@@ -194,7 +194,7 @@ Just as with interface, putting the type parameter on the class itself lets us m
 
 As we covered in [Classes](Classes), a class as two side to its type: the static side and the instance side.  Generic classes are only generic over their instance side rather than their static side, so when working with classes, static members can not use the class's type parameter.
 
-! Generic Constraints
+# Generic Constraints
 
 If you remember from an earlier example, you may sometimes want to write a generic function that works on a set of types where you have some knowledge about what capabilities that set of types will have.  In our 'loggingIdentity' example, we wanted to be able access the ".length" property of 'arg', but the compiler could not prove that every type had a ".length" property, so it warns us that we can't make this assumption.
 
