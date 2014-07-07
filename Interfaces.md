@@ -234,7 +234,7 @@ interface Square extends Shape {
     sideLength: number;
 }
 
-var square: Square;
+var square = <Square>{};
 square.color = "blue";
 square.sideLength = 10;
 ```
@@ -254,7 +254,7 @@ interface Square extends Shape, PenStroke {
     sideLength: number;
 }
 
-var square: Square;
+var square = <Square>{};
 square.color = "blue";
 square.sideLength = 10;
 square.penWidth = 5.0;
