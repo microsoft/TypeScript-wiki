@@ -23,7 +23,7 @@ TypeScript’s structural type system was designed based on how JavaScript code 
 ## A Note on Soundness
 TypeScript's type system allows certain operations that can’t be known at compile-time to be safe. When a type system has this property, it is said to not be “sound”. The places where TypeScript allows unsound behavior were carefully considered, and throughout this document we’ll explain where these happen and the motivating scenarios behind them.
 
-# Starting out
+# Starting Out
 The basic rule for TypeScript's structural type system is that x is compatible with y if y has at least the same members as x. For example:
 
 ```TypeScript
@@ -52,7 +52,7 @@ Note that ‘y’ has an extra ‘location’ property, but this does not create
 
 This comparison process proceeds recursively, exploring the type of each member and sub-member.
 
-# Comparing two functions
+# Comparing Two Functions
 While comparing primitive types and object types is relatively straightforward, the question of what kinds of functions should be considered compatible. Let’s start with a basic example of two functions that differ only in their argument lists:
 
 ```TypeScript
@@ -137,7 +137,7 @@ invokeLater([1, 2], (x, y) => console.log(x + ', ' + y));
 invokeLater([1, 2], (x?, y?) => console.log(x + ', ' + y));
 ```
 
-## Functions with overloads
+## Functions with Overloads
 
 When a function has overloads, each overload in the source type must be matched by a compatible signature on the target type.  This ensures that the target function can be called in all the same situations as the source function.  Functions with specialized overload signatures (those that use string literals in their overloads) do not use their specialized signatures when checking for compatibility.
 
@@ -175,7 +175,7 @@ a = s;  //OK
 s = a;  //OK
 ```
 
-## Private members in classes
+## Private Members in Classes
 
 Private members in a class affect their compatibility.  When an instance of a class is checked for compatibility, if it contains a private member, the target type must also contain a private member that originated from the same class.  This allows, for example, a class to be assignment compatible with its super class but not with classes from a different inheritance hierarchy which otherwise have the same shape.
 
