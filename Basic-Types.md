@@ -2,7 +2,7 @@
 
 For programs to be useful, we need to be able to work with some of the simplest units of data: numbers, strings, structures, boolean values, and the like.  In TypeScript, we support much the same types as you would expected in JavaScript, with a convenient enumeration type thrown in to help things along.
 
-# <a name="Boolean"></a>Boolean
+# Boolean
 
 The most basic datatype is the simple true/false value, which JavaScript and TypeScript (as well as other languages) call a 'boolean' value.
 
@@ -43,7 +43,7 @@ var list:Array<number> = [1, 2, 3];
 
 # Enum
 
-A helpful addition to the standard set of datatypes from JavaScript is the 'enum'.  Like languages like C#, an enum is a way of giving more friendly names to sets of numeric values. [test](#Boolean)
+A helpful addition to the standard set of datatypes from JavaScript is the 'enum'.  Like languages like C#, an enum is a way of giving more friendly names to sets of numeric values. 
 
 ```TypeScript
 enum Color {Red, Green, Blue};
