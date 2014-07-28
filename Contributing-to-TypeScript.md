@@ -27,5 +27,6 @@ Declined suggestions will have the `Declined` label along with one of the follow
  * `Out of Scope`: Is outside the scope of the TypeScript compiler; would be better implemented as a separate tool or extension rather than a change to TypeScript itself
  * `Too Complex`: The amount of complexity that this (and its future implications) would introduce is not justified by the amount of value it adds to the language
  * `Breaking Change`: Would meaningfully break compatibility with JavaScript or a previous version of TypeScript, or would prevent us from implementing known future ECMAScript proposals
+ * `By Design`: This aspect of the language is an intentional design decision
 
 Issues that are not bugs or suggestions will be labelled appropriately (`Question`, `By Design`, `External`) and closed. Please use [Stack Overflow](http://stackoverflow.com/questions/tagged/typescript) for TypeScript questions.
