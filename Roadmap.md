@@ -1,7 +1,7 @@
 # 1.1
 
 * Compiler re-write that focuses on a lightweight, faster implementation
-* Reach parity with 1.1, so that it is drop-in replaceable
+* Reach parity with 1.0, so that it is drop-in replaceable
 
 # 2.0
 
