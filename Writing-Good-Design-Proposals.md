@@ -1,5 +1,5 @@
 ### Before You Start
-First, refer to the TypeScript Design Philosophy page and make sure your proposal fits within those guidelines.
+First, refer to the [TypeScript Design Goals]() page and make sure your proposal fits within those guidelines.
 
 Next, see if there are any related existing suggestions in the issue tracker to avoid creating duplicate work.
 
