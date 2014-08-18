@@ -20,5 +20,5 @@ We recommend reading Chapter 1 of the TypeScript Language Specification for more
  1. Aggressively optimize the runtime performance of programs. Instead, emit idiomatic JavaScript code that plays well with the performance characteristics of runtime platforms.
  1. Apply a sound or "provably correct" type system. Instead, strike a balance between correctness and productivity.
  1. Provide an end-to-end build pipeline. Instead, make the system extensible so that external tools can use the compiler for more complex build workflows.
- 1. Add or rely on run-time type information in programs. Instead, encourage programming patterns that do not require run-time metadata.
+ 1. Add or rely on run-time type information in programs, or emit different code based on the results of the type system. Instead, encourage programming patterns that do not require run-time metadata.
  1. Provide additional runtime functionality or libraries. Instead, use TypeScript to describe existing libraries.
