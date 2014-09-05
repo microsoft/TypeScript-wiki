@@ -4,4 +4,4 @@
 
  * [Mystery Closed Bugs](https://github.com/Microsoft/TypeScript/issues?q=is%3Aclosed+is%3Aissue+label%3Abug++-label%3AFixed+-label%3A%22By+Design%22+-label%3A%22Duplicate%22+-label%3A%22Won%27t+Fix%22): Issues that have been closed but no sub-label explaining why they were closed
 
- * [Design Meeting Docket](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22in+discussion%22): Open suggestions tagged with 'In Discussion'
+ * [Design Meeting Docket](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22in+discussion%22): Open `Suggestion` issues tagged with `In Discussion`
