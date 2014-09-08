@@ -17,3 +17,6 @@ For each spec change:
 1. If there is no bug, find out if the spec or the implementation should be changed, and log a bug for it.
 
 When this process is complete, send a pull request for any tests you have added. Check it in as a normal code change (an example pull request is #621). Make sure to reference the spec change pull request in your pull request.
+
+Some guidelines and examples for specific test:
+* Sometimes if there is a code change associated with a spec change, the tests that have been added along with the code change are sufficient, and merely need to be moved. An example is tests/cases/compiler/indexSignatureTypeInference.ts in pull request 
