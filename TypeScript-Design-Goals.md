@@ -23,3 +23,4 @@ We recommend reading Chapter 1 of the TypeScript Language Specification for more
  1. Provide an end-to-end build pipeline. Instead, make the system extensible so that external tools can use the compiler for more complex build workflows.
  1. Add or rely on run-time type information in programs, or emit different code based on the results of the type system. Instead, encourage programming patterns that do not require run-time metadata.
  1. Provide additional runtime functionality or libraries. Instead, use TypeScript to describe existing libraries.
+ 1. Introduce behaviour that is likely to surprise users. Instead have due consideration for patterns adopted by other commonly-used languages.
