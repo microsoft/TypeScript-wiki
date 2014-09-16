@@ -14,6 +14,7 @@ We recommend reading Chapter 1 of the TypeScript Language Specification for more
  1. Avoid adding expression-level syntax.
  1. Use a consistent, fully erasable, structural type system.
  1. Be a cross-platform development tool.
+ 1. Do not cause substantial breaking changes from TypeScript 1.0.
 
 # Non-goals
  1. Exactly mimic the design of existing languages. Instead, use the behavior of JavaScript and the intentions of program authors as a guide for what makes the most sense in the language.
