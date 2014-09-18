@@ -3,6 +3,10 @@
 * Compiler re-write that focuses on a lightweight, faster implementation
 * Reach parity with 1.0, so that it is drop-in replaceable
 
+# 1.2
+
+* 1.1 plus any critical fixes
+
 # 1.3
 
 * Language service re-write to target new compiler
