@@ -44,5 +44,14 @@
 4. When stating a rule, the subject should be in the singular (e.g. "An external module cannot..." instead of "External modules cannot...")
 5. Use present tense
 
+## Diagnostic Message Codes
+* 1000 range for syntactic messages
+* 2000 for semantic messages
+* 4000 for declaration emit messages
+* 5000 for compiler options messages
+* 6000 for command line compiler messages
+* 7000 for noImplicitAny messages
+
+
 ## Style
 <TBA>
