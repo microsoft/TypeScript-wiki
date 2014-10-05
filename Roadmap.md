@@ -10,7 +10,12 @@
 # 1.3
 
 * Language service re-write to target new compiler
+* New: protected
 * Export Language Service public API
+
+# 1.4
+
+* 1.3 plus any critical fixes
 
 # 2.0
 
