@@ -11,7 +11,7 @@
 
 * Language service re-write to target new compiler
 * Support for [protected members](https://github.com/Microsoft/TypeScript/pull/688) in classes
-* Support for Tuple Types
+* Support for [Tuple Types](https://github.com/Microsoft/TypeScript/pull/428)
 * Export Language Service public API
 
 # 1.4
