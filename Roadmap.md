@@ -21,6 +21,6 @@
 # 2.0
 
 * Incorporate ECMAScript 6 features that can be polyfilled
-* Investigate top-rated feature requests ([protected](https://github.com/Microsoft/TypeScript/pull/688), mixins, abstract classes, etc). 
+* Investigate top-rated feature requests (mixins, abstract classes, etc). 
 * Investigate async/await as a desugaring to ES6
 * Improve lib.d.ts modularity
