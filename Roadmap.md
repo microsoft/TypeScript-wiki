@@ -10,7 +10,7 @@
 # 1.3
 
 * Language service re-write to target new compiler
-* Support for protected members in classes
+* Support for [protected members](https://github.com/Microsoft/TypeScript/pull/688) in classes
 * Support for Tuple Types
 * Export Language Service public API
 
