@@ -16,7 +16,6 @@
 
 # 1.4
 
-* 1.3 plus any critical fixes
 * Support for [Union Types and Type Guards](https://github.com/Microsoft/TypeScript/pull/824)
 
 # 2.0
