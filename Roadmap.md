@@ -10,7 +10,8 @@
 # 1.3
 
 * Language service re-write to target new compiler
-* Support for protected
+* Support for protected members
+* Support for Tuple Types
 * Export Language Service public API
 
 # 1.4
