@@ -1,43 +1,37 @@
 ## Architecture Overview
 
 
-### Command line compiler (tsc)
-The batch compilation CLI. Mainly handel reading and writing files for different supported engines (e.g. node js)
+* **Command line compiler (tsc):** The batch compilation CLI. Mainly handel reading and writing files for different supported engines (e.g. node js)
 
-### Parser
-Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)
+* **Parser:** Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)
 
-### Binder
-Linking declarations contributing to the same structure using a Symbol (e.g. different declarations of the same interface or module, or a function and a module with the same name). This allows the type system to reason about these named declarations. 
+* **Binder:** Linking declarations contributing to the same structure using a Symbol (e.g. different declarations of the same interface or module, or a function and a module with the same name). This allows the type system to reason about these named declarations. 
 
-### Type resolver/ Checker
-Resolving types of each construct, checking semantic operations and generate diagnostics as appropriate.
+* **Type resolver/ Checker:** Resolving types of each construct, checking semantic operations and generate diagnostics as appropriate.
 
-### Emitter
-Output generated from a set of inputs (.ts and .d.ts) files can be one of: JavaScript (.js), definitions (.d.ts), or source maps (.js.map)
+* **Emitter:** Output generated from a set of inputs (.ts and .d.ts) files can be one of: JavaScript (.js), definitions (.d.ts), or source maps (.js.map)
 
-### Services
-Provides an additional layer of language services on top of the basic output generation supported by the CLI. The services layer functionalities are ideal for an IDE but can be used for a variety of ways other than IDE scenarios. The services layer also override the basic compiler data structures allowing for a richer tree API.
+* **Services:** Provides an additional layer of language services on top of the basic output generation supported by the CLI. The services layer functionalities are ideal for an IDE but can be used for a variety of ways other than IDE scenarios. The services layer also override the basic compiler data structures allowing for a richer tree API.
+
+* **Pre-processor:** The "Compilation Context" refers to all files involved in a "program". The context is created by inspecting all files passed in to the compiler on the command line, in order, and then adding any files they may reference directory or indirectly through "import" statements and /// <references > tags.
+The result of walking the reference graph is an ordered list of source files, that constitute the program.
+When resolving imports, preference is given to ".ts" files over ".d.ts" files to ensure the most up-to-date files are processed.
+The compiler does a node-like process to resolve imports by walking up the directory chain to find a source file with a .ts or .d.ts extension matching the requested import.
+Failed import resolution does not result in an error, as an ambient module could be already declared.
 
 ## Data Structures
 
-### Node
-The basic building block of the Abstract Syntax Tree (AST). In general node represent non-terminals in the language grammar; some terminals are kept in the tree such as identifiers and literals.
+* **Node:** The basic building block of the Abstract Syntax Tree (AST). In general node represent non-terminals in the language grammar; some terminals are kept in the tree such as identifiers and literals.
 
-### SourceFile
-The AST of a given source file. A SourceFile is itself a Node; it provides an additional set of interfaces to access the raw text of the file, references in the file, the list of identifiers in the file, and mapping from a position in the file to a line and character numbers.
+* **SourceFile:** The AST of a given source file. A SourceFile is itself a Node; it provides an additional set of interfaces to access the raw text of the file, references in the file, the list of identifiers in the file, and mapping from a position in the file to a line and character numbers.
 
-### Program
-A collection of SourceFiles and a set of compilation options that represent a compilation unit. The program is the main entry point to the type system and code generation. 
+* **Program:** A collection of SourceFiles and a set of compilation options that represent a compilation unit. The program is the main entry point to the type system and code generation. 
 
-### Symbol
-A named declaration. Symbols are created as a result of binding. Symbols connect declarations nodes in the tree to other declarations contributing to the same entity. Symbols are the basic building block of the semantic system. 
+* **Symbol:** A named declaration. Symbols are created as a result of binding. Symbols connect declarations nodes in the tree to other declarations contributing to the same entity. Symbols are the basic building block of the semantic system. 
 
-### Type
-Types is the other part of the semantic system. Types can be named (e.g. classes and interfaces), or anonymous (e.g. object types). 
+* **Type:** Types is the other part of the semantic system. Types can be named (e.g. classes and interfaces), or anonymous (e.g. object types). 
 
-### Signature
-There are thee types of signatures in the language, call, construct and index signatures.
+* **Signature:** There are thee types of signatures in the language, call, construct and index signatures.
 
 ## Using the compiler API
 
@@ -120,6 +114,7 @@ Generates the following output:
     ]
 }
 ```
+
 
 ### Incremental build support using the language services
 
