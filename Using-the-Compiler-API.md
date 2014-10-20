@@ -138,11 +138,13 @@ var files =  [
 // Create the language service host to allow the LS to communicate with the host
 var servicesHost: ts.LanguageServiceHost = {
     getScriptFileNames: () => ts.map(files, f => f.filename),
-    getScriptVersion: (filename) => ts.forEach(files, f => f.filename === filename ? f.version.toString() : undefined),
+    getScriptVersion: (filename) => ts.forEach(files, 
+            f => f.filename === filename ? f.version.toString() : undefined),
     getScriptSnapshot: (filename) => {
         var file = ts.forEach(files, f => f.filename === filename ? f : undefined);
         // Read the text if we have not read it already
-        var readText = () => file.text ? file.text : file.text = fs.readFileSync(filename).toString();
+        var readText = () => file.text ? 
+            file.text : file.text = fs.readFileSync(filename).toString();
         return {
             getText: (start, end) => readText().substring(start, end),
             getLength: () => readText().length,
@@ -177,20 +179,22 @@ ts.forEach(files, f => {
     emitFile(f.filename);
 
     // Add a watch on the file to handle next change
-    fs.watchFile(f.filename, { persistent: true, interval: 250 }, (curr, prev) => {
-        // Check timestamp
-        if (+curr.mtime <= +prev.mtime) {
-            return;
-        }
+    fs.watchFile(f.filename, 
+        { persistent: true, interval: 250 }, 
+        (curr, prev) => {
+            // Check timestamp
+            if (+curr.mtime <= +prev.mtime) {
+                return;
+            }
 
-        // Update the version to signal a change in the file
-        f.version++;
+            // Update the version to signal a change in the file
+            f.version++;
 
-        // Clear the text to force a new read
-        f.text = undefined;
+            // Clear the text to force a new read
+            f.text = undefined;
 
-        // write the changes to disk
-        emitFile(f.filename);
-    });
+            // write the changes to disk
+            emitFile(f.filename);
+        });
 });
 ```
