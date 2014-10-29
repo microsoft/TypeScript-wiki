@@ -1,7 +1,7 @@
 # What's New in TypeScript?
 
-## TypeScript 1.1
-### Performance Improvements
+# TypeScript 1.1
+## Performance Improvements
 The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
 
 ### Better Module Visibility Rules
@@ -20,8 +20,8 @@ module MyControllers {
 }
 ```
 
-## TypeScript 1.3
-### Protected
+# TypeScript 1.3
+## Protected
 The new `protected` modifier in classes works like it does in familiar languages like C++, C#, and Java. A `protected` member of a class is visible only inside subclasses of the class in which it is declared:
 
 ```ts
@@ -39,7 +39,7 @@ var t = new MyThing();
 t.doSomething(); // Error, cannot call protected member from outside class
 ```
 
-### Tuple types
+## Tuple types
 Tuple types express an array where the type of certain elements is known, but need not be the same. For example, you may want to represent an array with a `string` at position 0 and a `number` at position 1:
 ```ts
 // Declare a tuple type
@@ -61,17 +61,42 @@ console.log(x[5].toString()); // OK, 'string' and 'number' both have toString
 x[6] = true; // Error, boolean isn't number or string
 ```
 
-## TypeScript 1.4
+# TypeScript 1.4
 TODO: Writeups
  * union types #824
   * improved generic type enforcement
   * improved BCT behavior
- * type guards #824
- * let and const #904
  * string templates #960
- * noEmitOnError #966
 
-### Type Guards
+## `let` declarations
+In JavaScript, `var` declarations are "hoisted" to the top of their enclosing scope. This can result in confusing bugs:
+```ts
+console.log(x); // meant to write 'y' here
+/* later in the same block */
+var x = 'hello';
+```
+
+The new ES6 keyword `let`, now supported in TypeScript, declares a variable with more intuitive "block" semantics. A `let` variable can only be referred to after its declaration, and is scoped to the syntactic block where it is defined:
+```ts
+if(foo) {
+    console.log(x); // Error, cannot refer to x before its declaration
+    let x = 'hello';
+} else {
+    console.log(x); // Error, x is not declared in this block
+}
+```
+`let` is only available when targeting ECMAScript 6 (`--target ES6`).
+
+## `const` declarations
+The other new ES6 declaration type supported in TypeScript is `const`. A `const` variable may not be assigned to, and must be initialized where it is declared. This is useful for declarations where you don't want to change the value after its initialization:
+```ts
+const halfPi = Math.PI / 2;
+halfPi = 2; // Error, can't assign to a `const`
+```
+
+`const` is only available when targeting ECMAScript 6 (`--target ES6`).
+
+## Type Guards
 A common pattern in JavaScript is to use `typeof` or `instanceof` to examine the type of an expression at runtime. TypeScript now understands these conditions and will change type inference accordingly when used in an `if` block.
 
 Using `typeof` to test a variable:
@@ -107,8 +132,11 @@ if(pet instanceof Dog) {
 }
 ```
 
-## Post-1.4 features
+# Post-1.4 features
 TODO: Writeups
  * type aliases #954
  * const enums #970
  * More ES6 features TBD...
+
+## `-noEmitOnErrors` commandline option
+The default behavior for the TypeScript compiler is to still emit .js files if there were type errors (for example, an attempt to assign a `string` to a `number`). This can be undesirable on build servers or other scenarios where only output from a "clean" build is desired. The new flag `noEmitOnErrors` prevents the compiler from emitting .js code if there were any errors. (TODO: track #966 in case we change the name)
