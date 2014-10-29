@@ -54,7 +54,7 @@ When accessing an element with a known index, the correct type is retrieved:
 console.log(x[0].substr(1)); // OK
 console.log(x[1].substr(1)); // Error, 'number' does not have 'substr'
 ```
-When accessing an element outside the set of known indices, a union type is used instead:
+In TypeScript 1.4, when accessing an element outside the set of known indices, a union type is used instead:
 ```ts
 x[3] = 'world'; // OK
 console.log(x[5].toString()); // OK, 'string' and 'number' both have toString
@@ -70,6 +70,42 @@ TODO: Writeups
  * let and const #904
  * string templates #960
  * noEmitOnError #966
+
+### Type Guards
+A common pattern in JavaScript is to use `typeof` or `instanceof` to examine the type of an expression at runtime. TypeScript now understands these conditions and will change type inference accordingly when used in an `if` block.
+
+Using `typeof` to test a variable:
+```ts
+var x: any = /* ... */;
+if(typeof x === 'string') {
+    console.log(x.subtr(1)); // Error, 'subtr' does not exist on 'string'
+}
+// x is still any here
+x.unknown(); // OK
+```
+
+Using `typeof` with union types and `else`:
+```ts
+var x: string|HTMLElement = /* ... */;
+if(typeof x === 'string') {
+    // x is string here, as shown above
+} else {
+    // x is HTMLElement here
+    console.log(x.innerHTML);
+}
+```
+
+Using `instanceof` with classes and union types:
+```ts
+class Dog { woof() { } }
+class Cat { meow() { } }
+var pet: Dog|Cat = /* ... */;
+if(pet instanceof Dog) {
+    pet.woof(); // OK
+} else {
+    pet.woof(); // Error
+}
+```
 
 ## Post-1.4 features
 TODO: Writeups
