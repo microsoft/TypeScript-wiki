@@ -11,7 +11,7 @@
 * Support for [Let and Const](https://github.com/Microsoft/TypeScript/pull/904)
 * Support for Template Strings
 * Library typings for ES6 
-* Support for Cosnt enums
+* Support for Const enums
 * Support for Symbols
 * Support for Computed properties
 * Export Language Service public API
