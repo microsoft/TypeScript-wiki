@@ -4,7 +4,7 @@
 ## Performance Improvements
 The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
 
-### Better Module Visibility Rules
+## Better Module Visibility Rules
 TypeScript now only strictly enforces the visibility of types in modules if the `--declaration` flag is provided. This is very useful for Angular scenarios, for example:
 ```ts
 module MyControllers {
@@ -67,6 +67,74 @@ TODO: Writeups
   * improved generic type enforcement
   * improved BCT behavior
  * string templates #960
+
+## Union types
+### Overview
+Union types are a powerful way to express a value that can be one of several types. For example, you might have an API for running a program that takes a commandline as either a `string` or a `string[]`. You can now write:
+```ts
+interface RunOptions {
+   program: string;
+   commandline: string[]|string;
+}
+```
+
+Assignment to union types works very intuitively -- anything you could assign to one of the union type's members is assignable to the union:
+```ts
+var opts: RunOptions = /* ... */;
+opts.commandline = '-hello world'; // OK
+opts.commandline = ['-hello', 'world']; // OK
+opts.commandline = [42]; // Error, number is not string or string[]
+```
+
+When reading from a union type, you can see any properties that are shared by them:
+```ts
+if(opts.length === 0) { // OK, string and string[] both have 'length' property
+  console.log("it's empty");
+}
+```
+
+Using Type Guards, you can easily work with a variable of a union type:
+```ts
+function formatCommandline(c: string|string[]) {
+    if(typeof c === 'string') {
+        return c.trim();
+    } else {
+        return c.join(' ');
+    }
+}
+```
+
+### Stricter Generics
+With union types able to represent a wide range of type scenarios, we've decided to improve the strictness of certain generic calls. Previously, code like this would (surprisingly) compile without error:
+```ts
+function equal<T>(lhs: T, rhs: T): boolean {
+  return lhs === rhs;
+}
+
+// Previously: No error
+// New behavior: Error, no best common type between 'string' and 'number'
+var e = equal(42, 'hello');
+```
+With union types, you can now specify the desired behavior at both the function declaration site and the call site:
+```ts
+// 'choose' function where types must match
+function choose1<T>(a: T, b: T): T { return Math.random() > 0.5 ? a : b }
+var a = choose1('hello', 42); // Error
+var b = choose1<string|number>('hello', 42); // OK
+
+// 'choose' function where types need not match
+function choose2<T, U>(a: T, b: U): T|U { return Math.random() > 0.5 ? a : b }
+var c = choose2('bar', 'foo'); // OK, c: string
+var d = choose2('hello', 42); // OK, d: string|number
+```
+
+### Better Type Inference
+Union types also allow for better type inference in arrays and other places where you might have multiple kinds of values in a collection:
+```ts
+var x = [1, 'hello']; // x: Array<string|number>
+x[0] = 'world'; // OK
+x[0] = false; // Error, boolean is not string or number
+```
 
 ## `let` declarations
 In JavaScript, `var` declarations are "hoisted" to the top of their enclosing scope. This can result in confusing bugs:
