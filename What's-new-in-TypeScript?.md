@@ -63,9 +63,6 @@ x[6] = true; // Error, boolean isn't number or string
 
 # TypeScript 1.4
 TODO: Writeups
- * union types #824
-  * improved generic type enforcement
-  * improved BCT behavior
  * string templates #960
 
 ## Union types
@@ -201,10 +198,40 @@ if(pet instanceof Dog) {
 ```
 
 # Post-1.4 features
-TODO: Writeups
- * type aliases #954
- * const enums #970
- * More ES6 features TBD...
+## Type Aliases
+You can now define an *alias* for a type using the `type` keyword:
+```ts
+type PrimitiveArray = Array<string|number|boolean>;
+type MyNumber = number;
+type NgScope = ng.IScope;
+type Callback = () => void;
+```
+
+Type aliases are exactly the same as their original types; they are simply alternative names.
+
+## `const enum` (completely inlined enums)
+Enums are very useful, but some programs don't actually need the generated code and would benefit from simply inlining all instances of enum members with their numeric equivalents. The new `const enum` declaration works just like a regular `enum` for type safety, but erases completely at compile time.
+
+```ts
+const enum Suit { Clubs, Diamonds, Hearts, Spades }
+var d = Suit.Diamonds;
+```
+Compiles to exactly:
+```js
+var d = 1;
+```
+
+TypeScript will also now compute enum values when possible:
+```ts
+enum MyFlags {
+  None = 0,
+  Neat = 1,
+  Cool = 2,
+  Awesome = 4,
+  Best = Neat | Cool | Awesome
+}
+var b = MyFlags.Best; // emits var b = 7;
+```
 
 ## `-noEmitOnErrors` commandline option
 The default behavior for the TypeScript compiler is to still emit .js files if there were type errors (for example, an attempt to assign a `string` to a `number`). This can be undesirable on build servers or other scenarios where only output from a "clean" build is desired. The new flag `noEmitOnErrors` prevents the compiler from emitting .js code if there were any errors. (TODO: track #966 in case we change the name)
