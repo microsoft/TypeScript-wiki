@@ -1,7 +1,7 @@
 ## Architecture Overview
 
 
-* **Command line compiler (tsc):** The batch compilation CLI. Mainly handel reading and writing files for different supported engines (e.g. node js)
+* **Command line compiler (tsc):** The batch compilation CLI. Mainly handle reading and writing files for different supported engines (e.g. node js)
 
 * **Parser:** Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)
 
@@ -37,7 +37,7 @@ Failed import resolution does not result in an error, as an ambient module could
 
 ### A simple transform function
 
-Let's try to write a transform function that can compile a TypeScript string to its corresponding JavaScript. We will need to create a "Program" to wrap our string. To create a program we will call ```createProgram```. createProgram abstracts any interaction with the underlying system in the "CompilerHost" interface. The CompilerHost allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For the purposes of our transform function, we will stub out most of these functions. Two functions that we will override are **readFile** and **writeFile**. The compiler calls into **readFile** to get the AST of a given input file; since we only have two files: the string to transform and the default library (lib.d.ts) we can hard code most of this section. **wrieFile** will capture the output in a list, and this, along with the errors, will be the output of our transform function.
+Let's try to write a transform function that can compile a TypeScript string to its corresponding JavaScript. We will need to create a "Program" to wrap our string. To create a program we will call ```createProgram```. createProgram abstracts any interaction with the underlying system in the "CompilerHost" interface. The CompilerHost allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For the purposes of our transform function, we will stub out most of these functions. Two functions that we will override are **readFile** and **writeFile**. The compiler calls into **readFile** to get the AST of a given input file; since we only have two files: the string to transform and the default library (lib.d.ts) we can hard code most of this section. **writeFile** will capture the output in a list, and this, along with the errors, will be the output of our transform function.
 
 ```TypeScript
 function transform(contents: string, libSource: string, compilerOptions: ts.CompilerOptions = { }) {
@@ -71,7 +71,7 @@ function transform(contents: string, libSource: string, compilerOptions: ts.Comp
 
     // Do not generate code in the presence of early errors
     if (!errors.length) {
-        // Type check and get semanic errors
+        // Type check and get semantic errors
         var checker = program.getTypeChecker(/*fullTypeCheckMode*/ true);
         errors = checker.getDiagnostics();
 
@@ -92,7 +92,7 @@ Calling our transform function using a simple TypeScript variable declarations, 
 ```TypeScript
 var fs = require("fs");
 var source = "var x: number  = 'string'";
-var libSoruces = fs.readFileSync("lib.d.ts");
+var libSources = fs.readFileSync("lib.d.ts");
 var result = transform(source, libSources);
 
 console.log(JSON.stringify(result));
