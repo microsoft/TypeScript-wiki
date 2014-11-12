@@ -91,9 +91,9 @@ Calling our transform function using a simple TypeScript variable declarations, 
 
 ```TypeScript
 var fs = require("fs");
-var soruce = "var x: number  = 'string'";
+var source = "var x: number  = 'string'";
 var libSoruces = fs.readFileSync("lib.d.ts");
-var result = transform(soruce, libSoruces);
+var result = transform(source, libSources);
 
 console.log(JSON.stringify(result));
 
