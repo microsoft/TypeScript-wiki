@@ -245,5 +245,30 @@ var b = MyFlags.Best; // emits var b = 7;
 ## `-noEmitOnError` commandline option
 The default behavior for the TypeScript compiler is to still emit .js files if there were type errors (for example, an attempt to assign a `string` to a `number`). This can be undesirable on build servers or other scenarios where only output from a "clean" build is desired. The new flag `noEmitOnError` prevents the compiler from emitting .js code if there were any errors.
 
+## AMD Module names
+By default AMD modules are generated anonymous. This can lead to problems when other tools are used to process the resulting modules like a bundlers (e.g. r.js). 
+
+The new `amd-module name` tag allows passing an optional module name to the compiler:
+
+```TypeScript
+//// [amdModule.ts]
+///<amd-module name='NamedModule'/>
+export class C {
+}
+```
+Will result in assiging the name `NamedModule` to the module as part of calling the AMD `define`:
+
+```JavaScript
+//// [amdModule.js]
+define("NamedModule", ["require", "exports"], function (require, exports) {
+    var C = (function () {
+        function C() {
+        }
+        return C;
+    })();
+    exports.C = C;
+});
+```
+
 # Post-1.4 features
 TODO: What are they?
