@@ -1,5 +1,3 @@
-# What's New in TypeScript?
-
 # TypeScript 1.1
 ## Performance Improvements
 The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
