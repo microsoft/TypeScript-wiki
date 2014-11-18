@@ -197,7 +197,6 @@ if(pet instanceof Dog) {
 }
 ```
 
-# Post-1.4 features
 ## Type Aliases
 You can now define an *alias* for a type using the `type` keyword:
 ```ts
@@ -233,5 +232,8 @@ enum MyFlags {
 var b = MyFlags.Best; // emits var b = 7;
 ```
 
-## `-noEmitOnErrors` commandline option
-The default behavior for the TypeScript compiler is to still emit .js files if there were type errors (for example, an attempt to assign a `string` to a `number`). This can be undesirable on build servers or other scenarios where only output from a "clean" build is desired. The new flag `noEmitOnErrors` prevents the compiler from emitting .js code if there were any errors. (TODO: track #966 in case we change the name)
+## `-noEmitOnError` commandline option
+The default behavior for the TypeScript compiler is to still emit .js files if there were type errors (for example, an attempt to assign a `string` to a `number`). This can be undesirable on build servers or other scenarios where only output from a "clean" build is desired. The new flag `noEmitOnError` prevents the compiler from emitting .js code if there were any errors.
+
+# Post-1.4 features
+TODO: What are they?
