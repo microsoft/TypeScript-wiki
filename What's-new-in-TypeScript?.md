@@ -161,6 +161,20 @@ halfPi = 2; // Error, can't assign to a `const`
 
 `const` is only available when targeting ECMAScript 6 (`--target ES6`).
 
+## String Templates
+TypeScript now supports ES6 string templates. These are an easy way to embed arbitrary expressions in strings:
+
+```ts
+var name = "TypeScript";
+var greeting  = `Hello, ${name}! Your name has ${name.length} characters`;
+```
+
+When compiling to pre-ES6 targets, the string is decomposed:
+```js
+var name = "TypeScript!";
+var greeting = "Hello, " + name + "! Your name has " + name.length + " characters";
+```
+
 ## Type Guards
 A common pattern in JavaScript is to use `typeof` or `instanceof` to examine the type of an expression at runtime. TypeScript now understands these conditions and will change type inference accordingly when used in an `if` block.
 
