@@ -62,8 +62,6 @@ x[6] = true; // Error, boolean isn't number or string
 ```
 
 # TypeScript 1.4
-TODO: Writeups
- * string templates #960
 
 ## Union types
 ### Overview
