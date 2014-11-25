@@ -40,49 +40,44 @@ Failed import resolution does not result in an error, as an ambient module could
 Let's try to write a transform function that can compile a TypeScript string to its corresponding JavaScript. We will need to create a "Program" to wrap our string. To create a program we will call ```createProgram```. createProgram abstracts any interaction with the underlying system in the "CompilerHost" interface. The CompilerHost allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For the purposes of our transform function, we will stub out most of these functions. Two functions that we will override are **readFile** and **writeFile**. The compiler calls into **readFile** to get the AST of a given input file; since we only have two files: the string to transform and the default library (lib.d.ts) we can hard code most of this section. **writeFile** will capture the output in a list, and this, along with the errors, will be the output of our transform function.
 
 ```TypeScript
-function transform(contents: string, libSource: string, compilerOptions: ts.CompilerOptions = { }) {
-    // Generated outputs
-    var outputs: ts.OutputFile[] = [];
 
+function transform(contents, libSource, compilerOptions) {
+    if (compilerOptions === void 0) { compilerOptions = {}; }
+    // Generated outputs
+    var outputs = [];
     // Create a compilerHost object to allow the compiler to read and write files
-    var compilerHost: ts.CompilerHost = {
-        getSourceFile: (filename, languageVersion) => {
-            if (filename === "file.ts") 
-				return ts.createSourceFile(filename, contents, compilerOptions.target, /*version:*/ "0");
-            if (filename === "lib.d.ts") 
-				return ts.createSourceFile(filename, libSource, compilerOptions.target, /*version:*/ "0");
+    var compilerHost = {
+        getSourceFile: function (filename, languageVersion) {
+            if (filename === "file.ts")
+                return ts.createSourceFile(filename, contents, compilerOptions.target, "0");
+            if (filename === "lib.d.ts")
+                return ts.createSourceFile(filename, libSource, compilerOptions.target, "0");
             return undefined;
         },
-        writeFile: (name, text, writeByteOrderMark) => { 
-			outputs.push({ name: name, text: text, writeByteOrderMark: writeByteOrderMark });
-		},
-        getDefaultLibFilename: () => "lib.d.ts",
-        useCaseSensitiveFileNames: () => false,
-        getCanonicalFileName: (filename) => filename,
-        getCurrentDirectory: (): string => undefined,
-        getNewLine: () => "\n"
+        writeFile: function (name, text, writeByteOrderMark) {
+            outputs.push({ name: name, text: text, writeByteOrderMark: writeByteOrderMark });
+        },
+        getDefaultLibFilename: function () { return "lib.d.ts"; },
+        useCaseSensitiveFileNames: function () { return false; },
+        getCanonicalFileName: function (filename) { return filename; },
+        getCurrentDirectory: function () { return ""; },
+        getNewLine: function () { return "\n"; }
     };
-
     // Create a program from inputs
     var program = ts.createProgram(["file.ts"], compilerOptions, compilerHost);
-
     // Query for early errors
     var errors = program.getDiagnostics();
-
     // Do not generate code in the presence of early errors
     if (!errors.length) {
         // Type check and get semantic errors
-        var checker = program.getTypeChecker(/*fullTypeCheckMode*/ true);
+        var checker = program.getTypeChecker(true);
         errors = checker.getDiagnostics();
-
         // Generate output
         checker.emitFiles();
     }
-
     return {
         outputs: outputs,
-        errors: ts.map(errors, e => 
-			e.file.filename + "(" + e.file.getLineAndCharacterFromPosition(e.start).line + "): "  + e.messageText)
+        errors: ts.map(errors, function (e) { return e.file.filename + "(" + e.file.getLineAndCharacterFromPosition(e.start).line + "): " + e.messageText; })
     };
 }
 ```
@@ -90,9 +85,11 @@ function transform(contents: string, libSource: string, compilerOptions: ts.Comp
 Calling our transform function using a simple TypeScript variable declarations, and loading the default library like:
 
 ```TypeScript
+declare var require: any;
+
 var fs = require("fs");
 var source = "var x: number  = 'string'";
-var libSources = fs.readFileSync("lib.d.ts");
+var libSources = fs.readFileSync("lib.d.ts").toString();
 var result = transform(source, libSources);
 
 console.log(JSON.stringify(result));
