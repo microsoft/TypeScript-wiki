@@ -4,7 +4,7 @@ There are three great ways to contribute to the TypeScript project: logging bugs
 To log a bug, just use the GitHub issue tracker. Confirmed bugs will be labelled with the `Bug` label. Please include code to reproduce the issue and a description of what you expected to happen.
 
 ### Pull Requests
-Before we can accept a pull request from you, you'll need to sign the Contributor License Agreement (CLA). See the "Legal" section of the [CONTRIBUTING.md guide](https://github.com/Microsoft/TypeScript/blob/master/CONTRIBUTING.md). That document also outlines the technical nuts and bolts of submitting a pull request.
+Before we can accept a pull request from you, you'll need to sign the Contributor License Agreement (CLA). See the "Legal" section of the [CONTRIBUTING.md guide](https://github.com/Microsoft/TypeScript/blob/master/CONTRIBUTING.md). That document also outlines the technical nuts and bolts of submitting a pull request. Be sure to follow our [[Coding Guidelines|coding-guidelines]].
 
 ### Suggestions
 We're also interested in your feedback in future of TypeScript. You can submit a suggestion or feature request through the issue tracker. To make this process more effective, we're asking that these include more information to help define them more clearly. Start by reading the [[TypeScript Design Goals]] and refer to [[Writing Good Design Proposals]] for information on how to write great feature proposals.
