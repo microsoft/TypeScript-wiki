@@ -54,6 +54,21 @@ Diagnostics are categorized into general ranges. If adding a new diagnostic mess
 * 6000 for command line compiler messages
 * 7000 for noImplicitAny messages
 
+## General Constructs
+
+For a variety of reasons, we avoid certain constructs, and use some of our own. Among them:
+
+1. Do not use ECMAScript 5 functions; instead use those found in [core.ts](https://github.com/Microsoft/TypeScript/blob/master/src/compiler/core.ts).
+2. Do not use `for..in` statements; instead, use `ts.forEach`, `ts.forEachKey` and `ts.forEachValue`. Be aware of their slightly different semantics.
+3. Try to use `ts.forEach`, `ts.map`, and `ts.filter` over loops when it is not strongly inconvenient.
 
 ## Style
-&lt;TBA>
+
+1. Use arrow functions over anonymous function expressions.
+2. Always surround loop and conditional bodies with curly braces.
+3. Open curly braces always go on the same line as whatever necessitates them.
+4. Parenthesized constructs should have no surrounding whitespace. A single space follows commas and semicolons in those constructs. For example:
+  1. `for (var i = 0, n = str.length; i < 10; i++) { }`
+  2. `if (x < 10) { }`
+5. Use a single declaration per variable statement (i.e. use `var x = 1; var y = 2;` over `var x = 1, y = 2;`.
+6. `else` goes on a separate line from the closing curly brace.
