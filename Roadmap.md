@@ -13,8 +13,6 @@
 * Support for [Template Strings](https://github.com/Microsoft/TypeScript/pull/960)
 * Library typings for ES6 
 * Support for [Const enums](https://github.com/Microsoft/TypeScript/issues/1029)
-* Support for Symbols
-* Support for Computed properties
 * Export Language Service public API
 
 # 1.5
@@ -23,6 +21,8 @@
 * Support for for..of
 * Support for generators
 * Support for ES6 Unicode specification
+* Support for Symbols
+* Support for Computed properties
 
 # 2.0
 
