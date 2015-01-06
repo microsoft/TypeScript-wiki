@@ -16,7 +16,9 @@
 
 * Type inference in TypeScript (multi-part series)
 * Object serialization in TypeScript (revivers for class prototypes, etc)
+
 **Deep dives (handbook updates?)**
+
 * Function overloading
 * Classes
 * Modules
