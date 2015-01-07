@@ -35,9 +35,41 @@ Failed import resolution does not result in an error, as an ambient module could
 
 ## Using the compiler API
 
+### A minimal compiler
+
+Let's try to write a barebones compiler that can compile a TypeScript string to its corresponding JavaScript. We will need to create a `Program`. This is as simple as calling `createProgram`. `createProgram` abstracts any interaction with the underlying system in the `CompilerHost` interface. The `CompilerHost` allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For convenience, we expose a function to create a default host using `createCompilerHost`.
+
+```TypeScript
+/// <reference path="typings/node/node.d.ts" />
+/// <reference path="typings/typescript/typescript.d.ts" />
+
+import ts = require("typescript");
+
+export function compile(filenames: string[], options: ts.CompilerOptions): void {
+    var host = ts.createCompilerHost(options);
+    var program = ts.createProgram(filenames, options, host);
+    var checker = ts.createTypeChecker(program, /*produceDiagnostics*/ true);
+    var result = checker.emitFiles();
+
+    var allDiagnostics = program.getDiagnostics()
+        .concat(checker.getDiagnostics())
+        .concat(result.diagnostics);
+
+    allDiagnostics.forEach(diagnostic => {
+        var lineChar = diagnostic.file.getLineAndCharacterFromPosition(diagnostic.start);
+        console.log(`${diagnostic.file.filename} (${lineChar.line},${lineChar.character}): ${diagnostic.messageText}`);
+    });
+
+    console.log(`Process exited with code '${result.emitResultStatus}'.`);
+}
+
+compile(process.argv.slice(2), { noImplicitAny: true, noEmitOnError: true,
+                                 target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS});
+```
+
 ### A simple transform function
 
-Let's try to write a transform function that can compile a TypeScript string to its corresponding JavaScript. We will need to create a "Program" to wrap our string. To create a program we will call ```createProgram```. createProgram abstracts any interaction with the underlying system in the "CompilerHost" interface. The CompilerHost allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For the purposes of our transform function, we will stub out most of these functions. Two functions that we will override are **readFile** and **writeFile**. The compiler calls into **readFile** to get the AST of a given input file; since we only have two files: the string to transform and the default library (lib.d.ts) we can hard code most of this section. **writeFile** will capture the output in a list, and this, along with the errors, will be the output of our transform function.
+Creating a compiler is simple enough, but you may not want to actually do traditional reads and writes from the file system; for instance, you may have a text buffer for your TypeScript input, and you may want to send/store the resulting JavaScript as JSON. What's more, you may want to use/modify the resulting JavaScript in some way. In such a case, you will need to provide your own `CompilerHost`. 
 
 ```TypeScript
 
@@ -96,7 +128,7 @@ console.log(JSON.stringify(result));
 
 ```
 
-Generates the following output:
+will generate the following output:
 
 ```JSON
 {
@@ -111,7 +143,6 @@ Generates the following output:
     ]
 }
 ```
-
 
 ### Incremental build support using the language services
 
