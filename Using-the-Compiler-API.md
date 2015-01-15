@@ -50,14 +50,32 @@ Syntax trivia represent the parts of the source text that are largely insignific
 
 Because trivia are not part of the normal language syntax (barring ECMAScript ASI rules) and can appear anywhere between any two tokens, they are not included in the syntax tree. Yet, because they are important when implementing a feature like refactoring and to maintain full fidelity with the source text, they are still accessible through our APIs on demand.
 
-In general, a token owns any trivia after it on the same line up to the next token. Any trivia after that line is associated with the following token. The first token in the source file gets all the initial trivia, and the last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
+Because the `EndOfFileToken` can have nothing following it (neither token nor trivia), all trivia naturally precedes some non-trivia token, and resides between that token's "full start" and the "token start"
 
-For most basic uses, comments are the "interesting" trivia, which can be fetched through the following functions:
+It is a convenient notion to state that a comment "belongs" to a `Node` in a more natural manner though. For instance, it might be visually clear that the `genie` function declaration owns the last two comments in the following example:
+
+```TypeScript
+var x = 10; // This is x.
+
+/**
+ * Postcondition: Grants all three wishes.
+ */
+function genie([wish1, wish2, wish3]: [Wish, Wish, Wish]) {
+    while (true) {
+    }
+} // End function
+```
+
+This is despite the fact that the function declaration's full start occurs directly after `var x = 10;`.
+
+We follow [Roslyn's notion of trivia ownership](https://github.com/dotnet/roslyn/wiki/Roslyn%20Overview#syntax-trivia) for comment ownership. In general, a token owns any trivia after it on the same line up to the next token. Any comment after that line is associated with the following token. The first token in the source file gets all the initial trivia, and the last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
+
+For most basic uses, comments are the "interesting" trivia. The comments that belong to a Node which can be fetched through the following functions:
 
 Function | Description
 ---------|------------
-`ts.getLeadingCommentRanges` | Returns ranges of comments between the first line break following the given position and the token itself.
-`ts.getTrailingCommentRanges` | Returns ranges of comments until the first line break following the given position.
+`ts.getLeadingCommentRanges` | Returns ranges of comments between the first line break following the given position and the token itself (probably most useful with `ts.Node.getFullStart`).
+`ts.getTrailingCommentRanges` | Returns ranges of comments until the first line break following the given position (probably most useful with `ts.Node.getEnd`).
 
 In the event that you are concerned with richer information of the token stream, `createScanner` also has a `skipTrivia` flag which you can set to `false`, and use `setText`/`setTextPos` to scan at different points in a file.
 
