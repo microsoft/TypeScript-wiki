@@ -33,6 +33,34 @@ Failed import resolution does not result in an error, as an ambient module could
 
 * **Signature:** There are thee types of signatures in the language, call, construct and index signatures.
 
+## Terminology
+
+##### **Full Start/Token Start**
+
+Tokens themselves have what we call a "full start" and a "token start". The "token start" is the more natural version, which is the position in file where the text of a token begins. The "full start" is the point at which the scanner began scanning since the last significant token. When concerned with trivia, we are often more concerned with the full start.
+
+Function | Description
+---------|------------
+`ts.Node.getStart` | Gets the position in text where the first token of a node started.
+`ts.Node.getFullStart` | Gets the position of the "full start" of the first token owned by the node.
+
+#### **Trivia**
+
+Syntax trivia represent the parts of the source text that are largely insignificant for normal understanding of the code, such as whitespace, comments, and even conflict markers.
+
+Because trivia are not part of the normal language syntax (barring ECMAScript ASI rules) and can appear anywhere between any two tokens, they are not included in the syntax tree. Yet, because they are important when implementing a feature like refactoring and to maintain full fidelity with the source text, they are still accessible through our APIs on demand.
+
+In general, a token owns any trivia after it on the same line up to the next token. Any trivia after that line is associated with the following token. The first token in the source file gets all the initial trivia, and the last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.
+
+For most basic uses, comments are the "interesting" trivia, which can be fetched through the following functions:
+
+Function | Description
+---------|------------
+`ts.getLeadingCommentRanges` | Returns ranges of comments between the first line break following the given position and the token itself.
+`ts.getTrailingCommentRanges` | Returns ranges of comments until the first line break following the given position.
+
+In the event that you are concerned with richer information of the token stream, `createScanner` also has a `skipTrivia` flag which you can set to `false`, and use `setText`/`setTextPos` to scan at different points in a file.
+
 ## Using the compiler API
 
 ### A minimal compiler
