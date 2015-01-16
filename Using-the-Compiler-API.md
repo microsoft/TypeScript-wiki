@@ -81,6 +81,21 @@ In the event that you are concerned with richer information of the token stream,
 
 ## Using the compiler API
 
+### Getting set up
+
+First you'll need to install TypeScript >=1.4 from `npm`.
+
+Once that's done, you'll need to link it from wherever your project resides. If you don't link from within a Node project, it will just link globally.
+
+```
+npm install -g typescript
+npm link typescript
+```
+
+Once that's done, [just grab our definitions file](https://github.com/Microsoft/TypeScript/blob/release-1.4/bin/typescript.d.ts) and include it from your TypeScript file.
+
+That's it, you're ready to go. Now you can try out some of the following examples.
+
 ### A minimal compiler
 
 Let's try to write a barebones compiler that can compile a TypeScript string to its corresponding JavaScript. We will need to create a `Program`. This is as simple as calling `createProgram`. `createProgram` abstracts any interaction with the underlying system in the `CompilerHost` interface. The `CompilerHost` allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For convenience, we expose a function to create a default host using `createCompilerHost`.
