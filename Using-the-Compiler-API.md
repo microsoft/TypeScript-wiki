@@ -118,9 +118,14 @@ compile(process.argv.slice(2), { noImplicitAny: true, noEmitOnError: true,
 Creating a compiler is simple enough, but you may not want to actually do traditional reads and writes from the file system; for instance, you may have a text buffer for your TypeScript input, and you may want to send/store the resulting JavaScript as JSON. What's more, you may want to use/modify the resulting JavaScript in some way. In such a case, you will need to provide your own `CompilerHost`. 
 
 ```TypeScript
+/// <reference path="typings/node/node.d.ts" />
+/// <reference path="typings/typescript/typescript.d.ts" />
 
-function transform(contents, libSource, compilerOptions) {
-    if (compilerOptions === void 0) { compilerOptions = {}; }
+import ts = require("typescript");
+import fs = require("fs");
+import path = require("path");
+
+function transform(contents: string, libSource: string, compilerOptions: ts.CompilerOptions = {}) {
     // Generated outputs
     var outputs = [];
     // Create a compilerHost object to allow the compiler to read and write files
@@ -155,23 +160,17 @@ function transform(contents, libSource, compilerOptions) {
     }
     return {
         outputs: outputs,
-        errors: ts.map(errors, function (e) { return e.file.filename + "(" + e.file.getLineAndCharacterFromPosition(e.start).line + "): " + e.messageText; })
+        errors: errors.map(function (e) { return e.file.filename + "(" + e.file.getLineAndCharacterFromPosition(e.start).line + "): " + e.messageText; })
     };
 }
-```
 
-Calling our transform function using a simple TypeScript variable declarations, and loading the default library like:
-
-```TypeScript
-declare var require: any;
-
-var fs = require("fs");
+// Calling our transform function using a simple TypeScript variable declarations, 
+// and loading the default library like:
 var source = "var x: number  = 'string'";
-var libSources = fs.readFileSync("lib.d.ts").toString();
-var result = transform(source, libSources);
+var libSource = fs.readFileSync(path.join(path.dirname(require.resolve('typescript')), 'lib.d.ts')).toString();
+var result = transform(source, libSource);
 
 console.log(JSON.stringify(result));
-
 ```
 
 will generate the following output:
