@@ -278,74 +278,105 @@ The services layer provide a set of additional set of utilities that can help si
 We will achieve this through creating a LanguageService object. Similar to the program in the previous example, we need a LanguageServiceHost. The LanguageServiceHost augments the concept of a file with a version, isOpen flag, and a ScriptSnapshot. Version, allows the language service to track changes to files. isOpen, tells the language service to keep AST in memory as the file is in use. ScriptSnapshot is an abstraction over text that allows the language service to query for changes.
 
 ```TypeScript
-var fs = require("fs");
+/// <reference path="typings/node/node.d.ts" />
+/// <reference path="typings/typescript/typescript.d.ts" />
 
-// Files constituting our program
-var files =  [
-    { filename: "file1.ts", version: 0, text: undefined },
-    { filename: "file2.ts", version: 0, text: undefined }
-];
+import fs = require("fs");
+import ts = require("typescript");
+import path = require("path");
 
-// Create the language service host to allow the LS to communicate with the host
-var servicesHost: ts.LanguageServiceHost = {
-    getScriptFileNames: () => ts.map(files, f => f.filename),
-    getScriptVersion: (filename) => ts.forEach(files, 
-            f => f.filename === filename ? f.version.toString() : undefined),
-    getScriptSnapshot: (filename) => {
-        var file = ts.forEach(files, f => f.filename === filename ? f : undefined);
-        // Read the text if we have not read it already
-        var readText = () => file.text ? 
-            file.text : file.text = fs.readFileSync(filename).toString();
-        return {
-            getText: (start, end) => readText().substring(start, end),
-            getLength: () => readText().length,
-            getLineStartPositions: () => [],
-            getChangeRange: (oldSnapshot) => undefined
-        };
-    },
-    log: (message) => console.log(message),
-    getCurrentDirectory: () => undefined,
-    getScriptIsOpen: () => true,
-    getDefaultLibFilename: () => "lib.d.ts",
-    getLocalizedDiagnosticMessages: () => undefined,
-    getCancellationToken: () => undefined,
-    getCompilationSettings: () => { return {}; },
-};
 
-// Create the language service files
-var services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
+function watch(filenames: string[], options: ts.CompilerOptions) {
+    var files: ts.Map<{ version: number; text: string; }> = {};
+    
+    // Add the default library file
+    filenames.unshift(path.join(path.dirname(require.resolve('typescript')), 'lib.d.ts'));
 
-// Write a single file outputs
-var emitFile = (filename: string) => {
-    var output = services.getEmitOutput(filename);
-    ts.forEach(output.outputFiles, o => {
-        console.log("Writing file: " + o.name);
-        fs.writeFileSync(o.name, o.text, "utf8");
+    // initialize the list of files
+    filenames.forEach(filename => {
+        files[filename] = { version: 0, text: fs.readFileSync(filename).toString() };
     });
-};
 
-// Now let's watch the files
-ts.forEach(files, f => {
-    // First time around, emit all files
-    emitFile(f.filename);
+    // Create the language service host to allow the LS to communicate with the host
+    var servicesHost: ts.LanguageServiceHost = {
+        getScriptFileNames: () => filenames,
+        getScriptVersion: (filename) => files[filename] && files[filename].version.toString(),
+        getScriptSnapshot: (filename) => {
+            var file = files[filename];
+            return {
+                getText: (start, end) => file.text.substring(start, end),
+                getLength: () => file.text.length,
+                getLineStartPositions: () => [],
+                getChangeRange: (oldSnapshot) => undefined
+            };
+        },
+        getCurrentDirectory: () => process.cwd(),
+        getScriptIsOpen: () => true,
+        getCompilationSettings: () => options,
+        getDefaultLibFilename:(options) => 'lib.d.ts',
+        log: (message) => console.log(message)
+    };
 
-    // Add a watch on the file to handle next change
-    fs.watchFile(f.filename, 
-        { persistent: true, interval: 250 }, 
-        (curr, prev) => {
-            // Check timestamp
-            if (+curr.mtime <= +prev.mtime) {
-                return;
-            }
+    // Create the language service files
+    var services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
 
-            // Update the version to signal a change in the file
-            f.version++;
+    // Now let's watch the files
+    filenames.forEach(filename => {
+        // First time around, emit all files
+        emitFile(filename);
 
-            // Clear the text to force a new read
-            f.text = undefined;
+        // Add a watch on the file to handle next change
+        fs.watchFile(filename,
+            { persistent: true, interval: 250 },
+            (curr, prev) => {
+                // Check timestamp
+                if (+curr.mtime <= +prev.mtime) {
+                    return;
+                }
 
-            // write the changes to disk
-            emitFile(f.filename);
+                var file = files[filename];
+
+                // Update the version to signal a change in the file
+                file.version++;
+
+                // Clear the text to force a new read
+                file.text = fs.readFileSync(filename).toString();
+
+                // write the changes to disk
+                emitFile(filename);
+            });
+    });
+
+
+    function emitFile(filename: string) {
+        var output = services.getEmitOutput(filename);
+
+        if (output.emitOutputStatus === ts.EmitReturnStatus.Succeeded) {
+            console.log(`Emitting ${filename}`);
+        }
+        else {
+            console.log(`Emitting ${filename} failed`);
+            var allDiagnostics = services.getCompilerOptionsDiagnostics()
+                .concat(services.getSyntacticDiagnostics(filename))
+                .concat(services.getSemanticDiagnostics(filename));
+
+            allDiagnostics.forEach(diagnostic => {
+                var lineChar = diagnostic.file.getLineAndCharacterFromPosition(diagnostic.start);
+                console.log(`  ${diagnostic.file && diagnostic.file.filename} (${lineChar.line},${lineChar.character}): ${diagnostic.messageText}`);
+            });
+        }
+
+        output.outputFiles.forEach(o => {
+            fs.writeFileSync(o.name, o.text, "utf8");
         });
-});
+    }
+}
+
+// Initialize files constituting the program as all .ts files in the current directory
+var currentDirectoryFiles = fs.readdirSync(process.cwd()).
+    filter(filename=> filename.length >= 3 && filename.substr(filename.length - 3, 3) === ".ts");
+    //map(filename => path.join(process.cwd(), filename));
+
+// Start the watcher
+watch(currentDirectoryFiles, { target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS });
 ```
