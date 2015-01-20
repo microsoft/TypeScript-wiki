@@ -3,12 +3,20 @@ The `this` keyword in JavaScript (and thus TypeScript) behaves differently than 
 
 This page will teach you how to recognize and diagnose problems with `this` in TypeScript, and describes several solutions and their respective trade-offs.
 
-## Typical Symptoms
+## Typical Symptoms and Risk Factors
 Typical symptoms of a lost `this` context include:
  * A class field (`this.foo`) is `undefined` when some other value was expected
  * The value `this` points to the global `window` object instead of the class instance (non-strict mode)
  * The value `this` points `undefined` instead of the class instance (strict mode)
  * Invoking a class method (`this.doBar()`) fails with the error "TypeError: undefined is not a function", "Object doesn't support property or method 'doBar'", or "this.doBar is not a function"
+
+These things often happen in certain coding patterns:
+ * Event listeners, e.g. `window.addEventListener('click', myClass.doThing);`
+ * Promise resolution, e.g. `myPromise.then(myClass.theNextThing);`
+ * Library event callbacks, e.g. `$(document).ready(myClass.start);`
+ * Functional callbacks, e.g. `someArray.map(myClass.convert)`
+ * Classes in ViewModel-type libraries, e.g. `<div data-bind="click: myClass.doSomething">`
+ * Functions in options bags, e.g. `$.ajax(url, { success: myClass.handleData })`
 
 ## What is `this` in JavaScript?
 Much has been written about the hazards of `this` in JavaScript. See [this page](http://www.quirksmode.org/js/this.html), [this one](http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/), or [this other one](http://bjorn.tipling.com/all-this).
