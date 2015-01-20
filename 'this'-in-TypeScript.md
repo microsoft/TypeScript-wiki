@@ -11,6 +11,8 @@ Typical symptoms of a lost `this` context include:
  * Invoking a class method (`this.doBar()`) fails with the error "TypeError: undefined is not a function", "Object doesn't support property or method 'doBar'", or "this.doBar is not a function"
 
 ## What is `this` in JavaScript?
+Much has been written about the hazards of `this` in JavaScript. See [this page](http://www.quirksmode.org/js/this.html), [this one](http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/), or [this other one](http://bjorn.tipling.com/all-this).
+
 When a function is invoked in JavaScript, you can follow these steps to determine what `this` will be (these rules are in priority order):
  * If the function was the result of a call to `function#bind`, `this` will be the argument given to `bind`
  * If the function was invoked in the form `foo.func()`, `this` will be `foo`
@@ -47,9 +49,9 @@ x.printThing(); // SAFE, method is invoked where it is referenced
 
 var y = x.printThing; // DANGER, invoking 'y()' may not have correct 'this'
 
-window.setTimeout(x.printThing, 10); // DANGER, method is not invoked where it is referenced
+window.addEventListener('click', x.printThing, 10); // DANGER, method is not invoked where it is referenced
 
-window.setTimeout(() => x.printThing(), 10); // SAFE, method is invoked in the same expression
+window.addEventListener('click', () => x.printThing(), 10); // SAFE, method is invoked in the same expression
 ```
 
 ## Fixes
@@ -66,7 +68,7 @@ class MyClass {
     }
 }
 var x = new MyClass();
-window.setTimeout(x.run, 100); // SAFE, 'run' will always have correct 'this'
+$(document).ready(x.run); // SAFE, 'run' will always have correct 'this'
 ```
 
  * Good/bad: This creates an additional closure per method per instance of the class. If this method is usually only used in regular method calls, this is overkill. However, if it's used a lot in callback positions, it's more efficient for the class instance to capture the `this` context instead of each call site creating a new closure upon invoke.
@@ -75,19 +77,6 @@ window.setTimeout(x.run, 100); // SAFE, 'run' will always have correct 'this'
  * Good: No extra work if the function has parameters
  * Bad: Derived classes can't call base class methods written this way using `super`
  * Bad: The exact semantics of which methods are "pre-bound" and which aren't create an additional non-typesafe contract between the class and its consumers
-
-### Function.bind
-```ts
-var x = new SomeClass();
-// SAFE: Functions created from function.bind are always preserve 'this'
-window.setTimeout(x.someMethod.bind(x), 100);
-```
-
- * Good/bad: Opposite memory/performance trade-off compared to using instance functions
- * Good: No extra work if the function has parameters
- * Bad: In TypeScript, this currently has no type safety
- * Bad: Only available in ECMAScript 5, if that matters
- * Bad: You have to type the instance name twice
 
 ### Local Fat Arrow
 In TypeScript (shown here with some dummy parameters for explanatory reasons):
@@ -103,3 +92,16 @@ someCallback((n, m) => x.doSomething(n, m));
  * Good: You only have to type the instance name once
  * Bad: You'll have to type the parameters twice
  * Bad: Doesn't work with variadic ('rest') parameters
+
+### Function.bind
+```ts
+var x = new SomeClass();
+// SAFE: Functions created from function.bind are always preserve 'this'
+window.setTimeout(x.someMethod.bind(x), 100);
+```
+
+ * Good/bad: Opposite memory/performance trade-off compared to using instance functions
+ * Good: No extra work if the function has parameters
+ * Bad: In TypeScript, this currently has no type safety
+ * Bad: Only available in ECMAScript 5, if that matters
+ * Bad: You have to type the instance name twice
