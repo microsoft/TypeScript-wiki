@@ -26,12 +26,13 @@ Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/Type
 
 1. [Enable dev mode](#enabling-dev-mode).
 2. Open up the Registry Editor.
-3. Navigate to the applicable `TypeScriptLanguageService`.
+3. Navigate to the applicable `TypeScriptLanguageService` key.
   * In Visual Studio 2013: `HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\12.0\TypeScriptLanguageService` 
   * In Visual Studio 2015: `HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\14.0\TypeScriptLanguageService` 
 4. Create a new String Value with the name `CustomTypeScriptServicesFileLocation`.
 5. Right click the `CustomTypeScriptServicesFileLocation` value and **Modify** it.
 6. Change the value data to the full path of your alternative services file (e.g. `C:\Users\drosen\TypeScript\built\local\typescriptServices.js`)
 
-# Debugging the language service
+# Debugging the language service in Visual Studio using Visual Studio
 
+1. Have a running instance of Visual Studio 2013/2015 with an open TypeScript file.
