@@ -1,3 +1,5 @@
+> ***Heads up:*** Keep in mind that this is not yet a stable API - we’re releasing this as version 0.4, and things will be changing over time. As a first iteration, there will be a few rough edges. We encourage any and all feedback from the community to improve the API. To allow users to transition between future releases, we will be documenting any breaking changes to this API per new release.
+
 ## Getting set up
 
 First you'll need to install TypeScript >=1.4 from `npm`.
