@@ -23,6 +23,7 @@
 * Support for ES6 Unicode specification
 * Support for Symbols
 * Support for Computed properties
+* Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
 
 # 2.0
 
