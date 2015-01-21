@@ -14,8 +14,8 @@ npm link typescript
 
 Once that's done, just grab our definitions file either
 
-* By using [tsd](https://www.npmjs.com/package/tsd) with the command `tsd query typescript --action install`
-* Going to the source [on our repository](https://github.com/Microsoft/TypeScript/blob/release-1.4/bin/typescript.d.ts)
+* By using [tsd](https://www.npmjs.com/package/tsd) with the command `tsd query typescript --action install`.
+* Going directly to the source [on our repository](https://github.com/Microsoft/TypeScript/blob/release-1.4/bin/typescript.d.ts).
 
 That's it, you're ready to go. Now you can try out some of the following examples.
 
