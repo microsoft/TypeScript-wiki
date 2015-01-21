@@ -33,4 +33,4 @@
 **Building Tools for TypeScript**
 * [[Architectural Overview]]
 * [[Using the Compiler API]]
-* [[Dev Mode]]
+* [[Dev Mode in Visual Studio]]
