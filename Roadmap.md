@@ -16,7 +16,7 @@
 * Export Language Service public API
 
 # 1.5
-* Support for Destructuring assignments
+* Support for [Destructuring](https://github.com/Microsoft/TypeScript/pull/1346)
 * Support for Spread operator
 * Support for for..of
 * Support for generators
