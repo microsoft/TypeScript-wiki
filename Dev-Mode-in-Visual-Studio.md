@@ -24,7 +24,7 @@ Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/Type
 
 # Using a custom language service file
 
-1. [Enable dev mode](#Enabling-Dev-Mode)
+1. [Enable dev mode](#enabling-dev-mode)
 
 # Debugging the language service
 
