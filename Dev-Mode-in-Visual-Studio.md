@@ -40,20 +40,20 @@ When the language service's script side is modified in any way (whether or not y
 # Debugging the language service in Visual Studio using Visual Studio
 
 1. Have a running instance of Visual Studio 2013/2015 with an open TypeScript file.
-   ![A running instance with a typical TypeScript file.](./dev-mode-screenshots/001.png)
+   ![A running instance with a typical TypeScript file.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/001.png)
 2. Open a new instance of Visual Studio 2013/2015.
 3. Bring up the **Attach to Process** dialog by either
   * Using menu bar and navigating from `Debug` -> `Attach to Process`.
-  ![Navigating to the **Attach to Process** dialog with the menu bar.](./dev-mode-screenshots/002.png)
+  ![Navigating to the **Attach to Process** dialog with the menu bar.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/002.png)
   * Clicking on the `Attach` button from the **Standard** toolbar if it is visible.
-  ![A shortcut to opening the 'Attach to Process' dialog.](./dev-mode-screenshots/003.png)
+  ![A shortcut to opening the 'Attach to Process' dialog.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/003.png)
 4. In the row labeled `Attach to:`, click on the `Select...` button.
-  ![Hit the select button.](./dev-mode-screenshots/004.png)
+  ![Hit the select button.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/004.png)
 5. Click the radio button `Debug these code types` and select `Script`. Then press OK.
-  ![Select 'Script' code to be debugged.](./dev-mode-screenshots/005.png)
+  ![Select 'Script' code to be debugged.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/005.png)
 6. Find the appropriate Visual Studio instance in your list. Visual Studio instances have the process name `devenv.exe` and you can typically narrow down your instance looking for its current file in the Title field.
 7. Hit the `Attach` button. In the **Solution Exporer**. you should now see four active debuggers (one for each language service thread).
-  ![Debugging view after appropriately selecting your Visual Studio instance.](./dev-mode-screenshots/006.png)
+  ![Debugging view after appropriately selecting your Visual Studio instance.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/006.png)
 
 At this point you should be able to hit debug points and get an understanding of what's going on.
 
