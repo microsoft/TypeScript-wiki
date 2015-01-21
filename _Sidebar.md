@@ -31,4 +31,5 @@
 * [[Writing Good Design Proposals]]
 
 **Building Tools for TypeScript**
+* [[Architectural Overview]]
 * [[Using the Compiler API]]
