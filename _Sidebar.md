@@ -17,7 +17,7 @@
 * [[Writing Definition Files]]
 
 **News**
-* [[What's new in TypeScript?]]
+* [[What's new in TypeScript]]
 * [[Roadmap]]
 * [[Breaking Changes]]
 
