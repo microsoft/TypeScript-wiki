@@ -35,7 +35,7 @@ Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/Type
 
 # Hot swapping
 
-When the language service's script side is modified in any way (whether or not you are using a custom location for your language service file), it will be reloaded on the fly. This means you should see changes instantaneously. However, this means that when debugging, your language service threads will be purged.
+When the language service's script side is modified in any way (whether or not you are using a custom location for your language service file), it will be reloaded on the fly for a given thread the next time any of that thread's services are requested. However, this means that if debugging, your language service threads will be purged.
 
 # Debugging the language service in Visual Studio using Visual Studio
 
