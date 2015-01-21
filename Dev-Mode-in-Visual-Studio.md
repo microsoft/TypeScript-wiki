@@ -60,7 +60,7 @@ At this point you should be able to hit debug points and get an understanding of
 ## Language Service Threads
 
 * **Classifier_N**: This thread runs the lexical classifier - a line-oriented classifier which is primarily concerned with fast rudimentary colorization.
-* **CoreServices_N**: This is used to calculate the virtual project space in VS, and needs more documentation.
 * **LanguageService_N** and **LanguageService_N**: Unfortunately these haven't been distinctly named.
   * One of these is the syntactic classifier, giving accurate (semantically agnostic) classifications.
-  * The other needs to be documented more thoroughly.
+  * The other performs all syntax-related questions such as formatting, smart indentation, etc.
+* **CoreServices_N**: This is used to perform semantic operations such as providing diagnostics, completion lists, quick info, etc. Effectively, anything that needs the typechecker will use this thread.
