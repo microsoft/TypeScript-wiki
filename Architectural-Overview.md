@@ -80,7 +80,7 @@ Function | Description
 As an example, imagine this portion of a source file:
 
 ```TypeScript
-debug;/*hello*/     
+debugger;/*hello*/     
     //bye
   /*hi*/    function
 ```
