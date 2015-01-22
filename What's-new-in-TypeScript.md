@@ -63,11 +63,11 @@ x[6] = true; // Error, boolean isn't number or string
 
 ## Union types
 ### Overview
-Union types are a powerful way to express a value that can be one of several types. For example, you might have an API for running a program that takes a commandline as either a `string` or a `string[]`. You can now write:
+Union types are a powerful way to express a value that can be one of several types. For example, you might have an API for running a program that takes a commandline as either a `string`, a `string[]` or a function that returns a `string`. You can now write:
 ```ts
 interface RunOptions {
    program: string;
-   commandline: string[]|string;
+   commandline: string[]|string|(() => string);
 }
 ```
 
