@@ -74,7 +74,24 @@ For most basic uses, comments are the "interesting" trivia. The comments that be
 
 Function | Description
 ---------|------------
-`ts.getLeadingCommentRanges` | Returns ranges of comments between the first line break following the given position and the token itself (probably most useful with `ts.Node.getFullStart`).
-`ts.getTrailingCommentRanges` | Returns ranges of comments until the first line break following the given position (probably most useful with `ts.Node.getEnd`).
+`ts.getLeadingCommentRanges` | Given the source text and positing within that text, returns ranges of comments between the first line break following the given position and the token itself (probably most useful with `ts.Node.getFullStart`).
+`ts.getTrailingCommentRanges` | Given the source text and positing within that text, returns ranges of comments until the first line break following the given position (probably most useful with `ts.Node.getEnd`).
 
+As an example, imagine this portion of a source file:
+
+```TypeScript
+debug;/*hello*/     
+    //bye
+  /*hi*/    function
+```
+
+The full start for the `function` keyword begins at the `/*hello*/` comment, but `getLeadingCommentRanges` will only return the last 2 comments:
+
+```
+/ * h e l l o * / _ _ _ _ _ [CR] [NL] _ _ _ _ / / b y e [CR] [NL] _ _ / * h i * / _ _ _ _ f u n c t i o n 
+↑                                     ↑       ↑                       ↑                   ↑
+full start                       look for     first comment           second comment      node start
+                           leading comments 
+                            starting here
+```
 In the event that you are concerned with richer information of the token stream, `createScanner` also has a `skipTrivia` flag which you can set to `false`, and use `setText`/`setTextPos` to scan at different points in a file.
