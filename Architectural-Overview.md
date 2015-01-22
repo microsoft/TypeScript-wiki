@@ -90,7 +90,7 @@ The full start for the `function` keyword begins at the `/*hello*/` comment, but
 ```
 d e b u g g e r ; / * h e l l o * / _ _ _ _ _ [CR] [NL] _ _ _ _ / / b y e [CR] [NL] _ _ / * h i * / _ _ _ _ f u n c t i o n 
                   ↑                                     ↑       ↑                       ↑                   ↑
-                  full start                       look for     first comment           second comment      node start
+                  full start                       look for     first comment           second comment      token start
                                               leading comments 
                                                starting here
 ```
