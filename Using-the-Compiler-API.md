@@ -44,11 +44,12 @@ export function compile(filenames: string[], options: ts.CompilerOptions): void 
         console.log(`${diagnostic.file.filename} (${lineChar.line},${lineChar.character}): ${diagnostic.messageText}`);
     });
 
-    console.log(`Process exited with code '${result.emitResultStatus}'.`);
+    console.log(`Process exiting with code '${result.emitResultStatus}'.`);
+    process.exit(result.emitResultStatus);
 }
 
-compile(process.argv.slice(2), { noImplicitAny: true, noEmitOnError: true,
-                                 target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS});
+compile(process.argv.slice(2), { noEmitOnError: true, noImplicitAny: true,
+                                 target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS });
 ```
 
 ## A simple transform function
