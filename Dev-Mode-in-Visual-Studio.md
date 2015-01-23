@@ -1,7 +1,7 @@
 Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/TypeScript/releases/tag/v1.4) and higher that allows you to
 
 1. Use a custom language service file of your choosing.
-2. Debug the script side of the language service Visual Studio is using during a session.
+2. Debug the script side of the language service in Visual Studio.
 
 # Enabling Dev Mode
 
