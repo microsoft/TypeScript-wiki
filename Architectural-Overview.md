@@ -1,5 +1,7 @@
 ## Layer Overview
 
+![Architectural overview.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/architecture.png)
+
 * **Core Compiler Pipeline:**
  * **Parser:** Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)
 
