@@ -1,17 +1,20 @@
 ## Layer Overview
 
+* **Core Compiler Pipeline:**
+ * **Parser:** Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)
+
+ * **Binder:** Linking declarations contributing to the same structure using a Symbol (e.g. different declarations of the same interface or module, or a function and a module with the same name). This allows the type system to reason about these named declarations. 
+
+ * **Type resolver/ Checker:** Resolving types of each construct, checking semantic operations and generate diagnostics as appropriate.
+
+ * **Emitter:** Output generated from a set of inputs (.ts and .d.ts) files can be one of: JavaScript (.js), definitions (.d.ts), or source maps (.js.map)
+
 
 * **Command line compiler (tsc):** The batch compilation CLI. Mainly handle reading and writing files for different supported engines (e.g. node js)
 
-* **Parser:** Starting from a set of sources, and following the productions of the language grammar, to generate an Abstract Syntax Tree (AST)
-
-* **Binder:** Linking declarations contributing to the same structure using a Symbol (e.g. different declarations of the same interface or module, or a function and a module with the same name). This allows the type system to reason about these named declarations. 
-
-* **Type resolver/ Checker:** Resolving types of each construct, checking semantic operations and generate diagnostics as appropriate.
-
-* **Emitter:** Output generated from a set of inputs (.ts and .d.ts) files can be one of: JavaScript (.js), definitions (.d.ts), or source maps (.js.map)
-
-* **Services:** Provides an additional layer of language services on top of the basic output generation supported by the CLI. The services layer functionalities are ideal for an IDE but can be used for a variety of ways other than IDE scenarios. The services layer also override the basic compiler data structures allowing for a richer tree API.
+* **Language Service:** The "Language Service" exposes an additional layer around the core compiler bibeline that are best suiting editor-like applications.
+The language service supports the common set of a typical editor operations like statement completions, signature help, code formatting and outlining, colorization, etc... Basic re-factoring like rename, Debugging interface helpers like validating breakpoints as well as TypeScript-specific features like support of incremental compilation (--watch equivalent on the command-line). 
+The language service is designed to efficiently handle scenarios with files changing over time within a long-lived compilation context; in that sense, the language service provides a slightly different perspective about working with programs and source files from that of the other compiler interfaces.
 
 * **Pre-processor:** The "Compilation Context" refers to all files involved in a "program". The context is created by inspecting all files passed in to the compiler on the command line, in order, and then adding any files they may reference directory or indirectly through "import" statements and /// <references > tags.
 The result of walking the reference graph is an ordered list of source files, that constitute the program.
