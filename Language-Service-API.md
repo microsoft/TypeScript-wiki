@@ -23,6 +23,10 @@ The language service will only ask the host for information as part of host call
 
 The host is expected to supply the full set of files compromising the context. Refer to [reference resolution in the language service](https://github.com/Microsoft/TypeScript/wiki/Language-Service-API#reference-resolution-in-the-language-service) for more details.
 
+## ScriptSnapshot
+A ScriptSnapshot represents the state of the text of an input file to the language service at a given point of time. The ScriptSnapshot is mainly used to allow for an efficient incremental parsing. A ScriptSnapshot is meant to answer two questions, 1. get current text, and 2. given a previous snapshot what are the change ranges. The second is what incremental parsing uses mainly to ensure it only parses only the changed sections.
+
+> For users who do not want to opt into incremental parsing, use `ts.ScriptSnapshot.fromString()`.
 
 ## Reference resolution in the language service
 There are two two means of declaring dependencies in TypeScript, import statements, and triple-slash reference comments (/// <reference path="" />). Reference resolution for a program is the process of walking the dependency graph between files, and generating a sorted list of files compromising the program. 
@@ -31,7 +35,7 @@ In the command-line compiler (tsc) this happens as part of building the program.
 
 This work flow is decoupled in the language service into two phases, allowing the host to interject at any point and change the resolution logic if needed. It also allows the host to fully manage program structure and optimize file state change.
 
-To resolve references originating from a file, use `ts.preProcessFile`. This method will resolve both imports and triple-slash references from this specific files. Also worth noting that this relies on the scanner, and does not require a full parse to allow for fast context resolution, suited to editor interactions.
+> To resolve references originating from a file, use `ts.preProcessFile`. This method will resolve both imports and triple-slash references from this specific files. Also worth noting that this relies on the scanner, and does not require a full parse to allow for fast context resolution, suited to editor interactions.
 
 ## Document Registry
 
@@ -39,4 +43,4 @@ A language service object corresponds to a single project. So if the host is han
 
 A more advanced use of the document registry is to serialize sourceFile objects to disk and re-hydrate them when needed.
 
-The Language service comes with a default DocumentRegistry implementation allowing for sharing SoruceFiles between different LanguageService instance, use `createDocumentRegistry` to create one, and pass it to all your `createLanguageService` calls.
+> The Language service comes with a default DocumentRegistry implementation allowing for sharing SoruceFiles between different LanguageService instance, use `createDocumentRegistry` to create one, and pass it to all your `createLanguageService` calls.
