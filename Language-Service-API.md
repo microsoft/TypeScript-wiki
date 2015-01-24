@@ -21,7 +21,7 @@ The host is descried by the LanguageServiceHost API, and it abstracts all intera
 
 The language service will only ask the host for information as part of host calls. No asynchronous events, or background processing are expected. The host is expected to manage threading if needed.
 
-The host is expected to supply the full set of files compromising the context. for resolving references refer to: 
+The host is expected to supply the full set of files compromising the context. Refer to [reference resolution in the language service](https://github.com/Microsoft/TypeScript/wiki/Language-Service-API#reference-resolution-in-the-language-service) for more details.
 
 
 ## Reference resolution in the language service
