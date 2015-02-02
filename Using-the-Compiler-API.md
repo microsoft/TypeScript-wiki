@@ -308,3 +308,70 @@ var currentDirectoryFiles = fs.readdirSync(process.cwd()).
 // Start the watcher
 watch(currentDirectoryFiles, { target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS });
 ```
+
+## Pretty printer using the LS Formatter
+
+> The formatting interfaces used here are part of the typescript 1.4 package but is not currently exposed in the public typescript.d.ts. The typings should be exposed in the next release.
+
+```TypeScript
+/// <reference path="typings/node/node.d.ts" />
+/// <reference path="typings/typescript/typescript.d.ts" />
+
+import ts = require("typescript");
+
+// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently 
+//       exposed in the public typescript.d.ts. The typings should be exposed in the next release. 
+function format(text: string) {
+    var options = getDefaultOptions();
+
+    // Parse the source text
+    var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, /*setParentNodes*/ true);
+
+    // Get the formatting edits on the input sources
+    var edits = (<any>ts).formatting.formatDocument(sourceFile, getRuleProvider(options), options);
+
+    // Apply the edits on the input code
+    return applyEdits(text, edits);
+
+    function getRuleProvider(options: ts.FormatCodeOptions) {
+        // Share this between multiple formatters using the same options.
+        // This represents the bulk of the space the formatter uses.
+        var ruleProvider = new (<any>ts).formatting.RulesProvider();
+        ruleProvider.ensureUpToDate(options);
+        return ruleProvider;
+    }
+
+    function applyEdits(text: string, edits: ts.TextChange[]): string {
+        // Apply edits in reverse on the existing text
+        var result = text;
+        for (var i = edits.length - 1; i >= 0; i--) {
+            var change = edits[i];
+            var head = result.slice(0, change.span.start);
+            var tail = result.slice(change.span.start + change.span.length)
+            result = head + change.newText + tail;
+        }
+        return result;
+    }
+
+    function getDefaultOptions(): ts.FormatCodeOptions {
+        return {
+            IndentSize: 4,
+            TabSize: 4,
+            NewLineCharacter: '\r\n',
+            ConvertTabsToSpaces: true,
+            InsertSpaceAfterCommaDelimiter: true,
+            InsertSpaceAfterSemicolonInForStatements: true,
+            InsertSpaceBeforeAndAfterBinaryOperators: true,
+            InsertSpaceAfterKeywordsInControlFlowStatements: true,
+            InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
+            InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
+            PlaceOpenBraceOnNewLineForFunctions: false,
+            PlaceOpenBraceOnNewLineForControlBlocks: false,
+        };
+    }
+}
+
+var code = "var a=function(v:number){return 0+1+2+3;\n}";
+var result = format(code);
+console.log(result);
+```
