@@ -325,7 +325,8 @@ function format(text: string) {
     var options = getDefaultOptions();
 
     // Parse the source text
-    var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, /*setParentNodes*/ true);
+    var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, "0");
+    fixupParentReferences(sourceFile);
 
     // Get the formatting edits on the input sources
     var edits = (<any>ts).formatting.formatDocument(sourceFile, getRuleProvider(options), options);
@@ -346,8 +347,8 @@ function format(text: string) {
         var result = text;
         for (var i = edits.length - 1; i >= 0; i--) {
             var change = edits[i];
-            var head = result.slice(0, change.span.start);
-            var tail = result.slice(change.span.start + change.span.length)
+            var head = result.slice(0, change.span.start());
+            var tail = result.slice(change.span.start() + change.span.length())
             result = head + change.newText + tail;
         }
         return result;
@@ -369,7 +370,21 @@ function format(text: string) {
             PlaceOpenBraceOnNewLineForControlBlocks: false,
         };
     }
+
+    function fixupParentReferences(sourceFile: ts.SourceFile) {
+        var parent: ts.Node = sourceFile;
+        function walk(n: ts.Node): void {
+            n.parent = parent;
+
+            var saveParent = parent;
+            parent = n;
+            ts.forEachChild(n, walk);
+            parent = saveParent;
+        }
+        ts.forEachChild(sourceFile, walk);
+    }
 }
+
 
 var code = "var a=function(v:number){return 0+1+2+3;\n}";
 var result = format(code);
