@@ -21,7 +21,7 @@ Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/Type
   * **Visual Studio 2015**: Navigate to `HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\14.0\TypeScriptLanguageService` (or create the key if it does not exist).
 3. Create a new String Value with the name `CustomTypeScriptServicesFileLocation`.
 4. Right click the `CustomTypeScriptServicesFileLocation` value and **Modify** it.
-5. Change the value data to the full path of your alternative services file (e.g. `C:\Users\drosen\TypeScript\built\local\typescriptServices.js`)
+5. Change the value data to the full path of your alternative services file (e.g. `C:\Users\Daniel\TypeScript\built\local\typescriptServices.js`)
 
 # Hot swapping
 
