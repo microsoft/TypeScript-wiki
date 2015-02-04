@@ -20,6 +20,7 @@
 * [[What's new in TypeScript]]
 * [[Roadmap]]
 * [[Breaking Changes]]
+* [[API Breaking Changes]]
 
 **TypeScript Contributors**
 
