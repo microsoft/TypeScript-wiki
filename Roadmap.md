@@ -17,7 +17,7 @@
 
 # 1.5
 * Support for [Destructuring](https://github.com/Microsoft/TypeScript/pull/1346)
-* Support for Spread operator
+* Support for [Spread Operator](https://github.com/Microsoft/TypeScript/pull/1931)
 * Support for for..of
 * Support for generators
 * Support for ES6 Unicode specification
