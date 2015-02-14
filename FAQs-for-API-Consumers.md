@@ -12,7 +12,7 @@ Though lexical goals are not addressed in the TypeScript spec, there is effectiv
 
 Template strings did not even originally have lexical classification support prior to 1.5 for [several technical reasons](https://github.com/Microsoft/TypeScript/issues/1477#issuecomment-66907946). However, due to demand, [support was added for what we believed would be the majority of practical uses](https://github.com/Microsoft/TypeScript/pull/2026).
 
-As a precursor, template expressions are made up of several components:
+As a precursor, when discussing template expressions, it is useful to be familiar with the following syntactic components:
 
 Syntax Kind | Example
 ------|------------
