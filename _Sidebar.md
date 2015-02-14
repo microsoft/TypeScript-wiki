@@ -37,4 +37,4 @@
 * [[Using the Language Service API]]
 * [[Dev Mode in Visual Studio]]
 
-** FAQs **
+**FAQs**
