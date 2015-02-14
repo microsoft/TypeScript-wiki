@@ -8,7 +8,7 @@ The rescan functions roughly correspond to triggering the alternate rules, thoug
 
 Though lexical goals are not addressed in the TypeScript spec, there is effectively one new rule added for the `>`s (greater-than characters) to make generics easy to parse, but impose that any places which might encounter a `>>`, `>>>`, etc. require a rescan.
 
-### Why do I sometimes see bad results for nested template strings?
+### Why does the lexical classifier sometimes give inaccurate results for nested template strings?
 
 For the record, template strings did not even originally have lexical classification support prior to 1.5, for [several technical reasons](https://github.com/Microsoft/TypeScript/issues/1477#issuecomment-66907946). However, due to demand, [support was added for what we believed would be the majority of practical uses](https://github.com/Microsoft/TypeScript/pull/2026).
 
