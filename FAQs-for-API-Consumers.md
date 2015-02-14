@@ -10,7 +10,7 @@ Though lexical goals are not addressed in the TypeScript spec, there is effectiv
 
 ### Why does the lexical classifier sometimes give inaccurate results for nested template strings?
 
-For the record, template strings did not even originally have lexical classification support prior to 1.5, for [several technical reasons](https://github.com/Microsoft/TypeScript/issues/1477#issuecomment-66907946). However, due to demand, [support was added for what we believed would be the majority of practical uses](https://github.com/Microsoft/TypeScript/pull/2026).
+For the record, template strings did not even originally have lexical classification support prior to 1.5 for [several technical reasons](https://github.com/Microsoft/TypeScript/issues/1477#issuecomment-66907946). However, due to demand, [support was added for what we believed would be the majority of practical uses](https://github.com/Microsoft/TypeScript/pull/2026).
 
 The lexical classifier is a rudimentary classifier that is intended to be fast and work on single lines at a time. It works through augmenting TypeScript's scanner, which itself works on a regular language grammar except when given a lexical goal in mind. Keep in mind, lexical goals can only be triggered accurately when motivated by a syntactically aware entity, while the lexical classifier only has the context of a single line with a previous line state to work with.
 
