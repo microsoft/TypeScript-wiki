@@ -1,3 +1,9 @@
+#### Frequently asked Questions
+* [What are these `rescanFooToken` functions in the scanner for?](#what-are-these-rescanfootoken-functions-in-the-scanner-for)
+* [Why does the lexical classifier sometimes give inaccurate results for nested template strings?](#why-does-the-lexical-classifier-sometimes-give-inaccurate-results-for-nested-template-strings)
+
+=================
+
 ### What are these `rescanFooToken` functions in the scanner for?
 
 The ECMASCript grammar describes *lexical goals* for its grammar, for which an alternate scanning rule should be used in its place from the default. These rules are triggered when ***syntactically aware consumers*** require them (i.e. EMCAScript parsers which know when a construct can occur). For details, [see the current ES6 draft](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-grammar-notation).
@@ -7,6 +13,8 @@ One example of this is for a single `/` (the forward-slash token). As long as th
 The rescan functions roughly correspond to triggering the alternate rules, though rather than passing an extra parameter, a rescan is demanded of the scanner.
 
 Though lexical goals are not addressed in the TypeScript spec, there is effectively one new rule added for the `>`s (greater-than characters) to make generics easy to parse, but impose that any places which might encounter a `>>`, `>>>`, etc. require a rescan.
+
+=================
 
 ### Why does the lexical classifier sometimes give inaccurate results for nested template strings?
 
