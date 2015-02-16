@@ -258,7 +258,7 @@ The new `amd-module name` tag allows passing an optional module name to the comp
 export class C {
 }
 ```
-Will result in assiging the name `NamedModule` to the module as part of calling the AMD `define`:
+Will result in assigning the name `NamedModule` to the module as part of calling the AMD `define`:
 
 ```JavaScript
 //// [amdModule.js]
@@ -272,5 +272,24 @@ define("NamedModule", ["require", "exports"], function (require, exports) {
 });
 ```
 
-# Post-1.4 features
+# TypeScript 1.5
+
+## AMD-dependency optional names
+`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code. 
+
+The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
+
+```Typescript
+/// <amd-dependency path="legacy/moduleA" name="moduleA"/>
+declare var moduleA:MyType
+moduleA.callStuff()
+```
+Generated JS code:
+```
+define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
+    moduleA.callStuff()
+});
+```
+
+# Post-1.5 features
 TODO: What are they?

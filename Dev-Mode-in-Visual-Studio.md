@@ -5,6 +5,8 @@ Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/Type
 
 # Enabling script debugging
 
+Note: You may also use the [VSDevMode.ps1](https://github.com/Microsoft/TypeScript/blob/master/scripts/VSDevMode.ps1) script to easily set these values. See the comments in the script for usage.
+
 1. Open up the Registry Editor (`regedit.exe` from the Run prompt).
 2. If you are using...
   * **Visual Studio 2013**: Navigate to `HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\12.0\TypeScriptLanguageService` (or create the key if it does not exist).
@@ -14,6 +16,8 @@ Dev Mode is a new feature for [TypeScript 1.4](https://github.com/Microsoft/Type
 5. Change the value data to `1`.
 
 # Using a custom language service file
+
+Note: You may also use the [VSDevMode.ps1](https://github.com/Microsoft/TypeScript/blob/master/scripts/VSDevMode.ps1) script to easily set these values. See the comments in the script for usage.
 
 1. Open up the Registry Editor.
 2. If you are using...

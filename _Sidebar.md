@@ -20,6 +20,7 @@
 * [[What's new in TypeScript]]
 * [[Roadmap]]
 * [[Breaking Changes]]
+* [[API Breaking Changes]]
 
 **TypeScript Contributors**
 
@@ -35,3 +36,6 @@
 * [[Using the Compiler API]]
 * [[Using the Language Service API]]
 * [[Dev Mode in Visual Studio]]
+
+**FAQs**
+* [[FAQs for API Consumers]]
