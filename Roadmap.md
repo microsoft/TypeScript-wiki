@@ -22,7 +22,7 @@
 * Support for for..of
 * Support for generators
 * Support for ES6 Unicode specification
-* Support for Symbols
+* Support for [Symbols](https://github.com/Microsoft/TypeScript/pull/1978)
 * Support for Computed properties
 * Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
 
