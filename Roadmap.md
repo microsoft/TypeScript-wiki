@@ -18,6 +18,7 @@
 # 1.5
 * Support for [Destructuring](https://github.com/Microsoft/TypeScript/pull/1346)
 * Support for [Spread Operator](https://github.com/Microsoft/TypeScript/pull/1931)
+* Support for [ES6 Modules](https://github.com/Microsoft/TypeScript/pull/1983)
 * Support for for..of
 * Support for generators
 * Support for ES6 Unicode specification
@@ -28,7 +29,6 @@
 # 2.0
 
 * Incorporate ECMAScript 6 features that can be polyfilled
-* Support for ES6 Modules
 * Support for local types and class expressions
 * Investigate top-rated feature requests (mixins, abstract classes, etc). 
 * Investigate async/await as a desugaring to ES6
