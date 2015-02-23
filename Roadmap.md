@@ -23,7 +23,7 @@
 * Support for generators
 * Support for ES6 Unicode specification
 * Support for [Symbols](https://github.com/Microsoft/TypeScript/pull/1978)
-* Support for Computed properties
+* Support for [Computed properties](https://github.com/Microsoft/TypeScript/issues/1082)
 * Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
 
 # 2.0
