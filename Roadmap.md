@@ -16,6 +16,7 @@
 * Export Language Service public API
 
 # 1.5
+
 * Support for [Destructuring](https://github.com/Microsoft/TypeScript/pull/1346)
 * Support for [Spread Operator](https://github.com/Microsoft/TypeScript/pull/1931)
 * Support for [ES6 Modules](https://github.com/Microsoft/TypeScript/pull/1983)
@@ -25,10 +26,12 @@
 * Support for [Symbols](https://github.com/Microsoft/TypeScript/pull/1978)
 * Support for [Computed properties](https://github.com/Microsoft/TypeScript/issues/1082)
 * Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
+* Support for let and const on ES3/ES5
+* Support for tagged string templates on ES3/ES5
+* Expose a new editor interface through [TS Server](https://github.com/Microsoft/TypeScript/pull/2041)
 
 # 2.0
 
-* Incorporate ECMAScript 6 features that can be polyfilled
 * Support for local types and class expressions
 * Investigate top-rated feature requests (mixins, abstract classes, etc). 
 * Investigate async/await as a desugaring to ES6
