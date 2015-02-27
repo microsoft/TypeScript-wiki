@@ -21,7 +21,6 @@
 * Support for [Spread Operator](https://github.com/Microsoft/TypeScript/pull/1931)
 * Support for [ES6 Modules](https://github.com/Microsoft/TypeScript/pull/1983)
 * Support for for..of
-* Support for generators
 * Support for ES6 Unicode specification
 * Support for [Symbols](https://github.com/Microsoft/TypeScript/pull/1978)
 * Support for [Computed properties](https://github.com/Microsoft/TypeScript/issues/1082)
@@ -30,9 +29,13 @@
 * Support for tagged string templates on ES3/ES5
 * Expose a new editor interface through [TS Server](https://github.com/Microsoft/TypeScript/pull/2041)
 
+# 1.6
+
+* Generators
+* Async/await
+
 # 2.0
 
 * Support for local types and class expressions
 * Investigate top-rated feature requests (mixins, abstract classes, etc). 
-* Investigate async/await as a desugaring to ES6
 * Improve lib.d.ts modularity
