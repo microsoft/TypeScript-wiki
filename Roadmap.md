@@ -26,7 +26,7 @@
 * Support for [Computed properties](https://github.com/Microsoft/TypeScript/issues/1082)
 * Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
 * Support for let and const on ES3/ES5
-* Support for tagged string templates on ES3/ES5
+* Support for [tagged string templates on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/1589)
 * Expose a new editor interface through [TS Server](https://github.com/Microsoft/TypeScript/pull/2041)
 
 # 1.6
