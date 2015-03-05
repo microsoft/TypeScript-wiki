@@ -30,6 +30,7 @@
 * [[Spec conformance testing]]
 * [[Useful Links for TypeScript Issue Management]]
 * [[Writing Good Design Proposals]]
+* [[Arcane Details of the Compiler]]
 
 **Building Tools for TypeScript**
 * [[Architectural Overview]]
