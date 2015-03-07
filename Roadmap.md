@@ -21,7 +21,7 @@
 * Support for [Spread Operator](https://github.com/Microsoft/TypeScript/pull/1931)
 * Support for [ES6 Modules](https://github.com/Microsoft/TypeScript/issues/2242)
 * Support for [for..of](https://github.com/Microsoft/TypeScript/pull/2207)
-* Support for ES6 Unicode specification
+* Support for [ES6 Unicode specification](https://github.com/Microsoft/TypeScript/pull/2169)
 * Support for [Symbols](https://github.com/Microsoft/TypeScript/pull/1978)
 * Support for [Computed properties](https://github.com/Microsoft/TypeScript/issues/1082)
 * Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
