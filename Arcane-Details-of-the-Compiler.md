@@ -16,10 +16,10 @@ This is an incomplete page that will need to be updated as time goes on. The int
 
 ## Type argument inference
 
+### Type argument fixing
+
 # Emitter
 
 ## Rewriting & synthesized nodes
-
-## Definition file generation
 
 ## Sourcemap generation
