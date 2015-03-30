@@ -179,7 +179,7 @@ import someMod = require('someModule');
 
 We specify which objects are visible outside the module by using the _export_ keyword on a top-level declaration, similarly to how _export_ defined the public surface area of an internal module.
 
-To compile, we must specify a module target on the command line. For node.js, use _--target commonjs_; for require.js, use _--target amd_. For example:
+To compile, we must specify a module target on the command line. For node.js, use _--module commonjs_; for require.js, use _--module amd_. For example:
 {{
 tsc --module commonjs Test.ts
 }}
