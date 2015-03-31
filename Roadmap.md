@@ -28,7 +28,7 @@
 * Support for [let and const on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/2161)
 * Support for [tagged string templates on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/1589)
 * Expose a new editor interface through [TS Server](https://github.com/Microsoft/TypeScript/pull/2041)
-* Decorators
+* Support for [ES7 Decorators proposal](https://github.com/Microsoft/TypeScript/issues/2249)
 
 # 1.6
 
