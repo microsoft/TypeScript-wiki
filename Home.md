@@ -7,6 +7,7 @@
 * [Functions] (Functions)
 * [Generics] (Generics)
 * [Common Errors] (Common Errors)
+* [Compiler Options] (Compiler Options)
 
 # Advanced Topics
 
