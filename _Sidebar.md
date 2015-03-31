@@ -7,6 +7,8 @@
 * [[Functions]]
 * [[Generics]]
 * [[Common Errors]]
+* [[Compiler Options]]
+* [[tsconfig.json]]
 
 **TypeScript Language Advanced**
 
