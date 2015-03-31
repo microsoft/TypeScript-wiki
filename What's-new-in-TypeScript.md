@@ -299,5 +299,31 @@ As an example, consider the need to escape a string that contains the character 
 
 With ES6’s codepoint escapes, you can cleanly represent that exact character in strings and template strings with a single escape: `"\u{20bb7}"`. TypeScript will emit the string in ES3/ES5 as `"\uD842\uDFB7"`.
 
+## Tagged template strings in ES3/ES5
+
+In TypeScript 1.4, we added support for template strings for all targets, and tagged templates for just ES6. Thanks to some considerable work done by [@ivogabe](https://github.com/ivogabe), we bridged the gap for for tagged templates in ES3 and ES5.
+
+When targeting ES3/ES5, the following code
+
+```TypeScript
+function oddRawStrings(strs: TemplateStringsArray, n1, n2) {
+    return strs.raw.filter((raw, index) => index % 2 === 1);
+}
+
+oddRawStrings `Hello \n${123} \t ${456}\n world`
+```
+
+will be emitted as
+
+```JavaScript
+function oddRawStrings(strs, n1, n2) {
+    return strs.raw.filter(function (raw, index) {
+        return index % 2 === 1;
+    });
+}
+(_a = ["Hello \n", " \t ", "\n world"], _a.raw = ["Hello \\n", " \\t ", "\\n world"], oddRawStrings(_a, 123, 456));
+var _a;
+```
+
 # Post-1.5 features
 TODO: What are they?
