@@ -6,7 +6,7 @@ Option | Shorthand | Description
 --help | --h | Print help message.
 --version | --v | Print the compiler's version.
 --module | --m | Specify module code generation: 'commonjs' or 'amd'.
---project | --p | Compile the project in the given directory. The directory needs to contain a `tsconfig.json` file to direct compilation. See tsconfig.json documentation for more details.
+--project | --p | Compile the project in the given directory. The directory needs to contain a `tsconfig.json` file to direct compilation. See [[tsconfig.json]] documentation for more details.
 --target | --t | Specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'
 --watch | --w | Run the compiler in watch mode. Watch input files and trigger recompilation on changes.
 --charset | | The character set of the input files.
