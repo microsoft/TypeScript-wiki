@@ -22,15 +22,10 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --declaration     | TypeScriptGeneratesDeclarations | boolean
 --module          | TypeScriptModuleKind  | AMD or CommonJs
 --target          | TypeScriptTarget      | ES3, ES5 or ES6
---project         | Not supported in VS   | 
---watch           | Not supported in VS   |
---charset         | TypeScriptCharset     |                
---diagnostics     | Not supported in VS   |           
---emitBOM         | TypeScriptEmitBOM     | boolean    
---listFiles       | Not supported in VS   | 
+--charset         | TypeScriptCharset     |                           
+--emitBOM         | TypeScriptEmitBOM     | boolean     
 --locale          | Automatically set to PreferredUILang value |
---mapRoot         | TypeScriptMapRoot     | File path
---noEmit          | Not supported in VS   | 
+--mapRoot         | TypeScriptMapRoot     | File path 
 --noEmitOnError   | TypeScriptNoEmitOnError | boolean
 --noImplicitAny   | TypeScriptNoImplicitAny | boolean
 --noLib           | TypeScriptNoLib       | boolean
@@ -42,4 +37,8 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --sourceMap       | TypeScriptSourceMap | File path                         
 --sourceRoot      | TypeScriptSourceRoot | File path
 --suppressImplicitAnyIndexErrors | TypeScriptSuppressImplicitAnyIndexErrors | boolean
-
+--project         | *Not supported in VS* | 
+--watch           | *Not supported in VS* |
+--diagnostics     | *Not supported in VS* |
+--listFiles       | *Not supported in VS* |
+--noEmit          | *Not supported in VS* |
