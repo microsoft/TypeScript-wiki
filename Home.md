@@ -8,6 +8,7 @@
 * [Generics] (Generics)
 * [Common Errors] (Common Errors)
 * [Compiler Options] (Compiler Options)
+* [tsconfig.json] (tsconfig.json)
 
 # Advanced Topics
 
