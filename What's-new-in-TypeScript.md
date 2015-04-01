@@ -60,6 +60,26 @@ let x = 0;
 console.log(x); // 0
 ```
 
+## for..of support
+
+TypeScript 1.5 adds support to for..of loops on arrays for ES3/ES5 as well as full support for Iterators for ES6.
+
+**Example:**
+
+The TypeScript compiler will transpile for..of arrays to idiomatic ES3/ES5 javascript:
+
+```ts
+for (var v of expr) { }
+```
+
+will be emitted as:
+
+```js
+for (var _i = 0, _a = expr; _i < _a.length; _i++) {
+    var v = _a[_i];
+}
+```
+
 ## Decorators
 TypeScript 1.5 comes along with ES7 decorators support. Decorators are functions that can alter or augment a class declaration.
 
