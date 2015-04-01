@@ -31,7 +31,7 @@ declares a function drawText that takes a single parameter of the type
 
 **Assignments**
 
-Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variablescan be written as a single destructuring assignment:
+Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variables can be written as a single destructuring assignment:
 ```ts
 var x = 1;  
 var y = 2;  
