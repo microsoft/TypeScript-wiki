@@ -24,11 +24,10 @@ Similarly, destructuring  can be used in function parameter declarations:
 function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {  
     // Draw text  
 }
-```
-declares a function drawText that takes a single parameter of the type
 
-```ts
-{ text?: string; location?: [number, number]; bold?: boolean; }
+// Call drawText with an object literal
+var item = { text: "someText", location: [1,2,3], style: "italics" };
+drawText(item);
 ```
 
 **Assignments**
