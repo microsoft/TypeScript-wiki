@@ -60,6 +60,38 @@ let x = 0;
 console.log(x); // 0
 ```
 
+## Decorators
+TypeScript 1.5 comes along with ES7 decorators support. Decorators are functions that can alter or augment a class declaration.
+
+As per the [ES7 proposal](https://github.com/wycats/javascript-decorators), A decorator is:
+- an expression
+- that evaluates to a function
+- that takes the target, name, and property descriptor as arguments
+- and optionally returns a property descriptor to install on the target object
+
+> For more information, please see the [Decorators](https://github.com/Microsoft/TypeScript/issues/2249) proposal.
+
+**Example:**
+
+Decorators `readonly` and `enumerable(false)` will be applied to the property `method` before it is installed on class `C`. This allows the decorator to change the implementation, and in this case, augment the descriptor to be writable: false and enumerable: false.
+
+```ts
+class C {
+  @readonly
+  @enumerable(false)
+  method() { }
+}
+
+function readonly(target, key, descriptor) {
+    descriptor.writable = false;
+}
+
+function enumerable(value) {
+  return function (target, key, descriptor) {
+     descriptor.enumerable = value;
+  }
+}
+```
 
 ## Computed properties
 Initializing an object with dynamic properties can be a bit of a burden. Take the following example:
