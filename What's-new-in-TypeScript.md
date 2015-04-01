@@ -2,6 +2,8 @@
 
 ## Destructuring in declarations and assignments
 
+TypeScript 1.5 adds support to ES6 destructuring declarations and assignments.
+
 **Declarations**
 
 A destructuring declaration introduces one or more named variables and initializes them with values extracted from properties of an object or elements of an array.
@@ -66,7 +68,7 @@ alert(a); // Error: a is not defined in this scope
 
 ## for..of support
 
-TypeScript 1.5 adds support to for..of loops on arrays for ES3/ES5 as well as full support for Iterators for ES6.
+TypeScript 1.5 adds support to ES6 for..of loops on arrays for ES3/ES5 as well as full support for Iterator interfaces when targetting ES6.
 
 **Example:**
 
@@ -85,9 +87,9 @@ for (var _i = 0, _a = expr; _i < _a.length; _i++) {
 ```
 
 ## Decorators
-TypeScript 1.5 comes along with ES7 decorators support. Decorators are functions that can alter or augment a class declaration.
+> Decorators is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators). 
 
-As per the [ES7 proposal](https://github.com/wycats/javascript-decorators), A decorator is:
+A decorator is:
 - an expression
 - that evaluates to a function
 - that takes the target, name, and property descriptor as arguments
@@ -146,7 +148,7 @@ function makeNode(name: string, initialNeighbor: Node): Node {
 
 ## Unicode codepoint escapes in strings
 
-ECMAScript 6 introduces escapes that allow users to represent a Unicode codepoint using just a single escape.
+ES6 introduces escapes that allow users to represent a Unicode codepoint using just a single escape.
 
 As an example, consider the need to escape a string that contains the character '𠮷'.  In UTF-16/UCS2, '𠮷' is represented as a surrogate pair, meaning that it's encoded using a pair of 16-bit code units of values, specifically `0xD842` and `0xDFB7`. Previously this meant that you'd have to escape the codepoint as `"\uD842\uDFB7"`. This has the major downside that it’s difficult to discern two independent characters from a surrogate pair.
 
