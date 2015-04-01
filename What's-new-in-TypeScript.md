@@ -17,9 +17,39 @@ define(["require", "exports", "legacy/moduleA"], function (require, exports, mod
 });
 ```
 
+## Computed properties
+It's not terribly uncommon to initialize an object with dynamic properties; unfortunately, doing so can be a bit of a burden. Take the following example:
+
+```TypeScript
+type NeighborMap = { [name: string]: Node };
+interface Node {
+    name: string;
+    neighbors: NeighborMap;
+}
+
+function makeNode(name: string, initialNeighbor: Node): Node {
+    var neighbors: NeighborMap = {};
+    neighbors[initialNeighbor.name] = initialNeighbor;
+    return { name: name, neighbors: neighbors };
+}
+```
+
+Here we need to create a variable to hold on to the neighbor-map so that we can initialize it. With TypeScript 1.5, we can let the compiler do the heavy lifting:
+
+```TypeScript
+function makeNode(name: string, initialNeighbor: Node): Node {
+    return {
+        name: name,
+        neighbors: {
+            [initialNeighbor.name] = initialNeighbor
+        }
+    }
+}
+```
+
 ## Unicode codepoint escapes in strings
 
-ECMAScript 6 introduces the concept of escapes that allow users to represent a Unicode codepoint using just a single escape.
+ECMAScript 6 introduces escapes that allow users to represent a Unicode codepoint using just a single escape.
 
 As an example, consider the need to escape a string that contains the character '𠮷'.  In UTF-16/UCS2, '𠮷' is represented as a surrogate pair, meaning that it's encoded using a pair of 16-bit code units of values, specifically `0xD842` and `0xDFB7`. Previously this meant that you'd have to escape the codepoint as `"\uD842\uDFB7"`. This has the major downside that it’s difficult to discern two independent characters from a surrogate pair.
 
