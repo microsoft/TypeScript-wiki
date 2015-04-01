@@ -87,7 +87,7 @@ for (var _i = 0, _a = expr; _i < _a.length; _i++) {
 ```
 
 ## Decorators
-> Decorators is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators). 
+> TypeScript decorator is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators). 
 
 A decorator is:
 - an expression
