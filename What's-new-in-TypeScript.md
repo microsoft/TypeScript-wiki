@@ -1,21 +1,5 @@
 # TypeScript 1.5
 
-## AMD-dependency optional names
-`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code. 
-
-The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
-
-```Typescript
-/// <amd-dependency path="legacy/moduleA" name="moduleA"/>
-declare var moduleA:MyType
-moduleA.callStuff()
-```
-Generated JS code:
-```
-define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
-    moduleA.callStuff()
-});
-```
 
 ## Computed properties
 It's not terribly uncommon to initialize an object with dynamic properties; unfortunately, doing so can be a bit of a burden. Take the following example:
@@ -79,6 +63,23 @@ function oddRawStrings(strs, n1, n2) {
 }
 (_a = ["Hello \n", " \t ", "\n world"], _a.raw = ["Hello \\n", " \\t ", "\\n world"], oddRawStrings(_a, 123, 456));
 var _a;
+```
+
+## AMD-dependency optional names
+`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code. 
+
+The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
+
+```Typescript
+/// <amd-dependency path="legacy/moduleA" name="moduleA"/>
+declare var moduleA:MyType
+moduleA.callStuff()
+```
+Generated JS code:
+```
+define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
+    moduleA.callStuff()
+});
 ```
 
 # TypeScript 1.4
