@@ -33,9 +33,9 @@ function f() {
 
 
 #### Contextual type flows through Super and parenthesized expressions
-Prior to this release, contextual type did not flow through parenthesized expressions. This has forced explicit type casts, specially in cases where parentheses are *required* to make an expression parse.
+Prior to this release, contextual types did not flow through parenthesized expressions. This has forced explicit type casts, especially in cases where parentheses are *required* to make an expression parse.
 
-In the examples below, `m` will have the contextual type, where previously it did not.
+In the examples below, `m` will have a contextual type, where previously it did not.
 ```ts
 var x: SomeType = (n) => ((m) => q)); 
 var y: SomeType = t ? (m => m.length) : undefined; 
