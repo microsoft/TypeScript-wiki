@@ -6,6 +6,32 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
 
+#### Referencing `arguments` in arrow functions is not allowed
+This is an aliment with the ES6 semantics of arrow functions. Previouslly arguments withen an arrow function would bind to the arrow function arguments. As per [ES6 spec draft](http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts) 9.2.12, arrow functions do not have an arguments objects. 
+In TypeScript 1.5, the use of arguments object in arrow functions will be flagged as an error to ensure your code ports to ES6 with no change in semantics.
+
+**Example:**
+```ts
+function f() {
+    return () => arguments; // Error: The 'arguments' object cannot be referenced in an arrow function. 
+}
+```
+
+**Recommendations:**
+```ts
+// 1. Use named rest args 
+function f() {
+    return (...args) => { args; }
+}
+
+// 2. Use function expressions instead
+function f() {
+    return function(){ arguments; }
+}
+```
+
+
+
 #### Contextual type flows through Super and parenthesized expressions
 Prior to this release, contextual type did not flow through parenthesized expressions. This has forced explicit type casts, specially in cases where parentheses are *required* to make an expression parse.
 
