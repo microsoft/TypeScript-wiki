@@ -1,5 +1,42 @@
 # TypeScript 1.5
 
+## Destructuring in declarations and assignments
+
+**Declarations**
+
+A destructuring declaration introduces one or more named variables and initializes them with values extracted from properties of an object or elements of an array.
+
+For example, the following sample declares a variables `x`, `y`, and `z`, and initializes them to `getSomeObject().x`, `getSomeObject().y` and `getSomeObject().q` respectively:
+
+```ts
+var { x, p: y, q: z = false } = getSomeObject();
+```
+
+Destructuring declarations also works for extracting values from arrays:
+```ts
+var [x, y, z = 10] = getSomeArray();
+```
+
+Similarly, destructuring  can be used in function parameter declarations:
+```ts
+function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {  
+    // Draw text  
+}
+```
+declares a function drawText that takes a single parameter of the type
+
+```ts
+{ text?: string; location?: [number, number]; bold?: boolean; }
+```
+
+**Assignments**
+
+Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variablescan be written as a single destructuring assignment:
+```ts
+var x = 1;  
+var y = 2;  
+[x, y] = [y, x];
+```
 
 ## Computed properties
 It's not terribly uncommon to initialize an object with dynamic properties; unfortunately, doing so can be a bit of a burden. Take the following example:
