@@ -38,8 +38,30 @@ var y = 2;
 [x, y] = [y, x];
 ```
 
+## `let` and `const` support
+ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5. 
+
+**Const**
+```ts
+const MAX = 100;
+
+++MAX; // Error he operand of an increment or decrement operator cannot be a constant.
+```
+
+**Block scoped**
+
+```ts
+let x = 0;
+{
+   let x = "hello!";
+   console.log(x); // hello!
+}
+console.log(x); // 0
+```
+
+
 ## Computed properties
-It's not terribly uncommon to initialize an object with dynamic properties; unfortunately, doing so can be a bit of a burden. Take the following example:
+Initializing an object with dynamic properties can be a bit of a burden. Take the following example:
 
 ```TypeScript
 type NeighborMap = { [name: string]: Node };
