@@ -66,7 +66,7 @@ TypeScript 1.5 adds support to for..of loops on arrays for ES3/ES5 as well as fu
 
 **Example:**
 
-The TypeScript compiler will transpile for..of arrays to idiomatic ES3/ES5 javascript:
+The TypeScript compiler will transpile for..of arrays to idiomatic ES3/ES5 JavaScript when targeting those versions:
 
 ```ts
 for (var v of expr) { }
