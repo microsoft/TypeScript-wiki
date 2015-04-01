@@ -1,5 +1,7 @@
 These changes list where implementation differs between versions as the spec and compiler are simplified and inconsistencies are corrected.
 
+> For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
+
 # TypeScript 1.1
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.1%22+label%3A%22breaking+change%22+).
