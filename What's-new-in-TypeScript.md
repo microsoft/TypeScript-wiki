@@ -6,7 +6,7 @@
 
 A destructuring declaration introduces one or more named variables and initializes them with values extracted from properties of an object or elements of an array.
 
-For example, the following sample declares a variables `x`, `y`, and `z`, and initializes them to `getSomeObject().x`, `getSomeObject().y` and `getSomeObject().q` respectively:
+For example, the following sample declares variables `x`, `y`, and `z`, and initializes them to `getSomeObject().x`, `getSomeObject().y` and `getSomeObject().q` respectively:
 
 ```ts
 var { x, p: y, q: z = false } = getSomeObject();
