@@ -2,35 +2,9 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
-# TypeScript 1.1
+# TypeScript 1.5
 
-For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.1%22+label%3A%22breaking+change%22+).
-
-## Working with null and undefined in ways that are observably incorrect is now an error
-
-Examples: 
-
-```TypeScript
-var ResultIsNumber17 = +(null + undefined);
-// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
-
-var ResultIsNumber18 = +(null + null);
-// Operator '+' cannot be applied to types 'null' and 'null'.
-
-var ResultIsNumber19 = +(undefined + undefined);
-// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
-```
-
-Similarly, using null and undefined directly as objects that have methods now is an error
-
-Examples:
-
-```TypeScript
-null.toBAZ();
-
-undefined.toBAZ();
-```
-
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
 
 # TypeScript 1.4
 
@@ -121,4 +95,32 @@ Manually specify a type parameter
 ```ts
 var r9 = f10<any>('', () => (a => a.foo), 1);
 ```
- 
+
+# TypeScript 1.1
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.1%22+label%3A%22breaking+change%22+).
+
+## Working with null and undefined in ways that are observably incorrect is now an error
+
+Examples: 
+
+```TypeScript
+var ResultIsNumber17 = +(null + undefined);
+// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
+
+var ResultIsNumber18 = +(null + null);
+// Operator '+' cannot be applied to types 'null' and 'null'.
+
+var ResultIsNumber19 = +(undefined + undefined);
+// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
+```
+
+Similarly, using null and undefined directly as objects that have methods now is an error
+
+Examples:
+
+```TypeScript
+null.toBAZ();
+
+undefined.toBAZ();
+```
