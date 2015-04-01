@@ -45,7 +45,8 @@ ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5.
 ```ts
 const MAX = 100;
 
-++MAX; // Error he operand of an increment or decrement operator cannot be a constant.
+++MAX; // Error: The operand of an increment or decrement 
+       //        operator cannot be a constant.
 ```
 
 **Block scoped**
