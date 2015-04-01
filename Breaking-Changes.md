@@ -6,6 +6,25 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
 
+#### Contextual type flows through Super and parenthesized expressions
+Prior to this release, contextual type did not flow through parenthesized expressions. This has forced explicit type casts, specially in cases where parentheses are *required* to make an expression parse.
+
+In the examples below, `m` will have the contextual type, where previously it did not.
+```ts
+var x: SomeType = (n) => ((m) => q)); 
+var y: SomeType = t ? (m => m.length) : undefined; 
+
+class C extends CBase<string> {
+    constructor() {
+        super({
+            method(m) { return m.length; }
+        });
+    }
+}
+```
+
+See issues [#1425](https://github.com/Microsoft/TypeScript/issues/1425) and [#920](https://github.com/Microsoft/TypeScript/issues/920) for more details.
+
 # TypeScript 1.4
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.4%22+label%3A%22breaking+change%22).
