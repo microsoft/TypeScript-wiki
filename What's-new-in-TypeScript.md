@@ -52,12 +52,16 @@ const MAX = 100;
 **Block scoped**
 
 ```ts
-let x = 0;
-{
-   let x = "hello!";
-   console.log(x); // hello!
-}
-console.log(x); // 0
+  if (true) {
+    let a = 4;
+    // use a
+  }
+  else {
+    let a = "string";
+    // use a
+  }
+
+  alert(a); // Error: a is not defined in this scope
 ```
 
 ## for..of support
