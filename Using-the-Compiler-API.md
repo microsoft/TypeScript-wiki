@@ -63,11 +63,11 @@ Creating a compiler is simple enough, but you may want to just get the correspon
 ```TypeScript
 /// <reference path="typings/typescript/typescript.d.ts" />
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
-var source = "let x: string  = 'string'";
+const source = "let x: string  = 'string'";
 
-var result = ts.transpile(source, { module: ts.ModuleKind.CommonJS });
+let result = ts.transpile(source, { module: ts.ModuleKind.CommonJS });
 
 console.log(JSON.stringify(result));
 ```
