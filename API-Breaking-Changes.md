@@ -25,6 +25,9 @@ The full list of APIs can be found in [this commit](https://github.com/Microsoft
 See [Pull Request #2051](https://github.com/Microsoft/TypeScript/pull/2051) for more details.
 
 
+### SourceFile.getLineAndCharacterFromPosition
+`SourceFile.getLineAndCharacterFromPosition` became `SourceFile.getLineAndCharacterOfPosition`
+
 ### APIs made internal as they are not intended for use outside of the compiler
 We did some cleanup to the public interfaces, here is the full list of changes:
 - Commit [2ee134c6b3c0ec](https://github.com/Microsoft/TypeScript/commit/2ee134c6b3c0ece87591e8abc9db833ebb7675cc)  
