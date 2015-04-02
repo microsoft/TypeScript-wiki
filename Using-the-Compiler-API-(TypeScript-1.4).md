@@ -1,7 +1,7 @@
 ## Getting set up
 First you'll need to install TypeScript ==1.4 from `npm`.
 
-> #### For API Samples working with **TypeScript >= 1.5** please see [[Using the Compiler API]]
+> #### For API Samples compatible with **TypeScript >= 1.5** please see [[Using the Compiler API]]
 
 Once that's done, you'll need to link it from wherever your project resides. If you don't link from within a Node project, it will just link globally.
 
