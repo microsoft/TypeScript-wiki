@@ -33,27 +33,27 @@ Let's try to write a barebones compiler that can compile a TypeScript string to 
 
 import ts = require("typescript");
 
-export function compile(filenames: string[], options: ts.CompilerOptions): void {
-    var host = ts.createCompilerHost(options);
-    var program = ts.createProgram(filenames, options, host);
-    var checker = ts.createTypeChecker(program, /*produceDiagnostics*/ true);
-    var result = checker.emitFiles();
+export function compile(fileNames: string[], options: ts.CompilerOptions): void {
+    var program = ts.createProgram(fileNames, options);
+    var emitResult = program.emit();
 
-    var allDiagnostics = program.getDiagnostics()
-        .concat(checker.getDiagnostics())
-        .concat(result.diagnostics);
+    var allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
 
     allDiagnostics.forEach(diagnostic => {
-        var lineChar = diagnostic.file.getLineAndCharacterFromPosition(diagnostic.start);
-        console.log(`${diagnostic.file.filename} (${lineChar.line},${lineChar.character}): ${diagnostic.messageText}`);
+        var { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+        var message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
+        console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
     });
 
-    console.log(`Process exiting with code '${result.emitResultStatus}'.`);
-    process.exit(result.emitResultStatus);
+    var exitCode = emitResult.emitSkipped ? 1 : 0;
+    console.log(`Process exiting with code '${exitCode}'.`);
+    process.exit(exitCode);
 }
 
-compile(process.argv.slice(2), { noEmitOnError: true, noImplicitAny: true,
-                                 target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS });
+compile(process.argv.slice(2), {
+    noEmitOnError: true, noImplicitAny: true,
+    target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS
+});
 ```
 
 ## A simple transform function
