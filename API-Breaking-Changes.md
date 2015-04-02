@@ -24,6 +24,8 @@ The full list of APIs can be found in [this commit](https://github.com/Microsoft
 ### The `syntacticClassifierAbsent` parameter for the Classifier.getClassificationsForLine is now required
 See [Pull Request #2051](https://github.com/Microsoft/TypeScript/pull/2051) for more details.
 
+### Changes to TextChange
+`TextChange.start` and `TextChange.length` became properties instead of methods.
 
 ### SourceFile.getLineAndCharacterFromPosition
 `SourceFile.getLineAndCharacterFromPosition` became `SourceFile.getLineAndCharacterOfPosition`
