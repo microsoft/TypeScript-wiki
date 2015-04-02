@@ -86,8 +86,8 @@ As an example of how one could traverse the AST, consider a minimal linter that 
 /// <reference path="typings/node/node.d.ts" />
 /// <reference path="typings/typescript/typescript.d.ts" />
 
-import * as ts from "typescript";
 import {readFileSync} from "fs";
+import * as ts from "typescript";
 
 export function delint(sourceFile: ts.SourceFile) {
     delintNode(sourceFile);
@@ -102,20 +102,21 @@ export function delint(sourceFile: ts.SourceFile) {
                     report(node, "A looping statement's contents should be wrapped in a block body.");
                 }
                 break;
+
             case ts.SyntaxKind.IfStatement:
                 let ifStatement = (<ts.IfStatement>node);
                 if (ifStatement.thenStatement.kind !== ts.SyntaxKind.Block) {
                     report(ifStatement.thenStatement, "An if statement's contents should be wrapped in a block body.");
                 }
                 if (ifStatement.elseStatement &&
-                    ifStatement.elseStatement.kind !== ts.SyntaxKind.Block && ifStatement.elseStatement.kind !== ts.SyntaxKind.IfStatement) {
+                    ifStatement.elseStatement.kind !== ts.SyntaxKind.Block &&
+                    ifStatement.elseStatement.kind !== ts.SyntaxKind.IfStatement) {
                     report(ifStatement.elseStatement, "An else statement's contents should be wrapped in a block body.");
                 }
                 break;
 
             case ts.SyntaxKind.BinaryExpression:
                 let op = (<ts.BinaryExpression>node).operatorToken.kind;
-
                 if (op === ts.SyntaxKind.EqualsEqualsToken || op == ts.SyntaxKind.ExclamationEqualsToken) {
                     report(node, "Use '===' and '!=='.")
                 }
@@ -154,52 +155,43 @@ We will achieve this through creating a LanguageService object. Similar to the p
 /// <reference path="typings/node/node.d.ts" />
 /// <reference path="typings/typescript/typescript.d.ts" />
 
-import fs = require("fs");
-import ts = require("typescript");
-import path = require("path");
+import * as fs from "fs";
+import * as ts from "typescript";
 
-
-function watch(filenames: string[], options: ts.CompilerOptions) {
-    var files: ts.Map<{ version: number; text: string; }> = {};
-    
-    // Add the default library file
-    filenames.unshift(path.join(path.dirname(require.resolve('typescript')), 'lib.d.ts'));
+function watch(rootFileNames: string[], options: ts.CompilerOptions) {
+    const files: ts.Map<{ version: number }> = {};
 
     // initialize the list of files
-    filenames.forEach(filename => {
-        files[filename] = { version: 0, text: fs.readFileSync(filename).toString() };
+    rootFileNames.forEach(fileName => {
+        files[fileName] = { version: 0 };
     });
 
     // Create the language service host to allow the LS to communicate with the host
-    var servicesHost: ts.LanguageServiceHost = {
-        getScriptFileNames: () => filenames,
-        getScriptVersion: (filename) => files[filename] && files[filename].version.toString(),
-        getScriptSnapshot: (filename) => {
-            var file = files[filename];
-            return {
-                getText: (start, end) => file.text.substring(start, end),
-                getLength: () => file.text.length,
-                getLineStartPositions: () => [],
-                getChangeRange: (oldSnapshot) => undefined
-            };
+    const servicesHost: ts.LanguageServiceHost = {
+        getScriptFileNames: () => rootFileNames,
+        getScriptVersion: (fileName) => files[fileName] && files[fileName].version.toString(),
+        getScriptSnapshot: (fileName) => {
+            if (!fs.existsSync(fileName)) {
+                return undefined;
+            }
+
+            return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString());
         },
         getCurrentDirectory: () => process.cwd(),
-        getScriptIsOpen: () => true,
         getCompilationSettings: () => options,
-        getDefaultLibFilename:(options) => 'lib.d.ts',
-        log: (message) => console.log(message)
+        getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
     };
 
     // Create the language service files
-    var services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
+    const services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
 
     // Now let's watch the files
-    filenames.forEach(filename => {
+    rootFileNames.forEach(fileName => {
         // First time around, emit all files
-        emitFile(filename);
+        emitFile(fileName);
 
         // Add a watch on the file to handle next change
-        fs.watchFile(filename,
+        fs.watchFile(fileName,
             { persistent: true, interval: 250 },
             (curr, prev) => {
                 // Check timestamp
@@ -207,51 +199,54 @@ function watch(filenames: string[], options: ts.CompilerOptions) {
                     return;
                 }
 
-                var file = files[filename];
-
                 // Update the version to signal a change in the file
-                file.version++;
-
-                // Clear the text to force a new read
-                file.text = fs.readFileSync(filename).toString();
+                files[fileName].version++;
 
                 // write the changes to disk
-                emitFile(filename);
+                emitFile(fileName);
             });
     });
 
+    function emitFile(fileName: string) {
+        let output = services.getEmitOutput(fileName);
 
-    function emitFile(filename: string) {
-        var output = services.getEmitOutput(filename);
-
-        if (output.emitOutputStatus === ts.EmitReturnStatus.Succeeded) {
-            console.log(`Emitting ${filename}`);
+        if (!output.emitSkipped) {
+            console.log(`Emitting ${fileName}`);
         }
         else {
-            console.log(`Emitting ${filename} failed`);
-            var allDiagnostics = services.getCompilerOptionsDiagnostics()
-                .concat(services.getSyntacticDiagnostics(filename))
-                .concat(services.getSemanticDiagnostics(filename));
-
-            allDiagnostics.forEach(diagnostic => {
-                var lineChar = diagnostic.file.getLineAndCharacterFromPosition(diagnostic.start);
-                console.log(`  ${diagnostic.file && diagnostic.file.filename} (${lineChar.line},${lineChar.character}): ${diagnostic.messageText}`);
-            });
+            console.log(`Emitting ${fileName} failed`);
+            logErrors(fileName);
         }
 
         output.outputFiles.forEach(o => {
             fs.writeFileSync(o.name, o.text, "utf8");
         });
     }
+
+    function logErrors(fileName: string) {
+        let allDiagnostics = services.getCompilerOptionsDiagnostics()
+            .concat(services.getSyntacticDiagnostics(fileName))
+            .concat(services.getSemanticDiagnostics(fileName));
+
+        allDiagnostics.forEach(diagnostic => {
+            let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+            if (diagnostic.file) {
+                let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+                console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
+            }
+            else {
+                console.log(`  Error: ${message}`);
+            }
+        });
+    }
 }
 
 // Initialize files constituting the program as all .ts files in the current directory
-var currentDirectoryFiles = fs.readdirSync(process.cwd()).
-    filter(filename=> filename.length >= 3 && filename.substr(filename.length - 3, 3) === ".ts");
-    //map(filename => path.join(process.cwd(), filename));
+const currentDirectoryFiles = fs.readdirSync(process.cwd()).
+    filter(fileName=> fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
 
 // Start the watcher
-watch(currentDirectoryFiles, { target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS });
+watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
 ```
 
 ## Pretty printer using the LS Formatter
