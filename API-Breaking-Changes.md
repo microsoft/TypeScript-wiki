@@ -1,5 +1,15 @@
 # TypeScript 1.5
 
+### Program interface changes
+- `TypeChecker.emitFiles` is no longer available; use `Program.emit` instead.
+- Getting diagnostics are now all centralized on Program,
+   - for Syntactic diagnostics for a single file use: `Program.getSyntacticDiagnostics(sourceFile)`
+   - for Syntactic diagnostics for all files use: `Program.getSyntacticDiagnostics()`
+   - for Semantic diagnostics for a single file use: `Program.getSemanticDiagnostics(sourceFile)`
+   - for Semantic diagnostics for all files use: `Program.getSemanticDiagnostics()`
+   - for compiler options and global diagnostics use: `Program.getGlobalDiagnostics()`
+> Tip: use ts.getPreEmitDiagnostics(program) to get syntactic, semantic, and global diagnostics for all files
+
 ### All usages of 'filename' and 'Filename' changed to 'fileName' and 'FileName'
 Here are the details:
 - `CompilerHost.getDefaultLibFilename` => `CompilerHost.getDefaultLibFileName`
