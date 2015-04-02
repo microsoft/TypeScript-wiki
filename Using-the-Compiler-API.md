@@ -257,19 +257,18 @@ watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
 /// <reference path="typings/node/node.d.ts" />
 /// <reference path="typings/typescript/typescript.d.ts" />
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
 // Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently 
 //       exposed in the public typescript.d.ts. The typings should be exposed in the next release. 
 function format(text: string) {
-    var options = getDefaultOptions();
+    let options = getDefaultOptions();
 
     // Parse the source text
-    var sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, "0");
-    fixupParentReferences(sourceFile);
+    let sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, /*setParentPointers*/ true);
 
     // Get the formatting edits on the input sources
-    var edits = (<any>ts).formatting.formatDocument(sourceFile, getRuleProvider(options), options);
+    let edits = (<any>ts).formatting.formatDocument(sourceFile, getRuleProvider(options), options);
 
     // Apply the edits on the input code
     return applyEdits(text, edits);
@@ -277,18 +276,18 @@ function format(text: string) {
     function getRuleProvider(options: ts.FormatCodeOptions) {
         // Share this between multiple formatters using the same options.
         // This represents the bulk of the space the formatter uses.
-        var ruleProvider = new (<any>ts).formatting.RulesProvider();
+        let ruleProvider = new (<any>ts).formatting.RulesProvider();
         ruleProvider.ensureUpToDate(options);
         return ruleProvider;
     }
 
     function applyEdits(text: string, edits: ts.TextChange[]): string {
         // Apply edits in reverse on the existing text
-        var result = text;
-        for (var i = edits.length - 1; i >= 0; i--) {
-            var change = edits[i];
-            var head = result.slice(0, change.span.start());
-            var tail = result.slice(change.span.start() + change.span.length())
+        let result = text;
+        for (let i = edits.length - 1; i >= 0; i--) {
+            let change = edits[i];
+            let head = result.slice(0, change.span.start);
+            let tail = result.slice(change.span.start + change.span.length)
             result = head + change.newText + tail;
         }
         return result;
@@ -310,23 +309,10 @@ function format(text: string) {
             PlaceOpenBraceOnNewLineForControlBlocks: false,
         };
     }
-
-    function fixupParentReferences(sourceFile: ts.SourceFile) {
-        var parent: ts.Node = sourceFile;
-        function walk(n: ts.Node): void {
-            n.parent = parent;
-
-            var saveParent = parent;
-            parent = n;
-            ts.forEachChild(n, walk);
-            parent = saveParent;
-        }
-        ts.forEachChild(sourceFile, walk);
-    }
 }
 
 
-var code = "var a=function(v:number){return 0+1+2+3;\n}";
-var result = format(code);
+let code = "var a=function(v:number){return 0+1+2+3;\n}";
+let result = format(code);
 console.log(result);
 ```
