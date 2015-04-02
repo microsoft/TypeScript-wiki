@@ -58,78 +58,18 @@ compile(process.argv.slice(2), {
 
 ## A simple transform function
 
-Creating a compiler is simple enough, but you may not want to actually do traditional reads and writes from the file system; for instance, you may have a text buffer for your TypeScript input, and you may want to send/store the resulting JavaScript as JSON. What's more, you may want to use/modify the resulting JavaScript in some way. In such a case, you will need to provide your own `CompilerHost`. 
+Creating a compiler is simple enough, but you may want to just get the corresponding JavaScript output given TypeScript sources. For this you can use ts.transpile to get a string => string transformation in two lines.
 
 ```TypeScript
-/// <reference path="typings/node/node.d.ts" />
 /// <reference path="typings/typescript/typescript.d.ts" />
 
 import ts = require("typescript");
-import fs = require("fs");
-import path = require("path");
 
-function transform(contents: string, libSource: string, compilerOptions: ts.CompilerOptions = {}) {
-    // Generated outputs
-    var outputs = [];
-    // Create a compilerHost object to allow the compiler to read and write files
-    var compilerHost = {
-        getSourceFile: function (filename, languageVersion) {
-            if (filename === "file.ts")
-                return ts.createSourceFile(filename, contents, compilerOptions.target, "0");
-            if (filename === "lib.d.ts")
-                return ts.createSourceFile(filename, libSource, compilerOptions.target, "0");
-            return undefined;
-        },
-        writeFile: function (name, text, writeByteOrderMark) {
-            outputs.push({ name: name, text: text, writeByteOrderMark: writeByteOrderMark });
-        },
-        getDefaultLibFilename: function () { return "lib.d.ts"; },
-        useCaseSensitiveFileNames: function () { return false; },
-        getCanonicalFileName: function (filename) { return filename; },
-        getCurrentDirectory: function () { return ""; },
-        getNewLine: function () { return "\n"; }
-    };
-    // Create a program from inputs
-    var program = ts.createProgram(["file.ts"], compilerOptions, compilerHost);
-    // Query for early errors
-    var errors = program.getDiagnostics();
-    // Do not generate code in the presence of early errors
-    if (!errors.length) {
-        // Type check and get semantic errors
-        var checker = program.getTypeChecker(true);
-        errors = checker.getDiagnostics();
-        // Generate output
-        checker.emitFiles();
-    }
-    return {
-        outputs: outputs,
-        errors: errors.map(function (e) { return e.file.filename + "(" + e.file.getLineAndCharacterFromPosition(e.start).line + "): " + e.messageText; })
-    };
-}
+var source = "let x: string  = 'string'";
 
-// Calling our transform function using a simple TypeScript variable declarations, 
-// and loading the default library like:
-var source = "var x: number  = 'string'";
-var libSource = fs.readFileSync(path.join(path.dirname(require.resolve('typescript')), 'lib.d.ts')).toString();
-var result = transform(source, libSource);
+var result = ts.transpile(source, { module: ts.ModuleKind.CommonJS });
 
 console.log(JSON.stringify(result));
-```
-
-will generate the following output:
-
-```JSON
-{
-    "outputs": [
-        {
-            "name": "file.js",
-            "text": "var x = 'string';\n"
-        }
-    ],
-    "errors": [
-        "file.ts(1): Type 'string' is not assignable to type 'number'."
-    ]
-}
 ```
 
 ## Traversing the AST with a little linter
@@ -146,7 +86,8 @@ As an example of how one could traverse the AST, consider a minimal linter that 
 /// <reference path="typings/node/node.d.ts" />
 /// <reference path="typings/typescript/typescript.d.ts" />
 
-import ts = require("typescript");
+import * as ts from "typescript";
+import {readFileSync} from "fs";
 
 export function delint(sourceFile: ts.SourceFile) {
     delintNode(sourceFile);
@@ -162,7 +103,7 @@ export function delint(sourceFile: ts.SourceFile) {
                 }
                 break;
             case ts.SyntaxKind.IfStatement:
-                var ifStatement = (<ts.IfStatement>node);
+                let ifStatement = (<ts.IfStatement>node);
                 if (ifStatement.thenStatement.kind !== ts.SyntaxKind.Block) {
                     report(ifStatement.thenStatement, "An if statement's contents should be wrapped in a block body.");
                 }
@@ -173,9 +114,9 @@ export function delint(sourceFile: ts.SourceFile) {
                 break;
 
             case ts.SyntaxKind.BinaryExpression:
-                var op = (<ts.BinaryExpression>node).operator;
+                let op = (<ts.BinaryExpression>node).operatorToken.kind;
 
-                if (op === ts.SyntaxKind.EqualsEqualsToken || op === ts.SyntaxKind.ExclamationEqualsToken) {
+                if (op === ts.SyntaxKind.EqualsEqualsToken || op == ts.SyntaxKind.ExclamationEqualsToken) {
                     report(node, "Use '===' and '!=='.")
                 }
                 break;
@@ -185,17 +126,19 @@ export function delint(sourceFile: ts.SourceFile) {
     }
 
     function report(node: ts.Node, message: string) {
-        var lineChar = sourceFile.getLineAndCharacterFromPosition(node.getStart());
-        console.log(`${sourceFile.filename} (${lineChar.line},${lineChar.character}): ${message}`)
+        let { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+        console.log(`${sourceFile.fileName} (${line + 1},${character + 1}): ${message}`);
     }
 }
 
-var fileNames = process.argv.slice(2);
-var options: ts.CompilerOptions = { target: ts.ScriptTarget.ES6, module: ts.ModuleKind.AMD };
-var host = ts.createCompilerHost(options);
-var program = ts.createProgram(fileNames, options, host);
+const fileNames = process.argv.slice(2);
+fileNames.forEach(fileName => {
+    // Parse a file
+    let sourceFile = ts.createSourceFile(fileName, readFileSync(fileName).toString(), ts.ScriptTarget.ES6, /*setParentNodes */ true);
 
-program.getSourceFiles().forEach(delint);
+    // delint it
+    delint(sourceFile);
+});
 ```
 
 In this example, we did not need to create a type checker because all we wanted to do was traverse each `SourceFile`.
