@@ -30,6 +30,22 @@ function f() {
 }
 ```
 
+#### Enum reference in-lining changes
+For regular enums, pre 1.5, the compiler *only* inline constant members, and a member was only constant if its initializer was a literal. That resulted in inconsistent behavior depending on whether the enum value is initalized with a literal or an expression. Starting with Typescript 1.5 all non-const enum members are not inlined.
+
+**Example:**
+```ts
+var x = E.a;  // previously inlined as "var x = 1; /*E.a*/"
+
+enum E {
+   a = 1
+}
+```
+
+**Recommendation:**
+Add the `const` modifier to the enum declaration to ensure it is consistently inlined at all consumption sites.
+
+For more details see issue [#2183](https://github.com/Microsoft/TypeScript/issues/2183).
 
 
 #### Contextual type flows through Super and parenthesized expressions
