@@ -107,6 +107,7 @@ function makeArray<T>(...items: T[]): T[];
 function makeArray(...items: {}[]): {}[];
 function makeArray<T>(...items: T[]): T[] { return items; }
 ```
+
 #### Overload Resolution with Type Argument Inference
 
 ```ts
@@ -119,4 +120,20 @@ Manually specify a type parameter
 ```ts
 var r9 = f10<any>('', () => (a => a.foo), 1);
 ```
- 
+
+#### Strict Mode Class Declaration and Class Expression
+ECMAScript 2015 Language Specification (ECMA-262 6<sup>th</sup> Edition) specifies that a ClassDeclaration and a ClassExpression are strict mode codes. 
+Thus, additional restriction will be applied when interpreting class declaration and class expression. 
+
+Examples:
+
+```ts
+class implements {}  // Invalid: implements is a reserved word in strict mode
+class C {
+	foo(arguments: any) {   // Invalid: "arguments" is not allow as a function argument
+		var eval = 10;      // Invalid: "eval" is not allowed as the left-hand-side expression
+		var arguments = [];  // Invalid: arguments object is immutable
+	}
+}
+```
+For complete list of strict mode restrictions, please see Annex C- The Strict Mode of ECMAScript of ECMA-262 6<sup>th</sup> Edition.
