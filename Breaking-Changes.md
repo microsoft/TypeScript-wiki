@@ -132,7 +132,7 @@ class implements {}  // Invalid: implements is a reserved word in strict mode
 class C {
 	foo(arguments: any) {   // Invalid: "arguments" is not allow as a function argument
 		var eval = 10;      // Invalid: "eval" is not allowed as the left-hand-side expression
-		var arguments = [];  // Invalid: arguments object is immutable
+		arguments = [];     // Invalid: arguments object is immutable
 	}
 }
 ```
