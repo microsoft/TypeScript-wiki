@@ -40,7 +40,7 @@ An example `tsconfig.json` file:
 ## Details 
 The `"compilerOptions"` property can be omitted, in which case the compiler's defaults are used. For more details about supported compiler options see [[Compiler Options]] documentation.
 
-If no `"files"` property is present in a `tsconfig.json`, the compiler defaults to including all files the containing directory and subdirectories. When a `"files"` property is specified, only those files are included.
+If no `"files"` property is present in a `tsconfig.json`, the compiler defaults to including all files in the containing directory and subdirectories. When a `"files"` property is specified, only those files are included.
 
 A `tsconfig.json` file is permitted to be completely empty, which compiles all files in the containing directory and subdirectories with the default compiler options.
 

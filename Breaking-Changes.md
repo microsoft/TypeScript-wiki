@@ -1,34 +1,71 @@
 These changes list where implementation differs between versions as the spec and compiler are simplified and inconsistencies are corrected.
 
-# TypeScript 1.1
+> For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
-For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.1%22+label%3A%22breaking+change%22+).
+# TypeScript 1.5
 
-## Working with null and undefined in ways that are observably incorrect is now an error
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
 
-Examples: 
+#### Referencing `arguments` in arrow functions is not allowed
+This is an alignment with the ES6 semantics of arrow functions. Previously arguments within an arrow function would bind to the arrow function arguments. As per [ES6 spec draft](http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts) 9.2.12, arrow functions do not have an arguments objects. 
+In TypeScript 1.5, the use of arguments object in arrow functions will be flagged as an error to ensure your code ports to ES6 with no change in semantics.
 
-```TypeScript
-var ResultIsNumber17 = +(null + undefined);
-// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
-
-var ResultIsNumber18 = +(null + null);
-// Operator '+' cannot be applied to types 'null' and 'null'.
-
-var ResultIsNumber19 = +(undefined + undefined);
-// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
+**Example:**
+```ts
+function f() {
+    return () => arguments; // Error: The 'arguments' object cannot be referenced in an arrow function. 
+}
 ```
 
-Similarly, using null and undefined directly as objects that have methods now is an error
+**Recommendations:**
+```ts
+// 1. Use named rest args 
+function f() {
+    return (...args) => { args; }
+}
 
-Examples:
-
-```TypeScript
-null.toBAZ();
-
-undefined.toBAZ();
+// 2. Use function expressions instead
+function f() {
+    return function(){ arguments; }
+}
 ```
 
+#### Enum reference in-lining changes
+For regular enums, pre 1.5, the compiler *only* inline constant members, and a member was only constant if its initializer was a literal. That resulted in inconsistent behavior depending on whether the enum value is initalized with a literal or an expression. Starting with Typescript 1.5 all non-const enum members are not inlined.
+
+**Example:**
+```ts
+var x = E.a;  // previously inlined as "var x = 1; /*E.a*/"
+
+enum E {
+   a = 1
+}
+```
+
+**Recommendation:**
+Add the `const` modifier to the enum declaration to ensure it is consistently inlined at all consumption sites.
+
+For more details see issue [#2183](https://github.com/Microsoft/TypeScript/issues/2183).
+
+
+#### Contextual type flows through Super and parenthesized expressions
+Prior to this release, contextual types did not flow through parenthesized expressions. This has forced explicit type casts, especially in cases where parentheses are *required* to make an expression parse.
+
+In the examples below, `m` will have a contextual type, where previously it did not.
+```ts
+var x: SomeType = (n) => ((m) => q)); 
+var y: SomeType = t ? (m => m.length) : undefined; 
+
+class C extends CBase<string> {
+    constructor() {
+        super({
+            method(m) { return m.length; }
+        });
+    }
+}
+```
+
+See issues [#1425](https://github.com/Microsoft/TypeScript/issues/1425) and [#920](https://github.com/Microsoft/TypeScript/issues/920) for more details.
 
 # TypeScript 1.4
 
@@ -136,4 +173,34 @@ class C {
 	}
 }
 ```
-For complete list of strict mode restrictions, please see Annex C- The Strict Mode of ECMAScript of ECMA-262 6<sup>th</sup> Edition.
+For complete list of strict mode restrictions, please see Annex C - The Strict Mode of ECMAScript of ECMA-262 6<sup>th</sup> Edition.
+
+
+# TypeScript 1.1
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.1%22+label%3A%22breaking+change%22+).
+
+## Working with null and undefined in ways that are observably incorrect is now an error
+
+Examples: 
+
+```TypeScript
+var ResultIsNumber17 = +(null + undefined);
+// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
+
+var ResultIsNumber18 = +(null + null);
+// Operator '+' cannot be applied to types 'null' and 'null'.
+
+var ResultIsNumber19 = +(undefined + undefined);
+// Operator '+' cannot be applied to types 'undefined' and 'undefined'.
+```
+
+Similarly, using null and undefined directly as objects that have methods now is an error
+
+Examples:
+
+```TypeScript
+null.toBAZ();
+
+undefined.toBAZ();
+```

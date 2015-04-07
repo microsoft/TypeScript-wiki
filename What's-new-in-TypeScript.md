@@ -1,63 +1,219 @@
-# TypeScript 1.1
-## Performance Improvements
-The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
+# TypeScript 1.5
 
-## Better Module Visibility Rules
-TypeScript now only strictly enforces the visibility of types in modules if the `--declaration` flag is provided. This is very useful for Angular scenarios, for example:
+## Destructuring in declarations and assignments
+
+TypeScript 1.5 adds support to ES6 destructuring declarations and assignments.
+
+**Declarations**
+
+A destructuring declaration introduces one or more named variables and initializes them with values extracted from properties of an object or elements of an array.
+
+For example, the following sample declares variables `x`, `y`, and `z`, and initializes them to `getSomeObject().x`, `getSomeObject().y` and `getSomeObject().z` respectively:
+
 ```ts
-module MyControllers {
-  interface ZooScope extends ng.IScope {
-    animals: Animal[];
-  }
-  export class ZooController {
-    // Used to be an error (cannot expose ZooScope), but now is only
-    // an error when trying to generate .d.ts files
-    constructor(public $scope: ZooScope) { }
-    /* more code */
+var { x, y, z} = getSomeObject();
+```
+
+Destructuring declarations also works for extracting values from arrays:
+```ts
+var [x, y, z = 10] = getSomeArray();
+```
+
+Similarly, destructuring  can be used in function parameter declarations:
+```ts
+function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {  
+    // Draw text  
+}
+
+// Call drawText with an object literal
+var item = { text: "someText", location: [1,2,3], style: "italics" };
+drawText(item);
+```
+
+**Assignments**
+
+Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variables can be written as a single destructuring assignment:
+```ts
+var x = 1;  
+var y = 2;  
+[x, y] = [y, x];
+```
+
+## `let` and `const` support
+ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5. 
+
+**Const**
+```ts
+const MAX = 100;
+
+++MAX; // Error: The operand of an increment or decrement 
+       //        operator cannot be a constant.
+```
+
+**Block scoped**
+
+```ts
+if (true) {
+  let a = 4;
+  // use a
+}
+else {
+  let a = "string";
+  // use a
+}
+
+alert(a); // Error: a is not defined in this scope
+```
+
+## for..of support
+
+TypeScript 1.5 adds support to ES6 for..of loops on arrays for ES3/ES5 as well as full support for Iterator interfaces when targetting ES6.
+
+**Example:**
+
+The TypeScript compiler will transpile for..of arrays to idiomatic ES3/ES5 JavaScript when targeting those versions:
+
+```ts
+for (var v of expr) { }
+```
+
+will be emitted as:
+
+```js
+for (var _i = 0, _a = expr; _i < _a.length; _i++) {
+    var v = _a[_i];
+}
+```
+
+## Decorators
+> TypeScript decorator is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators). 
+
+A decorator is:
+- an expression
+- that evaluates to a function
+- that takes the target, name, and property descriptor as arguments
+- and optionally returns a property descriptor to install on the target object
+
+> For more information, please see the [Decorators](https://github.com/Microsoft/TypeScript/issues/2249) proposal.
+
+**Example:**
+
+Decorators `readonly` and `enumerable(false)` will be applied to the property `method` before it is installed on class `C`. This allows the decorator to change the implementation, and in this case, augment the descriptor to be writable: false and enumerable: false.
+
+```ts
+class C {
+  @readonly
+  @enumerable(false)
+  method() { }
+}
+
+function readonly(target, key, descriptor) {
+    descriptor.writable = false;
+}
+
+function enumerable(value) {
+  return function (target, key, descriptor) {
+     descriptor.enumerable = value;
   }
 }
 ```
 
-# TypeScript 1.3
-## Protected
-The new `protected` modifier in classes works like it does in familiar languages like C++, C#, and Java. A `protected` member of a class is visible only inside subclasses of the class in which it is declared:
+## Computed properties
+Initializing an object with dynamic properties can be a bit of a burden. Take the following example:
 
-```ts
-class Thing {
-  protected doSomething() { /* ... */ }
+```TypeScript
+type NeighborMap = { [name: string]: Node };
+type Node = { name: string; neighbors: NeighborMap;}
+
+function makeNode(name: string, initialNeighbor: Node): Node {
+    var neighbors: NeighborMap = {};
+    neighbors[initialNeighbor.name] = initialNeighbor;
+    return { name: name, neighbors: neighbors };
+}
+```
+
+Here we need to create a variable to hold on to the neighbor-map so that we can initialize it. With TypeScript 1.5, we can let the compiler do the heavy lifting:
+
+```TypeScript
+function makeNode(name: string, initialNeighbor: Node): Node {
+    return {
+        name: name,
+        neighbors: {
+            [initialNeighbor.name] = initialNeighbor
+        }
+    }
+}
+```
+
+## Unicode codepoint escapes in strings
+
+ES6 introduces escapes that allow users to represent a Unicode codepoint using just a single escape.
+
+As an example, consider the need to escape a string that contains the character '𠮷'.  In UTF-16/UCS2, '𠮷' is represented as a surrogate pair, meaning that it's encoded using a pair of 16-bit code units of values, specifically `0xD842` and `0xDFB7`. Previously this meant that you'd have to escape the codepoint as `"\uD842\uDFB7"`. This has the major downside that it’s difficult to discern two independent characters from a surrogate pair.
+
+With ES6’s codepoint escapes, you can cleanly represent that exact character in strings and template strings with a single escape: `"\u{20bb7}"`. TypeScript will emit the string in ES3/ES5 as `"\uD842\uDFB7"`.
+
+## Tagged template strings in ES3/ES5
+
+In TypeScript 1.4, we added support for template strings for all targets, and tagged templates for just ES6. Thanks to some considerable work done by [@ivogabe](https://github.com/ivogabe), we bridged the gap for for tagged templates in ES3 and ES5.
+
+When targeting ES3/ES5, the following code
+
+```TypeScript
+function oddRawStrings(strs: TemplateStringsArray, n1, n2) {
+    return strs.raw.filter((raw, index) => index % 2 === 1);
 }
 
-class MyThing extends Thing {
-  public myMethod() {
-    // OK, can access protected member from subclass
-    this.doSomething();
-  }
-}
-var t = new MyThing();
-t.doSomething(); // Error, cannot call protected member from outside class
+oddRawStrings `Hello \n${123} \t ${456}\n world`
 ```
 
-## Tuple types
-Tuple types express an array where the type of certain elements is known, but need not be the same. For example, you may want to represent an array with a `string` at position 0 and a `number` at position 1:
-```ts
-// Declare a tuple type
-var x: [string, number];
-// Initialize it
-x = ['hello', 10]; // OK
-// Initialize it incorrectly
-x = [10, 'hello']; // Error
+will be emitted as
+
+```JavaScript
+function oddRawStrings(strs, n1, n2) {
+    return strs.raw.filter(function (raw, index) {
+        return index % 2 === 1;
+    });
+}
+(_a = ["Hello \n", " \t ", "\n world"], _a.raw = ["Hello \\n", " \\t ", "\\n world"], oddRawStrings(_a, 123, 456));
+var _a;
 ```
-When accessing an element with a known index, the correct type is retrieved:
-```ts
-console.log(x[0].substr(1)); // OK
-console.log(x[1].substr(1)); // Error, 'number' does not have 'substr'
+
+## AMD-dependency optional names
+`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code. 
+
+The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
+
+```Typescript
+/// <amd-dependency path="legacy/moduleA" name="moduleA"/>
+declare var moduleA:MyType
+moduleA.callStuff()
 ```
-In TypeScript 1.4, when accessing an element outside the set of known indices, a union type is used instead:
-```ts
-x[3] = 'world'; // OK
-console.log(x[5].toString()); // OK, 'string' and 'number' both have toString
-x[6] = true; // Error, boolean isn't number or string
+Generated JS code:
 ```
+define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
+    moduleA.callStuff()
+});
+```
+
+## Project support through `tsconfig.json`
+
+Adding a `tsconfig.json` file in a directory indicates that the directory is the root of a TypeScript project. The tsconfig.json file specifies the root files and the compiler options required to compile the project. A project is compiled in one of the following ways:
+
+- By invoking tsc with no input files, in which case the compiler searches for the tsconfig.json file starting in the current directory and continuing up the parent directory chain.
+- By invoking tsc with no input files and a -project (or just -p) command line option that specifies the path of a directory containing a tsconfig.json file.
+
+**Example:**
+```json
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "sourceMap": true,
+    }
+}
+```
+See the [tsconfig.json wiki page](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) for more details.
 
 # TypeScript 1.4
 
@@ -157,8 +313,8 @@ halfPi = 2; // Error, can't assign to a `const`
 
 `const` is only available when targeting ECMAScript 6 (`--target ES6`).
 
-## String Templates
-TypeScript now supports ES6 string templates. These are an easy way to embed arbitrary expressions in strings:
+## Template strings
+TypeScript now supports ES6 template strings. These are an easy way to embed arbitrary expressions in strings:
 
 ```ts
 var name = "TypeScript";
@@ -272,24 +428,63 @@ define("NamedModule", ["require", "exports"], function (require, exports) {
 });
 ```
 
-# TypeScript 1.5
+# TypeScript 1.3
+## Protected
+The new `protected` modifier in classes works like it does in familiar languages like C++, C#, and Java. A `protected` member of a class is visible only inside subclasses of the class in which it is declared:
 
-## AMD-dependency optional names
-`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code. 
+```ts
+class Thing {
+  protected doSomething() { /* ... */ }
+}
 
-The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
-
-```Typescript
-/// <amd-dependency path="legacy/moduleA" name="moduleA"/>
-declare var moduleA:MyType
-moduleA.callStuff()
+class MyThing extends Thing {
+  public myMethod() {
+    // OK, can access protected member from subclass
+    this.doSomething();
+  }
+}
+var t = new MyThing();
+t.doSomething(); // Error, cannot call protected member from outside class
 ```
-Generated JS code:
+
+## Tuple types
+Tuple types express an array where the type of certain elements is known, but need not be the same. For example, you may want to represent an array with a `string` at position 0 and a `number` at position 1:
+```ts
+// Declare a tuple type
+var x: [string, number];
+// Initialize it
+x = ['hello', 10]; // OK
+// Initialize it incorrectly
+x = [10, 'hello']; // Error
 ```
-define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
-    moduleA.callStuff()
-});
+When accessing an element with a known index, the correct type is retrieved:
+```ts
+console.log(x[0].substr(1)); // OK
+console.log(x[1].substr(1)); // Error, 'number' does not have 'substr'
+```
+Note that in TypeScript 1.4, when accessing an element outside the set of known indices, a union type is used instead:
+```ts
+x[3] = 'world'; // OK
+console.log(x[5].toString()); // OK, 'string' and 'number' both have toString
+x[6] = true; // Error, boolean isn't number or string
 ```
 
-# Post-1.5 features
-TODO: What are they?
+# TypeScript 1.1
+## Performance Improvements
+The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
+
+## Better Module Visibility Rules
+TypeScript now only strictly enforces the visibility of types in modules if the `--declaration` flag is provided. This is very useful for Angular scenarios, for example:
+```ts
+module MyControllers {
+  interface ZooScope extends ng.IScope {
+    animals: Animal[];
+  }
+  export class ZooController {
+    // Used to be an error (cannot expose ZooScope), but now is only
+    // an error when trying to generate .d.ts files
+    constructor(public $scope: ZooScope) { }
+    /* more code */
+  }
+}
+```
