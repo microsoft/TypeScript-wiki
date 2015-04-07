@@ -159,8 +159,8 @@ var r9 = f10<any>('', () => (a => a.foo), 1);
 ```
 
 #### Strict Mode Parsing for Class Declarations and Class Expressions
-ECMAScript 2015 Language Specification (ECMA-262 6<sup>th</sup> Edition) specifies that *ClassDeclaration* and *ClassExpression* are strict mode codes. 
-Thus, additional restriction will be applied when interpreting a class declaration or class expression. 
+ECMAScript 2015 Language Specification (ECMA-262 6<sup>th</sup> Edition) specifies that *ClassDeclaration* and *ClassExpression* are strict mode productions. 
+Thus, additional restrictions will be applied when parsing a class declaration or class expression. 
 
 Examples:
 
