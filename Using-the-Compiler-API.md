@@ -19,7 +19,7 @@ Once that's done, just grab our definitions file either
 * ~~By using [tsd](https://www.npmjs.com/package/tsd) with the command `tsd query typescript --action install`.~~
 * Going directly to the source [on our repository](https://github.com/Microsoft/TypeScript/blob/v1.5.0-alpha/bin/typescript.d.ts).
 
-The 1.5 definition file has not been submitted to DefinitelyTyped. Upon our 1.5 release, we will do so and our definitions will be available on `tsd`.
+> Note: The 1.5 definitions file has not been submitted to DefinitelyTyped. Upon our 1.5 release, we will do so and our definitions will be available on `tsd`.
 
 That's it, you're ready to go. Now you can try out some of the following examples.
 
