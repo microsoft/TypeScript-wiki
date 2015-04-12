@@ -16,10 +16,10 @@ npm link typescript
 
 Once that's done, just grab our definitions file either
 
-* By using [tsd](https://www.npmjs.com/package/tsd) with the command `tsd query typescript --action install`. But note this will use the 1.4 definitions and not the 1.5.
+* ~~By using [tsd](https://www.npmjs.com/package/tsd) with the command `tsd query typescript --action install`.~~
 * Going directly to the source [on our repository](https://github.com/Microsoft/TypeScript/blob/v1.5.0-alpha/bin/typescript.d.ts).
 
-> For a overview of the general TypeScript compiler architecture and layering, see [[Architectural Overview]]
+The 1.5 definition file has not been submitted to DefinitelyTyped. Upon our 1.5 release, we will do so and our definitions will be available on `tsd`.
 
 That's it, you're ready to go. Now you can try out some of the following examples.
 
