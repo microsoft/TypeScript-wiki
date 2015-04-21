@@ -215,6 +215,14 @@ Adding a `tsconfig.json` file in a directory indicates that the directory is the
 ```
 See the [tsconfig.json wiki page](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) for more details.
 
+## `--rootDir` command line option
+
+Option `--outDir` duplicates the input hierarchy in the output. The compiler computes the root of the input files as the longest common path of all input files; and then uses that to replicate all its substructure in the output.
+
+Sometimes this is not desirable, for instance inputs `FolderA\FolderB\1.ts` and `FolderA\FolderB\2.ts` would result in output structure mirroring `FolderA\FolderB\`. now if a new file `FolderA\3.ts` is added to the input, the output structure will pop out to mirror `FolderA\`.
+
+`--rootDir` specifies the input directory to be mirrored in output instead of computing it.
+
 # TypeScript 1.4
 
 ## Union types
