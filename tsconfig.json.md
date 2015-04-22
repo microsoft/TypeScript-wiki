@@ -17,7 +17,7 @@ An example `tsconfig.json` file:
         "removeComments": true,
         "preserveConstEnums": true,
         "out": "../../built/local/tsc.js",
-        "sourceMap": true,
+        "sourceMap": true
     },
     "files": [
         "core.ts",
