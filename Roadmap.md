@@ -29,14 +29,19 @@
 * Support for [tagged string templates on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/1589)
 * Expose a new editor interface through [TS Server](https://github.com/Microsoft/TypeScript/pull/2041)
 * Support for [ES7 Decorators proposal](https://github.com/Microsoft/TypeScript/issues/2249)
+* Support for [Decorator type metadata](https://github.com/Microsoft/TypeScript/pull/2589)
+* New [--rootDir](https://github.com/Microsoft/TypeScript/pull/2772)
+* New [ts.transpile API](https://github.com/Microsoft/TypeScript/issues/2499)
 
 # 1.6
 
-* Generators
+* Support [--module umd](https://github.com/Microsoft/TypeScript/issues/2036)
+* Support [--module system.js](https://github.com/Microsoft/TypeScript/issues/2616)
+* Support for [ES6 Generators](https://github.com/Microsoft/TypeScript/issues/2873)
 * Async/await
+* Support for local types and class expressions
 
 # 2.0
 
-* Support for local types and class expressions
 * Investigate top-rated feature requests (mixins, abstract classes, etc). 
 * Improve lib.d.ts modularity
