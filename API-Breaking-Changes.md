@@ -64,3 +64,9 @@ We did some cleanup to the public interfaces, here is the full list of changes:
 - Commit [c9ef4db99ac93bb1c166a](https://github.com/Microsoft/TypeScript/commit/c9ef4db99ac93bb1c166aa9af495453eeceea279)  
 * Commit [b4e5d5b0b460cc88a10db](https://github.com/Microsoft/TypeScript/commit/b4e5d5b0b460cc88a10dbfdb0a935fb33b534ab2)  
 
+
+### `typescript_internal.d.ts` and `typescriptServices_internal.d.ts` have been removed
+
+The two files exposed helpers in the past that were not part of the supported TypeScript API. If you were using any of these APIs please file an issue to re-expose them; requests for exposing helper APIs will be triaged on a case-per-case basis.
+
+For more information please see the [full change](https://github.com/Microsoft/TypeScript/pull/2692).
