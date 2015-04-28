@@ -101,6 +101,13 @@ You can keep using older versions of the library with newer version of the compi
 - ``XMLHttpRequest.send`` has two overloads ``send(data?: Document): void;`` and ``send(data?: String): void;``
 - ``window.orientation`` is of type ``string`` instead of ``number``
 
+**Here is a list of libraries that are partly or entirely replaced by the added DOM types:**
+``DefinitelyTyped/auth0/auth0.d.ts``
+``DefinitelyTyped/gamepad/gamepad.d.ts``
+``DefinitelyTyped/interactjs/interact.d.ts``
+``DefinitelyTyped/webaudioapi/waa.d.ts``
+``DefinitelyTyped/webcrypto/WebCrypto.d.ts``
+
 For more details, please see the [full change](https://github.com/Microsoft/TypeScript/pull/2739).
 
 # TypeScript 1.4
