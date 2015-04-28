@@ -67,6 +67,42 @@ class C extends CBase<string> {
 
 See issues [#1425](https://github.com/Microsoft/TypeScript/issues/1425) and [#920](https://github.com/Microsoft/TypeScript/issues/920) for more details.
 
+#### DOM interface changes
+TypeScript 1.5 refreshes the DOM types in lib.d.ts. This is the first major refresh since TypeScript 1.0; many IE-specific definitions have been removed in favor of the standard DOM definitions. as well as adding missing types like Web Audio.
+
+**Workaround:**
+
+You can keep using older versions of the library with newer version of the compiler. You will need to include a local copy of a previous version in your project. Here is the [last released version before this change (TypeScript 1.5-alpha)](https://github.com/Microsoft/TypeScript/blob/v1.5.0-alpha/bin/lib.d.ts).
+
+**Here is a list of changes:**
+- Property ``selection`` is removed from type ``Document``
+- Property ``clipboardData`` is removed from type ``Window``
+- Removed interface ``MSEventAttachmentTarget``
+- Properties ``onresize``, ``disabled``, ``uniqueID``, ``removeNode``, ``fireEvent``, ``currentStyle``, ``runtimeStyle`` are removed from type ``HTMLElement``
+- Property ``url`` is removed from type ``Event``
+- Properties ``execScript``, ``navigate``, ``item`` are removed from type ``Window``
+- Properties ``documentMode``, ``parentWindow``, ``createEventObject`` are removed from type ``Document``
+- Property ``parentWindow`` is removed from type ``HTMLDocument``
+- Property ``setCapture`` does not exist anywhere now
+- Property ``releaseCapture`` does not exist anywhere now
+- Properties ``setAttribute``, ``styleFloat``, ``pixelLeft`` are removed from type ``CSSStyleDeclaration``
+- Property ``selectorText`` is removed from type ``CSSRule``
+- ``CSSStyleSheet.rules`` is of type ``CSSRuleList`` instead of ``MSCSSRuleList``
+- ``documentElement`` is of type ``Element`` instead of ``HTMLElement``
+- ``Event`` has a new required property ``returnValue``
+- ``Node`` has a new required property ``baseURI``
+- ``Element`` has a new required property ``classList``
+- Properties ``MSPOINTER_TYPE_MOUSE``, ``MSPOINTER_TYPE_TOUCH`` are removed from type ``MSPointerEvent``
+- ``CSSStyleRule`` has a new required property ``readonly``
+- Property ``execUnsafeLocalFunction`` is removed from type ``MSApp``
+- Global method ``toStaticHTML`` is removed
+- ``HTMLCanvasElement.getContext`` now returns ``CanvasRenderingContext2D | WebGLRenderingContex``
+- Removed extension types ``Dataview``, ``Weakmap``, ``Map``, ``Set``
+- ``XMLHttpRequest.send`` has two overloads ``send(data?: Document): void;`` and ``send(data?: String): void;``
+- ``window.orientation`` is of type ``string`` instead of ``number``
+
+For more details, please see the [full change](https://github.com/Microsoft/TypeScript/pull/2739).
+
 # TypeScript 1.4
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.4%22+label%3A%22breaking+change%22).
