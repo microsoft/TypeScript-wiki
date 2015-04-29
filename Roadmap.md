@@ -41,7 +41,6 @@
 * New [--noEmitHelpers](https://github.com/Microsoft/TypeScript/pull/2901)
 * New [--inlineSourceMap](https://github.com/Microsoft/TypeScript/pull/2484)
 * New [--inlineSources](https://github.com/Microsoft/TypeScript/pull/2484)
-* New [--inlineSources](https://github.com/Microsoft/TypeScript/pull/2484)
 * New [--newLine](https://github.com/Microsoft/TypeScript/pull/2921)
 * Support for new [`namespace` keyword](https://github.com/Microsoft/TypeScript/issues/2159)
 * Async/await
