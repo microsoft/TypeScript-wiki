@@ -30,3 +30,13 @@ Declined suggestions will have the `Declined` label along with one of the follow
  * `By Design`: This aspect of the language is an intentional design decision
 
 Issues that are not bugs or suggestions will be labelled appropriately (`Question`, `By Design`, `External`) and closed. Please use [Stack Overflow](http://stackoverflow.com/questions/tagged/typescript) for TypeScript questions.
+
+### Documentation
+
+For any new features, please:
+* Add a link to the Roadmap: https://github.com/Microsoft/TypeScript/wiki/Roadmap
+* Add a blurb to what's new page: https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript
+* Add a section to the Handbook, if big enough:  https://github.com/Microsoft/TypeScript-Handbook
+* For breaking changes:
+ * Add a breaking change notice: https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes
+ * or to the API breaking changes pages: https://github.com/Microsoft/TypeScript/wiki/API-Breaking-Changes
