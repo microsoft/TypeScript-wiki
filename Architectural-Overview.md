@@ -78,8 +78,8 @@ For most basic uses, comments are the "interesting" trivia. The comments that be
 
 Function | Description
 ---------|------------
-`ts.getLeadingCommentRanges` | Given the source text and positing within that text, returns ranges of comments between the first line break following the given position and the token itself (probably most useful with `ts.Node.getFullStart`).
-`ts.getTrailingCommentRanges` | Given the source text and positing within that text, returns ranges of comments until the first line break following the given position (probably most useful with `ts.Node.getEnd`).
+`ts.getLeadingCommentRanges` | Given the source text and position within that text, returns ranges of comments between the first line break following the given position and the token itself (probably most useful with `ts.Node.getFullStart`).
+`ts.getTrailingCommentRanges` | Given the source text and position within that text, returns ranges of comments until the first line break following the given position (probably most useful with `ts.Node.getEnd`).
 
 As an example, imagine this portion of a source file:
 
