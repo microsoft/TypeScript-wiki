@@ -1,5 +1,81 @@
 # TypeScript 1.5
 
+## ES6 Modules ##
+
+TypeScript 1.5 supports ECMAScript 6 (ES6) modules. ES6 modules are effectively TypeScript external modules with a new syntax: ES6 modules are separately loaded source files that possibly import other modules and provide a number of externally accessible exports. ES6 modules feature several new export and import declarations. It is recommended that TypeScript libraries and applications be updated to use the new syntax, but this is not a requirement. The new ES6 module syntax coexists with TypeScript's original internal and external module constructs and the constructs can be mixed and matched at will.
+
+**Export Declarations**
+
+In addition to the existing TypeScript support for decorating declarations with `export`, module members can also be exported using separate export declarations, optionally specifying different names for exports using `as` clauses.
+
+```ts
+interface Stream { ... }
+function writeToStream(stream: Stream, data: string) { ... }
+export { Stream, writeToStream as write };  // writeToStream exported as write
+```
+
+Import declarations, as well, can optionally use `as` clauses to specify different local names for the imports. For example:
+
+```ts
+import { read, write, standardOutput as stdout } from "./inout";
+var s = read(stdout);
+write(stdout, s);
+```
+
+As an alternative to individual imports, a namespace import can be used to import an entire module:
+
+```ts
+import * as io from "./inout";
+var s = io.read(io.standardOutput);
+io.write(io.standardOutput, s);
+```
+
+**Re-exporting**
+
+Using `from` clause a module can copy the exports of a given module to the current module without introducing local names.
+
+```ts
+export { read, write, standardOutput as stdout } from "./inout";
+```
+
+`export *` can be used to re-export all exports of another module. This is useful for creating modules that aggregate the exports of several other modules.
+
+```ts
+export function transform(s: string): string { ... }
+export * from "./mod1";
+export * from "./mod2";
+```
+
+**Default Export**
+
+An export default declaration specifies an expression that becomes the default export of a module:
+```ts
+export default class Greeter {
+    sayHello() {
+        console.log("Greetings!");
+    }
+}
+```
+
+Which in tern can be imported using default imports:
+
+```ts
+import Greeter from "./greeter";
+var g = new Greeter();
+g.sayHello();
+```
+
+
+**Bare Import**
+
+A "bare import" can be used to import a module only for its side-effects.
+
+```ts
+import "./polyfills";
+```
+
+For more information about module, please see the [ES6 module support spec](https://github.com/Microsoft/TypeScript/issues/2242).
+
 ## Destructuring in declarations and assignments
 
 TypeScript 1.5 adds support to ES6 destructuring declarations and assignments.
