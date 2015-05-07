@@ -33,7 +33,7 @@
 * New [--rootDir](https://github.com/Microsoft/TypeScript/pull/2772)
 * New [ts.transpile API](https://github.com/Microsoft/TypeScript/issues/2499)
 * Support [--module umd](https://github.com/Microsoft/TypeScript/issues/2036)
-* Support [--module system.js](https://github.com/Microsoft/TypeScript/issues/2616)
+* Support [--module system](https://github.com/Microsoft/TypeScript/issues/2616)
 * New [--noEmitHelpers](https://github.com/Microsoft/TypeScript/pull/2901)
 * New [--inlineSourceMap](https://github.com/Microsoft/TypeScript/pull/2484)
 * New [--inlineSources](https://github.com/Microsoft/TypeScript/pull/2484)
