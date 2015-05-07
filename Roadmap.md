@@ -32,17 +32,17 @@
 * Support for [Decorator type metadata](https://github.com/Microsoft/TypeScript/pull/2589)
 * New [--rootDir](https://github.com/Microsoft/TypeScript/pull/2772)
 * New [ts.transpile API](https://github.com/Microsoft/TypeScript/issues/2499)
-
-# 1.6
-
 * Support [--module umd](https://github.com/Microsoft/TypeScript/issues/2036)
 * Support [--module system.js](https://github.com/Microsoft/TypeScript/issues/2616)
-* Support for [ES6 Generators](https://github.com/Microsoft/TypeScript/issues/2873)
 * New [--noEmitHelpers](https://github.com/Microsoft/TypeScript/pull/2901)
 * New [--inlineSourceMap](https://github.com/Microsoft/TypeScript/pull/2484)
 * New [--inlineSources](https://github.com/Microsoft/TypeScript/pull/2484)
 * New [--newLine](https://github.com/Microsoft/TypeScript/pull/2921)
 * Support for new [`namespace` keyword](https://github.com/Microsoft/TypeScript/issues/2159)
+
+# 1.6
+
+* Support for [ES6 Generators](https://github.com/Microsoft/TypeScript/issues/2873)
 * Async/await
 * Support for local types and class expressions
 
