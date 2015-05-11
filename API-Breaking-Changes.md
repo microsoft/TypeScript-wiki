@@ -13,8 +13,8 @@
 ### All usages of 'filename' and 'Filename' changed to 'fileName' and 'FileName'
 Here are the details:
 - `CompilerHost.getDefaultLibFilename` => `CompilerHost.getDefaultLibFileName`
-- `SourceFile .filename` => `SourceFile.fileName`
-- `FileReference`.filename => `FileReference.fileName`
+- `SourceFile.filename` => `SourceFile.fileName`
+- `FileReference.filename` => `FileReference.fileName`
 - `LanguageServiceHost.getDefaultLibFilename` => `LanguageServiceHost.getDefaultLibFileName`
 - `LanguageServiceShimHost.getDefaultLibFilename` => `LanguageServiceShimHost.getDefaultLibFileName`
 
