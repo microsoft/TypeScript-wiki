@@ -92,6 +92,7 @@ You can keep using older versions of the library with newer version of the compi
 - ``Event`` has a new required property ``returnValue``
 - ``Node`` has a new required property ``baseURI``
 - ``Element`` has a new required property ``classList``
+- ``Location`` has a new required property ``origin``
 - Properties ``MSPOINTER_TYPE_MOUSE``, ``MSPOINTER_TYPE_TOUCH`` are removed from type ``MSPointerEvent``
 - ``CSSStyleRule`` has a new required property ``readonly``
 - Property ``execUnsafeLocalFunction`` is removed from type ``MSApp``
