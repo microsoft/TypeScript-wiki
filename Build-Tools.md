@@ -1,11 +1,15 @@
 ## Browserify
 
 ### Install
-``` npm install tsify ```
+```sh
+npm install tsify
+```
 
 ### Using Command Line Interface
 
-``` browserify main.ts -p [ tsify --noImplicitAny ] > bundle.js ```
+```sh
+browserify main.ts -p [ tsify --noImplicitAny ] > bundle.js
+```
 
 ### Using API
 
@@ -29,7 +33,9 @@ More details: [smrq/tsify](https://github.com/smrq/tsify)
 
 ### Install
 
-``` npm install grunt-ts ```
+```sh
+npm install grunt-ts
+```
 
 ### Basic Gruntfile.js
 
@@ -52,8 +58,9 @@ More details: [TypeStrong/grunt-ts](https://github.com/TypeStrong/grunt-ts)
 ## Gulp
 
 ### Install
-
+```sh
 npm install gulp-typescript
+```
 
 ### Basic gulpfile.js
 
