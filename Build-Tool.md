@@ -27,8 +27,6 @@ browserify()
 More details: [smrq/tsify](https://github.com/smrq/tsify)
 ### 
 
-## Jake
-
 ## Grunt
 
 ### Install
