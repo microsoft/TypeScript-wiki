@@ -12,7 +12,7 @@
 ```javascript
 var fs = require("fs");
 var browserify = require("browserify");
-var babelify = require("tsify");
+var tsify = require("tsify");
 
 browserify()
     .add('main.ts')
