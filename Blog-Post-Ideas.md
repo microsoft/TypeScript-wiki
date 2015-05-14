@@ -28,7 +28,7 @@
 **Why and How?**
 
 * Why are function parameter types bivariant?
-* How do I handle 'this' in my program?
+* How do I handle `this` in my program?
 * When should I use instance methods vs prototype methods?
 * How do I write a definition file? Walk through an example
 * Advanced version: Choosing between overloads/optional params, use `{}` instead of `any`, etc
