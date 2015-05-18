@@ -4,7 +4,7 @@ Option | Shorthand | Description
 `--declaration` | `--d` | Generates corresponding '.d.ts' file.
 `--help` | `--h` | Print help message.
 `--version` | `--v` | Print the compiler's version.
-`--module` | `--m` | Specify module code generation: 'commonjs' or 'amd'.
+`--module` | `--m` | Specify module code generation: 'commonjs', 'amd', 'system'<sup>[1]</sup>, or 'umd'<sup>[1]</sup>.
 `--project` | `--p` | Compile the project in the given directory. The directory needs to contain a `tsconfig.json` file to direct compilation. See [[tsconfig.json]] documentation for more details.
 `--target` | `--t` | Specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'
 `--watch` | `--w` | Run the compiler in watch mode. Watch input files and trigger recompilation on changes.
@@ -26,6 +26,8 @@ Option | Shorthand | Description
 `--sourceMap` | | Generates corresponding '.map' file.
 `--sourceRoot` | | Specifies the location where debugger should locate TypeScript files instead of source locations. Use this flag if the sources will be located at run-time in a different location than that at design-time. The location specified will be embedded in the sourceMap to direct the debugger where the source files where be located.
 `--suppressImplicitAnyIndexErrors` | | Suppress noImplicitAny errors for indexing objects lacking index signatures. See [issue #1232](https://github.com/Microsoft/TypeScript/issues/1232#issuecomment-64510362) for more details.
+
+<sup>[1]</sup> These options will only be available in TypeScript 1.5.
 
 ## Related 
  - For tsconfig.json see [[tsconfig.json]]
