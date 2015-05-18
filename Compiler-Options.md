@@ -25,6 +25,7 @@ Option | Shorthand | Description
 `--preserveConstEnums` | | Do not erase const enum declarations in generated code. See [const enums documentation](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#94-constant-enum-declarations) for more details.
 `--removeComments` | | Do not emit comments to output.
 `--rootDir`<sup>[1]</sup> | | Specifies the root directory of input files. Use to control the output directory structure with `--outDir`.
+`--separateCompilation`<sup>[1]</sup> | | Unconditionally emit imports for unresolved files.
 `--sourceMap` | | Generates corresponding '.map' file.
 `--sourceRoot` | | Specifies the location where debugger should locate TypeScript files instead of source locations. Use this flag if the sources will be located at run-time in a different location than that at design-time. The location specified will be embedded in the sourceMap to direct the debugger where the source files where be located.
 `--suppressImplicitAnyIndexErrors` | | Suppress noImplicitAny errors for indexing objects lacking index signatures. See [issue #1232](https://github.com/Microsoft/TypeScript/issues/1232#issuecomment-64510362) for more details.
