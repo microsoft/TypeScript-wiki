@@ -20,6 +20,7 @@ Option | Shorthand | Description
 `--newLine`<sup>[1]</sup> | | Specifies the end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
 `--noEmit` | | Do not emit outputs.
 `--noEmitOnError` | | Do not emit outputs if any type checking errors were reported.
+`--noEmitHelpers` | | Do not generate custom helper functions like `__extends` in compiled output.
 `--noImplicitAny` | | Raise error on expressions and declarations with an implied 'any' type.
 `--noLib` | | Do not include the default library file (lib.d.ts).
 `--noResolve` | | Do not add triple-slash references or module import targets to the list of compiled files.
@@ -41,4 +42,3 @@ Option | Shorthand | Description
 ## Related 
  - For tsconfig.json see [[tsconfig.json]]
  - For Setting the compiler options in MSBuild projects see [[Setting Compiler Options in MSBuild projects]]
-
