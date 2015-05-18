@@ -24,9 +24,14 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --target          | TypeScriptTarget      | ES3, ES5 or ES6
 --charset         | TypeScriptCharset     |                           
 --emitBOM         | TypeScriptEmitBOM     | boolean     
+--emitDecoratorMetadata | TypeScriptEmitDecoratorMetadata | boolean
+--inlineSourceMap | TypeScriptInlineSourceMap |  boolean
+--inlineSources   | TypeScriptInlineSources|  boolean
 --locale          | Automatically set to PreferredUILang value |
---mapRoot         | TypeScriptMapRoot     | File path 
+--mapRoot         | TypeScriptMapRoot       | File path 
+--newLine         | TypeScriptNewLine       | CRLF or LF
 --noEmitOnError   | TypeScriptNoEmitOnError | boolean
+--noEmitHelpers   | TypeScriptNoEmitHelpers | boolean
 --noImplicitAny   | TypeScriptNoImplicitAny | boolean
 --noLib           | TypeScriptNoLib       | boolean
 --noResolve       | TypeScriptNoResolve   | boolean
@@ -34,8 +39,10 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --outDir          | TypeScriptOutDir      | File path
 --preserveConstEnums | TypeScriptPreserveConstEnums | boolean
 --removeComments  | TypeScriptRemoveComments | boolean
---sourceMap       | TypeScriptSourceMap | File path                         
---sourceRoot      | TypeScriptSourceRoot | File path
+--rootDir         | TypeScriptRootDir        | File path
+--separateCompilation | TypeScriptSeparateCompilation | boolean
+--sourceMap       | TypeScriptSourceMap      | File path                         
+--sourceRoot      | TypeScriptSourceRoot     | File path
 --suppressImplicitAnyIndexErrors | TypeScriptSuppressImplicitAnyIndexErrors | boolean
 --project         | *Not supported in VS* | 
 --watch           | *Not supported in VS* |
