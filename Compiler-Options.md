@@ -11,7 +11,7 @@ Option | Shorthand | Description
 `--charset` | | The character set of the input files.
 `--diagnostics` | | Show diagnostic information.
 `--emitBOM` | | Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.
-`--emitDecoratorMetadata`<sup>[2]</sup> | | Emit design-type metadata for decorated declarations in source. See [issue #2577](https://github.com/Microsoft/TypeScript/issues/2577) for details.
+`--emitDecoratorMetadata`<sup>[1][2]</sup> | | Emit design-type metadata for decorated declarations in source. See [issue #2577](https://github.com/Microsoft/TypeScript/issues/2577) for details.
 `--listFiles` | | Print names of files part of the compilation.
 `--locale` | | The locale to use to show error messages, e.g. en-us.
 `--mapRoot` | | Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than than the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files where be located.
