@@ -40,7 +40,7 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --preserveConstEnums | TypeScriptPreserveConstEnums | boolean
 --removeComments  | TypeScriptRemoveComments | boolean
 --rootDir         | TypeScriptRootDir        | File path
---separateCompilation | TypeScriptSeparateCompilation | boolean
+--separateCompilation | TypeScriptSingleFile | boolean
 --sourceMap       | TypeScriptSourceMap      | File path                         
 --sourceRoot      | TypeScriptSourceRoot     | File path
 --suppressImplicitAnyIndexErrors | TypeScriptSuppressImplicitAnyIndexErrors | boolean
