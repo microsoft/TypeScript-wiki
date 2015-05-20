@@ -9,6 +9,7 @@
 * Async/await
 * Support for local types and class expressions
 * [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
+* Module bundeling
 
 
 # 1.5
