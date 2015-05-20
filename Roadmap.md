@@ -8,6 +8,8 @@
 * Support for [ES6 Generators](https://github.com/Microsoft/TypeScript/issues/2873)
 * Async/await
 * Support for local types and class expressions
+* [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
+
 
 # 1.5
 
