@@ -36,6 +36,7 @@
 * New [--inlineSources](https://github.com/Microsoft/TypeScript/pull/2484)
 * New [--newLine](https://github.com/Microsoft/TypeScript/pull/2921)
 * Support for new [`namespace` keyword](https://github.com/Microsoft/TypeScript/issues/2159)
+* Support for [tsconfig.json in Visual Studio 2015](https://github.com/Microsoft/TypeScript/issues/3124)
 
 # 1.4
 
