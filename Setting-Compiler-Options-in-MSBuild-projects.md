@@ -20,8 +20,8 @@ Compiler options can be specified using MSBuild properties within an MSBuild pro
 Compiler Option   | MSBuild Property Name | Allowed Values
 ------------------|-----------------------|-----------------
 --declaration     | TypeScriptGeneratesDeclarations | boolean
---module          | TypeScriptModuleKind  | AMD or CommonJs
---target          | TypeScriptTarget      | ES3, ES5 or ES6
+--module          | TypeScriptModuleKind  | AMD, CommonJs, UMD, or System
+--target          | TypeScriptTarget      | ES3, ES5, or ES6
 --charset         | TypeScriptCharset     |                           
 --emitBOM         | TypeScriptEmitBOM     | boolean     
 --emitDecoratorMetadata | TypeScriptEmitDecoratorMetadata | boolean
@@ -49,3 +49,4 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --diagnostics     | *Not supported in VS* |
 --listFiles       | *Not supported in VS* |
 --noEmit          | *Not supported in VS* |
+*VS only option*  | TypeScriptAdditionalFlags | *Any compiler option*
