@@ -5,7 +5,7 @@
 4. Use camelCase for function names.
 5. Use camelCase for property names and local variables.
 6. Do not use "_" as a prefix for private properties.
-7. Use whole words when possible in names when possible.
+7. Use whole words in names when possible.
 
 ## Components 
 1. 1 file per logical component (e.g. parser, scanner, emitter, checker).
