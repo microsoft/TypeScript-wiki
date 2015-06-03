@@ -12,6 +12,7 @@
 * [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
 * Module bundling
 * Support for [extending built-in types](https://github.com/Microsoft/TypeScript/issues/1168)
+* Support for [`exclude` property in tsconfig.json](https://github.com/Microsoft/TypeScript/pull/3188)
 
 # 1.5
 
