@@ -53,7 +53,7 @@ Prior to this release, contextual types did not flow through parenthesized expre
 
 In the examples below, `m` will have a contextual type, where previously it did not.
 ```ts
-var x: SomeType = (n) => ((m) => q)); 
+var x: SomeType = (n) => ((m) => q); 
 var y: SomeType = t ? (m => m.length) : undefined; 
 
 class C extends CBase<string> {
@@ -68,7 +68,7 @@ class C extends CBase<string> {
 See issues [#1425](https://github.com/Microsoft/TypeScript/issues/1425) and [#920](https://github.com/Microsoft/TypeScript/issues/920) for more details.
 
 #### DOM interface changes
-TypeScript 1.5 refreshes the DOM types in lib.d.ts. This is the first major refresh since TypeScript 1.0; many IE-specific definitions have been removed in favor of the standard DOM definitions. as well as adding missing types like Web Audio and touche events.
+TypeScript 1.5 refreshes the DOM types in lib.d.ts. This is the first major refresh since TypeScript 1.0; many IE-specific definitions have been removed in favor of the standard DOM definitions. as well as adding missing types like Web Audio and touch events.
 
 **Workaround:**
 
