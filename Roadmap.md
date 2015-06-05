@@ -14,6 +14,8 @@
 * Module bundling
 * Support for [extending built-in types](https://github.com/Microsoft/TypeScript/issues/1168)
 * Support for [`exclude` property in tsconfig.json](https://github.com/Microsoft/TypeScript/pull/3188)
+* Supporting [generic type parameters on type aliases](https://github.com/Microsoft/TypeScript/issues/1616)
+
 
 # 1.5
 
