@@ -25,6 +25,7 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 --charset         | TypeScriptCharset     |                           
 --emitBOM         | TypeScriptEmitBOM     | boolean     
 --emitDecoratorMetadata | TypeScriptEmitDecoratorMetadata | boolean
+--experimentalDecorators | TypeScriptExperimentalDecorators | boolean
 --inlineSourceMap | TypeScriptInlineSourceMap |  boolean
 --inlineSources   | TypeScriptInlineSources|  boolean
 --locale          | Automatically set to PreferredUILang value |
