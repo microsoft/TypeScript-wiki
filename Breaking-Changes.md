@@ -48,7 +48,7 @@ Add the `const` modifier to the enum declaration to ensure it is consistently in
 For more details see issue [#2183](https://github.com/Microsoft/TypeScript/issues/2183).
 
 
-#### Contextual type flows through Super and parenthesized expressions
+#### Contextual type flows through `super` and parenthesized expressions
 Prior to this release, contextual types did not flow through parenthesized expressions. This has forced explicit type casts, especially in cases where parentheses are *required* to make an expression parse.
 
 In the examples below, `m` will have a contextual type, where previously it did not.
