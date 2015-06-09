@@ -6,15 +6,15 @@
 # 1.6
 
 * Support for [ES6 Generators](https://github.com/Microsoft/TypeScript/issues/2873)
-* Support for [`async`/`await`](https://github.com/Microsoft/TypeScript/issues/1664)
 * Support for [local types](https://github.com/Microsoft/TypeScript/pull/3266)
 * Support for [generic type aliases](https://github.com/Microsoft/TypeScript/issues/1616)
 * Support for [class expressions](https://github.com/Microsoft/TypeScript/issues/497)
-* [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
-* Module bundling
-* Support for [extending built-in types](https://github.com/Microsoft/TypeScript/issues/1168)
 * Support for [`exclude` property in tsconfig.json](https://github.com/Microsoft/TypeScript/pull/3188)
 * Support for [user defined type guard functions](https://github.com/Microsoft/TypeScript/issues/1007)
+* Support for [extending built-in types](https://github.com/Microsoft/TypeScript/issues/1168)
+* Support for [`async`/`await`](https://github.com/Microsoft/TypeScript/issues/1664)
+* [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
+* Module bundling
 
 
 # 1.5
