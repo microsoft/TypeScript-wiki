@@ -9,3 +9,9 @@
 # Sublime Text 3/2
 
 [Official support for TypeScript in Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin) can be acquired through [Package Control](https://packagecontrol.io/).
+
+# Atom
+
+# Eclipse
+
+# Vim
