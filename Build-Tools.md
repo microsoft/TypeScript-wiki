@@ -1,4 +1,4 @@
-## browserify
+# browserify
 
 ### Install
 ```sh
@@ -27,7 +27,7 @@ browserify()
 More details: [smrq/tsify](https://github.com/smrq/tsify)
 ### 
 
-## grunt
+# grunt
 
 ### Install
 
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 
 More details: [TypeStrong/grunt-ts](https://github.com/TypeStrong/grunt-ts)
 
-## gulp
+# gulp
 
 ### Install
 ```sh
@@ -77,7 +77,7 @@ gulp.task("default", function () {
 ```
 More details: [ivogabe/gulp-typescript](https://github.com/ivogabe/gulp-typescript)
 
-## webpack
+# webpack
 
 ### Install
 ```sh
