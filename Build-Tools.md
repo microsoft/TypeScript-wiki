@@ -108,3 +108,36 @@ module.exports = {
 };
 ```
 More details: [s-panferov/awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader)
+
+# duo
+
+### Install
+```sh
+npm install duo-typescript
+```
+
+### Using Command Line Interface
+
+```sh
+duo --use duo-typescript entry.ts
+```
+
+### Using API
+```javascript
+var Duo = require('duo');
+var fs = require('fs')
+var path = require('path')
+var typescript = require('duo-typescript');
+
+var out = path.join(__dirname, "output.js")
+
+Duo(__dirname)
+  .entry('entry.ts')
+  .use(typescript())
+  .run(function (err, results) {
+    if (err) throw err;
+    // Write compiled result to output file
+    fs.writeFileSync(out, results.code);
+  });
+```
+More details: [frankwallis/duo-typescript](https://github.com/frankwallis/duo-typescript)
