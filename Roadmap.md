@@ -8,6 +8,7 @@
 * Support for [ES6 Generators](https://github.com/Microsoft/TypeScript/issues/2873)
 * Support for [local types](https://github.com/Microsoft/TypeScript/pull/3266)
 * Support for [generic type aliases](https://github.com/Microsoft/TypeScript/issues/1616)
+* Support for [expressions in class extends clauses](https://github.com/Microsoft/TypeScript/pull/3516)
 * Support for [class expressions](https://github.com/Microsoft/TypeScript/issues/497)
 * Support for [`exclude` property in tsconfig.json](https://github.com/Microsoft/TypeScript/pull/3188)
 * Support for [user defined type guard functions](https://github.com/Microsoft/TypeScript/issues/1007)
