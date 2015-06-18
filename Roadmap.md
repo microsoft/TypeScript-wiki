@@ -2,6 +2,7 @@
 
 * Investigate top-rated feature requests (mixins, abstract classes, etc). 
 * Improve lib.d.ts modularity
+* Module bundling
 
 # 1.6
 
@@ -15,8 +16,7 @@
 * Support for [extending built-in types](https://github.com/Microsoft/TypeScript/issues/1168)
 * Support for [`async`/`await`](https://github.com/Microsoft/TypeScript/issues/1664)
 * [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
-* Module bundling
-
+* [JSX support](https://github.com/Microsoft/TypeScript/pull/3564)
 
 # 1.5
 
