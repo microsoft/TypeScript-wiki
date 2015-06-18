@@ -1,19 +1,12 @@
-# Visual Studio 2013/2015
+# Atom
+[TypScript Plugin for Atom](https://atom.io/packages/atom-typescript), a TypeScript language service for atom editor developed by TypeStrong
 
-[Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
-
-# Visual Studio Code
-
-[Visual Studio Code](https://code.visualstudio.com/), a lightweight cross-platform editor, comes with TypeScript support built in.
+# Eclipse
+[TypeScript Plugin for Eclipse](https://github.com/palantir/eclipse-typescript), a TypeScript language service support for Eclipse IDE developed by Palantir.
 
 # Sublime Text 3/2
 
 [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin) can be acquired through [Package Control](https://packagecontrol.io/).
-
-# Atom
-
-# Eclipse
-[TypeScript Plugin for Eclipse](https://github.com/palantir/eclipse-typescript), a TypeScript language service support for Eclipse IDE.
 
 # Vim
 
@@ -33,3 +26,11 @@ if !exists("g:ycm_semantic_triggers")
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 ```
+
+# Visual Studio 2013/2015
+
+[Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
+
+# Visual Studio Code
+
+[Visual Studio Code](https://code.visualstudio.com/), a lightweight cross-platform editor, comes with TypeScript support built in.
