@@ -115,7 +115,7 @@ More details: [ivogabe/gulp-typescript](https://github.com/ivogabe/gulp-typescri
 ```sh
 npm install -g jspm@beta
 ```
-Note: Currently TypeScript support in jspm is in 0.16beta
+_Note: Currently TypeScript support in jspm is in 0.16beta_
 
 More details: [TypeScriptSamples/jspm](https://github.com/Microsoft/TypeScriptSamples/tree/jspm/jspm)
 
