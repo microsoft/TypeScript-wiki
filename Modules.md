@@ -146,17 +146,21 @@ strings.forEach(s => {
 Once there are multiple files involved, we'll need to make sure all of the compiled code gets loaded. There are two ways of doing this.
 
 First, we can use concatenated output using the _--out_ flag to compile all of the input files into a single JavaScript output file:
-```
+
+```Shell
 tsc --out sample.js Test.ts
 ```
+
 The compiler will automatically order the output file based on the reference tags present in the files. You can also specify each file individually:
-```
+
+```Shell
 tsc --out sample.js Validation.ts LettersOnlyValidator.ts ZipCodeValidator.ts Test.ts
 ```
 
 Alternatively, we can use per-file compilation (the default) to emit one JavaScript file for each  input file. If multiple JS files get produced, we'll need to use _<script>_ tags on our webpage to load each emitted file in the appropriate order, for example:
 
 ### MyTestPage.html (excerpt)
+
 ```HTML
     <script src="Validation.js" type="text/javascript" />
     <script src="LettersOnlyValidator.js" type="text/javascript" />
@@ -165,6 +169,7 @@ Alternatively, we can use per-file compilation (the default) to emit one JavaScr
 ```
 
 # Going External
+
 TypeScript also has the concept of an external module. External modules are used in two cases: node.js and require.js. Applications not using node.js or require.js do not need to use external modules and can best be organized using the internal module concept outlined above.
 
 In external modules, relationships between files are specified in terms of imports and exports at the file level. In TypeScript, any file containing a top-level _import_ or _export_ is considered an external module.
