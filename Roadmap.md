@@ -43,6 +43,7 @@
 * New [--newLine](https://github.com/Microsoft/TypeScript/pull/2921)
 * Support for new [`namespace` keyword](https://github.com/Microsoft/TypeScript/issues/2159)
 * Support for [tsconfig.json in Visual Studio 2015](https://github.com/Microsoft/TypeScript/issues/3124)
+* Improved [template string highlighting in Visual Studio 2013](https://github.com/Microsoft/TypeScript/pull/2026)
 
 # 1.4
 
