@@ -1,4 +1,4 @@
-# browserify
+# Browserify
 
 ### Install
 ```sh
@@ -26,7 +26,7 @@ browserify()
 
 More details: [smrq/tsify](https://github.com/smrq/tsify)
 
-# duo
+# Duo
 
 ### Install
 ```sh
@@ -59,7 +59,7 @@ Duo(__dirname)
 ```
 More details: [frankwallis/duo-typescript](https://github.com/frankwallis/duo-typescript)
 
-# grunt
+# Grunt
 
 ### Install
 
@@ -108,6 +108,16 @@ gulp.task("default", function () {
 });
 ```
 More details: [ivogabe/gulp-typescript](https://github.com/ivogabe/gulp-typescript)
+
+# jspm
+
+### Install
+```sh
+npm install -g jspm@beta
+```
+_Note: Currently TypeScript support in jspm is in 0.16beta_
+
+More details: [TypeScriptSamples/jspm](https://github.com/Microsoft/TypeScriptSamples/tree/jspm/jspm)
 
 # webpack
 
