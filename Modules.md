@@ -146,13 +146,13 @@ strings.forEach(s => {
 Once there are multiple files involved, we'll need to make sure all of the compiled code gets loaded. There are two ways of doing this.
 
 First, we can use concatenated output using the _--out_ flag to compile all of the input files into a single JavaScript output file:
-{{
+```
 tsc --out sample.js Test.ts
-}}
+```
 The compiler will automatically order the output file based on the reference tags present in the files. You can also specify each file individually:
-{{
+```
 tsc --out sample.js Validation.ts LettersOnlyValidator.ts ZipCodeValidator.ts Test.ts
-}}
+```
 
 Alternatively, we can use per-file compilation (the default) to emit one JavaScript file for each  input file. If multiple JS files get produced, we'll need to use _<script>_ tags on our webpage to load each emitted file in the appropriate order, for example:
 
@@ -180,9 +180,9 @@ import someMod = require('someModule');
 We specify which objects are visible outside the module by using the _export_ keyword on a top-level declaration, similarly to how _export_ defined the public surface area of an internal module.
 
 To compile, we must specify a module target on the command line. For node.js, use _--module commonjs_; for require.js, use _--module amd_. For example:
-{{
+```
 tsc --module commonjs Test.ts
-}}
+```
 When compiled, each external module will become a separate .js file. Similar to reference tags, the compiler will follow _import_ statements to compile dependent files.
 
 ### Validation.ts
