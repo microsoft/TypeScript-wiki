@@ -7,6 +7,7 @@
 * [[Functions]]
 * [[Generics]]
 * [[Common Errors]]
+* [[Integrating with Build Tools]]
 * [[Compiler Options]]
 * [[tsconfig.json]]
 
