@@ -14,6 +14,7 @@ Option | Shorthand | Description
 `--emitDecoratorMetadata`<sup>[1][2]</sup> | | Emit design-type metadata for decorated declarations in source. See [issue #2577](https://github.com/Microsoft/TypeScript/issues/2577) for details.
 `--inlineSourceMap`<sup>[2]</sup> | | Emit a single file with source maps instead of having a separate file.
 `--inlineSources`<sup>[2]</sup> | | Emit the source alongside the sourcemaps within a single file; requires `--inlineSourceMap` to be set.
+`--isolatedModules`<sup>[2]</sup> | | Unconditionally emit imports for unresolved files.
 `--listFiles` | | Print names of files part of the compilation.
 `--locale` | | The locale to use to show error messages, e.g. en-us.
 `--mapRoot` | | Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than than the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files where be located.
@@ -29,7 +30,6 @@ Option | Shorthand | Description
 `--preserveConstEnums` | | Do not erase const enum declarations in generated code. See [const enums documentation](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#94-constant-enum-declarations) for more details.
 `--removeComments` | | Do not emit comments to output.
 `--rootDir`<sup>[2]</sup> | | Specifies the root directory of input files. Use to control the output directory structure with `--outDir`.
-`--isolatedModules`<sup>[2]</sup> | | Unconditionally emit imports for unresolved files.
 `--sourceMap` | | Generates corresponding '.map' file.
 `--sourceRoot` | | Specifies the location where debugger should locate TypeScript files instead of source locations. Use this flag if the sources will be located at run-time in a different location than that at design-time. The location specified will be embedded in the sourceMap to direct the debugger where the source files where be located.
 `--stripInternal`<sup>[1]</sup> | | Do not emit declarations for code that has an `@internal` annotation.
