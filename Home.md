@@ -7,6 +7,7 @@
 * [Functions] (Functions)
 * [Generics] (Generics)
 * [Common Errors] (Common Errors)
+* [[Integrating with Build Tools]]
 * [Compiler Options] (Compiler Options)
 * [TypeScript Editor Support](TypeScript-Editor-Support)
 * [tsconfig.json] (tsconfig.json)
