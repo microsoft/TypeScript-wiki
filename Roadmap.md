@@ -17,6 +17,7 @@
 * Support for [`async`/`await`](https://github.com/Microsoft/TypeScript/issues/1664)
 * [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
 * [JSX support](https://github.com/Microsoft/TypeScript/pull/3564)
+* [Intersection Types](https://github.com/Microsoft/TypeScript/pull/3622)
 
 # 1.5
 
