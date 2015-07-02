@@ -18,6 +18,7 @@
 * [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
 * [JSX support](https://github.com/Microsoft/TypeScript/pull/3564)
 * [Intersection types](https://github.com/Microsoft/TypeScript/pull/3622)
+* [`abstract` classes and methods](https://github.com/Microsoft/TypeScript/issues/3578)
 
 # 1.5
 
