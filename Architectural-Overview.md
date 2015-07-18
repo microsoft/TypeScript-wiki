@@ -35,7 +35,7 @@ The language service supports the common set of a typical editor operations like
 
 * **Type:** Types is the other part of the semantic system. Types can be named (e.g. classes and interfaces), or anonymous (e.g. object types). 
 
-* **Signature:** There are thee types of signatures in the language, call, construct and index signatures.
+* **Signature:** There are three types of signatures in the language, call, construct and index signatures.
 
 ## Terminology
 
