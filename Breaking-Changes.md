@@ -107,7 +107,7 @@ You can keep using older versions of the library with newer version of the compi
 - Removed extension types ``Dataview``, ``Weakmap``, ``Map``, ``Set``
 - ``XMLHttpRequest.send`` has two overloads ``send(data?: Document): void;`` and ``send(data?: String): void;``
 - ``window.orientation`` is of type ``string`` instead of ``number``
-- IE-specific `attachEvent` and `detatchEvent` are removed from `Window`
+- IE-specific `attachEvent` and `detachEvent` are removed from `Window`
 
 **Here is a list of libraries that are partly or entirely replaced by the added DOM types:**
 - ``DefinitelyTyped/auth0/auth0.d.ts``
