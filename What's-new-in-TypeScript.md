@@ -115,6 +115,26 @@ var y = 2;
 [x, y] = [y, x];
 ```
 
+## `namespace` keyword
+
+TypeScript used the `module` keyword to define both "internal modules" and "external modules"; this has been a bit of confusion for developers new to TypeScript. "Internal modules" are closer to what most people would call a namespace; likewise, "external modules" in JS speak really just are modules now.  
+
+> Note: Previous syntax defining internal modules are still supported.
+
+**Before**:
+```TypeScript
+module Math {
+    export function add(x, y) { ... }
+}
+```
+
+**After**:
+```TypeScript
+namespace Math {
+    export function add(x, y) { ... }
+}
+```
+
 ## `let` and `const` support
 ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5. 
 
@@ -221,6 +241,18 @@ function makeNode(name: string, initialNeighbor: Node): Node {
 }
 ```
 
+## Support for `UMD` and `System` module output
+
+In addition to `AMD` and `CommonJS` module loaders, TypeScript now supports emitting modules `UMD` ([Universal Module Definition](https://github.com/umdjs/umd)) and [`System`](https://github.com/systemjs/systemjs) module formats.
+
+**Usage**:
+> tsc --module umd
+
+and
+
+> tsc --module system
+
+
 ## Unicode codepoint escapes in strings
 
 ES6 introduces escapes that allow users to represent a Unicode codepoint using just a single escape.
@@ -298,6 +330,20 @@ Option `--outDir` duplicates the input hierarchy in the output. The compiler com
 Sometimes this is not desirable, for instance inputs `FolderA\FolderB\1.ts` and `FolderA\FolderB\2.ts` would result in output structure mirroring `FolderA\FolderB\`. now if a new file `FolderA\3.ts` is added to the input, the output structure will pop out to mirror `FolderA\`.
 
 `--rootDir` specifies the input directory to be mirrored in output instead of computing it.
+
+## `--noEmitHelpers` command line option
+
+The TypeSript compiler emits a few helpers like `__extends` when needed. The helpers are emitted in every file they are referenced in. If you want to consolidate all helpers in one place, or override the default behavior, use `--noEmitHelpers` to instructs the compiler not to emit them.
+
+
+## `--newLine` command line option
+
+By default the output new line character is `\r\n` on Windows based systems and `\n` on *nix based systems. `--newLine` command line flag allows overriding this behavior and specifying the new line character to be used in generated output files.
+
+## `--inlineSourceMap` and `inlineSources` command line options
+
+`--inlineSourceMap` causes source map files to be written inline in the generated `.js` files instead of in a independent `.js.map` file.  `--inlineSources` allows for additionally inlining the source `.ts` file into the 
+
 
 # TypeScript 1.4
 

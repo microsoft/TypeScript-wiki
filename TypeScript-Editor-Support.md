@@ -1,28 +1,31 @@
 # Atom
-[TypScript Plugin for Atom](https://atom.io/packages/atom-typescript), a TypeScript language service for atom editor developed by TypeStrong
+[Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
 
 # Eclipse
-[TypeScript Plugin for Eclipse](https://github.com/palantir/eclipse-typescript), a TypeScript language service support for Eclipse IDE developed by Palantir.
+[Eclipse TypeScript Plug-in](https://github.com/palantir/eclipse-typescript), an Eclipse plugin developed by Palantir.
 
 # Sublime Text 3/2
 
-[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin) can be acquired through [Package Control](https://packagecontrol.io/).
+[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), which can be acquired through [Package Control](https://packagecontrol.io/).
 
 # Vim
 
-### Syntax highlight
-[leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim) provides syntax files for highlighting .ts and .d.ts files. 
+### Syntax highlighting
+
+[leafgarland/typescript-vim](https://github.com/leafgarland/typescript-vim) provides syntax files for highlighting `.ts` and `.d.ts` files. 
 
 ### Language Service Tools
-There are two main TypeScript plugins:
-* [clausreinke/typescript-tools.vim](https://github.com/clausreinke/typescript-tools.vim)
-* [Quramy/tsuquyomi](https://github.com/Quramy/tsuquyomi)
 
-If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following codes into your .vimrc to specify what token will trigger the completion. YouCompleteMe will call into your respective TypeScript Plugin for semantic inquiry.
+There are two main TypeScript plugins:
+
+* [Quramy/tsuquyomi](https://github.com/Quramy/tsuquyomi)
+* [clausreinke/typescript-tools.vim](https://github.com/clausreinke/typescript-tools.vim)
+
+If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following code into your `.vimrc` to specify what token will trigger the completion. YouCompleteMe will call into its respective TypeScript Plugin for semantic queries.
 
 ```vimscript
 if !exists("g:ycm_semantic_triggers")
- let g:ycm_semantic_triggers = {}
+  let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 ```

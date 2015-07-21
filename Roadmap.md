@@ -13,12 +13,12 @@
 * [Class expressions](https://github.com/Microsoft/TypeScript/issues/497)
 * [`exclude` property in tsconfig.json](https://github.com/Microsoft/TypeScript/pull/3188)
 * [User defined type guard functions](https://github.com/Microsoft/TypeScript/issues/1007)
-* [Extending built-in types](https://github.com/Microsoft/TypeScript/issues/1168)
 * [`async`/`await` for ES6](https://github.com/Microsoft/TypeScript/issues/1664)
 * [External module resolution enhancements](https://github.com/Microsoft/TypeScript/issues/2338)
 * [JSX support](https://github.com/Microsoft/TypeScript/pull/3564)
 * [Intersection types](https://github.com/Microsoft/TypeScript/pull/3622)
 * [`abstract` classes and methods](https://github.com/Microsoft/TypeScript/issues/3578)
+* [Strict object literal assignment checking](https://github.com/Microsoft/TypeScript/pull/3823)
 
 # 1.5
 
