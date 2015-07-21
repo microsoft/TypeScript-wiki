@@ -31,7 +31,7 @@
 * Support for [Computed properties](https://github.com/Microsoft/TypeScript/issues/1082)
 * Support for [tsconfig.json files](https://github.com/Microsoft/TypeScript/pull/1692)
 * Support for [let and const on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/2161)
-* Support for [tagged string templates on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/1589)
+* Support for [tagged Templates on ES3/ES5](https://github.com/Microsoft/TypeScript/pull/1589)
 * Expose a new editor interface through [TS Server](https://github.com/Microsoft/TypeScript/pull/2041)
 * Support for [ES7 Decorators proposal](https://github.com/Microsoft/TypeScript/issues/2249)
 * Support for [Decorator type metadata](https://github.com/Microsoft/TypeScript/pull/2589)
@@ -46,7 +46,7 @@
 * New [--isolatedModules](https://github.com/Microsoft/TypeScript/issues/2499)
 * Support for new [`namespace` keyword](https://github.com/Microsoft/TypeScript/issues/2159)
 * Support for [tsconfig.json in Visual Studio 2015](https://github.com/Microsoft/TypeScript/issues/3124)
-* Improved [template string highlighting in Visual Studio 2013](https://github.com/Microsoft/TypeScript/pull/2026)
+* Improved [template literal highlighting in Visual Studio 2013](https://github.com/Microsoft/TypeScript/pull/2026)
 
 # 1.4
 
@@ -54,7 +54,7 @@
 * New [--noEmitOnError](https://github.com/Microsoft/TypeScript/pull/966)
 * New [--target ES6](https://github.com/Microsoft/TypeScript/commit/873c1df74b7c7dcba59eaccc1bb4bd4b0da18a35)
 * Support for [Let and Const](https://github.com/Microsoft/TypeScript/pull/904)
-* Support for [Template Strings](https://github.com/Microsoft/TypeScript/pull/960)
+* Support for [Template Literals](https://github.com/Microsoft/TypeScript/pull/960)
 * Library typings for ES6 
 * Support for [Const enums](https://github.com/Microsoft/TypeScript/issues/1029)
 * Export Language Service public API
