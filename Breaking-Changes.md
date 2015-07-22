@@ -16,6 +16,40 @@ The compiler uses the [new bulk-export](https://github.com/ModuleLoader/es6-modu
 
 The module loader needs to be updated to [v0.17.1](https://github.com/ModuleLoader/es6-module-loader/releases/tag/v0.17.1) or higher.
 
+#### Strict object literal assignment checking
+
+The changes make it an error to specify properties in an object literal that were not specified on the target type, when assigned to a variable or passed for a parameter of a non-empty target type.
+
+**Example:**
+
+```typescript
+var x: { foo: number };
+x = { foo: 1, baz: 2 };  // Error, excess property `baz`
+
+var y: { foo: number, bar?: number };
+y = { foo: 1, baz: 2 };  // Error, excess or misspelled property `baz`
+```
+
+**Recommendations:**
+
+To avoid the error, either define a indexer on the target type or use type assertion on the object literal in question.
+
+```typescript
+var x: { foo: number, [x: string]: any };
+x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
+```
+
+```ts
+interface Foo {
+    foo: number;
+}
+interface Bar extends Foo {
+    bar: number;
+}
+var y: Foo;
+y = <Bar>{ foo: 1, bar: 2 };
+```
+
 # TypeScript 1.5
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
