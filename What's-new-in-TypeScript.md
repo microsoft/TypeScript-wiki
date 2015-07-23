@@ -235,7 +235,7 @@ function makeNode(name: string, initialNeighbor: Node): Node {
     return {
         name: name,
         neighbors: {
-            [initialNeighbor.name] = initialNeighbor
+            [initialNeighbor.name]: initialNeighbor
         }
     }
 }
