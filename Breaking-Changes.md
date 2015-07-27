@@ -18,7 +18,7 @@ The module loader needs to be updated to [v0.17.1](https://github.com/ModuleLoad
 
 #### Strict object literal assignment checking
 
-The changes make it an error to specify properties in an object literal that were not specified on the target type, when assigned to a variable or passed for a parameter of a non-empty target type.
+It is an error to specify properties in an object literal that were not specified on the target type, when assigned to a variable or passed for a parameter of a non-empty target type.
 
 **Example:**
 
@@ -49,6 +49,61 @@ interface Bar extends Foo {
 var y: Foo;
 y = <Bar>{ foo: 1, bar: 2 };
 ```
+
+#### Function and class default export declarations can no longer merge with entities intersecting in their meaning
+
+Declaring an entity with the same name and in the same space as a default export declaration is now an error; for example,  
+
+```TypeScript
+export default function foo() {
+}
+
+namespace foo {
+    var x = 100;
+}
+```
+
+and
+
+```TypeScript
+export default class Foo {
+    a: number;
+}
+
+interface Foo {
+    b: string;
+}
+```
+
+both cause an error.
+
+However, in the following example, merging is allowed because the namespace does does not have a meaning in the value space:
+
+```TypeScript
+export default class Foo {
+}
+
+namespace Foo {
+}
+```
+
+**Recommendations:**
+
+Declare a local for your default export and use a separate `export default` statement as so:
+
+```TypeScript
+class Foo {
+    a: number;
+}
+
+interface foo {
+    b: string;
+}
+
+export default Foo;
+```
+
+For more details see [the originating issue](https://github.com/Microsoft/TypeScript/issues/3095).
 
 # TypeScript 1.5
 
