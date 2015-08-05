@@ -1,6 +1,6 @@
 # 2.0
 
-* Investigate top-rated feature requests (mixins, abstract classes, etc). 
+* Investigate top-rated feature requests (e.g. mixins). 
 * Improve lib.d.ts modularity
 * Module bundling
 * `async`/`await`
