@@ -13,7 +13,7 @@ This is where we'll add the TypeScript files and the [tsconfig.json](tsconfig.js
  
 ![Project layout](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/project.png)
 
-Finally we have to add the following option to the *"compilerOptions"* node in the `tsconfig.json` file to redirect the compiler output to the `wwwroot` folder:
+Finally we have to add the following option to the `"compilerOptions"` node in the `tsconfig.json` file to redirect the compiler output to the `wwwroot` folder:
 
 ```json
     "outDir": "../wwwroot/"
