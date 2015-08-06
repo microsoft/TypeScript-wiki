@@ -22,3 +22,8 @@ Finally we have to add the following option to the *"compilerOptions"* node in t
 Now if we build our project, you'll notice the `app.js` and `app.js.map` files were created in the root of our `wwwroot` folder.
 
 ![Files after build](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/postbuild.png)
+
+##Compile on Save
+In order to enable *Compile on Save* for ASP.NET v5 projects, you have to enable *Compile on Save* for TypeScript files which are not part of a project. The setting for the selected module type in that dialog will be ignored if a `tsconfig.json` file is part of the project.
+
+![Compile on Save](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/compile-on-save.png)
