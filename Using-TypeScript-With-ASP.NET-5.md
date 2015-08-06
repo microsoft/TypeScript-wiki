@@ -1,6 +1,6 @@
 Using TypeScript with ASP.NET v5 requires that you setup your project in a specific way.
 For more information about ASP.NET v5 see the [ASP.NET v5 documentation](http://docs.asp.net/en/latest/conceptual-overview/index.html).
-The current tsconfig.json support in Visual Studio projects is a work in progress, which is tracked in issue #3983.
+The current tsconfig.json support in Visual Studio projects is a work in progress, which is tracked in issue [#3983](https://github.com/Microsoft/TypeScript/issues/3983).
 
 # Project setup
 
