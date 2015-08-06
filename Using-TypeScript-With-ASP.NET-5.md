@@ -6,18 +6,17 @@ We start by creating a new empty ASP.NET v5 project in Visual Studio 2015, of yo
 
  ![Create new Empty ASP.NET Project](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/new-project.png)
  
- Next add a *scripts* folder to the root of the project, this is where we'll add the TypeScript files and the [tsconfig.json](tsconfig.json.md) file to set the compiler options.
+Next add a `scripts` folder to the root of our project.
+This is where we'll add the TypeScript files and the [tsconfig.json](tsconfig.json.md) file to set our compiler options.
  
 ![Project layout](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/project.png)
 
-Finally we have to add the following option to the *"compilerOptions"* node in the *tsconfig.json* file to redirect the compiler output to the *wwwroot* folder:
-````json
+Finally we have to add the following option to the *"compilerOptions"* node in the `tsconfig.json` file to redirect the compiler output to the `wwwroot` folder:
+
+```json
     "outDir": "../wwwroot/"
-````
-Now if you build your project, you notice the *app.js*, and the *app.js.map* files are created in the root of the *wwwroot* folder.
+```
+
+Now if we build our project, you'll notice the `app.js` and `app.js.map` files were created in the root of our `wwwroot` folder.
 
 ![Files after build](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/postbuild.png)
-
-
- 
- 
