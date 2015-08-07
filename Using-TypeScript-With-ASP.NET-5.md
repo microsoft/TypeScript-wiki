@@ -9,7 +9,11 @@ We start by creating a new empty ASP.NET v5 project in Visual Studio 2015, of yo
  ![Create new Empty ASP.NET Project](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/new-project.png)
  
 Next add a `scripts` folder to the root of our project.
-This is where we'll add the TypeScript files and the [tsconfig.json](tsconfig.json.md) file to set our compiler options.
+This is where we'll add the TypeScript files and the [tsconfig.json](tsconfig.json.md) file to set our compiler options. Please note that the names and locations of 
+the folders are pertinent to get the solution working correctly. To add a tsconfig.json file, simply right click on the 'scripts' folder, navigate to 'Add', then 'New Item'.
+Under Client-side, you can find it, as can be seen below.
+
+![Project layout](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/add-tsconfig.png)
  
 ![Project layout](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/project.png)
 
@@ -19,11 +23,34 @@ Finally we have to add the following option to the `"compilerOptions"` node in t
     "outDir": "../wwwroot/"
 ```
 
+This is potentially what a tsconfig.json might look like once configured.
+
+```json
+	{
+	  "compilerOptions": {
+		"noImplicitAny": false,
+		"noEmitOnError": true,
+		"removeComments": false,
+		"sourceMap": true,
+		"target": "es5",
+		"outDir": "../wwwroot"
+	  }
+	}
+```
+
 Now if we build our project, you'll notice the `app.js` and `app.js.map` files were created in the root of our `wwwroot` folder.
 
 ![Files after build](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/postbuild.png)
 
+##Project vs Virtual Project
+When adding a tsconfig.json file, it is vital to understand that this creates a virtual typescript project within the folder
+where the tsconfig.json is located. TypeScript files that are considered part of this virtual project, will not be compiled when 
+saving changes. TypeScript files that are outside of the folder containing the tsconfig.json are considered not to be part of the virtual project.
+In the image below, the virtual project can be visualized, and is the that which is contained within the blue rectangle.
+
+![Compile on Save](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/virtual-project.png)
+
 ##Compile on Save
-In order to enable *Compile on Save* for ASP.NET v5 projects, you have to enable *Compile on Save* for TypeScript files which are not part of a project. The setting for the selected module type in that dialog will be ignored if a `tsconfig.json` file is part of the project.
+In order to enable *Compile on Save* for ASP.NET v5 projects, you have to enable *Compile on Save* for TypeScript files which are not part of a virtual TypeScript project. The setting for the selected module type in that dialog will be ignored if a `tsconfig.json` file is part of the project.
 
 ![Compile on Save](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/compile-on-save.png)
