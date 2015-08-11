@@ -17,6 +17,7 @@
 * [[Declaration Merging]]
 * [[Type Inference]]
 * [[Type Compatibility]]
+* [[JSX]]
 * [[Writing Definition Files]]
 
 **News**
