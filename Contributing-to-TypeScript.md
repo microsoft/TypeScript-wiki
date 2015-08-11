@@ -31,6 +31,9 @@ Declined suggestions will have the `Declined` label along with one of the follow
 
 Issues that are not bugs or suggestions will be labelled appropriately (`Question`, `By Design`, `External`) and closed. Please use [Stack Overflow](http://stackoverflow.com/questions/tagged/typescript) for TypeScript questions.
 
+### Language and Tone
+In order to keep the conversation clear and transparent in the issues sections, limit discussion to English and keep things on topic with the issue. **Your tone should be courteous and professional at all times.**
+
 ### Documentation
 
 For any new features, please:
