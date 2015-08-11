@@ -32,14 +32,16 @@ Declined suggestions will have the `Declined` label along with one of the follow
 Issues that are not bugs or suggestions will be labelled appropriately (`Question`, `By Design`, `External`) and closed. Please use [Stack Overflow](http://stackoverflow.com/questions/tagged/typescript) for TypeScript questions.
 
 ### Language and Tone
-In order to keep the conversation clear and transparent in the issues sections, limit discussion to English and keep things on topic with the issue. **Your tone should be courteous and professional at all times.**
+
+In order to keep the conversation clear and transparent, limit discussion to English and keep things on topic with the issue.
+Be considerate to others and try to be courteous and professional at all times.
 
 ### Documentation
 
 For any new features, please:
 * Add a link to the Roadmap: https://github.com/Microsoft/TypeScript/wiki/Roadmap
 * Add a blurb to what's new page: https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript
-* Add a section to the Handbook, if big enough:  https://github.com/Microsoft/TypeScript-Handbook
+* Add a section to the Handbook, if big enough: https://github.com/Microsoft/TypeScript-Handbook
 * For breaking changes:
  * Add a breaking change notice: https://github.com/Microsoft/TypeScript/wiki/Breaking-Changes
  * or to the API breaking changes pages: https://github.com/Microsoft/TypeScript/wiki/API-Breaking-Changes
