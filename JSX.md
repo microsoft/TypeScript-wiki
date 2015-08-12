@@ -22,7 +22,7 @@ Additionally the output will have a `.jsx` file extension.
 The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension.
 
 Mode       | Input     | Output                       | File Extension
-======================================================================
+-----------|-----------|------------------------------|---------------
 `preserve` | `<div />` | `<div />`                    | `.jsx`
 `react`    | `<div />` | `React.createElement("div")` | `.js`
 
