@@ -19,6 +19,7 @@
 * [Intersection types](https://github.com/Microsoft/TypeScript/pull/3622)
 * [`abstract` classes and methods](https://github.com/Microsoft/TypeScript/issues/3578)
 * [Strict object literal assignment checking](https://github.com/Microsoft/TypeScript/pull/3823)
+* [Declaration merging for classes and interfaces](https://github.com/Microsoft/TypeScript/pull/3333)
 
 # 1.5
 
