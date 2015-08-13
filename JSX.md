@@ -1,8 +1,12 @@
-> This feature is upcoming in TypeScript 1.6. If you would like to try it today, use the [nightly package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx).
+> This feature is upcoming in TypeScript 1.6.
+If you would like to try it today, use the [nightly package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx).
 
 # Introduction
 
-JSX is an embeddable XML-like syntax. It is meant to be transpiled into valid JavaScript but the semantics of that transpilation are implementation-specific. JSX came to popularity with the React library but has since seen other applications. TypeScript supports embedding, type checking and optionally transpiling JSX.
+JSX is an embeddable XML-like syntax.
+It is meant to be transformed into valid JavaScript but the semantics of that transformation are implementation-specific.
+JSX came to popularity with the React library but has since seen other applications.
+TypeScript supports embedding, type checking, and optionally compiling JSX directly into JavaScript.
 
 # Basic usage
 
@@ -11,46 +15,38 @@ In order to use JSX you must do two things.
 1. Name your files with the `.tsx` extension
 2. Enable the `jsx` option
 
-TypeScript ships with two JSX modes: `preserve` and `react`. These modes only affect the emit stage. The `preserve` mode will keep the JSX as part of the output to be further consumed by another transpiler. Additionally the output will have a `.jsx` file extension. The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output has a `.js` file extension.
+TypeScript ships with two JSX modes: `preserve` and `react`.
+These modes only affect the emit stage.
+The `preserve` mode will keep the JSX as part of the output to be further consumed by another transform step.
+Additionally the output will have a `.jsx` file extension.
+The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension.
 
-<table>
-<tr>
-  <th>Mode</th>
-  <th>Input</th>
-  <th>Output</th>
-  <th>File Extension</th>
-</tr>
-<tr>
-  <td>preserve</td>
-  <td>&lt;div /&gt;</td>
-  <td>&lt;div /&gt;</td>
-  <td>.jsx</td>
-</tr>
-<tr>
-  <td>react</td>
-  <td>&lt;div /&gt;</td>
-  <td>React.createElement("div")</td>
-  <td>.js</td>
-</tr>
-<tr>
-</table>
+Mode       | Input     | Output                       | File Extension
+-----------|-----------|------------------------------|---------------
+`preserve` | `<div />` | `<div />`                    | `.jsx`
+`react`    | `<div />` | `React.createElement("div")` | `.js`
 
-You can specify this mode either with either the `--jsx` command line flag or in your [tsconfig.json](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) file.
+You can specify this mode using either the `--jsx` command line flag or the corresponding option in your [tsconfig.json](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) file.
 
->*Note: The identifier `React` is hardcoded, so you must make React available with an uppercase R.*
+> *Note: The identifier `React` is hard-coded, so you must make React available with an uppercase R.*
 
 # The `as` operator
 
-Since TypeScript uses angle brackets for type assertions, there is a conflict when parsing between type assertions and JSX. Consider the following code:
+Since TypeScript uses angle brackets for type assertions, there is a conflict when parsing between type assertions and JSX.
+Consider the following code:
 
-```jsx
+```JSX
 var foo = <foo>bar;
 </foo>
 ```
 
-Is this code creating a JSX element with the content of `bar;` or is it asserting that `bar` is of type `foo` and there is an invalid expression on line 2? To simplify cases like this, angle bracket type assertion is not available in `.tsx` files. So if the previous code were in a `.tsx` file it would be interpreted as a JSX element and if in a `.ts` file it would result in an error. To make up for this loss of functionality a new type assertion operator has been added: `as`. 
+Is this code creating a JSX element with the content of `bar;`, or is it asserting that `bar` is of type `foo` and there is an invalid expression on line 2?
+To simplify cases like this, angle bracket type assertions are not available in `.tsx` files.
+As a result, in a `.tsx` file, the previous code would be interpreted as a JSX element, and in a `.ts` file it would result in an error.
 
-```typescript
+To make up for this loss of functionality in `.tsx` files, a new type assertion operator has been added: `as`.
+
+```TypeScript
 var foo = bar as foo;
 ```
 
@@ -58,19 +54,25 @@ The `as` operator is available in both `.ts` and `.tsx` files.
 
 # Type Checking
 
-In order to understand type checking with JSX you must first understand intrinsic elements vs value-based elements. Given a JSX expression `<expr />`, is `expr` referring to something intrinsic to the environment (ie, a div or span in a DOM environment) or to a custom component that you've made? This is important for two reasons:
+In order to understand type checking with JSX you must first understand the difference between intrinsic elements value-based elements.
+Given a JSX expression `<expr />`, `expr` may either refer to something intrinsic to the environment (e.g. a `div` or `span` in a DOM environment) or to a custom component that you've created.
+This is important for two reasons:
 
-1. For React, intrinsic elements are emitted as strings, like `React.createElement('div')`, whereas a component you've created is not: `React.createElement(MyComponent)`.
+1. For React, intrinsic elements are emitted as strings (`React.createElement("div")`), whereas a component you've created is not (`React.createElement(MyComponent)`).
 2. The types of the attributes being passed in the JSX element should be looked up differently. Intrinsic element attributes should be known *intrinsically* whereas components will likely want to specify their own set of attributes.
 
-TypeScript uses the [same convention that React does](http://facebook.github.io/react/docs/jsx-in-depth.html#html-tags-vs.-react-components) for distinguishing between these: An intrinsic element always begins with a lowercase letter, and a value-based element always begins with an uppercase letter.
+TypeScript uses the [same convention that React does](http://facebook.github.io/react/docs/jsx-in-depth.html#html-tags-vs.-react-components) for distinguishing between these.
+An intrinsic element always begins with a lowercase letter, and a value-based element always begins with an uppercase letter.
 
 ## Intrinsic elements
 
-Intrinsic elements are looked up on the special interface `JSX.IntrinsicElements`. By default, if this interface is not specified, then anything goes and intrinsic elements will not be type checked. However, if you specify the interface then intrinsic elements are looked up as a property on the interface.
+Intrinsic elements are looked up on the special interface `JSX.IntrinsicElements`.
+By default, if this interface is not specified, then anything goes and intrinsic elements will not be type checked.
+However, if interface *is* present, then the name of the intrinsic element is looked up as a property on the `JSX.IntrinsicElements` interface.
+For example:
 
-```typescript
-declare module JSX {
+```TypeScript
+declare namespace JSX {
     interface IntrinsicElements {
         foo: any
     }
@@ -80,28 +82,40 @@ declare module JSX {
 <bar />; // error
 ```
 
-In the above example, `foo` will work fine but `bar` will result in an error since it has not been specified on the intrinsic elements interface. 
+In the above example, `<foo />` will work fine but `<bar />` will result in an error since it has not been specified on `JSX.IntrinsicElements`.
 
->*Note: You can also specify a catch-all string indexer on `JSX.IntrinsicElements`*
+*Note: You can also specify a catch-all string indexer on `JSX.IntrinsicElements`* as follows:
+
+```TypeScript
+declare namespace JSX {
+    interface IntrinsicElements {
+        [elemName: string]: any;
+    }
+}
+```
 
 ## Value-based elements
 
 Value based elements are simply looked up by identifiers that are in scope.
 
-```typescript
-import MyComponent = require('./myComponent');
+```TypeScript
+import MyComponent from "./myComponent";
 
 <MyComponent />; // ok
 <SomeOtherComponent />; // error
 ```
 
-It is possible to limit the type of a value-based element. However, for this we must introduce two new terms: the *element class type* and the *element instance type*. 
+It is possible to limit the type of a value-based element.
+However, for this we must introduce two new terms: the *element class type* and the *element instance type*.
 
-Given `<Expr />`, the *element class type* is the type of `Expr`. So in the example above, if `MyComponent` was an ES6 class the class type would be that class. If `MyComponent` was a factory function, the class type would be that function. 
+Given `<Expr />`, the *element class type* is the type of `Expr`.
+So in the example above, if `MyComponent` was an ES6 class the class type would be that class.
+If `MyComponent` was a factory function, the class type would be that function.
 
-Once the class type is established, the instance type is determined by the union of the return types of the class type's call signatures and construct signatures. So again, in the case of an ES6 class, the instance type would be the type of an instance of that class, and in the case of a factory function, it would be the type of the value returned from the function.
+Once the class type is established, the instance type is determined by the union of the return types of the class type's call signatures and construct signatures.
+So again, in the case of an ES6 class, the instance type would be the type of an instance of that class, and in the case of a factory function, it would be the type of the value returned from the function.
 
-```typescript
+```TypeScript
 class MyComponent {
   render() {}
 }
@@ -126,9 +140,10 @@ var myComponent = MyFactoryFunction();
 // element instance type => { render: () => void }
 ```
 
-The element instance type is interesting because it must be assignable to `JSX.ElementClass` or it will result in an error. By default `JSX.ElementClass` is `{}`, but it can be augmented to limit the use of JSX to only those types that conform to the proper interface.
+The element instance type is interesting because it must be assignable to `JSX.ElementClass` or it will result in an error.
+By default `JSX.ElementClass` is `{}`, but it can be augmented to limit the use of JSX to only those types that conform to the proper interface.
 
-```typescript
+```TypeScript
 declare module JSX {
   interface ElementClass {
     render: any;
@@ -156,11 +171,12 @@ function NotAValidFactoryFunction() {
 
 ## Attribute type checking
 
-The first step to type checking attributes is to determine the *element attributes type*. This is slightly different between intrinsic and value-based elements. 
+The first step to type checking attributes is to determine the *element attributes type*.
+This is slightly different between intrinsic and value-based elements.
 
 For intrinsic elements, it is the type of the property on `JSX.IntrinsicElements`
 
-```typescript
+```TypeScript
 declare module JSX {
   interface IntrinsicElements {
     foo: { bar?: boolean }
@@ -171,9 +187,13 @@ declare module JSX {
 <foo bar />;
 ```
 
-For value-based elements, it is a bit more complex. It is determined by the type of a property on the *element instance type* that was previously determined. Which property to use is determined by `JSX.ElementAttributesProperty`. It should be declared with a single property. The name of that property is then used.
+For value-based elements, it is a bit more complex.
+It is determined by the type of a property on the *element instance type* that was previously determined.
+Which property to use is determined by `JSX.ElementAttributesProperty`.
+It should be declared with a single property.
+The name of that property is then used.
 
-```typescript
+```TypeScript
 declare module JSX {
   interface ElementAttributesProperty {
     props; // specify the property name to use
@@ -191,9 +211,10 @@ class MyComponent {
 <MyComponent foo="bar" />
 ```
 
-The element attribute type is used to type check the attributes in the JSX. Optional and required properties are supported.
+The element attribute type is used to type check the attributes in the JSX.
+Optional and required properties are supported.
 
-```typescript
+```TypeScript
 declare module JSX {
   interface IntrinsicElements {
     foo: { requiredProp: string; optionalProp?: number }
@@ -212,7 +233,7 @@ declare module JSX {
 
 The spread operator also works:
 
-```jsx
+```JSX
 var props = { requiredProp: 'bar' };
 <foo {...props} />; // ok
 
@@ -222,21 +243,27 @@ var badProps = {};
 
 # The JSX result type
 
-By default the result of a JSX expression is typed as `any`. You can customize the type by specifying the `JSX.Element` interface. However, it is not possible to retrieve type information about the element, attributes or children of the JSX from this interface. It is a black box.
+By default the result of a JSX expression is typed as `any`.
+You can customize the type by specifying the `JSX.Element` interface.
+However, it is not possible to retrieve type information about the element, attributes or children of the JSX from this interface.
+It is a black box.
 
 # Escaping to TypeScript
 
-JSX in JavaScript allows you to escape to JavaScript by using curly braces `{ }`. JSX in TypeScript allows you to do the same thing, but you escape to TypeScript. That means transpilation features and type checking still work when embedded within JSX.
+JSX in JavaScript allows you to escape to JavaScript by using curly braces `{ }`.
+JSX in TypeScript allows you to do the same thing, but you escape to TypeScript.
+That means transpilation features and type checking still work when embedded within JSX.
 
-```jsx
+```JSX
 var a = <div>
   {['foo', 'bar'].map(i => <span>{i/2}</span>)}
 </div>
 ```
 
-The above code will result in an error since you cannot divide a string by a number. The output, when using the `preserve` option, looks like:
+The above code will result in an error since you cannot divide a string by a number.
+The output, when using the `preserve` option, looks like:
 
-```jsx
+```JSX
 var a = <div>
   {['foo', 'bar'].map(function (i) { return <span>{i / 2}</span>; })}
 </div>
@@ -244,9 +271,10 @@ var a = <div>
 
 # React integration
 
-To use JSX with React you should use the [React typings](https://github.com/borisyankov/DefinitelyTyped/tree/master/react). These typings define the `JSX` namespace appropriately for use with React.
+To use JSX with React you should use the [React typings](https://github.com/borisyankov/DefinitelyTyped/tree/master/react).
+These typings define the `JSX` namespace appropriately for use with React.
 
-```typescript
+```TypeScript
 /// <reference path="react.d.ts" />
 
 interface Props {
