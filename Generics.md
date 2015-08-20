@@ -246,7 +246,7 @@ find (giraffe, myAnimals);
 You can achieve the pattern above by replacing the type parameter with its constraint.  Rewriting the example above,
 
 ```TypeScript
-function find<T>(n: T, s: Findable<T>) {   // errors because type parameter used in constraint
+function find<T>(n: T, s: Findable<T>) {
   // ...
 } 
 find(giraffe, myAnimals);
