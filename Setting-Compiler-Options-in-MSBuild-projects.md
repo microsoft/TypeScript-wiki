@@ -20,8 +20,8 @@ Compiler options can be specified using MSBuild properties within an MSBuild pro
 Compiler Option   | MSBuild Property Name | Allowed Values
 ------------------|-----------------------|-----------------
 `--declaration`     | TypeScriptGeneratesDeclarations | boolean
-`--module`          | TypeScriptModuleKind  | AMD, CommonJs, UMD, or System
-`--target`          | TypeScriptTarget      | ES3, ES5, or ES6
+`--module`          | TypeScriptModuleKind  | `AMD`, `CommonJs`, `UMD`, or `System`
+`--target`          | TypeScriptTarget      | `ES3`, `ES5`, or `ES6`
 `--charset`         | TypeScriptCharset     |                           
 `--emitBOM`         | TypeScriptEmitBOM     | boolean     
 `--emitDecoratorMetadata` | TypeScriptEmitDecoratorMetadata | boolean
@@ -30,7 +30,7 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 `--inlineSources`   | TypeScriptInlineSources|  boolean
 `--locale`          | Automatically set to PreferredUILang value |
 `--mapRoot`         | TypeScriptMapRoot       | File path 
-`--newLine`         | TypeScriptNewLine       | CRLF or LF
+`--newLine`         | TypeScriptNewLine       | `CRLF` or `LF`
 `--noEmitOnError`   | TypeScriptNoEmitOnError | boolean
 `--noEmitHelpers`   | TypeScriptNoEmitHelpers | boolean
 `--noImplicitAny`   | TypeScriptNoImplicitAny | boolean
@@ -45,13 +45,13 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 `--sourceMap`       | TypeScriptSourceMap      | File path                         
 `--sourceRoot`      | TypeScriptSourceRoot     | File path
 `--suppressImplicitAnyIndexErrors` | TypeScriptSuppressImplicitAnyIndexErrors | boolean
+`--moduleResolution`<sup>[1]</sup> | TypeScriptModuleResolution | `Classic` or `NodeJs`
+`--experimentalAsyncFunctions`<sup>[1]</sup> | TypeScriptExperimentalAsyncFunctions | boolean
 `--project`         | *Not supported in VS* | 
 `--watch`           | *Not supported in VS* |
 `--diagnostics`     | *Not supported in VS* |
 `--listFiles`       | *Not supported in VS* |
 `--noEmit`          | *Not supported in VS* |
 *VS only option*  | TypeScriptAdditionalFlags | *Any compiler option*
-`--moduleResolution` <sup>[1]</sup>| TypeScriptModuleResolution | Classic, or NodeJs
-`--experimentalAsyncFunctions` <sup>[1]</sup>| TypeScriptExperimentalAsyncFunctions | boolean
 
 <sup>1</sup> These settings are new in TypeScript 1.6 
