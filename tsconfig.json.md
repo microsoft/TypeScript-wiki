@@ -7,8 +7,10 @@ The presence of a `tsconfig.json` file in a directory indicates that the directo
 
 When input files are specified on the command line, `tsconfig.json` files are ignored.
 
-## Example
-An example `tsconfig.json` file:
+## Examples
+Example `tsconfig.json` files:
+
+* Using the `"files"` property
 ```json
 {
     "compilerOptions": {
@@ -37,10 +39,34 @@ An example `tsconfig.json` file:
 }
 ```
 
+* Using the `"exclude"` property
+```json
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "out": "../../built/local/tsc.js",
+        "sourceMap": true
+    },
+    "exclude": [
+        "node_modules",
+        "wwwroot"
+    ]
+}
+```
+
 ## Details 
 The `"compilerOptions"` property can be omitted, in which case the compiler's defaults are used. For more details about supported compiler options see [[Compiler Options]] documentation.
 
 If no `"files"` property is present in a `tsconfig.json`, the compiler defaults to including all files in the containing directory and subdirectories. When a `"files"` property is specified, only those files are included.
+
+If the `"exclude"` property is specified, the compiler includes all files in the containing directory and subdirectories except for those files that are excluded.
+
+The `"files"` property cannot be used in conjunction with the `"exclude"` property. If both are specified then the `"files"` property takes precedence.
+
+Files referenced by files that are included are also included. Similarly, if a file is referenced by another file it cannot be excluded unless the referencing file is also excluded.
 
 A `tsconfig.json` file is permitted to be completely empty, which compiles all files in the containing directory and subdirectories with the default compiler options.
 
