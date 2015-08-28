@@ -66,7 +66,7 @@ If the `"exclude"` property is specified, the compiler includes all files in the
 
 The `"files"` property cannot be used in conjunction with the `"exclude"` property. If both are specified then the `"files"` property takes precedence.
 
-Any files that are referenced by those specified in the `"files"` property are also included. Similarly, if a file B.ts is referenced by another file A.ts, then B.ts cannot be excluded unless the referencing file A.ts is also excluded.
+Any files that are referenced by those specified in the `"files"` property are also included. Similarly, if a file B.ts is referenced by another file A.ts, then B.ts cannot be excluded unless the referencing file A.ts is also specified in the `"exclude"` list.
 
 A `tsconfig.json` file is permitted to be completely empty, which compiles all files in the containing directory and subdirectories with the default compiler options.
 
