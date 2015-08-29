@@ -1,11 +1,11 @@
 **TypeScript Language Basics**
 
-* [[Basic Types]]
-* [[Interfaces]]
-* [[Classes]]
-* [[Modules]]
-* [[Functions]]
-* [[Generics]]
+* [Basic Types](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Basic%20Types.md)
+* [Interfaces](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Interfaces.md)
+* [Classes](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md)
+* [Namespaces and Modules](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Namespaces%20and%20Modules.md)
+* [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
+* [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
 * [[Common Errors]]
 * [[Integrating with Build Tools]]
 * [[Compiler Options]]
@@ -13,12 +13,12 @@
 
 **TypeScript Language Advanced**
 
-* [[Mixins]]
-* [[Declaration Merging]]
-* [[Type Inference]]
-* [[Type Compatibility]]
+* [Mixins](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Mixins.md)
+* [Declaration Merging](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Declaration%20Merging.md)
+* [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
+* [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md)
 * [[JSX]]
-* [[Writing Definition Files]]
+* [Writing Definition Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)
 
 **News**
 * [[What's new in TypeScript]]
