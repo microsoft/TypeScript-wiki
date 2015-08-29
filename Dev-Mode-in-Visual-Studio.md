@@ -27,6 +27,10 @@ Note: You may also use the [VSDevMode.ps1](https://github.com/Microsoft/TypeScri
 4. Right click the `CustomTypeScriptServicesFileLocation` value and **Modify** it.
 5. Change the value data to the full path of your alternative services file (e.g. `C:\Users\Daniel\TypeScript\built\local\typescriptServices.js`)
 
+To use a custom lib.d.ts library definition in conjunction with the custom language service file, there are two additional registery keys which need to be set. Both reside in the `TypeScriptLanguageService` key as specified above:
+* `CustomDefaultLibraryLocation` - for lib.d.ts (e.g. `C:\Users\Daniel\TypeScript\built\local\lib.d.ts`)
+* `CustomDefaultES6LibraryLocation` - for lib.es6.d.ts (e.g. `C:\Users\Daniel\TypeScript\built\local\lib.es6.d.ts`)
+
 # Hot swapping
 
 When the language service's script side is modified in any way (whether or not you are using a custom location for your language service file), it will be reloaded on the fly for a given thread the next time any of that thread's services are requested. However, this means that if debugging, your language service threads will be purged.
