@@ -198,7 +198,7 @@ If we tried to run the example, we would get an error instead of the expected al
 
 We can fix this by making sure the function is bound to the correct 'this' before we return the function to be used later.  This way, regardless of how its later used, it will still be able to see the original 'deck' object.
 
-To fix this, we switching the function expression to use the lambda syntax ( ()=>{} ) rather than the JavaScript function expression.  This will automatically capture the 'this' available when the function is created rather than when it is invoked:
+To fix this, we switch the function expression to use the lambda syntax ( ()=>{} ) rather than the JavaScript function expression.  This will automatically capture the 'this' available when the function is created rather than when it is invoked:
 
 ```TypeScript
 var deck = {
