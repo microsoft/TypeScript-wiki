@@ -170,7 +170,7 @@ var buildNameFun: (fname: string, ...rest: string[])=>string = buildName;
 
 How 'this' works in JavaScript functions is a common theme in programmers coming to JavaScript.  Indeed, learning how to use it is something of a rite of passage as developers become more accustomed to working in JavaScript.  Since TypeScript is a superset of JavaScript, TypeScript developers also need to learn how to use 'this' and how to spot when it's not being used correctly.  A whole article could be written on how to use 'this' in JavaScript, and many have.  Here, we'll focus on some of the basics.  
 
-In JavaScript, 'this' is a variable that's set when a function is called.  This makes it a very powerful and flexible feature, but it comes at the cost of always having to know about the context that a function is executing in.  This can be notoriously confusing, when, for example, when a function is used as a callback.
+In JavaScript, 'this' is a variable that's set when a function is called.  This makes it a very powerful and flexible feature, but it comes at the cost of always having to know about the context that a function is executing in.  This can be notoriously confusing, when, for example, a function is used as a callback.
 
 Let's look at an example:
 
