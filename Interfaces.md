@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Interfaces](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Interfaces.md) at our Handbook repo page.
+
 # Introduction
 
 One of TypeScript's core principles is that type-checking focuses on the 'shape' that values have.  This is sometimes called "duck typing" or "structural subtyping".  In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.  

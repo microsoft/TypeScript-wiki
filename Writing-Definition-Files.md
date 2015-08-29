@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Writing Definition Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md) at our Handbook repo page.
+
 # Introduction
 When using an external JavaScript library, or new host API, you'll need to use a declaration file (.d.ts) to describe the shape of that library. This guide covers a few high-level concepts specific to writing definition files, then proceeds with a number of examples that show how to transcribe various concepts to their matching definition file descriptions.
 

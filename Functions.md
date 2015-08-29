@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md) at our Handbook repo page.
+
 # Introduction
 
 Functions are the fundamental building block of any applications in JavaScript.  They're how you build up layers of abstraction, mimicking classes, information hiding, and modules.  In TypeScript, while there are classes and modules, function still play the key role in describing how to 'do' things.  TypeScript also adds some new capabilities to the standard JavaScript functions to make them easier to work with.

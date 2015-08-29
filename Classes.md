@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Classes](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md) at our Handbook repo page.
+
 # Introduction
 
 Traditional JavaScript focuses on functions and prototype-based inheritance as the basic means of building up reusable components, but this may feel a bit awkward to programmers more comfortable with an object-oriented approach, where classes inherit functionality and objects are built from these classes.  Starting with ECMAScript 6, the next version of JavaScript, JavaScript programmers will be able to build their applications using this object-oriented class-based approach.  In TypeScript, we allow developers to use these techniques now, and compile them down to JavaScript that works across all major browsers and platforms, without having to wait for the next version of JavaScript.

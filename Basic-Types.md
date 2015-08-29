@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Basic Types](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Basic%20Types.md) at our Handbook repo page.
+
 # Introduction
 
 For programs to be useful, we need to be able to work with some of the simplest units of data: numbers, strings, structures, boolean values, and the like.  In TypeScript, we support much the same types as you would expected in JavaScript, with a convenient enumeration type thrown in to help things along.

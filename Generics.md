@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md) at our Handbook repo page.
+
 # Introduction
 
 A major part of software engineering is building components that not only have well-defined and consistent APIs, but are also reusable.  Components that are capable of working on the data of today as well as the data of tomorrow will give you the most flexible capabilities for building up large software systems.

@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md) at our Handbook repo page.
+
 # Introduction
 
 Type compatibility in TypeScript is based on structural subtyping.  Structural typing is a way of relating types based solely on their members. This is contrast with nominal typing. Consider the following code:

@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Declaration Merging](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Declaration%20Merging.md) at our Handbook repo page.
+
 # Introduction
 
 Some of the unique concepts in TypeScript comes from the necessity of describing what is happening to the shape of JavaScript objects at the type level.  One example that is especially unique to TypeScript is the concept of 'declaration merging'.  Understanding this concept will give you an advantage when working with existing JavaScript in your TypeScript.  It also opens the door to more advanced abstraction concepts.

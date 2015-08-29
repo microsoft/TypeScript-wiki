@@ -1,3 +1,6 @@
+> # Hey, this page is out of date!
+> For a more up to date guide, check out [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md) at our Handbook repo page.
+
 # Introduction
 
 In this section, we will cover type inference in TypeScript.  Namely, we'll discuss where and how types are inferred.
