@@ -6,20 +6,6 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.6%22+label%3A%22breaking+change%22).
 
-#### .js content of npm package is moved from 'bin' to 'lib' folder
-
-Entry point of TypeScript npm package was moved from `bin` to `lib` to unblock scenarios when 'node_modules/typescript/bin/typescript.js' is served from IIS (by default `bin` is in the list of hidden segments so IIS will block access to this folder).
-
-#### Module body is parsed in strict mode
-
-In accordance with [the ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-strict-mode-code), module bodies are now parsed in strict mode. module bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
-
-#### System module output uses bulk exports
-
-The compiler uses the [new bulk-export](https://github.com/ModuleLoader/es6-module-loader/issues/386) variation of the `_export` function in the System module format that takes any object containing key value pairs (optionally an entire module object for export *) as arguments instead of key, value.
-
-The module loader needs to be updated to [v0.17.1](https://github.com/ModuleLoader/es6-module-loader/releases/tag/v0.17.1) or higher.
-
 #### Strict object literal assignment checking
 
 It is an error to specify properties in an object literal that were not specified on the target type, when assigned to a variable or passed for a parameter of a non-empty target type.
@@ -108,6 +94,30 @@ export default Foo;
 ```
 
 For more details see [the originating issue](https://github.com/Microsoft/TypeScript/issues/3095).
+
+#### Module body is parsed in strict mode
+
+In accordance with [the ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-strict-mode-code), module bodies are now parsed in strict mode. module bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
+
+#### Changes to DOM API's in the standard library
+
+* **MessageEvent** and **ProgressEvent** constructors now expect arguments; see [issue #4295](https://github.com/Microsoft/TypeScript/issues/4295) for more details.
+* **ImageData** constructor now expects arguments; see [issue #4220](https://github.com/Microsoft/TypeScript/issues/4220) for more details.
+* **File** constructor now expects arguments; see [issue #3999](https://github.com/Microsoft/TypeScript/issues/3999) for more details.
+
+#### System module output uses bulk exports
+
+The compiler uses the [new bulk-export](https://github.com/ModuleLoader/es6-module-loader/issues/386) variation of the `_export` function in the System module format that takes any object containing key value pairs (optionally an entire module object for export *) as arguments instead of key, value.
+
+The module loader needs to be updated to [v0.17.1](https://github.com/ModuleLoader/es6-module-loader/releases/tag/v0.17.1) or higher.
+
+#### .js content of npm package is moved from 'bin' to 'lib' folder
+
+Entry point of TypeScript npm package was moved from `bin` to `lib` to unblock scenarios when 'node_modules/typescript/bin/typescript.js' is served from IIS (by default `bin` is in the list of hidden segments so IIS will block access to this folder).
+
+#### TypeScript npm package does not install globally by default
+
+TypeScript 1.6 removes the `preferGlobal` flag from package.json. If you relay on this behaviour please use `npm install -g typescript`.
 
 # TypeScript 1.5
 

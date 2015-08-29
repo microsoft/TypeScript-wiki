@@ -20,6 +20,7 @@
 * [`abstract` classes and methods](https://github.com/Microsoft/TypeScript/issues/3578)
 * [Strict object literal assignment checking](https://github.com/Microsoft/TypeScript/pull/3823)
 * [Declaration merging for classes and interfaces](https://github.com/Microsoft/TypeScript/pull/3333)
+* New [--init](https://github.com/Microsoft/TypeScript/issues/3079)
 
 # 1.5
 
