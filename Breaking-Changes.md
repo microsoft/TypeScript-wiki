@@ -22,22 +22,36 @@ y = { foo: 1, baz: 2 };  // Error, excess or misspelled property `baz`
 
 **Recommendations:**
 
-To avoid the error, either define a indexer on the target type or use type assertion on the object literal in question.
+To avoid the error, there are few remedies based on the situation you are looking into:
+
+**If the target type accepts additional properties, add an indexer:**
 
 ```typescript
 var x: { foo: number, [x: string]: any };
-x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
+x = { foo: 1, baz: 2 };  // OK, `baz` matched by index signature
 ```
 
+**If the source types are a set of related types, explicitly specify them using union types instead of just specifying the base type.**
+
+```ts
+let animalList : Dog|Cat|Turkey= [    // use union type instead of Animal
+    {name: "Milo", meow: true }, 
+    {name: "Pepper" , bark: true},
+    {name: "koko", gobble: true} 
+];
+```
+
+**Otherwise, explicitly cast to the target type to avoid the warning message:**
 ```ts
 interface Foo {
     foo: number;
 }
-interface Bar extends Foo {
+interface FooBar{
+    foo: number;
     bar: number;
 }
 var y: Foo;
-y = <Bar>{ foo: 1, bar: 2 };
+y = <FooBar>{ foo: 1, bar: 2 };
 ```
 
 #### Function and class default export declarations can no longer merge with entities intersecting in their meaning
