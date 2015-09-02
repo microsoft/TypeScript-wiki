@@ -31,17 +31,17 @@ The language service supports the common set of a typical editor operations like
 
 * **Program:** A collection of SourceFiles and a set of compilation options that represent a compilation unit. The program is the main entry point to the type system and code generation. 
 
-* **Symbol:** A named declaration. Symbols are created as a result of binding. Symbols connect declarations nodes in the tree to other declarations contributing to the same entity. Symbols are the basic building block of the semantic system. 
+* **Symbol:** A named declaration. Symbols are created as a result of binding. Symbols connect declaration nodes in the tree to other declarations contributing to the same entity. Symbols are the basic building block of the semantic system. 
 
-* **Type:** Types is the other part of the semantic system. Types can be named (e.g. classes and interfaces), or anonymous (e.g. object types). 
+* **Type:** Types are the other part of the semantic system. Types can be named (e.g. classes and interfaces), or anonymous (e.g. object types). 
 
-* **Signature:** There are three types of signatures in the language, call, construct and index signatures.
+* **Signature:** There are three types of signatures in the language: call, construct and index signatures.
 
 ## Terminology
 
 ##### **Full Start/Token Start**
 
-Tokens themselves have what we call a "full start" and a "token start". The "token start" is the more natural version, which is the position in file where the text of a token begins. The "full start" is the point at which the scanner began scanning since the last significant token. When concerned with trivia, we are often more concerned with the full start.
+Tokens themselves have what we call a "full start" and a "token start". The "token start" is the more natural version, which is the position in the file where the text of a token begins. The "full start" is the point at which the scanner began scanning since the last significant token. When concerned with trivia, we are often more concerned with the full start.
 
 Function | Description
 ---------|------------
