@@ -37,19 +37,19 @@ class MyComponent extends React.Component<Props, {}> {
 
 **Using other JSX framworks**
 
-JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for definiting the `JSX` namespace for your framework. 
+JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for defining the `JSX` namespace for your framework. 
 
 **Output generation**
 
 TypeScript ships with two JSX modes: `preserve` and `react`.  
-- The `preserve` mode will keep the JSX as part of the output to be further consumed by another transform step. *Additionally the output will have a `.jsx` file extension.*
+- The `preserve` mode will keep JSX expressions as part of the output to be further consumed by another transform step. *Additionally the output will have a `.jsx` file extension.*
 - The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension.
 
 See the [[JSX]] wiki page for more information on using JSX in TypeScript.
 
 ## Intersection types
 
-TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that has either type A or type B, whereas an intersection type `A & B` represents an entity that has both type A and type B.
+TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that is either of type `A` or type `B`, whereas an intersection type `A & B` represents an entity that is both of type `A` *and* type `B`.
 
 **Examples**
 
