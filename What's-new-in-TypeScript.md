@@ -51,7 +51,7 @@ See the [[JSX]] wiki page for more information on using JSX in TypeScript.
 
 TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that is either of type `A` or type `B`, whereas an intersection type `A & B` represents an entity that is both of type `A` *and* type `B`.
 
-#### Examples
+##### Example
 
 ```typescript
 function extend<T, U>(first: T, second: U): T & U {
@@ -221,7 +221,8 @@ class Test extends getGreeterBase() {
 
 TypeScript 1.6 adds support for `abstract` keyword for classes and their methods. An abstract class is allowed to have methods with no implementation, and cannot be constructed.
 
-Examples:
+#### Examples
+
 ```TypeScript
 abstract class Base {
     abstract getThing(): string;
@@ -317,7 +318,7 @@ TypeScript 1.6 introduces experimental support of `async` functions when targeti
 
 An *async function* is a function or method that has been prefixed with the `async` modifier. This modifier informs the compiler that function body transposition is required, and that the keyword `await` should be treated as a unary expression instead of an identifier. An *Async Function* must provide a return type annotation that points to a compatible `Promise` type. Return type inference can only be used if there is a globally defined, compatible `Promise` type.
 
-Example:
+#### Example
 
 ```TypeScript
 var p: Promise<number> = /* ... */;  
@@ -384,7 +385,7 @@ function bar(foo : Foo)  {
 
 TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
 
-#### Examples:
+#### Examples
 
 ```ts
 function isCat(a: any): a is Cat {
