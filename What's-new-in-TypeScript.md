@@ -52,6 +52,34 @@ abc.c = "hello";
 
 See [issue #1256](https://github.com/Microsoft/TypeScript/issues/1256) for more information.
 
+
+## `abstract` classes and methods
+
+TypeScript 1.6 adds support for `abstract` keyword for classes and their methods. An abstract class is allowed to have methods with no implementation, and cannot be constructed.
+
+Examples:
+```TypeScript
+abstract class Base {
+    abstract getThing(): string;
+    getOtherThing() { return 'hello'; }
+}
+
+let x = new Base(); // Error, 'Base' is abstract
+
+// Error, must either be 'abstract' or implement concrete 'getThing'
+class Derived1 extends Base { }
+
+class Derived2 extends Base {
+    getThing() { return 'hello'; }
+    foo() { super.getThing(); } // Error: cannot invoke abstract members through 'super'
+}
+
+var x = new Derived2(); // OK
+var y: Base = new Derived2(); // Also OK
+y.getThing(); // OK
+y.getOtherThing(); // OK
+```
+
 ## Nightly builds
 
 While not strictly a language change, nightly builds are now available by installing with the following command:
