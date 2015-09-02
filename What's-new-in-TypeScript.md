@@ -247,10 +247,7 @@ var x: Cat | Dog;
 if(isCat(x)) {
   x.meow(); // OK, x is Cat in this block
 }
-
 ```
-
-The forms `if(userCheck([other args,] expr [, other args])) {` and `if(expr.userCheck([any args]))` would apply the type guard to `expr` the same way that `expr instanceof t` and `typeof expr === 'literal'` do today.
 
 ## `exclude` property support in tsconfig.json
 
