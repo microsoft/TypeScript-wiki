@@ -1,5 +1,52 @@
 # TypeScript 1.6
 
+## JSX support
+
+JSX is an embeddable XML-like syntax. It is meant to be transformed into valid JavaScript, but the semantics of that transformation are implementation-specific. JSX came to popularity with the React library but has since seen other applications. TypeScript 1.6 supports embedding, type checking, and optionally compiling JSX directly into JavaScript.
+
+**New `.tsx` file extension and `as` operator**
+
+TypeScript 1.6 introduces a new `.tsx` file extension.  This extension does two things: it enables JSX inside of TypeScript files, and it makes the new `as` operator the default way to cast (removing any ambiguity between JSX expressions and the TypeScript prefix cast operator). For example:
+
+```ts
+var x = <any> foo; 
+// is equivalent to:
+var x = foo as any;
+```
+
+**Using React**
+
+To use JSX-support with React you should use the [React typings](https://github.com/borisyankov/DefinitelyTyped/tree/master/react). These typings define the `JSX` namespace so that TypeScript can correctly check JSX expressions for React. For example:
+
+```ts 
+/// <reference path="react.d.ts" />
+
+interface Props {  
+  name: string;
+}
+
+class MyComponent extends React.Component<Props, {}> {  
+  render() {
+    return <span>{this.props.foo}</span>
+  }
+}
+
+<MyComponent name="bar" />; // OK 
+<MyComponent name={0} />; // error, `name` is not a number  
+```
+
+**Using other JSX framworks**
+
+JSX element names and properties are validated against the `JSX` namespace. Please see [[JSX]] wiki page for definiting the `JSX` namespace for your framework. 
+
+**Output generation**
+
+TypeScript ships with two JSX modes: `preserve` and `react`.  
+- The `preserve` mode will keep the JSX as part of the output to be further consumed by another transform step. *Additionally the output will have a `.jsx` file extension.*
+- The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension.
+
+See the [[JSX]] wiki page for more information on using JSX in TypeScript.
+
 ## Intersection types
 
 TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that has either type A or type B, whereas an intersection type `A & B` represents an entity that has both type A and type B.
