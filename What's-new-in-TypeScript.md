@@ -300,6 +300,26 @@ Starting from release 1.6 TypeScript compiler will use different set of rules to
 - 'classic' - module resolution rules used by pre 1.6 TypeScript compiler
 - 'node' - node-like module resolution
 
+## Merging ambient class and interface declaration
+
+The instance side of an ambient class declaration can be extended using an interface declaration The class constructor object is unmodified. For example:
+
+```ts
+declare class Foo {
+    public x : number;
+}
+
+interface Foo {
+    y : string;
+}
+
+function bar(foo : Foo)  {
+    foo.x = 1;
+    foo.y = "1"; // okay, declared above.
+    foo.z = true; // okay, declared below.
+}
+```
+
 ## User-defined type guard functions
 
 TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
