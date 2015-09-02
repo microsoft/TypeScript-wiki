@@ -131,7 +131,7 @@ class Derived1 extends Base { }
 class Derived2 extends Base {
     getThing() { return 'hello'; }
     foo() { 
-        super.getThing(); // Error: cannot invoke abstract members through 'super'
+        super.getThing();// Error: cannot invoke abstract members through 'super'
     } 
 }
 
