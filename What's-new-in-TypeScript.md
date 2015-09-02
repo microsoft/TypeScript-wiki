@@ -310,6 +310,42 @@ function *g() {
 }
 ```
 
+## Experimental support for `async` functions
+
+TypeScript 1.6 introduces experimental support of `async` functions when targeting ES6. Async functions are expected to invoke an asynchronous operation and await its result without blocking normal execution of the program. This accomplished through the use of an ES6-compatible `Promise` implementation, and transposition of the function body into a compatible form to resume execution when the awaited asynchronous operation completes.
+
+
+An *async function* is a function or method that has been prefixed with the `async` modifier. This modifier informs the compiler that function body transposition is required, and that the keyword `await` should be treated as a unary expression instead of an identifier. An *Async Function* must provide a return type annotation that points to a compatible `Promise` type. Return type inference can only be used if there is a globally defined, compatible `Promise` type.
+
+Example:
+
+```TypeScript
+var p: Promise<number> = /* ... */;  
+async function fn(): Promise<number> {  
+  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
+  return 1 + i;  
+}  
+  
+var a = async (): Promise<number> => 1 + await p; // suspends execution.  
+var a = async () => 1 + await p; // suspends execution. return type is inferred as "Promise<number>" when compiling with --target ES6  
+var fe = async function(): Promise<number> {  
+  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
+  return 1 + i;  
+}  
+  
+class C {  
+  async m(): Promise<number> {  
+    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
+    return 1 + i;  
+  }  
+  
+  async get p(): Promise<number> {  
+    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
+    return 1 + i;  
+  }  
+}
+```
+
 ## Nightly builds
 
 While not strictly a language change, nightly builds are now available by installing with the following command:
