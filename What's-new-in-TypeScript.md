@@ -4,7 +4,7 @@
 
 TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that has either type A or type B, whereas an intersection type `A & B` represents an entity that has both type A and type B.
 
-### Examples
+**Examples**
 
 ```typescript
 function extend<T, U>(first: T, second: U): T & U {
@@ -52,6 +52,123 @@ abc.c = "hello";
 
 See [issue #1256](https://github.com/Microsoft/TypeScript/issues/1256) for more information.
 
+## Local type declarations
+
+Local class, interface, enum, and type alias declarations can now appear inside function declarations. Local types are block scoped, similar to variables declared with `let` and `const`. For example:
+
+```typescript
+function f() {
+    if (true) {
+        interface T { x: number }
+        let v: T;
+        v.x = 5;
+    }
+    else {
+        interface T { x: string }
+        let v: T;
+        v.x = "hello";
+    }
+}
+```
+
+The inferred return type of a function may be a type declared locally within the function. It is not possible for callers of the function to reference such a local type, but it can of course be matched structurally. For example:
+
+```typescript
+interface Point {
+    x: number;
+    y: number;
+}
+
+function getPointFactory(x: number, y: number) {
+    class P {
+        x = x;
+        y = y;
+    }
+    return P;
+}
+
+var PointZero = getPointFactory(0, 0);
+var PointOne = getPointFactory(1, 1);
+var p1 = new PointZero();
+var p2 = new PointZero();
+var p3 = new PointOne();
+```
+
+Local types may reference enclosing type parameters and local class and interfaces may themselves be generic. For example:
+
+```typescript
+function f3() {
+    function f<X, Y>(x: X, y: Y) {
+        class C {
+            public x = x;
+            public y = y;
+        }
+        return C;
+    }
+    let C = f(10, "hello");
+    let v = new C();
+    let x = v.x;  // number
+    let y = v.y;  // string
+}
+```
+
+## Class expressions
+
+TypeScript 1.6 adds support for ES6 class expressions. In a class expression, the class name is optional and, if specified, is only in scope in the class expression itself. This is similar to the optional name of a function expression. It is not possible to refer to the class instance type of a class expression outside the class expression, but the type can of course be matched structurally. For example:
+
+```typescript
+let Point = class {
+    constructor(public x: number, public y: number) { }
+    public length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+};
+var p = new Point(3, 4);  // p has anonymous class type
+console.log(p.length());
+```
+
+## Extending expressions
+
+TypeScript 1.6 adds support for classes extending arbitrary expression that computes a constructor function. This means that built-in types can now be extended in class declarations.
+
+The `extends` clause of a class previously required a type reference to be specified. It now accepts an expression optionally followed by a type argument list. The type of the expression must be a constructor function type with at least one construct signature that has the same number of type parameters as the number of type arguments specified in the `extends` clause. The return type of the matching construct signature(s) is the base type from which the class instance type inherits. Effectively, this allows both real classes and "class-like" expressions to be specified in the `extends` clause.
+
+Some examples:
+
+```typescript
+// Extend built-in types
+
+class MyArray extends Array<number> { }
+class MyError extends Error { }
+
+// Extend computed base class
+
+class ThingA {
+    getGreeting() { return "Hello from A"; }
+}
+
+class ThingB {
+    getGreeting() { return "Hello from B"; }
+}
+
+interface Greeter {
+    getGreeting(): string;
+}
+
+interface GreeterConstructor {
+    new (): Greeter;
+}
+
+function getGreeterBase(): GreeterConstructor {
+    return Math.random() >= 0.5 ? ThingA : ThingB;
+}
+
+class Test extends getGreeterBase() {
+    sayHello() {
+        console.log(this.getGreeting());
+    }
+}
+```
 
 ## `abstract` classes and methods
 
@@ -72,7 +189,7 @@ class Derived1 extends Base { }
 class Derived2 extends Base {
     getThing() { return 'hello'; }
     foo() { 
-        super.getThing(); // Error: cannot invoke abstract members through 'super'
+        super.getThing();// Error: cannot invoke abstract members through 'super'
     } 
 }
 
@@ -114,6 +231,23 @@ npm install -g typescript@next
 Starting from release 1.6 TypeScript compiler will use different set of rules to resolve module names when targeting 'commonjs'. These [rules](https://github.com/Microsoft/TypeScript/issues/2338) attempted to model module lookup procedure used by Node. This effectively mean that node modules can include information about its typings and TypeScript compiler will be able to find it. User however can override module resolution rules picked by the compiler by using `--moduleResolution` command line option. Possible values are: 
 - 'classic' - module resolution rules used by pre 1.6 TypeScript compiler
 - 'node' - node-like module resolution
+
+## User-defined type guard functions
+
+TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
+
+**Examples:**
+
+```ts
+function isCat(a: any): a is Cat {
+  return a.name === 'kitty';
+}
+
+var x: Cat | Dog;
+if(isCat(x)) {
+  x.meow(); // OK, x is Cat in this block
+}
+```
 
 ## `exclude` property support in tsconfig.json
 
