@@ -265,6 +265,27 @@ interface Tuple<A, B> {
 type Pair<T> = Tuple<T, T>;
 ```
 
+## Stricter object literal assignment checks
+
+TypeScript 1.6 enforces stricter object literal assignment checks for the purpose of catching excess or misspelled properties. Specifically, when a fresh object literal is assigned to a variable or passed for a parameter of a non-empty target type, it is an error for the object literal to specify properties that don't exist in the target type.
+
+**Examples**
+
+```typescript
+var x: { foo: number };
+x = { foo: 1, baz: 2 };  // Error, excess property `baz`
+
+var y: { foo: number, bar?: number };
+y = { foo: 1, baz: 2 };  // Error, excess or misspelled property `baz`
+```
+
+A type can include an index signature to explicitly indicate that excess properties are permitted:
+
+```typescript
+var x: { foo: number, [x: string]: any };
+x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
+```
+
 ## Nightly builds
 
 While not strictly a language change, nightly builds are now available by installing with the following command:
