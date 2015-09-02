@@ -10,22 +10,22 @@ There are two main goals that the language service design aims to achieve:
 
 1. **On demand processing**
 
-The language service is designed to allow quick response that scales with the size of the program. The only way this can be achieved is by only doing the absolute minimum work required. All language service interfaces only compute the necessary level of information needed to answer a query. 
+The language service is designed to allow a quick response that scales with the size of the program. The only way this can be achieved is by only doing the absolute minimum work required. All language service interfaces only compute the necessary level of information needed to answer a query. 
 
 For instance, a call to `getSyntacticDiagnostics` will only need the file in question to be parsed, but neither binding nor type checking will be performed in the process. A call `getCompletionsAtPosition` will only attempt to resolve declarations contributing to the type in question, but not others.
 
 2. **Decoupling compiler pipeline phases**
 
-The language service design decouples different phases of the compiler pipeline, that would normally happen in order in one shot during command-line compilation; and it allows the language service host flexibility in ordering these different phases.
+The language service design decouples different phases of the compiler pipeline that would normally happen in order in one shot during command-line compilation; and it allows the language service host flexibility in ordering these different phases.
 
 
 For instance, the language service reports diagnostics on a file per file bases, all while making a distinction between syntactic and semantic errors of each file. This ensures that the host can supply an optimal experience by retrieving syntax errors for a given file without having to pay the cost of querying other files, or performing a full semantic check. It also allows the host to skip querying for syntax errors for files that have not changed. Similarly, the language service allows for emitting a single file (`getEmitOutput`) without having to emit or even type check the whole program.
 
 ## Language Service Host
 
-The host is descried by the LanguageServiceHost API, and it abstracts all interactions between the language service and the external world. The language service host defers managing, monitoring and maintaining input files to the host.
+The host is described by the LanguageServiceHost API, and it abstracts all interactions between the language service and the external world. The language service host defers managing, monitoring and maintaining input files to the host.
 
-The language service will only ask the host for information as part of host calls. No asynchronous events, or background processing are expected. The host is expected to manage threading if needed.
+The language service will only ask the host for information as part of host calls. No asynchronous events or background processing are expected. The host is expected to manage threading if needed.
 
 The host is expected to supply the full set of files compromising the context. Refer to [reference resolution in the language service](#reference-resolution-in-the-language-service) for more details.
 
