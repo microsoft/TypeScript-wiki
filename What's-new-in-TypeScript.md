@@ -4,7 +4,7 @@
 
 TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that has either type A or type B, whereas an intersection type `A & B` represents an entity that has both type A and type B.
 
-### Examples
+**Examples**
 
 ```typescript
 function extend<T, U>(first: T, second: U): T & U {
