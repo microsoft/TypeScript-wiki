@@ -37,7 +37,7 @@ class MyComponent extends React.Component<Props, {}> {
 
 **Using other JSX framworks**
 
-JSX element names and properties are validated against the `JSX` namespace. Please see [[JSX]] wiki page for definiting the `JSX` namespace for your framework. 
+JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for definiting the `JSX` namespace for your framework. 
 
 **Output generation**
 
