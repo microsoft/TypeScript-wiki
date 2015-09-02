@@ -82,6 +82,25 @@ y.getThing(); // OK
 y.getOtherThing(); // OK
 ```
 
+## Generic type aliases
+
+With TypeScript 1.6, type aliases can be generic. For example:
+
+```typescript
+type Lazy<T> = T | (() => T);
+
+var s: Lazy<string>;
+s = "eager";
+s = () => "lazy";
+
+interface Tuple<A, B> {
+    a: A;
+    b: B;
+}
+
+type Pair<T> = Tuple<T, T>;
+```
+
 ## Nightly builds
 
 While not strictly a language change, nightly builds are now available by installing with the following command:
