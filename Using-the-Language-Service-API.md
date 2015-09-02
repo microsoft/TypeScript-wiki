@@ -10,7 +10,7 @@ There are two main goals that the language service design aims to achieve:
 
 1. **On demand processing**
 
-The language service is designed to allow a quick response that scales with the size of the program. The only way this can be achieved is by only doing the absolute minimum work required. All language service interfaces only compute the necessary level of information needed to answer a query. 
+The language service is designed to allow quick responses that scale with the size of the program. The only way this can be achieved is by only doing the absolute minimum work required. All language service interfaces only compute the necessary level of information needed to answer a query. 
 
 For instance, a call to `getSyntacticDiagnostics` will only need the file in question to be parsed, but neither binding nor type checking will be performed in the process. A call `getCompletionsAtPosition` will only attempt to resolve declarations contributing to the type in question, but not others.
 
