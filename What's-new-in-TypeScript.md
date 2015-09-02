@@ -14,6 +14,10 @@ Starting from release 1.6 TypeScript compiler will use different set of rules to
 - 'classic' - module resolution rules used by pre 1.6 TypeScript compiler
 - 'node' - node-like module resolution
 
+## `--init` command line option
+
+Run `tsc --init` in a directory to create an initial `tsconfig.json` in this directory with preset defaults. Optionally pass command line arguments along with `--init` to be stored in your initial tsconfig.json on creation.
+ 
 # TypeScript 1.5
 
 ## ES6 Modules ##
