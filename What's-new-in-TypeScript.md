@@ -232,6 +232,26 @@ Starting from release 1.6 TypeScript compiler will use different set of rules to
 - 'classic' - module resolution rules used by pre 1.6 TypeScript compiler
 - 'node' - node-like module resolution
 
+## User-defined type guard functions
+
+TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
+
+**Examples:**
+
+```ts
+function isCat(a: any): a is Cat {
+  return a.name === 'kitty';
+}
+
+var x: Cat | Dog;
+if(isCat(x)) {
+  x.meow(); // OK, x is Cat in this block
+}
+
+```
+
+The forms `if(userCheck([other args,] expr [, other args])) {` and `if(expr.userCheck([any args]))` would apply the type guard to `expr` the same way that `expr instanceof t` and `typeof expr === 'literal'` do today.
+
 ## `exclude` property support in tsconfig.json
 
 A tsconfig.json file that doesn't specify a files property (and therefore implicitly references all *.ts files in all subdirectories) can now contain an exclude property that specifies a list of files and/or directories to exclude from the compilation. The exclude property must be an array of strings that each specify a file or folder name relative to the location of the tsconfig.json file. For example:
