@@ -4,7 +4,7 @@
 
 JSX is an embeddable XML-like syntax. It is meant to be transformed into valid JavaScript, but the semantics of that transformation are implementation-specific. JSX came to popularity with the React library but has since seen other applications. TypeScript 1.6 supports embedding, type checking, and optionally compiling JSX directly into JavaScript.
 
-**New `.tsx` file extension and `as` operator**
+#### New `.tsx` file extension and `as` operator
 
 TypeScript 1.6 introduces a new `.tsx` file extension.  This extension does two things: it enables JSX inside of TypeScript files, and it makes the new `as` operator the default way to cast (removing any ambiguity between JSX expressions and the TypeScript prefix cast operator). For example:
 
@@ -14,7 +14,7 @@ var x = <any> foo;
 var x = foo as any;
 ```
 
-**Using React**
+#### Using React
 
 To use JSX-support with React you should use the [React typings](https://github.com/borisyankov/DefinitelyTyped/tree/master/react). These typings define the `JSX` namespace so that TypeScript can correctly check JSX expressions for React. For example:
 
@@ -35,11 +35,11 @@ class MyComponent extends React.Component<Props, {}> {
 <MyComponent name={0} />; // error, `name` is not a number  
 ```
 
-**Using other JSX framworks**
+#### Using other JSX framworks
 
 JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for defining the `JSX` namespace for your framework. 
 
-**Output generation**
+#### Output generation
 
 TypeScript ships with two JSX modes: `preserve` and `react`.  
 - The `preserve` mode will keep JSX expressions as part of the output to be further consumed by another transform step. *Additionally the output will have a `.jsx` file extension.*
@@ -51,7 +51,7 @@ See the [[JSX]] wiki page for more information on using JSX in TypeScript.
 
 TypeScript 1.6 introduces intersection types, the logical complement of union types. A union type `A | B` represents an entity that is either of type `A` or type `B`, whereas an intersection type `A & B` represents an entity that is both of type `A` *and* type `B`.
 
-**Examples**
+#### Examples
 
 ```typescript
 function extend<T, U>(first: T, second: U): T & U {
@@ -269,7 +269,7 @@ type Pair<T> = Tuple<T, T>;
 
 TypeScript 1.6 enforces stricter object literal assignment checks for the purpose of catching excess or misspelled properties. Specifically, when a fresh object literal is assigned to a variable or passed for a parameter of a non-empty target type, it is an error for the object literal to specify properties that don't exist in the target type.
 
-**Examples**
+#### Examples
 
 ```typescript
 var x: { foo: number };
@@ -384,7 +384,7 @@ function bar(foo : Foo)  {
 
 TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
 
-**Examples:**
+#### Examples:
 
 ```ts
 function isCat(a: any): a is Cat {
@@ -424,7 +424,7 @@ Run `tsc --init` in a directory to create an initial `tsconfig.json` in this dir
 
 TypeScript 1.5 supports ECMAScript 6 (ES6) modules. ES6 modules are effectively TypeScript external modules with a new syntax: ES6 modules are separately loaded source files that possibly import other modules and provide a number of externally accessible exports. ES6 modules feature several new export and import declarations. It is recommended that TypeScript libraries and applications be updated to use the new syntax, but this is not a requirement. The new ES6 module syntax coexists with TypeScript's original internal and external module constructs and the constructs can be mixed and matched at will.
 
-**Export Declarations**
+#### Export Declarations
 
 In addition to the existing TypeScript support for decorating declarations with `export`, module members can also be exported using separate export declarations, optionally specifying different names for exports using `as` clauses.
 
@@ -450,7 +450,7 @@ var s = io.read(io.standardOutput);
 io.write(io.standardOutput, s);
 ```
 
-**Re-exporting**
+#### Re-exporting
 
 Using `from` clause a module can copy the exports of a given module to the current module without introducing local names.
 
@@ -466,7 +466,7 @@ export * from "./mod1";
 export * from "./mod2";
 ```
 
-**Default Export**
+#### Default Export
 
 An export default declaration specifies an expression that becomes the default export of a module:
 ```ts
@@ -486,7 +486,7 @@ g.sayHello();
 ```
 
 
-**Bare Import**
+#### Bare Import
 
 A "bare import" can be used to import a module only for its side-effects.
 
@@ -500,7 +500,7 @@ For more information about module, please see the [ES6 module support spec](http
 
 TypeScript 1.5 adds support to ES6 destructuring declarations and assignments.
 
-**Declarations**
+#### Declarations
 
 A destructuring declaration introduces one or more named variables and initializes them with values extracted from properties of an object or elements of an array.
 
@@ -526,7 +526,7 @@ var item = { text: "someText", location: [1,2,3], style: "italics" };
 drawText(item);
 ```
 
-**Assignments**
+#### Assignments
 
 Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variables can be written as a single destructuring assignment:
 ```ts
@@ -558,7 +558,7 @@ namespace Math {
 ## `let` and `const` support
 ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5. 
 
-**Const**
+#### Const
 ```ts
 const MAX = 100;
 
@@ -566,7 +566,7 @@ const MAX = 100;
        //        operator cannot be a constant.
 ```
 
-**Block scoped**
+#### Block scoped
 
 ```ts
 if (true) {
@@ -585,7 +585,7 @@ alert(a); // Error: a is not defined in this scope
 
 TypeScript 1.5 adds support to ES6 for..of loops on arrays for ES3/ES5 as well as full support for Iterator interfaces when targetting ES6.
 
-**Example:**
+#### Example:
 
 The TypeScript compiler will transpile for..of arrays to idiomatic ES3/ES5 JavaScript when targeting those versions:
 
@@ -612,7 +612,7 @@ A decorator is:
 
 > For more information, please see the [Decorators](https://github.com/Microsoft/TypeScript/issues/2249) proposal.
 
-**Example:**
+#### Example:
 
 Decorators `readonly` and `enumerable(false)` will be applied to the property `method` before it is installed on class `C`. This allows the decorator to change the implementation, and in this case, augment the descriptor to be writable: false and enumerable: false.
 
@@ -731,7 +731,7 @@ Adding a `tsconfig.json` file in a directory indicates that the directory is the
 - By invoking tsc with no input files, in which case the compiler searches for the tsconfig.json file starting in the current directory and continuing up the parent directory chain.
 - By invoking tsc with no input files and a -project (or just -p) command line option that specifies the path of a directory containing a tsconfig.json file.
 
-**Example:**
+#### Example:
 ```json
 {
     "compilerOptions": {
