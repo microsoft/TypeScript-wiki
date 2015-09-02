@@ -71,7 +71,9 @@ class Derived1 extends Base { }
 
 class Derived2 extends Base {
     getThing() { return 'hello'; }
-    foo() { super.getThing(); } // Error: cannot invoke abstract members through 'super'
+    foo() { 
+        super.getThing(); // Error: cannot invoke abstract members through 'super'
+    } 
 }
 
 var x = new Derived2(); // OK
