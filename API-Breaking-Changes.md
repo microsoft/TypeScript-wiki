@@ -1,7 +1,3 @@
-# TypeScript 1.6
-
-None :)
-
 # TypeScript 1.5
 
 ### Program interface changes
