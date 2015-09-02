@@ -14,6 +14,23 @@ Starting from release 1.6 TypeScript compiler will use different set of rules to
 - 'classic' - module resolution rules used by pre 1.6 TypeScript compiler
 - 'node' - node-like module resolution
 
+## `exclude` property support in tsconfig.json
+
+A tsconfig.json file that doesn't specify a files property (and therefore implicitly references all *.ts files in all subdirectories) can now contain an exclude property that specifies a list of files and/or directories to exclude from the compilation. The exclude property must be an array of strings that each specify a file or folder name relative to the location of the tsconfig.json file. For example:
+```json
+{
+    "compilerOptions": {
+        "out": "test.js"
+    },
+    "exclude": [
+        "node_modules",
+        "test.ts",
+        "utils/t2.ts"
+    ]
+}
+```
+The `exclude` list does not support wilcards. It must simply be a list of files and/or directories.
+
 ## `--init` command line option
 
 Run `tsc --init` in a directory to create an initial `tsconfig.json` in this directory with preset defaults. Optionally pass command line arguments along with `--init` to be stored in your initial tsconfig.json on creation.
