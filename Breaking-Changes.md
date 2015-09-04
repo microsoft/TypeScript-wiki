@@ -10,6 +10,8 @@ For full list of breaking changes see the [breaking change issues](https://githu
 
 It is an error to specify properties in an object literal that were not specified on the target type, when assigned to a variable or passed for a parameter of a non-empty target type.
 
+This new strictness can be disabled with the --suppressExcessPropertyErrors (#4484) compiler option.
+
 **Example:**
 
 ```typescript
