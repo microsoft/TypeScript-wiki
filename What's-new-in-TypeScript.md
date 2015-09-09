@@ -375,9 +375,8 @@ interface Foo {
 }
 
 function bar(foo : Foo)  {
-    foo.x = 1;
-    foo.y = "1"; // okay, declared above.
-    foo.z = true; // okay, declared below.
+    foo.x = 1; // OK, declared in the class Foo
+    foo.y = "1"; // OK, declared in the interface Foo
 }
 ```
 
