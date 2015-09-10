@@ -56,6 +56,31 @@ var y: Foo;
 y = <FooBar>{ foo: 1, bar: 2 };
 ```
 
+#### CommonJS module resolution no longer treats non-relative paths as relative
+
+Previously, for the files `one.ts` and `two.ts`, an import of `"one"` in `two.ts` would resolve to `one.ts` if they resided in the same directory.
+
+In TypeScript 1.6, `"one"` is no longer equivalent to "./one" when compiling with CommonJS. Instead, it is searched as relative to an appropriate `node_modules` folder as would be resolved by runtimes such as NodeJS. This is to better reflect the semantics of the equivalent JavaScript.
+
+**Example:**
+
+`./one.ts`
+```TypeScript
+export function f() {
+    return 10;
+}
+```
+
+`./two.ts`
+```TypeScript
+import { f as g } from "one";
+``` 
+
+**Recommendations:**
+
+* Fix any non-relative import names that were unintended (strongly suggested).
+* Set the `--moduleResolution` compiler option to `classic`.
+
 #### Function and class default export declarations can no longer merge with entities intersecting in their meaning
 
 Declaring an entity with the same name and in the same space as a default export declaration is now an error; for example,  
@@ -133,7 +158,7 @@ Entry point of TypeScript npm package was moved from `bin` to `lib` to unblock s
 
 #### TypeScript npm package does not install globally by default
 
-TypeScript 1.6 removes the `preferGlobal` flag from package.json. If you relay on this behaviour please use `npm install -g typescript`.
+TypeScript 1.6 removes the `preferGlobal` flag from package.json. If you rely on this behaviour please use `npm install -g typescript`.
 
 # TypeScript 1.5
 
