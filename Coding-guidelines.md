@@ -1,3 +1,5 @@
+While these guidelines are mainly meant for contributors to the TypeScript project, certain suggestions apply as to how idiomatic TypeScript code should be written (i.e. the "Names" and "Style" sections).
+
 ## Names
 1. Use PascalCase for type names.
 2. Do not use "I" as a prefix for interface names.
@@ -23,13 +25,13 @@
 
 ## General Assumptions
 1. Consider objects like Nodes, Symbols, etc. as immutable outside the component that created them. Do not change them.
-2. Consider arrays as immutable by default.
+2. Consider arrays as immutable by default after creation.
 
 ## Classes
 1. For consistency, do not use classes in the core compiler pipeline. Use function closures instead.
 	
 ## Flags
-1. More than 2 Boolean properties on a type should be turned into flags.
+1. More than 2 related Boolean properties on a type should be turned into a flag.
 
 ## Comments
 1. Use JSDoc style comments for functions, interfaces, enums, and classes.
