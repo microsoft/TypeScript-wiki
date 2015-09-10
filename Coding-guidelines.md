@@ -20,7 +20,7 @@ While these guidelines are mainly meant for contributors to the TypeScript proje
 3. Shared types should be defined in 'types.ts'.
 4. Within a file, type definitions should come first.
 
-## `null` and `undefined`:
+## `null` and `undefined`
 1. Use **undefined**, do not use null.
 
 ## General Assumptions
