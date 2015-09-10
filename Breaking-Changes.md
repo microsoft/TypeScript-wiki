@@ -36,7 +36,7 @@ x = { foo: 1, baz: 2 };  // OK, `baz` matched by index signature
 **If the source types are a set of related types, explicitly specify them using union types instead of just specifying the base type.**
 
 ```ts
-let animalList : Dog|Cat|Turkey= [    // use union type instead of Animal
+let animalList: Dog | Cat | Turkey = [    // use union type instead of Animal
     {name: "Milo", meow: true }, 
     {name: "Pepper" , bark: true},
     {name: "koko", gobble: true} 
@@ -48,7 +48,7 @@ let animalList : Dog|Cat|Turkey= [    // use union type instead of Animal
 interface Foo {
     foo: number;
 }
-interface FooBar{
+interface FooBar {
     foo: number;
     bar: number;
 }
@@ -111,9 +111,9 @@ export default Foo;
 
 For more details see [the originating issue](https://github.com/Microsoft/TypeScript/issues/3095).
 
-#### Module body is parsed in strict mode
+#### Module bodies are parsed in strict mode
 
-In accordance with [the ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-strict-mode-code), module bodies are now parsed in strict mode. module bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
+In accordance with [the ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-mode-code), module bodies are now parsed in strict mode. module bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
 
 #### Changes to DOM API's in the standard library
 
@@ -245,9 +245,9 @@ You can keep using older versions of the library with newer version of the compi
 
 For more details, please see the [full change](https://github.com/Microsoft/TypeScript/pull/2739).
 
-#### Class body is parsed in strict mode
+#### Class bodies are parsed in strict mode
 
-In accordance with [the ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-strict-mode-code), class bodies are now parsed in strict mode. Class bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
+In accordance with [the ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-mode-code), class bodies are now parsed in strict mode. Class bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
 
 # TypeScript 1.4
 
