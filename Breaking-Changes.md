@@ -78,8 +78,21 @@ import { f as g } from "one";
 
 **Recommendations:**
 
-* Fix any non-relative import names that were unintended (strongly suggested).
-* Set the `--moduleResolution` compiler option to `classic`.
+**Fix any non-relative import names that were unintended (strongly suggested).**
+
+`./one.ts`
+```TypeScript
+export function f() {
+    return 10;
+}
+```
+
+`./two.ts`
+```TypeScript
+import { f as g } from "./one";
+``` 
+
+**Set the `--moduleResolution` compiler option to `classic`.**
 
 #### Function and class default export declarations can no longer merge with entities intersecting in their meaning
 
