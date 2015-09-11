@@ -56,7 +56,7 @@ var y: Foo;
 y = <FooBar>{ foo: 1, bar: 2 };
 ```
 
-#### CommonJS module resolution no longer treats non-relative paths as relative
+#### CommonJS module resolution no longer assumes paths are relative
 
 Previously, for the files `one.ts` and `two.ts`, an import of `"one"` in `two.ts` would resolve to `one.ts` if they resided in the same directory.
 
