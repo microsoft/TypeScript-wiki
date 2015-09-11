@@ -60,7 +60,7 @@ y = <FooBar>{ foo: 1, bar: 2 };
 
 Previously, for the files `one.ts` and `two.ts`, an import of `"one"` in `two.ts` would resolve to `one.ts` if they resided in the same directory.
 
-In TypeScript 1.6, `"one"` is no longer equivalent to "./one" when compiling with CommonJS. Instead, it is searched as relative to an appropriate `node_modules` folder as would be resolved by runtimes such as NodeJS. This is to better reflect the semantics of the equivalent JavaScript.
+In TypeScript 1.6, `"one"` is no longer equivalent to "./one" when compiling with CommonJS. Instead, it is searched as relative to an appropriate `node_modules` folder as would be resolved by runtimes such as Node.js. For details, see [the issue that describes the resolution algorithm](https://github.com/Microsoft/TypeScript/issues/2338).
 
 **Example:**
 
