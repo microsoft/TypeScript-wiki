@@ -1,3 +1,13 @@
+# TypeScript 1.6
+
+### CompilerHost interface change (comparing to TypeScript 1.6 beta)
+- return type of `CompilerHost.resolveModuleNames` was changed from `string[]` to `ResolvedModule[]`. Extra optional property `isExternalLibraryImport` in [ResolvedModule](https://github.com/Microsoft/TypeScript/blob/026632bca8b13a7f180ae8226e109d296480ddad/src/compiler/types.ts#L2274) interface denotes if `Program` should apply some particular set of policies to the resolved file. For example if Node resolver has resolved non-relative module name to the file in 'node_modules', then this file:
+  - should be a 'd.ts' file
+  - should be an external module
+  - should not contain tripleslash references.
+
+  Rationale: files containing external typings should not pollute global scope (to avoid conflicts between different versions of the same package). Also such files should never be added to the list of compiled files (otherwise compiled .ts file might overwrite actual .js file with implementation of the package) 
+
 # TypeScript 1.5
 
 ### Program interface changes
