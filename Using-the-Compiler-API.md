@@ -316,3 +316,53 @@ let code = "var a=function(v:number){return 0+1+2+3;\n}";
 let result = format(code);
 console.log(result);
 ```
+
+## Transpiling single file
+
+Currently TypeScript exposes two functions for this purpose. 
+```ts
+export function transpile(input: string, compilerOptions?: CompilerOptions, fileName?: string, diagnostics?: Diagnostic[], moduleName?: string): string;
+
+export interface TranspileOptions {
+    compilerOptions?: CompilerOptions;
+    fileName?: string;
+    reportDiagnostics?: boolean;
+    moduleName?: string;
+    renamedDependencies?: Map<string>;
+}
+
+export interface TranspileOutput {
+    outputText: string;
+    diagnostics?: Diagnostic[];
+    sourceMapText?: string;
+}
+
+/*
+ * This function will compile source text from 'input' argument using specified compiler options.
+ * If not options are provided - it will use a set of default compiler options.
+ * Extra compiler options that will unconditionally be used by this function are:
+ * - isolatedModules = true
+ * - allowNonTsExtensions = true
+ * - noLib = true
+ * - noResolve = true
+ */    
+export function transpileModule(input: string, transpileOptions: TranspileOptions): TranspileOutput 
+```
+
+>Historical note: initially only `transpile` function existed, however it was pretty difficult to extend (i.e to add new input parameters or return some extra information like source maps) without breaking existing consumers. As a result `transpile` is currently considered deprecated and superseded by `transpileModule`.
+
+```ts
+var ts = require("typescript");
+var content = 
+    "import {f} from \"foo\"\n" +
+    "export var x = f()";
+
+var compilerOptions = { module: ts.ModuleKind.System };
+var res1 = ts.transpile(content, compilerOptions, /*fileName*/ undefined, /*diagnostics*/ undefined, /*moduleName*/ "myModule1");
+console.log(res1);
+
+console.log("============")
+
+var res2 = ts.transpileModule(content, {compilerOptions: compilerOptions, moduleName: "myModule2"});
+console.log(res2.outputText);
+```
