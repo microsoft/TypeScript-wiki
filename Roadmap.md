@@ -1,7 +1,7 @@
 # 2.0
 * `async`/`await`
 
-# 1.8
+# 1.7
 
 * [Support for ES7 exponentiation operator](https://github.com/Microsoft/TypeScript/issues/4812)
 * Improve lib.d.ts modularity
