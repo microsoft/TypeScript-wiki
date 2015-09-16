@@ -3,7 +3,7 @@ Keep in mind that this is not yet a stable API - we’re releasing this as versi
 
 ## Getting set up
 
-First you'll need to install TypeScript >=1.5 from `npm`.
+First you'll need to install TypeScript >=1.6 from `npm`.
 
 > ##### For API Samples compatible with **TypeScript == 1.4** please see [[Using the Compiler API (TypeScript 1.4)]]
 
@@ -14,13 +14,6 @@ npm install -g typescript
 npm link typescript
 ```
 
-Once that's done, just grab our definitions file either
-
-* ~~By using [tsd](https://www.npmjs.com/package/tsd) with the command `tsd query typescript --action install`.~~
-* Going directly to the source [on our repository](https://github.com/Microsoft/TypeScript/blob/v1.5.0-alpha/bin/typescript.d.ts).
-
-> Note: The 1.5 definitions file has not been submitted to DefinitelyTyped. Upon our 1.5 release, we will do so and our definitions will be available on `tsd`.
-
 That's it, you're ready to go. Now you can try out some of the following examples.
 
 ## A minimal compiler
@@ -29,23 +22,22 @@ Let's try to write a barebones compiler that will take a list of TypeScript file
 
 ```TypeScript
 /// <reference path="typings/node/node.d.ts" />
-/// <reference path="typings/typescript/typescript.d.ts" />
 
-import ts = require("typescript");
+import * as ts from "typescript";
 
-export function compile(fileNames: string[], options: ts.CompilerOptions): void {
-    var program = ts.createProgram(fileNames, options);
-    var emitResult = program.emit();
+function compile(fileNames: string[], options: ts.CompilerOptions): void {
+    let program = ts.createProgram(fileNames, options);
+    let emitResult = program.emit();
 
-    var allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
+    let allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
 
     allDiagnostics.forEach(diagnostic => {
-        var { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
-        var message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
+        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+        let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
         console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
     });
 
-    var exitCode = emitResult.emitSkipped ? 1 : 0;
+    let exitCode = emitResult.emitSkipped ? 1 : 0;
     console.log(`Process exiting with code '${exitCode}'.`);
     process.exit(exitCode);
 }
@@ -61,8 +53,6 @@ compile(process.argv.slice(2), {
 Creating a compiler is simple enough, but you may want to just get the corresponding JavaScript output given TypeScript sources. For this you can use ts.transpile to get a string => string transformation in two lines.
 
 ```TypeScript
-/// <reference path="typings/typescript/typescript.d.ts" />
-
 import * as ts from "typescript";
 
 const source = "let x: string  = 'string'";
@@ -84,7 +74,6 @@ As an example of how one could traverse the AST, consider a minimal linter that 
 
 ```TypeScript
 /// <reference path="typings/node/node.d.ts" />
-/// <reference path="typings/typescript/typescript.d.ts" />
 
 import {readFileSync} from "fs";
 import * as ts from "typescript";
@@ -153,7 +142,6 @@ We will achieve this through creating a LanguageService object. Similar to the p
 
 ```TypeScript
 /// <reference path="typings/node/node.d.ts" />
-/// <reference path="typings/typescript/typescript.d.ts" />
 
 import * as fs from "fs";
 import * as ts from "typescript";
@@ -255,7 +243,6 @@ watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
 
 ```TypeScript
 /// <reference path="typings/node/node.d.ts" />
-/// <reference path="typings/typescript/typescript.d.ts" />
 
 import * as ts from "typescript";
 
@@ -320,6 +307,7 @@ console.log(result);
 ## Transpiling single file
 
 Currently TypeScript exposes two functions for this purpose. 
+
 ```ts
 export function transpile(input: string, compilerOptions?: CompilerOptions, fileName?: string, diagnostics?: Diagnostic[], moduleName?: string): string;
 
