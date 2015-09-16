@@ -1,6 +1,3 @@
-> This feature is upcoming in TypeScript 1.6.
-If you would like to try it today, use the [nightly package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx).
-
 # Introduction
 
 JSX is an embeddable XML-like syntax.
