@@ -9,4 +9,4 @@ Precise algorithm of module resolution can be found [here](https://github.com/Mi
 - be an external module
 - not have triple-slash references 
 
-> Rationale: typings should not bring new compatible items to the set of compiled files otherwise actual implementation files in package can be overwritten during compilation. Also loading typings should not pollute global scope by bringing potentially conflicting entries from different version of the same library
+> Rationale: typings should not bring new compilable items to the set of compiled files otherwise actual implementation files in package can be overwritten during compilation. Also loading typings should not pollute global scope by bringing potentially conflicting entries from different version of the same library
