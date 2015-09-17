@@ -1,7 +1,7 @@
 # 2.0
 * `async`/`await`
 
-# 1.7
+# 1.8
 
 * [Support for ES7 exponentiation operator](https://github.com/Microsoft/TypeScript/issues/4812)
 * Investigate [`this` typing](https://github.com/Microsoft/TypeScript/issues/3694)
