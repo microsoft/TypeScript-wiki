@@ -45,6 +45,7 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 `--sourceMap`       | TypeScriptSourceMap      | File path                         
 `--sourceRoot`      | TypeScriptSourceRoot     | File path
 `--suppressImplicitAnyIndexErrors` | TypeScriptSuppressImplicitAnyIndexErrors | boolean
+`--suppressExcessPropertyErrors`  |  TypeScriptSuppressExcessPropertyErrors | boolean
 `--moduleResolution`<sup>[1]</sup> | TypeScriptModuleResolution | `Classic` or `NodeJs`
 `--experimentalAsyncFunctions`<sup>[1]</sup> | TypeScriptExperimentalAsyncFunctions | boolean
 `--project`         | *Not supported in VS* | 
