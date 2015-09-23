@@ -23,7 +23,7 @@ Option | Shorthand | Description
 `--moduleResolution`<sup>[1]</sup> | | Determine how modules get resolved. Either 'node' for Node.js/io.js style resolution, or 'classic' (default).
 `--newLine` | | Specifies the end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
 `--noEmit` | | Do not emit outputs.
-`--noEmitOnError` | | Do not emit outputs if any type checking errors were reported.
+`--noEmitOnError` | | Do not emit outputs if any errors were reported.
 `--noEmitHelpers` | | Do not generate custom helper functions like `__extends` in compiled output.
 `--noImplicitAny` | | Raise error on expressions and declarations with an implied 'any' type.
 `--noLib` | | Do not include the default library file (lib.d.ts).
