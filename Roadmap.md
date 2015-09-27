@@ -3,8 +3,8 @@
 
 # 1.7
 
-* [Support for ES7 exponentiation operator](https://github.com/Microsoft/TypeScript/issues/4812)
-* [Support `this` typing](https://github.com/Microsoft/TypeScript/issues/3694)
+* [ES7 exponentiation operator](https://github.com/Microsoft/TypeScript/issues/4812)
+* [Polymorphic `this` type](https://github.com/Microsoft/TypeScript/pull/4910)
 * [Support `--module` with `--target es6`](https://github.com/Microsoft/TypeScript/issues/4806)
 * Improve lib.d.ts modularity
 * Module bundling
