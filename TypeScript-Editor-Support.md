@@ -12,7 +12,7 @@
 
 # Sublime Text 3/2
 
-[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), which can be acquired through [Package Control](https://packagecontrol.io/).
+[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), available through [Package Control](https://packagecontrol.io/).
 
 # Vim
 
