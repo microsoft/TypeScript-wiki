@@ -413,9 +413,9 @@ function createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: 
     }
 }
 
-function compile(rootFiles: string[], moduleSearchLocations: string[]): void {
+function compile(sourceFiles: string[], moduleSearchLocations: string[]): void {
     const options: ts.CompilerOptions = { module: ts.ModuleKind.AMD, target: ts.ScriptTarget.ES5 };
-    const program = ts.createProgram(rootFiles, options, createCompilerHost(options, moduleSearchLocations));
+    const program = ts.createProgram(sourceFiles, options, createCompilerHost(options, moduleSearchLocations));
     /// do something with program...
 }
 ```
