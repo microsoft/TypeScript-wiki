@@ -357,7 +357,18 @@ console.log(res2.outputText);
 
 ## Customizing module resolution
 
-Standard ways to resolve modules may be overridden by implementing optional method `CompilerHost.resolveModuleNames(moduleNames: string[], containingFile: string): string[]`. This method returns an array of size `moduleNames.length`, each element of the array stores either an instance of `ResolvedModule` with non-empty property `resolvedFileName` - resolution for corresponding name from `moduleNames` array or `undefined` if module name cannot be resolved. Host can run standard module resolution process via `resolveModuleName(moduleName: string, containingFile: string, options: CompilerOptions, moduleResolutionHost: ModuleResolutionHost): ResolvedModuleNameWithFallbackLocations`. This function returns an object that stores result of module resolution (value of `resolvedModule` property) as well as list of file names that were considered candidates before making current decision. Host can optionally monitor state of these disk locations and invalidate result of current resolution if something changes  
+You can override the standard way the compiler uses to resolve modules by implementing optional method: `CompilerHost.resolveModuleNames`:
+> `CompilerHost.resolveModuleNames(moduleNames: string[], containingFile: string): string[]`. 
+
+The method is given a list of module names in a file, and is expected to return an array of size `moduleNames.length`, each element of the array stores either:
+
+*  an instance of `ResolvedModule` with non-empty property `resolvedFileName` - resolution for corresponding name from `moduleNames` array or 
+* `undefined` if module name cannot be resolved. 
+
+You can invoke the standard module resolution process via calling `resolveModuleName`:
+> `resolveModuleName(moduleName: string, containingFile: string, options: CompilerOptions, moduleResolutionHost: ModuleResolutionHost): ResolvedModuleNameWithFallbackLocations`. 
+
+This function returns an object that stores result of module resolution (value of `resolvedModule` property) as well as list of file names that were considered candidates before making current decision. 
 
 ```ts
 /// <reference path="typings/node/node.d.ts" />
@@ -415,7 +426,9 @@ function createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: 
 
 function compile(sourceFiles: string[], moduleSearchLocations: string[]): void {
     const options: ts.CompilerOptions = { module: ts.ModuleKind.AMD, target: ts.ScriptTarget.ES5 };
-    const program = ts.createProgram(sourceFiles, options, createCompilerHost(options, moduleSearchLocations));
+    const host = createCompilerHost(options, moduleSearchLocations);
+    const program = ts.createProgram(sourceFiles, options, host);
+    
     /// do something with program...
 }
 ```
