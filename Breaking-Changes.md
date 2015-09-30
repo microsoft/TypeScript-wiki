@@ -2,6 +2,47 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 1.7
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).
+
+#### Changes in inferring the type of `this`
+
+In a class, the type of the value `this` will be inferred to the `this` type.
+This means subsequent assignments from values the original type can fail.
+
+**Example:**
+
+```TypeScript
+class Fighter {
+    /** @returns the winner of the fight. */
+    fight(opponent: Fighter) {
+        let theVeryBest = this;
+        if (Math.rand() < 0.5) {
+            theVeryBest = opponent; // error
+        }
+        return theVeryBest
+    }
+}
+```
+
+**Recommendations:**
+
+Add a type annotation:
+
+```TypeScript
+class Fighter {
+    /** @returns the winner of the fight. */
+    fight(opponent: Fighter) {
+        let theVeryBest: Fighter = this;
+        if (Math.rand() < 0.5) {
+            theVeryBest = opponent; // no error
+        }
+        return theVeryBest
+    }
+}
+```
+
 # TypeScript 1.6
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.6%22+label%3A%22breaking+change%22).
