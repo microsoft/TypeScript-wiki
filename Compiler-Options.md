@@ -36,7 +36,7 @@ Option | Shorthand | Description
 `--rootDir` | | Specifies the root directory of input files. Use to control the output directory structure with `--outDir`.
 `--sourceMap` | | Generates corresponding '.map' file.
 `--sourceRoot` | | Specifies the location where debugger should locate TypeScript files instead of source locations. Use this flag if the sources will be located at run-time in a different location than that at design-time. The location specified will be embedded in the sourceMap to direct the debugger where the source files where be located.
-`--stripInternal`<sup>[1]</sup> | | Do not emit declarations for code that has an `@internal` annotation.
+`--stripInternal`<sup>[1]</sup> | | Do not emit declarations for code that has an `/** @internal */` JSDoc annotation.
 `--suppressImplicitAnyIndexErrors` | | Suppress `--noImplicitAny` errors for indexing objects lacking index signatures. See [issue #1232](https://github.com/Microsoft/TypeScript/issues/1232#issuecomment-64510362) for more details.
 
 <sup>[1]</sup> These options are experimental.
