@@ -7,6 +7,7 @@
 * [Polymorphic `this` type](https://github.com/Microsoft/TypeScript/pull/4910)
 * [Support `--module` with `--target es6`](https://github.com/Microsoft/TypeScript/issues/4806)
 * [Support for path mappings module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
+* [Support JavaScript in TypeScript compilations](https://github.com/Microsoft/TypeScript/issues/4792)
 * Improve lib.d.ts modularity
 * Module bundling
 
