@@ -1,13 +1,13 @@
 ## Compiler Options
 Option | Shorthand | Description
 --------|-------|--------------
-`--declaration` | `--d` | Generates corresponding '.d.ts' file.
-`--help` | `--h` | Print help message.
-`--version` | `--v` | Print the compiler's version.
-`--module` | `--m` | Specify module code generation: 'commonjs', 'amd', 'system', or 'umd'.
-`--project` | `--p` | Compile the project in the given directory. The directory needs to contain a `tsconfig.json` file to direct compilation. See [[tsconfig.json]] documentation for more details.
-`--target` | `--t` | Specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'<sup>[1]</sup>
-`--watch` | `--w` | Run the compiler in watch mode. Watch input files and trigger recompilation on changes.
+`--declaration` | `-d` | Generates corresponding '.d.ts' file.
+`--help` | `-h` | Print help message.
+`--version` | `-v` | Print the compiler's version.
+`--module` | `-m` | Specify module code generation: 'commonjs', 'amd', 'system', or 'umd'.
+`--project` | `-p` | Compile the project in the given directory. The directory needs to contain a `tsconfig.json` file to direct compilation. See [[tsconfig.json]] documentation for more details.
+`--target` | `-t` | Specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'<sup>[1]</sup>
+`--watch` | `-w` | Run the compiler in watch mode. Watch input files and trigger recompilation on changes.
 `--charset` | | The character set of the input files.
 `--diagnostics` | | Show diagnostic information.
 `--emitBOM` | | Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.
@@ -23,7 +23,7 @@ Option | Shorthand | Description
 `--moduleResolution`<sup>[1]</sup> | | Determine how modules get resolved. Either 'node' for Node.js/io.js style resolution, or 'classic' (default).
 `--newLine` | | Specifies the end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
 `--noEmit` | | Do not emit outputs.
-`--noEmitOnError` | | Do not emit outputs if any type checking errors were reported.
+`--noEmitOnError` | | Do not emit outputs if any errors were reported.
 `--noEmitHelpers` | | Do not generate custom helper functions like `__extends` in compiled output.
 `--noImplicitAny` | | Raise error on expressions and declarations with an implied 'any' type.
 `--noLib` | | Do not include the default library file (lib.d.ts).

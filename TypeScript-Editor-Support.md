@@ -2,11 +2,17 @@
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
 
 # Eclipse
+
 [Eclipse TypeScript Plug-in](https://github.com/palantir/eclipse-typescript), an Eclipse plugin developed by Palantir.
+
+# Emacs
+
+[tide](https://github.com/ananthakumaran/tide) - TypeScript Interactive Development Environment for Emacs
+
 
 # Sublime Text 3/2
 
-[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), which can be acquired through [Package Control](https://packagecontrol.io/).
+[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), available through [Package Control](https://packagecontrol.io/).
 
 # Vim
 
