@@ -77,7 +77,7 @@ x = { foo: 1, baz: 2 };  // OK, `baz` matched by index signature
 **If the source types are a set of related types, explicitly specify them using union types instead of just specifying the base type.**
 
 ```ts
-let animalList: Dog | Cat | Turkey = [    // use union type instead of Animal
+let animalList: (Dog | Cat | Turkey)[] = [    // use union type instead of Animal
     {name: "Milo", meow: true }, 
     {name: "Pepper" , bark: true},
     {name: "koko", gobble: true} 
