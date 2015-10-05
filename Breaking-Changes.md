@@ -6,7 +6,7 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).
 
-#### Changes in inferring the type of `this`
+#### Changes in inferring the type from `this`
 
 In a class, the type of the value `this` will be inferred to the `this` type.
 This means subsequent assignments from values the original type can fail.
