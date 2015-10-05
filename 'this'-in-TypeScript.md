@@ -86,6 +86,40 @@ $(document).ready(x.run); // SAFE, 'run' will always have correct 'this'
  * Bad: Derived classes can't call base class methods written this way using `super`
  * Bad: The exact semantics of which methods are "pre-bound" and which aren't create an additional non-typesafe contract between the class and its consumers
 
+### Use `bindAll(this)` in the Constructor
+```ts
+function bindAll(instance: Object)
+{
+  var proto = Object.getPrototypeOf(instance);
+  for (var key in proto)
+  {
+    var prop = proto[key];
+    if (typeof prop === 'function' && key !== 'constructor')
+      instance[key] = prop.bind(instance);
+  }
+  return instance;
+}
+
+class Greeter {
+  greeting: string;
+  constructor(message: string) {
+    bindAll(this);
+    this.greeting = message;
+  }
+  greet() {
+    console.log("Hello, " + this.greeting);
+  }
+}
+
+var greeter = new Greeter("world");
+window.setTimeout(greeter.greet, 100);
+```
+
+ * Good/bad: Same as "Use Instance Functions" above, except this solves both "Bad" issues:
+  * Derived classes *can* call base class methods written this way using `super`
+  * All methods are "pre-bound"
+
+
 ### Local Fat Arrow
 In TypeScript (shown here with some dummy parameters for explanatory reasons):
 
