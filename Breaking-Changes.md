@@ -43,6 +43,28 @@ class Fighter {
 }
 ```
 
+#### Automatic semicolon insertion after class member modifiers
+
+The keywords `abstract, public, protected` and `private` are *FutureReservedWords* in ECMAScript 3 and are subject to automatic semicolon insertion. Previously, TypeScript did not insert semicolons when these keywords were on their own line. Now that this is fixed, `abstract class D` no longer correctly extends `C` in the following example, and instead declares a concrete method `m` and an additional property named `abstract`.
+
+Note that `async` and `declare` already correctly did ASI. 
+
+**Example:**
+
+```TypeScript
+abstract class C {
+    abstract m(): number;
+}
+abstract class D extends C {
+    abstract
+    m(): number;
+}
+```
+
+**Recommendations:**
+
+Remove line breaks after keywords when defining class members. In general, avoid relying on automatic semicolon insertion. 
+
 # TypeScript 1.6
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.6%22+label%3A%22breaking+change%22).
