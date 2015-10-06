@@ -9,6 +9,11 @@
 
 [tide](https://github.com/ananthakumaran/tide) - TypeScript Interactive Development Environment for Emacs
 
+# NetBeans
+
+[nbts](https://github.com/Everlaw/nbts) - NetBeans TypeScript editor plugin
+
+[Geertjan's TypeScript NetBeans Plugin](https://github.com/GeertjanWielenga/TypeScript)
 
 # Sublime Text 3/2
 
