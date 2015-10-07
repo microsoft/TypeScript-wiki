@@ -355,6 +355,8 @@ var res2 = ts.transpileModule(content, {compilerOptions: compilerOptions, module
 console.log(res2.outputText);
 ```
 
+Usually TypeScript compiler uses file extension to determine if file should be parsed as '.tsx' or '.ts'. The same rule is applied during single file transpilation if file name is provided. If file name is omitted then compiler will check if `jsx` options is specified - if it is set and is not `JsxEmit.None` then source text will be interpreted as '.tsx'.
+
 ## Customizing module resolution
 
 You can override the standard way the compiler uses to resolve modules by implementing optional method: `CompilerHost.resolveModuleNames`:
