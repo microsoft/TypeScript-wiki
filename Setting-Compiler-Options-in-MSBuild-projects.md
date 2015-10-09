@@ -29,7 +29,7 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 `--inlineSourceMap` | TypeScriptInlineSourceMap |  boolean
 `--inlineSources`   | TypeScriptInlineSources|  boolean
 `--locale`          | Automatically set to PreferredUILang value |
-`--mapRoot`         | TypeScriptMapRoot       | File path 
+`--mapRoot`         | TypeScriptMapRoot       | File path
 `--newLine`         | TypeScriptNewLine       | `CRLF` or `LF`
 `--noEmitOnError`   | TypeScriptNoEmitOnError | boolean
 `--noEmitHelpers`   | TypeScriptNoEmitHelpers | boolean
@@ -48,11 +48,16 @@ Compiler Option   | MSBuild Property Name | Allowed Values
 `--suppressExcessPropertyErrors`  |  TypeScriptSuppressExcessPropertyErrors | boolean
 `--moduleResolution`<sup>[1]</sup> | TypeScriptModuleResolution | `Classic` or `NodeJs`
 `--experimentalAsyncFunctions`<sup>[1]</sup> | TypeScriptExperimentalAsyncFunctions | boolean
-`--project`         | *Not supported in VS* | 
+`--jsx`<sup>[1]</sup> | TypeScriptJSXEmit | `React` or `Preserve`
+`--project`         | *Not supported in VS* |
 `--watch`           | *Not supported in VS* |
 `--diagnostics`     | *Not supported in VS* |
 `--listFiles`       | *Not supported in VS* |
 `--noEmit`          | *Not supported in VS* |
 *VS only option*  | TypeScriptAdditionalFlags | *Any compiler option*
 
-<sup>1</sup> These settings are new in TypeScript 1.6 
+<sup>1</sup> These settings are new in TypeScript 1.6
+
+## What is supported in my version of Visual Studio?
+
+Look in your ` C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets` file.  The authoritative mappings between MSBuild XML tags and the `tsc` switches live in there.
