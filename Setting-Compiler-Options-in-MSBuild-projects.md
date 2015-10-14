@@ -41,7 +41,7 @@ Compiler options can be specified using MSBuild properties within an MSBuild pro
 `--preserveConstEnums`                       | TypeScriptPreserveConstEnums               | boolean
 `--removeComments`                           | TypeScriptRemoveComments                   | boolean
 `--rootDir`                                  | TypeScriptRootDir                          | File path
-`--separateCompilation`                      | TypeScriptSingleFile                       | boolean
+`--isolatedModules`                          | TypeScriptIsolatedModules                  | boolean
 `--sourceMap`                                | TypeScriptSourceMap                        | File path
 `--sourceRoot`                               | TypeScriptSourceRoot                       | File path
 `--suppressImplicitAnyIndexErrors`           | TypeScriptSuppressImplicitAnyIndexErrors   | boolean
