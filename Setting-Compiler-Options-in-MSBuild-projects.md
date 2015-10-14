@@ -26,9 +26,9 @@ Compiler options can be specified using MSBuild properties within an MSBuild pro
 `--emitBOM`                                  | TypeScriptEmitBOM                          | boolean
 `--emitDecoratorMetadata`                    | TypeScriptEmitDecoratorMetadata            | boolean
 `--experimentalDecorators`                   | TypeScriptExperimentalDecorators           | boolean
-`--inlineSourceMap`                          | TypeScriptInlineSourceMap                  |  boolean
-`--inlineSources`                            | TypeScriptInlineSources                    |  boolean
-`--locale`                                   | Automatically set to PreferredUILang value |
+`--inlineSourceMap`                          | TypeScriptInlineSourceMap                  | boolean
+`--inlineSources`                            | TypeScriptInlineSources                    | boolean
+`--locale`                                   | *automatic*                                | Automatically set to PreferredUILang value
 `--mapRoot`                                  | TypeScriptMapRoot                          | File path
 `--newLine`                                  | TypeScriptNewLine                          | `CRLF` or `LF`
 `--noEmitOnError`                            | TypeScriptNoEmitOnError                    | boolean
