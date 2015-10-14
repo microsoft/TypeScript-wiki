@@ -8,6 +8,7 @@
 * [Support for unreachable code reporting](https://github.com/Microsoft/TypeScript/pull/4788)
 * Improve lib.d.ts modularity
 * Module bundling
+
 # 1.7
 
 * [ES7 exponentiation operator](https://github.com/Microsoft/TypeScript/issues/4812)
