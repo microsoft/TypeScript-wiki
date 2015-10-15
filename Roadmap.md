@@ -1,5 +1,5 @@
 # 2.0
-* `async`/`await`
+* `async`/`await` support for ES5/ES3
 
 # 1.8
 
@@ -15,6 +15,7 @@
 * [Polymorphic `this` type](https://github.com/Microsoft/TypeScript/pull/4910)
 * [Support `--module` with `--target es6`](https://github.com/Microsoft/TypeScript/issues/4806)
 * [Support for decorators when targeting ES3](https://github.com/Microsoft/TypeScript/pull/4741)
+* `async`/`await` support for ES6 (Node v4)
 
 # 1.6
 
