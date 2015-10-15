@@ -21,7 +21,7 @@ Option | Shorthand | Description
 `--locale` | | The locale to use to show error messages, e.g. en-us.
 `--mapRoot` | | Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than than the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files where be located.
 `--moduleResolution`<sup>[1]</sup> | | Determine how modules get resolved. Either 'node' for Node.js/io.js style resolution, or 'classic' (default).
-`--newLine` | | Specifies the end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
+`--newLine` | | Use the specified end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
 `--noEmit` | | Do not emit outputs.
 `--noEmitOnError` | | Do not emit outputs if any errors were reported.
 `--noEmitHelpers` | | Do not generate custom helper functions like `__extends` in compiled output.
