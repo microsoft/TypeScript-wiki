@@ -16,6 +16,7 @@
 * [Support `--module` with `--target es6`](https://github.com/Microsoft/TypeScript/issues/4806)
 * [Support for decorators when targeting ES3](https://github.com/Microsoft/TypeScript/pull/4741)
 * [`async`/`await` support for ES6 (Node v4)](https://github.com/Microsoft/TypeScript/pull/5231)
+* [Improved checking of destructuring with literal initializers](https://github.com/Microsoft/TypeScript/pull/4598)
 
 # 1.6
 
