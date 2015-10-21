@@ -1,12 +1,26 @@
-TypeScript 1.6 has introduced new way of resolving module names that mimics Node module resolution algorithm. As a consequence of that TypeScript compiler currently can load typings that are bundled with npm package. Compiler will try to discover typings for module `m` using the following set of rules:
-- try to load file `package.json` located in package folder (`node_modules/m/`) and read the path to typings file as a value of `"typings"` field.
-- try to load file `index.d.ts` located in package folder (`node_modules/m/`) - this file should contain typings for the package.
+TypeScript 1.6 has introduced new way of resolving module names that mimics the Node.js module resolution algorithm. This means the TypeScript compiler can currently load typings that are bundled with npm packages. The compiler will try to discover typings for module `"foo"` using the following set of rules:
 
-Precise algorithm of module resolution can be found [here](https://github.com/Microsoft/TypeScript/issues/2338)
+1. Try to load the `package.json` file located in the appropriate package folder (`node_modules/foo/`). If present,read the path to the typings file described in the `"typings"` field. For example, in the following `package.json`, the compiler will resolve the typings at `node_modules/foo/lib/foo.d.ts`
 
-### Typings file should:
-- be a `.d.ts` file
-- be an external module
-- not have triple-slash references 
+    ```JSON
+    {
+        "name": "foo",
+        "author": "Vandelay Industries",
+        "version": "1.0.0",
+        "main": "./lib/foo.js",
+        "typings": "./lib/foo.d.ts"
+    }
+    ```
 
-> Rationale: typings should not bring new compilable items to the set of compiled files otherwise actual implementation files in package can be overwritten during compilation. Also loading typings should not pollute global scope by bringing potentially conflicting entries from different version of the same library
+2. Try to load a file named `index.d.ts` located in the package folder (`node_modules/foo/`) - this file should contain typings for the package.
+
+The precise algorithm for module resolution can be found [here](https://github.com/Microsoft/TypeScript/issues/2338)
+
+### What your typings file should
+
+* be a `.d.ts` file
+* be an external module
+* not have triple-slash references 
+
+The rationale is that typings should not bring new compilable items to the set of compiled files; otherwise actual implementation files in the package can be overwritten during compilation.
+Additionally, **loading typings should not pollute global scope** by bringing potentially conflicting entries from different version of the same library
