@@ -7,6 +7,7 @@
 * [Support JavaScript in TypeScript compilations](https://github.com/Microsoft/TypeScript/issues/4792)
 * [Support for unreachable code reporting](https://github.com/Microsoft/TypeScript/pull/4788)
 * [Support for comments in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/4987)
+* [Support for stylized error messages in terminal output with `--pretty`](https://github.com/Microsoft/TypeScript/pull/5140)
 * Improve lib.d.ts modularity
 * Module bundling
 
