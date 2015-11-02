@@ -1,3 +1,19 @@
+# TypeScript 1.8
+
+## Prettier error messages from `tsc`
+
+# TypeScript 1.7
+
+## `async`/`await` support in ES6+ targets (Node v4+)
+
+## `this`-typing
+
+## ES7 exponentiation operator
+
+## Support for decorators when targeting ES3
+
+## Improved checking for destructuring object literal
+
 # TypeScript 1.6
 
 ## JSX support
