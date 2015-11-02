@@ -2,6 +2,63 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 1.8
+
+#### Reachability checks are enabled by default
+
+In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/Microsoft/TypeScript/pull/4788) to prevent certain categories of errors. Specifically
+
+1. check if code is reachable (enabled by default, can be disabled via `allowUnreachableCode` compiler option)
+   ```ts
+      function test1() {
+          return 1;
+          return 2; // error here
+      }
+      
+      function test2(x) {
+          if (x) {
+              return 1;
+          }
+          else {
+              throw new Error("NYI")
+          }
+          var y = 1; // error here
+      }
+   ```
+2. check if label is unused (enabled by default, can be disabled via `allowUnusedLabels` compiler option)
+   ```ts
+   l: // error will be reported - label `l` is unused
+   while (true) { 
+   }
+   
+   (x) => { x:x } // error will be reported - label `x` is unused
+   ```
+3. check if all code paths in function with return type annotation return some value (disabled by default, can be enabled via `noImplicitReturns` compiler option)
+
+   ```ts
+   // error will be reported since function does not return anything explicitly when `x` is falsy.
+   function test(x): number {
+      if (x) return 10;
+   }
+   ```
+4. check if control flow falls through cases in switch statement (disabled by default, can be enabled via `noFallthroughCasesInSwitch` compiler option). Note that cases without statements are not reported.
+
+   ```ts
+   switch(x) {
+      // OK
+      case 1: 
+      case 2: 
+          return 1; 
+   }
+   switch(x) {
+      case 1:
+          if (y) return 1;
+      case 2: 
+          return 2;
+   }
+   ```
+
+
 # TypeScript 1.7
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).
