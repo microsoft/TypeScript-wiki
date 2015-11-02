@@ -6,6 +6,7 @@
 * [Support for path mappings module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * [Support JavaScript in TypeScript compilations](https://github.com/Microsoft/TypeScript/issues/4792)
 * [Support for unreachable code reporting](https://github.com/Microsoft/TypeScript/pull/4788)
+* [Support for comments in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/4987)
 * Improve lib.d.ts modularity
 * Module bundling
 
