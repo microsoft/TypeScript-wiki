@@ -58,6 +58,7 @@ In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/
    }
    ```
 
+If these errors are showing up in your code you can either update your code or suppress errors with compiler options.
 
 # TypeScript 1.7
 
