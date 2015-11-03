@@ -1,8 +1,10 @@
-# TypeScript 1.8
+# TypeScript 1.8 (upcoming)
 
 ## Prettier error messages from `tsc`
 
-# TypeScript 1.7
+## Support output to IPC-driven files
+
+# TypeScript 1.7 (upcoming)
 
 ## `async`/`await` support in ES6+ targets (Node v4+)
 
