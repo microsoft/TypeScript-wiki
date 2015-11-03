@@ -14,8 +14,8 @@ Please note that the names and locations of the folders are pertinent to get the
 To add a `tsconfig.json` file, simply right click on the `scripts` folder, navigate to `Add`, then `New Item`.
 Under `Client-side`, you can find it, as can be seen below.
 
-*Note:* in since Visual Studio 2015 Update 1 RC, we also support adding the [`tsconfig.json`](tsconfig.json.md) file
-to the root of your project. Take care to adjust the `outDir` property appropiatly.
+*Note:* Since Visual Studio 2015 Update 1 RC, we also support adding the [`tsconfig.json`](tsconfig.json.md) file
+to the root of your project. Take care to adjust the `outDir` property appropriately.
 
 ![Adding a 'tsconfig.json' file in Visual Studio](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/add-tsconfig.png)
  
