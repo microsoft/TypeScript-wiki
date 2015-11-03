@@ -6,6 +6,35 @@
 
 ## `async`/`await` support in ES6+ targets (Node v4+)
 
+TypeScript now supports asynchronous functions for targets that support generators.
+Asynchronous functions are prefixed with the `async` keyword and return a flattened `Promise` of whatever value is returned.
+In the following example, each input element will be printed out one at a time with a 400ms delay:
+
+```TypeScript
+"use strict";
+
+// printDelayed is a 'Promise<void>'
+async function printDelayed(elements: string[]) {
+    for (const element of elements) {
+        await delay(200);
+        console.log(element);
+    }
+}
+
+async function delay(milliseconds: number) {
+    return new Promise<void>(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+printDelayed(["Hello", "beautiful", "asynchronous", "world"]).then(() => {
+    console.log();
+    console.log("Printed every element!");
+});
+```
+
+Alternatively, each 
+
 ## `this`-typing
 
 ## ES7 exponentiation operator
