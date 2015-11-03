@@ -37,6 +37,98 @@ Alternatively, each
 
 ## `this`-typing
 
+It is a common pattern to return the current object (i.e. `this`) from a method to create [fluent-style APIs](https://en.wikipedia.org/wiki/Fluent_interface).
+For instance, consider the following `BasicCalculator` module:
+
+```TypeScript
+export default class BasicCalculator {
+    public constructor(protected value: number = 0) { }
+    
+    public currentValue(): number {
+        return this.value;
+    }
+    
+    public add(operand: number) {
+        this.value += operand;
+        return this;
+    }
+    
+    public subtract(operand: number) {
+        this.value -= operand;
+        return this;
+    }
+    
+    public multiply(operand: number) {
+        this.value *= operand;
+        return this;
+    }
+    
+    public divide(operand: number) {
+        this.value /= operand;
+        return this;
+    }
+}
+```
+
+A user could express `2 * 5 + 1` as
+
+```TypeScript
+import calc from "./BasicCalculator";
+
+let v = new calc(2)
+    .multiply(5)
+    .add(1)
+    .currentValue();
+``` 
+
+This often opens up very elegant ways of writing code; however, there was a problem for classes that wanted to extend from `BasicCalculator`.
+Imagine a user wanted to start writing a `ScientificCalculator`:
+
+```TypeScript
+import BasicCalculator from "./BasicCalculator";
+
+export default class ScientificCalculator extends BasicCalculator {
+    public constructor(value = 0) {
+        super(value);
+    }
+    
+    public square() {
+        this.value = this.value ** 2;
+        return this;
+    }
+    
+    public sin() {
+        this.value = Math.sin(this.value);
+        return this;
+    }
+}
+```
+
+Because TypeScript used to infer the type `BasicCalculator` for each method in `BasicCalculator` that returned `this`, the type system would forget that it had `ScientificCalculator` whenever using a `BasicCalculator` method.
+
+For instance:
+
+```TypeScript
+import calc from "./ScientificCalculator";
+
+let v = new calc(0.5)
+    .square()
+    .divide(2)
+    .sin()    // Error: 'BasicCalculator' has no 'sin' method.
+    .currentValue();
+```
+
+This is no longer the case - TypeScript now infers `this` to have a special type called `this` whenever inside an instance method of a class.
+The `this` type is written as so, and basically means "the type of the left side of the dot in a method call".
+
+The `this` type is also useful with intersection types in describing libraries (e.g. Ember.js) that use mixin-style patterns to describe inheritance:
+
+```TypeScript
+interface MyType {
+    extend<T>(other: T): this & T;
+}
+```
+
 ## ES7 exponentiation operator
 
 ## Support for decorators when targeting ES3
