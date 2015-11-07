@@ -37,6 +37,30 @@ The language service supports the common set of a typical editor operations like
 
 * **Signature:** There are three types of signatures in the language: call, construct and index signatures.
 
+## Overview of the compilation process
+
+The process starts with preprocessing. the preprocessor figures out what files should be included in the compilation by following references (/// references and import statements).
+
+The parser then generates AST `Node`s. These are just abstract representation of the user input in a tree format. A `SourceFile` object represents an AST for a given file with some additional information like file name and source text. 
+
+The binder then passes over the AST nodes and generates and binds `Symbol`s; these are one per named entity, each `Symbol` can have multiple `Node`s, e.g.: multiple declarations of `namespace`, or `class` and a `namespace` with the same name, etc.. the binder also handles scopes and makes sure that each symbol is created in the correct enclosing function/block scope.
+
+Generating a `SourceFile` (along with its `Symbol`s) are done through calling the `createSourceFile` API.
+
+So far the AST/Symbols represent the Infomation of a single file. But `namespace`s for instance can span multiple files, so are `interface`s, `class`s, etc.. so the next step is build a global view of all files in the compilation by building a `Program`. 
+
+A `Program` is a collection of `SourceFile`s and a set of `CompilerOptions`. A `Program` is created by calling the `createProgram` API. A program can have only one file. 
+
+From a `Program` instance a `TypeCheker` can be created. `TypeChecker` is the core of the TypeScript type system. it is the part responsible to figuring out relationships between `Symbols` from different file, assigning `Type`s to `Symbol`s and generating any semantic `Diagnostic`s (i.e. errors).
+
+The first thing a `TypeCheker` will do is to consolidate all the `Symbol`s from different `SourceFile`s into a single view, and build a single Symbol Table by "merging" any common `Symbol`s (e.g. `namespace`s spanning multiple files).  
+
+After initializing the original state, the `TypeCheker` is ready to answer any questions about the program, things like: what is the `Symbol` for this `Node`, or what is the `Type` of this `Symbol`, what `Symbol`s are visible at a location in the AST, or what are the `Signature`s for a function declaration, or what errors would be produced for a file.
+
+The `TypeCheker` computes everything lazely; it only "resolves" the necessary information to answer a question, the checker will only examine Nodes/Symbols/Types that contribute to the question at hand and will not attempt to examine additional entities.
+
+An `Emitter` can also be created from a given `Program`. The `Emitter` is responsible for generating the desired output for a given `SourceFile`; this includes `.js`, `.jsx`, `.d.ts`, and `.js.map` outputs. 
+ 
 ## Terminology
 
 ##### **Full Start/Token Start**
