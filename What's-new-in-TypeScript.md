@@ -4,6 +4,8 @@
 
 ## Support output to IPC-driven files
 
+## Option to concatenate AMD and Systemjs modules into a single output file and a single dts file
+
 # TypeScript 1.7 (upcoming)
 
 ## `async`/`await` support in ES6+ targets (Node v4+)
