@@ -60,6 +60,10 @@ In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/
 
 If these errors are showing up in your code and you still think that scenario when they appear is legitimate you can suppress errors with compiler options.
 
+#### `--module` is not allowed alongside `--outFile` unless `--module` is specified as one of `amd` or `system`.
+
+Previously specifying both while using modules would result in an empty `out` file and no error.
+
 # TypeScript 1.7
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).
