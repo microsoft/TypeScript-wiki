@@ -1,3 +1,13 @@
+# Quick List
+ * [Atom](#Atom)
+ * [Eclipse](#Eclipse)
+ * [Emacs](#Emacs)
+ * [NetBeans](#NetBeans)
+ * [Sublime Text](#Sublime-Text)
+ * [Vim](#Vim)
+ * [Visual Studio](#visual-studio-20132015)
+ * [Visual Studio Code](#visual-studio-code)
+
 # Atom
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
 
@@ -14,9 +24,9 @@
 * [nbts](https://github.com/Everlaw/nbts) - NetBeans TypeScript editor plugin
 * [Geertjan's TypeScript NetBeans Plugin](https://github.com/GeertjanWielenga/TypeScript)
 
-# Sublime Text 3/2
+# Sublime Text
 
-[TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), available through [Package Control](https://packagecontrol.io/).
+The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), available through [Package Control](https://packagecontrol.io/) for both Sublime Text 3 and Sublime Text 2.
 
 # Vim
 
