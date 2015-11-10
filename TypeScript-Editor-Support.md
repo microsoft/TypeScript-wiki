@@ -4,7 +4,7 @@
  * [Emacs](#emacs)
  * [NetBeans](#netbeans)
  * [Sublime Text](#sublime-text)
- * [Vim](#Vim)
+ * [Vim](#vim)
  * [Visual Studio](#visual-studio-20132015)
  * [Visual Studio Code](#visual-studio-code)
 
