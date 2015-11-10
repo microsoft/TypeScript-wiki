@@ -4,6 +4,7 @@
  * [Emacs](#emacs)
  * [NetBeans](#netbeans)
  * [Sublime Text](#sublime-text)
+ * [TypeScript Builder](#typescript-builder)
  * [Vim](#vim)
  * [Visual Studio](#visual-studio-20132015)
  * [Visual Studio Code](#visual-studio-code)
@@ -27,6 +28,10 @@
 # Sublime Text
 
 The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Sublime-Plugin), available through [Package Control](https://packagecontrol.io/) for both Sublime Text 3 and Sublime Text 2.
+
+# TypeScript Builder
+
+[TypeScript Builder](http://www.typescriptbuilder.com/), a dedicated TypeScript IDE.
 
 # Vim
 
