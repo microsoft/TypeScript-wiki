@@ -4,7 +4,7 @@
 
 ## Support output to IPC-driven files
 
-## Option to concatenate AMD and Systemjs modules into a single output file and a single dts file
+## Option to concatenate `AMD` and `System` modules into a single output file
 
 # TypeScript 1.7 (upcoming)
 
