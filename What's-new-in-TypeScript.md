@@ -162,6 +162,24 @@ interface MyType {
 
 ## ES7 exponentiation operator
 
+TypeScript 1.7 will support upcoming ES7 exponentiation operators: `**` and `**=`. The operators will be down-level emitted using Math.pow.
+
+Example:
+```ts
+var x = 2 ** 3;
+var y = 10;
+y **= 2;
+var z =  -(4 ** 3);
+```
+will be down-level emitted as following
+
+```js
+var x = Math.pow(2, 3);
+var y = 10;
+y = Math.pow(y, 2);
+var z = -(Math.pow(4, 3));
+```
+
 ## Support for decorators when targeting ES3
 
 ## Improved checking for destructuring object literal
