@@ -8,7 +8,7 @@
 
 # TypeScript 1.7 (upcoming)
 
-## `async`/`await` support in ES6+ targets (Node v4+)
+## `async`/`await` support in ES6 targets (Node v4+)
 
 TypeScript now supports asynchronous functions for targets that support generators.
 Asynchronous functions are prefixed with the `async` keyword and return a flattened `Promise` of whatever value is returned.
