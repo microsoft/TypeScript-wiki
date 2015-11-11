@@ -141,6 +141,40 @@ interface MyType {
 
 ## Improved checking for destructuring object literal
 
+TypeScript 1.7 makes checking of destructuring patterns with an object literal or array literal initializers less rigid and more intuitive.
+
+When an object literal is contextually typed by the implied type of an object binding pattern:
+* Properties with default values in the object binding pattern become optional in the object literal.
+* Properties in the object binding pattern that have no match in the object literal are required to have a default value in the object binding pattern and are automatically added to the object literal type.
+* Properties in the object literal that have no match in the object binding pattern are an error.
+
+When an array literal is contextually typed by the implied type of an array binding pattern:
+
+* Elements in the array binding pattern that have no match in the array literal are required to have a default value in the array binding pattern and are automatically added to the array literal type.
+
+For example:
+
+```ts
+// Type of f1 is (arg?: { x?: number, y?: number }) => void
+function f1({ x = 0, y = 0 } = {}) { }
+
+// And can be called as:
+f1();
+f1({});
+f1({ x: 1 });
+f1({ y: 1 });
+f1({ x: 1, y: 1 });
+
+// Type of f2 is (arg?: (x: number, y?: number) => void
+function f2({ x, y = 0 } = { x: 0 }) { }
+
+f2();
+f2({});        // Error, x not optional
+f2({ x: 1 });
+f2({ y: 1 });  // Error, x not optional
+f2({ x: 1, y: 1 });
+```
+
 # TypeScript 1.6
 
 ## JSX support
