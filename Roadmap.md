@@ -9,6 +9,8 @@
 * [Support for comments in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/4987)
 * [Support for stylized error messages in terminal output with `--pretty`](https://github.com/Microsoft/TypeScript/pull/5140)
 * [Support for `--outFile` with named pipes, sockets, and special devices](https://github.com/Microsoft/TypeScript/issues/4841)
+* [Support for computed property with literal names](https://github.com/Microsoft/TypeScript/issues/4653)
+* [Support for string literal types](https://github.com/Microsoft/TypeScript/pull/5185)
 * Improve lib.d.ts modularity
 * Module bundling
 
