@@ -163,7 +163,7 @@ interface MyType {
 
 ## ES7 exponentiation operator
 
-TypeScript 1.7 supports upcoming ES7/ES2016 exponentiation operators: `**` and `**=`. The operators will be down-level emitted using `Math.pow`.
+TypeScript 1.7 supports upcoming [ES7/ES2016 exponentiation operators](https://github.com/rwaldron/exponentiation-operator): `**` and `**=`. The operators will be transformed in the output to ES3/ES5 using `Math.pow`.
 
 ##### Example
 
