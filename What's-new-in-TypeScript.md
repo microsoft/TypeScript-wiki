@@ -168,7 +168,7 @@ When an array literal is contextually typed by the implied type of an array bind
 
 * Elements in the array binding pattern that have no match in the array literal are required to have a default value in the array binding pattern and are automatically added to the array literal type.
 
-For example:
+##### Example
 
 ```ts
 // Type of f1 is (arg?: { x?: number, y?: number }) => void
