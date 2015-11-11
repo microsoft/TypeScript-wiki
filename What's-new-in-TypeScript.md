@@ -39,6 +39,7 @@ TypeScript now supports asynchronous functions for engines that have native supp
 Asynchronous functions are prefixed with the `async` keyword; `await` suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the `Promise` returned.
 
 ##### Example
+
 In the following example, each input element will be printed out one at a time with a 400ms delay:
 
 ```TypeScript
@@ -162,16 +163,18 @@ interface MyType {
 
 ## ES7 exponentiation operator
 
-TypeScript 1.7 will support upcoming ES7 exponentiation operators: `**` and `**=`. The operators will be down-level emitted using Math.pow.
+TypeScript 1.7 supports upcoming ES7/ES2016 exponentiation operators: `**` and `**=`. The operators will be down-level emitted using `Math.pow`.
 
-Example:
+##### Example
+
 ```ts
 var x = 2 ** 3;
 var y = 10;
 y **= 2;
 var z =  -(4 ** 3);
 ```
-will be down-level emitted as following
+
+Will generate the following JavaScript output:
 
 ```js
 var x = Math.pow(2, 3);
