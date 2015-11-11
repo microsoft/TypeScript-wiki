@@ -28,8 +28,10 @@ Specifying `--outFile` in conjunction with `--module amd` or `--module system` w
 
 ## `async`/`await` support in ES6 targets (Node v4+)
 
-TypeScript now supports asynchronous functions for targets that support generators.
-Asynchronous functions are prefixed with the `async` keyword and return a flattened `Promise` of whatever value is returned.
+TypeScript now supports asynchronous functions for engines that have native support for ES6 generators, e.g. Node v4 and above.
+Asynchronous functions are prefixed with the `async` keyword; `await` suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the `Promise` returned.
+
+##### Example
 In the following example, each input element will be printed out one at a time with a 400ms delay:
 
 ```TypeScript
@@ -55,7 +57,7 @@ printDelayed(["Hello", "beautiful", "asynchronous", "world"]).then(() => {
 });
 ```
 
-Alternatively, each 
+For more information see [Async Functions](https://github.com/Microsoft/TypeScript/issues/1664) proposal.
 
 ## `this`-typing
 
