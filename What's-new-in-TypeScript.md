@@ -2,6 +2,8 @@
 
 ## Prettier error messages from `tsc`
 
+![Showing off pretty error messages in ConEmu](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/new-in-typescript/pretty01.png)
+
 ## Support output to IPC-driven files
 
 In TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
