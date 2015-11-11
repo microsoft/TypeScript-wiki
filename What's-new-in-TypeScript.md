@@ -183,8 +183,6 @@ y = Math.pow(y, 2);
 var z = -(Math.pow(4, 3));
 ```
 
-## Support for decorators when targeting ES3
-
 ## Improved checking for destructuring object literal
 
 TypeScript 1.7 makes checking of destructuring patterns with an object literal or array literal initializers less rigid and more intuitive.
@@ -220,6 +218,11 @@ f2({ x: 1 });
 f2({ y: 1 });  // Error, x not optional
 f2({ x: 1, y: 1 });
 ```
+
+## Support for decorators when targeting ES3
+
+Decorators are now allowed when targeting ES3. TypeScript 1.7 removes the ES5-specific use of `reduceRight` from the `__decorate` helper. The changes also inline calls `Object.getOwnPropertyDescriptor` and `Object.defineProperty` in a backwards-compatible fashion that allows for a to clean up the emit for ES5 and later by removing various repetitive calls to the aforementioned `Object` methods.
+
 
 # TypeScript 1.6
 
