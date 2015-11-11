@@ -2,6 +2,11 @@
 
 ## Prettier error messages from `tsc`
 
+We understand that a ton of monochrome output can be a little difficult on the eyes.
+Colors can help discern where a message starts and ends, and these visual clues are important when error output gets overwhelming.
+
+TypeScript supports more colorful output for error messages using the experimental `--pretty` command line option.
+
 ![Showing off pretty error messages in ConEmu](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/new-in-typescript/pretty01.png)
 
 ## Support output to IPC-driven files
