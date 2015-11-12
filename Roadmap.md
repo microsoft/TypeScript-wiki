@@ -5,6 +5,7 @@
 
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * [Allow JavaScript in TypeScript compilations with `--allowjs`](https://github.com/Microsoft/TypeScript/issues/4792)
+* [Allow captured `let`/`const` in loops](https://github.com/Microsoft/TypeScript/issues/3915)
 * [Flag unreachable code](https://github.com/Microsoft/TypeScript/pull/4788)
 * [Concatenate module output with `--outFile`](https://github.com/Microsoft/TypeScript/pull/5090)
 * [Accept comments in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/4987)
