@@ -11,7 +11,7 @@
 
  * **Emitter:** Output generated from a set of inputs (.ts and .d.ts) files can be one of: JavaScript (.js), definitions (.d.ts), or source maps (.js.map)
 
- * **Pre-processor:** The "Compilation Context" refers to all files involved in a "program". The context is created by inspecting all files passed in to the compiler on the command line, in order, and then adding any files they may reference directory or indirectly through `import` statements and `/// <reference path=... >` tags.
+ * **Pre-processor:** The "Compilation Context" refers to all files involved in a "program". The context is created by inspecting all files passed in to the compiler on the command line, in order, and then adding any files they may reference directory or indirectly through `import` statements and `/// <reference path=... />` tags.
 The result of walking the reference graph is an ordered list of source files, that constitute the program.
 When resolving imports, preference is given to ".ts" files over ".d.ts" files to ensure the most up-to-date files are processed.
 The compiler does a node-like process to resolve imports by walking up the directory chain to find a source file with a .ts or .d.ts extension matching the requested import.
