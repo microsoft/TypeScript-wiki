@@ -13,6 +13,7 @@
 * [Support for `--outFile` with named pipes, sockets, and special devices](https://github.com/Microsoft/TypeScript/issues/4841)
 * [Support computed property with literal names](https://github.com/Microsoft/TypeScript/issues/4653)
 * [String literal types](https://github.com/Microsoft/TypeScript/pull/5185)
+* [Stateless Functional Components in JSX](https://github.com/Microsoft/TypeScript/issues/5478)
 * Improve lib.d.ts modularity
 * Module bundling
 
