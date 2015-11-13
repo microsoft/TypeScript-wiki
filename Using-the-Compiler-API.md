@@ -435,10 +435,10 @@ function compile(sourceFiles: string[], moduleSearchLocations: string[]): void {
 }
 ```
 
-### Using the TypeChecker
+### Using the Type Checker
 
-In this sample we will walk the AST and use the checker to serialize class information.
-We use the typeCheker to get symbol and type information, including JSDoc comments for the class, constructor and constructor parameters.
+In this example we will walk the AST and use the checker to serialize class information.
+We'll use the type checker to get symbol and type information, while grabbing JSDoc comments for classes, their constructors, and respective constructor parameters.
 
 ```ts
 /// <reference path="typings/node/node.d.ts" />
@@ -453,7 +453,7 @@ interface DocEntry {
     type?: string,
     constructors?: DocEntry[],
     parameters?: DocEntry[],
-    returnType?:string
+    returnType?: string
 };
 
 /** Generate documention for all classes in a set of .ts files */
@@ -467,7 +467,7 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
     let output: DocEntry[] = [];
 
     // Visit every sourceFile in the program    
-    program.getSourceFiles().forEach(sourceFile => {
+    for (const sourceFile of program.getSourceFiles()) {
         // Walk the tree to search for classes
         ts.forEachChild(sourceFile, visit);
     });
