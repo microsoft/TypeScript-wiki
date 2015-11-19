@@ -22,5 +22,6 @@ The precise algorithm for module resolution can be found [here](https://github.c
 * be an external module
 * not have triple-slash references 
 
-The rationale is that typings should not bring new compilable items to the set of compiled files; otherwise actual implementation files in the package can be overwritten during compilation.
-Additionally, **loading typings should not pollute global scope** by bringing potentially conflicting entries from different version of the same library
+The rationale is that typings should not bring new compatible items to the set of compiled files; otherwise actual implementation files (i.e. `.ts` files) will be considered by the compiler as part of the user code and will be compiled, and outputs in the package can be overwritten.
+
+Additionally, **loading typings should not pollute global scope** by bringing potentially conflicting entries from different version of the same library. Modules have their own scope, and do not pollute the global namespace, if your typings file is not a module, it will be polluting the user global scope, and will cause conflicts with other packages that depend on your package. Similarly `/// <references ... />` can bring global declarations into the global scope and should be avoided.
