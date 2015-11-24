@@ -15,6 +15,7 @@
 * [String literal types](https://github.com/Microsoft/TypeScript/pull/5185)
 * [Stateless Functional Components in JSX](https://github.com/Microsoft/TypeScript/issues/5478)
 * [Improved union/intersection type inference](https://github.com/Microsoft/TypeScript/pull/5738)
+* [Support full path for `-project`/`-p` parameter](https://github.com/Microsoft/TypeScript/issues/2869)
 * Improve lib.d.ts modularity
 * Module bundling
 
