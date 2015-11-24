@@ -64,7 +64,7 @@ If these errors are showing up in your code and you still think that scenario wh
 
 Previously specifying both while using modules would result in an empty `out` file and no error.
 
-#### Modules are now emitted use a `"use strict"`; prologue
+#### Modules are now emitted with a `"use strict"`; prologue
 
 Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in our emitted code. Now we ensure emitted modules are in strict mode.
 
