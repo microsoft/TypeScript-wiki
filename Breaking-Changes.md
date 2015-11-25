@@ -64,6 +64,10 @@ If these errors are showing up in your code and you still think that scenario wh
 
 Previously specifying both while using modules would result in an empty `out` file and no error.
 
+#### Modules are now emitted with a `"use strict"`; prologue
+
+Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in our emitted code. Now we ensure emitted modules are in strict mode.
+
 # TypeScript 1.7
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).

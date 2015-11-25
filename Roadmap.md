@@ -3,14 +3,19 @@
 
 # 1.8
 
-* [Support for path mappings module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
-* [Support JavaScript in TypeScript compilations](https://github.com/Microsoft/TypeScript/issues/4792)
-* [Support for unreachable code reporting](https://github.com/Microsoft/TypeScript/pull/4788)
-* [Support for comments in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/4987)
-* [Support for stylized error messages in terminal output with `--pretty`](https://github.com/Microsoft/TypeScript/pull/5140)
+* [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
+* [Allow JavaScript in TypeScript compilations with `--allowjs`](https://github.com/Microsoft/TypeScript/issues/4792)
+* [Allow captured `let`/`const` in loops](https://github.com/Microsoft/TypeScript/issues/3915)
+* [Flag unreachable code](https://github.com/Microsoft/TypeScript/pull/4788)
+* [Concatenate module output with `--outFile`](https://github.com/Microsoft/TypeScript/pull/5090)
+* [Accept comments in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/4987)
+* [Stylize error messages in terminal output with `--pretty`](https://github.com/Microsoft/TypeScript/pull/5140)
 * [Support for `--outFile` with named pipes, sockets, and special devices](https://github.com/Microsoft/TypeScript/issues/4841)
-* [Support for computed property with literal names](https://github.com/Microsoft/TypeScript/issues/4653)
-* [Support for string literal types](https://github.com/Microsoft/TypeScript/pull/5185)
+* [Support computed property with literal names](https://github.com/Microsoft/TypeScript/issues/4653)
+* [String literal types](https://github.com/Microsoft/TypeScript/pull/5185)
+* [Stateless Functional Components in JSX](https://github.com/Microsoft/TypeScript/issues/5478)
+* [Improved union/intersection type inference](https://github.com/Microsoft/TypeScript/pull/5738)
+* [Support full path for `-project`/`-p` parameter](https://github.com/Microsoft/TypeScript/issues/2869)
 * Improve lib.d.ts modularity
 * Module bundling
 

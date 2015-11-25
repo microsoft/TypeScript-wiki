@@ -2,7 +2,18 @@
 
 ## Prettier error messages from `tsc`
 
+We understand that a ton of monochrome output can be a little difficult on the eyes.
+Colors can help discern where a message starts and ends, and these visual clues are important when error output gets overwhelming.
+
+By just passing the `--pretty` command line option, TypeScript gives more colorful output with context about where things are going wrong.
+
 ![Showing off pretty error messages in ConEmu](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/new-in-typescript/pretty01.png)
+
+## The `--project` (`-p`) flag can now take any file path
+
+The `--project` command line option originally could only take paths to a folder containing a `tsconfig.json`. Given the different scenarios for build configurations, it made sense to allow `--project` to point to any other compatible JSON file. For instance, a user might want to target ES2015 with CommonJS modules for Node 5, but ES5 with AMD modules for the browser. With this new work, users can easily manage two separate build targets using `tsc` alone without having to perform hacky workarounds like placing `tsconfig.json` files in separate directories.
+
+The old behavior still remains the same if given a directory - the compiler will try to find a file in the directory named `tsconfig.json`.
 
 ## Support output to IPC-driven files
 
@@ -34,6 +45,7 @@ TypeScript now supports asynchronous functions for engines that have native supp
 Asynchronous functions are prefixed with the `async` keyword; `await` suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the `Promise` returned.
 
 ##### Example
+
 In the following example, each input element will be printed out one at a time with a 400ms delay:
 
 ```TypeScript
@@ -59,7 +71,22 @@ printDelayed(["Hello", "beautiful", "asynchronous", "world"]).then(() => {
 });
 ```
 
-For more information see [Async Functions](https://github.com/Microsoft/TypeScript/issues/1664) proposal.
+For more information see [Async Functions](http://blogs.msdn.com/b/typescript/archive/2015/11/03/what-about-async-await.aspx) blog post.
+
+## Support for `--target ES6` with `--module`
+
+TypeScript 1.7 adds `ES6` to the list of options available for the `--module` flag and allows you to specify the module output when targeting `ES6`. This provides more flexibility to target exactly the features you want in specific runtimes.
+
+#### Example
+
+```json
+{
+    "compilerOptions": { 
+        "module": "amd",
+        "target": "es6"
+    }
+}
+```
 
 ## `this`-typing
 
@@ -157,7 +184,25 @@ interface MyType {
 
 ## ES7 exponentiation operator
 
-## Support for decorators when targeting ES3
+TypeScript 1.7 supports upcoming [ES7/ES2016 exponentiation operators](https://github.com/rwaldron/exponentiation-operator): `**` and `**=`. The operators will be transformed in the output to ES3/ES5 using `Math.pow`.
+
+##### Example
+
+```ts
+var x = 2 ** 3;
+var y = 10;
+y **= 2;
+var z =  -(4 ** 3);
+```
+
+Will generate the following JavaScript output:
+
+```js
+var x = Math.pow(2, 3);
+var y = 10;
+y = Math.pow(y, 2);
+var z = -(Math.pow(4, 3));
+```
 
 ## Improved checking for destructuring object literal
 
@@ -194,6 +239,11 @@ f2({ x: 1 });
 f2({ y: 1 });  // Error, x not optional
 f2({ x: 1, y: 1 });
 ```
+
+## Support for decorators when targeting ES3
+
+Decorators are now allowed when targeting ES3. TypeScript 1.7 removes the ES5-specific use of `reduceRight` from the `__decorate` helper. The changes also inline calls `Object.getOwnPropertyDescriptor` and `Object.defineProperty` in a backwards-compatible fashion that allows for a to clean up the emit for ES5 and later by removing various repetitive calls to the aforementioned `Object` methods.
+
 
 # TypeScript 1.6
 
