@@ -27,7 +27,7 @@ Note: You may also use the [VSDevMode.ps1](https://github.com/Microsoft/TypeScri
 4. Right click the `CustomTypeScriptServicesFileLocation` value and **Modify** it.
 5. Change the value data to the full path of your alternative services file (e.g. `C:\Users\Daniel\TypeScript\built\local\typescriptServices.js`)
 
-To use a custom lib.d.ts library definition in conjunction with the custom language service file, there are two additional registery keys which need to be set. Both reside in the `TypeScriptLanguageService` key as specified above:
+To use a custom lib.d.ts library definition in conjunction with the custom language service file, there are two additional registry keys which need to be set. Both reside in the `TypeScriptLanguageService` key as specified above:
 * `CustomDefaultLibraryLocation` - for lib.d.ts (e.g. `C:\Users\Daniel\TypeScript\built\local\lib.d.ts`)
 * `CustomDefaultES6LibraryLocation` - for lib.es6.d.ts (e.g. `C:\Users\Daniel\TypeScript\built\local\lib.es6.d.ts`)
 
@@ -50,7 +50,7 @@ When the language service's script side is modified in any way (whether or not y
 5. Click the radio button `Debug these code types` and select `Script`. Then press OK. <br />
   ![Select 'Script' code to be debugged.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/005.png)
 6. Find the appropriate Visual Studio instance in your list. Visual Studio instances have the process name `devenv.exe` and you can typically narrow down your instance looking for its current file in the Title field.
-7. Hit the `Attach` button. In the **Solution Exporer**. you should now see four active debuggers (one for each language service thread). <br />
+7. Hit the `Attach` button. In the **Solution Explorer**. you should now see four active debuggers (one for each language service thread). <br />
   ![Debugging view after appropriately selecting your Visual Studio instance.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/dev-mode-screenshots/006.png)
 
 At this point you should be able to hit debug points and get an understanding of what's going on.
