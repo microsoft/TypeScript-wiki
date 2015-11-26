@@ -66,7 +66,7 @@ Previously specifying both while using modules would result in an empty `out` fi
 
 #### Modules are now emitted with a `"use strict"`; prologue
 
-Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in our emitted code. Now we ensure emitted modules are in strict mode.
+Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in our emitted code. Now we ensure emitted modules are in strict mode. This shouldn't have any visible changes in most code as TS considers most strict mode errors as errors at compiler time, but it means that some things which used to silently fail at runtime in your TS code, like assigning to NaN, will now loudly fail. You can reference the [MDN Article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) on strict mode for a detailed list of the differences between strict mode and non-strict mode.
 
 # TypeScript 1.7
 
