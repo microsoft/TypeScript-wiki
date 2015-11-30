@@ -37,7 +37,7 @@ tsc foo.ts --outFile /dev/stdout | pretty-js
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
 
-# TypeScript 1.7 (upcoming)
+# TypeScript 1.7
 
 ## `async`/`await` support in ES6 targets (Node v4+)
 
