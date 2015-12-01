@@ -7,6 +7,7 @@
   - should not contain tripleslash references.
 
   Rationale: files containing external typings should not pollute global scope (to avoid conflicts between different versions of the same package). Also such files should never be added to the list of compiled files (otherwise compiled .ts file might overwrite actual .js file with implementation of the package) 
+- `ts.parseConfigFile` has been renamed to `ts.parseJsonConfigFileContent`
 
 # TypeScript 1.5
 
