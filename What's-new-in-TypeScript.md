@@ -17,7 +17,7 @@ The old behavior still remains the same if given a directory - the compiler will
 
 ## Support output to IPC-driven files
 
-In TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
+TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
 
 As an example, on many Unix-like systems, the standard output stream is accessible by the file `/dev/stdout`.
 
