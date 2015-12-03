@@ -37,9 +37,32 @@ tsc foo.ts --outFile /dev/stdout | pretty-js
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
 
-## New compiler flag : `--allowSyntheticDefaultExports`
+## The new `--allowSyntheticDefaultImports` compiler flag
 
-When `--allowSyntheticDefaultImports` is specified, it indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. We infer that the default member is either the export= member of the imported module or the entire module itself should that not be present. System modules have this flag on by default.
+Default exports are an ES2015 feature for when modules are meant to have a primary usage.
+For instance, users can import a default-exported class with something like
+
+```ts
+import Foo from "moduleName";
+
+let foo = new Foo();
+```
+
+without having to think much about the other contents of the module.
+Unfortunately, other module systems also have a common mechanism to achieve this, which TypeScript users could leverage as follows:
+
+```ts
+import Foo = require("moduleName");
+
+let foo = new Foo();
+```
+
+This often resulted in awkward code when users needed to mix newer ECMAScript 2015 import syntax with older import forms.
+As a result, many module loaders "adapt" older style default exports into actual default exports to get around this.
+
+When `--allowSyntheticDefaultImports` is specified, it indicates that some module loader will adapt the module to supply a default-export.
+TypeScript will infer that the default export is either the entity specified by an `export =` declaration of the imported module, or or the entire module itself should that not be present.
+SystemJS modules have this flag on by default.
 
 # TypeScript 1.7
 
