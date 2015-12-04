@@ -10,7 +10,7 @@
 * [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
 * [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
 * [TypeScript Editor Support](TypeScript-Editor-Support)
-* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md
+* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [Using TypeScript with ASP.NET v5](Using-TypeScript-With-ASP.NET-5)
 
 # Advanced Topics
