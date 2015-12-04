@@ -1,1 +1,1 @@
-> ### Note: This file has moved to [Typescript-handbook\tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
+> ### Note: This page has moved to [Typescript-Handbook/tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)

@@ -1,1 +1,1 @@
-> ### Note: This file has moved to [Typescript-handbook\Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
+> ### Note: This page has moved to [Typescript-Handbook/Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
