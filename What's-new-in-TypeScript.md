@@ -37,7 +37,7 @@ tsc foo.ts --outFile /dev/stdout | pretty-js
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
 
-## New compiler flag : `--allowSyntheticDefaultExports`
+## New compiler flag : `--allowSyntheticDefaultImports`
 
 When `--allowSyntheticDefaultImports` is specified, it indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. We infer that the default member is either the export= member of the imported module or the entire module itself should that not be present. System modules have this flag on by default.
 
