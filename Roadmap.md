@@ -18,7 +18,6 @@
 * [Support full path for `-project`/`-p` parameter](https://github.com/Microsoft/TypeScript/issues/2869)
 * [Support for `default` import interop with SystemJS using `--allowSyntheticDefaultImports`](https://github.com/Microsoft/TypeScript/issues/5285)
 * [Recognize prototype assignments in JavaScript files](https://github.com/Microsoft/TypeScript/pull/5876)
-* [Allow type parameters in generic constraints](https://github.com/Microsoft/TypeScript/pull/5949)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * [Augmenting global/module scope from other modules](https://github.com/Microsoft/TypeScript/issues/4166)
 
