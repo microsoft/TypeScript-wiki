@@ -1,5 +1,24 @@
 # 2.0
-* `async`/`await` support for ES5/ES3
+
+* [Switch to a transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
+* [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1664)
+* [Object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
+* [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
+* [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
+* [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
+* [Support type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
+* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
+* [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
+* [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
+* [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
+* Decorators for function expressions/arrow functions
+* [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
+* [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
+* Quick fixes support in language service API
+* tsd integration in tsserver/language service API
+* [Extract type information from JSDoc in js files](https://github.com/Microsoft/TypeScript/issues/4790)
+* [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
+* [Support for an external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 
 # 1.8
 
