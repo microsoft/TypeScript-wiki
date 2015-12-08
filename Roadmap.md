@@ -1,3 +1,12 @@
+# 2.1 
+
+* Investigate [Function bind operator](https://github.com/Microsoft/TypeScript/issues/3508)
+* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [`readonly` modifier](https://github.com/Microsoft/TypeScript/issues/12)
+* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
+* Refactoring support in Language Service API
+* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
+
 # 2.0
 
 * [Switch to a transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
