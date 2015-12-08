@@ -20,6 +20,7 @@
 * [Recognize prototype assignments in JavaScript files](https://github.com/Microsoft/TypeScript/pull/5876)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * [Augmenting global/module scope from other modules](https://github.com/Microsoft/TypeScript/issues/4166)
+* [Use tsconfig.json as higher priority source of configuration in Visual Studio](https://github.com/Microsoft/TypeScript/issues/5287)
 
 # 1.7
 
