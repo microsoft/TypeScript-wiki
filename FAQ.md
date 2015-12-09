@@ -1,6 +1,10 @@
-# Function parameters are bivariant
+# Why are function parameters are bivariant?
 
-# All types are assignable to empty interfaces
+# Why are functions with fewer parameters assignable to functions that take more parameters?
+
+# Why are functions returning non-`void` assignable to function returning `void`?
+
+# Why are all types are assignable to empty interfaces?
 
 # Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?
 
@@ -14,8 +18,26 @@
 
 # Decorators on function declarations
 
-# Getters without setters are not considered readonly
+# Why are getters without setters not considered read-only?
 
 See [Issue #12](https://github.com/Microsoft/TypeScript/issues/12)
 
 # I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`
+
+# Why don't namespaces merge across different module files?
+
+# What's the difference between `enum` and `const enum`s?
+
+# What's the difference between `declare class` and `inteface`?
+
+# Can I make a type alias nominal?
+
+# How do I prevent two types from being structurally compatible?
+
+# What does it mean for an interface to extend a class?
+
+# Why am I getting an error about a missing index signature?
+
+# Why can't I use `x` in `function f({ x: number }) { /* ... */ }`?
+
+# Why don't I get type checking for `(number) => string`?
