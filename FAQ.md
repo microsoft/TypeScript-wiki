@@ -1,3 +1,5 @@
+# Why are imports being elided in my emit?
+
 # Why are function parameters are bivariant?
 
 # Why are functions with fewer parameters assignable to functions that take more parameters?
