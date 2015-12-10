@@ -15,6 +15,10 @@ The `--project` command line option originally could only take paths to a folder
 
 The old behavior still remains the same if given a directory - the compiler will try to find a file in the directory named `tsconfig.json`.
 
+## `this`-based type guards
+
+TODO
+
 ## Support output to IPC-driven files
 
 TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
