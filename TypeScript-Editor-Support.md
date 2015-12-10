@@ -59,6 +59,8 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 # Visual Studio 2013/2015
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
+TypeScript Installer for Visual Studio 2015 can be found [here] (http://www.microsoft.com/en-us/download/details.aspx?id=48593)
+TypeScript Installer for Visual Studio 2013 can be found [here] (https://www.microsoft.com/en-us/download/details.aspx?id=48739)
 
 # Visual Studio Code
 
