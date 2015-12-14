@@ -49,3 +49,6 @@ See [Issue #12](https://github.com/Microsoft/TypeScript/issues/12)
 # Why doesn't this incorrect cast throw a runtime error?
 
 # How do I write unit tests with TypeScript?
+
+# Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?
+(Derived class put before base class)
