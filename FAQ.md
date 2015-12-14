@@ -43,3 +43,8 @@ See [Issue #12](https://github.com/Microsoft/TypeScript/issues/12)
 # Why can't I use `x` in `function f({ x: number }) { /* ... */ }`?
 
 # Why don't I get type checking for `(number) => string`?
+
+# How do I check at runtime if an object implements some interface?
+
+# Why doesn't this incorrect cast throw a runtime error?
+
