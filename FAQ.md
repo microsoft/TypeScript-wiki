@@ -52,3 +52,6 @@ See [Issue #12](https://github.com/Microsoft/TypeScript/issues/12)
 
 # Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?
 (Derived class put before base class)
+
+# Why do my derived class property initializers overwrite values set in the base class constructor?
+See #1617 for this and other initialization order questions
