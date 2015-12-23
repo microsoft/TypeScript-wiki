@@ -1,6 +1,5 @@
 # Quick List
  * [Atom](#atom)
- * [Intellij IDEA](#intellij-idea)
  * [Eclipse](#eclipse)
  * [Emacs](#emacs)
  * [NetBeans](#netbeans)
@@ -9,12 +8,10 @@
  * [Vim](#vim)
  * [Visual Studio](#visual-studio-20132015)
  * [Visual Studio Code](#visual-studio-code)
+ * [WebStorm](#intellij-idea)
 
 # Atom
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
-
-# Intellij IDEA
-[Intellij IDEA](https://www.jetbrains.com/idea/help/typescript-support.html), as well as other Jetbrains IDEs, contains TypeScript language support out of the box.
 
 # Eclipse
 
@@ -71,3 +68,7 @@ TypeScript for Visual Studio 2013 can be found [here] (https://www.microsoft.com
 # Visual Studio Code
 
 [Visual Studio Code](https://code.visualstudio.com/), a lightweight cross-platform editor, comes with TypeScript support built in.
+
+# Webstorm
+
+[WebStorm](https://www.jetbrains.com/idea/help/typescript-support.html), as well as other JetBrains IDEs, contain TypeScript language support out of the box.
