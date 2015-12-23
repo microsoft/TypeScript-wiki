@@ -1,9 +1,36 @@
+# 2.1 
+
+* Investigate [Function bind operator](https://github.com/Microsoft/TypeScript/issues/3508)
+* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [`readonly` modifier](https://github.com/Microsoft/TypeScript/issues/12)
+* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
+* Refactoring support in Language Service API
+* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
+
 # 2.0
-* `async`/`await` support for ES5/ES3
+
+* Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
+* [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1664)
+* Support [ES7 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
+* [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
+* [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
+* [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
+* Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
+* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
+* [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
+* [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
+* [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
+* Decorators for function expressions/arrow functions
+* [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
+* [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
+* Quick fixes support in language service API
+* tsd integration in tsserver/language service API
+* [Extract type information from JSDoc in js files](https://github.com/Microsoft/TypeScript/issues/4790)
+* [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
+* Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 
 # 1.8
 
-* [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * [Allow JavaScript in TypeScript compilations with `--allowjs`](https://github.com/Microsoft/TypeScript/issues/4792)
 * [Allow captured `let`/`const` in loops](https://github.com/Microsoft/TypeScript/issues/3915)
 * [Flag unreachable code](https://github.com/Microsoft/TypeScript/pull/4788)
@@ -15,10 +42,14 @@
 * [String literal types](https://github.com/Microsoft/TypeScript/pull/5185)
 * [Stateless Functional Components in JSX](https://github.com/Microsoft/TypeScript/issues/5478)
 * [Improved union/intersection type inference](https://github.com/Microsoft/TypeScript/pull/5738)
+* [Support for F-Bounded Polymorphism](https://github.com/Microsoft/TypeScript/pull/5949)
 * [Support full path for `-project`/`-p` parameter](https://github.com/Microsoft/TypeScript/issues/2869)
 * [Support for `default` import interop with SystemJS using `--allowSyntheticDefaultImports`](https://github.com/Microsoft/TypeScript/issues/5285)
-* Improve lib.d.ts modularity
-* Module bundling
+* [Recognize prototype assignments in JavaScript files](https://github.com/Microsoft/TypeScript/pull/5876)
+* [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
+* [Augmenting global/module scope from other modules](https://github.com/Microsoft/TypeScript/issues/4166)
+* [Use tsconfig.json as higher priority source of configuration in Visual Studio](https://github.com/Microsoft/TypeScript/issues/5287)
+* [`this`-based type guards](https://github.com/Microsoft/TypeScript/pull/5906)
 
 # 1.7
 

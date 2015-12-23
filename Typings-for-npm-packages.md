@@ -16,7 +16,7 @@ TypeScript 1.6 has introduced new way of resolving module names that mimics the 
 
 The precise algorithm for module resolution can be found [here](https://github.com/Microsoft/TypeScript/issues/2338)
 
-### What your typings file should
+### Your typings file should...
 
 * be a `.d.ts` file
 * be an external module
