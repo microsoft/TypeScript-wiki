@@ -71,4 +71,4 @@ TypeScript for Visual Studio 2013 can be found [here] (https://www.microsoft.com
 
 # Webstorm
 
-[WebStorm](https://www.jetbrains.com/idea/help/typescript-support.html), as well as other JetBrains IDEs, contain TypeScript language support out of the box.
+[WebStorm](https://www.jetbrains.com/webstorm/), as well as other JetBrains IDEs, contain TypeScript language support out of the box.
