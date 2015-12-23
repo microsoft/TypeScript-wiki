@@ -8,7 +8,7 @@
  * [Vim](#vim)
  * [Visual Studio](#visual-studio-20132015)
  * [Visual Studio Code](#visual-studio-code)
- * [WebStorm](#intellij-idea)
+ * [WebStorm](#webstorm)
 
 # Atom
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
