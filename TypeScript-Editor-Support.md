@@ -1,5 +1,6 @@
 # Quick List
  * [Atom](#atom)
+ * [Intellij IDEA](#intellij-idea)
  * [Eclipse](#eclipse)
  * [Emacs](#emacs)
  * [NetBeans](#netbeans)
@@ -11,6 +12,9 @@
 
 # Atom
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
+
+# Intellij IDEA
+[Intellij IDEA](https://www.jetbrains.com/idea/help/typescript-support.html), as well as other Jetbrains IDEs, contains TypeScript language support out of the box.
 
 # Eclipse
 
