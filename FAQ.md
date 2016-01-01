@@ -57,3 +57,5 @@ See [Issue #12](https://github.com/Microsoft/TypeScript/issues/12)
 See #1617 for this and other initialization order questions
 
 # What does the error "Exported variable [name] has or is using private name [name]" mean?
+
+#6307
