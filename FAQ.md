@@ -58,4 +58,4 @@ See #1617 for this and other initialization order questions
 
 # What does the error "Exported variable [name] has or is using private name [name]" mean?
 
-#6307
+Port in content from #6307
