@@ -50,6 +50,7 @@
 * [Augmenting global/module scope from other modules](https://github.com/Microsoft/TypeScript/issues/4166)
 * [Use tsconfig.json as higher priority source of configuration in Visual Studio](https://github.com/Microsoft/TypeScript/issues/5287)
 * [`this`-based type guards](https://github.com/Microsoft/TypeScript/pull/5906)
+* Support for [custom JSX factories using `--reactNamespace`](https://github.com/Microsoft/TypeScript/pull/6146)
 
 # 1.7
 
