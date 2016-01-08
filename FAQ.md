@@ -195,26 +195,26 @@ In general, you should *never* find yourself declaring an `interface` with no pr
 TODO: Answer
 
 ### How do I prevent two types from being structurally compatible?
-I would like the following code to produce an error:
-```ts
-interface ScreenCoordinate {
-  x: number;
-  y: number;
-}
-interface PrintCoordinate {
-  x: number;
-  y: number;
-}
-function sendToPrinter(pt: PrintCoordinate) {
-  // ...
-}
-function getCursorPos(): ScreenCoordinate {
-  // Not a real implementation
-  return { x: 0, y: 0 };
-}
-// This should be an error
-sendToPrinter(getCursorPos());
-```
+> I would like the following code to produce an error:
+> ```ts
+> interface ScreenCoordinate {
+>   x: number;
+>   y: number;
+> }
+> interface PrintCoordinate {
+>   x: number;
+>   y: number;
+> }
+> function sendToPrinter(pt: PrintCoordinate) {
+>   // ...
+> }
+> function getCursorPos(): ScreenCoordinate {
+>   // Not a real implementation
+>   return { x: 0, y: 0 };
+> }
+> // This should be an error
+> sendToPrinter(getCursorPos());
+> ```
 
 A possible fix if you really want two types to be incompatible is to add a 'brand' member:
 ```ts
@@ -298,13 +298,12 @@ Because types are erased, there is no direct equivalent of C#'s `expr as` type o
 
 
 ### Why don't I get type checking for `(number) => string` or `(T) => T`?
-
-I wrote some code like this and expected an error:
-```ts
-let myFunc: (number) => string = (n) => 'The number in hex is ' + n.toString(16);
-// Expected error because boolean is not number
-console.log(myFunc(true));
-```
+> I wrote some code like this and expected an error:
+> ```ts
+> let myFunc: (number) => string = (n) => 'The number in hex is ' + n.toString(16);
+> // Expected error because boolean is not number
+> console.log(myFunc(true));
+> ```
 
 Parameter names in function types are required.
 The code as written describes a function taking one parameter named `number` of type `any`.
@@ -319,11 +318,14 @@ let myFunc: (number: any) => string
 
 To avoid this problem, turn on the `noImplicitAny` flag, which will issue a warning about the implicit `any` parameter type.
 
+### Why am I getting an error about a missing index signature?
+TODO: Answer
+
 
 -------------------------------------------------------------------------------------
 ## Functions
 
-## Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?
+### Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?
 > I wrote some code like this and got an unexpected error:
 > ```ts
 > function f({x: number}) {
@@ -368,13 +370,6 @@ TODO: Answer
 
 ### Why does `this` get orphaned in my instance methods?
 
-Synonyms and alternate symptoms:
-* Why are my class properties `undefined` in my callback?
-* Why does `this` point to `window` in my callback?
-* Why does `this` point to `undefined` in my callback?
-* Why am I getting an error `this.someMethod is not a function`?
-* Why am I getting an error `Cannot read property 'someMethod' of undefined` ?
-
 > I wrote some code like this:
 > ```ts
 > class MyClass {
@@ -392,6 +387,13 @@ Synonyms and alternate symptoms:
 > window.setTimeout(obj.someCallback, 10);
 > ```
 
+Synonyms and alternate symptoms:
+> * Why are my class properties `undefined` in my callback?
+> * Why does `this` point to `window` in my callback?
+> * Why does `this` point to `undefined` in my callback?
+> * Why am I getting an error `this.someMethod is not a function`?
+> * Why am I getting an error `Cannot read property 'someMethod' of undefined` ?
+
 In JavaScript, the value of `this` inside a function is determined as follows:
  1. Was the function the result of calling `.bind`? If so, `this` is the first argument passed to `bind`
  2. Was the function *directly* invoked via a property access expression `expr.method()` ? If so, `this` is `expr`
@@ -408,15 +410,15 @@ Thus, `this` in the body of `someCallback` referred to `window` (or `undefined` 
 Solutions to this are outlined here: http://stackoverflow.com/a/20627988/1704166
 
 ### What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class` ?
-I wrote some code like this and don't understand the error I'm getting:
-```ts
-class MyClass {
-  someMethod() { }
-}
-var x: MyClass;
-// Cannot assign 'typeof MyClass' to MyClass? Huh?
-x = MyClass;
-```
+> I wrote some code like this and don't understand the error I'm getting:
+> ```ts
+> class MyClass {
+>   someMethod() { }
+> }
+> var x: MyClass;
+> // Cannot assign 'typeof MyClass' to MyClass? Huh?
+> x = MyClass;
+> ```
 
 It's important to remember that in JavaScript, classes are just functions.
 We refer to the class object itself -- the *value* `MyClass` -- as a *constructor function*.
@@ -486,7 +488,7 @@ In general, this pattern is best avoided, especially if `Foo` has private member
 The most common cause of this is that your HTML page includes a `<script>` tag for file2.ts, but not file1.ts.
 Add a script tag for the base class's output *before* the script tag for the derived class.
 
-## Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?
+### Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?
 > I wrote some code:
 > ```ts
 > /** file1.ts **/
@@ -540,20 +542,19 @@ The type will have unexpected compatibility (as shown here) and will also fail t
 
 
 ### Why can't I write `typeof T` or `instanceof T` in my generic function?
-
-I want to write some code like this:
-```ts
-function doSomething<T>(x: T) {
-  // Can't find name T?
-  let xType = typeof T;
-  let y = new xType();
-
-  // Same here?
-  if(someVar instanceof typeof T) {
-
-  }
-}
-```
+> I want to write some code like this:
+> ```ts
+> function doSomething<T>(x: T) {
+>   // Can't find name T?
+>   let xType = typeof T;
+>   let y = new xType();
+> 
+>   // Same here?
+>   if(someVar instanceof typeof T) {
+> 
+>   }
+> }
+> ```
 
 Generics are erased during compilation.
 This means that there is no *value* `T` at runtime inside `doSomething`.
@@ -617,10 +618,11 @@ TODO: Answer
 ### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`
 TODO: Answer
 
-
-## Why am I getting an error about a missing index signature?
+### How do I use generics with JSX components?
 TODO: Answer
 
+
+-------------------------------------------------------------------------------------
 
 ## Things That Don't Work
 
@@ -634,10 +636,16 @@ TODO: Answer
 TODO: Answer
 
 
+
+-------------------------------------------------------------------------------------
+
 ## External Tools
 
 ### How do I write unit tests with TypeScript?
 TODO: Answer
+
+
+-------------------------------------------------------------------------------------
 
 ## Commandline Behavior
 
@@ -646,6 +654,9 @@ TODO: Answer
 
 ### What does the error "Exported variable [name] has or is using private name [name]" mean?
 TODO: Port in content from #6307
+
+
+-------------------------------------------------------------------------------------
 
 # Glossary and Terms in this FAQ
 
