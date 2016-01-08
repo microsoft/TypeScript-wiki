@@ -1,5 +1,3 @@
-# FAQs
-
 ## Common Feature Requests
 > I want to request one of the following features...
 
@@ -570,6 +568,7 @@ var c = create(MyClass); // c: MyClass
 function isReallyInstanceOf<T>(ctor: { new(...args: any) => T }, obj: T) {
   return obj instanceof ctor;
 }
+```
 
 -------------------------------------------------------------------------------------
 ## Modules
@@ -658,7 +657,7 @@ TODO: Port in content from #6307
 
 -------------------------------------------------------------------------------------
 
-# Glossary and Terms in this FAQ
+## Glossary and Terms in this FAQ
 
 ### Dogs, Cats, and Animals, Oh My
 For some code examples, we'll use a hypothetical type hierarchy:
