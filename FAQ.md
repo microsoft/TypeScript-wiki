@@ -1,20 +1,22 @@
+# FAQs
+
 ## Common Feature Requests
 > I want to request one of the following features...
 
 Here's a list of common feature requests and their corresponding issue.
 Please leave comments rather than logging new issues.
-* Non-nullable values #185
-* Minification #8
-* Read-only properties #12
-* Extension methods #9
-* Partial classes #563
-* Non-numeric or string-based `enum`s #1206
-* Wildcards or globbing in tsconfig.json: #1927
-* Safe navigation operator, AKA CoffeeScript's null conditional/propagating/propagation operator, AKA C#'s' ?. operator #16
-* Something to do with `this` #513
-* Generic type parameter defaults #2175
-* Strong typing of `Function` members `call`/`bind`/`apply` #212
-* Function overloading #3442
+* Non-nullable values [#185](https://github.com/Microsoft/TypeScript/issues/185)
+* Minification [#8](https://github.com/Microsoft/TypeScript/issues/8)
+* Read-only properties [#12](https://github.com/Microsoft/TypeScript/issues/12)
+* Extension methods [#9](https://github.com/Microsoft/TypeScript/issues/9)
+* Partial classes [#563](https://github.com/Microsoft/TypeScript/issues/563)
+* Non-numeric or string-based `enum`s [#1206](https://github.com/Microsoft/TypeScript/issues/1206)
+* Wildcards or globbing in tsconfig.json: [#1927](https://github.com/Microsoft/TypeScript/issues/1927)
+* Safe navigation operator, AKA CoffeeScript's null conditional/propagating/propagation operator, AKA C#'s' ?. operator [#16](https://github.com/Microsoft/TypeScript/issues/16)
+* Something to do with `this` [#513](https://github.com/Microsoft/TypeScript/issues/513)
+* Generic type parameter defaults [#2175](https://github.com/Microsoft/TypeScript/issues/2175)
+* Strong typing of `Function` members `call`/`bind`/`apply` [#212](https://github.com/Microsoft/TypeScript/issues/212)
+* Function overloading [#3442](https://github.com/Microsoft/TypeScript/issues/3442)
 
 ## Type System Behavior
 
@@ -67,7 +69,7 @@ Many questions in this FAQ boil down to "because types are erased".
 > ```
 
 A getter without a setter *does not* create a read-only property.
-See [Issue #12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion tracking this issue.
+See  [#12](https://github.com/Microsoft/TypeScript/issues/12)] for the suggestion tracking this issue.
 
 
 ### Why are function parameters bivariant?
@@ -239,7 +241,7 @@ function getCursorPos(): ScreenCoordinate {
 }
 ```
 
-See also #202 for a suggestion tracking making this more intuitive.
+See also [#202](https://github.com/Microsoft/TypeScript/issues/202) for a suggestion tracking making this more intuitive.
 
 ### How do I check at runtime if an object implements some interface?
 
@@ -441,7 +443,7 @@ Thus, `typeof MyClass` refers to the type of the expression `MyClass` - the *con
 
 
 ### Why do my derived class property initializers overwrite values set in the base class constructor?
-See #1617 for this and other initialization order questions
+See [#1617](https://github.com/Microsoft/TypeScript/issues/1617) for this and other initialization order questions
 
 
 ### What's the difference between `declare class` and `inteface`?
@@ -652,12 +654,12 @@ TODO: Answer
 TODO: Answer
 
 ### What does the error "Exported variable [name] has or is using private name [name]" mean?
-TODO: Port in content from #6307
+TODO: Port in content from [#6307](https://github.com/Microsoft/TypeScript/issues/6307)
 
 
 -------------------------------------------------------------------------------------
 
-## Glossary and Terms in this FAQ
+# Glossary and Terms in this FAQ
 
 ### Dogs, Cats, and Animals, Oh My
 For some code examples, we'll use a hypothetical type hierarchy:
