@@ -52,6 +52,7 @@
 * [`this`-based type guards](https://github.com/Microsoft/TypeScript/pull/5906)
 * Support for [custom JSX factories using `--reactNamespace`](https://github.com/Microsoft/TypeScript/pull/6146)
 * [Improved checking of for-in statements](https://github.com/Microsoft/TypeScript/pull/6379)
+* [Colorization of JSX code in VS 2015](https://github.com/Microsoft/TypeScript/issues/4835)
 
 # 1.7
 
