@@ -51,7 +51,7 @@ The `as` operator is available in both `.ts` and `.tsx` files.
 
 # Type Checking
 
-In order to understand type checking with JSX you must first understand the difference between intrinsic elements value-based elements.
+In order to understand type checking with JSX you must first understand the difference between intrinsic elements and value-based elements.
 Given a JSX expression `<expr />`, `expr` may either refer to something intrinsic to the environment (e.g. a `div` or `span` in a DOM environment) or to a custom component that you've created.
 This is important for two reasons:
 
@@ -133,7 +133,7 @@ function MyFactoryFunction() {
 // use a call signature
 var myComponent = MyFactoryFunction();
 
-// element class type => FactoryFunction
+// element class type => MyFactoryFunction
 // element instance type => { render: () => void }
 ```
 
