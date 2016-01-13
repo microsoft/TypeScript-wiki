@@ -18,7 +18,7 @@ Option | Shorthand | Description
 `--jsx` | | Support JSX in '.tsx' files: 'React' or 'Preserve'. See [[JSX]].
 `--listFiles` | | Print names of files part of the compilation.
 `--locale` | | The locale to use to show error messages, e.g. en-us.
-`--mapRoot` | | Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than than the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files where be located.
+`--mapRoot` | | Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than that the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files where be located.
 `--moduleResolution`<sup>[1]</sup> | | Determine how modules get resolved. Either 'node' for Node.js/io.js style resolution, or 'classic' (default).
 `--newLine` | | Use the specified end of line sequence to be used when emitting files: 'CRLF' (dos) or 'LF' (unix)."
 `--noEmit` | | Do not emit outputs.
