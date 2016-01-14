@@ -4,7 +4,7 @@
 > I want to request one of the following features...
 
 Here's a list of common feature requests and their corresponding issue.
-Please leave comments rather than logging new issues.
+Please leave comments in these rather than logging new issues.
 * Non-nullable values [#185](https://github.com/Microsoft/TypeScript/issues/185)
 * Minification [#8](https://github.com/Microsoft/TypeScript/issues/8)
 * Read-only properties [#12](https://github.com/Microsoft/TypeScript/issues/12)
@@ -17,6 +17,7 @@ Please leave comments rather than logging new issues.
 * Generic type parameter defaults [#2175](https://github.com/Microsoft/TypeScript/issues/2175)
 * Strong typing of `Function` members `call`/`bind`/`apply` [#212](https://github.com/Microsoft/TypeScript/issues/212)
 * Function overloading [#3442](https://github.com/Microsoft/TypeScript/issues/3442)
+* Referencing generic components in JSX [#6395](https://github.com/Microsoft/TypeScript/issues/6395) 
 
 ## Type System Behavior
 
@@ -107,12 +108,17 @@ When the type system is *deciding* whether or not `Dog[]` is a subtype of `Anima
   * Is each member of `Dog[]` assignable to `Animal[]` ?
     * Is `Dog[].push` assignable to `Animal[].push` ?
       * Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?
-        * Is the first parameter type in `(x: Dog) => number` assignable to first parameter type in `(x: Animal) => number`?
-          * Is `Dog` assignable to `Animal`?
+        * Is the first parameter type in `(x: Dog) => number` assignable to or from first parameter type in `(x: Animal) => number`?
+          * Is `Dog` assignable to or from `Animal`?
             * Yes
 
-TODO: Keep writing...
+As you can see here, the relevant question *Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?* is the same question
+being asked when we were passing a possibly-too-specific callback to a function.
 
+In summary, in the TypeScript type system, the question of *whether a more-specific-type-accepting function should be assignable to a
+function accpting a less-specific type* provides a prerequisite answer to whether an *array* of that more specific type should be assignable
+to an array of a less specific type. Having the latter *not* be the case would not be an acceptable type system in the vast majority of cases,
+so we have to take a correctness trade-off for the specific case of function argument types.
 
 ### Why are functions with fewer parameters assignable to functions that take more parameters?
 
@@ -192,7 +198,35 @@ In this example, `window`, `42`, and `'huh?'` all have the required members of a
 In general, you should *never* find yourself declaring an `interface` with no properties.
 
 ### Can I make a type alias nominal?
-TODO: Answer
+> I wrote the following code and expected an error:
+> ```ts
+> type SomeUrl = string;
+> type FirstName = string;
+> let x: SomeUrl = "http://www.typescriptlang.org/";
+> let y: FirstName = "Bob';
+> x = y; // Expected error
+> ```
+
+Type aliases are simply *aliases* -- they are indistinguishable from the types they refer to.
+
+A workaround involving intersection types to make "branded primitives" is possible:
+```ts
+// Strings here are arbitrary, but must be distinct
+type SomeUrl = string & {'this is a url': {}};
+type FirstName = string & {'person name': {}};
+
+// Add type assertions
+let x = <SomeUrl>'';
+let y = <FirstName>'bob';
+x = y; // Error
+
+// OK
+let xs: string = x;
+let ys: string = y;
+xs = ys;
+```
+You'll need to add a type assertion wherever a value of this type is created.
+These can still be aliased by `string` and lose type safety.
 
 ### How do I prevent two types from being structurally compatible?
 > I would like the following code to produce an error:
@@ -319,8 +353,10 @@ let myFunc: (number: any) => string
 To avoid this problem, turn on the `noImplicitAny` flag, which will issue a warning about the implicit `any` parameter type.
 
 ### Why am I getting an error about a missing index signature?
-TODO: Answer
 
+TODO: Port content from here
+
+http://stackoverflow.com/questions/22077023/why-cant-i-indirectly-return-an-object-literal-to-satisfy-an-index-signature-re
 
 -------------------------------------------------------------------------------------
 ## Functions
@@ -364,8 +400,36 @@ function f({x = 0}) {
 -------------------------------------------------------------------------------------
 ## Classes
 
+### Why do these empty classes behave strangely?
+
+> I wrote some code like this and expected an error:
+> ```ts
+> class Empty { /* empty */ }
+> 
+> var e2: Empty = window;
+> ```
+
+See the question "Why are all types are assignable to empty interfaces?" in this FAQ.
+
+
 ### When and why are classes nominal?
-TODO: Answer
+
+What explains the difference between these two lines of code?
+```ts
+class Alpha { x: number }
+class Bravo { x: number }
+class Charlie { private x: number }
+class Delta { private x: number }
+
+let a = new Alpha(), b = new Beta(), c = new Charlie(), d = new Delta();
+
+a = b; // OK
+c = d; // Error
+```
+
+In TypeScript, classes are compared structurally.
+The one exception to this is `private` and `protected` members.
+When a member is private or protected, it must *originate in the same declaration* to be considered the same as another private or protected member.
 
 
 ### Why does `this` get orphaned in my instance methods?
@@ -576,24 +640,56 @@ function isReallyInstanceOf<T>(ctor: { new(...args: any) => T }, obj: T) {
 ## Modules
 
 ### Why are imports being elided in my emit?
-TODO: Answer
+ 
+> I wrote some code like this
+> ```ts
+> import someModule = require('./myMod');
+> 
+> let x: someModule.SomeType = /* something */;
+> ```
+> 
+> and the emit looked like this:
+> ```js
+> // Expected to see "var someModule = require('./myMod');" here!
+> 
+> var x = /* something */;
+> ```
 
+TypeScript assumes that module imports do not have side effects, so it removes module imports that aren't used in any *expression*.
+Depending on your exact scenario, there are a few workarounds.
 
-### Why is my output file empty when I use module exports with `--outFile`?
-TODO: Answer
+You can simply reference the module. This is the most universal workaround. A single use will do:
 
+```ts
+import someModule = require('./myMod');
+someModule; // Used for side effects
+```
+
+If you're using CommonJS (typically with Node), you can use `require` directly while still using the import for type information:
+```ts
+import _someModule = require('./myMod');
+const someModule: typeof _someModule = require('./myMod');
+```
+
+If you're using CommonJS and *don't* need type information, you can just invoke `require`:
+```ts
+require('./myMod');
+```
+
+If you're using AMD, you can use the `amd-depedency` tag:
+```ts
+/// <amd-depedency path="./myMod" />
+import someModule = require('./myMod');
+```
 
 ### Why don't namespaces merge across different module files?
-TODO: Answer
+TODO: Port content from
+http://stackoverflow.com/questions/30357634/how-do-i-use-namespaces-with-typescript-external-modules
 
 
 -------------------------------------------------------------------------------------
 
 ## Enums
-
-### Why are enums nominal?
-TODO: Answer
-
 
 ### What's the difference between `enum` and `const enum`s?
 
@@ -616,27 +712,104 @@ TODO: Answer
 
 ## JSX and React
 
-### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`
-TODO: Answer
+### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />` ?
+> I wrote some code like this. Why is there an error?
+> ```ts
+> class Display extends React.Component<any, any> {
+>     render() { ... }
+> }
+> 
+> let SomeThing: Display = /* ... */;
+> // Error here, isn't this OK?
+> let jsx = <SomeThing />;
+> ```
 
-### How do I use generics with JSX components?
-TODO: Answer
+This is a confusion between the *instance* and *static* side of a class.
+When React instantiates a component, it's invoking a *constructor function*.
+So when TypeScript sees a JSX `<TagName />`, it is validating that the result of *constructing* `TagName` produces a valid component.
 
+But by declaring `let SomeThing: Display`, the code is indicating that `SomeThing` is the class *instance*, not the class *constructor*.
+Indeed, it would be a runtime error to write:
+```ts
+let SomeThing = new Display();
+let jsx = <SomeThing />; // Not gonna work
+```
+
+The easiest fix is to use the `typeof` type operator.
+> let SomeThing: typeof Display = /* ... */;
 
 -------------------------------------------------------------------------------------
 
 ## Things That Don't Work
 
 ### You should emit classes like this so they have real private members
-TODO: Answer
+
+> If I write code like this:
+> ```ts
+> class Foo {
+> 	private x = 0;
+> 	increment(): number {
+> 		this.x++;
+>       return x;
+> 	}
+> }
+> ```
+> You should emit code like this so that 'x' is truly private:
+> ```js
+> var Foo = (function () {
+> 	  var x = 0;
+> 	
+>     function Foo() {
+>     }
+>     Foo.prototype.increment = function () {
+>         x++;
+>         return x;
+>     };
+>     return Foo;
+> })();
+> ```
+
+This code doesn't work.
+It creates a *single* private field that all classes share:
+```js
+var a = new Foo();
+a.increment(); // Prints 1
+a.increment(); // Prints 2
+var b = new Foo(); // Should not affect a
+a.increment(); // Prints 1
+```
 
 ### You should emit classes like this so they don't lose `this` in callbacks
-TODO: Answer
+> If I write code like this:
+> ```ts
+> class MyClass {
+> 	method() {
+> 	}
+> }
+> ```
+> You should emit code like this so that I can't mess up `this` in in callbacks:
+> ```js
+> var MyClass = (function () {
+>     function MyClass() {
+> 		this.method = function() {
+> 			
+> 		}
+>     }
+>     return MyClass;
+> })();
+> ```
 
+Two problems here.
+
+First, the proposed behavior change is not in line with the ECMAScript specification.
+There isn't really anything else to be said on that front -- TypeScript must have the same runtime behavior as JavaScript.
+
+Second, the runtime characteristics of this class are very surprising.
+Instead of allocating one closure per method, this allocates one closure per method *per instance*.
+This expensive in terms of class initialization cost, memory pressure, and GC performance.
+ 
 ### You should have some class initialization which is impossible to emit code for
-TODO: Answer
-
-
+TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1617)
 
 -------------------------------------------------------------------------------------
 
