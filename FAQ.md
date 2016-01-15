@@ -823,6 +823,45 @@ TODO: Answer
 
 ## Commandline Behavior
 
+
+### Why did adding an `import` or `export` modifier break my program?
+
+> I wrote a program:
+> ```ts
+> /* myApp.ts */
+> function doSomething() {
+>     console.log('Hello, world!');
+> }
+> doSomething();
+> ```
+> 
+> I compiled it with `tsc --module commonjs myApp.ts --out app.js` and ran `node app.js` and got the expected output.
+> 
+> Then I added an `import` to it:
+> ```ts
+> import fs = require('fs');
+> function doSomething() {
+>     console.log('Hello, world!');
+> }
+> doSomething();
+> ```
+> 
+> Or added an `export` to it:
+> ```ts
+> export function doSomething() {
+>     console.log('Hello, world!');
+> }
+> doSomething();
+> ```
+> 
+> And now nothing happens when I run `app.js`!
+
+Modules -- those files containing top-level `export` or `import` statements -- are always compiled 1:1 with their corresponding js files.
+The `--out` option only controls where *script* (non-module) code is emitted.
+In this case, you should be running `node myApp.js`, because the *module* `myApp.ts` is always emitted to the file `myApp.js`.  
+
+This behavior has been fixed as of TypeScript 1.8; combining `--out` and `--module` is now an error for CommonJS module output.
+
 ### How do I control file ordering in combined output (`--out`) ?
 TODO: Answer
 
