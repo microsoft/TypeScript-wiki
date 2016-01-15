@@ -1,3 +1,6 @@
+# [FAQ](Frequently Asked Questions)
+Please see the [[FAQ]] for common questions, suggestions, and other useful information.
+
 # Getting Started
 
 * [Basic Types](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Basic%20Types.md)
