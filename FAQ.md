@@ -39,13 +39,17 @@ Many questions in this FAQ trace their roots to structural typing and its implic
 Once you grasp the basics of it, however, it's very easy to reason about.
 
 ### What is type erasure?
+
 TypeScript *removes* type annotations, interfaces, type aliases, and other type system constructs during compilation.
 
 Input:
+
 ```ts
 var x: SomeInterface;
 ```
+
 Output:
+
 ```js
 var x;
 ```
@@ -71,7 +75,6 @@ Many questions in this FAQ boil down to "because types are erased".
 
 A getter without a setter *does not* create a read-only property.
 See  [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion tracking this issue.
-
 
 ### Why are function parameters bivariant?
 
@@ -361,6 +364,7 @@ TODO: Port content from here
 http://stackoverflow.com/questions/22077023/why-cant-i-indirectly-return-an-object-literal-to-satisfy-an-index-signature-re
 
 -------------------------------------------------------------------------------------
+
 ## Functions
 
 ### Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?
@@ -400,6 +404,7 @@ function f({x = 0}) {
 ```
 
 -------------------------------------------------------------------------------------
+
 ## Classes
 
 ### Why do these empty classes behave strangely?
@@ -582,11 +587,12 @@ Re-order your script tags so that files defining base classes are included befor
 Finally, if you're using a third-party bundler of some sort, that bundler may be ordering files incorrectly.
 Refer to that tool's documentation to understand how to properly order the input files in the resulting output.
 
-
 -------------------------------------------------------------------------------------
+
 ## Generics
 
 ### Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?
+
 > I wrote some code and expected an error:
 > ```ts
 > interface Something<T> {
@@ -606,8 +612,8 @@ Because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what t
 In general, you should *never* have a type parameter which is unused.
 The type will have unexpected compatibility (as shown here) and will also fail to have proper generic type inference in function calls.
 
-
 ### Why can't I write `typeof T` or `instanceof T` in my generic function?
+
 > I want to write some code like this:
 > ```ts
 > function doSomething<T>(x: T) {
@@ -685,9 +691,9 @@ import someModule = require('./myMod');
 ```
 
 ### Why don't namespaces merge across different module files?
+
 TODO: Port content from
 http://stackoverflow.com/questions/30357634/how-do-i-use-namespaces-with-typescript-external-modules
-
 
 -------------------------------------------------------------------------------------
 
@@ -699,9 +705,39 @@ TODO: Write up common symptoms of `enum` / `const enum` confusion.
 
 See http://stackoverflow.com/questions/28818849/how-do-the-different-enum-variants-work-in-typescript
 
-
 -------------------------------------------------------------------------------------
 
+## Type Guards
+
+### Why doesn't `x instanceof Foo` narrow `x` to `Foo`?
+
+It depends what `x` is.
+If the type of `x` was originally not even compatible with `Foo`, then it wouldn't make much sense to narrow the type, so we don't.
+
+More likely, you'll find yourself in this situation when `x` had the type `any`.
+The motivating example for this is something like the following:
+
+```ts
+function doIt(x) {
+    if (x instanceof Object) {
+        // Assume 'x' is a well-known object which
+        // we know how to handle specifically
+    }
+
+    // Treat 'x' as a primitive
+}
+```
+
+You'll see this type of code in TypeScript code that predates union types, or TypeScript code that's been ported over from JavaScript.
+If we narrowed from `any` to `Object` then there's not much you could really do with `x`.
+Using any properties that aren't in `Object` will lead to an error.
+This is not just true of `Object`, it's true of any other type with a defined set of properties.
+
+### Why doesn't `isFoo(x)` narrow `x` to `Foo` when `isFoo` is a type guard?
+
+TODO, but it is strongly related to the above section.
+
+-------------------------------------------------------------------------------------
 ## Decorators
 
 ### Decorators on function declarations
@@ -715,6 +751,7 @@ TODO: Answer
 ## JSX and React
 
 ### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />` ?
+
 > I wrote some code like this. Why is there an error?
 > ```ts
 > class Display extends React.Component<any, any> {
