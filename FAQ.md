@@ -70,7 +70,7 @@ Many questions in this FAQ boil down to "because types are erased".
 > ```
 
 A getter without a setter *does not* create a read-only property.
-See  [#12](https://github.com/Microsoft/TypeScript/issues/12)] for the suggestion tracking this issue.
+See  [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion tracking this issue.
 
 
 ### Why are function parameters bivariant?
@@ -145,6 +145,7 @@ Second, let's consider another case:
 let items = [1, 2, 3];
 items.forEach(arg => console.log(arg));
 ```
+
 This is isomorphic to the example that "wanted" an error.
 At runtime, `forEach` invokes the given callback with three arguments (value, index, array), but most of the time the callback only uses one or two of the arguments.
 This is a very common JavaScript pattern and it would be burdensome to have to explicitly declare unused parameters.
@@ -178,7 +179,7 @@ This is isomorphic to the example that "wanted" an error.
 
 Another way to think of this is that a `void`-returning callback type says "I'm not going to look at your return value, if one exists".
 
-### Why are all types are assignable to empty interfaces?
+### Why are all types assignable to empty interfaces?
 
 > I wrote some code like this an expected an error:
 > ```ts
@@ -198,6 +199,7 @@ In this example, `window`, `42`, and `'huh?'` all have the required members of a
 In general, you should *never* find yourself declaring an `interface` with no properties.
 
 ### Can I make a type alias nominal?
+
 > I wrote the following code and expected an error:
 > ```ts
 > type SomeUrl = string;
@@ -409,7 +411,7 @@ function f({x = 0}) {
 > var e2: Empty = window;
 > ```
 
-See the question "Why are all types are assignable to empty interfaces?" in this FAQ.
+See the question "Why are all types assignable to empty interfaces?" in this FAQ.
 
 
 ### When and why are classes nominal?
