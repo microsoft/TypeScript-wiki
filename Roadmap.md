@@ -28,6 +28,7 @@
 * [Extract type information from JSDoc in js files](https://github.com/Microsoft/TypeScript/issues/4790)
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
+* Invistigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 1.8
 
