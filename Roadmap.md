@@ -54,6 +54,7 @@
 * Support for [custom JSX factories using `--reactNamespace`](https://github.com/Microsoft/TypeScript/pull/6146)
 * [Improved checking of for-in statements](https://github.com/Microsoft/TypeScript/pull/6379)
 * [Colorization of JSX code in VS 2015](https://github.com/Microsoft/TypeScript/issues/4835)
+* Publish official [TypeScript NuGet packages](https://github.com/Microsoft/TypeScript/issues/3940)
 
 # 1.7
 
