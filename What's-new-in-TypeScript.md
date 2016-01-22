@@ -1,5 +1,17 @@
 # TypeScript 1.8 (upcoming)
 
+## Option to concatenate `AMD` and `System` modules into a single output file
+
+Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
+
+## New compiler flag : `--allowSyntheticDefaultImports`
+
+When `--allowSyntheticDefaultImports` is specified, it indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. We infer that the default member is either the export= member of the imported module or the entire module itself should that not be present. System modules have this flag on by default.
+
+## `this`-based type guards
+
+TODO
+
 ## Prettier error messages from `tsc`
 
 We understand that a ton of monochrome output can be a little difficult on the eyes.
@@ -9,16 +21,19 @@ By just passing the `--pretty` command line option, TypeScript gives more colorf
 
 ![Showing off pretty error messages in ConEmu](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/new-in-typescript/pretty01.png)
 
+## Colorization of JSX code in VS 2015 
+
+JSX tags now have their own classifications in Visual Studio 2015 with TypeScript 1.8. 
+
+![jsx](https://cloud.githubusercontent.com/assets/8052307/12271404/b875c502-b90f-11e5-93d8-c6740be354d1.png)
+
+The classification can be further customized by changing the font and color settings for the `VB XML` color and font settings through Tools\Options\Environment\Fonts and Colors page.
+
 ## The `--project` (`-p`) flag can now take any file path
 
 The `--project` command line option originally could only take paths to a folder containing a `tsconfig.json`. Given the different scenarios for build configurations, it made sense to allow `--project` to point to any other compatible JSON file. For instance, a user might want to target ES2015 with CommonJS modules for Node 5, but ES5 with AMD modules for the browser. With this new work, users can easily manage two separate build targets using `tsc` alone without having to perform hacky workarounds like placing `tsconfig.json` files in separate directories.
 
 The old behavior still remains the same if given a directory - the compiler will try to find a file in the directory named `tsconfig.json`.
-
-## `this`-based type guards
-
-TODO
-
 ## Support output to IPC-driven files
 
 TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
@@ -37,13 +52,6 @@ As an example, we can pipe our emitted JavaScript into a pretty printer like [pr
 tsc foo.ts --outFile /dev/stdout | pretty-js
 ```
 
-## Option to concatenate `AMD` and `System` modules into a single output file
-
-Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
-
-## New compiler flag : `--allowSyntheticDefaultImports`
-
-When `--allowSyntheticDefaultImports` is specified, it indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. We infer that the default member is either the export= member of the imported module or the entire module itself should that not be present. System modules have this flag on by default.
 
 # TypeScript 1.7
 
