@@ -34,6 +34,26 @@ The classification can be further customized by changing the font and color sett
 The `--project` command line option originally could only take paths to a folder containing a `tsconfig.json`. Given the different scenarios for build configurations, it made sense to allow `--project` to point to any other compatible JSON file. For instance, a user might want to target ES2015 with CommonJS modules for Node 5, but ES5 with AMD modules for the browser. With this new work, users can easily manage two separate build targets using `tsc` alone without having to perform hacky workarounds like placing `tsconfig.json` files in separate directories.
 
 The old behavior still remains the same if given a directory - the compiler will try to find a file in the directory named `tsconfig.json`.
+
+## Allow comments in tsconfig.json
+
+It is always nice to be able to document your configuration! tsconfig.json now accepts single and multi-line comments. 
+
+```ts
+{
+    "compilerOptions": {
+        "target": "ES2015", // running on node v5, yaay!
+        "sourceMap": true // makes debugging easier
+    },
+    /* Excluded
+      * Files
+      */
+    "exclude": [
+        "file.d.ts"
+    ]
+}
+```
+ 
 ## Support output to IPC-driven files
 
 TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
