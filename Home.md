@@ -1,4 +1,4 @@
-# [FAQ](Frequently Asked Questions)
+# [[FAQ]]
 Please see the [[FAQ]] for common questions, suggestions, and other useful information.
 
 # Getting Started
