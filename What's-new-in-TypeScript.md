@@ -12,6 +12,18 @@ When `--allowSyntheticDefaultImports` is specified, it indicates that the module
 
 TODO
 
+## Official TypeScript NuGet package
+
+Starting with TypeScript 1.8, official NuGet packages are available for the Typescript Compiler (tsc.exe) as well as the MSBuild integration (Microsoft.TypeScript.targets and Microsoft.TypeScript.Tasks.dll).
+
+Stable packages are available here:
+* [Microsoft.TypeScript.Compiler](https://www.nuget.org/packages/Microsoft.TypeScript.Compiler/)
+* [Microsoft.TypeScript.MSBuild](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/)
+
+Also, a nightly NuGet packages to match the [nightly npm package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on www.myget.org:
+
+* [TypeScript-Preview](https://www.myget.org/gallery/typescript-preview)
+
 ## Prettier error messages from `tsc`
 
 We understand that a ton of monochrome output can be a little difficult on the eyes.
