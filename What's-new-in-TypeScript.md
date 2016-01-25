@@ -6,7 +6,11 @@ Specifying `--outFile` in conjunction with `--module amd` or `--module system` w
 
 ## New compiler flag : `--allowSyntheticDefaultImports`
 
-When `--allowSyntheticDefaultImports` is specified, it indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. We infer that the default member is either the export= member of the imported module or the entire module itself should that not be present. System modules have this flag on by default.
+Module loaders like SystemJS wrap CommonJS modules and expose then as a `default` ES6 import. This makes it impossible to share the definition files between the SystemJS and CommonJS implementation of the module as the module shape looks different based on the loader.
+
+Setting the new compiler flag `--allowSyntheticDefaultImports` indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. The compiler will infer the existence of a `default` export that has the shape of the entire module itself. 
+
+System modules have this flag on by default.
 
 ## `this`-based type guards
 
