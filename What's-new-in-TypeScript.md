@@ -27,7 +27,9 @@ Name of module augmentation is resolved using the same set of rules as module sp
 
 Module augmentations cannot add new items to the top level scope but rather patch existing declarations.
 
-#### Example
+##### Example
+
+Here module `map` can declare that internally it will patch `Observable` type and add `map` function to it.
 
 ```ts
 // observable.ts
@@ -56,11 +58,9 @@ let o: Observable<number>;
 o.map(x => x.toFixed());
 ```
 
-Here module `map` can declare that internally it will patch `Observable` type and add `map` function to it.
-
 Similarly, the global scope can be augmented from modules using `declare global` declarations:
 
-#### Example
+##### Example
 
 ```ts
 // in external module
