@@ -4,7 +4,7 @@
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
 
-## New compiler flag : `--allowSyntheticDefaultImports`
+## Support for SystemJS wrapping CommonJS modules as `default` exports
 
 Module loaders like SystemJS wrap CommonJS modules and expose then as a `default` ES6 import. This makes it impossible to share the definition files between the SystemJS and CommonJS implementation of the module as the module shape looks different based on the loader.
 
