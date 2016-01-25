@@ -1,6 +1,6 @@
 # TypeScript 1.8 (upcoming)
 
-## Option to concatenate `AMD` and `System` modules into a single output file
+## Concatenate `AMD` and `System` modules with `--outFile`
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
 
