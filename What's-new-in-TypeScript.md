@@ -4,6 +4,40 @@
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
 
+A module name will be computed for each module based on its relative location to `rootDir`.
+
+For instance:
+```ts
+// file src/a.ts
+import * as B from "./lib/b";
+export function createA() {
+    return B.createB();
+}
+```
+```ts
+// file src/lib/b.ts
+export function createB() {
+    return { };
+}
+```
+
+Results in:
+```js
+define("lib/b", ["require", "exports"], function (require, exports) {
+    "use strict";
+    function createB() {
+        return {};
+    }
+    exports.createB = createB;
+});
+define("a", ["require", "exports", "lib/b"], function (require, exports, B) {
+    "use strict";
+    function createA() {
+        return B.createB();
+    }
+    exports.createA = createA;
+});
+```
 ## Support for `default` import interop with SystemJS
 
 Module loaders like SystemJS wrap CommonJS modules and expose then as a `default` ES6 import. This makes it impossible to share the definition files between the SystemJS and CommonJS implementation of the module as the module shape looks different based on the loader.
