@@ -19,6 +19,62 @@ assign(x, { b: 10, d: 20 });
 assign(x, { e: 0 });  // Error
 ```
 
+## Augmenting global/module scope from modules
+
+Module augmentation is a declaration of ambient module that directly nested either in external module or in top level ambient external module. 
+
+Name of module augmentation is resolved using the same set of rules as module specifiers in `import` \ `export` declarations. The declarations in module augmentation are merged with declarations inside module using standard rules for declaration merging. 
+
+Module augmentations cannot add new items to the top level scope but rather patch existing declarations.
+
+#### Example
+
+```ts
+// observable.ts
+export class Observable<T> {}
+```
+
+```ts
+// map.ts
+import {Observable} from "./observable";
+Observable.prototype.map = function () { /* ... */ }
+
+declare module "./observable" {
+    // Augment the Observable class definition
+    interface Observable<T> {
+        map<U>(proj: (el: T) => U): Observable<U>;
+    }
+}
+```
+
+```ts
+// consumer.ts
+import {Observable} from "./observable";
+import "./map";
+
+let o: Observable<number>;
+o.map(x => x.toFixed());
+```
+
+Here module `map` can declare that internally it will patch `Observable` type and add `map` function to it.
+
+Similarly, the global scope can be augmented from modules using `declare global` declarations:
+
+#### Example
+
+```ts
+// in external module
+export {};
+
+Array.prototype.mapToNumbers = function () { /* ... */ }
+
+declare global {
+    interface Array<T> {
+        mapToNumbers(): number[];
+    }
+}
+```
+
 ## Concatenate `AMD` and `System` modules with `--outFile`
 
 Specifying `--outFile` in conjunction with `--module amd` or `--module system` will concatenate all modules in the compilation into a single output file containing multiple module closures.
