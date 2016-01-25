@@ -6,7 +6,7 @@ Specifying `--outFile` in conjunction with `--module amd` or `--module system` w
 
 A module name will be computed for each module based on its relative location to `rootDir`.
 
-For instance:
+##### Example
 ```ts
 // file src/a.ts
 import * as B from "./lib/b";
@@ -38,6 +38,7 @@ define("a", ["require", "exports", "lib/b"], function (require, exports, B) {
     exports.createA = createA;
 });
 ```
+
 ## Support for `default` import interop with SystemJS
 
 Module loaders like SystemJS wrap CommonJS modules and expose then as a `default` ES6 import. This makes it impossible to share the definition files between the SystemJS and CommonJS implementation of the module as the module shape looks different based on the loader.
@@ -45,6 +46,23 @@ Module loaders like SystemJS wrap CommonJS modules and expose then as a `default
 Setting the new compiler flag `--allowSyntheticDefaultImports` indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. The compiler will infer the existence of a `default` export that has the shape of the entire module itself. 
 
 System modules have this flag on by default.
+
+## Improved checking for `for..in` statements
+
+Previously the type of a `for..in` variable is inferred to `any`; that allowed the compiler to ignore invalid uses within the `for..in` body.
+
+Starting with TS 1.8,:
+* The type of a variable declared in a `for..in` statement is implicitly `string`.
+* When an object with a numeric index signature of type `T` (such as an array) is indexed by a `for..in` variable of a containing `for..in` statement for an object *with* a numeric index signature and *without* a string index signature (again such as an array), the value produced is of type `T`.
+
+##### Example
+
+```typescript
+var a: MyObject[];
+for (var x in a) {   // Type of x is implicitly string
+    var obj = a[x];  // Type of obj is MyObject
+}
+```
 
 ## `this`-based type guards
 
