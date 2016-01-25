@@ -2,7 +2,9 @@
 
 ## Type parameters as constraints
 
-With TypeScript 1.8 it becomes possible for a type parameter constraint to reference type parameters from the same type parameter list (this was previously an error). For example:
+With TypeScript 1.8 it becomes possible for a type parameter constraint to reference type parameters from the same type parameter list; previously this was an error. This capability is usually referred to as [F-Bounded Polymorphism](https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification).
+
+##### Example
 
 ```ts
 function assign<T extends U, U>(target: T, source: U): T {
@@ -16,9 +18,6 @@ let x = { a: 1, b: 2, c: 3, d: 4 };
 assign(x, { b: 10, d: 20 });
 assign(x, { e: 0 });  // Error
 ```
-
-The academic term for this capability is [F-Bounded Polymorphism](https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification).
-
 
 ## Concatenate `AMD` and `System` modules with `--outFile`
 
