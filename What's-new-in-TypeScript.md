@@ -27,11 +27,14 @@ Statements guaranteed to not be executed at run time are now correctly flagged a
 
 ##### Example
 
+Here's a simple example of an unreachable code error:
+
 ```ts
 function f(x) {
     if (x) {
        return true;
-    } else {
+    }
+    else {
        return false;
     }
 
@@ -39,16 +42,19 @@ function f(x) {
 }
 ```
 
-Or a more common error case such as adding a newline after a `return` statement:
+A more common error that this feature catches is adding a newline after a `return` statement:
 
 ```ts
 function f() {
-    return     // Automatic Semicolon Insertion triggered at newline
+    return            // Automatic Semicolon Insertion triggered at newline
     {
         x: "string"   // Error: Unreachable code detected.
     }
 }
 ```
+
+Since JavaScript automatically terminates the `return` statement at the end of the line, the object literal becomes a block.
+
 
 ### Unused labels
 
@@ -168,7 +174,8 @@ Array.prototype.mapToNumbers = function () { /* ... */ }
 
 ## Improved union/intersection type inference
 
-TypeScript 1.8 improves type inference involving source and target sides that are both union or intersection types. For example, when inferring from `string | string[]` to `string | T`, we reduce the types to `string[]` and `T`, thus inferring `string[]` for `T`.
+TypeScript 1.8 improves type inference involving source and target sides that are both union or intersection types.
+For example, when inferring from `string | string[]` to `string | T`, we reduce the types to `string[]` and `T`, thus inferring `string[]` for `T`.
 
 ##### Example
 
@@ -251,7 +258,8 @@ System modules have this flag on by default.
 
 ## Allow captured `let`/`const` in loops
 
-Previously an error, now supported in TypeScript 1.8. `let`/`const` declarations within loops and captured in functions are now emitted to correctly match `let`/`const` freshness semantics.
+Previously an error, now supported in TypeScript 1.8.
+`let`/`const` declarations within loops and captured in functions are now emitted to correctly match `let`/`const` freshness semantics.
 
 ##### Example
 
@@ -344,9 +352,10 @@ var div = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
 
 ## `this`-based type guards
 
-TypeScript 1.8 extends [user-defined type guards](https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#user-defined-type-guard-functions) functions to class and interface methods.
+TypeScript 1.8 extends [user-defined type guard functions](#user-defined-type-guard-functions) to class and interface methods.
 
-`this is T` is now valid return type annotation for methods in classes and interfaces. When used in a type narowing position (e.g. `if` statement), the type of the call expression target object would be narrowed to `T`.
+`this is T` is now valid return type annotation for methods in classes and interfaces.
+When used in a type narowing position (e.g. `if` statement), the type of the call expression target object would be narrowed to `T`.
 
 ##### Example
 
@@ -383,13 +392,13 @@ else if (fso.isNetworked()) {
 
 ## Official TypeScript NuGet package
 
-Starting with TypeScript 1.8, official NuGet packages are available for the Typescript Compiler (tsc.exe) as well as the MSBuild integration (Microsoft.TypeScript.targets and Microsoft.TypeScript.Tasks.dll).
+Starting with TypeScript 1.8, official NuGet packages are available for the Typescript Compiler (`tsc.exe`) as well as the MSBuild integration (`Microsoft.TypeScript.targets` and `Microsoft.TypeScript.Tasks.dll`).
 
 Stable packages are available here:
 * [Microsoft.TypeScript.Compiler](https://www.nuget.org/packages/Microsoft.TypeScript.Compiler/)
 * [Microsoft.TypeScript.MSBuild](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/)
 
-Also, a nightly NuGet packages to match the [nightly npm package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on www.myget.org:
+Also, a nightly NuGet packages to match the [nightly npm package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on https://myget.org:
 
 * [TypeScript-Preview](https://www.myget.org/gallery/typescript-preview)
 
@@ -1457,7 +1466,7 @@ opts.commandline = [42]; // Error, number is not string or string[]
 
 When reading from a union type, you can see any properties that are shared by them:
 ```ts
-if(opts.length === 0) { // OK, string and string[] both have 'length' property
+if (opts.length === 0) { // OK, string and string[] both have 'length' property
   console.log("it's empty");
 }
 ```
@@ -1465,9 +1474,10 @@ if(opts.length === 0) { // OK, string and string[] both have 'length' property
 Using Type Guards, you can easily work with a variable of a union type:
 ```ts
 function formatCommandline(c: string|string[]) {
-    if(typeof c === 'string') {
+    if (typeof c === 'string') {
         return c.trim();
-    } else {
+    }
+    else {
         return c.join(' ');
     }
 }
@@ -1518,10 +1528,11 @@ var x = 'hello';
 
 The new ES6 keyword `let`, now supported in TypeScript, declares a variable with more intuitive "block" semantics. A `let` variable can only be referred to after its declaration, and is scoped to the syntactic block where it is defined:
 ```ts
-if(foo) {
+if (foo) {
     console.log(x); // Error, cannot refer to x before its declaration
     let x = 'hello';
-} else {
+}
+else {
     console.log(x); // Error, x is not declared in this block
 }
 ```
@@ -1572,7 +1583,8 @@ Using `typeof` with union types and `else`:
 var x: string | HTMLElement = /* ... */;
 if(typeof x === 'string') {
     // x is string here, as shown above
-} else {
+}
+else {
     // x is HTMLElement here
     console.log(x.innerHTML);
 }
@@ -1583,9 +1595,10 @@ Using `instanceof` with classes and union types:
 class Dog { woof() { } }
 class Cat { meow() { } }
 var pet: Dog|Cat = /* ... */;
-if(pet instanceof Dog) {
+if (pet instanceof Dog) {
     pet.woof(); // OK
-} else {
+}
+else {
     pet.woof(); // Error
 }
 ```
