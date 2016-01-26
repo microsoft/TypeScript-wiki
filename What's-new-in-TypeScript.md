@@ -488,7 +488,7 @@ tsc foo.ts --outFile /dev/stdout | pretty-js
 ## Improved support for tsconfig.json in Visual Studio 2015
 
 TypeScript 1.8 allows `tsconfig.json` files in all project types, this includes ASP.NET v4, Console Application, and the "Html Application with 
-TypeScript". Further you are no longer limited to a single `tsconfig.json` file, but you can add multiple, and each will be build as part of the project.
+TypeScript". Further you are no longer limited to a single `tsconfig.json` file, but you can add multiple, and each will be built as part of the project.
 This allows you to separate the configuration for different parts of your application, without having to use multiple different projects.
 
 ![Showing off tsconfig.json in Visual Studio](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/new-in-typescript/tsconfig-in-vs.png)
