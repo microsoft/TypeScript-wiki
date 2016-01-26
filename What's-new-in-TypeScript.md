@@ -2,7 +2,7 @@
 
 ## Type parameters as constraints
 
-With TypeScript 1.8 it becomes possible for a type parameter constraint to reference type parameters from the same type parameter list; previously this was an error. This capability is usually referred to as [F-Bounded Polymorphism](https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification).
+With TypeScript 1.8 it becomes possible for a type parameter constraint to reference type parameters from the same type parameter list. Previously this was an error. This capability is usually referred to as [F-Bounded Polymorphism](https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification).
 
 ##### Example
 
@@ -19,11 +19,11 @@ assign(x, { b: 10, d: 20 });
 assign(x, { e: 0 });  // Error
 ```
 
-## Unreachable code detection
+## Unreachable and unused code detection
 
 ### Unreachable code
 
-Statements guaranteed to not be executed at run time are now correctly flagged as unreachable code errors. For instance statements following unconditional `return`, `throw`, `break` or `continue` statements. Use `--allowUnreachableCode` to disable unreachable code detection and reporting.
+Statements guaranteed to not be executed at run time are now correctly flagged as unreachable code errors. For instance, statements following unconditional `return`, `throw`, `break` or `continue` statements are considered unreachable. Use `--allowUnreachableCode` to disable unreachable code detection and reporting.
 
 ##### Example
 
@@ -43,7 +43,7 @@ Or a more common error case such as adding a newline after a `return` statement:
 
 ```ts
 function f() {
-    return     // Automatic Semicolon Insertion triggered at newline 
+    return     // Automatic Semicolon Insertion triggered at newline
     {
         x: "string"   // Error: Unreachable code detected.
     }
@@ -78,7 +78,7 @@ function f(x) { // Error: Not all code paths return a value.
 }
 ```
 
-### Case labels fall-through 
+### Case clause fall-throughs
 
 Reports errors for fall-through cases in switch statement. Check is turned *off* by default, and can enabled using `--noFallthroughCasesInSwitch`.
 
@@ -86,13 +86,9 @@ Reports errors for fall-through cases in switch statement. Check is turned *off*
 
 ```ts
 switch (x % 2) {
-    case 0: // Error Fallthrough case in switch.
-        if (x === 2) {
-            console.log("prime");
-            break;
-        }
+    case 0: // Error: Fallthrough case in switch.
         console.log("even");
-    
+
     case 1:
         console.log("odd");
         break;
@@ -105,58 +101,69 @@ Here are more examples of reachability checks in action:
 
 ## Augmenting global/module scope from modules
 
-Module augmentation is a declaration of ambient module that directly nested either in external module or in top level ambient external module. 
+Users can now declare any augmentations that they want to make, or that any other consumers already have made, to an existing module.
+Module augmentations look like plain old ambient module declarations (i.e. the `declare module "foo" { }` syntax), and are directly nested either your own modules, or in another top level ambient external module.
 
-Name of module augmentation is resolved using the same set of rules as module specifiers in `import` \ `export` declarations. The declarations in module augmentation are merged with declarations inside module using standard rules for declaration merging. 
+Furthermore, TypeScript also has the notion of *global* augmentations of the form `declare global { }`.
+This allows modules to augment global types such as `Array` if necessary.
 
-Module augmentations cannot add new items to the top level scope but rather patch existing declarations.
+The name of module augmentation is resolved using the same set of rules as module specifiers in `import` and `export` declarations.
+The declarations in module augmentation are merged with any existing declarations the same way they would if they were declared in the same file.
+
+Neither module augmentations nor global augmentations can add new items to the top level scope - they can only "patch" existing declarations.
 
 ##### Example
 
-Here module `map` can declare that internally it will patch `Observable` type and add `map` function to it.
+Here `map.ts` can declare that it will internally patch the `Observable` type from `observable.ts` and add the `map` method to it.
 
 ```ts
 // observable.ts
-export class Observable<T> {}
-```
-
-```ts
-// map.ts
-import {Observable} from "./observable";
-Observable.prototype.map = function () { /* ... */ }
-
-declare module "./observable" {
-    // Augment the Observable class definition
-    interface Observable<T> {
-        map<U>(proj: (el: T) => U): Observable<U>;
-    }
+export class Observable<T> {
+    // ...
 }
 ```
 
 ```ts
+// map.ts
+import { Observable } from "./observable";
+
+// Create an augmentation for "./observable"
+declare module "./observable" {
+
+    // Augment the 'Observable' class definition with interface merging
+    interface Observable<T> {
+        map<U>(proj: (el: T) => U): Observable<U>;
+    }
+
+}
+
+Observable.prototype.map = /*...*/;
+```
+
+```ts
 // consumer.ts
-import {Observable} from "./observable";
+import { Observable } from "./observable";
 import "./map";
 
 let o: Observable<number>;
 o.map(x => x.toFixed());
 ```
 
-Similarly, the global scope can be augmented from modules using `declare global` declarations:
+Similarly, the global scope can be augmented from modules using a `declare global` declarations:
 
 ##### Example
 
 ```ts
-// in external module
+// Ensure this is treated as a module.
 export {};
-
-Array.prototype.mapToNumbers = function () { /* ... */ }
 
 declare global {
     interface Array<T> {
         mapToNumbers(): number[];
     }
 }
+
+Array.prototype.mapToNumbers = function () { /* ... */ }
 ```
 
 ## Improved union/intersection type inference
@@ -207,6 +214,7 @@ export function createA() {
     return B.createB();
 }
 ```
+
 ```ts
 // file src/lib/b.ts
 export function createB() {
@@ -215,6 +223,7 @@ export function createB() {
 ```
 
 Results in:
+
 ```js
 define("lib/b", ["require", "exports"], function (require, exports) {
     "use strict";
@@ -236,7 +245,7 @@ define("a", ["require", "exports", "lib/b"], function (require, exports, B) {
 
 Module loaders like SystemJS wrap CommonJS modules and expose then as a `default` ES6 import. This makes it impossible to share the definition files between the SystemJS and CommonJS implementation of the module as the module shape looks different based on the loader.
 
-Setting the new compiler flag `--allowSyntheticDefaultImports` indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. The compiler will infer the existence of a `default` export that has the shape of the entire module itself. 
+Setting the new compiler flag `--allowSyntheticDefaultImports` indicates that the module loader performs some kind of synthetic default import member creation not indicated in the imported .ts or .d.ts. The compiler will infer the existence of a `default` export that has the shape of the entire module itself.
 
 System modules have this flag on by default.
 
@@ -255,7 +264,7 @@ for (let i = 0; i < 5; i++) {
 list.forEach(f => console.log(f()));
 ```
 
-Is transpiled as:
+is compiled to:
 
 ```js
 var list = [];
@@ -268,7 +277,8 @@ for (var i = 0; i < 5; i++) {
 list.forEach(function (f) { return console.log(f()); });
 ```
 
-And results in 
+And results in
+
 ```cmd
 0
 1
@@ -296,9 +306,13 @@ for (var x in a) {   // Type of x is implicitly string
 
 ## Including `.js` files with `--allowJS`
 
-Often there are external source files in your project that may not be authored in TypeScript; or you can be in the middle of converting a JS code base into TS, but you still want to bundle all outputs in a single file along with your other TS sources.
+Often there are external source files in your project that may not be authored in TypeScript.
+Alternatively, you might be in the middle of converting a JS code base into TS, but still want to bundle all your JS code into a single file with the output of your new TS code.
 
-`.js` files are now allowed as input to `tsc`. The TypeScript compiler checks the input `.js` files for syntax errors, and emits valid output based on the `--target` and `--module` flags. The output can be combined with other `.ts` files as well. Source maps are generated for `.js` files as well as `.ts` files.
+`.js` files are now allowed as input to `tsc`.
+The TypeScript compiler checks the input `.js` files for syntax errors, and emits valid output based on the `--target` and `--module` flags.
+The output can be combined with other `.ts` files as well.
+Source maps are still generated for `.js` files just like with `.ts` files.
 
 ## Custom JSX factories using `--reactNamespace`
 
@@ -388,39 +402,43 @@ By just passing the `--pretty` command line option, TypeScript gives more colorf
 
 ![Showing off pretty error messages in ConEmu](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/new-in-typescript/pretty01.png)
 
-## Colorization of JSX code in VS 2015 
+## Colorization of JSX code in VS 2015
 
-JSX tags now have their own classifications in Visual Studio 2015 with TypeScript 1.8. 
+With TypeScript 1.8, JSX tags are now classified and colorized in Visual Studio 2015.
 
 ![jsx](https://cloud.githubusercontent.com/assets/8052307/12271404/b875c502-b90f-11e5-93d8-c6740be354d1.png)
 
-The classification can be further customized by changing the font and color settings for the `VB XML` color and font settings through Tools\Options\Environment\Fonts and Colors page.
+The classification can be further customized by changing the font and color settings for the `VB XML` color and font settings through `Tools`->`Options`->`Environment`->`Fonts and Colors` page.
 
 ## The `--project` (`-p`) flag can now take any file path
 
-The `--project` command line option originally could only take paths to a folder containing a `tsconfig.json`. Given the different scenarios for build configurations, it made sense to allow `--project` to point to any other compatible JSON file. For instance, a user might want to target ES2015 with CommonJS modules for Node 5, but ES5 with AMD modules for the browser. With this new work, users can easily manage two separate build targets using `tsc` alone without having to perform hacky workarounds like placing `tsconfig.json` files in separate directories.
+The `--project` command line option originally could only take paths to a folder containing a `tsconfig.json`.
+Given the different scenarios for build configurations, it made sense to allow `--project` to point to any other compatible JSON file.
+For instance, a user might want to target ES2015 with CommonJS modules for Node 5, but ES5 with AMD modules for the browser.
+With this new work, users can easily manage two separate build targets using `tsc` alone without having to perform hacky workarounds like placing `tsconfig.json` files in separate directories.
 
 The old behavior still remains the same if given a directory - the compiler will try to find a file in the directory named `tsconfig.json`.
 
 ## Allow comments in tsconfig.json
 
-It is always nice to be able to document your configuration! tsconfig.json now accepts single and multi-line comments. 
+It's always nice to be able to document your configuration!
+`tsconfig.json` now accepts single and multi-line comments.
 
 ```ts
 {
     "compilerOptions": {
         "target": "ES2015", // running on node v5, yaay!
-        "sourceMap": true // makes debugging easier
+        "sourceMap": true   // makes debugging easier
     },
-    /* Excluded
-      * Files
+    /*
+     * Excluded files
       */
     "exclude": [
         "file.d.ts"
     ]
 }
 ```
- 
+
 ## Support output to IPC-driven files
 
 TypeScript 1.8 allows users to use the `--outFile` argument with special file system entities like named pipes, devices, etc.
@@ -438,7 +456,6 @@ As an example, we can pipe our emitted JavaScript into a pretty printer like [pr
 ```shell
 tsc foo.ts --outFile /dev/stdout | pretty-js
 ```
-
 
 # TypeScript 1.7
 
@@ -484,7 +501,7 @@ TypeScript 1.7 adds `ES6` to the list of options available for the `--module` fl
 
 ```json
 {
-    "compilerOptions": { 
+    "compilerOptions": {
         "module": "amd",
         "target": "es6"
     }
@@ -499,26 +516,26 @@ For instance, consider the following `BasicCalculator` module:
 ```TypeScript
 export default class BasicCalculator {
     public constructor(protected value: number = 0) { }
-    
+
     public currentValue(): number {
         return this.value;
     }
-    
+
     public add(operand: number) {
         this.value += operand;
         return this;
     }
-    
+
     public subtract(operand: number) {
         this.value -= operand;
         return this;
     }
-    
+
     public multiply(operand: number) {
         this.value *= operand;
         return this;
     }
-    
+
     public divide(operand: number) {
         this.value /= operand;
         return this;
@@ -535,7 +552,7 @@ let v = new calc(2)
     .multiply(5)
     .add(1)
     .currentValue();
-``` 
+```
 
 This often opens up very elegant ways of writing code; however, there was a problem for classes that wanted to extend from `BasicCalculator`.
 Imagine a user wanted to start writing a `ScientificCalculator`:
@@ -547,12 +564,12 @@ export default class ScientificCalculator extends BasicCalculator {
     public constructor(value = 0) {
         super(value);
     }
-    
+
     public square() {
         this.value = this.value ** 2;
         return this;
     }
-    
+
     public sin() {
         this.value = Math.sin(this.value);
         return this;
@@ -659,7 +676,7 @@ JSX is an embeddable XML-like syntax. It is meant to be transformed into valid J
 TypeScript 1.6 introduces a new `.tsx` file extension.  This extension does two things: it enables JSX inside of TypeScript files, and it makes the new `as` operator the default way to cast (removing any ambiguity between JSX expressions and the TypeScript prefix cast operator). For example:
 
 ```ts
-var x = <any> foo; 
+var x = <any> foo;
 // is equivalent to:
 var x = foo as any;
 ```
@@ -668,30 +685,30 @@ var x = foo as any;
 
 To use JSX-support with React you should use the [React typings](https://github.com/borisyankov/DefinitelyTyped/tree/master/react). These typings define the `JSX` namespace so that TypeScript can correctly check JSX expressions for React. For example:
 
-```ts 
+```ts
 /// <reference path="react.d.ts" />
 
-interface Props {  
+interface Props {
   name: string;
 }
 
-class MyComponent extends React.Component<Props, {}> {  
+class MyComponent extends React.Component<Props, {}> {
   render() {
     return <span>{this.props.foo}</span>
   }
 }
 
-<MyComponent name="bar" />; // OK 
-<MyComponent name={0} />; // error, `name` is not a number  
+<MyComponent name="bar" />; // OK
+<MyComponent name={0} />; // error, `name` is not a number
 ```
 
 #### Using other JSX framworks
 
-JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for defining the `JSX` namespace for your framework. 
+JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for defining the `JSX` namespace for your framework.
 
 #### Output generation
 
-TypeScript ships with two JSX modes: `preserve` and `react`.  
+TypeScript ships with two JSX modes: `preserve` and `react`.
 - The `preserve` mode will keep JSX expressions as part of the output to be further consumed by another transform step. *Additionally the output will have a `.jsx` file extension.*
 - The `react` mode will emit `React.createElement`, does not need to go through a JSX transformation before use, and the output will have a `.js` file extension.
 
@@ -886,9 +903,9 @@ class Derived1 extends Base { }
 
 class Derived2 extends Base {
     getThing() { return 'hello'; }
-    foo() { 
+    foo() {
         super.getThing();// Error: cannot invoke abstract members through 'super'
-    } 
+    }
 }
 
 var x = new Derived2(); // OK
@@ -939,7 +956,7 @@ x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 
 ## ES6 generators
 
-TypeScript 1.6 adds support for generators when targeting ES6. 
+TypeScript 1.6 adds support for generators when targeting ES6.
 
 A generator function can have a return type annotation, just like a function. The annotation represents the type of the generator returned by the function. Here is an example:
 ```ts
@@ -971,29 +988,29 @@ An *async function* is a function or method that has been prefixed with the `asy
 ##### Example
 
 ```TypeScript
-var p: Promise<number> = /* ... */;  
-async function fn(): Promise<number> {  
-  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
-  return 1 + i;  
-}  
-  
-var a = async (): Promise<number> => 1 + await p; // suspends execution.  
-var a = async () => 1 + await p; // suspends execution. return type is inferred as "Promise<number>" when compiling with --target ES6  
-var fe = async function(): Promise<number> {  
-  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
-  return 1 + i;  
-}  
-  
-class C {  
-  async m(): Promise<number> {  
-    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
-    return 1 + i;  
-  }  
-  
-  async get p(): Promise<number> {  
-    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"  
-    return 1 + i;  
-  }  
+var p: Promise<number> = /* ... */;
+async function fn(): Promise<number> {
+  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
+  return 1 + i;
+}
+
+var a = async (): Promise<number> => 1 + await p; // suspends execution.
+var a = async () => 1 + await p; // suspends execution. return type is inferred as "Promise<number>" when compiling with --target ES6
+var fe = async function(): Promise<number> {
+  var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
+  return 1 + i;
+}
+
+class C {
+  async m(): Promise<number> {
+    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
+    return 1 + i;
+  }
+
+  async get p(): Promise<number> {
+    var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
+    return 1 + i;
+  }
 }
 ```
 
@@ -1007,7 +1024,7 @@ npm install -g typescript@next
 
 ## Adjustments in module resolution logic
 
-Starting from release 1.6 TypeScript compiler will use different set of rules to resolve module names when targeting 'commonjs'. These [rules](https://github.com/Microsoft/TypeScript/issues/2338) attempted to model module lookup procedure used by Node. This effectively mean that node modules can include information about its typings and TypeScript compiler will be able to find it. User however can override module resolution rules picked by the compiler by using `--moduleResolution` command line option. Possible values are: 
+Starting from release 1.6 TypeScript compiler will use different set of rules to resolve module names when targeting 'commonjs'. These [rules](https://github.com/Microsoft/TypeScript/issues/2338) attempted to model module lookup procedure used by Node. This effectively mean that node modules can include information about its typings and TypeScript compiler will be able to find it. User however can override module resolution rules picked by the compiler by using `--moduleResolution` command line option. Possible values are:
 - 'classic' - module resolution rules used by pre 1.6 TypeScript compiler
 - 'node' - node-like module resolution
 
@@ -1032,7 +1049,7 @@ function bar(foo : Foo)  {
 
 ## User-defined type guard functions
 
-TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
+TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`.
 
 ##### Examples
 
@@ -1067,7 +1084,7 @@ The `exclude` list does not support wilcards. It must simply be a list of files 
 ## `--init` command line option
 
 Run `tsc --init` in a directory to create an initial `tsconfig.json` in this directory with preset defaults. Optionally pass command line arguments along with `--init` to be stored in your initial tsconfig.json on creation.
- 
+
 # TypeScript 1.5
 
 ## ES6 Modules ##
@@ -1167,8 +1184,8 @@ var [x, y, z = 10] = getSomeArray();
 
 Similarly, destructuring  can be used in function parameter declarations:
 ```ts
-function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {  
-    // Draw text  
+function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {
+    // Draw text
 }
 
 // Call drawText with an object literal
@@ -1180,14 +1197,14 @@ drawText(item);
 
 Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variables can be written as a single destructuring assignment:
 ```ts
-var x = 1;  
-var y = 2;  
+var x = 1;
+var y = 2;
 [x, y] = [y, x];
 ```
 
 ## `namespace` keyword
 
-TypeScript used the `module` keyword to define both "internal modules" and "external modules"; this has been a bit of confusion for developers new to TypeScript. "Internal modules" are closer to what most people would call a namespace; likewise, "external modules" in JS speak really just are modules now.  
+TypeScript used the `module` keyword to define both "internal modules" and "external modules"; this has been a bit of confusion for developers new to TypeScript. "Internal modules" are closer to what most people would call a namespace; likewise, "external modules" in JS speak really just are modules now.
 
 > Note: Previous syntax defining internal modules are still supported.
 
@@ -1206,13 +1223,13 @@ namespace Math {
 ```
 
 ## `let` and `const` support
-ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5. 
+ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5.
 
 #### Const
 ```ts
 const MAX = 100;
 
-++MAX; // Error: The operand of an increment or decrement 
+++MAX; // Error: The operand of an increment or decrement
        //        operator cannot be a constant.
 ```
 
@@ -1252,7 +1269,7 @@ for (var _i = 0, _a = expr; _i < _a.length; _i++) {
 ```
 
 ## Decorators
-> TypeScript decorator is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators). 
+> TypeScript decorator is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators).
 
 A decorator is:
 - an expression
@@ -1358,7 +1375,7 @@ var _a;
 ```
 
 ## AMD-dependency optional names
-`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code. 
+`/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code.
 
 The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
 
@@ -1392,6 +1409,7 @@ Adding a `tsconfig.json` file in a directory indicates that the directory is the
     }
 }
 ```
+
 See the [tsconfig.json wiki page](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) for more details.
 
 ## `--rootDir` command line option
@@ -1413,13 +1431,14 @@ By default the output new line character is `\r\n` on Windows based systems and 
 
 ## `--inlineSourceMap` and `inlineSources` command line options
 
-`--inlineSourceMap` causes source map files to be written inline in the generated `.js` files instead of in a independent `.js.map` file.  `--inlineSources` allows for additionally inlining the source `.ts` file into the 
-
+`--inlineSourceMap` causes source map files to be written inline in the generated `.js` files instead of in a independent `.js.map` file.  `--inlineSources` allows for additionally inlining the source `.ts` file into the
 
 # TypeScript 1.4
 
 ## Union types
+
 ### Overview
+
 Union types are a powerful way to express a value that can be one of several types. For example, you might have an API for running a program that takes a commandline as either a `string`, a `string[]` or a function that returns a `string`. You can now write:
 ```ts
 interface RunOptions {
@@ -1455,6 +1474,7 @@ function formatCommandline(c: string|string[]) {
 ```
 
 ### Stricter Generics
+
 With union types able to represent a wide range of type scenarios, we've decided to improve the strictness of certain generic calls. Previously, code like this would (surprisingly) compile without error:
 ```ts
 function equal<T>(lhs: T, rhs: T): boolean {
@@ -1479,6 +1499,7 @@ var d = choose2('hello', 42); // OK, d: string|number
 ```
 
 ### Better Type Inference
+
 Union types also allow for better type inference in arrays and other places where you might have multiple kinds of values in a collection:
 ```ts
 var x = [1, 'hello']; // x: Array<string|number>
@@ -1487,6 +1508,7 @@ x[0] = false; // Error, boolean is not string or number
 ```
 
 ## `let` declarations
+
 In JavaScript, `var` declarations are "hoisted" to the top of their enclosing scope. This can result in confusing bugs:
 ```ts
 console.log(x); // meant to write 'y' here
@@ -1515,6 +1537,7 @@ halfPi = 2; // Error, can't assign to a `const`
 `const` is only available when targeting ECMAScript 6 (`--target ES6`).
 
 ## Template strings
+
 TypeScript now supports ES6 template strings. These are an easy way to embed arbitrary expressions in strings:
 
 ```ts
@@ -1523,15 +1546,18 @@ var greeting  = `Hello, ${name}! Your name has ${name.length} characters`;
 ```
 
 When compiling to pre-ES6 targets, the string is decomposed:
+
 ```js
 var name = "TypeScript!";
 var greeting = "Hello, " + name + "! Your name has " + name.length + " characters";
 ```
 
 ## Type Guards
+
 A common pattern in JavaScript is to use `typeof` or `instanceof` to examine the type of an expression at runtime. TypeScript now understands these conditions and will change type inference accordingly when used in an `if` block.
 
 Using `typeof` to test a variable:
+
 ```ts
 var x: any = /* ... */;
 if(typeof x === 'string') {
@@ -1543,7 +1569,7 @@ x.unknown(); // OK
 
 Using `typeof` with union types and `else`:
 ```ts
-var x: string|HTMLElement = /* ... */;
+var x: string | HTMLElement = /* ... */;
 if(typeof x === 'string') {
     // x is string here, as shown above
 } else {
@@ -1582,12 +1608,15 @@ Enums are very useful, but some programs don't actually need the generated code 
 const enum Suit { Clubs, Diamonds, Hearts, Spades }
 var d = Suit.Diamonds;
 ```
+
 Compiles to exactly:
+
 ```js
 var d = 1;
 ```
 
 TypeScript will also now compute enum values when possible:
+
 ```ts
 enum MyFlags {
   None = 0,
@@ -1600,12 +1629,14 @@ var b = MyFlags.Best; // emits var b = 7;
 ```
 
 ## `-noEmitOnError` commandline option
+
 The default behavior for the TypeScript compiler is to still emit .js files if there were type errors (for example, an attempt to assign a `string` to a `number`). This can be undesirable on build servers or other scenarios where only output from a "clean" build is desired. The new flag `noEmitOnError` prevents the compiler from emitting .js code if there were any errors.
 
 This is now the default for MSBuild projects; this allows MSBuild incremental build to work as expected, as outputs are only generated on clean builds.
 
 ## AMD Module names
-By default AMD modules are generated anonymous. This can lead to problems when other tools are used to process the resulting modules like a bundlers (e.g. r.js). 
+
+By default AMD modules are generated anonymous. This can lead to problems when other tools are used to process the resulting modules like a bundlers (e.g. `r.js`).
 
 The new `amd-module name` tag allows passing an optional module name to the compiler:
 
