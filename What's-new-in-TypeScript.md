@@ -281,7 +281,7 @@ And results in
 
 Previously the type of a `for..in` variable is inferred to `any`; that allowed the compiler to ignore invalid uses within the `for..in` body.
 
-Starting with TS 1.8,:
+Starting with TypeScript 1.8,:
 * The type of a variable declared in a `for..in` statement is implicitly `string`.
 * When an object with a numeric index signature of type `T` (such as an array) is indexed by a `for..in` variable of a containing `for..in` statement for an object *with* a numeric index signature and *without* a string index signature (again such as an array), the value produced is of type `T`.
 
@@ -293,6 +293,12 @@ for (var x in a) {   // Type of x is implicitly string
     var obj = a[x];  // Type of obj is MyObject
 }
 ```
+
+## Including `.js` files with `--allowJS`
+
+Often there are external source files in your project that may not be authored in TypeScript; or you can be in the middle of converting a JS code base into TS, but you still want to bundle all outputs in a single file along with your other TS sources.
+
+`.js` files are now allowed as input to `tsc`. The TypeScript compiler checks the input `.js` files for syntax errors, and emits valid output based on the `--target` and `--module` flags. The output can be combined with other `.ts` files as well. Source maps are generated for `.js` files as well as `.ts` files.
 
 ## Custom JSX factories using `--reactNamespace`
 
