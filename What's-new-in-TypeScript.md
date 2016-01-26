@@ -38,6 +38,7 @@ function f(x) {
     x = 0; // Error: Unreachable code detected.
 }
 ```
+
 Or a more common error case such as adding a newline after a `return` statement:
 
 ```ts
@@ -155,6 +156,40 @@ declare global {
     interface Array<T> {
         mapToNumbers(): number[];
     }
+}
+```
+
+## Improved union/intersection type inference
+
+TypeScript 1.8 improves type inference involving source and target sides that are both union or intersection types. For example, when inferring from `string | string[]` to `string | T`, we reduce the types to `string[]` and `T`, thus inferring `string[]` for `T`.
+
+##### Example
+
+```ts
+type Maybe<T> = T | void;
+
+function isDefined<T>(x: Maybe<T>): x is T {
+    return x !== undefined && x !== null;
+}
+
+function isUndefined<T>(x: Maybe<T>): x is void {
+    return x === undefined || x === null;
+}
+
+function getOrElse<T>(x: Maybe<T>, defaultValue: T): T {
+    return isDefined(x) ? x : defaultValue;
+}
+
+function test1(x: Maybe<string>) {
+    let x1 = getOrElse(x, "Undefined");         // string
+    let x2 = isDefined(x) ? x : "Undefined";    // string
+    let x3 = isUndefined(x) ? "Undefined" : x;  // string
+}
+
+function test2(x: Maybe<number>) {
+    let x1 = getOrElse(x, -1);         // number
+    let x2 = isDefined(x) ? x : -1;    // number
+    let x3 = isUndefined(x) ? -1 : x;  // number
 }
 ```
 
