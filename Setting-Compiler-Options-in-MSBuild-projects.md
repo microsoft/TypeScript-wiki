@@ -46,7 +46,7 @@ Compiler options can be specified using MSBuild properties within an MSBuild pro
 `--sourceRoot`                               | TypeScriptSourceRoot                       | File path
 `--suppressImplicitAnyIndexErrors`           | TypeScriptSuppressImplicitAnyIndexErrors   | boolean
 `--suppressExcessPropertyErrors`             |  TypeScriptSuppressExcessPropertyErrors    | boolean
-`--moduleResolution`<sup>[1]</sup>           | TypeScriptModuleResolution                 | `Classic` or `NodeJs`
+`--moduleResolution`<sup>[1]</sup>           | TypeScriptModuleResolution                 | `Classic` or `Node`
 `--experimentalAsyncFunctions`<sup>[1]</sup> | TypeScriptExperimentalAsyncFunctions       | boolean
 `--jsx`<sup>[1]</sup>                        | TypeScriptJSXEmit                          | `React` or `Preserve`
 `--project`                                  | *Not supported in VS*                      |
