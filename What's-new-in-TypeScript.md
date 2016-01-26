@@ -122,6 +122,43 @@ Setting the new compiler flag `--allowSyntheticDefaultImports` indicates that th
 
 System modules have this flag on by default.
 
+## Allow captured `let`/`const` in loops
+
+Previously an error, now supported in TypeScript 1.8. `let`/`const` declarations within loops and captured in functions are now emitted to correctly match `let`/`const` freshness semantics.
+
+#### Example
+
+```ts
+let list = [];
+for (let i = 0; i < 5; i++) {
+    list.push(() => i);
+}
+
+list.forEach(f => console.log(f()));
+```
+
+Is transpiled as:
+
+```js
+var list = [];
+var _loop_1 = function(i) {
+    list.push(function () { return i; });
+};
+for (var i = 0; i < 5; i++) {
+    _loop_1(i);
+}
+list.forEach(function (f) { return console.log(f()); });
+```
+
+And results in 
+```cmd
+0
+1
+2
+3
+4
+```
+
 ## Improved checking for `for..in` statements
 
 Previously the type of a `for..in` variable is inferred to `any`; that allowed the compiler to ignore invalid uses within the `for..in` body.
