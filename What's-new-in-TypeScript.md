@@ -19,7 +19,12 @@ assign(x, { b: 10, d: 20 });
 assign(x, { e: 0 });  // Error
 ```
 
-## Unreachable and unused code detection
+## Control flow analysis errors
+
+TypeScript 1.8 introduces control flow analysis to help catch common errors that users tend to run into.
+Read on to get more details, and check out these errors in action: 
+
+![cfa](https://cloud.githubusercontent.com/assets/8052307/5210657/c5ae0f28-7585-11e4-97d8-86169ef2a160.gif)
 
 ### Unreachable code
 
@@ -86,9 +91,12 @@ function f(x) { // Error: Not all code paths return a value.
 
 ### Case clause fall-throughs
 
-Reports errors for fall-through cases in switch statement. Check is turned *off* by default, and can enabled using `--noFallthroughCasesInSwitch`.
+TypeScript can reports errors for fall-through cases in switch statement where the case clause is non-empty.
+This check is turned *off* by default, and can be enabled using `--noFallthroughCasesInSwitch`.
 
 ##### Example
+
+With `--noFallthroughCasesInSwitch`, this example will trigger an error:
 
 ```ts
 switch (x % 2) {
@@ -101,9 +109,20 @@ switch (x % 2) {
 }
 ```
 
-Here are more examples of reachability checks in action:
+However, in the following example, no error will be reported because the fall-through case is empty:
 
-![cfa](https://cloud.githubusercontent.com/assets/8052307/5210657/c5ae0f28-7585-11e4-97d8-86169ef2a160.gif)
+```ts
+switch (x % 3) {
+    case 0:
+    case 1:
+        console.log("Acceptable");
+        break;
+
+    case 2:
+        console.log("This is *two much*!");
+        break;
+}
+```
 
 ## Augmenting global/module scope from modules
 
@@ -113,8 +132,8 @@ Module augmentations look like plain old ambient module declarations (i.e. the `
 Furthermore, TypeScript also has the notion of *global* augmentations of the form `declare global { }`.
 This allows modules to augment global types such as `Array` if necessary.
 
-The name of module augmentation is resolved using the same set of rules as module specifiers in `import` and `export` declarations.
-The declarations in module augmentation are merged with any existing declarations the same way they would if they were declared in the same file.
+The name of a module augmentation is resolved using the same set of rules as module specifiers in `import` and `export` declarations.
+The declarations in a module augmentation are merged with any existing declarations the same way they would if they were declared in the same file.
 
 Neither module augmentations nor global augmentations can add new items to the top level scope - they can only "patch" existing declarations.
 
@@ -398,7 +417,7 @@ Stable packages are available here:
 * [Microsoft.TypeScript.Compiler](https://www.nuget.org/packages/Microsoft.TypeScript.Compiler/)
 * [Microsoft.TypeScript.MSBuild](https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/)
 
-Also, a nightly NuGet packages to match the [nightly npm package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on https://myget.org:
+Also, a nightly NuGet package to match the [nightly npm package](http://blogs.msdn.com/b/typescript/archive/2015/07/27/introducing-typescript-nightlies.aspx) is available on https://myget.org:
 
 * [TypeScript-Preview](https://www.myget.org/gallery/typescript-preview)
 
@@ -1278,7 +1297,7 @@ for (var _i = 0, _a = expr; _i < _a.length; _i++) {
 ```
 
 ## Decorators
-> TypeScript decorator is based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators).
+> TypeScript decorators are based on the [ES7 decorator proposal](https://github.com/wycats/javascript-decorators).
 
 A decorator is:
 - an expression
