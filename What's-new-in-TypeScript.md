@@ -77,7 +77,7 @@ function f(x) { // Error: Not all code paths return a value.
 }
 ```
 
-### Case labels fallthrough 
+### Case labels fall-through 
 
 Reports errors for fall-through cases in switch statement. Check is turned *off* by default, and can enabled using `--noFallthroughCasesInSwitch`.
 
