@@ -25,7 +25,7 @@ assign(x, { e: 0 });  // Error
 
 Statements guaranteed to not be executed at run time are now correctly flagged as unreachable code errors. For instance statements following unconditional `return`, `throw`, `break` or `continue` statements. Use `--allowUnreachableCode` to disable unreachable code detection and reporting.
 
-#### Example
+##### Example
 
 ```ts
 function f(x) {
@@ -53,7 +53,7 @@ function f() {
 
 Unused labels are also flagged. Just like unreachable code checks, these are turned on by default; use `--allowUnusedLabels` to stop reporting these errors.
 
-#### Example
+##### Example
 
 ```ts
 loop: while (x > 0) {  // Error: Unused label.
@@ -65,7 +65,7 @@ loop: while (x > 0) {  // Error: Unused label.
 
 Functions with code paths that do not return a value in JS implicitly return `undefined`. These can now be flagged by the compiler as implicit returns. The check is turned *off* by default; use `--noImplicitReturns` to turn it on.
 
-#### Example
+##### Example
 
 ```ts
 function f(x) { // Error: Not all code paths return a value.
@@ -81,7 +81,7 @@ function f(x) { // Error: Not all code paths return a value.
 
 Reports errors for fall-through cases in switch statement. Check is turned *off* by default, and can enabled using `--noFallthroughCasesInSwitch`.
 
-#### Example
+##### Example
 
 ```ts
 switch (x % 2) {
@@ -209,7 +209,7 @@ System modules have this flag on by default.
 
 Previously an error, now supported in TypeScript 1.8. `let`/`const` declarations within loops and captured in functions are now emitted to correctly match `let`/`const` freshness semantics.
 
-#### Example
+##### Example
 
 ```ts
 let list = [];
@@ -265,7 +265,7 @@ Passing `--reactNamespace <JSX factory Name>` along with `--jsx react` allows fo
 
 The new factory name will be used to call `createElement` and `__spread` functions.
 
-#### Example
+##### Example
 
 ```ts
 import {jsxFactory} from "jsxFactory";
@@ -293,7 +293,7 @@ TypeScript 1.8 extends [user-defined type guards](https://github.com/Microsoft/T
 
 `this is T` is now valid return type annotation for methods in classes and interfaces. When used in a type narowing position (e.g. `if` statement), the type of the call expression target object would be narrowed to `T`.
 
-#### Example
+##### Example
 
 ```ts
 
@@ -439,7 +439,7 @@ For more information see [Async Functions](http://blogs.msdn.com/b/typescript/ar
 
 TypeScript 1.7 adds `ES6` to the list of options available for the `--module` flag and allows you to specify the module output when targeting `ES6`. This provides more flexibility to target exactly the features you want in specific runtimes.
 
-#### Example
+##### Example
 
 ```json
 {
@@ -830,7 +830,7 @@ class Test extends getGreeterBase() {
 
 TypeScript 1.6 adds support for `abstract` keyword for classes and their methods. An abstract class is allowed to have methods with no implementation, and cannot be constructed.
 
-#### Examples
+##### Examples
 
 ```TypeScript
 abstract class Base {
@@ -879,7 +879,7 @@ type Pair<T> = Tuple<T, T>;
 
 TypeScript 1.6 enforces stricter object literal assignment checks for the purpose of catching excess or misspelled properties. Specifically, when a fresh object literal is assigned to a variable or passed for a parameter of a non-empty target type, it is an error for the object literal to specify properties that don't exist in the target type.
 
-#### Examples
+##### Examples
 
 ```typescript
 var x: { foo: number };
@@ -927,7 +927,7 @@ TypeScript 1.6 introduces experimental support of `async` functions when targeti
 
 An *async function* is a function or method that has been prefixed with the `async` modifier. This modifier informs the compiler that function body transposition is required, and that the keyword `await` should be treated as a unary expression instead of an identifier. An *Async Function* must provide a return type annotation that points to a compatible `Promise` type. Return type inference can only be used if there is a globally defined, compatible `Promise` type.
 
-#### Example
+##### Example
 
 ```TypeScript
 var p: Promise<number> = /* ... */;  
@@ -993,7 +993,7 @@ function bar(foo : Foo)  {
 
 TypeScript 1.6 adds a new way to narrow a variable type inside an `if` block, in addition to `typeof` and `instanceof`. A user-defined type guard functions is one with a return type annotation of the form `x is T`, where `x` is a declared parameter in the signature, and `T` is any type. When a user-defined type guard function is invoked on a variable in an `if` block, the type of the variable will be narrowed to `T`. 
 
-#### Examples
+##### Examples
 
 ```ts
 function isCat(a: any): a is Cat {
@@ -1194,7 +1194,7 @@ alert(a); // Error: a is not defined in this scope
 
 TypeScript 1.5 adds support to ES6 for..of loops on arrays for ES3/ES5 as well as full support for Iterator interfaces when targetting ES6.
 
-#### Example:
+##### Example
 
 The TypeScript compiler will transpile for..of arrays to idiomatic ES3/ES5 JavaScript when targeting those versions:
 
@@ -1221,7 +1221,7 @@ A decorator is:
 
 > For more information, please see the [Decorators](https://github.com/Microsoft/TypeScript/issues/2249) proposal.
 
-#### Example:
+##### Example
 
 Decorators `readonly` and `enumerable(false)` will be applied to the property `method` before it is installed on class `C`. This allows the decorator to change the implementation, and in this case, augment the descriptor to be writable: false and enumerable: false.
 
@@ -1340,7 +1340,8 @@ Adding a `tsconfig.json` file in a directory indicates that the directory is the
 - By invoking tsc with no input files, in which case the compiler searches for the tsconfig.json file starting in the current directory and continuing up the parent directory chain.
 - By invoking tsc with no input files and a -project (or just -p) command line option that specifies the path of a directory containing a tsconfig.json file.
 
-#### Example:
+##### Example
+
 ```json
 {
     "compilerOptions": {
