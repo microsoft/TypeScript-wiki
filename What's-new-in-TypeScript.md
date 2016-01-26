@@ -21,6 +21,83 @@ assign(x, { e: 0 });  // Error
 
 ## Unreachable code detection
 
+### Unreachable code
+
+Statements guaranteed to not be executed at run time are now correctly flagged as unreachable code errors. For instance statements following unconditional `return`, `throw`, `break` or `continue` statements. Use `--allowUnreachableCode` to disable unreachable code detection and reporting.
+
+#### Example
+
+```ts
+function f(x) {
+    if (x) {
+       return true;
+    } else {
+       return false;
+    }
+
+    x = 0; // Error: Unreachable code detected.
+}
+```
+Or a more common error case such as adding a newline after a `return` statement:
+
+```ts
+function f() {
+    return     // Automatic Semicolon Insertion triggered at newline 
+    {
+        x: "string"   // Error: Unreachable code detected.
+    }
+}
+```
+
+### Unused labels
+
+Unused labels are also flagged. Just like unreachable code checks, these are turned on by default; use `--allowUnusedLabels` to stop reporting these errors.
+
+#### Example
+
+```ts
+loop: while (x > 0) {  // Error: Unused label.
+    x++;
+}
+```
+
+### Implicit returns
+
+Functions with code paths that do not return a value in JS implicitly return `undefined`. These can now be flagged by the compiler as implicit returns. The check is turned *off* by default; use `--noImplicitReturns` to turn it on.
+
+#### Example
+
+```ts
+function f(x) { // Error: Not all code paths return a value.
+    if (x) {
+        return false;
+    }
+
+    // implicitly returns `undefined`
+}
+```
+
+### Case labels fallthrough 
+
+Reports errors for fall-through cases in switch statement. Check is turned *off* by default, and can enabled using `--noFallthroughCasesInSwitch`.
+
+#### Example
+
+```ts
+switch (x % 2) {
+    case 0: // Error Fallthrough case in switch.
+        if (x === 2) {
+            console.log("prime");
+            break;
+        }
+        console.log("even");
+    
+    case 1:
+        console.log("odd");
+        break;
+}
+```
+
 Here are more examples of reachability checks in action:
 
 ![cfa](https://cloud.githubusercontent.com/assets/8052307/5210657/c5ae0f28-7585-11e4-97d8-86169ef2a160.gif)
