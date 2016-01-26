@@ -4,6 +4,8 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 1.8
 
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?utf8=%E2%9C%93&q=milestone%3A%22TypeScript+1.8%22+label%3A%22breaking+change%22+).
+
 #### Reachability checks are enabled by default
 
 In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/Microsoft/TypeScript/pull/4788) to prevent certain categories of errors. Specifically
