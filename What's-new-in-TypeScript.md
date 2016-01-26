@@ -206,7 +206,42 @@ var div = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
 
 ## `this`-based type guards
 
-TODO
+TypeScript 1.8 extends [user-defined type guards](https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#user-defined-type-guard-functions) functions to class and interface methods.
+
+`this is T` is now valid return type annotation for methods in classes and interfaces. When used in a type narowing position (e.g. `if` statement), the type of the call expression target object would be narrowed to `T`.
+
+#### Example
+
+```ts
+
+class FileSystemObject {
+    isFile(): this is File { return this instanceof File; }
+    isDirectory(): this is Directory { return this instanceof Directory;}
+    isNetworked(): this is (Networked & this) { return this.networked; }
+    constructor(public path: string, private networked: boolean) {}
+}
+
+class File extends FileSystemObject {
+    constructor(path: string, public content: string) { super(path, false); }
+}
+class Directory extends FileSystemObject {
+    children: FileSystemObject[];
+}
+interface Networked {
+    host: string;
+}
+
+let fso: FileSystemObject = new File("foo/bar.txt", "foo");
+if (fso.isFile()) {
+    fso.content; // fso is File
+}
+else if (fso.isDirectory()) {
+    fso.children; // fso is Directory
+}
+else if (fso.isNetworked()) {
+    fso.host; // fso is networked
+}
+```
 
 ## Official TypeScript NuGet package
 
