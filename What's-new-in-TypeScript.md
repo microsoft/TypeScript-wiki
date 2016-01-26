@@ -19,6 +19,12 @@ assign(x, { b: 10, d: 20 });
 assign(x, { e: 0 });  // Error
 ```
 
+## Unreachable code detection
+
+Here are more examples of reachability checks in action:
+
+![cfa](https://cloud.githubusercontent.com/assets/8052307/5210657/c5ae0f28-7585-11e4-97d8-86169ef2a160.gif)
+
 ## Augmenting global/module scope from modules
 
 Module augmentation is a declaration of ambient module that directly nested either in external module or in top level ambient external module. 
