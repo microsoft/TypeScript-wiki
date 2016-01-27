@@ -124,6 +124,31 @@ switch (x % 3) {
 }
 ```
 
+
+## Stateless Function Components in React
+
+TypeScript now supports [Stateless Function components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
+These are lightweight components that easily compose other components:
+
+```ts
+// Use parameter destructuring and defaults for easy definition of 'props' type
+const Greeter = ({name = 'world'}) => <div>Hello, {name}!</div>;
+
+// Properties get validated
+let example = <Greeter name='TypeScript 1.8' />;
+```
+
+For this feature and simplified props, be sure to be use the [latest version of react.d.ts](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/react).
+
+## Simplified `props` type management in React
+
+In TypeScript 1.8 with the latest version of react.d.ts (see above), we've also greatly simplified the declaration of `props` types.
+
+Specifically:
+ * You no longer need to either explicitly declare `ref` and `key` or `extend React.Props`
+ * The `ref` and `key` properties will appear with correct types on all components
+ * The `ref` property is correctly disallowed on instances of Stateless Function components
+
 ## Augmenting global/module scope from modules
 
 Users can now declare any augmentations that they want to make, or that any other consumers already have made, to an existing module.
