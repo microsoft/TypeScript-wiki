@@ -9,6 +9,7 @@
 
 # 2.0
 
+* [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1664)
 * Support [ES7 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
