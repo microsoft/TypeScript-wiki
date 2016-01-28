@@ -8,7 +8,7 @@ npm install -g typescript@next
 
 ## Using NuGet with MSBuild:
 
-> Note: You'll need to configure your project to use the NuGet packages instead of any other installations.
+> Note: You'll need to configure your project to use the NuGet packages. Please see [Configuring MSBuild projects to use NuGet](https://github.com/Microsoft/TypeScript/wiki/Configuring-MSBuild-projects-to-use-NuGet) for more information.
 
 The nightlies are available on https://www.myget.org/gallery/typescript-preview
 
