@@ -35,7 +35,7 @@ There are two packages:
 2. Go to your Packages folder
     * Mac/Linux: `~/"Library/Application Support/Sublime Text 3/Packages`
     * Windows: `%APPDATA%\Sublime Text 3\Packages`
-3 Copy:
+3. Copy:
  * `<path to your folder>/node_modules/typescript/lib/tsserver.js` to `<Packages>/TypeScript/tsserver/`
  * `<path to your folder>/node_modules/typescript/lib/lib.d.ts` to `<Packages>/TypeScript/tsserver/`
 
