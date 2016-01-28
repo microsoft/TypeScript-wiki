@@ -31,3 +31,5 @@ Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualSt
 Project="..\packages\Microsoft.TypeScript.MSBuild.1.8.0-beta\tools\Microsoft.TypeScript.targets" 
 Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.1.8.0-beta\tools\Microsoft.TypeScript.targets')" />
  ```
+
+* Reload
