@@ -1,9 +1,4 @@
 For existing projects:
-* Right-Click -> Manage NuGet Packages
-* Search for `Microsoft.TypeScript.MSBuild`
- ![Search for NuGet package.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/searchForNuGetPackage.png)
-
-* Hit `Install`
 * Right-Click -> Unload Project
 * Edit project file
 * Remove references to existing targets and prop files:
@@ -23,3 +18,8 @@ Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualSt
  ```
 
 * Reload Project
+* Right-Click -> Manage NuGet Packages
+* Search for `Microsoft.TypeScript.MSBuild`
+ ![Search for NuGet package.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/searchForNuGetPackage.png)
+
+* Hit `Install`
