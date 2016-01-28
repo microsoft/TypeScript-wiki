@@ -23,3 +23,4 @@ Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualSt
  ![Search for NuGet package.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/searchForNuGetPackage.png)
 
 * Hit `Install`
+* When install is complete, rebuild!
