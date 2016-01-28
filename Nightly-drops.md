@@ -1,3 +1,5 @@
+A nightly build from the [master](https://github.com/Microsoft/TypeScript/tree/master) branch is published nightly to NPM and NuGet. Here is how you can get it and use it with your tools.
+
 ## For building using nodejs use `typescript@next`:
 
 ```cmd
