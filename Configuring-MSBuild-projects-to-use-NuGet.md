@@ -32,4 +32,4 @@ Project="..\packages\Microsoft.TypeScript.MSBuild.1.8.0-beta\tools\Microsoft.Typ
 Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.1.8.0-beta\tools\Microsoft.TypeScript.targets')" />
  ```
 
-* Reload
+* Reload Project
