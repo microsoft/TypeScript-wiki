@@ -17,7 +17,7 @@ Option | Shorthand | Description
 `--inlineSources` | | Emit the source alongside the sourcemaps within a single file; requires `--inlineSourceMap` to be set.
 `--isolatedModules` | | Unconditionally emit imports for unresolved files.
 `--jsx` | | Support JSX in '.tsx' files: 'React' or 'Preserve'. See [[JSX]].
-`--reactNamespace` | | Specifies the object invoked for createElement and __spread when targeting 'react' JSX emit.
+`--reactNamespace` | | Specifies the object invoked for `createElement` and `__spread` when targeting 'react' JSX emit.
 `--listFiles` | | Print names of files part of the compilation.
 `--locale` | | The locale to use to show error messages, e.g. en-us.
 `--mapRoot` | | Specifies the location where debugger should locate map files instead of generated locations. Use this flag if the .map files will be located at run-time in a different location than that the .js files. The location specified will be embedded in the sourceMap to direct the debugger where the map files where be located.
@@ -48,7 +48,7 @@ Option | Shorthand | Description
 `--allowUnreachableCode` | | Do not report errors on unreachable code.
 `--forceConsistentCasingInFileNames` | | Disallow inconsistently-cased references to the same file.
 `--allowSyntheticDefaultImports` | | Allow default imports from modules with no default export. This does not affect code emit, just typechecking.
-`--allowJs` | | Allow javascript files to be compiled.
+`--allowJs` | | Allow JavaScript files to be compiled.
 
 <sup>[1]</sup> These options are experimental.
 
