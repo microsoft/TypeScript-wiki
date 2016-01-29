@@ -1,4 +1,4 @@
-# TypeScript 1.8 (upcoming)
+# TypeScript 1.8
 
 ## Type parameters as constraints
 
