@@ -994,6 +994,11 @@ The member `t` has the type `Test`. The type `Test` is not visible because it's 
 
 In the *very simplest* cases, we could rewrite `Test`'s shape as an object type literal. But for the vast majority of cases, this doesn't work. As written, `Test`'s shape is self-referential and can't be written as an anonymous type. This also doesn't work if `Test` has any private or protected members. So rather than let you get 65% of the way through writing a realistic class and then start erroring then, we just issue the error (you're almost certainly going to hit later anyway) right away and save you the trouble.
 
+To avoid this error:
+
+1. Export the declarations used in the type in question
+2. Specify an explicit type annotation for the compiler to use when writing declarations.
+
 -------------------------------------------------------------------------------------
 
 # Glossary and Terms in this FAQ
