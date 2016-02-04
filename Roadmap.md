@@ -10,10 +10,12 @@
 
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
+* [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
+* [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1664)
-* Support [ES7 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
+* Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
+* Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
 * [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
@@ -26,9 +28,6 @@
 * [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
 * Quick fixes support in language service API
 * tsd integration in tsserver/language service API
-* [Extract type information from JSDoc in js files](https://github.com/Microsoft/TypeScript/issues/4790)
-* [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
-* Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 1.8
@@ -46,6 +45,7 @@
 * [Improved union/intersection type inference](https://github.com/Microsoft/TypeScript/pull/5738)
 * [Support for F-Bounded Polymorphism](https://github.com/Microsoft/TypeScript/pull/5949)
 * [Support full path for `-project`/`-p` parameter](https://github.com/Microsoft/TypeScript/issues/2869)
+* [Extract type information from JSDoc in js files](https://github.com/Microsoft/TypeScript/issues/4790)
 * [Support for `default` import interop with SystemJS using `--allowSyntheticDefaultImports`](https://github.com/Microsoft/TypeScript/issues/5285)
 * [Recognize prototype assignments in JavaScript files](https://github.com/Microsoft/TypeScript/pull/5876)
 * [Augmenting global/module scope from other modules](https://github.com/Microsoft/TypeScript/issues/4166)
