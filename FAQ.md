@@ -1,5 +1,70 @@
 # FAQs
 
+<!-- !!! READ THIS !!! -->
+<!-- The table of contents is auto-generated using doctoc. Don't edit manually! -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+  - [Common Feature Requests](#common-feature-requests)
+  - [Type System Behavior](#type-system-behavior)
+    - [What is structural typing?](#what-is-structural-typing)
+    - [What is type erasure?](#what-is-type-erasure)
+    - [Why are getters without setters not considered read-only?](#why-are-getters-without-setters-not-considered-read-only)
+    - [Why are function parameters bivariant?](#why-are-function-parameters-bivariant)
+    - [Why are functions with fewer parameters assignable to functions that take more parameters?](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
+    - [Why are functions returning non-`void` assignable to function returning `void`?](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
+    - [Why are all types assignable to empty interfaces?](#why-are-all-types-assignable-to-empty-interfaces)
+    - [Can I make a type alias nominal?](#can-i-make-a-type-alias-nominal)
+    - [How do I prevent two types from being structurally compatible?](#how-do-i-prevent-two-types-from-being-structurally-compatible)
+    - [How do I check at runtime if an object implements some interface?](#how-do-i-check-at-runtime-if-an-object-implements-some-interface)
+    - [Why doesn't this incorrect cast throw a runtime error?](#why-doesnt-this-incorrect-cast-throw-a-runtime-error)
+    - [Why don't I get type checking for `(number) => string` or `(T) => T`?](#why-dont-i-get-type-checking-for-number--string-or-t--t)
+    - [Why am I getting an error about a missing index signature?](#why-am-i-getting-an-error-about-a-missing-index-signature)
+  - [Functions](#functions)
+    - [Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?](#why-cant-i-use-x-in-the-destructuring-function-f-x-number------)
+  - [Classes](#classes)
+    - [Why do these empty classes behave strangely?](#why-do-these-empty-classes-behave-strangely)
+    - [When and why are classes nominal?](#when-and-why-are-classes-nominal)
+    - [Why does `this` get orphaned in my instance methods?](#why-does-this-get-orphaned-in-my-instance-methods)
+    - [What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class` ?](#whats-the-difference-between-bar-and-typeof-bar-when-bar-is-a-class-)
+    - [Why do my derived class property initializers overwrite values set in the base class constructor?](#why-do-my-derived-class-property-initializers-overwrite-values-set-in-the-base-class-constructor)
+    - [What's the difference between `declare class` and `inteface`?](#whats-the-difference-between-declare-class-and-inteface)
+    - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
+    - [Why am I getting "TypeError: [base class name] is not defined in `__extends` ?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends-)
+    - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
+  - [Generics](#generics)
+    - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
+    - [Why can't I write `typeof T` or `instanceof T` in my generic function?](#why-cant-i-write-typeof-t-or-instanceof-t-in-my-generic-function)
+  - [Modules](#modules)
+    - [Why are imports being elided in my emit?](#why-are-imports-being-elided-in-my-emit)
+    - [Why don't namespaces merge across different module files?](#why-dont-namespaces-merge-across-different-module-files)
+  - [Enums](#enums)
+    - [What's the difference between `enum` and `const enum`s?](#whats-the-difference-between-enum-and-const-enums)
+  - [Type Guards](#type-guards)
+    - [Why doesn't `x instanceof Foo` narrow `x` to `Foo`?](#why-doesnt-x-instanceof-foo-narrow-x-to-foo)
+    - [Why doesn't `isFoo(x)` narrow `x` to `Foo` when `isFoo` is a type guard?](#why-doesnt-isfoox-narrow-x-to-foo-when-isfoo-is-a-type-guard)
+  - [Decorators](#decorators)
+    - [Decorators on function declarations](#decorators-on-function-declarations)
+    - [What's the difference between `@dec` and `@dec()` ? Shouldn't they be equivalent?](#whats-the-difference-between-@dec-and-@dec--shouldnt-they-be-equivalent)
+  - [JSX and React](#jsx-and-react)
+    - [I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />` ?](#i-wrote-declare-var-mycomponent-reactcomponent-why-cant-i-write-mycomponent--)
+  - [Things That Don't Work](#things-that-dont-work)
+    - [You should emit classes like this so they have real private members](#you-should-emit-classes-like-this-so-they-have-real-private-members)
+    - [You should emit classes like this so they don't lose `this` in callbacks](#you-should-emit-classes-like-this-so-they-dont-lose-this-in-callbacks)
+    - [You should have some class initialization which is impossible to emit code for](#you-should-have-some-class-initialization-which-is-impossible-to-emit-code-for)
+  - [External Tools](#external-tools)
+    - [How do I write unit tests with TypeScript?](#how-do-i-write-unit-tests-with-typescript)
+  - [Commandline Behavior](#commandline-behavior)
+    - [Why did adding an `import` or `export` modifier break my program?](#why-did-adding-an-import-or-export-modifier-break-my-program)
+    - [How do I control file ordering in combined output (`--out`) ?](#how-do-i-control-file-ordering-in-combined-output---out-)
+    - [What does the error "Exported variable [name] has or is using private name [name]" mean?](#what-does-the-error-exported-variable-name-has-or-is-using-private-name-name-mean)
+- [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
+    - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
+    - ["Substitutability"](#substitutability)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Common Feature Requests
 > I want to request one of the following features...
 
