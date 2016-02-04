@@ -970,8 +970,29 @@ This behavior has been fixed as of TypeScript 1.8; combining `--out` and `--modu
 TODO: Answer
 
 ### What does the error "Exported variable [name] has or is using private name [name]" mean?
-TODO: Port in content from [#6307](https://github.com/Microsoft/TypeScript/issues/6307)
 
+This error occurs when you use the `--declaration` flag because the compiler is trying to produce a declaration file that *exactly* matches the module you defined.
+
+Let's say you have this code:
+```ts
+/// MyFile.ts
+class Test {
+    // ... other members ....
+    constructor(public parent: Test){}
+}
+
+export let t = new Test("some thing");
+```
+
+To produce a declaration file, the compiler has to write out a type for `t`:
+```ts
+/// MyFile.d.ts, auto-generated
+export let t: ___fill in the blank___;
+```
+
+The member `t` has the type `Test`. The type `Test` is not visible because it's not exported, so we can't write `t: Test`.
+
+In the *very simplest* cases, we could rewrite `Test`'s shape as an object type literal. But for the vast majority of cases, this doesn't work. As written, `Test`'s shape is self-referential and can't be written as an anonymous type. This also doesn't work if `Test` has any private or protected members. So rather than let you get 65% of the way through writing a realistic class and then start erroring then, we just issue the error (you're almost certainly going to hit later anyway) right away and save you the trouble.
 
 -------------------------------------------------------------------------------------
 
