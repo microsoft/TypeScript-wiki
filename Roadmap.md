@@ -26,7 +26,7 @@
 * Decorators for function expressions/arrow functions
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 * [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
-* Quick fixes support in language service API
+* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * tsd integration in tsserver/language service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
