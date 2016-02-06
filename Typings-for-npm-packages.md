@@ -16,11 +16,12 @@ TypeScript 1.6 has introduced new way of resolving module names that mimics the 
 
 The precise algorithm for module resolution can be found [here](https://github.com/Microsoft/TypeScript/issues/2338)
 
-### What your typings file should
+### Your typings file should...
 
 * be a `.d.ts` file
 * be an external module
 * not have triple-slash references 
 
-The rationale is that typings should not bring new compilable items to the set of compiled files; otherwise actual implementation files in the package can be overwritten during compilation.
-Additionally, **loading typings should not pollute global scope** by bringing potentially conflicting entries from different version of the same library
+The rationale is that **typings should not bring new compatible sources** to the set of compiled files; otherwise source files (i.e. `.ts` files) will be considered by the compiler as part of the user code and will be compiled, and outputs in the package can be overwritten with the resulting `.js` outputs.
+
+Additionally, **loading typings should not pollute global scope** by bringing potentially conflicting entries from different version of the same library. Modules have their own scope, and do not pollute the global namespace, if your typings file is not a module, it will be polluting the user global scope, and will cause conflicts with other packages that depend on your package. Similarly `/// <references ... />` can bring global declarations into the global scope and should be avoided.

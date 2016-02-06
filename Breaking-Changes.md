@@ -4,6 +4,8 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 1.8
 
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.8%22+label%3A%22Breaking+Change%22+is%3Aclosed).
+
 #### Reachability checks are enabled by default
 
 In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/Microsoft/TypeScript/pull/4788) to prevent certain categories of errors. Specifically
@@ -63,6 +65,39 @@ If these errors are showing up in your code and you still think that scenario wh
 #### `--module` is not allowed alongside `--outFile` unless `--module` is specified as one of `amd` or `system`.
 
 Previously specifying both while using modules would result in an empty `out` file and no error.
+
+#### Modules are now emitted with a `"use strict";` prologue
+
+Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in the generated code. Starting with TypeScript 1.8, emitted modules are always in strict mode. This shouldn't have any visible changes in most code as TS considers most strict mode errors as errors at compile time, but it means that some things which used to silently fail at runtime in your TS code, like assigning to `NaN`, will now loudly fail. You can reference the [MDN Article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) on strict mode for a detailed list of the differences between strict mode and non-strict mode.
+
+#### Exporting non-local names from a module
+
+In accordance with the ES6/ES2015 spec, it is an error to export a non-local name from a module.
+
+**Example**
+
+```ts
+export { Promise }; // Error
+```
+
+**Recommendation**
+
+Use a local variable declaration to capture the global name before exporting it.
+
+```ts
+const localPromise = Promise;
+export { localPromise as Promise }; 
+```
+#### Changes to DOM API's in the standard library
+
+* **ImageData.data** is now of type `Uint8ClampedArray` instead of `number[]`. See [#949](https://github.com/Microsoft/TypeScript/issues/949) for more details.
+* **HTMLSelectElement .options** is now of type `HTMLCollection` instead of `HTMLSelectElement`. See [#1558](https://github.com/Microsoft/TypeScript/issues/1558) for more details.
+* **HTMLTableElement.createCaption**, **HTMLTableElement.createTBody**,  **HTMLTableElement.createTFoot**,  **HTMLTableElement.createTHead**, **HTMLTableElement.insertRow**, **HTMLTableSectionElement.insertRow**, and **HTMLTableElement.insertRow** now return `HTMLTableRowElement` instead of `HTMLElement`. See [#3583](https://github.com/Microsoft/TypeScript/issues/3583) for more details.
+* **HTMLTableRowElement.insertCell** now return `HTMLTableCellElement` instead of `HTMLElement`. See [#3583](https://github.com/Microsoft/TypeScript/issues/3583) for more details.
+* **IDBObjectStore.createIndex** and **IDBDatabase.createIndex** second argument is now of type `IDBObjectStoreParameters` instead of `any`. See [#5932](https://github.com/Microsoft/TypeScript/issues/5932) for more details.
+* **DataTransferItemList.Item** returns type now is `DataTransferItem` instead of `File`. See [#6106](https://github.com/Microsoft/TypeScript/issues/6106) for more details.
+* **Window.open** return type now is `Window` instead of `any`. See [#6418](https://github.com/Microsoft/TypeScript/issues/6418) for more details.
+* **WeakMap.clear** as removed. See [#6500](https://github.com/Microsoft/TypeScript/issues/6500) for more details.
 
 # TypeScript 1.7
 

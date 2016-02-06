@@ -1,3 +1,7 @@
+# TypeScript 1.7
+
+- `ts.parseConfigFile` has been renamed to `ts.parseJsonConfigFileContent`
+
 # TypeScript 1.6
 
 ### CompilerHost interface change (comparing to TypeScript 1.6 beta)
@@ -6,7 +10,7 @@
   - should be an external module
   - should not contain tripleslash references.
 
-  Rationale: files containing external typings should not pollute global scope (to avoid conflicts between different versions of the same package). Also such files should never be added to the list of compiled files (otherwise compiled .ts file might overwrite actual .js file with implementation of the package) 
+  Rationale: files containing external typings should not pollute global scope (to avoid conflicts between different versions of the same package). Also such files should never be added to the list of compiled files (otherwise compiled .ts file might overwrite actual .js file with implementation of the package)
 
 # TypeScript 1.5
 

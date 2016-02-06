@@ -1,4 +1,6 @@
-While these guidelines are mainly meant for contributors to the TypeScript project, certain suggestions apply as to how idiomatic TypeScript code should be written (e.g. the "Names" and "Style" sections).
+**NOTE: These are Coding Guidelines for TypeScript Contributors**
+
+While **these guidelines are mainly meant for contributors to the TypeScript project**, certain suggestions apply as to how idiomatic TypeScript code should be written (e.g. the "Names" and "Style" sections).
 
 ## Names
 1. Use PascalCase for type names.

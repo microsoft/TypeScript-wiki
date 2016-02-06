@@ -8,6 +8,7 @@
  * [Vim](#vim)
  * [Visual Studio](#visual-studio-20132015)
  * [Visual Studio Code](#visual-studio-code)
+ * [WebStorm](#webstorm)
 
 # Atom
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
@@ -60,6 +61,14 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
 
+TypeScript for Visual Studio 2015 can be found [here] (http://www.microsoft.com/en-us/download/details.aspx?id=48593)
+
+TypeScript for Visual Studio 2013 can be found [here] (https://www.microsoft.com/en-us/download/details.aspx?id=48739)
+
 # Visual Studio Code
 
 [Visual Studio Code](https://code.visualstudio.com/), a lightweight cross-platform editor, comes with TypeScript support built in.
+
+# Webstorm
+
+[WebStorm](https://www.jetbrains.com/webstorm/), as well as other JetBrains IDEs, contain TypeScript language support out of the box.

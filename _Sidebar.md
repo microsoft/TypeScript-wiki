@@ -10,6 +10,7 @@
 * [[Integrating with Build Tools]]
 * [[Compiler Options]]
 * [[tsconfig.json]]
+* [[Nightly drops]]
 
 **TypeScript Language Advanced**
 
@@ -35,7 +36,7 @@
 * [[Spec conformance testing]]
 * [[Useful Links for TypeScript Issue Management]]
 * [[Writing Good Design Proposals]]
-* [[Arcane Details of the Compiler]]
+* [[Compiler Internals]]
 
 **Building Tools for TypeScript**
 * [[Architectural Overview]]
