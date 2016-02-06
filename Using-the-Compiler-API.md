@@ -438,7 +438,7 @@ function compile(sourceFiles: string[], moduleSearchLocations: string[]): void {
 ### Using the Type Checker
 
 In this example we will walk the AST and use the checker to serialize class information.
-We'll use the type checker to get symbol and type information, while grabbing JSDoc comments for classes, their constructors, and respective constructor parameters.
+We'll use the type checker to get symbol and type information, while grabbing JSDoc comments for exported classes, their constructors, and respective constructor parameters.
 
 ```ts
 /// <reference path="typings/node/node.d.ts" />
@@ -475,6 +475,28 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
     // print out the doc
     fs.writeFileSync("classes.json", JSON.stringify(output, undefined, 4));
 
+    return;
+
+    /** visit nodes finding exported classes */    
+    function visit(node: ts.Node) {
+        // Only consider exported nodes
+        if (!isNodeExported(node)) {
+            return;
+        }
+
+        if (node.kind === ts.SyntaxKind.ClassDeclaration) {
+            // This is a top level class, get its symbol
+            let symbol = checker.getSymbolAtLocation((<ts.ClassDeclaration>node).name);
+            output.push(serializeClass(symbol));
+            // No need to walk any further, class expressions/inner declarations
+            // cannot be exported
+        }
+        else if (node.kind === ts.SyntaxKind.ModuleDeclaration) {
+            // This is a namespace, visit its children
+            ts.forEachChild(node, visit);
+        }
+    }
+
     /** Serialize a symbol into a json object */    
     function serializeSymbol(symbol: ts.Symbol): DocEntry {
         return {
@@ -487,14 +509,14 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
     /** Serialize a class symbol infomration */
     function serializeClass(symbol: ts.Symbol) {
         let details = serializeSymbol(symbol);
-        
-        // Get the construct signatures            
+
+        // Get the construct signatures
         let constructorType = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration);
         details.constructors = constructorType.getConstructSignatures().map(serializeSignature);
         return details;
     }
 
-    /** Serialize a signature (call or construct) */    
+    /** Serialize a signature (call or construct) */
     function serializeSignature(signature: ts.Signature) {
         return {
             paramters: signature.parameters.map(serializeSymbol),
@@ -506,24 +528,6 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
     /** True if this is visible outside this file, false otherwise */
     function isNodeExported(node: ts.Node): boolean {
         return (node.flags & ts.NodeFlags.Export) !== 0 || (node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
-    }
-
-    /** vist nodes finding exported classes */    
-    function visit(node: ts.Node) {
-        // Only consider exported nodes
-        if (!isNodeExported(node)) {
-            return;
-        }
-
-        if (node.kind === ts.SyntaxKind.ClassDeclaration) {
-            // This is a class, get its symbol
-            let symbol = checker.getSymbolAtLocation((<ts.ClassDeclaration>node).name);
-            output.push(serializeClass(symbol));
-        }
-        else if (node.kind === ts.SyntaxKind.ModuleDeclaration) {
-            // This is a namespace, visit its children
-            ts.forEachChild(node, visit);
-        }
     }
 }
 
