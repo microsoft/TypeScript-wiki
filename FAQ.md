@@ -1006,3 +1006,64 @@ This is a principle that says if an object `X` can be used in place of some obje
 We also commonly say that `X` is *assignable to* `Y` (these terms have slightly different meanings in TypeScript, but the difference is not important here).
 
 In other words, if I ask for a `fork`, a `spork` is an acceptable *substitute* because it has the same functions and properties of a `fork` (three prongs and a handle).
+
+----------------------------------------------------------------------------------------
+
+## GitHub Process Questions
+
+### What do the labels on these issues mean?
+> What are all the labels people keep putting on my issues?
+
+* Accepting PRs: We are accepting pull requests to implement this feature or fix this bug. PRs must adhere to the rules specified in `CONTRIBUTING.md`
+* Breaking Change: Fixing this bug or implenting this feature will break code that someone could have plausibly written (i.e. we do not consider new errors in nonsense code like `undefined.throwSomething()` to be breaking changes)
+* By Design: This is an intentional behavior of TypeScript
+* Canonical: This issue contains a lengthy explanation of a common question or misconception
+* Committed: Someone from the TypeScript team will fix this bug or implement this feature
+* Declined: For reasons explained in the issue, we are not going to accept this suggestion (note: See "I disagree with the outcome..." section)
+* Discussion: This issue is a discussion with no defined outcome. The TypeScript team may weigh in on these issues, but they are not regularly reviewed
+* Duplicate: This issue is the same, or has the same root cause, as another issue
+* Effort: Easy/Moderate/Difficult: For issues Accepting PRs, these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, ixing typos or modfiying lib.d.s are generally Easy; work that requires understanding the basics of the codebase is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
+* ES6 / ES7 / ES Next: Refers to issues related to features found in these specific ECMAScript versions
+* External: Catch-all bucket when an issue reported is not an issue with TypeScript, but rather an external tool, library, website, person, or situation
+* Fixed: This bug has been fixed. Generally, you will see these bugs fixed in the nightly version(`npm install typescript@next`) within 24-48 hours
+* High Priority: Issues affecting runtime behavior or high-occurrence crashes
+* Infrastructure: Technical debt associated with the TypeScript project
+* In Discussion: The suggestion is ready to be discussed at a Design Meeting or Suggestion Backlog Slog
+* Needs More Info: The team needs more information about this suggestion or bug in order to understand what's going on. Generally, Suggestions will start out as Needs More Info, graduate to Needs Proposal, then finally go to In Discussion
+* Needs Proposal: A suggestion that has a well-understood use case and a plausible outline of a solution, but lacks a formal definition of how exactly the problem will be solved
+* Out of Scope: A suggestion that is outside the design parameters of TypeScript, either because it is a poor fit (e.g. make TypeScript look exactly like C#), is outside the constraints of the language (e.g. asm.js compilation), or better belongs to another tool or process (e.g. a built-in Collections library, or a runtime language feature that should start in the ECMAScript committee)
+* Question: The issue is (intentionally or otherwise) simply asking a question about TypeScript. Answers to Questions, if provided, will generally be to-the-point because we do not have time to be a support community for all TypeScript users; please use Stack Overflow for TypeScript questions.
+* Revisit: A suggestion or bug that can't be adequately addressed today, but will probably be able to be addressed in the future (e.g. we need to wait for the ECMAScript committee to make up its mind)
+* Suggestion: Any suggestion
+* Too Complex: Relative to the complexity required to implement or understand it, the suggestion does not provide enough value. This is a subjective measure, see "I disagree with the outcome...")
+* Won't Fix: While the behavior described is agreed to be incorrect, the cost (in time, complexity, performance, etc.) is too high to justify taking a fix relative to the cost of simply living with the bug
+
+### I disagree with the outcome of this suggestion
+> I don't think this suggestion should have been closed! What can I do next?
+
+To date, we've received over 1,000 suggestions on the TypeScript GitHub repo.
+We do our best to read, understand, prioritize, formalize, and implement these suggestions.
+User feedback has been critical in shaping the success of the project.
+That said, sometimes we'll make decisions that you don't agree with, and sometimes we'll make the wrong call.
+What should you do if you think we should reconsider something?
+Let's walk through the five stages of grief.
+
+*Denial*: It's healthy to believe that a suggestion might come back later.
+Do keep leaving feedback!
+We look at all comments on all issues - closed or otherwise.
+If you encounter a problem that would have been addressed by a suggestion, leave a comment explaning what you were doing and how you could have had a better experience.
+Having a record of these use cases helps us reprioritize.
+
+*Anger*: Don't be angry.
+Specifically, remember that the TypeScript team does not have the resources to continuously relitigate closed suggestions.
+
+*Bargaining*: Ask yourself: is there a smaller thing that would work?
+Many suggestions are simply too large of a hammer for too small of a nail.
+Think about the problem you're experiencing for a while and see if you can come up with a simpler solution that accomplishes the same goal.
+
+*Depression*: Try not to be depressed about declined suggestions.
+The features that make it into the language instead might solve your problem in an even better way than you could have imagined.
+
+*Acceptance*: Repeat this mantra: *I will accept the features I cannot have,
+have courage to submit pull requests for those I can,
+and the wisdom to know the difference by looking at the GitHub labels.*
