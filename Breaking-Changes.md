@@ -70,6 +70,8 @@ Previously specifying both while using modules would result in an empty `out` fi
 
 Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in the generated code. Starting with TypeScript 1.8, emitted modules are always in strict mode. This shouldn't have any visible changes in most code as TS considers most strict mode errors as errors at compile time, but it means that some things which used to silently fail at runtime in your TS code, like assigning to `NaN`, will now loudly fail. You can reference the [MDN Article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) on strict mode for a detailed list of the differences between strict mode and non-strict mode.
 
+To disable this behavior, pass `--noImplicitUseStrict` on the command line or set it in your tsconfig.json file.
+
 #### Exporting non-local names from a module
 
 In accordance with the ES6/ES2015 spec, it is an error to export a non-local name from a module.
