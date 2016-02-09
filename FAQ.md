@@ -35,7 +35,7 @@
     - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
   - [Generics](#generics)
     - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
-    - [Why can't I write `typeof T` or `instanceof T` in my generic function?](#why-cant-i-write-typeof-t-or-instanceof-t-in-my-generic-function)
+    - [Why can't I write `typeof T`, `new T`, or `instanceof T` in my generic function?](#why-cant-i-write-typeof-t-new-t-or-instanceof-t-in-my-generic-function)
   - [Modules](#modules)
     - [Why are imports being elided in my emit?](#why-are-imports-being-elided-in-my-emit)
     - [Why don't namespaces merge across different module files?](#why-dont-namespaces-merge-across-different-module-files)
@@ -680,7 +680,7 @@ Because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what t
 In general, you should *never* have a type parameter which is unused.
 The type will have unexpected compatibility (as shown here) and will also fail to have proper generic type inference in function calls.
 
-### Why can't I write `typeof T` or `instanceof T` in my generic function?
+### Why can't I write `typeof T`, `new T`, or `instanceof T` in my generic function?
 
 > I want to write some code like this:
 > ```ts
@@ -688,11 +688,12 @@ The type will have unexpected compatibility (as shown here) and will also fail t
 >   // Can't find name T?
 >   let xType = typeof T;
 >   let y = new xType();
-> 
 >   // Same here?
 >   if(someVar instanceof typeof T) {
 > 
 >   }
+>   // How do I instantiate?
+>   let z = new T();
 > }
 > ```
 
