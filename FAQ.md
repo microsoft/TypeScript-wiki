@@ -62,6 +62,9 @@
 - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
+- [GitHub Process Questions](#github-process-questions)
+    - [What do the labels on these issues mean?](#what-do-the-labels-on-these-issues-mean)
+    - [I disagree with the outcome of this suggestion](#i-disagree-with-the-outcome-of-this-suggestion)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -1009,7 +1012,7 @@ In other words, if I ask for a `fork`, a `spork` is an acceptable *substitute* b
 
 ----------------------------------------------------------------------------------------
 
-## GitHub Process Questions
+# GitHub Process Questions
 
 ### What do the labels on these issues mean?
 > What are all the labels people keep putting on my issues?
