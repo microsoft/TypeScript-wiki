@@ -70,3 +70,12 @@ Compiler Option | MSBuild Property Name | Allowed Values
 
 Look in your `C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets` file.
 The authoritative mappings between MSBuild XML tags and `tsc` compiler options live in there.
+
+
+## ToolsVersion
+
+The value of `<TypeScriptToolsVersion>` property in the project file identifies the compiler version to use to build. This allows a project to build against the save versions of the compiler on different machines.
+
+If `TypeScriptToolsVersion` is not specified, the latest compiler version installed on the machine will be used to build.
+
+Users using newer versions of TS, will see a prompt to upgrade their project on first load.
