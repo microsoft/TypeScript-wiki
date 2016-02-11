@@ -390,7 +390,7 @@ Starting with TypeScript 1.8,:
 
 ##### Example
 
-```typescript
+```ts
 var a: MyObject[];
 for (var x in a) {   // Type of x is implicitly string
     var obj = a[x];  // Type of obj is MyObject
@@ -584,7 +584,7 @@ Asynchronous functions are prefixed with the `async` keyword; `await` suspends t
 
 In the following example, each input element will be printed out one at a time with a 400ms delay:
 
-```TypeScript
+```ts
 "use strict";
 
 // printDelayed is a 'Promise<void>'
@@ -629,7 +629,7 @@ TypeScript 1.7 adds `ES6` to the list of options available for the `--module` fl
 It is a common pattern to return the current object (i.e. `this`) from a method to create [fluent-style APIs](https://en.wikipedia.org/wiki/Fluent_interface).
 For instance, consider the following `BasicCalculator` module:
 
-```TypeScript
+```ts
 export default class BasicCalculator {
     public constructor(protected value: number = 0) { }
 
@@ -661,7 +661,7 @@ export default class BasicCalculator {
 
 A user could express `2 * 5 + 1` as
 
-```TypeScript
+```ts
 import calc from "./BasicCalculator";
 
 let v = new calc(2)
@@ -673,7 +673,7 @@ let v = new calc(2)
 This often opens up very elegant ways of writing code; however, there was a problem for classes that wanted to extend from `BasicCalculator`.
 Imagine a user wanted to start writing a `ScientificCalculator`:
 
-```TypeScript
+```ts
 import BasicCalculator from "./BasicCalculator";
 
 export default class ScientificCalculator extends BasicCalculator {
@@ -697,7 +697,7 @@ Because TypeScript used to infer the type `BasicCalculator` for each method in `
 
 For instance:
 
-```TypeScript
+```ts
 import calc from "./ScientificCalculator";
 
 let v = new calc(0.5)
@@ -712,7 +712,7 @@ The `this` type is written as so, and basically means "the type of the left side
 
 The `this` type is also useful with intersection types in describing libraries (e.g. Ember.js) that use mixin-style patterns to describe inheritance:
 
-```TypeScript
+```ts
 interface MyType {
     extend<T>(other: T): this & T;
 }
@@ -836,7 +836,7 @@ TypeScript 1.6 introduces intersection types, the logical complement of union ty
 
 ##### Example
 
-```typescript
+```ts
 function extend<T, U>(first: T, second: U): T & U {
     let result = <T & U> {};
     for (let id in first) {
@@ -855,7 +855,7 @@ var s = x.a;
 var n = x.b;
 ```
 
-```typescript
+```ts
 type LinkedList<T> = T & { next: LinkedList<T> };
 
 interface Person {
@@ -869,7 +869,7 @@ var s = people.next.next.name;
 var s = people.next.next.next.name;
 ```
 
-```typescript
+```ts
 interface A { a: string }
 interface B { b: string }
 interface C { c: string }
@@ -886,7 +886,7 @@ See [issue #1256](https://github.com/Microsoft/TypeScript/issues/1256) for more 
 
 Local class, interface, enum, and type alias declarations can now appear inside function declarations. Local types are block scoped, similar to variables declared with `let` and `const`. For example:
 
-```typescript
+```ts
 function f() {
     if (true) {
         interface T { x: number }
@@ -903,7 +903,7 @@ function f() {
 
 The inferred return type of a function may be a type declared locally within the function. It is not possible for callers of the function to reference such a local type, but it can of course be matched structurally. For example:
 
-```typescript
+```ts
 interface Point {
     x: number;
     y: number;
@@ -926,7 +926,7 @@ var p3 = new PointOne();
 
 Local types may reference enclosing type parameters and local class and interfaces may themselves be generic. For example:
 
-```typescript
+```ts
 function f3() {
     function f<X, Y>(x: X, y: Y) {
         class C {
@@ -946,7 +946,7 @@ function f3() {
 
 TypeScript 1.6 adds support for ES6 class expressions. In a class expression, the class name is optional and, if specified, is only in scope in the class expression itself. This is similar to the optional name of a function expression. It is not possible to refer to the class instance type of a class expression outside the class expression, but the type can of course be matched structurally. For example:
 
-```typescript
+```ts
 let Point = class {
     constructor(public x: number, public y: number) { }
     public length() {
@@ -965,7 +965,7 @@ The `extends` clause of a class previously required a type reference to be speci
 
 Some examples:
 
-```typescript
+```ts
 // Extend built-in types
 
 class MyArray extends Array<number> { }
@@ -1006,7 +1006,7 @@ TypeScript 1.6 adds support for `abstract` keyword for classes and their methods
 
 ##### Examples
 
-```TypeScript
+```ts
 abstract class Base {
     abstract getThing(): string;
     getOtherThing() { return 'hello'; }
@@ -1034,7 +1034,7 @@ y.getOtherThing(); // OK
 
 With TypeScript 1.6, type aliases can be generic. For example:
 
-```typescript
+```ts
 type Lazy<T> = T | (() => T);
 
 var s: Lazy<string>;
@@ -1055,7 +1055,7 @@ TypeScript 1.6 enforces stricter object literal assignment checks for the purpos
 
 ##### Examples
 
-```typescript
+```ts
 var x: { foo: number };
 x = { foo: 1, baz: 2 };  // Error, excess property `baz`
 
@@ -1065,7 +1065,7 @@ y = { foo: 1, baz: 2 };  // Error, excess or misspelled property `baz`
 
 A type can include an index signature to explicitly indicate that excess properties are permitted:
 
-```typescript
+```ts
 var x: { foo: number, [x: string]: any };
 x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 ```
@@ -1075,6 +1075,7 @@ x = { foo: 1, baz: 2 };  // Ok, `baz` matched by index signature
 TypeScript 1.6 adds support for generators when targeting ES6.
 
 A generator function can have a return type annotation, just like a function. The annotation represents the type of the generator returned by the function. Here is an example:
+
 ```ts
 function *g(): Iterable<string> {
     for (var i = 0; i < 100; i++) {
@@ -1085,6 +1086,7 @@ function *g(): Iterable<string> {
 ```
 
 A generator function with no type annotation can have the type annotation inferred. So in the following case, the type will be inferred from the yield statements:
+
 ```ts
 function *g() {
     for (var i = 0; i < 100; i++) {
@@ -1103,7 +1105,7 @@ An *async function* is a function or method that has been prefixed with the `asy
 
 ##### Example
 
-```TypeScript
+```ts
 var p: Promise<number> = /* ... */;
 async function fn(): Promise<number> {
   var i = await p; // suspend execution until 'p' is settled. 'i' has type "number"
@@ -1252,6 +1254,7 @@ export * from "./mod2";
 #### Default Export
 
 An export default declaration specifies an expression that becomes the default export of a module:
+
 ```ts
 export default class Greeter {
     sayHello() {
@@ -1294,11 +1297,13 @@ var { x, y, z} = getSomeObject();
 ```
 
 Destructuring declarations also works for extracting values from arrays:
+
 ```ts
 var [x, y, z = 10] = getSomeArray();
 ```
 
 Similarly, destructuring  can be used in function parameter declarations:
+
 ```ts
 function drawText({ text = "", location: [x, y] = [0, 0], bold = false }) {
     // Draw text
@@ -1312,6 +1317,7 @@ drawText(item);
 #### Assignments
 
 Destructuring patterns can also be used in regular assignment expressions. For instance, swapping two variables can be written as a single destructuring assignment:
+
 ```ts
 var x = 1;
 var y = 2;
@@ -1325,14 +1331,14 @@ TypeScript used the `module` keyword to define both "internal modules" and "exte
 > Note: Previous syntax defining internal modules are still supported.
 
 **Before**:
-```TypeScript
+```ts
 module Math {
     export function add(x, y) { ... }
 }
 ```
 
 **After**:
-```TypeScript
+```ts
 namespace Math {
     export function add(x, y) { ... }
 }
@@ -1342,6 +1348,7 @@ namespace Math {
 ES6 `let` and `const` declarations are now supported when targeting ES3 and ES5.
 
 #### Const
+
 ```ts
 const MAX = 100;
 
@@ -1420,7 +1427,7 @@ function enumerable(value) {
 ## Computed properties
 Initializing an object with dynamic properties can be a bit of a burden. Take the following example:
 
-```TypeScript
+```ts
 type NeighborMap = { [name: string]: Node };
 type Node = { name: string; neighbors: NeighborMap;}
 
@@ -1433,7 +1440,7 @@ function makeNode(name: string, initialNeighbor: Node): Node {
 
 Here we need to create a variable to hold on to the neighbor-map so that we can initialize it. With TypeScript 1.5, we can let the compiler do the heavy lifting:
 
-```TypeScript
+```ts
 function makeNode(name: string, initialNeighbor: Node): Node {
     return {
         name: name,
@@ -1470,7 +1477,7 @@ In TypeScript 1.4, we added support for template strings for all targets, and ta
 
 When targeting ES3/ES5, the following code
 
-```TypeScript
+```ts
 function oddRawStrings(strs: TemplateStringsArray, n1, n2) {
     return strs.raw.filter((raw, index) => index % 2 === 1);
 }
@@ -1480,7 +1487,7 @@ oddRawStrings `Hello \n${123} \t ${456}\n world`
 
 will be emitted as
 
-```JavaScript
+```js
 function oddRawStrings(strs, n1, n2) {
     return strs.raw.filter(function (raw, index) {
         return index % 2 === 1;
@@ -1491,17 +1498,20 @@ var _a;
 ```
 
 ## AMD-dependency optional names
+
 `/// <amd-dependency path="x" />` informs the compiler about a non-TS module dependency that needs to be injected in the resulting module's require call; however, there was no way to consume this module in the TS code.
 
 The new `amd-dependency name` property allows passing an optional name for an amd-dependency:
 
-```Typescript
+```ts
 /// <amd-dependency path="legacy/moduleA" name="moduleA"/>
 declare var moduleA:MyType
 moduleA.callStuff()
 ```
+
 Generated JS code:
-```
+
+```js
 define(["require", "exports", "legacy/moduleA"], function (require, exports, moduleA) {
     moduleA.callStuff()
 });
@@ -1556,6 +1566,7 @@ By default the output new line character is `\r\n` on Windows based systems and 
 ### Overview
 
 Union types are a powerful way to express a value that can be one of several types. For example, you might have an API for running a program that takes a commandline as either a `string`, a `string[]` or a function that returns a `string`. You can now write:
+
 ```ts
 interface RunOptions {
    program: string;
@@ -1564,6 +1575,7 @@ interface RunOptions {
 ```
 
 Assignment to union types works very intuitively -- anything you could assign to one of the union type's members is assignable to the union:
+
 ```ts
 var opts: RunOptions = /* ... */;
 opts.commandline = '-hello world'; // OK
@@ -1572,6 +1584,7 @@ opts.commandline = [42]; // Error, number is not string or string[]
 ```
 
 When reading from a union type, you can see any properties that are shared by them:
+
 ```ts
 if (opts.length === 0) { // OK, string and string[] both have 'length' property
   console.log("it's empty");
@@ -1579,6 +1592,7 @@ if (opts.length === 0) { // OK, string and string[] both have 'length' property
 ```
 
 Using Type Guards, you can easily work with a variable of a union type:
+
 ```ts
 function formatCommandline(c: string|string[]) {
     if (typeof c === 'string') {
@@ -1593,6 +1607,7 @@ function formatCommandline(c: string|string[]) {
 ### Stricter Generics
 
 With union types able to represent a wide range of type scenarios, we've decided to improve the strictness of certain generic calls. Previously, code like this would (surprisingly) compile without error:
+
 ```ts
 function equal<T>(lhs: T, rhs: T): boolean {
   return lhs === rhs;
@@ -1603,6 +1618,7 @@ function equal<T>(lhs: T, rhs: T): boolean {
 var e = equal(42, 'hello');
 ```
 With union types, you can now specify the desired behavior at both the function declaration site and the call site:
+
 ```ts
 // 'choose' function where types must match
 function choose1<T>(a: T, b: T): T { return Math.random() > 0.5 ? a : b }
@@ -1618,6 +1634,7 @@ var d = choose2('hello', 42); // OK, d: string|number
 ### Better Type Inference
 
 Union types also allow for better type inference in arrays and other places where you might have multiple kinds of values in a collection:
+
 ```ts
 var x = [1, 'hello']; // x: Array<string|number>
 x[0] = 'world'; // OK
@@ -1627,6 +1644,7 @@ x[0] = false; // Error, boolean is not string or number
 ## `let` declarations
 
 In JavaScript, `var` declarations are "hoisted" to the top of their enclosing scope. This can result in confusing bugs:
+
 ```ts
 console.log(x); // meant to write 'y' here
 /* later in the same block */
@@ -1634,6 +1652,7 @@ var x = 'hello';
 ```
 
 The new ES6 keyword `let`, now supported in TypeScript, declares a variable with more intuitive "block" semantics. A `let` variable can only be referred to after its declaration, and is scoped to the syntactic block where it is defined:
+
 ```ts
 if (foo) {
     console.log(x); // Error, cannot refer to x before its declaration
@@ -1643,10 +1662,12 @@ else {
     console.log(x); // Error, x is not declared in this block
 }
 ```
+
 `let` is only available when targeting ECMAScript 6 (`--target ES6`).
 
 ## `const` declarations
 The other new ES6 declaration type supported in TypeScript is `const`. A `const` variable may not be assigned to, and must be initialized where it is declared. This is useful for declarations where you don't want to change the value after its initialization:
+
 ```ts
 const halfPi = Math.PI / 2;
 halfPi = 2; // Error, can't assign to a `const`
@@ -1686,6 +1707,7 @@ x.unknown(); // OK
 ```
 
 Using `typeof` with union types and `else`:
+
 ```ts
 var x: string | HTMLElement = /* ... */;
 if(typeof x === 'string') {
@@ -1698,6 +1720,7 @@ else {
 ```
 
 Using `instanceof` with classes and union types:
+
 ```ts
 class Dog { woof() { } }
 class Cat { meow() { } }
@@ -1711,7 +1734,9 @@ else {
 ```
 
 ## Type Aliases
+
 You can now define an *alias* for a type using the `type` keyword:
+
 ```ts
 type PrimitiveArray = Array<string|number|boolean>;
 type MyNumber = number;
@@ -1760,7 +1785,7 @@ By default AMD modules are generated anonymous. This can lead to problems when o
 
 The new `amd-module name` tag allows passing an optional module name to the compiler:
 
-```TypeScript
+```ts
 //// [amdModule.ts]
 ///<amd-module name='NamedModule'/>
 export class C {
@@ -1768,7 +1793,7 @@ export class C {
 ```
 Will result in assigning the name `NamedModule` to the module as part of calling the AMD `define`:
 
-```JavaScript
+```js
 //// [amdModule.js]
 define("NamedModule", ["require", "exports"], function (require, exports) {
     var C = (function () {
@@ -1781,7 +1806,9 @@ define("NamedModule", ["require", "exports"], function (require, exports) {
 ```
 
 # TypeScript 1.3
+
 ## Protected
+
 The new `protected` modifier in classes works like it does in familiar languages like C++, C#, and Java. A `protected` member of a class is visible only inside subclasses of the class in which it is declared:
 
 ```ts
@@ -1800,7 +1827,9 @@ t.doSomething(); // Error, cannot call protected member from outside class
 ```
 
 ## Tuple types
+
 Tuple types express an array where the type of certain elements is known, but need not be the same. For example, you may want to represent an array with a `string` at position 0 and a `number` at position 1:
+
 ```ts
 // Declare a tuple type
 var x: [string, number];
@@ -1809,12 +1838,16 @@ x = ['hello', 10]; // OK
 // Initialize it incorrectly
 x = [10, 'hello']; // Error
 ```
+
 When accessing an element with a known index, the correct type is retrieved:
+
 ```ts
 console.log(x[0].substr(1)); // OK
 console.log(x[1].substr(1)); // Error, 'number' does not have 'substr'
 ```
+
 Note that in TypeScript 1.4, when accessing an element outside the set of known indices, a union type is used instead:
+
 ```ts
 x[3] = 'world'; // OK
 console.log(x[5].toString()); // OK, 'string' and 'number' both have toString
@@ -1822,11 +1855,15 @@ x[6] = true; // Error, boolean isn't number or string
 ```
 
 # TypeScript 1.1
+
 ## Performance Improvements
+
 The 1.1 compiler is typically around 4x faster than any previous release. See [this blog post for some impressive charts.](http://blogs.msdn.com/b/typescript/archive/2014/10/06/announcing-typescript-1-1-ctp.aspx)
 
 ## Better Module Visibility Rules
+
 TypeScript now only strictly enforces the visibility of types in modules if the `--declaration` flag is provided. This is very useful for Angular scenarios, for example:
+
 ```ts
 module MyControllers {
   interface ZooScope extends ng.IScope {
