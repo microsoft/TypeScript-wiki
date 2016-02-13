@@ -1,6 +1,6 @@
 TypeScript 1.6 has introduced new way of resolving module names that mimics the Node.js module resolution algorithm. This means the TypeScript compiler can currently load typings that are bundled with npm packages. The compiler will try to discover typings for module `"foo"` using the following set of rules:
 
-1. Try to load the `package.json` file located in the appropriate package folder (`node_modules/foo/`). If present,read the path to the typings file described in the `"typings"` field. For example, in the following `package.json`, the compiler will resolve the typings at `node_modules/foo/lib/foo.d.ts`
+1. Try to load the `package.json` file located in the appropriate package folder (`node_modules/foo/`). If present, read the path to the typings file described in the `"typings"` field. For example, in the following `package.json`, the compiler will resolve the typings at `node_modules/foo/lib/foo.d.ts`
 
     ```JSON
     {
