@@ -1,4 +1,5 @@
 # Quick List
+
  * [Atom](#atom)
  * [Eclipse](#eclipse)
  * [Emacs](#emacs)
@@ -11,6 +12,7 @@
  * [WebStorm](#webstorm)
 
 # Atom
+
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
 
 # Eclipse
