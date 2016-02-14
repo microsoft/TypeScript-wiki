@@ -4,7 +4,7 @@ Option | Shorthand | Description
 `--declaration` | `-d` | Generates corresponding '.d.ts' file.
 `--help` | `-h` | Print help message.
 `--version` | `-v` | Print the compiler's version.
-`--module` | `-m` | Specify module code generation: 'commonjs', 'amd', 'system', or 'umd'. Only 'amd' and 'system' can be used in conjunction with `--outFile`.
+`--module` | `-m` | Specify module code generation: 'commonjs', 'amd', 'system', 'umd', or 'es6'. Only 'amd' and 'system' can be used in conjunction with `--outFile`. The 'es6' value may not be used when targeting ES5 or lower.
 `--project` | `-p` | Compile the project in the given directory. The directory needs to contain a `tsconfig.json` file to direct compilation. See [[tsconfig.json]] documentation for more details.
 `--target` | `-t` | Specify ECMAScript target version: 'ES3' (default), 'ES5', or 'ES6'<sup>[1]</sup>
 `--watch` | `-w` | Run the compiler in watch mode. Watch input files and trigger recompilation on changes.
