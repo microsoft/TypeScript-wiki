@@ -57,6 +57,7 @@ Compiler Option | MSBuild Property Name | Allowed Values
 `--allowUnreachableCode`<sup>[1]</sup> |TypeScriptAllowUnreachableCode| boolean
 `--forceConsistentCasingInFileNames`<sup>[1]</sup>|TypeScriptForceConsistentCasingInFileNames| boolean
 `--allowSyntheticDefaultImports`<sup>[1]</sup>|TypeScriptAllowSyntheticDefaultImports| boolean
+`--noImplicitUseStrict`<sup>[1]</sup>|TypeScriptNoImplicitUseStrict| boolean
 `--project` | *Not supported in VS* |
 `--watch` | *Not supported in VS* |
 `--diagnostics` | *Not supported in VS* |
