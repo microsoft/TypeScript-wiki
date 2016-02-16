@@ -9,6 +9,7 @@
 # 2.0
 
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
+* [Implicit index signatures](https://github.com/Microsoft/TypeScript/pull/7029)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
