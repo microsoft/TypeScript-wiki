@@ -49,6 +49,7 @@ Option | Shorthand | Description
 `--forceConsistentCasingInFileNames` | | Disallow inconsistently-cased references to the same file.
 `--allowSyntheticDefaultImports` | | Allow default imports from modules with no default export. This does not affect code emit, just typechecking.
 `--allowJs` | | Allow JavaScript files to be compiled.
+`--noImplicitUseStrict` | | Do not emit `"use strict"` directives in module output
 
 <sup>[1]</sup> These options are experimental.
 
