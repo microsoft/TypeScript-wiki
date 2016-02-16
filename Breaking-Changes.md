@@ -102,6 +102,30 @@ Previously specifying both while using modules would result in an empty `out` fi
 * **Window.open** return type now is `Window` instead of `any`. See [#6418](https://github.com/Microsoft/TypeScript/issues/6418) for more details.
 * **WeakMap.clear** as removed. See [#6500](https://github.com/Microsoft/TypeScript/issues/6500) for more details.
 
+#### Disallow `this` accessing before super-call
+ES6 disallows accessing `this` in a constructor declaration.
+
+For example:
+```typescript
+class B {
+    constructor(that?: any) {}
+}
+
+class C extends B {
+    constructor() {
+        super(this);  // error;
+    }
+}
+
+class D extends B {
+    private _prop1: number;
+    constructor() {
+        this._prop1 = 10;  // error
+        super();
+    }
+}
+```
+
 # TypeScript 1.7
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).
