@@ -11,7 +11,7 @@
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
 * [Implicit index signatures](https://github.com/Microsoft/TypeScript/pull/7029)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
-* Support [visibility modifiers on constructors](https://github.com/Microsoft/TypeScript/pull/6885)
+* Support [private and protected constructors](https://github.com/Microsoft/TypeScript/pull/6885)
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
