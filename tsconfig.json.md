@@ -83,8 +83,8 @@ Setting a top-level property `compileOnSave` signals to the IDE to generate all 
 
 ```json
 {
-   "compileOnSave" : true,
-   "compilerOptions" {
+   "compileOnSave": true,
+   "compilerOptions": {
        "noImplicitAny" : true
    }
 }
