@@ -21,6 +21,7 @@
     - [Why doesn't this incorrect cast throw a runtime error?](#why-doesnt-this-incorrect-cast-throw-a-runtime-error)
     - [Why don't I get type checking for `(number) => string` or `(T) => T`?](#why-dont-i-get-type-checking-for-number--string-or-t--t)
     - [Why am I getting an error about a missing index signature?](#why-am-i-getting-an-error-about-a-missing-index-signature)
+    - [#Why am I getting `Supplied parameters do not match any signature` error?](#why-am-i-getting-supplied-parameters-do-not-match-any-signature-error)
   - [Functions](#functions)
     - [Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?](#why-cant-i-use-x-in-the-destructuring-function-f-x-number------)
   - [Classes](#classes)
