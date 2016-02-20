@@ -431,6 +431,46 @@ TODO: Port content from here
 
 http://stackoverflow.com/questions/22077023/why-cant-i-indirectly-return-an-object-literal-to-satisfy-an-index-signature-re
 
+### Why am I getting `Supplied parameters do not match any signature` error?
+
+A function or a method implementation signature is not part of the overloads.
+
+```ts
+function createLog(message:string): number;
+function createLog(source:string, message?:string): number {
+  return 0;
+}
+
+createLog("message"); // OK
+createLog("source", "message"); // ERROR: Supplied parameters do not match any signature
+```
+
+When having at least one overload signature declaration, only the overloads are visible. The last signature declaration, also known as the implementation signature, does not contribute to the shape of your signature. So to get the desired behavior you will need to add an additional overload:
+
+```ts
+function createLog(message:string): number;
+function createLog(source:string, message:string): number
+function createLog(source:string, message?:string): number {
+  return 0;
+}
+```
+
+The rational here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive that what you would want your users to call you through. 
+
+For instance you can require your users to call you using matching pairs of arguments, and implement this correctly without having to allow mixed argument types:
+
+```ts
+function compare(a: string, b: string): void;
+function compare(a: number, b: number): void;
+function compare(a: string|number, b: string|number): void { // Just an implementation and not visible to callers
+
+}
+
+compare(1,2) // OK
+compare("s", "l") // OK
+compare (1, "l") // Error.
+```
+
 -------------------------------------------------------------------------------------
 
 ## Functions
