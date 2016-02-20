@@ -81,7 +81,17 @@ Compiler options specified on the command line override those specified in the `
 
 Setting a top-level property `compileOnSave` signals to the IDE to generate all files for a given tsconfig.json upon saving. 
 
+```json
+{
+   "compileOnSave" : true,
+   "compilerOptions" {
+       "noImplicitAny" : true
+   }
+}
+```
+
 This feature is currently supported in Visual Studio 2015 with TypeScript 1.8.4 and above, and [atom-typescript](https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md#compileonsave) plugin.
+
 
 ## Schema
 
