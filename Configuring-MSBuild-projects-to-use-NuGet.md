@@ -15,11 +15,11 @@
  * Create a new Source:
   * Name: `TypeScript Nightly`
   * Source: `https://www.myget.org/F/typescript-preview/`
- ![Add new Package Source.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/addNewPackageSource.png)
+ ![Add new Package Source.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/addNewPackageSource.PNG)
 
 2. Use the new Package Source
-* On Project node Right-Click -> `Manage NuGet Packages`
-* Search for `Microsoft.TypeScript.MSBuild`
- ![Search for NuGet package.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/searchForMyGetPackage.png)
-* Hit `Install`
-* When install is complete, rebuild!
+ * On Project node Right-Click -> `Manage NuGet Packages`
+ * Search for `Microsoft.TypeScript.MSBuild`
+ ![Search for NuGet package.](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/searchForMyGetPackage.PNG)
+ * Hit `Install`
+ * When install is complete, rebuild!
