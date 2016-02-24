@@ -13,6 +13,7 @@
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
 * Support [private and protected constructors](https://github.com/Microsoft/TypeScript/pull/6885)
 * Support [`abstract` properties](https://github.com/Microsoft/TypeScript/issues/4669)
+* Support for [declaration output folder using `--declarationDir`](https://github.com/Microsoft/TypeScript/issues/6723)
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
