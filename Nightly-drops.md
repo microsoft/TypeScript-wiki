@@ -32,12 +32,11 @@ There are two packages:
 > Note: This is currently a manual process. See the [relevant issue](https://github.com/Microsoft/TypeScript-Sublime-Plugin/issues/370) which tracks automating the process.
 
 1. Install the npm package `npm install typescript@next`, to a local `node_modules` folder, then
-2. Go to your Packages folder
-    * Mac/Linux: `~/"Library/Application Support/Sublime Text 3/Packages`
-    * Windows: `%APPDATA%\Sublime Text 3\Packages`
-3. Copy:
- * `<path to your folder>/node_modules/typescript/lib/tsserver.js` to `<Packages>/TypeScript/tsserver/`
- * `<path to your folder>/node_modules/typescript/lib/lib.d.ts` to `<Packages>/TypeScript/tsserver/`
+2. Update the `Settings - User` file with the following:
+
+   ```json
+   "typescript_tsdk": "<path to your folder>/node_modules/typescript/lib"
+   ```
 
 More information is available at: https://github.com/Microsoft/TypeScript-Sublime-Plugin#installation
 
