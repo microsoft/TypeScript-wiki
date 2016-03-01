@@ -721,6 +721,52 @@ Because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what t
 In general, you should *never* have a type parameter which is unused.
 The type will have unexpected compatibility (as shown here) and will also fail to have proper generic type inference in function calls.
 
+### Why doesn't type inference work on this interface: `interface Foo<T> { }` ?
+
+> I wrote some code like this:
+> ```ts
+> interface Named<T> {
+>     name: string;
+> }
+> class MyNamed<T> implements Named<T> {
+>   name: 'mine';
+> }
+> function findByName<T>(x: Named<T>): T {
+>   // TODO: Implement
+>   return undefined;
+> }
+> 
+> var x: MyNamed<string>;
+> var y = findByName(x); // expected y: string, got y: {}
+> ```
+
+TypeScript uses a structrual type system.
+This structuralness also applies during generic type inference.
+When inferring the type of `T` in the function call, we try to find *members* of type `T` on the `x` argument to figure out what `T` should be.
+Because there are no members which use `T`, there is nothing to infer from, so we return `{}`.
+
+Note that if you use `T`, you get correct inference:
+```ts
+interface Named<T> {
+    name: string;
+  value: T; // <-- added
+}
+class MyNamed<T> implements Named<T> {
+  name: 'mine';
+  value: T; // <-- added
+}
+function findByName<T>(x: Named<T>): T {
+  // TODO: Implement
+  return undefined;
+}
+
+var x: MyNamed<string>;
+var y = findByName(x); // got y: string;
+```
+
+Remember: You should *never* have unused type parameters!
+See the previous question for more reasons why this is bad.
+
 ### Why can't I write `typeof T`, `new T`, or `instanceof T` in my generic function?
 
 > I want to write some code like this:
