@@ -36,6 +36,7 @@
     - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
   - [Generics](#generics)
     - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
+    - [Why doesn't type inference work on this interface: `interface Foo<T> { }` ?](#why-doesnt-type-inference-work-on-this-interface-interface-foot---)
     - [Why can't I write `typeof T`, `new T`, or `instanceof T` in my generic function?](#why-cant-i-write-typeof-t-new-t-or-instanceof-t-in-my-generic-function)
   - [Modules](#modules)
     - [Why are imports being elided in my emit?](#why-are-imports-being-elided-in-my-emit)
