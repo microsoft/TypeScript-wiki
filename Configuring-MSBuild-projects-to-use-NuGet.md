@@ -1,4 +1,4 @@
-> **Note**: The install script will remove the default import to `Microsoft.TypeScript.targets` file;
+> **Note**: The install script will remove the default import to the `Microsoft.TypeScript.targets` file;
 if you have manually edited the import before, you will need to remove it yourself **before** proceeding.
 See [Removing default imports](#removing-default-imports) for more details.
 
