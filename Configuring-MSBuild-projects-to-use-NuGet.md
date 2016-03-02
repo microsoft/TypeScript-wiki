@@ -1,5 +1,10 @@
-> **Note**: The install script will remove the default import to `Microsoft.TypeScript.targets` file; if you have manually edited the import before, you will need to remove it yourself **before** proceeding. See [Removing default imports](#removing-default-imports) for more details.
+> **Note**: The install script will remove the default import to `Microsoft.TypeScript.targets` file; if you have manually edited the
+import before, you will need to remove it yourself **before** proceeding. See [Removing default imports](#removing-default-imports) for
+more details.
 
+> **Note**: The Nuget package depends on the x86 version of the [Visual C++ Redistributable for Visual Studio 2015]
+(https://www.microsoft.com/en-us/download/details.aspx?id=48145). This is generally already installed on your computer, but you can
+verify that in "Programs and Features".
 
 ## For major releases (www.nuget.org)
 
