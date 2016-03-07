@@ -225,7 +225,7 @@ x = { foo: 1, baz: 2 };  // OK, `baz` matched by index signature
 ```ts
 let animalList: (Dog | Cat | Turkey)[] = [    // use union type instead of Animal
     {name: "Milo", meow: true }, 
-    {name: "Pepper" , bark: true},
+    {name: "Pepper", bark: true},
     {name: "koko", gobble: true} 
 ];
 ```
