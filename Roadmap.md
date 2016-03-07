@@ -1,5 +1,13 @@
 # 2.1 
 
+* Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
+* [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
+* Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
+* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
+* [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
+* [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
+* [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
+* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * Investigate [Function bind operator](https://github.com/Microsoft/TypeScript/issues/3508)
 * [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
@@ -18,21 +26,14 @@
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1664)
+* [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
-* Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
-* [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
-* Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
-* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
-* [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
-* [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
-* [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
-* Decorators for function expressions/arrow functions
-* [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 * [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
-* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * tsd integration in tsserver/language service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+* Decorators for function expressions/arrow functions
+* [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 
 # 1.8
 
