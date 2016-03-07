@@ -25,7 +25,7 @@
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
-* [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1664)
+* [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 * [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
