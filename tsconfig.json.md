@@ -73,7 +73,7 @@ The `"files"` property cannot be used in conjunction with the `"exclude"` proper
 Any files that are referenced by those specified in the `"files"` property are also included.
 Similarly, if a file `B.ts` is referenced by another file `A.ts`, then `B.ts` cannot be excluded unless the referencing file `A.ts` is also specified in the `"exclude"` list.
 
-There is no way now to indicate an `“include”`, i.e. a file outside the current folder in the `tsconfig.json`(tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference>` in one of the files in your directory.
+There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
 
 A `tsconfig.json` file is permitted to be completely empty, which compiles all files in the containing directory and subdirectories with the default compiler options.
 
