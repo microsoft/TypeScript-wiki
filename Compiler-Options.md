@@ -35,7 +35,7 @@ Option | Shorthand | Description
 `--outFile` | | Concatenate and emit output to single file. The order of concatenation is determined by the list of files passed to the compiler on the command line along with triple-slash references and imports. See output file order documentation for more details.
 `--preserveConstEnums` | | Do not erase const enum declarations in generated code. See [const enums documentation](https://github.com/Microsoft/TypeScript/blob/master/doc/spec.md#94-constant-enum-declarations) for more details.
 `--pretty`<sup>[1]</sup> | | Stylize errors and messages using color and context.
-`--removeComments` | | Remove all comments except copy-right header comments beginning with `/!*`
+`--removeComments` | | Remove all comments except copy-right header comments beginning with `/*!`
 `--rootDir` | | Specifies the root directory of input files. Only use to control the output directory structure with `--outDir`.
 `--sourceMap` | | Generates corresponding '.map' file.
 `--sourceRoot` | | Specifies the location where debugger should locate TypeScript files instead of source locations. Use this flag if the sources will be located at run-time in a different location than that at design-time. The location specified will be embedded in the sourceMap to direct the debugger where the source files where be located.
