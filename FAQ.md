@@ -61,6 +61,10 @@
     - [Why did adding an `import` or `export` modifier break my program?](#why-did-adding-an-import-or-export-modifier-break-my-program)
     - [How do I control file ordering in combined output (`--out`) ?](#how-do-i-control-file-ordering-in-combined-output---out-)
     - [What does the error "Exported variable [name] has or is using private name [name]" mean?](#what-does-the-error-exported-variable-name-has-or-is-using-private-name-name-mean)
+  - [`tsconfig.json` Behaviour](#tsconfigjson-behavior)
+    - [Why does a file in exclude list is still picked up by the compiler?](#why-does-a-file-in-exclude-list-is-still-picked-up-by-the-compiler)
+    - [How can I specify an include?](#how-can-i-specify-an-include)
+
 - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
@@ -1019,23 +1023,6 @@ TODO: Answer
 
 ## Commandline Behavior
 
-## `tsconfig.json` Behavior
-
-### Why does a file in `exclude` list is still picked up by the compiler
-
-`tsconfig.json` turns a folder into a “project”. Without specifying any `“exclude”` or `“files”` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation. 
-
-If you want to exclude some of the files use `“exclude”`, if you would rather specify all the files instead of letting the compiler look them up, use `“files”`.
-
-That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from “mod”`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition files. if the file was found, it will be included regardless if it was excluded in the previous steps.
-
-So to exclude a file from the compilation, you need to exclude and all **all** files that has an `import` or `/// <reference path="..." />` directives to it.
-
-### How can I specify an `include`?
-
-There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
-
-
 ### Why did adding an `import` or `export` modifier break my program?
 
 > I wrote a program:
@@ -1106,6 +1093,22 @@ To avoid this error:
 
 1. Export the declarations used in the type in question
 2. Specify an explicit type annotation for the compiler to use when writing declarations.
+
+## `tsconfig.json` Behavior
+
+### Why does a file in `exclude` list is still picked up by the compiler
+
+`tsconfig.json` turns a folder into a “project”. Without specifying any `“exclude”` or `“files”` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation. 
+
+If you want to exclude some of the files use `“exclude”`, if you would rather specify all the files instead of letting the compiler look them up, use `“files”`.
+
+That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from “mod”`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition files. if the file was found, it will be included regardless if it was excluded in the previous steps.
+
+So to exclude a file from the compilation, you need to exclude and all **all** files that has an `import` or `/// <reference path="..." />` directives to it.
+
+### How can I specify an `include`?
+
+There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
 
 -------------------------------------------------------------------------------------
 
