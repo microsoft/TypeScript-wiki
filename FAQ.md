@@ -461,7 +461,7 @@ function createLog(source:string, message?:string): number {
 }
 ```
 
-The rational here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive that what you would want your users to call you through. 
+The rationale here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive that what you would want your users to call you through. 
 
 For instance you can require your users to call you using matching pairs of arguments, and implement this correctly without having to allow mixed argument types:
 
