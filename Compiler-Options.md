@@ -14,7 +14,7 @@ Option | Shorthand | Description
 `--emitDecoratorMetadata`<sup>[1]</sup> | | Emit design-type metadata for decorated declarations in source. See [issue #2577](https://github.com/Microsoft/TypeScript/issues/2577) for details.
 `--experimentalDecorators` | | Enables experimental support for ES7 decorators.
 `--inlineSourceMap` | | Emit a single file with source maps instead of having a separate file.
-`--inlineSources` | | Emit the source alongside the sourcemaps within a single file; requires `--inlineSourceMap` to be set.
+`--inlineSources` | | Emit the source alongside the sourcemaps within a single file; requires `--inlineSourceMap` or `--sourceMap` to be set.
 `--isolatedModules` | | Unconditionally emit imports for unresolved files.
 `--jsx` | | Support JSX in '.tsx' files: 'React' or 'Preserve'. See [[JSX]].
 `--reactNamespace` | | Specifies the object invoked for `createElement` and `__spread` when targeting 'react' JSX emit.
