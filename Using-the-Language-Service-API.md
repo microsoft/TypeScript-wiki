@@ -63,6 +63,6 @@ The document registry is simply a store of SourceFile objects. If multiple langu
 
 <!-- @mhegazy, it seems unclear how the DocumentRegistry ties into that. I don't think there was anything particularly motivating of the DocumentRegistry in the prior paragraph. - Daniel -->
 
-A more advanced use of the document registry is to serialize sourceFile objects to disk and re-hydrate them when needed.
+A more advanced use of the document registry is to serialize `SourceFile` objects to disk and re-hydrate them when needed.
 
-> The Language service comes with a default DocumentRegistry implementation allowing for sharing SoruceFiles between different `LanguageService` instance, use `createDocumentRegistry` to create one, and pass it to all your `createLanguageService` calls.
+The Language service comes with a default `DocumentRegistry` implementation allowing for sharing SourceFiles between different `LanguageService` instances. Use `createDocumentRegistry` to create one, and pass it to all your `createLanguageService` calls.
