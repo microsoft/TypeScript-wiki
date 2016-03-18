@@ -81,3 +81,4 @@ For a variety of reasons, we avoid certain constructs, and use some of our own. 
   3. `function f(x: number, y: string): void { }`
 6. Use a single declaration per variable statement <br />(i.e. use `var x = 1; var y = 2;` over `var x = 1, y = 2;`).
 7. `else` goes on a separate line from the closing curly brace.
+8. Use 4 spaces per indentation.
