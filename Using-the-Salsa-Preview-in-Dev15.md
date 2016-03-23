@@ -60,11 +60,11 @@ for more recent language features (as shown in the destructuring example below).
 
 _**Richer intellisense**_
 
-<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/array.map.png" height=132 width=933/>
+<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/array.map.png" height="132" width="933"/>
 
 _**Latest language features**_
 
-<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/destructuring.png" height=156 width=500/>
+<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/destructuring.png" height="156" width="500"/>
 
 ## Features
 
@@ -145,7 +145,7 @@ JsDoc tag).
 
 _**TypeScript declarations used in JavaScript**_
 
-<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png" height=264 width=912/>
+<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png" height="264" width="912"/>
 
 ### Automatic acquisition of type definitions
 In the TypeScript world, the most popular JavaScript libraries have their APIs
