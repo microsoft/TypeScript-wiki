@@ -11,7 +11,7 @@ for more info.
 ## Goals
 In the last few releases of Visual Studio, the JavaScript language service has been
 provided via an "execution based" model, which runs the code as you write it, and
-examine the execuction environment when it reaches the current editing location to
+examines the execuction environment when it reaches the current editing location to
 provide information such as completion lists, signature help, etc.. This provided a
 number of challenges, for example:
 
@@ -27,7 +27,7 @@ number of challenges, for example:
  the TypeScript language service, meaning there is no shared context or integration
  across file types. Ideally TypeScript and JavaScript files should be able to
  contribute to each other's editing experience, and support similar JavaScript
- features.
+ language features.
  
 By basing the new JavaScript language service on the same codebase that powers the
 TypeScript language service, the following benefits are realized:
@@ -38,7 +38,7 @@ TypeScript language service, the following benefits are realized:
  checking, intellisense, etc., resulting in reduced cost, faster iteration, and
  a common experience across the languages.
  - JavaScript and TypeScript files can be integrated within a project, including
- be aware of constructs across languages, and being emitted to downlevel code.
+ being aware of constructs across languages, and being emitted to downlevel code.
  (Features that are outlined below). 
  
 ## Overview
@@ -60,11 +60,11 @@ for more recent language features (as shown in the destructuring example below).
 
 _**Richer intellisense**_
 
-![Array.map](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/array.map.png)
+![Array.map](array.map.png)
 
 _**Latest language features**_
 
-![Destructuring](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/destructuring.png)
+![Destructuring](destructuring.png)
 
 ## Features
 
@@ -76,12 +76,12 @@ from the return statements, whereas the parameters are not infered (but may
 be specified, as will be outlined later).
 
 One common area where this can be limiting is in *expando* objects. These are
-objects that properties are added to after initialization. For example:
+objects that have properties added after initialization. For example:
 
 ```javascript
 var x = {a: true};
 x.b = false;
-x. // <- "x" is shown as only having property "a" that it was initialized with
+x. // <- "x" is shown as only having the property "a" that it was initialized with
 ```
 
 The type of `x` can be specified explicitly to give it the desired type (as
@@ -135,7 +135,7 @@ See [this doc](TODO) for the JsDoc annotations currently supported.
 ### Intellisense based on TypeScript definitions
 With JavaScript and TypeScript now being based on the same language service, they
 are able to interact in a richer way. For example, JavaScript intellisense can be
-provided for values declaring in a `.d.ts` file. Types such as interface and classes
+provided for values declared in a `.d.ts` file. Types such as interface and classes
 may also be declared in TypeScript, and those types are available for use in JsDoc
 comments. 
 
@@ -145,12 +145,12 @@ JsDoc tag).
 
 _**TypeScript declarations used in JavaScript**_
 
-![decl1](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png)
+![decl1](decl1.png)
 
 ### Automatic acquisition of type definitions
 In the TypeScript world, the most popular JavaScript libraries have their APIs
 described by `.d.ts` files, and the most common repository for such definitions
-is on [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped).
+is on [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped).
 
 With the Salsa language service enabled, it will by default try to detect which
 JavaScript libraries are in use, and automatically download and reference the
@@ -179,19 +179,19 @@ and some of these defaults must then be set explicitly. The main settings of int
 are outlined below:
 
  - `allowJs`: This value must be set to `true` for JavaScript files to be recognised.
-By default this is `false`, as TypeScript compiles to JavaScript, and the compiler
-shouldn't include files in just emitted.
+By default this is `false`, as TypeScript compiles to JavaScript, and this is to avoid
+the compiler including files in just emitted.
  - `outDir`: This should be set to a location not included in the project, in order
-that the emitted JavaScript files are not detected and included in the next compilation.
+that the emitted JavaScript files are not detected and included in the project.
  - `module`: If using modules, this settings tells the compiler which module format
 the emitted code should use (e.g. `commonjs` for Node or bundlers such as Browserify).
  - `exclude`: This setting states which folders not to include in the project. The
-emit location, as well as non-project folders such as `node_modules` or `temp`, should
+output location, as well as non-project folders such as `node_modules` or `temp`, should
 be added to this setting.
- - `enableAutoDiscovery`: This setting enables the automatic acquisition of definition
-files as outlined above.
+ - `enableAutoDiscovery`: This setting enables the automatic detection and download of
+definition files as outlined above.
  - `compileOnSave`: This settings tells the compiler if it should recompile any time
-a source file is saved.
+a source file is saved in Visual Studio.
 
 In order to convert JavaScript files to CommonJS modules in an `./out` folder, settings
 similar to the below might be included in a `tsconfig.json` file.
@@ -215,8 +215,8 @@ similar to the below might be included in a `tsconfig.json` file.
 }
 ```
 
-With the above settings in place, if source file `./app.js` read as shown below,
-which contains several ECMAScript 2015 language features:
+With the above settings in place, if a source file (`./app.js`) existed which
+contains several ECMAScript 2015 language features as shown below:
 
 ```javascript
 import {Subscription} from 'rxjs/Subscription';
@@ -255,15 +255,18 @@ exports.default = Subscription_1.Subscription;
 ### Mixing JavaScript and TypeScript source
 With the above configuration file in place, TypeScript and JavaScript files may
 be used in the same compilation. For example, existing JavaScript code using the
-CommonJS module format, may be imported and consumed by TypeScript code using
-ECMAScript2015 module syntax. Conversely, TypeScript code written to provide a 
+CommonJS module format, may be imported and consumed by TypeScript code using the
+ECMAScript 2015 module syntax. Conversely, TypeScript code written to provide a 
 well-defined API contract for a service, may be referenced by JavaScript code 
 that is written to call that service, thus providing rich intellisense at design time.
 
 ### JSX and React support
-TODO: Example showing JSX support and the ability to preserve or compile the JSX syntax.
+TODO: Example
 
 ## Known issues
- - MSBuild skips compilation if no .ts files are present and modified in a project
+TODO:
+ - MSBuild skipping if no .ts files
+ - Need to set `allowJs` for mixed mode
+ - Need to set `outDir` to avoid errors compiling .js files
  
  
