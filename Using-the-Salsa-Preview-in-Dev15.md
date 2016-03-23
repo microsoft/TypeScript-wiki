@@ -261,12 +261,36 @@ well-defined API contract for a service, may be referenced by JavaScript code
 that is written to call that service, thus providing rich intellisense at design time.
 
 ### JSX and React support
-TODO: Example
+The new JavaScript language service adds rich support for the JSX syntax, and
+also for converting the syntax to React API calls - as it does for TSX files.
+
+Note: To convert the JSX syntax to React calls, the setting `"jsx": "react"` must
+be added to the `compilerOptions` in the `tsconfig.json` file outlined above.
+
+Again, with the ability to mix and match, it is possible to define React components
+with a well defined type in a TypeScript file (.tsx), and then use those components
+from a .jsx file. (Note: Mixing languages is not required here, you could write
+entirely in JavaScript or TypeScript, the example is to highlight the flexibilty provided).
+
+The below screen-shot shows a React component defined in the `comps.tsx` TypeScript
+file, and then this component being used from the `app.jsx` file, complete with
+intellisense for completions and documentation within the JSX expressions.
+
+<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/react.png" height="500" width="640"/>
+
+The JavaScript file created at `./out/app.js' upon build is shown below:
+
+```javascript
+"use strict";
+var comps_1 = require('./comps');
+var x = React.createElement(comps_1.RepoDisplay, {description: "test"});
+```
+
 
 ## Known issues
-TODO:
- - MSBuild skipping if no .ts files
- - Need to set `allowJs` for mixed mode
- - Need to set `outDir` to avoid errors compiling .js files
- 
- 
+ - If compiling only JavaScript files, then MSBuild does not detect that there is
+input source for the TypeScript compiler. To workaround this problem, add one 
+TypeScript file to the project.
+ - Sometime changes to configuration, such as adding or editing a `tsconfig.json`
+file, are not picked up correctly. Reloading the project (or restarting Visual 
+Studio) should pick up the changes correctly.
