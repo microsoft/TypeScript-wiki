@@ -93,7 +93,6 @@ function fn6(p1,p2){}
 var someObj = {
   /**
    * @param {string} param1 - Docs on property assignments work
-   * @return {number}
    */
   x: function(param1){}
 };
@@ -118,8 +117,8 @@ Foo.prototype.sayHi = (greeting) => console.log("Hi!");
 let myArrow = x => x * x;
 
 /**
- * Which means is works for stateless function components in JSX too
- * @param {{a: string, b: number}} test - The users name
+ * Which means it works for stateless function components in JSX too
+ * @param {{a: string, b: number}} test - Some param
  */
 var sfc = (test) => <div>{test.a.charAt(0)}</div>;
 
