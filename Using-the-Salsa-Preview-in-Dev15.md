@@ -129,7 +129,7 @@ function Foo(param1) {
 }
 ```
  
-See [this doc](TODO) for the JsDoc annotations currently supported.
+See [this doc](https://github.com/Microsoft/TypeScript/wiki/JsDoc-support-in-JavaScript) for the JsDoc annotations currently supported.
 
 
 ### Intellisense based on TypeScript definitions
