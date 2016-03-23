@@ -145,7 +145,7 @@ JsDoc tag).
 
 _**TypeScript declarations used in JavaScript**_
 
-<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png" height="185" width="640"/>
+<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png" height="400" width="640"/>
 
 ### Automatic acquisition of type definitions
 In the TypeScript world, the most popular JavaScript libraries have their APIs
