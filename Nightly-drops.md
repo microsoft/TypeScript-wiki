@@ -29,8 +29,6 @@ There are two packages:
 
 ## Sublime Text
 
-> Note: This is currently a manual process. See the [relevant issue](https://github.com/Microsoft/TypeScript-Sublime-Plugin/issues/370) which tracks automating the process.
-
 1. Install the npm package `npm install typescript@next`, to a local `node_modules` folder, then
 2. Update the `Settings - User` file with the following:
 
