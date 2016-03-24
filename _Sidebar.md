@@ -7,9 +7,9 @@
 * [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
 * [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
 * [[Common Errors]]
-* [[Integrating with Build Tools]]
-* [[Compiler Options]]
-* [[tsconfig.json]]
+* [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
+* [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
+* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [[Nightly drops]]
 
 **TypeScript Language Advanced**
@@ -18,7 +18,7 @@
 * [Declaration Merging](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Declaration%20Merging.md)
 * [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
 * [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md)
-* [[JSX]]
+* [JSX](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/JSX.md)
 * [Writing Definition Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)
 * [Typings for NPM packages](https://github.com/Microsoft/TypeScript/wiki/Typings-for-npm-packages)
 
