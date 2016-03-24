@@ -71,14 +71,14 @@ _**Latest language features**_
 ### Intellisense based on type inference
 The Salsa language service mostly uses the same inference as TypeScript to determine
 the type of a value. For a variable or property, this is typically the type
-of the value used to initialize it. For a function, the return type is infered
-from the return statements, whereas the parameters are not infered (but may
+of the value used to initialize it. For a function, the return type is inferred
+from the return statements, whereas the parameters are not inferred (but may
 be specified, as will be outlined later).
 
 One common area where this can be limiting is in *expando* objects. These are
 objects that have properties added after initialization. For example:
 
-```javascript
+```js
 var x = {a: true};
 x.b = false;
 x. // <- "x" is shown as only having the property "a" that it was initialized with
@@ -90,7 +90,7 @@ outlined later).
 For JavaScript files, some additional inference is done, specifically "es3-style"
 classes, and CommonJS-style module patterns are recognized. For example:
 
-```javascript
+```js
 function Foo(param1) {
     this.prop = param1;
 }
@@ -108,7 +108,7 @@ documentation purposes), type information may be provided explicitly via JsDoc
 annotations. For example, to give the variable `x` the desired type in the example
 above, it may be written as:
 
-```javascript
+```js
 /**
  * @type {{a: boolean, b: boolean, c: number}}
  */
@@ -117,10 +117,10 @@ x.b = false;
 x. // <- "x" is shown as having properties a, b, and c of the types specified
 ```
 
-As mentioned, function parameters are also never infered. Thus if it is desired
+As mentioned, function parameters are also never inferred. Thus if it is desired
 that they have a specific type, then JsDoc may be used for this purpose also:
 
-```javascript
+```js
 /**
  * @param {string} param1 - The first argument to this function
  */
@@ -196,7 +196,7 @@ a source file is saved in Visual Studio.
 In order to convert JavaScript files to CommonJS modules in an `./out` folder, settings
 similar to the below might be included in a `tsconfig.json` file.
 
-```javascript
+```json
 {
   "compilerOptions": {
     "module": "commonjs",
@@ -218,7 +218,7 @@ similar to the below might be included in a `tsconfig.json` file.
 With the above settings in place, if a source file (`./app.js`) existed which
 contains several ECMAScript 2015 language features as shown below:
 
-```javascript
+```js
 import {Subscription} from 'rxjs/Subscription';
 
 class Foo {
@@ -234,7 +234,7 @@ export default Subscription;
 Then a file would be emitted to `./out/app.js` targetting ECMAScript 5 (the default)
 that looks something like the below:
 
-```javascript
+```js
 "use strict";
 var Subscription_1 = require('rxjs/Subscription');
 var Foo = (function () {
@@ -280,7 +280,7 @@ intellisense for completions and documentation within the JSX expressions.
 
 The JavaScript file created at `./out/app.js' upon build is shown below:
 
-```javascript
+```js
 "use strict";
 var comps_1 = require('./comps');
 var x = React.createElement(comps_1.RepoDisplay, {description: "test"});
