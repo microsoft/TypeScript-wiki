@@ -6,10 +6,9 @@
 * [Namespaces and Modules](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Namespaces%20and%20Modules.md)
 * [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
 * [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
-* [[Common Errors]]
-* [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
 * [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
 * [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
+* [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
 * [[Nightly drops]]
 
 **TypeScript Language Advanced**
