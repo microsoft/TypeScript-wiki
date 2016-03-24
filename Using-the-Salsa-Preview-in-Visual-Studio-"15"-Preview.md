@@ -1,6 +1,6 @@
 # JavaScript "Salsa" Language Service
 
-Visual Studio "15" Preview includes a preview of a new JavaScript language service, 
+Visual Studio "15" Preview includes a preview of the new JavaScript language service, 
 internally codenamed "Salsa". This may be switched on or off via a registry key.
 
 Salsa also powers the JavaScript language service in VS Code, and most of the below
@@ -11,7 +11,7 @@ for more info.
 In the last few releases of Visual Studio, the JavaScript language service has been
 provided via an "execution based" model, which runs the code as you write it, and
 examines the execuction environment when it reaches the current editing location to
-provide information such as completion lists, signature help, etc.. This provided a
+provide information such as completion lists, signature help, etc. This provided a
 number of challenges, for example:
 
  - Visual Studio specific: The existing language service is tied to Visual Studio
