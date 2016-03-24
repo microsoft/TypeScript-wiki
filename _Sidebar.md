@@ -44,4 +44,5 @@
 * [[Dev Mode in Visual Studio]]
 
 **FAQs**
+* [[FAQ]]
 * [[FAQs for API Consumers]]
