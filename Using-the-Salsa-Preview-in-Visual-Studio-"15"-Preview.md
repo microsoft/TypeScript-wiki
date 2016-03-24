@@ -1,8 +1,7 @@
 # JavaScript "Salsa" Language Service
 
-With the release of "Dev15 Preview", we have included a preview of a new JavaScript
-language service, internally codenamed "Salsa". This may be switched on or off via a
-registry key.
+Visual Studio "15" Preview includes a preview of a new JavaScript language service, 
+internally codenamed "Salsa". This may be switched on or off via a registry key.
 
 Salsa also powers the JavaScript language service in VS Code, and most of the below
 info applies there also. See [VSCode release notes](https://github.com/Microsoft/vscode-docs/blob/vnext/release-notes/latest.md#languages---javascript)
