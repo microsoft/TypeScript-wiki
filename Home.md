@@ -10,10 +10,10 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
 * [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
 * [Common Errors](Common Errors)
-* [[Integrating with Build Tools]]
-* [Compiler Options] (Compiler Options)
+* [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
+* [Compiler Options] (https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
 * [TypeScript Editor Support](TypeScript-Editor-Support)
-* [tsconfig.json](tsconfig.json)
+* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [Using TypeScript with ASP.NET v5](Using-TypeScript-With-ASP.NET-5)
 * [[Nightly drops]]
 
@@ -24,5 +24,4 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
 * [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md)
 * [Writing Definition (`.d.ts`) Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)
-* [[JSX]]
-
+* [JSX](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/JSX.md)
