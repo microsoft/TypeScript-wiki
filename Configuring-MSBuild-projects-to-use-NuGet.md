@@ -1,7 +1,12 @@
-> **Note**: The install script will remove the default import to `Microsoft.TypeScript.targets` file; if you have manually edited the import before, you will need to remove it yourself **before** proceeding. See [Removing default imports](#removing-default-imports) for more details.
+> **Note**: The install script will remove the default import to the `Microsoft.TypeScript.targets` file;
+if you have manually edited the import before, you will need to remove it yourself **before** proceeding.
+See [Removing default imports](#removing-default-imports) for more details.
 
+> **Note**: The Nuget package depends on the x86 version of [Visual C++ Redistributable for Visual Studio 2015]
+(https://www.microsoft.com/en-us/download/details.aspx?id=48145).
+This is generally already installed on your computer, but you can verify that within **Programs and Features**.
 
-## For major releases (www.nuget.org)
+## For major releases (https://www.nuget.org)
 
 * Right-Click -> Manage NuGet Packages
 * Search for `Microsoft.TypeScript.MSBuild`
@@ -11,7 +16,7 @@
 * When install is complete, rebuild!
 
 
-## For Nightly dorps (www.myget.org)
+## For Nightly dorps (https://www.myget.org)
 
 1. Add a new Package Source 
  * Go to `Tools` -> `Options` -> `NuGet Package Manager` -> `Package Sources`
