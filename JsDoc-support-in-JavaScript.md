@@ -1,4 +1,8 @@
-The below code outlined which constructs are currently support or not supported when using JsDoc annotations to provide type information in JavaScript files.
+The below code outlined which constructs are currently support or not supported
+when using JsDoc annotations to provide type information in JavaScript files.
+
+Note any tags not listed explicitly below (such as `@typedef`, or `@constructor`)
+are not yet supported.
 
 ```javascript
 // === Supported ===
