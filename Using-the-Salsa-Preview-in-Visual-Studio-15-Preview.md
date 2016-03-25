@@ -10,7 +10,7 @@ for more info.
 ## Goals
 In the last few releases of Visual Studio, the JavaScript language service has been
 provided via an "execution based" model. A JavaScript engine runs your code as you write it and
-examines the execuction environment at the current editing location to
+examines the execution environment at the current editing location to
 provide information such as completion lists, signature help, and other language tooling features. 
 The new language service is based on the TypeScript language service, which is powered by static analysis.
 This change opens up several opportunities, such as:
@@ -179,18 +179,18 @@ are present. To compile JavaScript files, a `tsconfig.json` file must be added,
 and some of these defaults must then be set explicitly. The required settings are outlined below:
 
  - `allowJs`: This value must be set to `true` for JavaScript files to be recognized.
-By default this is `false`, as TypeScript compiles to JavaScript, and this is neccesary to avoid
+By default this is `false`, as TypeScript compiles to JavaScript, and this is necessary to avoid
 the compiler including files it just compiled.
  - `outDir`: This should be set to a location not included in the project, in order
 that the emitted JavaScript files are not detected and then included in the project (see `exclude` below).
- - `module`: If using modules, this settings tells the compiler which module format
+ - `module`: If using modules, this setting tells the compiler which module format
 the emitted code should use (e.g. `commonjs` for Node or bundlers such as Browserify).
  - `exclude`: This setting states which folders not to include in the project. The
 output location, as well as non-project folders such as `node_modules` or `temp`, should
 be added to this setting.
  - `enableAutoDiscovery`: This setting enables the automatic detection and download of
 definition files as outlined above.
- - `compileOnSave`: This settings tells the compiler if it should recompile any time
+ - `compileOnSave`: This setting tells the compiler if it should recompile any time
 a source file is saved in Visual Studio.
 
 In order to convert JavaScript files to CommonJS modules in an `./out` folder, settings
