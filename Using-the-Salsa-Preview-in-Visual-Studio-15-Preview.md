@@ -9,41 +9,26 @@ for more info.
 
 ## Goals
 In the last few releases of Visual Studio, the JavaScript language service has been
-provided via an "execution based" model, which runs the code as you write it, and
-examines the execuction environment when it reaches the current editing location to
-provide information such as completion lists, signature help, etc. This provided a
-number of challenges, for example:
+provided via an "execution based" model. A JavaScript engine runs your code as you write it and
+examines the execution environment at the current editing location to
+provide information such as completion lists, signature help, and other language tooling features. 
+The new language service is based on the TypeScript language service, which is powered by static analysis.
+This change opens up several opportunities, such as:
 
- - Visual Studio specific: The existing language service is tied to Visual Studio
- and Windows, meaning it cannot be shared across editors & platforms (such as VS Code).
- - Costly engineering: The bulk of the existing language service logic is written
- in C++, making iterating quickly and adding new features slower than desired.
- - Inconsistent experience: Being execution based, changes in code in one location
- can impact the intellisense experience in other locations in non-obvious ways.
- Timeouts are also used to halt execution if paths take too long, which can cause
- different behavior on different hardware.
- - No TypeScript integration: The current language service is entirely distinct from
- the TypeScript language service, meaning there is no shared context or integration
- across file types. Ideally TypeScript and JavaScript files should be able to
- contribute to each other's editing experience, and support similar JavaScript
- language features.
- 
-By basing the new JavaScript language service on the same codebase that powers the
-TypeScript language service, the following benefits are realized:
-
- - The language service can be used outside of Visual Studio (as has been done by
- the VS Code team).
- - The team can focus on **one** casebase written in TypeScript to provide parsing,
- checking, intellisense, etc., resulting in reduced cost, faster iteration, and
+ - The new language service is written in TypeScript, so it is inherently cross platform and can be
+  executed outside of Visual Studio (as has been done by the VS Code team).
+ - The team can focus on **one** codebase to provide parsing, checking, intellisense,
+  and other tooling for both JavaScript and TypeScript, resulting in reduced cost, faster iteration, and
  a common experience across the languages.
- - JavaScript and TypeScript files can be integrated within a project, including
- being aware of constructs across languages, and being emitted to downlevel code.
- (Features that are outlined below). 
+ - TypeScript and JavaScript files in the same project can benefit from cross-language integration, 
+ with JavaScript files being aware of and understanding code from TypeScript files, and vice-versa.
+ - JavaScript written using the latest language features (ES6+) can utilize TypeScript's "transpiler" 
+ to be converted to JavaScript that runs on all of today's engines. 
  
-## Overview
+## Enabling Salsa
 To enable the new "Salsa" language service experience in Visual Studio "15" Preview,
-save the below as a local file named `salsa.reg` and open it to update the registry.
-(Set the same registry key value to 0 to disable at any point).
+save the below snippet as a local file named `salsa.reg`, open it to update the registry,
+and then restart Visual Studio. (Do the same with value `00000000` instead of `00000001` to disable at any point).
 
 ```
 Windows Registry Editor Version 5.00
@@ -52,9 +37,11 @@ Windows Registry Editor Version 5.00
 "UseTypeScriptExperimental"=dword:00000001
 ```
 
-Now when you open a JavaScript file in Visual Studio, you should notice that
+## Overview
+
+Once Salsa is enabled, when you open a JavaScript file in Visual Studio, you should notice that
 the editing experience is similar to that of TypeScript; namely richer types
-flowing through constructs (as shown in the `Array.map` example below), or support
+flowing through constructs (as shown in the `Array.map` example below), and support
 for more recent language features (as shown in the destructuring example below).
 
 _**Richer intellisense**_
@@ -72,7 +59,7 @@ The Salsa language service mostly uses the same inference as TypeScript to deter
 the type of a value. For a variable or property, this is typically the type
 of the value used to initialize it. For a function, the return type is inferred
 from the return statements, whereas the parameters are not inferred (but may
-be specified, as will be outlined later).
+be explicitly specified, as will be outlined later).
 
 One common area where this can be limiting is in *expando* objects. These are
 objects that have properties added after initialization. For example:
@@ -83,11 +70,16 @@ x.b = false;
 x. // <- "x" is shown as only having the property "a" that it was initialized with
 ```
 
-The type of `x` can be specified explicitly to give it the desired type (as
-outlined later).
+The type of `x` can be specified explicitly to give it the desired type, as will
+be outlined below.
 
-For JavaScript files, some additional inference is done, specifically "es3-style"
-classes, and CommonJS-style module patterns are recognized. For example:
+For JavaScript files, some additional inference is done, specifically the below
+are also recognized:
+
+ - "ES3-style" classes, specified using a constructor function and assignments to
+the prototype property.
+ - CommonJS-style module patterns, specified as property assignments on the `exports`
+object, or assignments to the `module.exports` property.
 
 ```js
 function Foo(param1) {
@@ -128,15 +120,15 @@ function Foo(param1) {
 }
 ```
  
-See [this doc](https://github.com/Microsoft/TypeScript/wiki/JsDoc-support-in-JavaScript) for the JsDoc annotations currently supported.
+See [this doc](https://github.com/Microsoft/TypeScript/wiki/JsDoc-support-in-JavaScript) 
+for the JsDoc annotations currently supported.
 
 
 ### Intellisense based on TypeScript definitions
 With JavaScript and TypeScript now being based on the same language service, they
 are able to interact in a richer way. For example, JavaScript intellisense can be
-provided for values declared in a `.d.ts` file. Types such as interface and classes
-may also be declared in TypeScript, and those types are available for use in JsDoc
-comments. 
+provided for values declared in a `.d.ts` file, and types such as interfaces and
+classes declared in TypeScript are available for use as types in JsDoc comments. 
 
 Below shows a simple example of a TypeScript definition file providing such type
 information (via an interface) to a JavaScript file in the same project (via a
@@ -147,21 +139,31 @@ _**TypeScript declarations used in JavaScript**_
 <img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png" height="400" width="640"/>
 
 ### Automatic acquisition of type definitions
-In the TypeScript world, the most popular JavaScript libraries have their APIs
+In the TypeScript world, most popular JavaScript libraries have their APIs
 described by `.d.ts` files, and the most common repository for such definitions
 is on [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped).
 
-With the Salsa language service enabled, it will by default try to detect which
-JavaScript libraries are in use, and automatically download and reference the
+By default, the Salsa language service will try to detect which
+JavaScript libraries are in use and automatically download and reference the
 corresponding `.d.ts` file that describes the library in order to provide rich
 intellisense. The files are downloaded to a cache located under the user folder
-at `%LOCALAPPDATA%\Microsoft\TypeScript`.
+at `%LOCALAPPDATA%\Microsoft\TypeScript`. (Note: This feature is **disabled** by
+default if using a `tsconfig.json` configuration file, but may be set to enabled,
+as outlined further below).
 
 Currently auto-detection works for dependencies downloaded from NPM (via reading
-the `package.json` file) or Bower (via reading the `bower.json` file).
+the `package.json` file) or Bower (via reading the `bower.json` file). These files
+are used by their respective package managers to specify which packages to install for a
+project. (See https://docs.npmjs.com/files/package.json for more info).
 
-Note: This feature currently only works in Salsa running within Visual Studio "15",
-and is not available in VS Code yet.
+If you do not wish to use auto-acquisition, disable it by adding a configuration
+file as outlined below. You can still place definition files for use directly
+within your project (either manually downloaded, or via a tool such as
+[TSD](http://definitelytyped.org/tsd/) or [typings](https://github.com/typings/typings)).
+
+Note: The auto-acquisition feature currently only works in Salsa running within 
+Visual Studio "15" and is not available in VS Code yet.
+
 
 ### Compiling JavaScript down-level
 One of the key features TypeScript provides is the ability to use the latest JavaScript
@@ -170,26 +172,25 @@ yet understand those newer features. With JavaScript using the same language ser
 it too can now take advantage of this same feature.
 
 Before this can be set up, some understanding of the configuration options is
-required. TypeScript is configured via a `tsconfig.json` file. In the absense of such
+required. TypeScript is configured via a `tsconfig.json` file. In the absence of such
 a file, some default values are used. For compatibility reasons, these defaults are
 different in a context where only JavaScript files (and optionally `.d.ts` files)
 are present. To compile JavaScript files, a `tsconfig.json` file must be added,
-and some of these defaults must then be set explicitly. The main settings of interest
-are outlined below:
+and some of these defaults must then be set explicitly. The required settings are outlined below:
 
- - `allowJs`: This value must be set to `true` for JavaScript files to be recognised.
-By default this is `false`, as TypeScript compiles to JavaScript, and this is to avoid
-the compiler including files in just emitted.
+ - `allowJs`: This value must be set to `true` for JavaScript files to be recognized.
+By default this is `false`, as TypeScript compiles to JavaScript, and this is necessary to avoid
+the compiler including files it just compiled.
  - `outDir`: This should be set to a location not included in the project, in order
-that the emitted JavaScript files are not detected and included in the project.
- - `module`: If using modules, this settings tells the compiler which module format
+that the emitted JavaScript files are not detected and then included in the project (see `exclude` below).
+ - `module`: If using modules, this setting tells the compiler which module format
 the emitted code should use (e.g. `commonjs` for Node or bundlers such as Browserify).
  - `exclude`: This setting states which folders not to include in the project. The
 output location, as well as non-project folders such as `node_modules` or `temp`, should
 be added to this setting.
  - `enableAutoDiscovery`: This setting enables the automatic detection and download of
 definition files as outlined above.
- - `compileOnSave`: This settings tells the compiler if it should recompile any time
+ - `compileOnSave`: This setting tells the compiler if it should recompile any time
 a source file is saved in Visual Studio.
 
 In order to convert JavaScript files to CommonJS modules in an `./out` folder, settings
@@ -230,7 +231,7 @@ export let sqr = x => x * x;
 export default Subscription;
 ```
 
-Then a file would be emitted to `./out/app.js` targetting ECMAScript 5 (the default)
+Then a file would be emitted to `./out/app.js` targeting ECMAScript 5 (the default)
 that looks something like the below:
 
 ```js
@@ -260,16 +261,17 @@ well-defined API contract for a service, may be referenced by JavaScript code
 that is written to call that service, thus providing rich intellisense at design time.
 
 ### JSX and React support
-The new JavaScript language service adds rich support for the JSX syntax, and
+The new JavaScript language service adds rich support for the JSX syntax and
 also for converting the syntax to React API calls - as it does for TSX files.
 
 Note: To convert the JSX syntax to React calls, the setting `"jsx": "react"` must
 be added to the `compilerOptions` in the `tsconfig.json` file outlined above.
 
 Again, with the ability to mix and match, it is possible to define React components
-with a well defined type in a TypeScript file (.tsx), and then use those components
+with a well-defined type in a TypeScript file (.tsx), and then use those components
 from a .jsx file. (Note: Mixing languages is not required here, you could write
-entirely in JavaScript or TypeScript, the example is to highlight the flexibilty provided).
+entirely in JavaScript or TypeScript, the example is to highlight the flexibility
+provided).
 
 The below screen-shot shows a React component defined in the `comps.tsx` TypeScript
 file, and then this component being used from the `app.jsx` file, complete with
@@ -277,7 +279,7 @@ intellisense for completions and documentation within the JSX expressions.
 
 <img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/react.png" height="500" width="640"/>
 
-The JavaScript file created at `./out/app.js' upon build is shown below:
+The JavaScript file created at `./out/app.js' upon build would contain the code:
 
 ```js
 "use strict";
@@ -288,8 +290,18 @@ var x = React.createElement(comps_1.RepoDisplay, {description: "test"});
 
 ## Known issues
  - If compiling only JavaScript files, then MSBuild does not detect that there is
-input source for the TypeScript compiler. To workaround this problem, add one 
+input source for the TypeScript compiler. To work around this problem, add one 
 TypeScript file to the project.
  - Sometime changes to configuration, such as adding or editing a `tsconfig.json`
 file, are not picked up correctly. Reloading the project (or restarting Visual 
-Studio) should pick up the changes correctly.
+Studio) should reload the file and pick up the changes.
+
+
+## Still to come...
+The new language service is a work in progress, including plans to:
+ - Improve [JsDoc support](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+salsa+jsdoc+label%3ASuggestion)
+ - Improve [the acquisition and use of type definitions](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+label%3ATypings+)
+ - ... and [much more!](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+salsa)
+
+The goal is to provide a JavaScript language service developers love using. Please
+do provide feedback, suggestions, and issues at https://github.com/Microsoft/TypeScript/issues
