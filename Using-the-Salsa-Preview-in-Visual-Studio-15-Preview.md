@@ -9,28 +9,26 @@ for more info.
 
 ## Goals
 In the last few releases of Visual Studio, the JavaScript language service has been
-provided via an "execution based" model, which runs the code as you write it, and
-examines the execution environment when it reaches the current editing location to
-provide information such as completion lists, signature help, etc. The new language
-service is based on the TypeScript language service, which works via static analysis.
-This change aims for a number of benefits, such as:
+provided via an "execution based" model. A JavaScript engine runs your code as you write it and
+examines the execuction environment at the current editing location to
+provide information such as completion lists, signature help, and other language tooling features. 
+The new language service is based on the TypeScript language service, which is powered by static analysis.
+This change opens up several opportunities, such as:
 
- - The language service is written in TypeScript, and can be executed outside of
-Visual Studio and used cross-platform (as has been done by the VS Code team).
- - The team can focus on **one** codebase written in TypeScript to provide parsing,
- checking, intellisense, etc., resulting in reduced cost, faster iteration, and
+ - The new language service is written in TypeScript, so it is inherently cross platform and can be
+  executed outside of Visual Studio (as has been done by the VS Code team).
+ - The team can focus on **one** codebase to provide parsing, checking, intellisense,
+  and other tooling for both JavaScript and TypeScript, resulting in reduced cost, faster iteration, and
  a common experience across the languages.
- - With TypeScript and JavaScript files in the same project being handled by the
-same language service, there is cross-language integration, with JavaScript files
-being aware of code written in TypeScript files, and vice-versa.
- - Using the same "transpiler" as TypeScript, JavaScript written to take advantage
-of the latest language features can be converted to JavaScript that runs on today's
-engines. 
+ - TypeScript and JavaScript files in the same project can benefit from cross-language integration, 
+ with JavaScript files being aware of and understanding code from TypeScript files, and vice-versa.
+ - JavaScript written using the latest language features (ES6+) can utilize TypeScript's "transpiler" 
+ to be converted to JavaScript that runs on all of today's engines. 
  
-## Overview
+## Enabling Salsa
 To enable the new "Salsa" language service experience in Visual Studio "15" Preview,
-save the below as a local file named `salsa.reg` and open it to update the registry,
-then restart Visual Studio. (Set the same registry key value to 0 to disable at any point).
+save the below snippet as a local file named `salsa.reg`, open it to update the registry,
+and then restart Visual Studio. (Do the same with value `00000000` instead of `00000001` to disable at any point).
 
 ```
 Windows Registry Editor Version 5.00
@@ -39,7 +37,9 @@ Windows Registry Editor Version 5.00
 "UseTypeScriptExperimental"=dword:00000001
 ```
 
-Now when you open a JavaScript file in Visual Studio, you should notice that
+## Overview
+
+Once Salsa is enabled, when you open a JavaScript file in Visual Studio, you should notice that
 the editing experience is similar to that of TypeScript; namely richer types
 flowing through constructs (as shown in the `Array.map` example below), and support
 for more recent language features (as shown in the destructuring example below).
@@ -139,21 +139,21 @@ _**TypeScript declarations used in JavaScript**_
 <img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/decl1.png" height="400" width="640"/>
 
 ### Automatic acquisition of type definitions
-In the TypeScript world, the most popular JavaScript libraries have their APIs
+In the TypeScript world, most popular JavaScript libraries have their APIs
 described by `.d.ts` files, and the most common repository for such definitions
 is on [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped).
 
-With the Salsa language service enabled, it will by default try to detect which
-JavaScript libraries are in use, and automatically download and reference the
+By default, the Salsa language service will try to detect which
+JavaScript libraries are in use and automatically download and reference the
 corresponding `.d.ts` file that describes the library in order to provide rich
 intellisense. The files are downloaded to a cache located under the user folder
-at `%LOCALAPPDATA%\Microsoft\TypeScript`. (Note: This feature is disabled by
+at `%LOCALAPPDATA%\Microsoft\TypeScript`. (Note: This feature is **disabled** by
 default if using a `tsconfig.json` configuration file, but may be set to enabled,
 as outlined further below).
 
 Currently auto-detection works for dependencies downloaded from NPM (via reading
 the `package.json` file) or Bower (via reading the `bower.json` file). These files
-are used by these package manager to specify which packages to install for a
+are used by their respective package managers to specify which packages to install for a
 project. (See https://docs.npmjs.com/files/package.json for more info).
 
 If you do not wish to use auto-acquisition, disable it by adding a configuration
@@ -162,7 +162,7 @@ within your project (either manually downloaded, or via a tool such as
 [TSD](http://definitelytyped.org/tsd/) or [typings](https://github.com/typings/typings)).
 
 Note: The auto-acquisition feature currently only works in Salsa running within 
-Visual Studio "15", and is not available in VS Code yet.
+Visual Studio "15" and is not available in VS Code yet.
 
 
 ### Compiling JavaScript down-level
@@ -176,14 +176,13 @@ required. TypeScript is configured via a `tsconfig.json` file. In the absence of
 a file, some default values are used. For compatibility reasons, these defaults are
 different in a context where only JavaScript files (and optionally `.d.ts` files)
 are present. To compile JavaScript files, a `tsconfig.json` file must be added,
-and some of these defaults must then be set explicitly. The main settings of interest
-are outlined below:
+and some of these defaults must then be set explicitly. The required settings are outlined below:
 
  - `allowJs`: This value must be set to `true` for JavaScript files to be recognized.
-By default this is `false`, as TypeScript compiles to JavaScript, and this is to avoid
-the compiler including files in just emitted.
+By default this is `false`, as TypeScript compiles to JavaScript, and this is neccesary to avoid
+the compiler including files it just compiled.
  - `outDir`: This should be set to a location not included in the project, in order
-that the emitted JavaScript files are not detected and then included in the project.
+that the emitted JavaScript files are not detected and then included in the project (see `exclude` below).
  - `module`: If using modules, this settings tells the compiler which module format
 the emitted code should use (e.g. `commonjs` for Node or bundlers such as Browserify).
  - `exclude`: This setting states which folders not to include in the project. The
@@ -262,7 +261,7 @@ well-defined API contract for a service, may be referenced by JavaScript code
 that is written to call that service, thus providing rich intellisense at design time.
 
 ### JSX and React support
-The new JavaScript language service adds rich support for the JSX syntax, and
+The new JavaScript language service adds rich support for the JSX syntax and
 also for converting the syntax to React API calls - as it does for TSX files.
 
 Note: To convert the JSX syntax to React calls, the setting `"jsx": "react"` must
