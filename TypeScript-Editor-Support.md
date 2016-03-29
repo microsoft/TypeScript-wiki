@@ -17,7 +17,8 @@
 
 # Eclipse
 
-[Eclipse TypeScript Plug-in](https://github.com/palantir/eclipse-typescript), an Eclipse plugin developed by Palantir.
+* [Eclipse TypeScript Plug-in](https://github.com/palantir/eclipse-typescript), an Eclipse plugin developed by Palantir.
+* [typescript.java](https://github.com/angelozerr/typescript.java) an Eclipse plugin which consumes tsserver with JSDT Editor.
 
 # Emacs
 
