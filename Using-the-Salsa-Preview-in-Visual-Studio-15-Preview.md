@@ -127,7 +127,7 @@ for the JsDoc annotations currently supported.
 ### Intellisense based on TypeScript definitions
 With JavaScript and TypeScript now being based on the same language service, they
 are able to interact in a richer way. For example, JavaScript intellisense can be
-provided for values declared in a `.d.ts` file, and types such as interfaces and
+provided for values declared in a `.d.ts` file ([more info](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)), and types such as interfaces and
 classes declared in TypeScript are available for use as types in JsDoc comments. 
 
 Below shows a simple example of a TypeScript definition file providing such type

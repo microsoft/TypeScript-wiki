@@ -15,7 +15,7 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [TypeScript Editor Support](TypeScript-Editor-Support)
 * [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [Using TypeScript with ASP.NET v5](Using-TypeScript-With-ASP.NET-5)
-* [[Nightly drops]]
+* [Nightly Builds](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
 # Advanced Topics
 
