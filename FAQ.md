@@ -1062,7 +1062,18 @@ In this case, you should be running `node myApp.js`, because the *module* `myApp
 This behavior has been fixed as of TypeScript 1.8; combining `--out` and `--module` is now an error for CommonJS module output.
 
 ### How do I control file ordering in combined output (`--out`) ?
-TODO: Answer
+
+The order of the generated files in the output follows that of the input files after the pre-processing pass.
+
+The compiler performs a pre-processing pass on input files to resolve all *triple-slash reference directives* and *module import statements*.
+During this process, additional files can be added to the compilation.
+
+The process starts with a set of root files; these are the file names specified on the command-line or in the `"files"` list in the [`tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig.json.html).
+These root files are pre-processed in the *same order* they are specified.
+Before a file is added to the list, all triple-slash references and import statements in it are processed, and their targets included.
+Triple-slash references and import statements are resolved in a *depth-first manner*, in the order they appear in the file.
+
+See more information about resolving triple-slash reference directives at [triple-slash directives documentation](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html) and module import statements resolution at [module resolution documentation](https://www.typescriptlang.org/docs/handbook/module-resolution.html).
 
 ### What does the error "Exported variable [name] has or is using private name [name]" mean?
 
