@@ -61,6 +61,7 @@
     - [Why did adding an `import` or `export` modifier break my program?](#why-did-adding-an-import-or-export-modifier-break-my-program)
     - [How do I control file ordering in combined output (`--out`) ?](#how-do-i-control-file-ordering-in-combined-output---out-)
     - [What does the error "Exported variable [name] has or is using private name [name]" mean?](#what-does-the-error-exported-variable-name-has-or-is-using-private-name-name-mean)
+    - [Why does `--outDir` moves output after adding a new file?](#why-does---outdir-moves-output-after-adding-a-new-file)
   - [`tsconfig.json` Behaviour](#tsconfigjson-behavior)
     - [Why does a file in exclude list is still picked up by the compiler?](#why-does-a-file-in-exclude-list-is-still-picked-up-by-the-compiler)
     - [How can I specify an include?](#how-can-i-specify-an-include)
