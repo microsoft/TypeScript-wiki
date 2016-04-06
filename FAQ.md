@@ -1105,6 +1105,15 @@ To avoid this error:
 1. Export the declarations used in the type in question
 2. Specify an explicit type annotation for the compiler to use when writing declarations.
 
+### Why does `--outDir` moves output after adding a new file?
+
+`--outDir` specifies the "root" directory of the output.
+The compiler needs a "root" directory in the source to mirror into the output directory.
+If `--rootDir` is not specified, the compiler will compute one; this is based on a common path calculation, which is the longest common prefix of all your input files.
+Obviously this changes with adding a new file to the compilation that has a shorter path prefix.
+
+To ensure the output does not change with adding new files specify `--rootDir` on the command-line or in your tsconfig.json.
+
 ## `tsconfig.json` Behavior
 
 ### Why does a file in `exclude` list is still picked up by the compiler
