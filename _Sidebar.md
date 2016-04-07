@@ -18,7 +18,7 @@
 * [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
 * [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md)
 * [JSX](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/JSX.md)
-* [Writing Definition Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)
+* [Writing Declaration Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Declaration%20Files.md)
 * [Typings for NPM packages](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Typings%20for%20NPM%20Packages.md)
 
 **News**
