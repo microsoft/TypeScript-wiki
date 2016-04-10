@@ -826,30 +826,18 @@ function isReallyInstanceOf<T>(ctor: { new(...args: any) => T }, obj: T) {
 > ```
 
 TypeScript assumes that module imports do not have side effects, so it removes module imports that aren't used in any *expression*.
-Depending on your exact scenario, there are a few workarounds.
 
-You can simply reference the module. This is the most universal workaround. A single use will do:
+Use `import "mod"` syntax to force the module to be loaded.
+
+```ts
+import "./myMod"; // For side effects
+```
+
+You can also simply reference the module. This is the most universal workaround. A single use will do:
 
 ```ts
 import someModule = require('./myMod');
 someModule; // Used for side effects
-```
-
-If you're using CommonJS (typically with Node), you can use `require` directly while still using the import for type information:
-```ts
-import _someModule = require('./myMod');
-const someModule: typeof _someModule = require('./myMod');
-```
-
-If you're using CommonJS and *don't* need type information, you can just invoke `require`:
-```ts
-require('./myMod');
-```
-
-If you're using AMD, you can use the `amd-depedency` tag:
-```ts
-/// <amd-depedency path="./myMod" />
-import someModule = require('./myMod');
 ```
 
 ### Why don't namespaces merge across different module files?
