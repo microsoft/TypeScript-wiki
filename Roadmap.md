@@ -23,7 +23,7 @@
 * Support [`abstract` properties](https://github.com/Microsoft/TypeScript/issues/4669)
 * Support for [declaration output folder using `--declarationDir`](https://github.com/Microsoft/TypeScript/issues/6723)
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
-* [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494)
+* [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494) and new [`--lib`](https://github.com/Microsoft/TypeScript/issues/6974) support
 * Support for [UMD module definitions](https://github.com/Microsoft/TypeScript/issues/7125)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
