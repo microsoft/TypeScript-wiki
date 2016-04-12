@@ -23,5 +23,5 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [Declaration Merging](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Declaration%20Merging.md)
 * [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
 * [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md)
-* [Writing Definition (`.d.ts`) Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)
+* [Writing Declaration (`.d.ts`) Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Declaration%20Files.md)
 * [JSX](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/JSX.md)
