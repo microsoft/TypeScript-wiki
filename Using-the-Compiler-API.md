@@ -470,7 +470,7 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
     for (const sourceFile of program.getSourceFiles()) {
         // Walk the tree to search for classes
         ts.forEachChild(sourceFile, visit);
-    });
+    };
 
     // print out the doc
     fs.writeFileSync("classes.json", JSON.stringify(output, undefined, 4));
