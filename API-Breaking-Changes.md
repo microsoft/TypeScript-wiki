@@ -1,3 +1,7 @@
+# TypeScript 1.9
+
+- `LanguageService.getSourceFile` is removed (https://github.com/Microsoft/TypeScript/pull/7584), `LanguageService.getProgram().getSourceFile` should be used instead.
+
 # TypeScript 1.7
 
 - `ts.parseConfigFile` has been renamed to `ts.parseJsonConfigFileContent`
