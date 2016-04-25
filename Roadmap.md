@@ -16,6 +16,8 @@
 
 # 2.0
 
+* [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
+* [Control flow based type analysis](https://github.com/Microsoft/TypeScript/pull/8010)
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
 * [Implicit index signatures](https://github.com/Microsoft/TypeScript/pull/7029)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
@@ -27,7 +29,6 @@
 * Support for [UMD module definitions](https://github.com/Microsoft/TypeScript/issues/7125)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
-* [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
 * [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
