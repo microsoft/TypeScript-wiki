@@ -519,7 +519,7 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
     /** Serialize a signature (call or construct) */
     function serializeSignature(signature: ts.Signature) {
         return {
-            paramters: signature.parameters.map(serializeSymbol),
+            parameters: signature.parameters.map(serializeSymbol),
             returnType: checker.typeToString(signature.getReturnType()),
             documentation: ts.displayPartsToString(signature.getDocumentationComment())
         };
@@ -552,7 +552,7 @@ Passing an input like:
 class C { 
     /** 
      * constructor documentation
-     * @param a my paramter documentation
+     * @param a my parameter documentation
      * @param b another parameter documentation
      */
     constructor(a: string, b: C) { }
@@ -569,10 +569,10 @@ We should get output like:
         "type": "typeof C",
         "constructors": [
             {
-                "paramters": [
+                "parameters": [
                     {
                         "name": "a",
-                        "documentation": "my paramter documentation",
+                        "documentation": "my parameter documentation",
                         "type": "string"
                     },
                     {
