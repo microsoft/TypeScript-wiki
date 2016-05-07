@@ -14,6 +14,9 @@ Please note that the names and locations of the folders are pertinent to get the
 To add a `tsconfig.json` file, simply right click on the `scripts` folder, navigate to `Add`, then `New Item`.
 Under `Client-side`, you can find it, as can be seen below.
 
+*Note:* Since Visual Studio 2015 Update 1 RC, we also support adding the [`tsconfig.json`](tsconfig.json.md) file
+to the root of your project. Take care to adjust the `outDir` property appropriately.
+
 ![Adding a 'tsconfig.json' file in Visual Studio](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/add-tsconfig.png)
  
 ![A project in Visual Studio's Solution Explorer](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/project.png)
@@ -51,10 +54,3 @@ TypeScript files that are *outside* of the folder containing `tsconfig.json` are
 In the image below, the virtual project can be visualized, and is the that which is contained within the red rectangle.
 
 ![A virtual project in Visual Studio's Solution Explorer](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/virtual-project.png)
-
-## Compile on Save
-
-In order to enable *Compile on Save* for ASP.NET v5 projects, you have to enable *Compile on Save* for TypeScript files which are not part of a virtual TypeScript project.
-The setting for the selected module type in that dialog will be ignored if a `tsconfig.json` file is part of the project.
-
-![Compile on Save](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/aspnet-screenshots/compile-on-save.png)
