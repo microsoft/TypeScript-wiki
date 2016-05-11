@@ -582,7 +582,7 @@ Asynchronous functions are prefixed with the `async` keyword; `await` suspends t
 
 ##### Example
 
-In the following example, each input element will be printed out one at a time with a 400ms delay:
+In the following example, each input element will be printed out one at a time with a 200ms delay:
 
 ```ts
 "use strict";
