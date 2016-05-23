@@ -38,6 +38,7 @@
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * Decorators for function expressions/arrow functions
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
+* [`--skipLibCheck` compiler option](https://github.com/Microsoft/TypeScript/pull/8735)
 
 # 1.8
 
