@@ -423,11 +423,16 @@ Parameter names in function types are required.
 The code as written describes a function taking one parameter named `number` of type `any`.
 In other words, this declaration
 ```ts
-let myFunc: (number) => string
+let myFunc: (number) => string;
 ```
 is equivalent to this one
 ```ts
-let myFunc: (number: any) => string
+let myFunc: (number: any) => string;
+```
+
+You should instead write:
+```ts
+let myFunc: (myArgName: number) => string;
 ```
 
 To avoid this problem, turn on the `noImplicitAny` flag, which will issue a warning about the implicit `any` parameter type.
