@@ -39,6 +39,7 @@
 * Decorators for function expressions/arrow functions
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 * [`--skipLibCheck` compiler option](https://github.com/Microsoft/TypeScript/pull/8735)
+* [Trailing Commas in Function Param Lists](https://github.com/Microsoft/TypeScript/issues/7279)
 
 # 1.8
 
