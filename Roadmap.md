@@ -40,6 +40,7 @@
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 * [`--skipLibCheck` compiler option](https://github.com/Microsoft/TypeScript/pull/8735)
 * [Trailing Commas in Function Param Lists](https://github.com/Microsoft/TypeScript/issues/7279)
+* [Completion lists for string literals](https://github.com/Microsoft/TypeScript/issues/606)
 
 # 1.8
 
