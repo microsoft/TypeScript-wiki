@@ -41,6 +41,7 @@
 * [`--skipLibCheck` compiler option](https://github.com/Microsoft/TypeScript/pull/8735)
 * [Trailing Commas in Function Param Lists](https://github.com/Microsoft/TypeScript/issues/7279)
 * [Completion lists for string literals](https://github.com/Microsoft/TypeScript/issues/606)
+* [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
 
 # 1.8
 
