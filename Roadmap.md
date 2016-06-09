@@ -13,6 +13,7 @@
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * Refactoring support in Language Service API
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
+* [Shorthand ambient module declarations and wildcard matching in module names](https://github.com/Microsoft/TypeScript/issues/6615)
 
 # 2.0
 
