@@ -13,7 +13,6 @@
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * Refactoring support in Language Service API
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
-* [Shorthand ambient module declarations and wildcard matching in module names](https://github.com/Microsoft/TypeScript/issues/6615)
 
 # 2.0
 
@@ -43,6 +42,7 @@
 * [Trailing Commas in Function Param Lists](https://github.com/Microsoft/TypeScript/issues/7279)
 * [Completion lists for string literals](https://github.com/Microsoft/TypeScript/issues/606)
 * [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
+* [Shorthand ambient module declarations and wildcard matching in module names](https://github.com/Microsoft/TypeScript/issues/6615)
 
 # 1.8
 
