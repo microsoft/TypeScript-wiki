@@ -44,6 +44,7 @@
 * [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
 * [Shorthand ambient module declarations and wildcard matching in module names](https://github.com/Microsoft/TypeScript/issues/6615)
 * Support for [jsdoc `@typedef`](https://github.com/Microsoft/TypeScript/pull/8103) for JS files
+* [Support 'target:es5' with 'module:es6' ](https://github.com/Microsoft/TypeScript/issues/6319)
 
 # 1.8
 
