@@ -13,6 +13,9 @@
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * Refactoring support in Language Service API
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
+* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+* Decorators for function expressions/arrow functions
+* [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 
 # 2.0
 
@@ -42,9 +45,6 @@
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
-* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
-* Decorators for function expressions/arrow functions
-* [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
 
 # 1.8
 
