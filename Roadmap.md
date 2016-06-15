@@ -19,33 +19,33 @@
 * [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * [Control flow based type analysis](https://github.com/Microsoft/TypeScript/pull/8010)
 * [Discriminated union types](https://github.com/Microsoft/TypeScript/pull/9163)
+* [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
+* [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
-* [Implicit index signatures](https://github.com/Microsoft/TypeScript/pull/7029)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
+* [Shorthand ambient module declarations and wildcard matching in module names](https://github.com/Microsoft/TypeScript/issues/6615)
+* [Implicit index signatures](https://github.com/Microsoft/TypeScript/pull/7029)
 * Support [private and protected constructors](https://github.com/Microsoft/TypeScript/pull/6885)
 * Support [`abstract` properties](https://github.com/Microsoft/TypeScript/issues/4669)
 * [Optional properties in classes](https://github.com/Microsoft/TypeScript/pull/8625)
 * [The `never` type](https://github.com/Microsoft/TypeScript/pull/8652)
+* [`--skipLibCheck` compiler option](https://github.com/Microsoft/TypeScript/pull/8735)
 * Support for [declaration output folder using `--declarationDir`](https://github.com/Microsoft/TypeScript/issues/6723)
-* [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
+* [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
 * [Improve lib.d.ts modularity](https://github.com/Microsoft/TypeScript/issues/494) and new [`--lib`](https://github.com/Microsoft/TypeScript/issues/6974) support
 * Support for [UMD module definitions](https://github.com/Microsoft/TypeScript/issues/7125)
+* [Trailing Commas in Function Param Lists](https://github.com/Microsoft/TypeScript/issues/7279)
+* Support for [jsdoc `@typedef`](https://github.com/Microsoft/TypeScript/pull/8103) for JS files
+* [Completion lists for string literals](https://github.com/Microsoft/TypeScript/issues/606)
+* [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
+* [Support 'target:es5' with 'module:es6' ](https://github.com/Microsoft/TypeScript/issues/6319)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
-* [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
-* [Glob support in tsconfig.json](https://github.com/Microsoft/TypeScript/issues/1927)
 * tsd integration in tsserver/language service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * Decorators for function expressions/arrow functions
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
-* [`--skipLibCheck` compiler option](https://github.com/Microsoft/TypeScript/pull/8735)
-* [Trailing Commas in Function Param Lists](https://github.com/Microsoft/TypeScript/issues/7279)
-* [Completion lists for string literals](https://github.com/Microsoft/TypeScript/issues/606)
-* [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
-* [Shorthand ambient module declarations and wildcard matching in module names](https://github.com/Microsoft/TypeScript/issues/6615)
-* Support for [jsdoc `@typedef`](https://github.com/Microsoft/TypeScript/pull/8103) for JS files
-* [Support 'target:es5' with 'module:es6' ](https://github.com/Microsoft/TypeScript/issues/6319)
 
 # 1.8
 
