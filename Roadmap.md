@@ -42,7 +42,6 @@
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
-* tsd integration in tsserver/language service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * Decorators for function expressions/arrow functions
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
