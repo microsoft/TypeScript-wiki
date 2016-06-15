@@ -18,6 +18,7 @@
 
 * [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * [Control flow based type analysis](https://github.com/Microsoft/TypeScript/pull/8010)
+* [Discriminated union types](https://github.com/Microsoft/TypeScript/pull/9163)
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
 * [Implicit index signatures](https://github.com/Microsoft/TypeScript/pull/7029)
 * [Use path mappings in module resolution](https://github.com/Microsoft/TypeScript/issues/5039)
