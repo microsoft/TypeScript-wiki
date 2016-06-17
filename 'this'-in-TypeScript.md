@@ -104,7 +104,7 @@ someCallback((n, m) => x.doSomething(n, m));
 ### Function.bind
 ```ts
 var x = new SomeClass();
-// SAFE: Functions created from function.bind are always preserve 'this'
+// SAFE: Functions created from function.bind always preserve 'this'
 window.setTimeout(x.someMethod.bind(x), 100);
 ```
 
