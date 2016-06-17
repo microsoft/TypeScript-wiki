@@ -24,7 +24,8 @@ It checks whether a symbol has an entry in the merged-symbols table each time be
 
 # Parser
 
-It's a recursive descent parser. It's pretty resilient, so if you search for functions matching the thing you want to change, you can probably get away with just adding the code to parse.
+It's a recursive descent parser.
+It's pretty resilient to small changes, so if you search for function names matching the thing you want to change, you can probably get away with not having to think about the whole parser.
 There aren't any surprises in the general implementation style here.
 
 ## Incremental parsing
