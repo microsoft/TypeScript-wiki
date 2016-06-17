@@ -36,10 +36,14 @@ There aren't any surprises in the general implementation style here.
 
 ## JSDoc parsing
 
+# Binder
+
 # Checker
 
 The checker is almost 20,000 lines long, and does almost everything that's not syntactic.
-Surprisingly, a checker gets created every time the language service requests information because it tries to present an immutable interface.
+Since the semantics of a entire program can change dramatically with a couple of keystrokes (e.g. renaming a class), a new checker gets created every time the language service requests information.
+Creating a checker is cheap, though, because the compiler as a whole is so lazy.
+You just have to create some basic types and get the binder to build the global symbol table.
 
 ## Grammatical checking
 
@@ -62,6 +66,3 @@ There is still a small printer that writes any AST back to text.
 ## Sourcemap generation
 
 # Language service
-
-The language service provides an API for clients to provide edit-time information about a program.
-Point it at a directory and it will maintain compilation information about the source in that directory.
