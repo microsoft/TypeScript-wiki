@@ -1,8 +1,11 @@
-**NOTE: These are Coding Guidelines for TypeScript Contributors**
+**NOTE: These are Coding Guidelines for TypeScript Contributors.**
 
-While **these guidelines are mainly meant for contributors to the TypeScript project**, certain suggestions apply as to how idiomatic TypeScript code should be written (e.g. the "Names" and "Style" sections).
+While these guidelines are mainly **meant for contributors to the TypeScript project**, certain suggestions apply as to how idiomatic TypeScript code should be written (e.g. the "Names" and "Style" sections).
+
+**Please do not file issues about these guidelines.**
 
 ## Names
+
 1. Use PascalCase for type names.
 2. Do not use "I" as a prefix for interface names.
 3. Use PascalCase for enum values.
