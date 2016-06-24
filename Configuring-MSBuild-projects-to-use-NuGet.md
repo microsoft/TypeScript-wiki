@@ -16,7 +16,7 @@ This is generally already installed on your computer, but you can verify that wi
 * When install is complete, rebuild!
 
 
-## For Nightly dorps (https://www.myget.org)
+## For Nightly drops (https://www.myget.org)
 
 1. Add a new Package Source 
  * Go to `Tools` -> `Options` -> `NuGet Package Manager` -> `Package Sources`
