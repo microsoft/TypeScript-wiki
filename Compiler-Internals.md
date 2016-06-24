@@ -24,7 +24,7 @@ It checks whether a symbol has an entry in the merged-symbols table each time be
 
 # Parser
 
-It's a recursive descent parser.
+The parser is a recursive descent parser.
 It's pretty resilient to small changes, so if you search for function names matching the thing you want to change, you can probably get away with not having to think about the whole parser.
 There aren't any surprises in the general implementation style here.
 
@@ -40,7 +40,7 @@ There aren't any surprises in the general implementation style here.
 
 # Checker
 
-The checker is almost 20,000 lines long, and does almost everything that's not syntactic.
+The checker is almost 20,000 lines long, and does almost everything that's not syntactic -- it's the second of two semantic passes, after binding, which is the first semantic pass.
 Since the semantics of a entire program can change dramatically with a couple of keystrokes (e.g. renaming a class), a new checker gets created every time the language service requests information.
 Creating a checker is cheap, though, because the compiler as a whole is so lazy.
 You just have to create some basic types and get the binder to build the global symbol table.
