@@ -1,5 +1,186 @@
 # TypeScript 2.0
 
+## Null- and undefined-aware types
+
+TypeScript has two special types, Null and Undefined, that have the values `null` and `undefined` respectively.
+Previously it was not possible to explicitly name these types, but `null` and `undefined` may now be used as type names regardless of type checking mode.
+
+The type checker previously considered `null` and `undefined` assignable to anything.
+Effectively, `null` and `undefined` were valid values of *every* type and it wasn't possible to specifically exclude them (and therefore not possible to detect erroneous use of them).
+
+### `--strictNullChecks`
+
+`--strictNullChecks` switchs in a new strict null checking mode.
+
+In strict null checking mode, the `null` and `undefined` values are *not* in the domain of every type and are only assignable to themselves and `any` (the one exception being that `undefined` is also assignable to `void`).
+So, whereas `T` and `T | undefined` are considered synonymous in regular type checking mode (because `undefined` is considered a subtype of any `T`), they are different types in strict type checking mode, and only `T | undefined` permits `undefined` values. The same is true for the relationship of `T` to `T | null`.
+
+#### Example
+
+```ts
+// Compiled with --strictNullChecks
+let x: number;
+let y: number | undefined;
+let z: number | null | undefined;
+x = 1;  // Ok
+y = 1;  // Ok
+z = 1;  // Ok
+x = undefined;  // Error
+y = undefined;  // Ok
+z = undefined;  // Ok
+x = null;  // Error
+y = null;  // Error
+z = null;  // Ok
+x = y;  // Error
+x = z;  // Error
+y = x;  // Ok
+y = z;  // Error
+z = x;  // Ok
+z = y;  // Ok
+```
+
+### Assigned-before-use checking
+
+In strict null checking mode the compiler requires every reference to a local variable of a type that doesn't include `undefined` to be preceded by an assignment to that variable in every possible preceding code path.
+
+#### Example
+
+```ts
+// Compiled with --strictNullChecks
+let x: number;
+let y: number | null;
+let z: number | undefined;
+x;  // Error, reference not preceded by assignment
+y;  // Error, reference not preceded by assignment
+z;  // Ok
+x = 1;
+y = null;
+x;  // Ok
+y;  // Ok
+```
+
+The compiler checks that variables are definitely assigned by performing *control flow based type analysis*. See later for further details on this topic.
+
+### Optional parameters and properties
+
+Optional parameters and properties automatically have `undefined` added to their types, even when their type annotations don't specifically include `undefined`.
+For example, the following two types are identical:
+
+```ts
+// Compiled with --strictNullChecks
+type T1 = (x?: number) => string;              // x has type number | undefined
+type T2 = (x?: number | undefined) => string;  // x has type number | undefined
+```
+
+### Non-null and non-undefined type guards
+
+A property access or a function call produces a compile-time error if the object or function is of a type that includes `null` or `undefined`. 
+However, type guards are extended to support non-null and non-undefined checks. 
+
+#### Example
+
+```ts
+// Compiled with --strictNullChecks
+declare function f(x: number): string;
+let x: number | null | undefined;
+if (x) {
+    f(x);  // Ok, type of x is number here
+}
+else {
+    f(x);  // Error, type of x is number? here
+}
+let a = x != null ? f(x) : "";  // Type of a is string
+let b = x && f(x);  // Type of b is string?
+```
+
+Non-null and non-undefined type guards may use the `==`, `!=`, `===`, or `!==` operator to compare to `null` or `undefined`, as in `x != null` or `x === undefined`.
+The effects on subject variable types accurately reflect JavaScript semantics (e.g. double-equals operators check for both values no matter which one is specified whereas triple-equals only checks for the specified value).
+
+### Dotted names in type guards
+
+Type guards previously only supported checking local variables and parameters. 
+Type guards now support checking "dotted names" consisting of a variable or parameter name followed one or more property accesses. 
+
+#### Example
+
+```ts
+interface Options {
+    location?: {
+        x?: number;
+        y?: number;
+    };
+}
+
+function foo(options?: Options) {
+    if (options && options.location && options.location.x) {
+        const x = options.location.x;  // Type of x is number
+    }
+}
+```
+
+Type guards for dotted names also work with user defined type guard functions and the `typeof` and `instanceof` operators and do not depend on the `--strictNullChecks` compiler option.
+
+A type guard for a dotted name has no effect following an assignment to any part of the dotted name.
+For example, a type guard for `x.y.z` will have no effect following an assignment to `x`, `x.y`, or `x.y.z`.
+
+### Expression operators
+
+Expression operators permit operand types to include `null` and/or `undefined` but always produce values of non-null and non-undefined types.
+
+```ts
+// Compiled with --strictNullChecks
+function sum(a: number | null, b: number | null) {
+    return a + b;  // Produces value of type number
+}
+```
+
+The `&&` operator adds `null` and/or `undefined` to the type of the right operand depending on which are present in the type of the left operand, and the `||` operator removes both `null` and `undefined` from the type of the left operand in the resulting union type.
+
+```ts
+// Compiled with --strictNullChecks
+interface Entity {
+    name: string;
+}
+let x: Entity | null;
+let s = x && x.name;  // s is of type string | null
+let y = x || { name: "test" };  // y is of type Entity
+```
+
+### Type widening
+
+The `null` and `undefined` types are *not* widened to `any` in strict null checking mode.
+
+```ts
+let z = null;  // Type of z is null
+```
+
+In regular type checking mode the inferred type of `z` is `any` because of widening, but in strict null checking mode the inferred type of `z` is `null` (and therefore, absent a type annotation, `null` is the only possible value for `z`).
+
+### Non-null assertion operator
+
+A new `!` post-fix expression operator may be used to assert that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact.
+Specifically, the operation `x!` produces a value of the type of `x` with `null` and `undefined` excluded.
+Similar to type assertions of the forms `<T>x` and `x as T`, the `!` non-null assertion operator is simply removed in the emitted JavaScript code.
+
+```ts
+// Compiled with --strictNullChecks
+function validateEntity(e: Entity?) {
+    // Throw exception if e is null or invalid entity
+}
+
+function processEntity(e: Entity?) {
+    validateEntity(e);
+    let s = e!.name;  // Assert that e is non-null and access name
+}
+```
+
+### Compatibility
+
+The new features are designed such that they can be used in both strict null checking mode and regular type checking mode.
+In particular, the `null` and `undefined` types are automatically erased from union types in regular type checking mode (because they are subtypes of all other types), and the `!` non-null assertion expression operator is permitted but has no effect in regular type checking mode. Thus, declaration files that are updated to use null- and undefined-aware types can still be used in regular type checking mode for backwards compatibility.
+
+In practical terms, strict null checking mode requires that all files in a compilation are null- and undefined-aware. 
+
 ## The `never` type
 
 TypeScript 2.0 introduces a new primitive type `never`.
