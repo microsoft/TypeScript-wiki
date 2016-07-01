@@ -1,10 +1,55 @@
 # TypeScript 2.0
 
+## Specifying the type of `this` for functions
+
+Following up on specifying the type of `this` in a class or an interface, functions and methods can now declare the type of `this` they expect.
+
+By default the type of `this` inside a function is `any`.
+Starting with TypeScript 2.0, you can provide an explicit `this` parameter.
+`this` parameters are fake parameters that come first in the parameter list of a function:
+
+```ts
+function f(this: void) {
+    // make sure `this` is unusable in this standalone function
+}
+```
+That means that `this` is of type `Deck` now, not `any`, so `--noImplicitThis` will not cause any errors.
+
+### `this` parameters in callbacks
+
+Libraries can also use `this` parameters to declare how callbacks will be invoked.
+
+#### Example
+
+```ts
+interface UIElement {
+    addClickListener(onclick: (this: void, e: Event) => void): void;
+}
+```
+
+`this: void` means that `addClickListener` expects `onclick` to be a function that does not require a `this` type.
+
+Now if you annotate calling code with `this`:
+
+```ts
+class Handler {
+    info: string;
+    onClickBad(this: Handler, e: Event) {
+        // oops, used this here. using this callback would crash at runtime
+        this.info = e.message;
+    };
+}
+let h = new Handler();
+uiElement.addClickListener(h.onClickBad); // error!
+```
+
+### `--noImplicitThis`
+
+A new flag is also added in TypeScript 2.0 to flag all uses of `this` in functions without an explicit type annotation.
+
 ## Glob support in `tsconfig.json`
 
-Glob support is here!! 
-
-Glob support has been [one of the most requested features](https://github.com/Microsoft/TypeScript/issues/1927).
+Glob support is here!! Glob support has been [one of the most requested features](https://github.com/Microsoft/TypeScript/issues/1927).
 
 Glob-like file patterns are supported two properties `"include"` and `"exclude"`.
 
