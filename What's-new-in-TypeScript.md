@@ -1,5 +1,55 @@
 # TypeScript 2.0
 
+## Read-only properties and index signatures
+
+A property or index signature can now be declared with the `readonly` modifier is considered read-only.
+
+Read-only properties may have initializers and may be assigned to in constructors within the same class declaration, but otherwise assignments to read-only properties are disallowed.
+
+In addition, entities are *implicitly* read-only in several situations:
+
+* A property declared with a `get` accessor and no `set` accessor is considered read-only.
+* In the type of an enum object, enum members are considered read-only properties.
+* In the type of a module object, exported `const` variables are considered read-only properties.
+* An entity declared in an `import` statement is considered read-only.
+* An entity accessed through an ES2015 namespace import is considered read-only (e.g. `foo.x` is read-only when `foo` is declared as `import * as foo from "foo"`).
+
+#### Example
+
+```ts
+interface Point {
+    readonly x: number;
+    readonly y: number;
+}
+
+var p1: Point = { x: 10, y: 20 };
+p1.x = 5;  // Error, p1.x is read-only
+
+var p2 = { x: 1, y: 1 };
+var p3: Point = p2;  // Ok, read-only alias for p2
+p3.x = 5;  // Error, p3.x is read-only
+p2.x = 5;  // Ok, but also changes p3.x because of aliasing
+```
+
+```ts
+class Foo {
+    readonly a = 1;
+    readonly b: string;
+    constructor() {
+        this.b = "hello";  // Assignment permitted in constructor
+    }
+}
+```
+
+```ts
+let a: Array<number> = [0, 1, 2, 3, 4];
+let b: ReadonlyArray<number> = a;
+b[5] = 5;      // Error, elements are read-only
+b.push(5);     // Error, no push method (because it mutates array)
+b.length = 3;  // Error, length is read-only
+a = b;         // Error, mutating methods are missing
+```
+
 ## Specifying the type of `this` for functions
 
 Following up on specifying the type of `this` in a class or an interface, functions and methods can now declare the type of `this` they expect.
