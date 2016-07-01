@@ -181,6 +181,119 @@ In particular, the `null` and `undefined` types are automatically erased from un
 
 In practical terms, strict null checking mode requires that all files in a compilation are null- and undefined-aware. 
 
+## Control flow based type analysis
+
+TypeScript 2.0 implements a control flow-based type analysis for local variables and parameters.
+Previously, the type analysis performed for type guards was limited to `if` statements and `?:` conditional expressions and didn't include effects of assignments and control flow constructs such as `return` and `break` statements.
+With TypeScript 2.0, the type checker analyses all possible flows of control in statements and expressions to produce the most specific type possible (the *narrowed type*) at any given location for a local variable or parameter that is declared to have a union type.
+
+#### Example
+
+```ts
+function foo(x: string | number | boolean) {
+    if (typeof x === "string") {
+        x; // type of x is string here
+        x = 1;
+        x; // type of x is number here
+    }
+    x; // type of x is number | boolean here
+}
+
+function bar(x: string | number) {
+    if (typeof x === "number") {
+        return;
+    }
+    x; // type of x is string here
+}
+```
+
+Control flow based type analysis is particuarly relevant in `--strictNullChecks` mode because nullable types are represented using union types:
+
+```ts
+function test(x: string | null) {
+    if (x === null) {
+        return;
+    }
+    x; // type of x is string in remainder of function
+}
+```
+
+Furthermore, in `--strictNullChecks` mode, control flow based type analysis includes *definite assignment analysis* for local variables of types that don't permit the value `undefined`.
+
+```ts
+function mumble(check: boolean) {
+    let x: number; // Type doesn't permit undefined
+    x; // Error, x is undefined
+    if (check) {
+        x = 1;
+        x; // Ok
+    }
+    x; // Error, x is possibly undefined
+    x = 2;
+    x; // Ok
+}
+```
+
+## Tagged union types
+
+TypeScript 2.0 implements support for tagged (or discriminated) union types. 
+Specifically, the TS compiler now support type guards that narrow union types based on tests of a discriminant property and furthermore extend that capability to `switch` statements.
+
+#### Example
+
+```ts
+interface Square {
+    kind: "square";
+    size: number;
+}
+
+interface Rectangle {
+    kind: "rectangle";
+    width: number;
+    height: number;
+}
+
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type Shape = Square | Rectangle | Circle;
+
+function area(s: Shape) {
+    // In the following switch statement, the type of s is narrowed in each case clause
+    // according to the value of the discriminant property, thus allowing the other properties
+    // of that variant to be accessed without a type assertion.
+    switch (s.kind) {
+        case "square": return s.size * s.size;
+        case "rectangle": return s.width * s.height;
+        case "circle": return Math.PI * s.radius * s.radius;
+    }
+}
+
+function test1(s: Shape) {
+    if (s.kind === "square") {
+        s;  // Square
+    }
+    else {
+        s;  // Rectangle | Circle
+    }
+}
+
+function test2(s: Shape) {
+    if (s.kind === "square" || s.kind === "rectangle") {
+        return;
+    }
+    s;  // Circle
+}
+```
+
+A *discriminant property type guard* is an expression of the form `x.p == v`, `x.p === v`, `x.p != v`, or `x.p !== v`, where `p` and `v` are a property and an expression of a string literal type or a union of string literal types.
+The discriminant property type guard narrows the type of `x` to those constituent types of `x` that have a discriminant property `p` with one of the possible values of `v`.
+
+Note that we currently only support discriminant properties of string literal types. 
+We intend to later add support for boolean and numeric literal types.
+
 ## The `never` type
 
 TypeScript 2.0 introduces a new primitive type `never`.
