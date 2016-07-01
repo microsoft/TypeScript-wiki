@@ -1,5 +1,80 @@
 # TypeScript 2.0
 
+## The `never` type
+
+TypeScript 2.0 introduces a new primitive type `never`.
+The `never` type represents the type of values that never occur. 
+Specifically, `never` is the return type for functions that never return and `never` is the type of variables under type guards that are never true. 
+
+The `never` type has the following characteristics:
+
+* `never` is a subtype of and assignable to every type.
+* No type is a subtype of or assignable to `never` (except `never` itself).
+* In a function expression or arrow function with no return type annotation, if the function has no `return` statements, or only `return` statements with expressions of type `never`, and if the end point of the function is not reachable (as determined by control flow analysis), the inferred return type for the function is `never`.
+* In a function with an explicit `never` return type annotation, all `return` statements (if any) must have expressions of type `never` and the end point of the function must not be reachable.
+
+Because `never` is a subtype of every type, it is always omitted from union types and it is ignored in function return type inference as long as there are other types being returned.
+
+Some examples of functions returning `never`:
+
+```ts
+// Function returning never must have unreachable end point
+function error(message: string): never {
+    throw new Error(message);
+}
+
+// Inferred return type is never
+function fail() {
+    return error("Something failed");
+}
+
+// Function returning never must have unreachable end point
+function infiniteLoop(): never {
+    while (true) {
+    }
+}
+```
+
+Some examples of use of functions returning `never`:
+
+```ts
+// Inferred return type is number
+function move1(direction: "up" | "down") {
+    switch (direction) {
+        case "up":
+            return 1;
+        case "down":
+            return -1; 
+    }
+    return error("Should never get here");
+}
+
+// Inferred return type is number
+function move2(direction: "up" | "down") {
+    return direction === "up" ? 1 :
+        direction === "down" ? -1 :
+        error("Should never get here");
+}
+
+// Inferred return type is T
+function check<T>(x: T | undefined) {
+    return x || error("Undefined value");
+}
+```
+
+Because `never` is assignable to every type, a function returning `never` can be used when a callback returning a more specific type is required:
+
+```ts
+function test(cb: () => string) {
+    let s = cb();
+    return s;
+}
+
+test(() => "hello");
+test(() => fail());
+test(() => { throw new Error(); })
+```
+
 ## Read-only properties and index signatures
 
 A property or index signature can now be declared with the `readonly` modifier is considered read-only.
