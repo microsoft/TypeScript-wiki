@@ -401,6 +401,48 @@ httpService("", { "Content-Type": "application/x-www-form-urlencoded" });  // Ok
 httpService("", headers);  // Now ok, previously wasn't
 ```
 
+## Including built-in type declarations with `--lib`
+
+Getting to ES6/ES2015 built-in API declarations were only limited to `target: ES6`.
+Enter `--lib`; with `--lib` you can specify a list of built-in API declaration groups that you can chose to include in your project.
+For instance, if you expect your runtime to have support for `Map`, `Set` and `Promise` (e.g. most evergreen browsers today), just include `--lib es2015.collection,es2015.promise`.
+Similarly you can exclude declarations you do not want to include in your project, e.g. DOM if you are working on a node project using `--lib es5,es6`.
+
+Here is a list of available API groups:
+
+* dom
+* webworker
+* es5
+* es6 / es2015
+* es2015.core
+* es2015.collection
+* es2015.iterable
+* es2015.promise
+* es2015.proxy
+* es2015.reflect
+* es2015.generator
+* es2015.symbol
+* es2015.symbol.wellknown
+* es2016
+* es2016.array.include
+* es2017
+* es2017.object
+* es2017.sharedmemory
+* scripthost
+
+
+#### Example
+
+```bash
+tsc --target es5 --lib es5,es6.promise
+```
+
+```json
+"compilerOptions": {
+    "lib": ["es5", "es6.promise"]
+}
+```
+
 ## Flag unused declarations with `--noUnusedParameters` and `--noUnusedLocals` 
 
 TypeScript 2.0 has two new flags to help you maintain a clean code base.
