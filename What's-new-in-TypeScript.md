@@ -914,6 +914,31 @@ Since declarations in one file can affect type checking in other files, some err
 For example, if a non-declaration file augments a type declared in a declaration file, errors may result that are only reported when the declaration file is checked. 
 However, in practice such situations are rare.
 
+## Allow duplicate identifiers across declarations
+
+This has been one common source of duplicate definition errors.
+Multiple declaration files defining the same members on interfaces.
+
+TypeScript 2.0 relaxes this constraint and allows duplicate identifiers across blocks, as long as they have *identical* types.
+
+Within the same block duplicate definitions are still disallowed.
+
+#### Example
+
+```ts
+interface Error {
+    stack?: string;
+}
+
+
+interface Error {
+    code?: string;
+    path?: string;
+    stack?: string;  // OK
+}
+
+```
+
 ## New `--declarationDir`
 
 `--declarationDir` allows for generating declaration files in a different location than JavaScript files.
