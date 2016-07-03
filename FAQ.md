@@ -194,7 +194,7 @@ As you can see here, the relevant question *Is the type `(x: Dog) => number` ass
 being asked when we were passing a possibly-too-specific callback to a function.
 
 In summary, in the TypeScript type system, the question of *whether a more-specific-type-accepting function should be assignable to a
-function accpting a less-specific type* provides a prerequisite answer to whether an *array* of that more specific type should be assignable
+function accepting a less-specific type* provides a prerequisite answer to whether an *array* of that more specific type should be assignable
 to an array of a less specific type. Having the latter *not* be the case would not be an acceptable type system in the vast majority of cases,
 so we have to take a correctness trade-off for the specific case of function argument types.
 
