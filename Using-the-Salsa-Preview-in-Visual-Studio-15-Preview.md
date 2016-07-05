@@ -32,7 +32,7 @@ To enable the new "Salsa" language service experience in Visual Studio "15" Prev
   2. Navigate to "Text Editor" > "JavaScript" > "Experimental".
   3. Enable the option titled "Enable the experimental JavaScript language service."
 
-<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/enable-salsa-dev15.png" height="407" width="652"/>
+<img src="https://raw.githubusercontent.com/Microsoft/TypeScript-wiki/master/images/enable-salsa-dev15.png" height="407" width="652" />
 
 ## Overview
 
