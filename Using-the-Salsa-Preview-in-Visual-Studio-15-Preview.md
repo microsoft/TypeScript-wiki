@@ -26,16 +26,13 @@ This change opens up several opportunities, such as:
  to be converted to JavaScript that runs on all of today's engines. 
  
 ## Enabling Salsa
-To enable the new "Salsa" language service experience in Visual Studio "15" Preview,
-save the below snippet as a local file named `salsa.reg`, open it to update the registry,
-and then restart Visual Studio. (Do the same with value `00000000` instead of `00000001` to disable at any point).
 
-```
-Windows Registry Editor Version 5.00
+To enable the new "Salsa" language service experience in Visual Studio "15" Preview 3: 
+  1. Open the `Tools > Options` dialog.
+  2. Navigate to "Text Editor" > "JavaScript" > "Experimental".
+  3. Enable the option titled "Enable the experimental JavaScript language service."
 
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\VisualStudio\15.0\TypeScriptLanguageService]
-"UseTypeScriptExperimental"=dword:00000001
-```
+<img src="https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/enable-salsa-dev15.png" height="407" width="652"/>
 
 ## Overview
 
