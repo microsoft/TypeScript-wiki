@@ -107,7 +107,7 @@ Because they have the same members with the same types, they are identical.
 
 This applies to subtype relationships as well.
 In C++, for example, you could only use a `Dog` in place of an `Animal` if `Animal` was explicitly in `Dog`'s class heritage.
-In TypeScript, this is not the case -- a `Dog` with at least as many members (with appropriate types) as `Animal` is a subtype of `Animal` regardless of explicit heritage.
+In TypeScript, this is not the case - a `Dog` with at least as many members (with appropriate types) as `Animal` is a subtype of `Animal` regardless of explicit heritage.
 
 This can have some surprising consequences for programmers accustomed to working in a nominally-typed language.
 Many questions in this FAQ trace their roots to structural typing and its implications.
@@ -158,44 +158,49 @@ See  [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion
  > function trainDog(d: Dog) { ... }
  > function cloneAnimal(source: Animal, done: (result: Animal) => void): void { ... }
  > let c = new Cat();
+ >
  > // Runtime error here occurs because we end up invoking 'trainDog' with a 'Cat'
  > cloneAnimal(c, trainDog);
  > ```
 
-This is a unsoundness resulting from the lack of explicit covariant / contravariant annotations in the type system.
+This is an unsoundness resulting from the lack of explicit covariant/contravariant annotations in the type system.
+Because of this omission, TypeScript must be more permissive when asked whether `(x: Dog) => void` is assignable to `(x: Animal) => void`.
 
-To see why this happens, consider two questions: Is `Dog[]` a subtype of `Animal[]` ? *Should* `Dog[]` be a subtype of `Animal[]`?
+To understand why, consider two questions: Is `Dog[]` a subtype of `Animal[]` ? *Should* `Dog[]` be a subtype of `Animal[]` in TypeScript?
 
-The second question (*should* `Dog[]` be a subtype of `Animal[]`?) is an easier one.
+The second question (*should* `Dog[]` be a subtype of `Animal[]`?) is an easier to analyze.
 What if the answer was "no" ?
+
 ```ts
-function checkAnimalsAreAwake(arr: Animal[]) { ... }
+function checkIfAnimalsAreAwake(arr: Animal[]) { ... }
 
 let myPets: Dog[] = [spot, fido];
+
 // Error? Can't substitute Dog[] for Animal[] ?
-checkAnimalsAreAwake(myPets);
+checkIfAnimalsAreAwake(myPets);
 ```
+
 This would be *incredibly annoying*.
-The code here is 100% correct.
-There's not a good reason to reject this program on the basis that `Dog[]` can't be used in place of `Animal[]` -- clearly a group of `Dog`s is a group of `Animal`s.
+The code here is 100% correct provided that `checkIfAnimalsAreAwake` doesn't modify the array.
+There's not a good reason to reject this program on the basis that `Dog[]` can't be used in place of `Animal[]` - clearly a group of `Dog`s is a group of `Animal`s here.
 
 Back to the first question.
-When the type system is *deciding* whether or not `Dog[]` is a subtype of `Animal[]`, it does the following computation (written here as if the compiler took no optimizations), among many others:
+When the type system decides whether or not `Dog[]` is a subtype of `Animal[]`, it does the following computation (written here as if the compiler took no optimizations), among many others:
 
  * Is `Dog[]` assignable to Animal[]` ?
   * Is each member of `Dog[]` assignable to `Animal[]` ?
-    * Is `Dog[].push` assignable to `Animal[].push` ?
+    * Is `Dog[].push` assignable to `Animal[].push`?
       * Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?
         * Is the first parameter type in `(x: Dog) => number` assignable to or from first parameter type in `(x: Animal) => number`?
           * Is `Dog` assignable to or from `Animal`?
-            * Yes
+            * Yes.
 
-As you can see here, the relevant question *Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?* is the same question
-being asked when we were passing a possibly-too-specific callback to a function.
+As you can see here, the type system must ask "Is the type `(x: Dog) => number` assignable to `(x: Animal) => number`?",
+which is the same question the type system needed to ask for the original question.
+If TypeScript forced contravariance on parameters (requiring `Animal` being assignable to `Dog`), then `Dog[]` would not be assignable to `Animal[]`.
 
-In summary, in the TypeScript type system, the question of *whether a more-specific-type-accepting function should be assignable to a
-function accpting a less-specific type* provides a prerequisite answer to whether an *array* of that more specific type should be assignable
-to an array of a less specific type. Having the latter *not* be the case would not be an acceptable type system in the vast majority of cases,
+In summary, in the TypeScript type system, the question of whether a more-specific-type-accepting function should be assignable to a function accepting a less-specific type provides a prerequisite answer to whether an *array* of that more specific type should be assignable to an array of a less specific type.
+Having the latter *not* be the case would not be an acceptable type system in the vast majority of cases,
 so we have to take a correctness trade-off for the specific case of function argument types.
 
 ### Why are functions with fewer parameters assignable to functions that take more parameters?

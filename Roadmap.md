@@ -1,5 +1,6 @@
 # 2.1 
 
+* Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
@@ -42,10 +43,9 @@
 * [Completion lists for string literals](https://github.com/Microsoft/TypeScript/issues/606)
 * [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
 * [Support 'target:es5' with 'module:es6' ](https://github.com/Microsoft/TypeScript/issues/6319)
-* Flag unused declarations with [`--noUnusedVariables` and `--noUnusedParameters`](https://github.com/Microsoft/TypeScript/pull/9200)
+* Flag unused declarations with [`--noUnusedLocals` and `--noUnusedParameters`](https://github.com/Microsoft/TypeScript/pull/9200)
 * Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
-* Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 
 # 1.8
 
