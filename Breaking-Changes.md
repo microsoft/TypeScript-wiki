@@ -6,6 +6,69 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.0%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
+## No type narrowing for captured variables in functions and class expressions
+
+Type narrowing does not cross function and class expressions, as well as lambda expressions.
+ 
+**Example**
+
+```ts
+var x: number | string;
+
+if (typeof x === "number") {
+    function inner(): number {
+        return x; // Error, type of x is not narrowed, c is number | string
+    }
+    var y: number = x; // OK, x is number
+}
+```
+
+In the previous pattern the compiler can not tell when the callback will execute. Consider:
+
+```ts
+var x: number | string = "a";
+if (typeof x === "string") {
+    setTimeout(() => console.log(x.charAt(0)), 0);
+}
+x = 5;
+```
+
+It is wrong to assume `x` is a `string` when `x.charAt()` is called, as indeed it isn't.
+
+**Recommendation**
+
+Use constants instead:
+
+```typescript
+const x: number | string = "a";
+if (typeof x === "string") {
+    setTimeout(() => console.log(x.charAt(0)), 0);
+}
+```
+
+## Function declarations not allowed in blocks in strict mode
+
+This is already a run-time error under strict mode. Starting with TypeScript 2.0, it will be flagged as a compile-time error as well.
+
+**Example**
+
+```ts
+if( true ) {
+    function foo() {}
+}
+
+export = foo;
+```
+
+**Recommendation**
+
+Use function expressions instead:
+
+```ts
+if( true ) {
+    const foo = function() {}
+}
+```
 
 # TypeScript 1.8
 
