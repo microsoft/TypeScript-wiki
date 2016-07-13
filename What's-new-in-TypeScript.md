@@ -432,7 +432,6 @@ function f(this: void) {
     // make sure `this` is unusable in this standalone function
 }
 ```
-That means that `this` is of type `Deck` now, not `any`, so `--noImplicitThis` will not cause any errors.
 
 ### `this` parameters in callbacks
 
