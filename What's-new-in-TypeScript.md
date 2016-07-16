@@ -547,13 +547,13 @@ The TypeScript compiler supports the declaration of such mappings using `"paths"
 
 #### Example
 
-For instance, an import to a module `"jquery"` would be translated at runtime to `"node_modules\jquery\dist\jquery.slim.min.js"`.
+For instance, an import to a module `"jquery"` would be translated at runtime to `"node_modules/jquery/dist/jquery.slim.min.js"`.
 
 ```json
 {
   "compilerOptions": {
     "paths": {
-      "jquery": ["node_modules/jquery/dist/jquery.d.ts"]
+      "jquery": ["node_modules/jquery/dist/jquery.slim.min.js"]
     }
 }
 ```
