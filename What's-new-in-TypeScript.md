@@ -553,7 +553,7 @@ For instance, an import to a module `"jquery"` would be translated at runtime to
 {
   "compilerOptions": {
     "paths": {
-      "jquery": ["node_modules/jquery/dist/jquery.slim.min.js"]
+      "jquery": ["node_modules/jquery/dist/jquery.d.ts"]
     }
 }
 ```
