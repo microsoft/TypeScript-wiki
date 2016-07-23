@@ -46,6 +46,39 @@ if (typeof x === "string") {
 }
 ```
 
+## Type aliases are now narrowed
+
+**Example**
+
+```ts
+function g<T>(obj: T) {
+    var t: T;
+    if (obj instanceof RegExp) {
+         t = obj; // RegExp is not assignable to T
+    }
+}
+```
+
+**Recommendation**
+Either declare your locals to be a specific type and not the generic type parameter, or use a type assertion.
+
+## Getters with no setters are automatically inferred to be `readonly` properties
+
+**Example**
+
+```ts
+class C { 
+  get x() { return 0; }
+}
+
+var c = new C();
+c.x = 1; // Error Left-hand side is a readonly property
+```
+
+**Recommendation**
+
+Define a setter for do not write to the property.
+
 ## Function declarations not allowed in blocks in strict mode
 
 This is already a run-time error under strict mode. Starting with TypeScript 2.0, it will be flagged as a compile-time error as well.
