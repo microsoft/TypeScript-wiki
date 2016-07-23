@@ -46,7 +46,7 @@ if (typeof x === "string") {
 }
 ```
 
-## Type aliases are now narrowed
+## Generic type parameters are now narrowed
 
 **Example**
 
