@@ -48,12 +48,13 @@
     - [Why doesn't `isFoo(x)` narrow `x` to `Foo` when `isFoo` is a type guard?](#why-doesnt-isfoox-narrow-x-to-foo-when-isfoo-is-a-type-guard)
   - [Decorators](#decorators)
     - [Decorators on function declarations](#decorators-on-function-declarations)
-    - [What's the difference between `@dec` and `@dec()` ? Shouldn't they be equivalent?](#whats-the-difference-between-@dec-and-@dec--shouldnt-they-be-equivalent)
+    - [What's the difference between `@dec` and `@dec()` ? Shouldn't they be equivalent?](#whats-the-difference-between-dec-and-dec--shouldnt-they-be-equivalent)
   - [JSX and React](#jsx-and-react)
     - [I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />` ?](#i-wrote-declare-var-mycomponent-reactcomponent-why-cant-i-write-mycomponent--)
   - [Things That Don't Work](#things-that-dont-work)
     - [You should emit classes like this so they have real private members](#you-should-emit-classes-like-this-so-they-have-real-private-members)
     - [You should emit classes like this so they don't lose `this` in callbacks](#you-should-emit-classes-like-this-so-they-dont-lose-this-in-callbacks)
+    - [Why can't I access arbitrary properties on a type with a string indexer?](#why-cant-i-access-arbitrary-properties-on-a-type-with-a-string-indexer)
     - [You should have some class initialization which is impossible to emit code for](#you-should-have-some-class-initialization-which-is-impossible-to-emit-code-for)
   - [External Tools](#external-tools)
     - [How do I write unit tests with TypeScript?](#how-do-i-write-unit-tests-with-typescript)
@@ -62,10 +63,9 @@
     - [How do I control file ordering in combined output (`--out`) ?](#how-do-i-control-file-ordering-in-combined-output---out-)
     - [What does the error "Exported variable [name] has or is using private name [name]" mean?](#what-does-the-error-exported-variable-name-has-or-is-using-private-name-name-mean)
     - [Why does `--outDir` moves output after adding a new file?](#why-does---outdir-moves-output-after-adding-a-new-file)
-  - [`tsconfig.json` Behaviour](#tsconfigjson-behavior)
-    - [Why does a file in exclude list is still picked up by the compiler?](#why-does-a-file-in-exclude-list-is-still-picked-up-by-the-compiler)
-    - [How can I specify an include?](#how-can-i-specify-an-include)
-
+  - [`tsconfig.json` Behavior](#tsconfigjson-behavior)
+    - [Why is a file in the `exclude` list still picked up by the compiler?](#why-is-a-file-in-the-exclude-list-still-picked-up-by-the-compiler)
+    - [How can I specify an `include`?](#how-can-i-specify-an-include)
 - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
@@ -1006,7 +1006,40 @@ There isn't really anything else to be said on that front -- TypeScript must hav
 Second, the runtime characteristics of this class are very surprising.
 Instead of allocating one closure per method, this allocates one closure per method *per instance*.
 This expensive in terms of class initialization cost, memory pressure, and GC performance.
- 
+
+### Why can't I access arbitrary properties on a type with a string indexer?
+
+> When I declare an interface with a string indexer,
+> I want to be able to access arbitrary properties on it, like this:
+> ```ts
+> interface StringMap {
+>    [index: string]: string;
+> }
+> function f(obj: StringMap) {
+>    obj.foo; // error!
+>    obj['foo']; // I have to write it this way
+> }
+> ```
+> Instead I can only use index syntax: `obj['foo']`.
+
+The point of TypeScript is to catch errors at compile-time, and "Property does not exist" is one of the most important.
+If a string indexer let you access properties on a type, you'd never get this error for those types.
+This is important if you have other properties on the indexed type:
+
+```ts
+interface StringMap {
+   property1: string;
+   [index: string]: string;
+}
+function f(obj: StringMap) {
+   obj.property1; // ok
+   obj.propertyl; // error!
+   obj['foo']; // ok
+}
+```
+
+So TypeScript always checks property accesses and reserves arbitrary access for the indexer syntax.
+
 ### You should have some class initialization which is impossible to emit code for
 TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1617)
 
@@ -1115,7 +1148,7 @@ To ensure the output does not change with adding new files specify `--rootDir` o
 
 ## `tsconfig.json` Behavior
 
-### Why does a file in `exclude` list is still picked up by the compiler
+### Why is a file in the `exclude` list still picked up by the compiler?
 
 `tsconfig.json` turns a folder into a “project”. Without specifying any `“exclude”` or `“files”` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation. 
 

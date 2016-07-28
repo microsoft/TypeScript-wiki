@@ -832,12 +832,12 @@ Here is a list of available API groups:
 #### Example
 
 ```bash
-tsc --target es5 --lib es5,es6.promise
+tsc --target es5 --lib es5,es2015.promise
 ```
 
 ```json
 "compilerOptions": {
-    "lib": ["es5", "es6.promise"]
+    "lib": ["es5", "es2015.promise"]
 }
 ```
 
