@@ -541,8 +541,22 @@ function f({x = 0}) {
 > var e2: Empty = window;
 > ```
 
-See the question "Why are all types assignable to empty interfaces?" in this FAQ.
+See the question ["Why are all types assignable to empty interfaces?"](#why-are-all-types-assignable-to-empty-interfaces) in this FAQ.
+It's worth re-iterating the advice from that answer: in general, you should *never* declare a `class` with no properties.
+This is true even for subclasses:
 
+```ts
+class Base {
+  important: number;
+  properties: number;
+}
+class Alpha extends Base { }
+class Bravo extends Base { }
+```
+
+`Alpha` and `Bravo` are structurally identical to each other, and to `Base`.
+This has a lot of surprising effects, so don't do it!
+If you want `Alpha` and `Bravo` to be different, add a private property to each.
 
 ### When and why are classes nominal?
 
