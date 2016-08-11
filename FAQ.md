@@ -148,8 +148,8 @@ Many questions in this FAQ boil down to "because types are erased".
 > x.bar = 10;
 > ```
 
-A getter without a setter *does not* create a read-only property.
-See  [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion tracking this issue.
+This is now an error in TypeScript 2.0 and later.
+See [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion tracking this issue.
 
 ### Why are function parameters bivariant?
 
