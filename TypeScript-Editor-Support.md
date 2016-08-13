@@ -2,6 +2,7 @@
 
  * [alm.tools](#alm)
  * [Atom](#atom)
+ * [CATS](#cats) 
  * [Eclipse](#eclipse)
  * [Emacs](#emacs)
  * [NetBeans](#netbeans)
@@ -18,6 +19,10 @@
 # Atom
 
 [Atom-TypeScript](https://atom.io/packages/atom-typescript), a TypeScript language service for Atom developed by TypeStrong
+
+# CATS
+
+[CATS](https://github.com/jbaron/cats) - Code Assistant for TypeScript is an opensource Typescript development environment that runs on OSX, Windows and Linux. Since it is also written in TypeScript, it can be easily extended if required.
 
 # Eclipse
 
