@@ -22,7 +22,8 @@
 
 # CATS
 
-[CATS](https://github.com/jbaron/cats) - Code Assistant for TypeScript is an opensource Typescript development environment that runs on OSX, Windows and Linux. Since it is also written in TypeScript, it can be easily extended if required.
+[Code Assistant for TypeScript (CATS)](https://github.com/jbaron/cats) -  is an open source TypeScript development environment that runs on OS X, Windows, and Linux.
+Since it is also written in TypeScript, it can be easily extended if required.
 
 # Eclipse
 
