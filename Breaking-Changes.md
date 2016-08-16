@@ -103,6 +103,26 @@ if( true ) {
 }
 ```
 
+## `TemplateStringsArray` is now immutable
+
+ES2015 tagged templates always pass their tag an immutable array-like object that has a property called `raw` (which is also immutable).
+TypeScript names this object the `TemplateStringsArray`.
+
+Conveniently, `TemplateStringsArray` was assignable to an `Array<string>`, so it's possible users took advantage of this to use a shorter type for their tag parameters:
+
+```ts
+function myTemplateTag(strs: string[]) {
+    // ...
+}
+```
+
+However, in TypeScript 2.0, the language now supports the `readonly` modifier and can express that these objects are immutable.
+As a result, `TemplateStringsArray` has also been made immutable, and is no longer assignable to `string[]`.
+
+**Recommendation**
+
+Use `TemplateStringsArray` explicitly (or use `ReadonlyArray<string>`).
+
 # TypeScript 1.8
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.8%22+label%3A%22Breaking+Change%22+is%3Aclosed).
