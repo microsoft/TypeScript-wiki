@@ -50,14 +50,14 @@ compile(process.argv.slice(2), {
 
 ## A simple transform function
 
-Creating a compiler is simple enough, but you may want to just get the corresponding JavaScript output given TypeScript sources. For this you can use ts.transpile to get a string => string transformation in two lines.
+Creating a compiler is simple enough, but you may want to just get the corresponding JavaScript output given TypeScript sources. For this you can use ts.transpileModule to get a string => string transformation in two lines.
 
 ```TypeScript
 import * as ts from "typescript";
 
 const source = "let x: string  = 'string'";
 
-let result = ts.transpile(source, { module: ts.ModuleKind.CommonJS });
+let result = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
 
 console.log(JSON.stringify(result));
 ```
@@ -304,13 +304,14 @@ let result = format(code);
 console.log(result);
 ```
 
-## Transpiling single file
+## Transpiling a single file
 
-Currently TypeScript exposes two functions for this purpose. 
+Currently TypeScript exposes two functions for this purpose: `transpileModule` and `transpile` (**which is deprecated**).
+Note that regardless of the name, **each one assumes that the input file is a module**.
+
+Here is the relevant signature of `transpileModule`:
 
 ```ts
-export function transpile(input: string, compilerOptions?: CompilerOptions, fileName?: string, diagnostics?: Diagnostic[], moduleName?: string): string;
-
 export interface TranspileOptions {
     compilerOptions?: CompilerOptions;
     fileName?: string;
@@ -337,7 +338,13 @@ export interface TranspileOutput {
 export function transpileModule(input: string, transpileOptions: TranspileOptions): TranspileOutput 
 ```
 
->Historical note: initially only `transpile` function existed, however it was pretty difficult to extend (i.e to add new input parameters or return some extra information like source maps) without breaking existing consumers. As a result `transpile` is currently considered deprecated and superseded by `transpileModule`.
+and here is the appropriate version of `transpile`:
+
+```ts
+export function transpile(input: string, compilerOptions?: CompilerOptions, fileName?: string, diagnostics?: Diagnostic[], moduleName?: string): string;
+```
+
+> Historical note: initially only `transpile` function existed, however it was pretty difficult to extend (i.e to add new input parameters or return some extra information like source maps) without breaking existing consumers. As a result `transpile` is currently considered deprecated and superseded by `transpileModule`.
 
 ```ts
 var ts = require("typescript");
@@ -346,16 +353,19 @@ var content =
     "export var x = f()";
 
 var compilerOptions = { module: ts.ModuleKind.System };
-var res1 = ts.transpile(content, compilerOptions, /*fileName*/ undefined, /*diagnostics*/ undefined, /*moduleName*/ "myModule1");
-console.log(res1);
+
+var res1 = ts.transpileModule(content, {compilerOptions: compilerOptions, moduleName: "myModule2"});
+console.log(res1.outputText);
 
 console.log("============")
 
-var res2 = ts.transpileModule(content, {compilerOptions: compilerOptions, moduleName: "myModule2"});
-console.log(res2.outputText);
+var res2 = ts.transpile(content, compilerOptions, /*fileName*/ undefined, /*diagnostics*/ undefined, /*moduleName*/ "myModule1");
+console.log(res2);
 ```
 
-Usually TypeScript compiler uses file extension to determine if file should be parsed as '.tsx' or '.ts'. The same rule is applied during single file transpilation if file name is provided. If file name is omitted then compiler will check if `jsx` options is specified - if it is set and is not `JsxEmit.None` then source text will be interpreted as '.tsx'.
+Usually TypeScript compiler uses file extension to determine if file should be parsed as '.tsx' or '.ts'. The same rule is applied during single file transpilation if the file name is provided.
+If the file name is omitted, then compiler will check if the `jsx` options is specified.
+If it is set and is not `JsxEmit.None`, then source text will be interpreted as '.tsx'.
 
 ## Customizing module resolution
 
