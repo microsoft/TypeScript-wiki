@@ -4,7 +4,7 @@ Visual Studio "15" Preview includes a preview of the new JavaScript language ser
 internally codenamed "Salsa". This may be switched on or off via a registry key.
 
 Salsa also powers the JavaScript language service in VS Code, and most of the below
-info applies there also. See [VSCode release notes](https://github.com/Microsoft/vscode-docs/blob/vnext/release-notes/latest.md#languages---javascript)
+info applies there also. See [VSCode release notes](https://code.visualstudio.com/updates/vFebruary#_languages-javascript)
 for more info.
 
 ## Goals
