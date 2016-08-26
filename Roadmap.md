@@ -25,6 +25,7 @@
 * [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * [Control flow based type analysis](https://github.com/Microsoft/TypeScript/pull/8010)
 * [Discriminated union types](https://github.com/Microsoft/TypeScript/pull/9163)
+* [Improved definition file acquisition](https://github.com/Microsoft/TypeScript/issues/9184)
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
 * [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
