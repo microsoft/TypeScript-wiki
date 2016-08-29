@@ -47,6 +47,7 @@
 * [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
 * [Support 'target:es5' with 'module:es6' ](https://github.com/Microsoft/TypeScript/issues/6319)
 * Flag unused declarations with [`--noUnusedLocals` and `--noUnusedParameters`](https://github.com/Microsoft/TypeScript/pull/9200)
+* [Number, boolean, and Enum literal types](https://github.com/Microsoft/TypeScript/pull/9407)
 
 # 1.8
 
