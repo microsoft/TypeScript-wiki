@@ -8,7 +8,6 @@
 * [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
 * [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
 * [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* Investigate [Function bind operator](https://github.com/Microsoft/TypeScript/issues/3508)
 * [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * Refactoring support in Language Service API
