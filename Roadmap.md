@@ -1,22 +1,22 @@
 # 2.1 
 
+* Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
+* [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
-* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
 * [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
 * [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
-* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
-* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
-* Refactoring support in Language Service API
-* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
-* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * Decorators for function expressions/arrow functions
+* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
+* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+* Refactoring support in Language Service API
+* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
+* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
+* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
-* Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
-* [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 
 # 2.0
 
