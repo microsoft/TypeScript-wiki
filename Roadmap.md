@@ -2,7 +2,6 @@
 
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
 * [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
