@@ -652,7 +652,7 @@ import data from "json!http://example.com/data.json";
 console.log(data, fileContent);
 ```
 
-WildChard module names can be even more useful when migrating from an un-typed code base.
+Wildcard module names can be even more useful when migrating from an un-typed code base.
 Combined with Shorthand ambient module declarations, a set of modules can be easily declared as `any`.
 
 #### Example
