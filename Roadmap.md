@@ -1,30 +1,29 @@
 # 2.1 
 
+* Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
+* [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 * Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [Switch type guards](https://github.com/Microsoft/TypeScript/issues/2214)
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
-* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
 * [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
 * [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
-* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* Investigate [Function bind operator](https://github.com/Microsoft/TypeScript/issues/3508)
-* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
-* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
-* Refactoring support in Language Service API
-* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
-* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * Decorators for function expressions/arrow functions
+* [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
+* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+* Refactoring support in Language Service API
+* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
+* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
+* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
-* Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
-* [`async`/`await` and generators support for ES5/ES3](https://github.com/Microsoft/TypeScript/issues/1564)
 
 # 2.0
 
 * [Non-nullable types](https://github.com/Microsoft/TypeScript/pull/7140)
 * [Control flow based type analysis](https://github.com/Microsoft/TypeScript/pull/8010)
 * [Discriminated union types](https://github.com/Microsoft/TypeScript/pull/9163)
+* [Improved definition file acquisition](https://github.com/Microsoft/TypeScript/issues/9184)
 * [Specifying `this` types for functions](https://github.com/Microsoft/TypeScript/issues/3694)
 * [Type guards on property access](https://github.com/Microsoft/TypeScript/issues/186)
 * [Readonly properties and index signatures](https://github.com/Microsoft/TypeScript/pull/6532)
@@ -46,6 +45,7 @@
 * [Module name in imports allow .js extension](https://github.com/Microsoft/TypeScript/issues/4595)
 * [Support 'target:es5' with 'module:es6' ](https://github.com/Microsoft/TypeScript/issues/6319)
 * Flag unused declarations with [`--noUnusedLocals` and `--noUnusedParameters`](https://github.com/Microsoft/TypeScript/pull/9200)
+* [Number, boolean, and Enum literal types](https://github.com/Microsoft/TypeScript/pull/9407)
 
 # 1.8
 
