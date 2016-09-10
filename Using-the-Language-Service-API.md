@@ -27,7 +27,7 @@ The host is described by the LanguageServiceHost API, and it abstracts all inter
 
 The language service will only ask the host for information as part of host calls. No asynchronous events or background processing are expected. The host is expected to manage threading if needed.
 
-The host is expected to supply the full set of files compromising the context. Refer to [reference resolution in the language service](#reference-resolution-in-the-language-service) for more details.
+The host is expected to supply the full set of files comprising the context. Refer to [reference resolution in the language service](#reference-resolution-in-the-language-service) for more details.
 
 ## ScriptSnapshot
 
