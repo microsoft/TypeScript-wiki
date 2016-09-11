@@ -164,11 +164,11 @@ Similar to type assertions of the forms `<T>x` and `x as T`, the `!` non-null as
 
 ```ts
 // Compiled with --strictNullChecks
-function validateEntity(e: Entity?) {
+function validateEntity(e?: Entity) {
     // Throw exception if e is null or invalid entity
 }
 
-function processEntity(e: Entity?) {
+function processEntity(e?: Entity) {
     validateEntity(e);
     let s = e!.name;  // Assert that e is non-null and access name
 }
