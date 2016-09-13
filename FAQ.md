@@ -66,10 +66,10 @@
   - [`tsconfig.json` Behavior](#tsconfigjson-behavior)
     - [Why is a file in the `exclude` list still picked up by the compiler?](#why-is-a-file-in-the-exclude-list-still-picked-up-by-the-compiler)
     - [How can I specify an `include`?](#how-can-i-specify-an-include)
-- [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
+  - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
-- [GitHub Process Questions](#github-process-questions)
+  - [GitHub Process Questions](#github-process-questions)
     - [What do the labels on these issues mean?](#what-do-the-labels-on-these-issues-mean)
     - [I disagree with the outcome of this suggestion](#i-disagree-with-the-outcome-of-this-suggestion)
 
