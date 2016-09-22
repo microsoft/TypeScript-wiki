@@ -23,7 +23,9 @@ From here, there are different steps for debugging the client- and server-side, 
 ## Debugging client-side
 
 1) Set the ts-server to be open in debug mode on the right port using either of the following two methods (in the rest of this guide, we assume you chose 5859):
-a. In a shell, (export)[http://stackoverflow.com/questions/1158091/defining-a-variable-with-or-without-export] the `TSS_DEBUG` environment variable to an open port (you will run the development vs code instance from within that shell).
+
+a. In a shell, [export](http://stackoverflow.com/questions/1158091/defining-a-variable-with-or-without-export) the `TSS_DEBUG` environment variable to an open port (you will run the development vs code instance from within that shell).
+
 b. Edit `extensions/typescript/src/typescriptServiceClient.ts`, setting the port to an open one.
 
 2) Update launch.json with an option to attach to the node instance, with sourcemaps from your `built/local` folder. You can use this option as a template:
@@ -56,4 +58,4 @@ b. Edit `extensions/typescript/src/typescriptServiceClient.ts`, setting the port
 ---
 <sup>1</sup> In particular, the built-in extension spawns the node instance that loads tsserver via the call to electron.fork() in `extensions/typescript/src/typescriptServiceClient.ts`.
 
-<sup>2</sup> If you are on Linux, be sure to increase the number of file watchers per (the fix for `ENOSPC` errors)[https://github.com/Microsoft/vscode/wiki/How-to-Contribute#incremental-build]. for opening medium-large projects like Typescript, the default limit of 8192 is almost certainly too small.
+<sup>2</sup> If you are on Linux, be sure to increase the number of file watchers per the fix for ENOSPC [errors](https://github.com/Microsoft/vscode/wiki/How-to-Contribute#incremental-build). for opening medium-large projects like Typescript, the default limit of 8192 is almost certainly too small.
