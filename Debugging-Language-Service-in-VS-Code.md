@@ -1,5 +1,3 @@
-# Debugging TS Server in VS Code
-
 VS Code is designed around an extension model. This means that the client-side (ie: text-editor) code for communicating with the TypeScript server lives in "extensions/typescript" in the VS Code repo.<sup>1</sup>
 The server side code lives in `src/services` of the TypeScript repo.
 
