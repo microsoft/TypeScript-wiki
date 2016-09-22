@@ -551,8 +551,9 @@ For instance, an import to a module `"jquery"` would be translated at runtime to
 ```json
 {
   "compilerOptions": {
+    "baseUrl": "./node_modules",
     "paths": {
-      "jquery": ["node_modules/jquery/dist/jquery.d.ts"]
+      "jquery": ["jquery/dist/jquery.slim.min"]
     }
 }
 ```
