@@ -42,6 +42,7 @@
 * [[Using the Compiler API]]
 * [[Using the Language Service API]]
 * [[Dev Mode in Visual Studio]]
+* [[Debugging Language Service in VS Code]]
 
 **FAQs**
 * [[FAQ]]
