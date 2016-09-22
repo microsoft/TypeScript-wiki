@@ -90,7 +90,7 @@ else {
     f(x);  // Error, type of x is number? here
 }
 let a = x != null ? f(x) : "";  // Type of a is string
-let b = x && f(x);  // Type of b is string?
+let b = x && f(x);  // Type of b is string | 0 | null | undefined
 ```
 
 Non-null and non-undefined type guards may use the `==`, `!=`, `===`, or `!==` operator to compare to `null` or `undefined`, as in `x != null` or `x === undefined`.
