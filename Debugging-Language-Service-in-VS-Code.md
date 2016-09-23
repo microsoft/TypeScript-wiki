@@ -22,6 +22,8 @@ From here, there are different steps for debugging the client- and server-side, 
 
 ## Debugging client-side
 
+**Note:** source-maps do not work at this time.
+
 1) Set the ts-server to be open in debug mode on the right port using either of the following two methods (in the rest of this guide, we assume you chose 5859):
 
 a. In a shell, [export](http://stackoverflow.com/questions/1158091/defining-a-variable-with-or-without-export) the `TSS_DEBUG` environment variable to an open port (you will run the development vs code instance from within that shell).
