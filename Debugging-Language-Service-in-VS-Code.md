@@ -22,7 +22,7 @@ From here, there are different steps for debugging the client- and server-side, 
 
 ## Debugging client-side
 
-**Note:** source-maps do not work at this time.
+**Note:** [the gulp-build doesn't currently produce working source-maps](https://github.com/Microsoft/TypeScript/issues/11105), and [building with jake may require some extra effort to fix the source-maps](https://github.com/Microsoft/TypeScript/issues/11111).
 
 1) Set the ts-server to be open in debug mode on the right port using either of the following two methods (in the rest of this guide, we assume you chose 5859):
 
