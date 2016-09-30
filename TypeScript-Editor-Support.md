@@ -14,7 +14,11 @@
 
 # alm
 
-[alm.tools](http://alm.tools/) a complete TypeScript development environment available as a simple npm package `npm i alm -g`.
+[alm.tools](http://alm.tools/) a complete TypeScript development environment available as a simple npm package.
+
+```shell
+npm i alm -g
+```
 
 # Atom
 
