@@ -1,6 +1,6 @@
 # Future
 
-* Support [type-checking of computed properties for constants and Symbols]
+* Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/2103)
 * [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
 * [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
@@ -20,13 +20,9 @@
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-(https://github.com/Microsoft/TypeScript/issues/5579)
 * [ ] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * [ ] Refactoring support in Language Service API
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
-
-
-
 
 # 2.0
 
