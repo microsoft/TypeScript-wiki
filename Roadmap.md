@@ -1,3 +1,12 @@
+# Future
+
+* Support [type-checking of computed properties for constants and Symbols]
+* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
+* Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
+* [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
+* Implement new ES Decorator proposal
+
 # 2.1
 
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
@@ -5,19 +14,15 @@
 * [X] Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [ ] Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
+(https://github.com/Microsoft/TypeScript/issues/5579)
 * [ ] [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
 * [ ] [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
 * [ ] [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
 * [ ] Decorators for function expressions/arrow functions
 * [ ] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * [ ] Refactoring support in Language Service API
-* [ ] [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
-* [ ] [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
-* [ ] Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
-* [ ] [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
-* [ ] [Support for node register hook](https://github.com/Microsoft/TypeScript/issues/1823)
+* [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+
 
 # 2.0
 
