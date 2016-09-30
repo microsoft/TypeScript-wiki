@@ -6,6 +6,8 @@
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * Implement new ES Decorator proposal
+* Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
+* Decorators for function expressions/arrow functions
 
 # 2.1
 
@@ -16,10 +18,6 @@
 * [ ] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 (https://github.com/Microsoft/TypeScript/issues/5579)
-* [ ] [Ambient decorators](https://github.com/Microsoft/TypeScript/issues/2900)
-* [ ] [Deprecated decorator](https://github.com/Microsoft/TypeScript/issues/390)
-* [ ] [Conditional decorator](https://github.com/Microsoft/TypeScript/issues/3538)
-* [ ] Decorators for function expressions/arrow functions
 * [ ] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * [ ] Refactoring support in Language Service API
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
