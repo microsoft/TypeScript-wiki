@@ -14,6 +14,7 @@
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [X] [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/pull/9175)
 * [X] Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
+* [X] [Better inference for literal types](https://github.com/Microsoft/TypeScript/pull/10676)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
 * [ ] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
