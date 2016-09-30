@@ -9,7 +9,7 @@
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
 
-# 2.1
+# 2.1 (November 2016)
 
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [X] [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/pull/9175)
