@@ -16,11 +16,16 @@
 * [X] Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
 * [ ] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
+* [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
+* [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
+* [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 (https://github.com/Microsoft/TypeScript/issues/5579)
 * [ ] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * [ ] Refactoring support in Language Service API
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+
+
 
 
 # 2.0
