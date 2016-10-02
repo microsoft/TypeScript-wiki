@@ -10,7 +10,7 @@ Effectively, `null` and `undefined` were valid values of *every* type and it was
 
 ### `--strictNullChecks`
 
-`--strictNullChecks` switchs in a new strict null checking mode.
+`--strictNullChecks` switches to a new strict null checking mode.
 
 In strict null checking mode, the `null` and `undefined` values are *not* in the domain of every type and are only assignable to themselves and `any` (the one exception being that `undefined` is also assignable to `void`).
 So, whereas `T` and `T | undefined` are considered synonymous in regular type checking mode (because `undefined` is considered a subtype of any `T`), they are different types in strict type checking mode, and only `T | undefined` permits `undefined` values. The same is true for the relationship of `T` to `T | null`.
