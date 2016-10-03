@@ -876,7 +876,7 @@ function returnNull(_a) { // OK
 
 Before TypeScript 2.0, a module identifier was always assumed to be extension-less;
 for instance, given an import as `import d from "./moduleA.js"`, the compiler looked up the definition of `"moduleA.js"` in `./moduleA.js.ts` or `./moduleA.js.d.ts`.
-This made it hard to use bundling/loading tools like (SystemJS)[https://github.com/systemjs/systemjs] that expect URI's in their module identifier.
+This made it hard to use bundling/loading tools like [SystemJS](https://github.com/systemjs/systemjs) that expect URI's in their module identifier.
 
 With TypeScript 2.0, the compiler will look up definition of `"moduleA.js"` in  `./moduleA.ts` or `./moduleA.d.t`.
 
