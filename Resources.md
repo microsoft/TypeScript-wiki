@@ -4,7 +4,8 @@
 * [Why we love TypeScript: Delve and TypeScript](https://medium.com/@delveeng/why-we-love-typescript-bec2df88d6c2#.yonceora3)
 * [What is TypeScript and why would I use it in place of JavaScript? (stackoverflow.com)](http://stackoverflow.com/questions/12694530/what-is-typescript-and-why-would-i-use-it-in-place-of-javascript)
 * [Love for TypeScript](https://github.com/Microsoft/TypeScript/issues/10011)
-* [Heap Blog -- Goodbye CoffeeScript, Hello TypeScript](http://blog.heapanalytics.com/goodbye-coffeescript-hello-typescript/)
+* [Heap Blog - Goodbye CoffeeScript, Hello TypeScript](http://blog.heapanalytics.com/goodbye-coffeescript-hello-typescript/)
+* [Cycligent.com/blog - TypeScript Seals My Penchant for JavaScript](https://www.cycligent.com/blog/typescript-seals-my-penchant-for-javascript/)
 
 ## Talks
 
