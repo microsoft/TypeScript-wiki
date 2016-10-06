@@ -1,7 +1,7 @@
 # JavaScript "Salsa" Language Service
 
-Visual Studio "15" Preview includes a preview of the new JavaScript language service, 
-internally codenamed "Salsa". This may be switched on or off via a registry key.
+Visual Studio "15" Preview 5 includes the new JavaScript language service, 
+internally codenamed "Salsa".
 
 Salsa also powers the JavaScript language service in VS Code, and most of the below
 info applies there also. See [VSCode release notes](https://github.com/Microsoft/vscode-docs/blob/vnext/release-notes/latest.md#languages---javascript)
@@ -26,13 +26,13 @@ This change opens up several opportunities, such as:
  to be converted to JavaScript that runs on all of today's engines. 
  
 ## Enabling Salsa
+Salsa is enabled by default in Visual Studio "15" Preview 5.
 
-To enable the new "Salsa" language service experience in Visual Studio "15" Preview 3: 
+To enable or disable the new language service: 
   1. Open the `Tools > Options` dialog.
-  2. Navigate to "Text Editor" > "JavaScript" > "Experimental".
-  3. Enable the option titled "Enable the experimental JavaScript language service."
+  2. Navigate to "Text Editor" > "JavaScript/TypeScript" > "Language Service".
+  3. Toggle the option titled "Enable the new JavaScript language service."
 
-<img src="https://raw.githubusercontent.com/Microsoft/TypeScript-wiki/master/images/enable-salsa-dev15.png" height="407" width="652" />
 
 ## Overview
 
