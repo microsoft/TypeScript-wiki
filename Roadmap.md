@@ -17,7 +17,7 @@
 * [X] [Better inference for literal types](https://github.com/Microsoft/TypeScript/pull/10676)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
 * [X] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
-* [ ] [Control flow analysis for array construction](https://github.com/Microsoft/TypeScript/pull/11432)
+* [X] [Control flow analysis for array construction](https://github.com/Microsoft/TypeScript/pull/11432)
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
