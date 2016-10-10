@@ -77,7 +77,7 @@ c.x = 1; // Error Left-hand side is a readonly property
 
 **Recommendation**
 
-Define a setter for do not write to the property.
+Define a setter or do not write to the property.
 
 ## Function declarations not allowed in blocks in strict mode
 
