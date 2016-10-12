@@ -8,6 +8,7 @@
 * Implement new ES Decorator proposal
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
+* Refactoring support in Language Service API
 
 # 2.1 (November 2016)
 
@@ -22,8 +23,7 @@
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [ ] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* [ ] Refactoring support in Language Service API
+* [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 2.0
