@@ -6,7 +6,7 @@
 
 ### What are these `rescanFooToken` functions in the scanner for?
 
-The ECMASCript grammar describes *lexical goals* for its grammar, for which an alternate scanning rule should be used in its place from the default. These rules are triggered when ***syntactically aware consumers*** require them (i.e. EMCAScript parsers which know when a construct can occur). For details, [see the current ES6 draft](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-grammar-notation).
+The ECMASCript grammar describes *lexical goals* for its grammar, for which an alternate scanning rule should be used in its place from the default. These rules are triggered when ***syntactically aware consumers*** require them (i.e. ECMAScript parsers which know when a construct can occur). For details, [see the current ES spec](https://tc39.github.io/ecma262/#sec-ecmascript-language-lexical-grammar).
 
 One example of this is for a single `/` (the forward-slash token). As long as the `/` isn't immediately followed by another `/` (indicating a comment), the default goal (*InputElementDiv*)  is to scan it as a plain `/` or `/=` (for division operations); however, in contexts where a bare `/` or `/=` would not make sense (such as when parsing a *PrimaryExpression*), the goal is modified to *InputElementRegExp* to scan out a regular expression literal.
 
