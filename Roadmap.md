@@ -23,6 +23,7 @@
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
+* [X] New [`--alwaysStrict`](https://github.com/Microsoft/TypeScript/issues/10758)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
