@@ -21,6 +21,7 @@
 * [X] [Control flow analysis for array construction](https://github.com/Microsoft/TypeScript/pull/11432)
 * [X] [Narrow string and number types in literal equality checks](https://github.com/Microsoft/TypeScript/pull/11587)
 * [X] [Contextual typing of partially annotated signatures](https://github.com/Microsoft/TypeScript/pull/11673)
+* [X] [Normalize union/intersection type combinations](https://github.com/Microsoft/TypeScript/pull/11717)
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
