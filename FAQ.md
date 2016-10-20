@@ -656,7 +656,7 @@ Thus, `typeof MyClass` refers to the type of the expression `MyClass` - the *con
 See [#1617](https://github.com/Microsoft/TypeScript/issues/1617) for this and other initialization order questions
 
 
-### What's the difference between `declare class` and `inteface`?
+### What's the difference between `declare class` and `interface`?
 
 TODO: Write up common symptoms of `declare class` / `interface` confusion.
 
