@@ -30,7 +30,7 @@
     - [Why does `this` get orphaned in my instance methods?](#why-does-this-get-orphaned-in-my-instance-methods)
     - [What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class` ?](#whats-the-difference-between-bar-and-typeof-bar-when-bar-is-a-class-)
     - [Why do my derived class property initializers overwrite values set in the base class constructor?](#why-do-my-derived-class-property-initializers-overwrite-values-set-in-the-base-class-constructor)
-    - [What's the difference between `declare class` and `inteface`?](#whats-the-difference-between-declare-class-and-inteface)
+    - [What's the difference between `declare class` and `interface`?](#whats-the-difference-between-declare-class-and-interface)
     - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
     - [Why am I getting "TypeError: [base class name] is not defined in `__extends` ?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends-)
     - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
@@ -656,7 +656,7 @@ Thus, `typeof MyClass` refers to the type of the expression `MyClass` - the *con
 See [#1617](https://github.com/Microsoft/TypeScript/issues/1617) for this and other initialization order questions
 
 
-### What's the difference between `declare class` and `inteface`?
+### What's the difference between `declare class` and `interface`?
 
 TODO: Write up common symptoms of `declare class` / `interface` confusion.
 
