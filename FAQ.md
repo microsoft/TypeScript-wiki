@@ -770,7 +770,7 @@ The type will have unexpected compatibility (as shown here) and will also fail t
 > var y = findByName(x); // expected y: string, got y: {}
 > ```
 
-TypeScript uses a structrual type system.
+TypeScript uses a structural type system.
 This structuralness also applies during generic type inference.
 When inferring the type of `T` in the function call, we try to find *members* of type `T` on the `x` argument to figure out what `T` should be.
 Because there are no members which use `T`, there is nothing to infer from, so we return `{}`.
