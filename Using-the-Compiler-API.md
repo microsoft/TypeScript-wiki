@@ -399,7 +399,7 @@ interface DocEntry {
     returnType?: string
 };
 
-/** Generate documention for all classes in a set of .ts files */
+/** Generate documentation for all classes in a set of .ts files */
 function generateDocumentation(fileNames: string[], options: ts.CompilerOptions): void {
     // Build a program using the set of root file names in fileNames
     let program = ts.createProgram(fileNames, options);
