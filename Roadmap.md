@@ -29,6 +29,7 @@
 * [X] New [`--alwaysStrict`](https://github.com/Microsoft/TypeScript/issues/10758)
 * [X] Support for [`--target ES2016` and `--target ES2017`](https://github.com/Microsoft/TypeScript/pull/11407)
 * [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
+* [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)](https://github.com/Microsoft/TypeScript/pull/11929)
 * [ ] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [ ] [Partial types](https://github.com/Microsoft/TypeScript/issues/11233)
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
