@@ -9,6 +9,7 @@
 
 ## Talks
 
+* [Typescript latest at ng-europe 2016](https://www.youtube.com/watch?v=o8YI2hvassE) (@DanielRosenwasser)
 * [//Build 2016 : What's New in TypeScript](https://www.youtube.com/watch?v=6wEVu_mkJjM) (@ahejlsberg)
 * [Portland TypeScript user meetup group October 2015 -- Typescript: Today and Tommrow](https://www.youtube.com/watch?v=E1s_YP-l6-A) (@DanielRosenwasser)
 * [Angular connect 2015 -- What is new in TypeScript](https://www.youtube.com/watch?v=_TDUV9R09PM) (@billti)
