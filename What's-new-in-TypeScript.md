@@ -1,3 +1,317 @@
+# TypeScript 2.1
+
+## Improved `any` Inference
+
+Previously, if TypeScript can't figure out the type of a variable, it will choose the `any` type.
+
+```ts
+let x;      // implicitly 'any'
+let y = []; // implicitly 'any[]'
+
+let z: any; // explicitly 'any'.
+```
+
+With TypeScript 2.1, instead of just choosing `any`, TypeScript will infer types based on what you end up assigning later on.
+
+#### Example
+
+```ts
+let x;
+
+// You can still assign anything you want to 'x'.
+x = () => 42;
+
+// After that last assignment, TypeScript 2.1 knows that 'x' has type '() => number'.
+let y = x();
+
+// Thanks to that, it will now tell you that you can't add a number to a function!
+console.log(x + y);
+//          ~~~~~
+// Error! Operator '+' cannot be applied to types '() => number' and 'number'.
+
+// TypeScript still allows you to assign anything you want to 'x'.
+x = "Hello world!";
+
+// But now it also knows that 'x' is a 'string'!
+x.toLowerCase();
+```
+
+The same sort of tracking is now also done for empty arrays.
+
+A variable declared with no type annotation and an initial value of `[]` is considered an implicit `any[]` variable.
+Each following `x.push(value)`, `x.unshift(value)` or `x[n] = value` operation _evolves_ the type of the variable in accordance with what elements are added to it.
+
+``` ts
+function f1() {
+    let x = [];
+    x.push(5);
+    x[1] = "hello";
+    x.unshift(true);
+    return x;  // (string | number | boolean)[]
+}
+
+function f2() {
+    let x = null;
+    if (cond()) {
+        x = [];
+        while (cond()) {
+            x.push("hello");
+        }
+    }
+    return x;  // string[] | null
+}
+```
+
+### Implicit any errors
+
+One great benefit of this is that you'll see *way fewer* implicit `any` errors when running with `--noImplicitAny`.
+Implicit `any` errors are only reported when the compiler is unable to know the type of a available without a type annotation.
+
+#### Example
+
+``` ts
+function f3() {
+    let x = [];  // Error: Variable 'x' implicitly has type 'any[]' in some locations where its type cannot be determined.
+    x.push(5);
+    function g() {
+        x;    // Error: Variable 'x' implicitly has an 'any[]' type.
+    }
+}
+```
+
+## Downlevel Async Functions
+
+This feature was supported before TypeScript 2.1, but only when targeting ES6/ES2015.
+TypeScript 2.1 brings the capability to ES3 and ES5 run-times, meaning you'll be free to take advantage of it no matter what environment you're using.
+
+
+> Note: first, we need to make sure our run-time has an ECMAScript-compliant `Promise` available globally.
+> That might involve grabbing [a polyfill](https://github.com/stefanpenner/es6-promise) for `Promise`, or relying on one that you might have in the run-time that you're targeting.
+> We also need to make sure that TypeScript knows `Promise` exists by setting your `lib` flag to something like `"dom", "es2015"` or `"dom", "es2015.promise", "es5"`
+
+#### Example
+
+##### tsconfig.json
+
+```json
+{
+    "compilerOptions": {
+        "lib": ["dom", "es2015.promise", "es5"]
+    }
+}
+```
+
+##### dramaticWelcome.ts
+```ts
+function delay(milliseconds: number) {
+    return new Promise<void>(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+async function dramaticWelcome() {
+    console.log("Hello");
+
+    for (let i = 0; i < 3; i++) {
+        await delay(500);
+        console.log(".");
+    }
+
+    console.log("World!");
+}
+
+dramaticWelcome();
+```
+
+Compiling and running the output should result in the correct behavior on an ES3/ES5 engine.
+
+
+## Support for external helpers library (`tslib`)
+
+TypeScript injects a handful of helper functions such as `__extends` for inheritance, `__assign` for spread operator in JSX, and `__awaiter` for async functions.
+Previouslly there were two options either 1. inject helpers in *every* file that needs them or 2. no helpers at all with `--noEmitHelpers`.
+
+TypeScript 2.1 allows for including these files in your project once in a separate module, and the compiler will emit imports to them as needed.
+
+First, install the [`tslib`](https://github.com/Microsoft/tslib):
+
+```sh
+npm install tslib
+```
+
+Second, compile your files using `--importHelpers`:
+
+```sh
+tsc --module commonjs --importHelpers a.ts
+```
+
+## Better inference for literal types
+
+String, numeric and boolean literal types (e.g. `"abc"`, `1`, and `true`) were previously inferred only in the presence of an explicit type annotation.
+Starting with TypeScript 2.1, literal types are *always* infered by default.
+
+The type inferred for a `const` variable or `readonly` property without a type annotation is the type of the literal initializer.
+The type inferred for a `let` variable, `var` variable, parameter, or non-`readonly` property with an initializer and no type annotation is the widened literal type of the initializer.
+Where the widened type for a string literal type is `string`, `number` for numeric literal types, `boolean` for `true` or `false` and the containing enum for enum literal types.
+
+#### Example
+
+```ts
+
+const c1 = 1;  // Type 1
+const c2 = c1;  // Type 1
+const c3 = "abc";  // Type "abc"
+const c4 = true;  // Type true
+const c5 = cond ? 1 : "abc";  // Type 1 | "abc"
+
+let v1 = 1;  // Type number
+let v2 = c2;  // Type number
+let v3 = c3;  // Type string
+let v4 = c4;  // Type boolean
+let v5 = c5;  // Type number | string
+```
+
+Literal type widening can be controlled through explicit type annotations.
+Specifically, when an expression of a literal type is inferred for a const location without a type annotation, that `const` variable gets a widening literal type inferred.
+But when a `const` location has an explicit literal type annotation, the `const` variable gets a non-widening literal type.
+
+#### Example
+
+```ts
+const c1 = "hello";  // Widening type "hello"
+let v1 = c1;  // Type string
+
+const c2: "hello" = "hello";  // Type "hello"
+let v2 = c2;  // Type "hello"
+```
+
+## Use returned values from super calls as 'this'
+
+In ES2015, constructors which return a value (which is an object) implicitly substitute the value of `this` for any callers of `super()`.
+As a result, it is necessary to capture any potential return value of `super()` and replace it with `this`.
+This change enables working with [Custom Elements](https://w3c.github.io/webcomponents/spec/custom/#htmlelement-constructor), which takes advantage of this to initialize browser-allocated elements with user-written constructors.
+
+#### Example
+
+```ts
+class Base {
+    x: number;
+    constructor() {
+        // return a new object other than `this`
+        return {
+            x: 1,
+        };
+    }
+}
+
+class Derived extends Base {
+    constructor() {
+        super();
+        this.x = 2;
+    }
+}
+```
+
+Generates:
+
+```js
+var Derived = (function (_super) {
+    __extends(Derived, _super);
+    function Derived() {
+        var _this = _super.call(this) || this;
+        _this.x = 2;
+        return _this;
+    }
+    return Derived;
+}(Base));
+```
+
+## Configuration inheritance
+
+Often a project has multiple output targets, e.g. `ES5` and `ES2015`, debug and production or `CommonJS` and `System`;
+Just a few configuration options change between these two targets, and maintaining multiple `tsconfig.json` files can be a hassle.
+
+TypeScript 2.1 supports inheriting configuration using `extends`, where:
+
+* `extends` is a new top-level propoerty in `tsconfig.json` (alongside `compilerOptions`, `files`, `include`, and `exclude`).
+* `extends`' value is a string containing a path to other `tsconfig.json` to inherit from.
+* The configuration from the base file are loaded first, then overridden by those  in the inheriting config file.
+* If a circularity is encountered, we report an error.
+* `files`, `include` and `exclude` from the inheriting config file *overwrite* those from the base config file.
+* All relative paths found in the configuration file will be resolved relative to the configuration file they originated in.
+
+#### Example
+
+`configs/base.json`:
+
+``` ts
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
+  }
+}
+```
+
+`configs/tests.json`:
+
+``` ts
+{
+  "compilerOptions": {
+    "preserveConstEnums": true,
+    "stripComments": false,
+    "sourceMaps": true
+  },
+  "exclude": [
+    "../tests/baselines",
+    "../tests/scenarios"
+  ],
+  "include": [
+    "../tests/**/*.ts"
+  ]
+}
+```
+
+`tsconfig.json`:
+
+``` ts
+{
+  "extends": "./configs/base",
+  "files": [
+    "main.ts",
+    "supplemental.ts"
+  ]
+}
+```
+
+`tsconfig.nostrictnull.json`:
+
+``` ts
+{
+  "extends": "./tsconfig"
+  "compilerOptions": {
+    "strictNullChecks": false
+  }
+}
+```
+
+## New `--alwaysStrict`
+
+Invoking the compiler with `--alwaysStrict` causes:
+1. Parses all the code in strict mode.
+2. Writes `"use strict";` directive atop every generated file.
+
+Modules are parsed automatically in strict mode.
+The new flag is recommended for non-module code.
+
+## Support for `--target ES2016` and `--target ES2017`
+
+TypeScript 2.1 supports two new target values `--target ES2016` and `--target ES2017`.
+Using target `--target ES2016` will instruct the compiler not to transform ES2016-specific features, e.g. `**` operator.
+Similarly, `--target ES2017` will instruct the compiler not to transform ES2017-specific features like `async`/`await`.
+
+
 # TypeScript 2.0
 
 ## Null- and undefined-aware types
