@@ -24,6 +24,7 @@
 * [X] [Contextual typing of partially annotated signatures](https://github.com/Microsoft/TypeScript/pull/11673)
 * [X] [Normalize union/intersection type combinations](https://github.com/Microsoft/TypeScript/pull/11717)
 * [X] [Static types for dynamically named properties](https://github.com/Microsoft/TypeScript/pull/11929)
+* [ ] [Mapped types](https://github.com/Microsoft/TypeScript/pull/12114)
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
