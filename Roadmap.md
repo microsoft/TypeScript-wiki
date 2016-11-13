@@ -10,6 +10,7 @@
 * Decorators for function expressions/arrow functions
 * Refactoring support in Language Service API
 * [Partial types](https://github.com/Microsoft/TypeScript/issues/11233)
+* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 2.1 (November 2016)
 
@@ -34,7 +35,6 @@
 * [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)](https://github.com/Microsoft/TypeScript/pull/11929)
 * [X] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [X] New [`--jsxFactory`](https://github.com/Microsoft/TypeScript/pull/12135)
-* [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 2.0
 
