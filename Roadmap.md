@@ -33,6 +33,7 @@
 * [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
 * [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)](https://github.com/Microsoft/TypeScript/pull/11929)
 * [X] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
+* [X] New [`--jsxFactory`](https://github.com/Microsoft/TypeScript/pull/12135)
 * [ ] Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 2.0
