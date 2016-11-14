@@ -9,7 +9,6 @@
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
 * Refactoring support in Language Service API
-* [Partial types](https://github.com/Microsoft/TypeScript/issues/11233)
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
 # 2.1 (November 2016)
