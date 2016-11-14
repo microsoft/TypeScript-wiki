@@ -34,7 +34,6 @@
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
 * [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-(https://github.com/Microsoft/TypeScript/pull/11929)
 
 # 2.0
 
