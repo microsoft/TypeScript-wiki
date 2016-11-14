@@ -17,6 +17,9 @@
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [X] [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/pull/9175)
 * [X] Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
+* [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)]
+* [X] [Mapped types](https://github.com/Microsoft/TypeScript/pull/12114)
+* [X] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [X] [Better inference for literal types](https://github.com/Microsoft/TypeScript/pull/10676)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
 * [X] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
@@ -24,17 +27,14 @@
 * [X] [Narrow string and number types in literal equality checks](https://github.com/Microsoft/TypeScript/pull/11587)
 * [X] [Contextual typing of partially annotated signatures](https://github.com/Microsoft/TypeScript/pull/11673)
 * [X] [Normalize union/intersection type combinations](https://github.com/Microsoft/TypeScript/pull/11717)
-* [X] [Static types for dynamically named properties](https://github.com/Microsoft/TypeScript/pull/11929)
-* [X] [Mapped types](https://github.com/Microsoft/TypeScript/pull/12114)
+* [X] New [`--jsxFactory`](https://github.com/Microsoft/TypeScript/pull/12135)
+* [X] New [`--alwaysStrict`](https://github.com/Microsoft/TypeScript/issues/10758)
+* [X] Support for [`--target ES2016`, `--target ES2017`](https://github.com/Microsoft/TypeScript/pull/11407) and `--target ESNext`
 * [X] [Configuration inheritance](https://github.com/Microsoft/TypeScript/issues/9876)
 * [X] [Go to implementation support](https://github.com/Microsoft/TypeScript/pull/10482)
 * [X] [Completions in imports and triple-slash reference paths](https://github.com/Microsoft/TypeScript/issues/188)
-* [X] New [`--alwaysStrict`](https://github.com/Microsoft/TypeScript/issues/10758)
-* [X] Support for [`--target ES2016`, `--target ES2017`](https://github.com/Microsoft/TypeScript/pull/11407) and `--target ESNext`
 * [X] [Quick fixes support](https://github.com/Microsoft/TypeScript/issues/6943) in language service API
-* [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)](https://github.com/Microsoft/TypeScript/pull/11929)
-* [X] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
-* [X] New [`--jsxFactory`](https://github.com/Microsoft/TypeScript/pull/12135)
+(https://github.com/Microsoft/TypeScript/pull/11929)
 
 # 2.0
 
