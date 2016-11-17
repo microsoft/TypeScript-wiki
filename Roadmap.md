@@ -18,7 +18,7 @@
 * [X] Support for [external helpers library](https://github.com/Microsoft/TypeScript/issues/3364)
 * [X] [Static types for dynamically named properties (`keyof T` and `T[K]`)](https://github.com/Microsoft/TypeScript/pull/11929)
 * [X] [Mapped types (e.g. `{ [P in K]: T[P] }`)](https://github.com/Microsoft/TypeScript/pull/12114)
-* [X] Support [ES8 object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
+* [X] Support [ESNext object property spread and rest](https://github.com/Microsoft/TypeScript/issues/2103)
 * [X] [Better inference for literal types](https://github.com/Microsoft/TypeScript/pull/10676)
 * [X] [Use returned values from super calls as 'this'](https://github.com/Microsoft/TypeScript/pull/10762)
 * [X] [Control flow analysis for implicit any variables](https://github.com/Microsoft/TypeScript/pull/11263)
