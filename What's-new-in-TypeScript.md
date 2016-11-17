@@ -311,6 +311,18 @@ TypeScript 2.1 supports two new target values `--target ES2016` and `--target ES
 Using target `--target ES2016` will instruct the compiler not to transform ES2016-specific features, e.g. `**` operator.
 Similarly, `--target ES2017` will instruct the compiler not to transform ES2017-specific features like `async`/`await`.
 
+## Untyped imports
+
+If you don't have `--noImplicitAny` set, you can import a Javascript module without needing a type declaration.
+A type declaration (such as `declare module "foo" { ... }` or `node_modules/@types/foo`) still takes priority if it exists.
+
+#### Example
+
+```ts
+// Succeeds if `node_modules/asdf/index.js` exists
+import { x } from "asdf";
+```
+
 
 # TypeScript 2.0
 
