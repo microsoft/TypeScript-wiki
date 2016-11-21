@@ -237,73 +237,6 @@ const currentDirectoryFiles = fs.readdirSync(process.cwd()).
 watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
 ```
 
-## Pretty printer using the LS Formatter
-
-> The formatting interfaces used here are part of the typescript 1.4 package but is not currently exposed in the public typescript.d.ts. The typings should be exposed in the next release.
-
-```TypeScript
-/// <reference path="typings/node/node.d.ts" />
-
-import * as ts from "typescript";
-
-// Note: this uses ts.formatting which is part of the typescript 1.4 package but is not currently 
-//       exposed in the public typescript.d.ts. The typings should be exposed in the next release. 
-function format(text: string) {
-    let options = getDefaultOptions();
-
-    // Parse the source text
-    let sourceFile = ts.createSourceFile("file.ts", text, ts.ScriptTarget.Latest, /*setParentPointers*/ true);
-
-    // Get the formatting edits on the input sources
-    let edits = (<any>ts).formatting.formatDocument(sourceFile, getRuleProvider(options), options);
-
-    // Apply the edits on the input code
-    return applyEdits(text, edits);
-
-    function getRuleProvider(options: ts.FormatCodeOptions) {
-        // Share this between multiple formatters using the same options.
-        // This represents the bulk of the space the formatter uses.
-        let ruleProvider = new (<any>ts).formatting.RulesProvider();
-        ruleProvider.ensureUpToDate(options);
-        return ruleProvider;
-    }
-
-    function applyEdits(text: string, edits: ts.TextChange[]): string {
-        // Apply edits in reverse on the existing text
-        let result = text;
-        for (let i = edits.length - 1; i >= 0; i--) {
-            let change = edits[i];
-            let head = result.slice(0, change.span.start);
-            let tail = result.slice(change.span.start + change.span.length)
-            result = head + change.newText + tail;
-        }
-        return result;
-    }
-
-    function getDefaultOptions(): ts.FormatCodeOptions {
-        return {
-            IndentSize: 4,
-            TabSize: 4,
-            NewLineCharacter: '\r\n',
-            ConvertTabsToSpaces: true,
-            InsertSpaceAfterCommaDelimiter: true,
-            InsertSpaceAfterSemicolonInForStatements: true,
-            InsertSpaceBeforeAndAfterBinaryOperators: true,
-            InsertSpaceAfterKeywordsInControlFlowStatements: true,
-            InsertSpaceAfterFunctionKeywordForAnonymousFunctions: false,
-            InsertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis: false,
-            PlaceOpenBraceOnNewLineForFunctions: false,
-            PlaceOpenBraceOnNewLineForControlBlocks: false,
-        };
-    }
-}
-
-
-let code = "var a=function(v:number){return 0+1+2+3;\n}";
-let result = format(code);
-console.log(result);
-```
-
 ## Transpiling a single file
 
 Currently TypeScript exposes two functions for this purpose: `transpileModule` and `transpile` (**which is deprecated**).
@@ -466,7 +399,7 @@ interface DocEntry {
     returnType?: string
 };
 
-/** Generate documention for all classes in a set of .ts files */
+/** Generate documentation for all classes in a set of .ts files */
 function generateDocumentation(fileNames: string[], options: ts.CompilerOptions): void {
     // Build a program using the set of root file names in fileNames
     let program = ts.createProgram(fileNames, options);
