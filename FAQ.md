@@ -66,10 +66,11 @@
   - [`tsconfig.json` Behavior](#tsconfigjson-behavior)
     - [Why is a file in the `exclude` list still picked up by the compiler?](#why-is-a-file-in-the-exclude-list-still-picked-up-by-the-compiler)
     - [How can I specify an `include`?](#how-can-i-specify-an-include)
-  - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
+    - [Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?](#why-am-i-getting-the-error-ts5055-cannot-write-file-xxxjs-because-it-would-overwrite-input-file-when-using-javascript-files)
+- [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
-  - [GitHub Process Questions](#github-process-questions)
+- [GitHub Process Questions](#github-process-questions)
     - [What do the labels on these issues mean?](#what-do-the-labels-on-these-issues-mean)
     - [I disagree with the outcome of this suggestion](#i-disagree-with-the-outcome-of-this-suggestion)
 
@@ -1175,6 +1176,17 @@ So to exclude a file from the compilation, you need to exclude and all **all** f
 ### How can I specify an `include`?
 
 There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
+
+### Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?
+
+For a TypeScript file, the TypeScript compiler by default emits the generated JavaScript files in the same directory with the same base file name.
+Because the TypeScript files and emitted JavaScript files always have different file extensions, it is safe to do so.
+However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidently overwriting your source file, the  compiler will issue this warning and skip writing the output files.
+
+There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` file in the project root to enable this. 
+If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`;
+If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files;
+If you just want to include the JavaScript files for editing and don't need to compile, set the `noEmit` compiler option to `true` to skip the emitting check.
 
 -------------------------------------------------------------------------------------
 
