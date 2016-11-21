@@ -1181,12 +1181,11 @@ There is no way now to indicate an `“include”` to a file outside the current
 
 For a TypeScript file, the TypeScript compiler by default emits the generated JavaScript files in the same directory with the same base file name.
 Because the TypeScript files and emitted JavaScript files always have different file extensions, it is safe to do so.
-However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidently overwriting your source file, the  compiler will issue this warning and block the emitting.
+However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidently overwriting your source file, the  compiler will issue this warning and skip writing the output files.
 
-There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` or `jsconfig.json` file in the project root to enable this. 
-If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`.
-You may not have set the `allowJs` option to `true` yourself. In some cases, the option is set by default, for example, when you are using a `jsconfig.json` file instead of a `tsconfig.json` file.
-If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files.
+There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` file in the project root to enable this. 
+If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`;
+If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files;
 If you just want to include the JavaScript files for editing and don't need to compile, set the `noEmit` compiler option to `true` to skip the emitting check.
 
 -------------------------------------------------------------------------------------
