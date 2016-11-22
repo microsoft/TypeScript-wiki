@@ -233,9 +233,9 @@ Just a few configuration options change between these two targets, and maintaini
 
 TypeScript 2.1 supports inheriting configuration using `extends`, where:
 
-* `extends` is a new top-level propoerty in `tsconfig.json` (alongside `compilerOptions`, `files`, `include`, and `exclude`).
-* `extends`' value is a string containing a path to other `tsconfig.json` to inherit from.
-* The configuration from the base file are loaded first, then overridden by those  in the inheriting config file.
+* `extends` is a new top-level property in `tsconfig.json` (alongside `compilerOptions`, `files`, `include`, and `exclude`).
+* `extends`' value is a string containing a path to another configuration file to inherit from.
+* The configuration from the base file are loaded first, then overridden by those in the inheriting config file.
 * If a circularity is encountered, we report an error.
 * `files`, `include` and `exclude` from the inheriting config file *overwrite* those from the base config file.
 * All relative paths found in the configuration file will be resolved relative to the configuration file they originated in.
@@ -244,38 +244,18 @@ TypeScript 2.1 supports inheriting configuration using `extends`, where:
 
 `configs/base.json`:
 
-``` ts
+```json
 {
   "compilerOptions": {
-    "allowJs": true,
     "noImplicitAny": true,
     "strictNullChecks": true
   }
 }
 ```
 
-`configs/tests.json`:
-
-``` ts
-{
-  "compilerOptions": {
-    "preserveConstEnums": true,
-    "stripComments": false,
-    "sourceMaps": true
-  },
-  "exclude": [
-    "../tests/baselines",
-    "../tests/scenarios"
-  ],
-  "include": [
-    "../tests/**/*.ts"
-  ]
-}
-```
-
 `tsconfig.json`:
 
-``` ts
+```json
 {
   "extends": "./configs/base",
   "files": [
@@ -287,9 +267,9 @@ TypeScript 2.1 supports inheriting configuration using `extends`, where:
 
 `tsconfig.nostrictnull.json`:
 
-``` ts
+```json
 {
-  "extends": "./tsconfig"
+  "extends": "./tsconfig",
   "compilerOptions": {
     "strictNullChecks": false
   }
