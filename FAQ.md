@@ -188,7 +188,7 @@ There's not a good reason to reject this program on the basis that `Dog[]` can't
 Back to the first question.
 When the type system decides whether or not `Dog[]` is a subtype of `Animal[]`, it does the following computation (written here as if the compiler took no optimizations), among many others:
 
- * Is `Dog[]` assignable to Animal[]` ?
+ * Is `Dog[]` assignable to `Animal[]` ?
   * Is each member of `Dog[]` assignable to `Animal[]` ?
     * Is `Dog[].push` assignable to `Animal[].push`?
       * Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?
