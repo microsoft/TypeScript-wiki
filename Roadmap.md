@@ -1,3 +1,6 @@
+- [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
+
+
 # Future
 
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
@@ -160,11 +163,3 @@
 * [X] Language service re-write to target new compiler
 * [X] Support for [protected members](https://github.com/Microsoft/TypeScript/pull/688) in classes
 * [X] Support for [Tuple Types](https://github.com/Microsoft/TypeScript/pull/428)
-
-
-
-<br/>
-<br/>
-<br/>
-***
-- [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
