@@ -14,7 +14,7 @@
 * Refactoring support in Language Service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
-# 2.1 (November 2016)
+# 2.1 (December 2016)
 
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [X] [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/pull/9175)
