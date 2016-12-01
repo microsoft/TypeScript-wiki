@@ -111,5 +111,5 @@ window.setTimeout(x.someMethod.bind(x), 100);
  * Good/bad: Opposite memory/performance trade-off compared to using instance functions
  * Good: No extra work if the function has parameters
  * Bad: In TypeScript, this currently has no type safety
- * Bad: Only available in ECMAScript 5, if that matters
+ * Bad: Only available in [ECMAScript 5](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) or newer
  * Bad: You have to type the instance name twice
