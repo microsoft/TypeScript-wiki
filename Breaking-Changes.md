@@ -8,7 +8,7 @@ For full list of breaking changes see the [breaking change issues](https://githu
 
 ## Generated constructor code use return value of `super(...)` calls as `this` 
 
-In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(..)`. As a result, it is necessary to capture any potential return value of `super()` and replace it with `this`.
+In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(...)`. As a result, it is necessary to capture any potential return value of `super(...)` and replace it with `this`.
 
 **Example**
 
@@ -43,6 +43,7 @@ Notice:
  * All uses of `this` in the constructor body has been replaced by the result of the `super` call (i.e. `_this`)
  * Each constructor now returns explicitly its `this`, to enable for correct inheritance 
 
+It is worth noting that the use of `this` before `super(...)` is already an error as of [TypeScript 1.8](#disallow-this-accessing-before-super-call)
 
 ## Comma operators on side-effect-free expressions is now flagged as an error
 
