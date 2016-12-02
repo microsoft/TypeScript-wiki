@@ -2,6 +2,96 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.1
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.1%22+label%3A%22Breaking+Change%22+is%3Aclosed).
+
+## Generated constructor code use return value of `super(...)` calls as `this` 
+
+In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(..)`. As a result, it is necessary to capture any potential return value of `super()` and replace it with `this`.
+
+**Example**
+
+A class `C` as:
+
+```ts
+class C extends B {
+    public a: number;
+    constructor() {
+        super();
+        this.a = 0;
+    }
+}
+```
+
+Will generate code as:
+
+```js
+var C = (function (_super) {
+    __extends(C, _super);
+    function C() {
+        var _this = _super.call(this) || this;
+        _this.a = 0;
+        return _this;
+    }
+    return C;
+}(B));
+```
+
+Notice:
+ * `_super.call(this)` is captured into a local variable `_this`
+ * All uses of `this` in the constructor body has been replaced by the result of the `super` call (i.e. `_this`)
+ * Each constructor now returns explicitly its `this`, to enable for correct inheritance 
+
+
+## Comma operators on side-effect-free expressions is now flagged as an error
+
+Mostly, this should catch errors that were previously allowed as valid comma expressions.
+
+**Example**
+
+```ts
+let x = Math.pow((3, 5)); // x = NaN, was meant to be `Math.pow(3, 5)`
+
+// This code does not do what it appears to!
+let arr = [];
+switch(arr.length) {
+  case 0, 1:
+    return 'zero or one';
+  default:
+    return 'more than one';
+}
+```
+
+**Recommendation**
+
+`--allowUnreachableCode` will disable the warning for the whole compilation. Alternatively, you can use the `void` operator to suppress the error for specific comma expressions:
+
+```ts
+let a = 0;
+let y = (void a, 1); // no warning for `a` 
+```
+
+## No type narrowing for captured variables in functions and class expressions
+
+String, numeric and boolean literal types will be inferred if the generic type parameter has a constraint of `string`,`number` or `boolean` respectively. Moreover the rule of failing if no best common super-type for inferences in the case of literal types if they have the same base type (e.g. `string`).
+
+**Example**
+
+```ts
+declare function push<T extends string>(...args: T[]): T;
+
+var x = push("A", "B", "C"); // inferred as "A" | "B" | "C" in TS 2.1, was string in TS 2.0 
+```
+
+**Recommendation**
+
+Specify the type argument explicitly at call site:
+
+```ts
+var x = push<string>("A", "B", "C"); // x is string
+```
+
 # TypeScript 2.0
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.0%22+label%3A%22Breaking+Change%22+is%3Aclosed).
