@@ -1,3 +1,7 @@
+# TypeScript 2.1
+
+- `ParseConfigHost` now require a new member `readFile` to support [configuration inheritance](https://github.com/Microsoft/TypeScript/pull/9941).
+
 # TypeScript 1.9
 
 - `LanguageService.getSourceFile` is removed (https://github.com/Microsoft/TypeScript/pull/7584), `LanguageService.getProgram().getSourceFile` should be used instead.

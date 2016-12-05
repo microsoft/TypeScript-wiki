@@ -2,6 +2,97 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.1
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.1%22+label%3A%22Breaking+Change%22+is%3Aclosed).
+
+## Generated constructor code use return value of `super(...)` calls as `this` 
+
+In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(...)`. As a result, it is necessary to capture any potential return value of `super(...)` and replace it with `this`.
+
+**Example**
+
+A class `C` as:
+
+```ts
+class C extends B {
+    public a: number;
+    constructor() {
+        super();
+        this.a = 0;
+    }
+}
+```
+
+Will generate code as:
+
+```js
+var C = (function (_super) {
+    __extends(C, _super);
+    function C() {
+        var _this = _super.call(this) || this;
+        _this.a = 0;
+        return _this;
+    }
+    return C;
+}(B));
+```
+
+Notice:
+ * `_super.call(this)` is captured into a local variable `_this`
+ * All uses of `this` in the constructor body has been replaced by the result of the `super` call (i.e. `_this`)
+ * Each constructor now returns explicitly its `this`, to enable for correct inheritance 
+
+It is worth noting that the use of `this` before `super(...)` is already an error as of [TypeScript 1.8](#disallow-this-accessing-before-super-call)
+
+## Comma operators on side-effect-free expressions is now flagged as an error
+
+Mostly, this should catch errors that were previously allowed as valid comma expressions.
+
+**Example**
+
+```ts
+let x = Math.pow((3, 5)); // x = NaN, was meant to be `Math.pow(3, 5)`
+
+// This code does not do what it appears to!
+let arr = [];
+switch(arr.length) {
+  case 0, 1:
+    return 'zero or one';
+  default:
+    return 'more than one';
+}
+```
+
+**Recommendation**
+
+`--allowUnreachableCode` will disable the warning for the whole compilation. Alternatively, you can use the `void` operator to suppress the error for specific comma expressions:
+
+```ts
+let a = 0;
+let y = (void a, 1); // no warning for `a` 
+```
+
+## No type narrowing for captured variables in functions and class expressions
+
+String, numeric and boolean literal types will be inferred if the generic type parameter has a constraint of `string`,`number` or `boolean` respectively. Moreover the rule of failing if no best common super-type for inferences in the case of literal types if they have the same base type (e.g. `string`).
+
+**Example**
+
+```ts
+declare function push<T extends string>(...args: T[]): T;
+
+var x = push("A", "B", "C"); // inferred as "A" | "B" | "C" in TS 2.1, was string in TS 2.0 
+```
+
+**Recommendation**
+
+Specify the type argument explicitly at call site:
+
+```ts
+var x = push<string>("A", "B", "C"); // x is string
+```
+
 # TypeScript 2.0
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.0%22+label%3A%22Breaking+Change%22+is%3Aclosed).
@@ -127,13 +218,13 @@ Use `TemplateStringsArray` explicitly (or use `ReadonlyArray<string>`).
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.8%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
-#### Modules are now emitted with a `"use strict";` prologue
+## Modules are now emitted with a `"use strict";` prologue
 
 Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in the generated code. Starting with TypeScript 1.8, emitted modules are always in strict mode. This shouldn't have any visible changes in most code as TS considers most strict mode errors as errors at compile time, but it means that some things which used to silently fail at runtime in your TS code, like assigning to `NaN`, will now loudly fail. You can reference the [MDN Article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) on strict mode for a detailed list of the differences between strict mode and non-strict mode.
 
 To disable this behavior, pass `--noImplicitUseStrict` on the command line or set it in your tsconfig.json file.
 
-#### Exporting non-local names from a module
+## Exporting non-local names from a module
 
 In accordance with the ES6/ES2015 spec, it is an error to export a non-local name from a module.
 
@@ -152,7 +243,7 @@ const localPromise = Promise;
 export { localPromise as Promise }; 
 ```
 
-#### Reachability checks are enabled by default
+## Reachability checks are enabled by default
 
 In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/Microsoft/TypeScript/pull/4788) to prevent certain categories of errors. Specifically
 
@@ -208,11 +299,11 @@ In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/
 
 If these errors are showing up in your code and you still think that scenario when they appear is legitimate you can suppress errors with compiler options.
 
-#### `--module` is not allowed alongside `--outFile` unless `--module` is specified as one of `amd` or `system`.
+## `--module` is not allowed alongside `--outFile` unless `--module` is specified as one of `amd` or `system`.
 
 Previously specifying both while using modules would result in an empty `out` file and no error.
 
-#### Changes to DOM API's in the standard library
+## Changes to DOM API's in the standard library
 
 * **ImageData.data** is now of type `Uint8ClampedArray` instead of `number[]`. See [#949](https://github.com/Microsoft/TypeScript/issues/949) for more details.
 * **HTMLSelectElement .options** is now of type `HTMLCollection` instead of `HTMLSelectElement`. See [#1558](https://github.com/Microsoft/TypeScript/issues/1558) for more details.
@@ -223,7 +314,7 @@ Previously specifying both while using modules would result in an empty `out` fi
 * **Window.open** return type now is `Window` instead of `any`. See [#6418](https://github.com/Microsoft/TypeScript/issues/6418) for more details.
 * **WeakMap.clear** as removed. See [#6500](https://github.com/Microsoft/TypeScript/issues/6500) for more details.
 
-#### Disallow `this` accessing before super-call
+## Disallow `this` accessing before super-call
 ES6 disallows accessing `this` in a constructor declaration.
 
 For example:
@@ -251,7 +342,7 @@ class D extends B {
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.7%22+label%3A%22breaking+change%22).
 
-#### Changes in inferring the type from `this`
+## Changes in inferring the type from `this`
 
 In a class, the type of the value `this` will be inferred to the `this` type.
 This means subsequent assignments from values the original type can fail.
@@ -288,7 +379,7 @@ class Fighter {
 }
 ```
 
-#### Automatic semicolon insertion after class member modifiers
+## Automatic semicolon insertion after class member modifiers
 
 The keywords `abstract, public, protected` and `private` are *FutureReservedWords* in ECMAScript 3 and are subject to automatic semicolon insertion. Previously, TypeScript did not insert semicolons when these keywords were on their own line. Now that this is fixed, `abstract class D` no longer correctly extends `C` in the following example, and instead declares a concrete method `m` and an additional property named `abstract`.
 
@@ -314,7 +405,7 @@ Remove line breaks after keywords when defining class members. In general, avoid
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.6%22+label%3A%22breaking+change%22).
 
-#### Strict object literal assignment checking
+## Strict object literal assignment checking
 
 It is an error to specify properties in an object literal that were not specified on the target type, when assigned to a variable or passed for a parameter of a non-empty target type.
 
@@ -364,7 +455,7 @@ var y: Foo;
 y = <FooBar>{ foo: 1, bar: 2 };
 ```
 
-#### CommonJS module resolution no longer assumes paths are relative
+## CommonJS module resolution no longer assumes paths are relative
 
 Previously, for the files `one.ts` and `two.ts`, an import of `"one"` in `two.ts` would resolve to `one.ts` if they resided in the same directory.
 
@@ -402,7 +493,7 @@ import { f as g } from "./one";
 
 **Set the `--moduleResolution` compiler option to `classic`.**
 
-#### Function and class default export declarations can no longer merge with entities intersecting in their meaning
+## Function and class default export declarations can no longer merge with entities intersecting in their meaning
 
 Declaring an entity with the same name and in the same space as a default export declaration is now an error; for example,  
 
@@ -457,31 +548,31 @@ export default Foo;
 
 For more details see [the originating issue](https://github.com/Microsoft/TypeScript/issues/3095).
 
-#### Module bodies are parsed in strict mode
+## Module bodies are parsed in strict mode
 
 In accordance with [the ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-mode-code), module bodies are now parsed in strict mode. module bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
 
-#### Changes to DOM API's in the standard library
+## Changes to DOM API's in the standard library
 
 * **MessageEvent** and **ProgressEvent** constructors now expect arguments; see [issue #4295](https://github.com/Microsoft/TypeScript/issues/4295) for more details.
 * **ImageData** constructor now expects arguments; see [issue #4220](https://github.com/Microsoft/TypeScript/issues/4220) for more details.
 * **File** constructor now expects arguments; see [issue #3999](https://github.com/Microsoft/TypeScript/issues/3999) for more details.
 
-#### System module output uses bulk exports
+## System module output uses bulk exports
 
 The compiler uses the [new bulk-export](https://github.com/ModuleLoader/es6-module-loader/issues/386) variation of the `_export` function in the System module format that takes any object containing key value pairs (optionally an entire module object for export *) as arguments instead of key, value.
 
 The module loader needs to be updated to [v0.17.1](https://github.com/ModuleLoader/es6-module-loader/releases/tag/v0.17.1) or higher.
 
-#### .js content of npm package is moved from 'bin' to 'lib' folder
+## .js content of npm package is moved from 'bin' to 'lib' folder
 
 Entry point of TypeScript npm package was moved from `bin` to `lib` to unblock scenarios when 'node_modules/typescript/bin/typescript.js' is served from IIS (by default `bin` is in the list of hidden segments so IIS will block access to this folder).
 
-#### TypeScript npm package does not install globally by default
+## TypeScript npm package does not install globally by default
 
 TypeScript 1.6 removes the `preferGlobal` flag from package.json. If you rely on this behaviour please use `npm install -g typescript`.
 
-#### Decorators are checked as call expressions
+## Decorators are checked as call expressions
 
 Starting with 1.6, decorators type checking is more accurate; the compiler will checks a decorator expression as a call expression with the decorated entity as a parameter. This can cause error to be reported that were not in previous releases.
 
@@ -489,7 +580,7 @@ Starting with 1.6, decorators type checking is more accurate; the compiler will 
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
 
-#### Referencing `arguments` in arrow functions is not allowed
+## Referencing `arguments` in arrow functions is not allowed
 This is an alignment with the ES6 semantics of arrow functions. Previously arguments within an arrow function would bind to the arrow function arguments. As per [ES6 spec draft](http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts) 9.2.12, arrow functions do not have an arguments objects. 
 In TypeScript 1.5, the use of arguments object in arrow functions will be flagged as an error to ensure your code ports to ES6 with no change in semantics.
 
@@ -513,7 +604,7 @@ function f() {
 }
 ```
 
-#### Enum reference in-lining changes
+## Enum reference in-lining changes
 For regular enums, pre 1.5, the compiler *only* inline constant members, and a member was only constant if its initializer was a literal. That resulted in inconsistent behavior depending on whether the enum value is initalized with a literal or an expression. Starting with Typescript 1.5 all non-const enum members are not inlined.
 
 **Example:**
@@ -531,7 +622,7 @@ Add the `const` modifier to the enum declaration to ensure it is consistently in
 For more details see issue [#2183](https://github.com/Microsoft/TypeScript/issues/2183).
 
 
-#### Contextual type flows through `super` and parenthesized expressions
+## Contextual type flows through `super` and parenthesized expressions
 Prior to this release, contextual types did not flow through parenthesized expressions. This has forced explicit type casts, especially in cases where parentheses are *required* to make an expression parse.
 
 In the examples below, `m` will have a contextual type, where previously it did not.
@@ -550,7 +641,7 @@ class C extends CBase<string> {
 
 See issues [#1425](https://github.com/Microsoft/TypeScript/issues/1425) and [#920](https://github.com/Microsoft/TypeScript/issues/920) for more details.
 
-#### DOM interface changes
+## DOM interface changes
 TypeScript 1.5 refreshes the DOM types in lib.d.ts. This is the first major refresh since TypeScript 1.0; many IE-specific definitions have been removed in favor of the standard DOM definitions, as well as adding missing types like Web Audio and touch events.
 
 **Workaround:**
@@ -595,7 +686,7 @@ You can keep using older versions of the library with newer version of the compi
 
 For more details, please see the [full change](https://github.com/Microsoft/TypeScript/pull/2739).
 
-#### Class bodies are parsed in strict mode
+## Class bodies are parsed in strict mode
 
 In accordance with [the ES6 spec](http://www.ecma-international.org/ecma-262/6.0/#sec-strict-mode-code), class bodies are now parsed in strict mode. Class bodies will behave as if `"use strict"` was defined at the top of their scope; this includes flagging the use of `arguments` and `eval` as variable or parameter names, use of future reserved words as variables or parameters, use of octal numeric literals, etc..
 
@@ -605,7 +696,7 @@ For full list of breaking changes see the [breaking change issues](https://githu
 
 See [issue #868](https://github.com/Microsoft/TypeScript/issues/868) for more details about breaking changes related to Union Types
 
-#### Multiple Best Common Type Candidates
+## Multiple Best Common Type Candidates
 Given multiple viable candidates from a Best Common Type computation we now choose an item (depending on the compiler's implementation) rather than the first item.
 
 ```ts
@@ -625,7 +716,7 @@ Provide a type annotation if you need a specific type to be chosen
 var bs: { x: number; y?: number; z?: number }[] = [b, a];
 ```
 
-#### Generic Type Inference
+## Generic Type Inference
 Using different types for multiple arguments of type T is now an error, even with constraints involved:
 
 ```ts
@@ -660,7 +751,7 @@ declare function foo<T,U>(x: T, y:U): T|U;
 function f<T extends Animal, U extends Animal>(x: T, y: U): T|U { return undefined; }
 ```
 
-#### Generic Rest Parameters 
+## Generic Rest Parameters 
 You cannot use heterogeneous argument types anymore:
 
 ```ts
@@ -677,7 +768,7 @@ function makeArray(...items: {}[]): {}[];
 function makeArray<T>(...items: T[]): T[] { return items; }
 ```
 
-#### Overload Resolution with Type Argument Inference
+## Overload Resolution with Type Argument Inference
 
 ```ts
 var f10: <T>(x: T, b: () => (a: T) => void, y: T) => T;
@@ -690,7 +781,7 @@ Manually specify a type parameter
 var r9 = f10<any>('', () => (a => a.foo), 1);
 ```
 
-#### Strict Mode Parsing for Class Declarations and Class Expressions
+## Strict Mode Parsing for Class Declarations and Class Expressions
 ECMAScript 2015 Language Specification (ECMA-262 6<sup>th</sup> Edition) specifies that *ClassDeclaration* and *ClassExpression* are strict mode productions. 
 Thus, additional restrictions will be applied when parsing a class declaration or class expression. 
 

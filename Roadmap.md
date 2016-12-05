@@ -1,3 +1,6 @@
+- [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
+
+
 # Future
 
 * Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
@@ -11,7 +14,7 @@
 * Refactoring support in Language Service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
-# 2.1 (November 2016)
+# 2.1 (December 2016)
 
 * [X] Switch to a [transformation-based emitter](https://github.com/Microsoft/TypeScript/issues/5595)
 * [X] [`async`/`await` support for ES5/ES3](https://github.com/Microsoft/TypeScript/pull/9175)
@@ -160,11 +163,3 @@
 * [X] Language service re-write to target new compiler
 * [X] Support for [protected members](https://github.com/Microsoft/TypeScript/pull/688) in classes
 * [X] Support for [Tuple Types](https://github.com/Microsoft/TypeScript/pull/428)
-
-
-
-<br/>
-<br/>
-<br/>
-***
-- [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
