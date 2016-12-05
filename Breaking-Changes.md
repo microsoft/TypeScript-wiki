@@ -6,9 +6,10 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.1%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
-## Generated constructor code use return value of `super(...)` calls as `this` 
+## Generated constructor code substitutes the return value of `super(...)` calls as `this`
 
-In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(...)`. As a result, it is necessary to capture any potential return value of `super(...)` and replace it with `this`.
+In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(...)`.
+As a result, it is necessary to capture any potential return value of `super(...)` and replace it with `this`.
 
 **Example**
 
@@ -41,7 +42,7 @@ var C = (function (_super) {
 Notice:
  * `_super.call(this)` is captured into a local variable `_this`
  * All uses of `this` in the constructor body has been replaced by the result of the `super` call (i.e. `_this`)
- * Each constructor now returns explicitly its `this`, to enable for correct inheritance 
+ * Each constructor now returns explicitly its `this`, to enable for correct inheritance
 
 It is worth noting that the use of `this` before `super(...)` is already an error as of [TypeScript 1.8](#disallow-this-accessing-before-super-call)
 
@@ -70,8 +71,57 @@ switch(arr.length) {
 
 ```ts
 let a = 0;
-let y = (void a, 1); // no warning for `a` 
+let y = (void a, 1); // no warning for `a`
 ```
+
+## Extending built-ins like `Error`, `Array`, and `Map` may no longer work
+
+As part of substituting the value of `this` with the value returned by a `super(...)` call, subclassing `Error`, `Array`, and others may no longer work as expected.
+This is due to the fact that constructor functions for `Error`, `Array`, and the like use ES6's `new.target` to adjust the prototype chain;
+however, there is no way to emulate the semantics of `new.target` in ECMAScript 5.
+Other downlevel compilers generally have the same limitation by default.
+
+**Example**
+
+For a subclass like the following:
+
+```ts
+class FooError extends Error {
+    constructor(m: string) {
+        super(m);
+    }
+    sayHello() {
+        return "hello " + this.message;
+    }
+}
+```
+
+you may find that:
+
+* methods may be `undefined` on objects returned by constructing these subclasses, so calling `sayHello` will result in ane error.
+* `instanceof` will be broken between instances of the subclass and their instances, so `(new FooError()) instanceof FooError` may return `false`.
+
+**Recommendation**
+
+As a recommendation, you can manually adjust the prototype immediately after any `super(...)` calls.
+
+```ts
+class FooError extends Error {
+    constructor(m: string) {
+        super(m);
+
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, Foo.prototype);
+    }
+
+    sayHello() {
+        return "hello " + this.message;
+    }
+}
+```
+
+However, any subclass of `FooError` will have to manually set the prototype as well.
+For runtimes that don't support [`Object.setPrototypeOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
 
 ## No type narrowing for captured variables in functions and class expressions
 
@@ -82,7 +132,7 @@ String, numeric and boolean literal types will be inferred if the generic type p
 ```ts
 declare function push<T extends string>(...args: T[]): T;
 
-var x = push("A", "B", "C"); // inferred as "A" | "B" | "C" in TS 2.1, was string in TS 2.0 
+var x = push("A", "B", "C"); // inferred as "A" | "B" | "C" in TS 2.1, was string in TS 2.0
 ```
 
 **Recommendation**
@@ -100,7 +150,7 @@ For full list of breaking changes see the [breaking change issues](https://githu
 ## No type narrowing for captured variables in functions and class expressions
 
 Type narrowing does not cross function and class expressions, as well as lambda expressions.
- 
+
 **Example**
 
 ```ts
@@ -158,7 +208,7 @@ Either declare your locals to be a specific type and not the generic type parame
 **Example**
 
 ```ts
-class C { 
+class C {
   get x() { return 0; }
 }
 
@@ -240,7 +290,7 @@ Use a local variable declaration to capture the global name before exporting it.
 
 ```ts
 const localPromise = Promise;
-export { localPromise as Promise }; 
+export { localPromise as Promise };
 ```
 
 ## Reachability checks are enabled by default
@@ -253,7 +303,7 @@ In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/
           return 1;
           return 2; // error here
       }
-      
+
       function test2(x) {
           if (x) {
               return 1;
@@ -267,9 +317,9 @@ In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/
 2. check if label is unused (enabled by default, can be disabled via `allowUnusedLabels` compiler option)
    ```ts
    l: // error will be reported - label `l` is unused
-   while (true) { 
+   while (true) {
    }
-   
+
    (x) => { x:x } // error will be reported - label `x` is unused
    ```
 3. check if all code paths in function with return type annotation return some value (disabled by default, can be enabled via `noImplicitReturns` compiler option)
@@ -285,14 +335,14 @@ In TypeScript 1.8 we've added a set of [reachability checks](https://github.com/
    ```ts
    switch(x) {
       // OK
-      case 1: 
-      case 2: 
-          return 1; 
+      case 1:
+      case 2:
+          return 1;
    }
    switch(x) {
       case 1:
           if (y) return 1;
-      case 2: 
+      case 2:
           return 2;
    }
    ```
@@ -383,7 +433,7 @@ class Fighter {
 
 The keywords `abstract, public, protected` and `private` are *FutureReservedWords* in ECMAScript 3 and are subject to automatic semicolon insertion. Previously, TypeScript did not insert semicolons when these keywords were on their own line. Now that this is fixed, `abstract class D` no longer correctly extends `C` in the following example, and instead declares a concrete method `m` and an additional property named `abstract`.
 
-Note that `async` and `declare` already correctly did ASI. 
+Note that `async` and `declare` already correctly did ASI.
 
 **Example:**
 
@@ -399,7 +449,7 @@ abstract class D extends C {
 
 **Recommendations:**
 
-Remove line breaks after keywords when defining class members. In general, avoid relying on automatic semicolon insertion. 
+Remove line breaks after keywords when defining class members. In general, avoid relying on automatic semicolon insertion.
 
 # TypeScript 1.6
 
@@ -436,9 +486,9 @@ x = { foo: 1, baz: 2 };  // OK, `baz` matched by index signature
 
 ```ts
 let animalList: (Dog | Cat | Turkey)[] = [    // use union type instead of Animal
-    {name: "Milo", meow: true }, 
+    {name: "Milo", meow: true },
     {name: "Pepper", bark: true},
-    {name: "koko", gobble: true} 
+    {name: "koko", gobble: true}
 ];
 ```
 
@@ -473,7 +523,7 @@ export function f() {
 `./two.ts`
 ```TypeScript
 import { f as g } from "one";
-``` 
+```
 
 **Recommendations:**
 
@@ -489,13 +539,13 @@ export function f() {
 `./two.ts`
 ```TypeScript
 import { f as g } from "./one";
-``` 
+```
 
 **Set the `--moduleResolution` compiler option to `classic`.**
 
 ## Function and class default export declarations can no longer merge with entities intersecting in their meaning
 
-Declaring an entity with the same name and in the same space as a default export declaration is now an error; for example,  
+Declaring an entity with the same name and in the same space as a default export declaration is now an error; for example,
 
 ```TypeScript
 export default function foo() {
@@ -581,19 +631,19 @@ Starting with 1.6, decorators type checking is more accurate; the compiler will 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+1.5%22+label%3A%22breaking+change%22).
 
 ## Referencing `arguments` in arrow functions is not allowed
-This is an alignment with the ES6 semantics of arrow functions. Previously arguments within an arrow function would bind to the arrow function arguments. As per [ES6 spec draft](http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts) 9.2.12, arrow functions do not have an arguments objects. 
+This is an alignment with the ES6 semantics of arrow functions. Previously arguments within an arrow function would bind to the arrow function arguments. As per [ES6 spec draft](http://wiki.ecmascript.org/doku.php?id=harmony:specification_drafts) 9.2.12, arrow functions do not have an arguments objects.
 In TypeScript 1.5, the use of arguments object in arrow functions will be flagged as an error to ensure your code ports to ES6 with no change in semantics.
 
 **Example:**
 ```ts
 function f() {
-    return () => arguments; // Error: The 'arguments' object cannot be referenced in an arrow function. 
+    return () => arguments; // Error: The 'arguments' object cannot be referenced in an arrow function.
 }
 ```
 
 **Recommendations:**
 ```ts
-// 1. Use named rest args 
+// 1. Use named rest args
 function f() {
     return (...args) => { args; }
 }
@@ -627,8 +677,8 @@ Prior to this release, contextual types did not flow through parenthesized expre
 
 In the examples below, `m` will have a contextual type, where previously it did not.
 ```ts
-var x: SomeType = (n) => ((m) => q); 
-var y: SomeType = t ? (m => m.length) : undefined; 
+var x: SomeType = (n) => ((m) => q);
+var y: SomeType = t ? (m => m.length) : undefined;
 
 class C extends CBase<string> {
     constructor() {
@@ -705,7 +755,7 @@ var b: { x: number; z?: number };
 
 // was { x: number; z?: number; }[]
 // now { x: number; y?: number; }[]
-var bs = [b, a]; 
+var bs = [b, a];
 ```
 
 This can happen in a variety of circumstances. A shared set of required properties and a disjoint set of other properties (optional or otherwise), empty types, compatible signature types (including generic and non-generic signatures when type parameters are stamped out with ```any```).
@@ -751,7 +801,7 @@ declare function foo<T,U>(x: T, y:U): T|U;
 function f<T extends Animal, U extends Animal>(x: T, y: U): T|U { return undefined; }
 ```
 
-## Generic Rest Parameters 
+## Generic Rest Parameters
 You cannot use heterogeneous argument types anymore:
 
 ```ts
@@ -782,8 +832,8 @@ var r9 = f10<any>('', () => (a => a.foo), 1);
 ```
 
 ## Strict Mode Parsing for Class Declarations and Class Expressions
-ECMAScript 2015 Language Specification (ECMA-262 6<sup>th</sup> Edition) specifies that *ClassDeclaration* and *ClassExpression* are strict mode productions. 
-Thus, additional restrictions will be applied when parsing a class declaration or class expression. 
+ECMAScript 2015 Language Specification (ECMA-262 6<sup>th</sup> Edition) specifies that *ClassDeclaration* and *ClassExpression* are strict mode productions.
+Thus, additional restrictions will be applied when parsing a class declaration or class expression.
 
 Examples:
 
@@ -805,7 +855,7 @@ For full list of breaking changes see the [breaking change issues](https://githu
 
 ## Working with null and undefined in ways that are observably incorrect is now an error
 
-Examples: 
+Examples:
 
 ```TypeScript
 var ResultIsNumber17 = +(null + undefined);
