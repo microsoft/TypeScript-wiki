@@ -46,34 +46,6 @@ Notice:
 
 It is worth noting that the use of `this` before `super(...)` is already an error as of [TypeScript 1.8](#disallow-this-accessing-before-super-call)
 
-## Comma operators on side-effect-free expressions is now flagged as an error
-
-Mostly, this should catch errors that were previously allowed as valid comma expressions.
-
-**Example**
-
-```ts
-let x = Math.pow((3, 5)); // x = NaN, was meant to be `Math.pow(3, 5)`
-
-// This code does not do what it appears to!
-let arr = [];
-switch(arr.length) {
-  case 0, 1:
-    return 'zero or one';
-  default:
-    return 'more than one';
-}
-```
-
-**Recommendation**
-
-`--allowUnreachableCode` will disable the warning for the whole compilation. Alternatively, you can use the `void` operator to suppress the error for specific comma expressions:
-
-```ts
-let a = 0;
-let y = (void a, 1); // no warning for `a`
-```
-
 ## Extending built-ins like `Error`, `Array`, and `Map` may no longer work
 
 As part of substituting the value of `this` with the value returned by a `super(...)` call, subclassing `Error`, `Array`, and others may no longer work as expected.
@@ -141,6 +113,34 @@ Specify the type argument explicitly at call site:
 
 ```ts
 var x = push<string>("A", "B", "C"); // x is string
+```
+
+## Comma operators on side-effect-free expressions is now flagged as an error
+
+Mostly, this should catch errors that were previously allowed as valid comma expressions.
+
+**Example**
+
+```ts
+let x = Math.pow((3, 5)); // x = NaN, was meant to be `Math.pow(3, 5)`
+
+// This code does not do what it appears to!
+let arr = [];
+switch(arr.length) {
+  case 0, 1:
+    return 'zero or one';
+  default:
+    return 'more than one';
+}
+```
+
+**Recommendation**
+
+`--allowUnreachableCode` will disable the warning for the whole compilation. Alternatively, you can use the `void` operator to suppress the error for specific comma expressions:
+
+```ts
+let a = 0;
+let y = (void a, 1); // no warning for `a`
 ```
 
 # TypeScript 2.0
