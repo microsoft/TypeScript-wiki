@@ -77,8 +77,8 @@ let y = (void a, 1); // no warning for `a`
 ## Extending built-ins like `Error`, `Array`, and `Map` may no longer work
 
 As part of substituting the value of `this` with the value returned by a `super(...)` call, subclassing `Error`, `Array`, and others may no longer work as expected.
-This is due to the fact that constructor functions for `Error`, `Array`, and the like use ES6's `new.target` to adjust the prototype chain;
-however, there is no way to emulate the semantics of `new.target` in ECMAScript 5.
+This is due to the fact that constructor functions for `Error`, `Array`, and the like use ECMAScript 6's `new.target` to adjust the prototype chain;
+however, there is no way to ensure a value for `new.target` when invoking a constructor in ECMAScript 5.
 Other downlevel compilers generally have the same limitation by default.
 
 **Example**
@@ -99,7 +99,7 @@ class FooError extends Error {
 you may find that:
 
 * methods may be `undefined` on objects returned by constructing these subclasses, so calling `sayHello` will result in ane error.
-* `instanceof` will be broken between instances of the subclass and their instances, so `(new FooError()) instanceof FooError` may return `false`.
+* `instanceof` will be broken between instances of the subclass and their instances, so `(new FooError()) instanceof FooError` will return `false`.
 
 **Recommendation**
 
