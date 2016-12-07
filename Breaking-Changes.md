@@ -98,6 +98,28 @@ For runtimes that don't support [`Object.setPrototypeOf`](https://developer.mozi
 Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior](https://msdn.microsoft.com/en-us/library/s4esdbwz(v=vs.94).aspx).
 One can manually copy methods from the prototype onto the instance itself (i.e. `FooError.prototype` onto `this`), but the prototype chain itself cannot be fixed.
 
+## Literal types are inferred by default for `const` variables and `readonly` properties
+
+String, numeric, boolean and enum literal types are not inferred by default for `const` declarations and `readonly` properties. This means your variables/properties an have more narrowed type than before. This could manifest in using comparison operators such as `===` and `!===`.
+
+**Example**
+
+```ts
+const DEBUG = true; // Now has type `true`, previously had type `boolean`
+
+if (DEBUG === false) { /// Error: operator '===' can not be applied to 'true' and 'false'
+    ...
+}
+```
+
+**Recommendation**
+
+For types intentionally needed to be wider, cast to the base type:
+
+```ts
+const DEBUG = <boolean>true; // type is `boolean`
+```
+
 ## No type narrowing for captured variables in functions and class expressions
 
 String, numeric and boolean literal types will be inferred if the generic type parameter has a constraint of `string`,`number` or `boolean` respectively. Moreover the rule of failing if no best common super-type for inferences in the case of literal types if they have the same base type (e.g. `string`).
