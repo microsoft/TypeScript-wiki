@@ -146,6 +146,14 @@ let a = 0;
 let y = (void a, 1); // no warning for `a`
 ```
 
+## Changes to DOM API's in the standard library
+
+* **Node.firstChild**, **Node.lastChild**, **Node.nextSibling**, **Node.previousSibling**, **Node.parentElement** and **Node.parentNode** are now `Node | null` instead of `Node`. 
+ 
+ See [#11113](https://github.com/Microsoft/TypeScript/issues/11113) for more details. 
+ 
+ Recommendation is to explicitly check for `null` or use the `!` assertion operator (e.g. `node.lastChild!`).
+
 # TypeScript 2.0
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.0%22+label%3A%22Breaking+Change%22+is%3Aclosed).
