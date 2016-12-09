@@ -140,6 +140,35 @@ Specify the type argument explicitly at call site:
 var x = push<string>("A", "B", "C"); // x is string
 ```
 
+## Implicit-any error raised for un-annotated callback arguments with no matching overload arguments
+
+Previously the compiler silently gave the argument of the callback (`c` below) a type `any`. The reason is how the compiler resolves function expressions while doing overload resolution.Starting with TypeScript 2.1 an error will be reported under `--noImplicitAny`.
+
+**Example**
+
+```ts
+declare function func(callback: () => void): any;
+declare function func(callback: (arg: number) => void): any;
+
+func(c => { });
+```
+
+**Recommendation**
+
+Remove the first overload, since it is rather meaningless; the function above can still be called with a call back with 1 or 0 required arguments, as it is safe for functions to ignore additional arguments.
+```ts
+declare function func(callback: (arg: number) => void): any;
+
+func(c => { });
+func(() => { });
+```
+
+Alternatively, you can either specify an explicit type annotation on the callback argument:
+
+```ts
+func((c:number) => { });
+```
+
 ## Comma operators on side-effect-free expressions is now flagged as an error
 
 Mostly, this should catch errors that were previously allowed as valid comma expressions.
