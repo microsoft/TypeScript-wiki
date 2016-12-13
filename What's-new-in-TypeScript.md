@@ -279,7 +279,7 @@ An import to a module with no declaration file will still be flagged as an error
 ##### Example
 
 ```ts
-// Succeeds if `node_modules/asdf/index.js` exists
+// Succeeds if `node_modules/asdf/index.js` exists, or if `node_modules/asdf/package.json` defines a valid "main" entry point
 import { x } from "asdf";
 ```
 
