@@ -14,7 +14,7 @@
 * Refactoring support in Language Service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
-2.2 (February 2017)
+# 2.2 (February 2017)
 
 * [ ] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
 * [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
