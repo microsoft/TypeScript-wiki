@@ -13,7 +13,18 @@
 * Decorators for function expressions/arrow functions
 * Refactoring support in Language Service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
-* [ ] [Support for `new.target`](https://github.com/Microsoft/TypeScript/pull/12783).
+
+2.2 (February 2017)
+
+* [ ] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
+* [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
+* [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
+* [X] [Support for JSX spread children](https://github.com/Microsoft/TypeScript/issues/9495)
+* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
+* [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
+* [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
+* [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
+* [X] More Quick fixes: [Add missing imports](https://github.com/Microsoft/TypeScript/pull/11768), [Implement interface](https://github.com/Microsoft/TypeScript/pull/11547), and [Remove unused declarations](https://github.com/Microsoft/TypeScript/pull/11546)
 
 # 2.1 (December 2016)
 
