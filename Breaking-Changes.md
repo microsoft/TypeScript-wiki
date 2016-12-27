@@ -70,7 +70,7 @@ class FooError extends Error {
 
 you may find that:
 
-* methods may be `undefined` on objects returned by constructing these subclasses, so calling `sayHello` will result in ane error.
+* methods may be `undefined` on objects returned by constructing these subclasses, so calling `sayHello` will result in an error.
 * `instanceof` will be broken between instances of the subclass and their instances, so `(new FooError()) instanceof FooError` will return `false`.
 
 **Recommendation**
