@@ -16,7 +16,7 @@
 
 # 2.2 (February 2017)
 
-* [ ] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
+* [X] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
 * [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
 * [X] [Support for JSX spread children](https://github.com/Microsoft/TypeScript/issues/9495)
