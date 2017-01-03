@@ -19,6 +19,7 @@
 * [X] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
 * [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
+* [X] [Update `__extends` to use `Object.setPrototypeOf`](https://github.com/Microsoft/TypeScript/pull/12488)
 * [X] [Support for JSX spread children](https://github.com/Microsoft/TypeScript/issues/9495)
 * [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 * [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
