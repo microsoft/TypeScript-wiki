@@ -1184,7 +1184,7 @@ All imports to any module under `myLibrary` would be considered to have the type
 thus, shutting down any checking on the shapes or types of these modules.
 
 ```ts
-import { readFile } from "myLibrary/fileSystem/readFile`;
+import { readFile } from "myLibrary/fileSystem/readFile";
 
 readFile(); // readFile is 'any'
 ```
