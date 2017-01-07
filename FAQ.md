@@ -34,6 +34,7 @@
     - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
     - [Why am I getting "TypeError: [base class name] is not defined in `__extends` ?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends-)
     - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
+    - [Why doesn't extending built-ins like `Error`, `Array`, and `Map` work?](#why-doesnt-extending-built-ins-like-error-array-and-map-work)
   - [Generics](#generics)
     - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
     - [Why doesn't type inference work on this interface: `interface Foo<T> { }` ?](#why-doesnt-type-inference-work-on-this-interface-interface-foot---)
@@ -726,6 +727,62 @@ Re-order your script tags so that files defining base classes are included befor
 
 Finally, if you're using a third-party bundler of some sort, that bundler may be ordering files incorrectly.
 Refer to that tool's documentation to understand how to properly order the input files in the resulting output.
+
+
+### Why doesn't extending built-ins like `Error`, `Array`, and `Map` work?
+
+In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(...)`.
+It is necessary for generated constructor code to capture any potential return value of `super(...)` and replace it with `this`.
+
+As a result, subclassing `Error`, `Array`, and others may no longer work as expected.
+This is due to the fact that constructor functions for `Error`, `Array`, and the like use ECMAScript 6's `new.target` to adjust the prototype chain;
+however, there is no way to ensure a value for `new.target` when invoking a constructor in ECMAScript 5.
+Other downlevel compilers generally have the same limitation by default.
+
+**Example**
+
+For a subclass like the following:
+
+```ts
+class FooError extends Error {
+    constructor(m: string) {
+        super(m);
+    }
+    sayHello() {
+        return "hello " + this.message;
+    }
+}
+```
+
+you may find that:
+
+* methods may be `undefined` on objects returned by constructing these subclasses, so calling `sayHello` will result in an error.
+* `instanceof` will be broken between instances of the subclass and their instances, so `(new FooError()) instanceof FooError` will return `false`.
+
+**Recommendation**
+
+As a recommendation, you can manually adjust the prototype immediately after any `super(...)` calls.
+
+```ts
+class FooError extends Error {
+    constructor(m: string) {
+        super(m);
+
+        // Set the prototype explicitly.
+        Object.setPrototypeOf(this, FooError.prototype);
+    }
+
+    sayHello() {
+        return "hello " + this.message;
+    }
+}
+```
+
+However, any subclass of `FooError` will have to manually set the prototype as well.
+For runtimes that don't support [`Object.setPrototypeOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
+
+Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior](https://msdn.microsoft.com/en-us/library/s4esdbwz(v=vs.94).aspx).
+One can manually copy methods from the prototype onto the instance itself (i.e. `FooError.prototype` onto `this`), but the prototype chain itself cannot be fixed.
 
 -------------------------------------------------------------------------------------
 
