@@ -34,7 +34,7 @@
     - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
     - [Why am I getting "TypeError: [base class name] is not defined in `__extends` ?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends-)
     - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
-    - [Why extending built-ins like `Error`, `Array`, and `Map` does not work?](#why-extending-built-ins-like-error-array-and-map-does-not-work)
+    - [Why doesn't extending built-ins like `Error`, `Array`, and `Map` work?](#why-doesnt-extending-built-ins-like-error-array-and-map-work)
   - [Generics](#generics)
     - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
     - [Why doesn't type inference work on this interface: `interface Foo<T> { }` ?](#why-doesnt-type-inference-work-on-this-interface-interface-foot---)
@@ -729,7 +729,7 @@ Finally, if you're using a third-party bundler of some sort, that bundler may be
 Refer to that tool's documentation to understand how to properly order the input files in the resulting output.
 
 
-### Why extending built-ins like `Error`, `Array`, and `Map` does not work?
+### Why doesn't extending built-ins like `Error`, `Array`, and `Map` work?
 
 In ES2015, constructors which return an object implicitly substitute the value of `this` for any callers of `super(...)`.
 It is necessary for generated constructor code to capture any potential return value of `super(...)` and replace it with `this`.
