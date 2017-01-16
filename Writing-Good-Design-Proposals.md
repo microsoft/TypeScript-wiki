@@ -1,7 +1,7 @@
 ### Before You Start
 First, refer to the [[TypeScript Design Goals]] page and make sure your proposal fits within those guidelines.
 
-Next, see if there are any related existing suggestions in the issue tracker to avoid creating duplicate work.
+Next, see if there are any related [existing suggestions](https://github.com/Microsoft/TypeScript/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3Asuggestion) in the issue tracker to avoid creating duplicate work.
 
 ### Defining a Scenario
 A good design proposal starts with a problem statement. What are users having difficulty with? What common task do we need to make easier? Who is affected? Starting with several examples that show where the current language isn't meeting the needs of programmers will help make clear what problem is being fixed. Be sure to think about what the current workarounds are.
