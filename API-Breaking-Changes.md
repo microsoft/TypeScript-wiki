@@ -1,3 +1,7 @@
+# TypeScript 2.2
+
+- `ts.Map<T>` is now a native `Map<string, T>` or a shim. This affects the `SymbolTable` type, exposed by `Symbol.members`, `Symbol.exports`, and `Symbol.globalExports`.
+
 # TypeScript 2.1
 
 - `ParseConfigHost` now require a new member `readFile` to support [configuration inheritance](https://github.com/Microsoft/TypeScript/pull/9941).
