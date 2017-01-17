@@ -17,6 +17,7 @@
 # 2.2 (February 2017)
 
 * [X] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
+* [X] [Improved checking of nullable operands in expressions](https://github.com/Microsoft/TypeScript/pull/13483)
 * [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
 * [X] [Update `__extends` to use `Object.setPrototypeOf`](https://github.com/Microsoft/TypeScript/pull/12488)
