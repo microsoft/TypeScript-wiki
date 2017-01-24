@@ -27,6 +27,7 @@
 * [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
 * [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
+* [X] New [`--jsx react-native`](https://github.com/Microsoft/TypeScript/issues/11158)
 * [X] [Support for the `object` type.](https://github.com/Microsoft/TypeScript/issues/1809)
 * [X] More Quick fixes: [Add missing imports](https://github.com/Microsoft/TypeScript/pull/11768), [Implement interface/ Extend abstract class](https://github.com/Microsoft/TypeScript/pull/11547), and [Remove unused declarations](https://github.com/Microsoft/TypeScript/pull/11546)
 
