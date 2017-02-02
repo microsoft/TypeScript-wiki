@@ -1,3 +1,44 @@
+# TypeScript 2.2
+
+## `object` type
+
+TypeScript did not have a type that represents the non-primitive type, i.e. any thing that is not `number` | `string` | `boolean` | `symbol` | `null` | `undefined`. Enter the new `object` type. 
+
+With `object` type, APIs like `Object.create` can be better represented. For example:
+```ts
+declare function create(o: object | null): void;
+
+create({ prop: 0 }); // OK
+create(null); // OK
+
+create(42); // Error
+create("string"); // Error
+create(false); // Error
+create(undefined); // Error
+```
+
+## Dotted property for types with string index signatures
+
+Types with a string index signature can be indexed using the `[]` notation, but were not allowed to use the `.`. Starting with TypeScript 2.2 using either should be allowed.
+
+```ts
+interface StringMap<T> {
+    [x: string]: T;
+}
+
+const map: StringMap<number>;
+
+map["prop1"] = 1;
+map.prop2 = 2; 
+
+```
+
+This only apply to types with an *explicit* string index signature. It is still an error to access unknown properties on a type using `.` notation.
+
+## New `jsx: react-native` 
+
+React-native build pipeline expects all files to have a `.js` extensions even if the file contains JSX syntax. The new `--jsx` value `react-native` will persevere the JSX syntax in the output file, but give it a `.js` extension.
+
 # TypeScript 2.1
 
 ## `keyof` and Lookup Types
