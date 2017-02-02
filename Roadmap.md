@@ -28,6 +28,7 @@
 * [X] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
 * [X] [Improved checking of nullable operands in expressions](https://github.com/Microsoft/TypeScript/pull/13483)
 * [X] [Update `__extends` to use `Object.setPrototypeOf`](https://github.com/Microsoft/TypeScript/pull/12488)
+* [X] [Allow property (dotted) access for types with string index signatures](https://github.com/Microsoft/TypeScript/issues/12596)
 * [X] [Support for JSX spread children](https://github.com/Microsoft/TypeScript/issues/9495)
 * [X] New [`--jsx react-native`](https://github.com/Microsoft/TypeScript/issues/11158)
 * [X] [Support for the `object` type.](https://github.com/Microsoft/TypeScript/issues/1809)
