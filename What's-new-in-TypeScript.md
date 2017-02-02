@@ -96,6 +96,28 @@ map.prop2 = 2;
 
 This only apply to types with an *explicit* string index signature. It is still an error to access unknown properties on a type using `.` notation.
 
+## Support for spread operator on JSX element children
+
+TypeScript 2.2 adds suppot for using spread on a JSX element children. Please see [facebook/jsx#57](https://github.com/facebook/jsx/issues/57) for more details.
+
+#### Example 
+
+```ts
+function Todo(prop: { key: number, todo: string }) {
+    return <div>{prop.key.toString() + prop.todo}</div>;
+}
+
+function TodoList({ todos }: TodoListProps) {
+    return <div>
+        {...todos.map(todo => <Todo key={todo.id} todo={todo.todo} />)}
+    </div>;
+}
+
+let x: TodoListProps;
+
+<TodoList {...x} />
+```
+
 ## New `jsx: react-native` 
 
 React-native build pipeline expects all files to have a `.js` extensions even if the file contains JSX syntax. The new `--jsx` value `react-native` will persevere the JSX syntax in the output file, but give it a `.js` extension.
