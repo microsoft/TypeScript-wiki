@@ -98,7 +98,7 @@ This only apply to types with an *explicit* string index signature. It is still 
 
 ## Support for spread operator on JSX element children
 
-TypeScript 2.2 adds suppot for using spread on a JSX element children. Please see [facebook/jsx#57](https://github.com/facebook/jsx/issues/57) for more details.
+TypeScript 2.2 adds support for using spread on a JSX element children. Please see [facebook/jsx#57](https://github.com/facebook/jsx/issues/57) for more details.
 
 #### Example 
 
