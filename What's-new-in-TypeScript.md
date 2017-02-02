@@ -17,6 +17,54 @@ create(false); // Error
 create(undefined); // Error
 ```
 
+## Support for `new.target`
+
+The `new.target` meta-property is new syntax introduced in ES2015. When an instance of a constructor is created via `new`, the value of `new.target` is set to be a reference to the constructor function initially used to allocate the instance. If a function is called rather than constructed via `new`, `new.target` is set to `undefined`. 
+
+`new.target` comes in handy when `Object.setPrototypeOf` or `__proto__` needs to be set in a class constructor. One such use case is inheriting from `Error` in NodeJS v4 and higher.
+
+#### Example
+
+```ts
+class CustomError extends Error {
+    constructor(message?: string) {
+        super(message); // 'Error' breaks prototype chain here
+        Object.setPrototypeOf(this, new.target.prototype); // restore prototype chain
+    }
+}
+```
+This results in the generated JS
+
+```js
+var CustomError = (function (_super) {
+  __extends(CustomError, _super);
+  function CustomError() {
+    var _newTarget = this.constructor;
+    var _this = _super.apply(this, arguments);  // 'Error' breaks prototype chain here
+    _this.__proto__ = _newTarget.prototype; // restore prototype chain
+    return _this;
+  }
+  return CustomError;
+})(Error);
+```
+
+`new.target` also comes in handy for writing constructable functions, for example:
+
+```ts
+function f() {
+  if (new.target) { /* called via 'new' */ }
+}
+```
+
+Which translates to:
+
+```js
+function f() {
+  var _newTarget = this && this instanceof f ? this.constructor : void 0;
+  if (_newTarget) { /* called via 'new' */ }
+}
+```
+
 ## Better checking for `null`/`undefined` in operands of expressions
 
 TypeScript 2.2 improves checking of nullable operands in expressions. Specifically, these are now flagged as errors:
