@@ -56,10 +56,7 @@ The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Subl
 
 ### Language Service Tools
 
-There are two main TypeScript plugins:
-
 * [Quramy/tsuquyomi](https://github.com/Quramy/tsuquyomi)
-* [clausreinke/typescript-tools.vim](https://github.com/clausreinke/typescript-tools.vim)
 
 If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following code into your `.vimrc` to specify what token will trigger the completion. YouCompleteMe will call into its respective TypeScript Plugin for semantic queries.
 
