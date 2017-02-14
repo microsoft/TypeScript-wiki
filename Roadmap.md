@@ -21,6 +21,8 @@
 * [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
 * [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
 * [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
+* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
+* [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 
 # 2.2 (February 2017)
 
@@ -38,8 +40,6 @@
     * [Implement interface/abstract class members](https://github.com/Microsoft/TypeScript/pull/11547)
     * [Remove unused declarations](https://github.com/Microsoft/TypeScript/pull/11546)
     * [Add missing `this.`](https://github.com/Microsoft/TypeScript/pull/13759)
-* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
-* [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 
 # 2.1 (December 2016)
 
