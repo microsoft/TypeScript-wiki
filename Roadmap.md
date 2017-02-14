@@ -16,6 +16,7 @@
 
 # 2.3 (May 2017)
 
+* [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
 * [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
 * [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
