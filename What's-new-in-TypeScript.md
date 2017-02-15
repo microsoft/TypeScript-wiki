@@ -1,5 +1,75 @@
 # TypeScript 2.2
 
+## Support for Mix-in classes
+
+TypeScript 2.2 adds support for the ECMAScript 2015 mixin class pattern (see [MDN Mixin description](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes#Mix-ins) and ["Real" Mixins with JavaScript Classes](http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/) for more details) as well as rules for combining mixin construct signatures with regular construct signatures in intersection types.
+
+##### First some terminology:
+
+- A **mixin constructor type** refers to a type that has a single construct signature with a single rest argument of type `any[]` and an object-like return type. For example, given an object-like type `X`, `new (...args: any[]) => X` is a mixin constructor type with an instance type `X`.
+
+- A **mixin class** is a class declaration or expression that `extends` an expression of a type parameter type. The following rules apply to mixin class declarations:
+
+ * The type parameter type of the `extends` expression must be constrained to a mixin constructor type.
+ * The constructor of a mixin class (if any) must have a single rest parameter of type `any[]` and must use the spread operator to pass those parameters as arguments in a `super(...args)` call.
+
+Given an expression `Base` of a parametric type `T` with a constraint `X`, a mixin class `class C extends Base {...}` is processed as if `Base` had type `X` and the resulting type is the intersection `typeof C & T`. In other words, a mixin class is represented as an intersection between the mixin class constructor type and the parametric base class constructor type.
+
+When obtaining the construct signatures of an intersection type that contains mixin constructor types, the mixin construct signatures are discarded and their instance types are mixed into the return types of the other construct signatures in the intersection type. For example, the intersection type `{ new(...args: any[]) => A } & { new(s: string) => B }` has a single construct signature `new(s: string) => A & B`.
+
+##### Putting all of the above rules together in an example:
+
+```ts
+class Point {
+    constructor(public x: number, public y: number) {}
+}
+
+class Person {
+    constructor(public name: string) {}
+}
+
+type Constructor<T> = new(...args: any[]) => T;
+
+function Tagged<T extends Constructor<{}>>(Base: T) {
+    return class extends Base {
+        _tag: string;
+        constructor(...args: any[]) {
+            super(...args);
+            this._tag = "";
+        }
+    }
+}
+
+const TaggedPoint = Tagged(Point);
+
+let point = new TaggedPoint(10, 20);
+point._tag = "hello";
+
+class Customer extends Tagged(Person) {
+    accountBalance: number;
+}
+
+let customer = new Customer("Joe");
+customer._tag = "test";
+customer.accountBalance = 0;
+```
+
+Mixin classes can constrain the types of classes they can mix into by specifying a construct signature return type in the constraint for the type parameter. For example, the following `WithLocation` function implements a subclass factory that adds a `getLocation` method to any class that satisfies the `Point` interface (i.e. that has `x` and `y` properties of type `number`).
+
+```ts
+interface Point {
+    x: number;
+    y: number;
+}
+
+const WithLocation = <T extends Constructor<Point>>(Base: T) =>
+    class extends Base {
+        getLocation(): [number, number] {
+            return [this.x, this.y];
+        }
+    }
+```
+
 ## `object` type
 
 TypeScript did not have a type that represents the non-primitive type, i.e. any thing that is not `number` | `string` | `boolean` | `symbol` | `null` | `undefined`. Enter the new `object` type. 
