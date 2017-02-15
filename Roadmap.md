@@ -17,12 +17,12 @@
 # 2.3 (May 2017)
 
 * [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
+* [X] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
+* [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
-* [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
 * [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
 * [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
-* [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 
 # 2.2 (February 2017)
 
