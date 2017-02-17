@@ -41,6 +41,7 @@
     * [Implement interface/abstract class members](https://github.com/Microsoft/TypeScript/pull/11547)
     * [Remove unused declarations](https://github.com/Microsoft/TypeScript/pull/11546)
     * [Add missing `this.`](https://github.com/Microsoft/TypeScript/pull/13759)
+    * [Add missing property declaration](https://github.com/Microsoft/TypeScript/pull/14097)
 
 # 2.1 (December 2016)
 
