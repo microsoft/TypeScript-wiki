@@ -14,20 +14,25 @@
 * Refactoring support in Language Service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 
+# 2.3 (May 2017)
+
+* [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
+* [X] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
+* [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
+* [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
+* [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
+* [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
+* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
+
 # 2.2 (February 2017)
 
 * [X] [Mixin classes](https://github.com/Microsoft/TypeScript/pull/13743)
 * [X] [Allow deriving from object and intersection types](https://github.com/Microsoft/TypeScript/pull/13604)
 * [X] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
 * [X] [Improved checking of nullable operands in expressions](https://github.com/Microsoft/TypeScript/pull/13483)
-* [ ] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
-* [ ] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
 * [X] [Update `__extends` to use `Object.setPrototypeOf`](https://github.com/Microsoft/TypeScript/pull/12488)
+* [X] [Allow property (dotted) access for types with string index signatures](https://github.com/Microsoft/TypeScript/issues/12596)
 * [X] [Support for JSX spread children](https://github.com/Microsoft/TypeScript/issues/9495)
-* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
-* [ ] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
-* [ ] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
-* [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
 * [X] New [`--jsx react-native`](https://github.com/Microsoft/TypeScript/issues/11158)
 * [X] [Support for the `object` type.](https://github.com/Microsoft/TypeScript/issues/1809)
 * [X] More Quick Fixes!
