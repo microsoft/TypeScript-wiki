@@ -5,6 +5,7 @@
  * [CATS](#cats) 
  * [Eclipse](#eclipse)
  * [Emacs](#emacs)
+ * [NeoVim](#neovim)
  * [NetBeans](#netbeans)
  * [Sublime Text](#sublime-text)
  * [Vim](#vim)
@@ -37,6 +38,10 @@ Since it is also written in TypeScript, it can be easily extended if required.
 # Emacs
 
 [tide](https://github.com/ananthakumaran/tide) - TypeScript Interactive Development Environment for Emacs
+
+# NeoVim
+
+[nvim-typescript](https://github.com/mhartington/nvim-typescript)
 
 # NetBeans
 
