@@ -104,7 +104,7 @@ One can manually copy methods from the prototype onto the instance itself (i.e. 
 
 ## Literal types are inferred by default for `const` variables and `readonly` properties
 
-String, numeric, boolean and enum literal types are not inferred by default for `const` declarations and `readonly` properties. This means your variables/properties an have more narrowed type than before. This could manifest in using comparison operators such as `===` and `!===`.
+String, numeric, boolean and enum literal types are not inferred by default for `const` declarations and `readonly` properties. This means your variables/properties an have more narrowed type than before. This could manifest in using comparison operators such as `===` and `!==`.
 
 **Example**
 
