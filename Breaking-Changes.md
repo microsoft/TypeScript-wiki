@@ -6,6 +6,12 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.2%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
+## Changes to DOM API's in the standard library
+
+* Standard library now has declarations for `Window.fetch`; dependencies to `@types\whatwg-fetch` will cause conflicting declaration errors and will need to be removed.
+
+* Standard library now has declarations for `ServiceWorker`; dependencies on `@types\service_worker_api` will cause conflicting declaration errors and will need to be removed.
+
 # TypeScript 2.1
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.1%22+label%3A%22Breaking+Change%22+is%3Aclosed).
