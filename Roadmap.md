@@ -24,7 +24,7 @@
 * [X] [Controlling `this` in methods of object literals through contextual type](https://github.com/Microsoft/TypeScript/pull/14141)
 * [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
 * [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
-* [ ] [New `--strict` master option](https://github.com/Microsoft/TypeScript/pull/14486)
+* [X] [New `--strict` master option](https://github.com/Microsoft/TypeScript/pull/14486)
 
 # 2.2 (February 2017)
 
