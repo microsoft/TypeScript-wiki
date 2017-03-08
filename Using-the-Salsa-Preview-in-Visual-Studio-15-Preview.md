@@ -1,6 +1,6 @@
 # JavaScript "Salsa" Language Service
 
-Visual Studio "15" Preview 5 includes the new JavaScript language service, 
+Visual Studio 2017 includes the new JavaScript language service, 
 internally codenamed "Salsa".
 
 Salsa also powers the JavaScript language service in VS Code, and most of the below
