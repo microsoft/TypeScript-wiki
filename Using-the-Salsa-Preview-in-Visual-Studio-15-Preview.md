@@ -158,9 +158,6 @@ file as outlined below. You can still place definition files for use directly
 within your project (either manually downloaded, or via a tool such as
 [TSD](http://definitelytyped.org/tsd/) or [typings](https://github.com/typings/typings)).
 
-Note: The auto-acquisition feature currently only works in Salsa running within 
-Visual Studio "15" and is not available in VS Code yet.
-
 
 ### Compiling JavaScript down-level
 One of the key features TypeScript provides is the ability to use the latest JavaScript
