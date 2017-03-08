@@ -26,7 +26,7 @@ This change opens up several opportunities, such as:
  to be converted to JavaScript that runs on all of today's engines. 
  
 ## Enabling Salsa
-Salsa is enabled by default in Visual Studio "15" Preview 5.
+Salsa is enabled by default in Visual Studio 2017.
 
 To enable or disable the new language service: 
   1. Open the `Tools > Options` dialog.
