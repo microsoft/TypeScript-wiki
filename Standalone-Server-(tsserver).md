@@ -45,9 +45,9 @@ Content-Length: 261
 
 ## Commands
 
-`tsserver` supports a set of commands. The full list of commands supported by the server can be found under [ts.server.protocol.CommandNames](https://github.com/Microsoft/TypeScript/blob/master/lib/protocol.d.ts#L5). 
+`tsserver` supports a set of commands. The full list of commands supported by the server can be found under [ts.server.protocol.CommandTypes](https://github.com/Microsoft/TypeScript/blob/master/lib/protocol.d.ts#L5). 
 
-Each command is associated with a request and a response interface. For instance command `"completions"` corresponds to response interface `CompletionsRequest`, and response interface defined in `CompletionsResponse`.
+Each command is associated with a request and a response interface. For instance command `"completions"` corresponds to request interface `CompletionsRequest`, and response interface defined in `CompletionsResponse`.
 
 # Sample implementations
 
