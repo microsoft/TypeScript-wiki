@@ -1,7 +1,7 @@
-The below code outlined which constructs are currently support or not supported
+The below code outlines which constructs are currently supported or not supported
 when using JsDoc annotations to provide type information in JavaScript files.
 
-Note any tags not listed explicitly below (such as `@typedef`, or `@constructor`)
+Note any tags which are not  explicitly listed below (such as `@typedef`, or `@constructor`)
 are not yet supported.
 
 ```javascript
@@ -63,7 +63,7 @@ var var8;
 var var9;
 
 
-// Parameters may be delcared in a variety of syntactic forms
+// Parameters may be declared in a variety of syntactic forms
 
 /**
  * @param {string}  p1 - A string param. 
@@ -92,7 +92,7 @@ var fn5;
  * @param {*} p1 - Param can be 'any' type
  * @param {?} p2 - Param is of unknown type (same as 'any')
  */
-function fn6(p1,p2){}
+function fn6(p1, p2){}
 
 var someObj = {
   /**
