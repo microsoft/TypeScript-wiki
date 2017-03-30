@@ -9,10 +9,10 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [Namespaces and Modules](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Namespaces%20and%20Modules.md)
 * [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
 * [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
-* [Common Errors](Common Errors)
+* [Common Errors](Common-Errors.md)
 * [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
-* [Compiler Options] (https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
-* [TypeScript Editor Support](TypeScript-Editor-Support)
+* [Compiler Options](Compiler-Options.md)
+* [TypeScript Editor Support](TypeScript-Editor-Support.md)
 * [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [Nightly Builds](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
