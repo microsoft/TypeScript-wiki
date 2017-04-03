@@ -16,7 +16,6 @@
 
 # 2.3 (May 2017)
 
-* [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
 * [X] [Generic defaults](https://github.com/Microsoft/TypeScript/issues/2175)
 * [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [X] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
@@ -28,6 +27,7 @@
 
 # 2.2 (February 2017)
 
+* [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
 * [X] [Mixin classes](https://github.com/Microsoft/TypeScript/pull/13743)
 * [X] [Allow deriving from object and intersection types](https://github.com/Microsoft/TypeScript/pull/13604)
 * [X] [Support for `new.target`](https://github.com/Microsoft/TypeScript/issues/2551)
