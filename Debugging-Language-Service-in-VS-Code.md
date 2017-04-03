@@ -20,7 +20,7 @@ The corresponding setting/path is
 
 From here, there are different steps for debugging the client- and server-side, respectively.
 
-## Debugging client-side
+## Debugging tsserver (server-side)
 
 **Note:** [the gulp-build doesn't currently produce working source-maps](https://github.com/Microsoft/TypeScript/issues/11105), and [building with jake may require some extra effort to fix the source-maps](https://github.com/Microsoft/TypeScript/issues/11111).
 
@@ -48,7 +48,7 @@ b. Edit `extensions/typescript/src/typescriptServiceClient.ts`, setting the port
 
 5) Attach the stable vs code instance to the development instance.
 
-## Debugging server-side
+## Debugging the Extension Host (client-side)
 
 3) Launch an instance of development vs code.
 
