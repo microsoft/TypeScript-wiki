@@ -1,3 +1,29 @@
+# TypeScript 2.3
+
+## Generic parameter defaults
+
+TypeScript 2.3 adds support for declaring defaults for generic type parameters. A generic parameter default has the form of:
+
+```ts
+class ElementContainer<T extends HTMLElement = HTMLDivElement, U = T[]> {
+
+}
+
+new ElementContainer<HTMLAnchorElement, HTMLAnchorElement[]>();
+new ElementContainer<HTMLAnchorElement>(); // G<HTMLAnchorElement, HTMLAnchorElement[]>
+new ElementContainer(); // G<HTMLDivElement, HTMLDivElement[]>
+```
+
+A generic parameter default follows the following rules:
+* A type parameter is deemed optional if it has a default.
+* Required type parameters must not follow optional type parameters.
+* Default types for a type parameter must satisfy the constraint for the type parameter, if it exists.
+* When specifying type arguments, you are only required to specify type arguments for the required type parameters. Unspecified type parameters will resolve to their default types.
+* If a default type is specified and inference cannot chose a candidate, the default type is inferred.
+* A class or interface declaration that merges with an existing class or interface declaration may introduce a default for an existing type parameter.
+* A class or interface declaration that merges with an existing class or interface declaration may introduce a new type parameter as long as it specifies a default.
+
+
 # TypeScript 2.2
 
 ## Support for Mix-in classes
