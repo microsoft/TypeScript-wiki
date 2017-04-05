@@ -18,13 +18,13 @@
 
 # 2.3 (May 2017)
 
-* [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
-* [X] [Generic defaults](https://github.com/Microsoft/TypeScript/pull/13487)
-* [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [X] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [X] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
+* [X] [Generic defaults](https://github.com/Microsoft/TypeScript/pull/13487)
 * [X] [Controlling `this` in methods of object literals through contextual type](https://github.com/Microsoft/TypeScript/pull/14141)
+* [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [X] [New `--strict` master option](https://github.com/Microsoft/TypeScript/pull/14486)
+* [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
 
 # 2.2 (February 2017)
 
