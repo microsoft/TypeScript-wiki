@@ -1,5 +1,113 @@
 # TypeScript 2.3
 
+### Generators and Iteration for ES5/ES3
+
+*First some ES2016 terminology:*
+
+#### Iterators
+
+[ES2015 introduced `Iterator`](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration), which is an object that exposes three methods, `next`, `return`, and `throw`, as per the following interface:
+```ts
+interface Iterator<T> {
+  next(value?: any): IteratorResult<T>;
+  return?(value?: any): IteratorResult<T>;
+  throw?(e?: any): IteratorResult<T>;
+}
+```
+
+This kind of iterator is useful for iterating over synchronously available values, such as the elements of an Array or the keys of a Map.
+An object that supports iteration is said to be "iterable" if it has a `Symbol.iterator` method that returns an `Iterator` object.
+
+The Iterator protocol also defines the target of some of the ES2015 features like `for..of` and spread operator and the array rest in destructuring assignemnets.
+
+#### Generators
+
+[ES2015 also introduced "Generators"](http://www.ecma-international.org/ecma-262/6.0/#sec-generatorfunction-objects), which are functions that can be used to yield partial computation results via the `Iterator` interface and the `yield` keyword.
+Generators can also internally delegate calls to another iterable through `yield *`. For example:
+
+```ts
+function* f() {
+  yield 1;
+  yield* [2, 3];
+}
+```
+
+#### New `--downlevelIteration`
+
+Previously generators were only supported if the target is ES6/ES2015 or later.
+Moreover, constructs that operate on the Iterator protocol, e.g. `for..of` were only supported if they operate on arrays for targets below ES6/ES2015.
+
+TypeScript 2.3 adds full support for generators and the Iterator protocol for ES3 and ES5 targets with `--downlevelIteration` flag.
+
+With `--downlevelIteration`, the compiler uses new type check and emit behavior that attempts to call a `[Symbol.iterator]()` method on the iterated object if it is found, and creates a synthetic array iterator over the object if it is not.
+
+> Please note that this requires a native `Symbol.iterator` or `Symbol.iterator` shim at runtime for any non-array values.
+
+`for..of` statements,  Array Destructuring, and Spread elements in Array, Call, and New expressions support `Symbol.iterator` in ES5/E3 if available when using `--downlevelIteration`, but can be used on an Array even if it does not define `Symbol.iterator` at run time or design time.
+
+
+## Async Iterators
+
+TypeScript 2.3 adds support for the async iterators and generators as described by the current [TC39 proposal](https://github.com/tc39/proposal-async-iteration).
+
+
+#### Async iterators
+
+The Async Iteration introduces an `AsyncIterator`, which is similar to `Iterator`.
+The difference lies in the fact that the `next`, `return`, and `throw` methods of an `AsyncIterator` return a `Promise` for the iteration result, rather than the result itself. This allows the caller to enlist in an asynchronous notification for the time at which the `AsyncIterator` has advanced to the point of yielding a value.
+An `AsyncIterator` has the following shape:
+
+```ts
+interface AsyncIterator<T> {
+  next(value?: any): Promise<IteratorResult<T>>;
+  return?(value?: any): Promise<IteratorResult<T>>;
+  throw?(e?: any): Promise<IteratorResult<T>>;
+}
+```
+
+An object that supports async iteration is said to be "iterable" if it has a `Symbol.asyncIterator` method that returns an `AsyncIterator` object.
+
+
+#### Async Generators
+
+The [Async Iteration proposal](https://github.com/tc39/proposal-async-iteration) introduces "Async Generators", which are async functions that also can be used to yield partial computation results. Async Generators can also delegate calls via `yield*` to either an iterable or async iterable:
+
+```ts
+async function* g() {
+  yield 1;
+  await sleep(100);
+  yield* [2, 3];
+  yield* (async function *() { 
+    await sleep(100); 
+    yield 4; 
+  })();
+}
+```
+
+As with Generators, Async Generators can only be function declarations, function expressions, or methods of classes or object literals. Arrow functions cannot be Async Generators. Async Generators require a valid, global `Promise` implementation (either native or an ES2015-compatible polyfill), in addition to a valid `Symbol.asyncIterator` reference (either a native symbol or a shim).
+
+#### The `for-await-of` Statement
+
+Finally, ES2015 introduced the `for..of` statement as a means of iterating over an iterable.
+Similarly, the Async Iteration proposal introduces the `for..await..of` statement to iterate over an async iterable:
+
+```ts
+async function f() {
+  for await (const x of g()) {
+     console.log(x);
+  }
+}
+```
+
+The `for..await..of` statement is only legal within an Async Function or Async Generator.
+
+#### Caveats
+
+* Keep in mind that our support for async iterators relies on support for `Symbol.asyncIterator` to exist at runtime. 
+You may need to polyfill `Symbol.asyncIterator`, which for simple purposes can be as simple as: `(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.from("Symbol.asyncIterator");`
+* You also need to include `esnext` in your `--lib` option, to get the `AsyncIterator` declaration if you do not already have it.
+* Finally, if your target is ES5 or ES3, you'll also need to set the `--downlevelIterators` flag. 
+
 ## Generic parameter defaults
 
 TypeScript 2.3 adds support for declaring defaults for generic type parameters. A generic parameter default has the form of:
