@@ -1,6 +1,6 @@
 # TypeScript 2.3
 
-### Generators and Iteration for ES5/ES3
+## Generators and Iteration for ES5/ES3
 
 *First some ES2016 terminology:*
 
