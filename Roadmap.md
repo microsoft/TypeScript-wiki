@@ -13,6 +13,8 @@
 * Decorators for function expressions/arrow functions
 * Refactoring support in Language Service API
 * Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
+* [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
+* [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
 # 2.3 (May 2017)
 
@@ -22,8 +24,6 @@
 * [X] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [X] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/issues/11326)
 * [X] [Controlling `this` in methods of object literals through contextual type](https://github.com/Microsoft/TypeScript/pull/14141)
-* [ ] [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
-* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 * [X] [New `--strict` master option](https://github.com/Microsoft/TypeScript/pull/14486)
 
 # 2.2 (February 2017)
