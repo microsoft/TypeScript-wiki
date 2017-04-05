@@ -110,16 +110,22 @@ You may need to polyfill `Symbol.asyncIterator`, which for simple purposes can b
 
 ## Generic parameter defaults
 
-TypeScript 2.3 adds support for declaring defaults for generic type parameters. A generic parameter default has the form of:
+TypeScript 2.3 adds support for declaring defaults for generic type parameters. 
+
+#### Example
+
+Consider a function that creates a new `HTMLElement`, calling it with no arguments generats an `Div`; you can optionally pass a list of children as well. Previouslly you would have to define it as:
 
 ```ts
-class ElementContainer<T extends HTMLElement = HTMLDivElement, U = T[]> {
+declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
+declare function create<T extends HTMLElement>(element: T): Container<T, T[]>;
+declare function create<T extends HTMLElement, U extends HTMLElement>(element: T, children: U[]): Container<T, U[]>;
+```
 
-}
+With generic parameter defaults we can reduce it to:
 
-new ElementContainer<HTMLAnchorElement, HTMLAnchorElement[]>();
-new ElementContainer<HTMLAnchorElement>(); // G<HTMLAnchorElement, HTMLAnchorElement[]>
-new ElementContainer(); // G<HTMLDivElement, HTMLDivElement[]>
+```ts
+declare function create<T extends HTMLElement = HTMLDivElement, U = T[]>(element?: T, children?: U): Container<T, U>;
 ```
 
 A generic parameter default follows the following rules:
