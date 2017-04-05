@@ -2,6 +2,21 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.3
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.3%22+label%3A%22Breaking+Change%22+is%3Aclosed).
+
+## Empty generic parameter lists are flagged as error
+
+**Example**
+
+```ts
+class X<> {}  // Error: Type parameter list cannot be empty.
+function f<>() {}  // Error: Type parameter list cannot be empty.
+const x: X<> = new X<>();  // Error: Type parameter list cannot be empty.
+```
+
+
 # TypeScript 2.2
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.2%22+label%3A%22Breaking+Change%22+is%3Aclosed).
