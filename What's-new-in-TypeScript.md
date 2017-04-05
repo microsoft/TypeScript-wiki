@@ -46,7 +46,7 @@ With `--downlevelIteration`, the compiler uses new type check and emit behavior 
 `for..of` statements,  Array Destructuring, and Spread elements in Array, Call, and New expressions support `Symbol.iterator` in ES5/E3 if available when using `--downlevelIteration`, but can be used on an Array even if it does not define `Symbol.iterator` at run time or design time.
 
 
-## Async Iterations
+## Async Iteration
 
 TypeScript 2.3 adds support for the async iterators and generators as described by the current [TC39 proposal](https://github.com/tc39/proposal-async-iteration).
 
