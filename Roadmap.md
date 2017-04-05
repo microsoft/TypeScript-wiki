@@ -24,6 +24,7 @@
 * [X] [Controlling `this` in methods of object literals through contextual type](https://github.com/Microsoft/TypeScript/pull/14141)
 * [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [X] [New `--strict` master option](https://github.com/Microsoft/TypeScript/pull/14486)
+* [X] [Enhanced `tsc --init` output](https://github.com/Microsoft/TypeScript/pull/13982)
 * [X] [Language Service Extensibility](https://github.com/Microsoft/TypeScript/pull/12231)
 
 # 2.2 (February 2017)
