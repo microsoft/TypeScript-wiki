@@ -18,7 +18,7 @@ interface Iterator<T> {
 This kind of iterator is useful for iterating over synchronously available values, such as the elements of an Array or the keys of a Map.
 An object that supports iteration is said to be "iterable" if it has a `Symbol.iterator` method that returns an `Iterator` object.
 
-The Iterator protocol also defines the target of some of the ES2015 features like `for..of` and spread operator and the array rest in destructuring assignemnets.
+The Iterator protocol also defines the target of some of the ES2015 features like `for..of` and spread operator and the array rest in destructuring assignmnets.
 
 #### Generators
 
@@ -114,7 +114,7 @@ TypeScript 2.3 adds support for declaring defaults for generic type parameters.
 
 #### Example
 
-Consider a function that creates a new `HTMLElement`, calling it with no arguments generats an `Div`; you can optionally pass a list of children as well. Previouslly you would have to define it as:
+Consider a function that creates a new `HTMLElement`, calling it with no arguments generats an `Div`; you can optionally pass a list of children as well. Previously you would have to define it as:
 
 ```ts
 declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
