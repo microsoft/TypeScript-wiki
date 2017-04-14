@@ -1,14 +1,14 @@
 The below code outlines which constructs are currently supported or not supported
 when using JsDoc annotations to provide type information in JavaScript files.
 
-Note any tags which are not  explicitly listed below (such as `@typedef`, or `@constructor`)
+Note any tags which are not  explicitly listed below (such as `@constructor`)
 are not yet supported.
 
 ```javascript
 // === Supported ===
 
 // You can use the "@type" tag and reference a type name (either primitive, 
-// or defined in a TypeScript declaration)
+// defined in a TypeScript declaration, or in a JSDoc "@typedef" tag)
 /** 
  * @type {string}
  */
@@ -57,11 +57,19 @@ var var7;
 var var8;
 
 
-// An object specification may also be using within the braces
+// An object specification may also be used within the braces
 // For example, an object with properties 'a' (string) and 'b' (number)
 /** @type {{a: string, b: number}} */
 var var9;
 
+// "@typedef" maybe used to define complex types
+/**
+ * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
+ * @property {string} prop1 - a string property of SpecialType
+ * @property {number} prop2 - a number property of SpecialType
+ */
+/** @type {SpecialType} */
+var specialTypeObject;
 
 // Parameters may be declared in a variety of syntactic forms
 
