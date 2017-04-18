@@ -105,3 +105,47 @@ Option                        | Description
 `--eventPort`                 | Port used for receiving events. If non is specified events are sent to stdout.
 `--useSingleInferredProject`  | Put all open .ts and .js files that do not have a .tsconfig file in a common project
 
+
+# Project System
+
+There are three kinds of projects:
+
+## Configured Project
+
+Configured projects are defined by a configuration file, which can be either `tsconfig.json` file or a `jsconfig.json` file. 
+That configuration file marks the project root path and defines what files to include.
+The configuration file also provide the compiler options to be used for this project.
+
+You can find more information in the [tsconfig.json documentation](http://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+
+## External Project
+
+An external project represents host-specific project formats that TS is not aware of.
+The host is responsible for supplying the list of files in this project and compiler options to use.
+
+Currently VS is the only consumer of this type of project, to model the TS/JS files in a .csproj project.
+
+
+## Inferred Project
+
+Inferred projects are what is used to represent a loose TS/JS file.
+If a file does not have a configuration file (`tsconfig.json` or `jsconfig.json`) **in the current directory or any parent directories**, the server will create an inferred project for it.
+
+The server will include the loose file, then includes all other files included by triple slash references and module imports from the original file transitively.
+
+Compilation options will use a the default options for inferred projects.
+The host can set the defaults of an inferred project.
+
+## Relationship Among These Projects
+
+In general, the relationship can be summarized as `configured projects > external projects > inferred projects`.
+
+For example, if `file1.ts` belongs to an inferred project, but later a new `tsconfig.json` also includes this file.
+Then after the `tsconfig.json` file is found, `file1.ts` will no longer belong to the previous inferred project but the newly created configured project instead. 
+If `file1.ts` used to be the root file of the inferred project, that inferred project will now be destroyed; otherwise it will remain with one fewer file.
+
+For another example, if a `tsconfig.json` file is created to include some files used to belong to an external project (let's call it EP1), then in the current implementation EP1 will be destroyed, all its files either go to the new configured project or will belong to a new inferred project the next time it is opened. 
+
+One thing to notice is that one file can belong to multiple projects of the same kind at the same time. E.g., a file can be included by multiple configured projects / inferred projects / external projects.
+
+
