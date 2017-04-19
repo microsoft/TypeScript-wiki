@@ -12,7 +12,6 @@
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
 * Refactoring support in Language Service API
-* Investigate [Language Service extensibility](https://github.com/Microsoft/TypeScript/issues/6508)
 * [Better support for literal types in JSX attributes](https://github.com/Microsoft/TypeScript/issues/10393)
 * [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
