@@ -1,6 +1,6 @@
-**NOTE: These are Coding Guidelines for TypeScript Contributors.**
+# NOTE: These are Coding Guidelines for ***Contributors to TypeScript***
 
-While these guidelines are mainly **meant for contributors to the TypeScript project**, certain suggestions apply as to how idiomatic TypeScript code should be written (e.g. the "Names" and "Style" sections).
+These guidelines are mainly **meant for contributors to the TypeScript project**. Feel free to adopt them for your own team.
 
 **Please do not file issues about these guidelines.**
 
