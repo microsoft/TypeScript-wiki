@@ -6,34 +6,14 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.3%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
-## Contravariance in limited cases
+## Contravariance in callback parameters
 
-Previously Typescript allowed callbacks to be assignable in either
-direction. Now they must be contra-variantly assignable (?).
-This means that callbacks are checked much more carefully, in
-particular promises (since promises have a type parameter that is not
-used as a return type). Which means that Typescript will find many
-errors in Promise code that it did not before.
-
-I was going to show an example and try to explain co- and
-contra-variance. But you know what? It's too complicated. It's too
-complicated and I don't think I can explain it to normal people who
-just want to fix the new errors Typescript found. So I'm going to skip
-straight to the new errors you'll see and how to fix them.
-
-### What is contravariance?
-
-SKIPPED
-
-```ts
-example
-goes
-here
-seriously
-```
-
-However, we know that callbacks are an output position,
-similar to return types. So they should be related contra-variantly.
+Typescript's checking of callback parameters is now contravariant.
+Previously it was bivariant, which sometimes lets incorrect types through.
+Basically, this means that callback parameters and classes that
+contain callbacks are checked more carefully, so Typescript will
+require stricter types in this release. This is particularly true of
+promises due to the way that promises are defined.
 
 ### Promises
 
@@ -41,20 +21,25 @@ Here is an example of improved Promise checking:
 
 ```ts
 let p: Promise<number> = new Promise((c, e) => { c(12) });
+    ~
+Type 'Promise<{}>' is not assignable to 'Promise<number>'
 ```
 
 Typescript is not able to infer the type argument `T` when you call
-`new Promise`. So it just infers `Promise<{}>`. Under the new rules,
-however, `Promise<{}>` is not assignable to `Promise<number>` because
-it breaks the callbacks to Promise. To fix this you have to provide
-the type argument yourself:
+`new Promise`. So it just infers `Promise<{}>`. Unfortunately, this
+allows you to write `c(12)` and `c('foo')`, even though the
+declaration of `p` explicitly says that it must be `Promise<number>`.
+
+Under the new rules, `Promise<{}>` is not assignable to
+`Promise<number>` because it breaks the callbacks to Promise.
+Typescript still isn't able to infer the type argument, so to fix
+this you have to provide the type argument yourself:
 
 ```ts
 let p: Promise<number> = new Promise<number>((c, e) => { c(12) });
 ```
 This requirement helps find errors in the body of the promise code.
-Previously, Typescript allowed to you pass `'foo'` even though a
-number was required:
+Now if you mistakenly call `c('foo')`, you get the following error:
 
 ```ts
 let p: Promise<number> = new Promise((c, e) => { c('foo') });
@@ -62,37 +47,27 @@ let p: Promise<number> = new Promise((c, e) => { c('foo') });
     Argument of type 'foo' is not assignable to 'number'
 ```
 
-Now that you have to make the type argument explicit, the compiler can
-also check that `c` is called with the correct types.
-
 ### (Nested) Callbacks
 
-Here is an example of improved callback checking for non-Promises.
-Similar errors now show up in a few other places that were situated in
-a place that used bivariance but now uses contravariance.
+Other callbacks are affected by the improved callback checking as
+well, primarily nested callbacks. Here's an example with a function
+that takes a callback, which takes a nested callback. The nested
+callback is now checked contra-variantly.
 
 ```ts
 declare function f(callback: (nested: (error: number, result: any) => void, index: number) => void): void;
 
-f((nested: (error: number, result: any) => void) => { });
-f((nested: (error: number) => void) => { });
+f((nested: (error: number) => void) => { log(error) });
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  '(error: number) => void' is not assignable to (error: number, result: any) => void'
+```
 
-function loop(files: string[],
-              cb: (item: string,
-                   callback: (error: number, result: Empty) => void,
-                   index: number,
-                   total: number) => void,
-              callback: string): void {
-              }
-loop(files, (file: string, clb: (error: number, result: Empty) => void) => {
-}, callback);
+The fix is easy in this case. Just add the missing parameter to the
+nested callback:
+
 ```ts
-
-### How to fix Promises
-
-### How to fix callbacks
-
-(If needed, perhaps not).
+f((nested: (error: number, result: any) => void) => { });
+```
 
 ## Empty generic parameter lists are flagged as error
 
