@@ -6,9 +6,9 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.3%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
-## Contravariance in callback parameters
+## Covariance in callback parameters
 
-Typescript's checking of callback parameters is now contravariant.
+Typescript's checking of callback parameters is now covariant.
 Previously it was bivariant, which sometimes lets incorrect types through.
 Basically, this means that callback parameters and classes that
 contain callbacks are checked more carefully, so Typescript will
@@ -52,7 +52,7 @@ let p: Promise<number> = new Promise((c, e) => { c('foo') });
 Other callbacks are affected by the improved callback checking as
 well, primarily nested callbacks. Here's an example with a function
 that takes a callback, which takes a nested callback. The nested
-callback is now checked contra-variantly.
+callback is now checked co-variantly.
 
 ```ts
 declare function f(callback: (nested: (error: number, result: any) => void, index: number) => void): void;
