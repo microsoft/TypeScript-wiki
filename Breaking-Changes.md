@@ -6,6 +6,69 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.3%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
+## Covariance in callback parameters
+
+Typescript's checking of callback parameters is now covariant.
+Previously it was bivariant, which sometimes lets incorrect types through.
+Basically, this means that callback parameters and classes that
+contain callbacks are checked more carefully, so Typescript will
+require stricter types in this release. This is particularly true of
+promises due to the way that promises are defined.
+
+### Promises
+
+Here is an example of improved Promise checking:
+
+```ts
+let p: Promise<number> = new Promise((c, e) => { c(12) });
+    ~
+Type 'Promise<{}>' is not assignable to 'Promise<number>'
+```
+
+Typescript is not able to infer the type argument `T` when you call
+`new Promise`. So it just infers `Promise<{}>`. Unfortunately, this
+allows you to write `c(12)` and `c('foo')`, even though the
+declaration of `p` explicitly says that it must be `Promise<number>`.
+
+Under the new rules, `Promise<{}>` is not assignable to
+`Promise<number>` because it breaks the callbacks to Promise.
+Typescript still isn't able to infer the type argument, so to fix
+this you have to provide the type argument yourself:
+
+```ts
+let p: Promise<number> = new Promise<number>((c, e) => { c(12) });
+```
+This requirement helps find errors in the body of the promise code.
+Now if you mistakenly call `c('foo')`, you get the following error:
+
+```ts
+let p: Promise<number> = new Promise((c, e) => { c('foo') });
+                                                   ~~~~~
+    Argument of type 'foo' is not assignable to 'number'
+```
+
+### (Nested) Callbacks
+
+Other callbacks are affected by the improved callback checking as
+well, primarily nested callbacks. Here's an example with a function
+that takes a callback, which takes a nested callback. The nested
+callback is now checked co-variantly.
+
+```ts
+declare function f(callback: (nested: (error: number, result: any) => void, index: number) => void): void;
+
+f((nested: (error: number) => void) => { log(error) });
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  '(error: number) => void' is not assignable to (error: number, result: any) => void'
+```
+
+The fix is easy in this case. Just add the missing parameter to the
+nested callback:
+
+```ts
+f((nested: (error: number, result: any) => void) => { });
+```
+
 ## Empty generic parameter lists are flagged as error
 
 **Example**
