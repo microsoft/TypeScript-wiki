@@ -446,9 +446,91 @@ To avoid this problem, turn on the `noImplicitAny` flag, which will issue a warn
 
 ### Why am I getting an error about a missing index signature?
 
-TODO: Port content from here
+> These three functions seem to do the same thing, but the last one is an error. Why is this the case?
+> ```ts
+> interface StringMap {
+>   [key: string]: string;
+> }
+> 
+> function a(): StringMap {
+>   return { a: "1" }; // OK
+> }
+> 
+> function b(): StringMap {
+>   var result: StringMap = { a: "1" };
+>   return result; // OK
+> }
+> 
+> function c(): StringMap {
+>   var result = { a: "1" };
+>   return result; // Error - result lacks index signature, why?
+> }
+> ```
 
-http://stackoverflow.com/questions/22077023/why-cant-i-indirectly-return-an-object-literal-to-satisfy-an-index-signature-re
+This isn't now an error in TypeScript 1.8 and later. As for earlier versions:
+
+Contextual typing occurs when the context of an expression gives a hint about what its type might be. For example, in this initialization:
+
+```ts
+var x: number = y;
+```
+
+The expression `y` gets a contextual type of `number` because it's initializing a value of that type. In this case, nothing special happens, but in other cases more interesting things will occur.
+
+One of the most useful cases is functions:
+
+```ts
+// Error: string does not contain a function called 'ToUpper'
+var x: (n: string) => void = (s) => console.log(s.ToUpper());
+```
+
+How did the compiler know that `s` was a `string`? If you wrote that function expression by itself, `s` would be of type `any` and there wouldn't be any error issued. But because the function was contextually typed by the type of `x`, the parameter s acquired the type `string`. Very useful!
+
+At the same time, an index signature specifies the type when an object is indexed by a `string` or a `number`. Naturally, these signatures are part of type checking:
+
+```ts
+var x: { [n: string]: Car; };
+var y: { [n: string]: Animal; };
+x = y; // Error: Cars are not Animals, this is invalid
+```
+
+The lack of an index signature is also important:
+
+```ts
+var x: { [n: string]: Car; };
+var y: { name: Car; };
+x = y; // Error: y doesn't have an index signature that returns a Car
+```
+
+The problem with assuming that objects don't have index signatures is that you then have no way to initialize an object with an index signature:
+
+```ts
+var c: Car;
+// Error, or not?
+var x: { [n: string]: Car } = { 'mine': c };
+```
+
+The solution is that when an object literal is contextually typed by a type with an index signature, that index signature is added to the type of the object literal if it matches. For example:
+
+```ts
+var c: Car;
+var a: Animal;
+// OK
+var x: { [n: string]: Car } = { 'mine': c };
+// Not OK: Animal is not Car
+var y: { [n: string]: Car } = { 'mine': a };
+```
+
+Let's look at the original function:
+
+```ts
+function c(): StringMap {
+  var result = { a: "1" };
+  return result; // Error - result lacks index signature, why?
+}
+```
+
+Because `result`'s type does not have an index signature, the compiler throws an error.
 
 ### Why am I getting `Supplied parameters do not match any signature` error?
 
