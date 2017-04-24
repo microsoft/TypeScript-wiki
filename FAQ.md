@@ -475,7 +475,7 @@ Contextual typing occurs when the context of an expression gives a hint about wh
 var x: number = y;
 ```
 
-The expression y gets a contextual type of number because it's initializing a value of that type. In this case, nothing special happens, but in other cases more interesting things will occur.
+The expression `y` gets a contextual type of `number` because it's initializing a value of that type. In this case, nothing special happens, but in other cases more interesting things will occur.
 
 One of the most useful cases is functions:
 
@@ -484,9 +484,9 @@ One of the most useful cases is functions:
 var x: (n: string) => void = (s) => console.log(s.ToUpper());
 ```
 
-How did the compiler know that s was a string? If you wrote that function expression by itself, s would be of type any and there wouldn't be any error issued. But because the function was contextually typed by the type of x, the parameter s acquired the type string. Very useful!
+How did the compiler know that `s` was a `string`? If you wrote that function expression by itself, `s` would be of type `any` and there wouldn't be any error issued. But because the function was contextually typed by the type of `x`, the parameter s acquired the type `string`. Very useful!
 
-At the same time, an index signature specifies the type when an object is indexed by a string or a number. Naturally, these signatures are part of type checking:
+At the same time, an index signature specifies the type when an object is indexed by a `string` or a `number`. Naturally, these signatures are part of type checking:
 
 ```ts
 var x: { [n: string]: Car; };
