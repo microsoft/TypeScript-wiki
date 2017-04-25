@@ -1,12 +1,14 @@
-By default the TypeScript compiler does not report any errors in `.js` files including using `--allowJs`. With TypeScript 2.3 type-checking errors can also be reported in `.js` files with `--checkJs`. 
+TypeScript 2.3 and later support a mode of type-checking and reporting errors in `.js` files with `--checkJs`.
 
-You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely you can choose to check only a few `.js` files by adding `// @ts-check` comment to them without setting `--checkJs`. You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
+You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely you can choose to check only a few `.js` files by adding `// @ts-check` comment to them without setting `--checkJs`.
+You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
 
 Here are some notable differences on how checking work in `.js` file from `.ts` file:
 
 ## Using types in JSDoc
 
-In a `.js` files types are inferred from initialization just like in `.ts` files. JSDoc in `.js` files fills in what type annotations does in a `.ts` file. 
+In a `.js` file, types can often be inferred just like in `.ts` files.
+Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations do in a `.ts` file. 
 
 JSDoc annotations adorning a declaration will be used to set the type of that declaration. For example:
 
@@ -22,7 +24,7 @@ You can find the full list of supported JSDoc patterns in the [JSDoc support in 
 
 ## Property declaration inferred from assignments in class bodies
 
-ES2015/ES6 does not specify a mean for declaring properties on classes. Properties are dynamically assigned, just like in the case of object literals. 
+ES2015/ES6 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like in the case of object literals. 
 
 In a `.js` file property declarations are inferred from assignments to the properties inside the class body. The type of properties is the union of the types of all the right-hand values in these assignments. Properties defined in the constructor are always assumed to exist, where as ones defined in methods, getters, or setters are considered optional.
 
