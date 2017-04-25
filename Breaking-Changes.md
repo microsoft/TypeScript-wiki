@@ -6,14 +6,14 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.3%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
-## Covariance in callback parameters
+## Stricter variance in callback parameters
 
-Typescript's checking of callback parameters is now covariant.
-Previously it was bivariant, which sometimes lets incorrect types through.
+TypeScript's checking of callback parameters is now covariant with respect to immediate signature checks.
+Previously it was bivariant, which could sometimes let incorrect types through.
 Basically, this means that callback parameters and classes that
 contain callbacks are checked more carefully, so Typescript will
-require stricter types in this release. This is particularly true of
-promises due to the way that promises are defined.
+require stricter types in this release.
+This is particularly true of Promises and Observables due to the way in which their APIs are specified.
 
 ### Promises
 
@@ -25,26 +25,25 @@ let p: Promise<number> = new Promise((c, e) => { c(12) });
 Type 'Promise<{}>' is not assignable to 'Promise<number>'
 ```
 
-Typescript is not able to infer the type argument `T` when you call
-`new Promise`. So it just infers `Promise<{}>`. Unfortunately, this
-allows you to write `c(12)` and `c('foo')`, even though the
-declaration of `p` explicitly says that it must be `Promise<number>`.
+The reason this occurs is that TypeScript is not able to infer the type argument `T` when you call `new Promise`.
+As a result, it just infers `Promise<{}>`.
+Unfortunately, this allows you to write `c(12)` and `c('foo')`, even though the declaration of `p` explicitly says that it must be `Promise<number>`.
 
 Under the new rules, `Promise<{}>` is not assignable to
 `Promise<number>` because it breaks the callbacks to Promise.
-Typescript still isn't able to infer the type argument, so to fix
-this you have to provide the type argument yourself:
+TypeScript still isn't able to infer the type argument, so to fix this you have to provide the type argument yourself:
 
 ```ts
 let p: Promise<number> = new Promise<number>((c, e) => { c(12) });
 ```
+
 This requirement helps find errors in the body of the promise code.
 Now if you mistakenly call `c('foo')`, you get the following error:
 
 ```ts
 let p: Promise<number> = new Promise((c, e) => { c('foo') });
-                                                   ~~~~~
-    Argument of type 'foo' is not assignable to 'number'
+//                                                 ~~~~~
+//  Argument of type 'foo' is not assignable to 'number'
 ```
 
 ### (Nested) Callbacks
