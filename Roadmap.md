@@ -14,13 +14,16 @@
 * Refactoring support in Language Service API
 * [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
-# 2.3 (May 2017)
+# 2.4
+
+* [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
+
+# 2.3 (April 2017)
 
 * [X] [Generator support for ES3/ES5](https://github.com/Microsoft/TypeScript/issues/1564)
 * [X] [Asynchronous iterators](https://github.com/Microsoft/TypeScript/pull/12346)
 * [X] [Generic defaults](https://github.com/Microsoft/TypeScript/pull/13487)
 * [X] [Controlling `this` in methods of object literals through contextual type](https://github.com/Microsoft/TypeScript/pull/14141)
-* [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
 * [X] [JSX stateless components overload resolution](https://github.com/Microsoft/TypeScript/issues/9703)
 * [X] [JSX `children` checking](https://github.com/Microsoft/TypeScript/pull/15160)
 * [X] [New `--strict` master option](https://github.com/Microsoft/TypeScript/pull/14486)
