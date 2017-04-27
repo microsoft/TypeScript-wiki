@@ -17,6 +17,7 @@
 # 2.4
 
 * [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
+* [] [String enums](https://github.com/Microsoft/TypeScript/issues/3192)
 
 # 2.3 (April 2017)
 
