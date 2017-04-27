@@ -11,13 +11,13 @@
 * Implement new ES Decorator proposal
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
-* Refactoring support in Language Service API
-* [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
 # 2.4
 
 * [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
-* [] [String enums](https://github.com/Microsoft/TypeScript/issues/3192)
+* [ ] [String enums](https://github.com/Microsoft/TypeScript/issues/3192)
+* [ ] Refactoring support in Language Service API
+* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
 # 2.3 (April 2017)
 
