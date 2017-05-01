@@ -44,6 +44,7 @@
 * [[Standalone Server (tsserver)]]
 * [[Dev Mode in Visual Studio]]
 * [[Debugging Language Service in VS Code]]
+* [[Writing a Language Service Plugin]]
 
 **FAQs**
 * [[FAQ]]
