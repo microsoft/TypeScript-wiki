@@ -26,7 +26,7 @@ These guidelines are mainly **meant for contributors to the TypeScript project**
 4. Within a file, type definitions should come first.
 
 ## `null` and `undefined`
-1. Use **undefined**, do not use null.
+1. Use **undefined**. Do not use null.
 
 ## General Assumptions
 1. Consider objects like Nodes, Symbols, etc. as immutable outside the component that created them. Do not change them.
