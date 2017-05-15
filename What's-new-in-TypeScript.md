@@ -114,7 +114,7 @@ TypeScript 2.3 adds support for declaring defaults for generic type parameters.
 
 #### Example
 
-Consider a function that creates a new `HTMLElement`, calling it with no arguments generats an `Div`; you can optionally pass a list of children as well. Previously you would have to define it as:
+Consider a function that creates a new `HTMLElement`, calling it with no arguments generates a `Div`; you can optionally pass a list of children as well. Previously you would have to define it as:
 
 ```ts
 declare function create(): Container<HTMLDivElement, HTMLDivElement[]>;
@@ -2611,7 +2611,7 @@ f2({ x: 1, y: 1 });
 
 ## Support for decorators when targeting ES3
 
-Decorators are now allowed when targeting ES3. TypeScript 1.7 removes the ES5-specific use of `reduceRight` from the `__decorate` helper. The changes also inline calls `Object.getOwnPropertyDescriptor` and `Object.defineProperty` in a backwards-compatible fashion that allows for a to clean up the emit for ES5 and later by removing various repetitive calls to the aforementioned `Object` methods.
+Decorators are now allowed when targeting ES3. TypeScript 1.7 removes the ES5-specific use of `reduceRight` from the `__decorate` helper. The changes also inline calls to `Object.getOwnPropertyDescriptor` and `Object.defineProperty` in a backwards-compatible fashion that allows for clean up of the emit for ES5 and later by removing various repetitive calls to the aforementioned `Object` methods.
 
 
 # TypeScript 1.6
