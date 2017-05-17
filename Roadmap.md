@@ -15,7 +15,7 @@
 # 2.4
 
 * [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
-* [ ] [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486)
+* [X] [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486)
 * [ ] [Refactoring support in Language Service API](https://github.com/Microsoft/TypeScript/pull/14624)
 * [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
