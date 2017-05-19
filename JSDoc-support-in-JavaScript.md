@@ -138,7 +138,7 @@ var sfc = (test) => <div>{test.a.charAt(0)}</div>;
 /**
  * A parameter can be a class constructor.
  *
- * @param {{new(...args: any[]): Object}} C - The class to register
+ * @param {{new(...args: any[]): object}} C - The class to register
  */
 function registerClass(C) {}
 
