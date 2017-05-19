@@ -2,8 +2,6 @@
 
 - The type `EnumLiteralType` was removed and `LiteralType` is used instead. `LiteralType` also replaces `.text` with a `.value` which may be either a number or string. See [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486).
 
-# TypeScript 2.3
-
 - `Declaration` does not have a `name` property. TypeScript now recognize assignments in .js files as declarations in certain contexts, e.g. `func.prototype.method = function() {..}` will be a declaration of member `method` on `func`. As a result `Declaration` is not guaranteed to have a `name` property as before. A new type was introduced `NamedDeclaration` to take the place of `Declaration`, and `Declaration` moved to be the base type of both `NamedDeclaration` and `BinaryExpression`.
 Casting to `NamedDeclaration` should be safe for non .js declarations.
 See https://github.com/Microsoft/TypeScript/pull/15594 for more details.
