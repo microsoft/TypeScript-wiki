@@ -1,3 +1,7 @@
+# TypeScript 2.4
+
+- The type `EnumLiteralType` was removed and `LiteralType` is used instead. `LiteralType` also replaces `.text` with a `.value` which may be either a number or string. See [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486).
+
 # TypeScript 2.2
 
 - `ts.Map<T>` is now a native `Map<string, T>` or a shim. This affects the `SymbolTable` type, exposed by `Symbol.members`, `Symbol.exports`, and `Symbol.globalExports`.
