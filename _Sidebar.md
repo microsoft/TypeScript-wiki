@@ -43,6 +43,7 @@
 * [[Using the Language Service API]]
 * [[Standalone Server (tsserver)]]
 * [[Dev Mode in Visual Studio]]
+* [[TypeScript MSBuild In Depth]]
 * [[Debugging Language Service in VS Code]]
 * [[Writing a Language Service Plugin]]
 
