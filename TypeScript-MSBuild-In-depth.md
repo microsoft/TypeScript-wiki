@@ -2,7 +2,7 @@
 
 ## NuGet
 
-In release 2.3 and above, TypeScript MSBuild can be use with MSBuild on non-Window platform.
+In release 2.3 and above, TypeScript MSBuild can be used with MSBuild on non-Window platform.
 
 ### Package structure
 
@@ -10,7 +10,7 @@ TypeScript NuGet contains two main folders
 
 * build folder
 
-    Two files are locatd in the folder.
+    Two files are locate in the folder.
     Both are entry point for main TypeScript target file and props file respectively.
 
     1. Microsoft.TypeScript.MSBuild.targets
