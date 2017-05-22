@@ -15,7 +15,7 @@ TypeScript NuGet contains two main folders
 
     1. Microsoft.TypeScript.MSBuild.targets
 
-        The file set variables specific to a runtime platform, such as a path to `TypeScript.Tasks.dll`, before import `Microsoft.TypeScript.targets` from `tools` folder.
+        The file set variables specific to a run-time platform, such as a path to `TypeScript.Tasks.dll`, before import `Microsoft.TypeScript.targets` from `tools` folder.
 
     2. Microsoft.TypeScript.MSBuild.props
 
@@ -40,5 +40,10 @@ TypeScript NuGet contains two main folders
 
         contains `tsc.exe` and all dependency files to execute the exe.
         On Window, `TypeScript.Tasks.dll` uses the `tsc.exe` to build projects.
-        On non-Window, `TypeScript.Tasks.dll` uses `tsc.js`, running through command `node tsc.js <project path>`.
+        On non-Window, `TypeScript.Tasks.dll` uses `tsc.js`, running through command
+
+        ```
+            node tsc.js <project path>
+        ```
+
         Therefore, on non-Window platform, NodeJS is required to be installed.
