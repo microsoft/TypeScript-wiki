@@ -7,8 +7,7 @@ The highest priority is getting unlabeled bugs to zero.
 # How to Label a Bug
 
 Classify the bug accordingly:
- * Duplicate
-   * The plurality of issues are duplicates. Try to find something matching this one
+ * Duplicate: Many issues are duplicates, so try to find an original
    * If you do, add the `Duplicate` label and add a comment e.g. "See #1234567"
    * If it's clearly an exact duplicate, Close
    * Optional: If the user would have found this with a trivial search (e.g. searching for the title of their own bug), gently remind them to search before logging new issues
