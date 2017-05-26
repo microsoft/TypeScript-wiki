@@ -74,13 +74,14 @@ var specialTypeObject;
 // Parameters may be declared in a variety of syntactic forms
 
 /**
+ * @param p0 {string} - A string param declared using TS-style
  * @param {string}  p1 - A string param. 
  * @param {string=} p2 - An optional param 
  * @param {string} [p3] - Another optional param.
  * @param {string} [p4="test"] - An optional param with a default value
  * @return {string} This is the result
  */
-function fn3(p1, p2, p3, p4){
+function fn3(p0, p1, p2, p3, p4){
   // TODO
 }
 
