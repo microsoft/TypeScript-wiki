@@ -74,6 +74,16 @@ var var9;
 /** @type {SpecialType} */
 var specialTypeObject;
 
+// You can use both 'object' and 'Object'
+/**
+ * @typedef {object} SpecialType1 - creates a new type named 'SpecialType'
+ * @property {string} prop1 - a string property of SpecialType
+ * @property {number} prop2 - a number property of SpecialType
+ * @property {number=} prop3 - an optional number property of SpecialType
+ */
+/** @type {SpecialType1} */
+var specialTypeObject1;
+
 // Parameters may be declared in a variety of syntactic forms
 
 /**
