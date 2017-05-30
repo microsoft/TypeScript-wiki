@@ -100,11 +100,19 @@ function fn4(p1){}
 /** @type {function(string, boolean): number} */
 var fn5;
 
+/** @type {function} */
+var fn6;
+
+/** @type {Function} */
+var fn7;
+
+// Note: Both "fn6" and "fn7" have same type of Function type.
+
 /**
  * @param {*} p1 - Param can be 'any' type
  * @param {?} p2 - Param is of unknown type (same as 'any')
  */
-function fn6(p1, p2){}
+function fn8(p1, p2){}
 
 var someObj = {
   /**
