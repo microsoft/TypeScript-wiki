@@ -45,6 +45,7 @@ var var4;
  */
 var var5;
 
+
 // You can specify an array type (e.g. an array of numbers)
 /** @type {number[]} */
 var var6;
@@ -84,8 +85,8 @@ var specialTypeObject;
 /** @type {SpecialType1} */
 var specialTypeObject1;
 
-// Parameters may be declared in a variety of syntactic forms
 
+// Parameters may be declared in a variety of syntactic forms
 /**
  * @param p0 {string} - A string param declared using TS-style
  * @param {string}  p1 - A string param. 
@@ -98,8 +99,8 @@ function fn3(p0, p1, p2, p3, p4){
   // TODO
 }
 
-// Generic types may also be used
 
+// Generic types may also be used
 /**
  * @template T
  * @param {T} p1 - A generic parameter that flows through to the return type
@@ -107,16 +108,16 @@ function fn3(p0, p1, p2, p3, p4){
  */
 function fn4(p1){}
 
+// Define function type
 /** @type {function(string, boolean): number} */
 var fn5;
 
+// Both "fn6" and "fn7" have same type of Function type.
 /** @type {function} */
 var fn6;
 
 /** @type {Function} */
 var fn7;
-
-// Note: Both "fn6" and "fn7" have same type of Function type.
 
 /**
  * @param {*} p1 - Param can be 'any' type
@@ -143,7 +144,6 @@ let someFunc = function(){};
  */
 Foo.prototype.sayHi = (greeting) => console.log("Hi!");
 
-
 /**
  * And arrow functions expressions
  * @param {number} x - A multiplier
@@ -155,7 +155,6 @@ let myArrow = x => x * x;
  * @param {{a: string, b: number}} test - Some param
  */
 var sfc = (test) => <div>{test.a.charAt(0)}</div>;
-
 
 /**
  * A parameter can be a class constructor.
