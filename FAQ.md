@@ -266,7 +266,7 @@ Another way to think of this is that a `void`-returning callback type says "I'm 
 
 ### Why are all types assignable to empty interfaces?
 
-> I wrote some code like this an expected an error:
+> I wrote some code like this and expected an error:
 > ```ts
 > interface Thing { /* nothing here */ }
 > function doSomething(a: Thing) {
