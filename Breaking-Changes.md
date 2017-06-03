@@ -35,15 +35,16 @@ TypeScript still isn't able to infer the type argument, so to fix this you have 
 
 ```ts
 let p: Promise<number> = new Promise<number>((c, e) => { c(12) });
+//                                  ^^^^^^^^ explicit type arguments here
 ```
 
 This requirement helps find errors in the body of the promise code.
 Now if you mistakenly call `c('foo')`, you get the following error:
 
 ```ts
-let p: Promise<number> = new Promise((c, e) => { c('foo') });
-//                                                 ~~~~~
-//  Argument of type 'foo' is not assignable to 'number'
+let p: Promise<number> = new Promise<number>((c, e) => { c('foo') });
+//                                                         ~~~~~
+//  Argument of type '"foo"' is not assignable to 'number'
 ```
 
 ### (Nested) Callbacks
