@@ -46,7 +46,6 @@ Since it is also written in TypeScript, it can be easily extended if required.
 # NetBeans
 
 * [nbts](https://github.com/Everlaw/nbts) - NetBeans TypeScript editor plugin
-* [Geertjan's TypeScript NetBeans Plugin](https://github.com/GeertjanWielenga/TypeScript)
 
 # Sublime Text
 
