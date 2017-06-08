@@ -16,6 +16,7 @@
 
 * [X] [Infer from generic function return types](https://github.com/Microsoft/TypeScript/pull/16072)
 * [X] [Contextual generic function types](https://github.com/Microsoft/TypeScript/pull/16305)
+* [X] [Stricter generic signature checks](https://github.com/Microsoft/TypeScript/pull/16368)
 * [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
 * [X] [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486)
 * [X] [Weak type detection](https://github.com/Microsoft/TypeScript/pull/16047)
