@@ -1405,7 +1405,7 @@ Let's walk through the five stages of grief.
 *Denial*: It's healthy to believe that a suggestion might come back later.
 Do keep leaving feedback!
 We look at all comments on all issues - closed or otherwise.
-If you encounter a problem that would have been addressed by a suggestion, leave a comment explaning what you were doing and how you could have had a better experience.
+If you encounter a problem that would have been addressed by a suggestion, leave a comment explaining what you were doing and how you could have had a better experience.
 Having a record of these use cases helps us reprioritize.
 
 *Anger*: Don't be angry.

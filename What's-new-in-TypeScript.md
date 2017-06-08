@@ -2277,7 +2277,7 @@ var div = jsxFactory_1.jsxFactory.createElement("div", null, "Hello JSX!");
 TypeScript 1.8 extends [user-defined type guard functions](#user-defined-type-guard-functions) to class and interface methods.
 
 `this is T` is now valid return type annotation for methods in classes and interfaces.
-When used in a type narowing position (e.g. `if` statement), the type of the call expression target object would be narrowed to `T`.
+When used in a type narrowing position (e.g. `if` statement), the type of the call expression target object would be narrowed to `T`.
 
 ##### Example
 
@@ -2651,7 +2651,7 @@ class MyComponent extends React.Component<Props, {}> {
 <MyComponent name={0} />; // error, `name` is not a number
 ```
 
-#### Using other JSX framworks
+#### Using other JSX frameworks
 
 JSX element names and properties are validated against the `JSX` namespace. Please see the [[JSX]] wiki page for defining the `JSX` namespace for your framework.
 
@@ -2853,7 +2853,7 @@ class Derived1 extends Base { }
 class Derived2 extends Base {
     getThing() { return 'hello'; }
     foo() {
-        super.getThing();// Error: cannot invoke abstract members through 'super'
+        super.getThing(); // Error: cannot invoke abstract members through 'super'
     }
 }
 
@@ -3381,7 +3381,7 @@ Sometimes this is not desirable, for instance inputs `FolderA/FolderB/1.ts` and 
 
 ## `--noEmitHelpers` command line option
 
-The TypeSript compiler emits a few helpers like `__extends` when needed. The helpers are emitted in every file they are referenced in. If you want to consolidate all helpers in one place, or override the default behavior, use `--noEmitHelpers` to instructs the compiler not to emit them.
+The TypeScript compiler emits a few helpers like `__extends` when needed. The helpers are emitted in every file they are referenced in. If you want to consolidate all helpers in one place, or override the default behavior, use `--noEmitHelpers` to instructs the compiler not to emit them.
 
 
 ## `--newLine` command line option
