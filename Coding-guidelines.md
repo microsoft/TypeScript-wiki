@@ -73,15 +73,15 @@ For a variety of reasons, we avoid certain constructs, and use some of our own. 
 
 1. Use arrow functions over anonymous function expressions.
 2. Only surround arrow function parameters when necessary. <br />For example, `(x) => x + x` is wrong but the following are correct:
-  1. `x => x + x`
-  2. `(x,y) => x + y`
-  3. `<T>(x: T, y: T) => x === y`
-3. Always surround loop and conditional bodies with curly braces.
+   1. `x => x + x`
+   2. `(x,y) => x + y`
+   3. `<T>(x: T, y: T) => x === y`
+3. Always surround loop and conditional bodies with curly braces. Curly braces for inline return statements are optional but preferred.
 4. Open curly braces always go on the same line as whatever necessitates them.
 5. Parenthesized constructs should have no surrounding whitespace. <br />A single space follows commas, colons, and semicolons in those constructs. For example:
-  1. `for (var i = 0, n = str.length; i < 10; i++) { }`
-  2. `if (x < 10) { }`
-  3. `function f(x: number, y: string): void { }`
+   1. `for (var i = 0, n = str.length; i < 10; i++) { }`
+   2. `if (x < 10) { }`
+   3. `function f(x: number, y: string): void { }`
 6. Use a single declaration per variable statement <br />(i.e. use `var x = 1; var y = 2;` over `var x = 1, y = 2;`).
 7. `else` goes on a separate line from the closing curly brace.
 8. Use 4 spaces per indentation.
