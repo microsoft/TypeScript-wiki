@@ -48,7 +48,7 @@ The nightly build currently does not include the full plugin setup, but we are w
 2. Download the [VSDevMode.ps1](https://github.com/Microsoft/TypeScript/blob/master/scripts/VSDevMode.ps1) script.
 
    > Also see our wiki page on [using a custom language service file](https://github.com/Microsoft/TypeScript/wiki/Dev-Mode-in-Visual-Studio#using-a-custom-language-service-file).
-3. From a poweshell command window, run:
+3. From a powershell command window, run:
    * VS 2015:
 
      ```posh
