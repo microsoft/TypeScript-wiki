@@ -809,7 +809,7 @@ function f() {
 ```
 
 ## Enum reference in-lining changes
-For regular enums, pre 1.5, the compiler *only* inline constant members, and a member was only constant if its initializer was a literal. That resulted in inconsistent behavior depending on whether the enum value is initalized with a literal or an expression. Starting with Typescript 1.5 all non-const enum members are not inlined.
+For regular enums, pre 1.5, the compiler *only* inline constant members, and a member was only constant if its initializer was a literal. That resulted in inconsistent behavior depending on whether the enum value is initialized with a literal or an expression. Starting with Typescript 1.5 all non-const enum members are not inlined.
 
 **Example:**
 ```ts
@@ -965,7 +965,7 @@ var r = makeArray(1, ""); // used to return {}[], now an error
 Likewise for `new Array(...)`
 
 **Recommendations**
-Declare a back-compat signature if the 1.0 behavior was desired:
+Declare a back-compatible signature if the 1.0 behavior was desired:
 ```ts
 function makeArray<T>(...items: T[]): T[];
 function makeArray(...items: {}[]): {}[];
