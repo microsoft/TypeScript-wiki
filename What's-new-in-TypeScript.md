@@ -15,8 +15,7 @@ async function getZipFile(name: string, files: File[]): Promise<File> {
 }
 ```
 
-Many bundlers have support for automatically splitting output bundles based on these `import` expressions, so consider using this new feature with the `es2015` module target.
-
+Many bundlers have support for automatically splitting output bundles based on these `import` expressions, so consider using this new feature with the `esnext` module target.
 
 ## String Enums
 
