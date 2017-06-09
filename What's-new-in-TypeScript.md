@@ -1,3 +1,172 @@
+# TypeScript 2.4
+
+## Dynamic Import Expressions
+
+Dynamic `import` expressions are a new feature and part of ECMAScript that allows users to asynchronously load a module at any arbitrary point in your program.
+
+This means that you can conditionally and lazily import other modules and libraries.
+For example, here's an `async` function that only imports a utility library when it's needed:
+
+```ts
+async function getZipFile(name: string, files: File[]): Promise<File> {
+    const zipUtil = await import('./utils/create-zip-file');
+    const zipContents = await zipUtil.getContentAsBlob(files);
+    return new File(zipContents, name);
+}
+```
+
+Many bundlers have support for automatically splitting output bundles based on these `import` expressions, so consider using this new feature with the `es2015` module target.
+
+
+## String Enums
+
+TypeScript 2.4 now allows enum members to contain string initializers.
+
+```ts
+enum Colors {
+    Red = "RED",
+    Green = "GREEN",
+    Blue = "BLUE",
+}
+```
+
+The caveat is that string-initialized enums can't be reverse-mapped to get the original enum member name.
+In other words, you can't write `Colors["RED"]` to get the string `"Red"`.
+
+## Improved inference for generics
+
+TypeScript 2.4 introduces a few wonderful changes around the way generics are inferred.
+
+### Return types as inference targets
+
+For one, TypeScript can now make inferences for the return type of a call.
+This can improve your experiece and catch errors.
+Something that now works:
+
+```ts
+function arrayMap<T, U>(f: (x: T) => U): (a: T[]) => U[] {
+    return a => a.map(f);
+}
+
+
+const lengths: (a: string[]) => number[] = arrayMap(s => s.length);
+```
+
+
+As an example of new errors you might spot as a result:
+
+```ts
+let x: Promise<string> = new Promise(resolve => {
+    resolve(10);
+    //      ~~ Error!
+});
+```
+
+### Type parameter inference from contextual types
+
+Prior to TypeScript 2.4, in the following example
+
+```ts
+let f: <T>(x: T) => T = y => y;
+```
+
+`y` would have the type `any`.
+This meant the program would type-check, but you could technically do anything with `y`, such as the following:
+
+```ts
+let f: <T>(x: T) => T = y => y() + y.foo.bar;
+```
+
+That last example isn't actually type-safe.
+
+In TypeScript 2.4, the function on the right side actually implicitly *gains* type parameters, and `y` is inferred to have the type of that type-parameter.
+
+If you use `y` in a way that the type parameter's constraint doesn't support, you'll correctly get an error.
+In this case, the constraint of `T` was (implicitly) `{}`, so the last example will appropriately fail.
+
+### Stricter checking for generic functions
+
+TypeScript now tries to unify type parameters when comparing two single-signature types.
+As a result, you'll get stricter checks when relating two generic signatures, and may catch some bugs.
+
+```ts
+type A = <T, U>(x: T, y: U) => [T, U];
+type B = <S>(x: S, y: S) => [S, S];
+
+function f(a: A, b: B) {
+    a = b;  // Error
+    b = a;  // Ok
+}
+```
+
+## Strict contravariance for callback parameters
+
+TypeScript has always compared parameters in a bivariant way.
+There are a number of reasons for this, but by-and-large this was not been a huge issue for our users until we saw some of the adverse effects it had with `Promise`s and `Observable`s.
+
+TypeScript 2.4 introduces tightens this up when relating two callback types. For example:
+
+```ts
+interface Mappable<T> {
+    map<U>(f: (x: T) => U): Mappable<U>;
+}
+
+declare let a: Mappable<number>;
+declare let b: Mappable<string | number>;
+
+a = b;
+b = a;
+```
+
+Prior to TypeScript 2.4, this example would succeed.
+When relating the types of `map`, TypeScript would bidirectionally relate their parameters (i.e. the type of `f`).
+When relating each `f`, TypeScript would also bidirectionally relate the type of *those* parameters.
+
+When relating the type of `map` in TS 2.4, the language will check whether each parameter is a callback type, and if so, it will ensure that those parameters are checked in a contravariant manner with respect to the current relation.
+
+In other words, TypeScript now catches the above bug, which may be a breaking change for some users, but will largely be helpful.
+
+## Weak Type Detection
+
+TypeScript 2.4 introduces the concept of "weak types".
+Any type that contains nothing but a set of all-optional properties is considered to be *weak*.
+For example, this `Options` type is a weak type:
+
+```ts
+interface Options {
+    data?: string,
+    timeout?: number,
+    maxRetries?: number,
+}
+```
+
+In TypeScript 2.4, it's now an error to assign anything to a weak type when there's no overlap in properties.
+For example:
+
+```ts
+function sendMessage(options: Options) {
+    // ...
+}
+
+const opts = {
+    payload: "hello world!",
+    retryOnFail: true,
+}
+
+// Error!
+sendMessage(opts);
+// No overlap between the type of 'opts' and 'Options' itself.
+// Maybe we meant to use 'data'/'maxRetries' instead of 'payload'/'retryOnFail'.
+```
+
+You can think of this as TypeScript "toughening up" the weak guarantees of these types to catch what would otherwise be silent bugs.
+
+Since this is a breaking change, you may need to know about the workarounds which are the same as those for strict object literal checks:
+
+1. Declare the properties if they really do exist.
+2. Add an index signature to the weak type (i.e. `[propName: string]: {}`).
+3. Use a type assertion (i.e. `opts as Options`).
+
 # TypeScript 2.3
 
 ## Generators and Iteration for ES5/ES3
@@ -77,9 +246,9 @@ async function* g() {
   yield 1;
   await sleep(100);
   yield* [2, 3];
-  yield* (async function *() { 
-    await sleep(100); 
-    yield 4; 
+  yield* (async function *() {
+    await sleep(100);
+    yield 4;
   })();
 }
 ```
@@ -103,14 +272,14 @@ The `for..await..of` statement is only legal within an Async Function or Async G
 
 #### Caveats
 
-* Keep in mind that our support for async iterators relies on support for `Symbol.asyncIterator` to exist at runtime. 
+* Keep in mind that our support for async iterators relies on support for `Symbol.asyncIterator` to exist at runtime.
 You may need to polyfill `Symbol.asyncIterator`, which for simple purposes can be as simple as: `(Symbol as any).asyncIterator = Symbol.asyncIterator || Symbol.from("Symbol.asyncIterator");`
 * You also need to include `esnext` in your `--lib` option, to get the `AsyncIterator` declaration if you do not already have it.
-* Finally, if your target is ES5 or ES3, you'll also need to set the `--downlevelIterators` flag. 
+* Finally, if your target is ES5 or ES3, you'll also need to set the `--downlevelIterators` flag.
 
 ## Generic parameter defaults
 
-TypeScript 2.3 adds support for declaring defaults for generic type parameters. 
+TypeScript 2.3 adds support for declaring defaults for generic type parameters.
 
 #### Example
 
@@ -159,13 +328,13 @@ has the effect of turning on all strict options *except* the `--noImplicitThis` 
 
 Starting with TypeScript 2.3, the default `tsconfig.json` generated by `tsc --init` includes a `"strict": true` setting in the `"compilerOptions"` section. Thus, new projects started with `tsc --init` will by default have the highest level of type safety enabled.
 
-## Enhanced `--init` output 
+## Enhanced `--init` output
 
 Along with setting `--strict` on by default, `tsc --init` has an enhanced output. Default `tsconfig.json` files generated by `tsc --init` now include a set of the common compiler options along with their descriptions commented out. Just un-comment the configuration you like to set to get the desired behavior; we hope the new output simplifies the setting up new projects and keeps configuration files readable as projects grow.
 
 ## Errors in .js files with `--checkJs`
 
-By default the TypeScript compiler does not report any errors in .js files including using `--allowJs`. With TypeScript 2.3 type-checking errors can also be reported in `.js` files with `--checkJs`. 
+By default the TypeScript compiler does not report any errors in .js files including using `--allowJs`. With TypeScript 2.3 type-checking errors can also be reported in `.js` files with `--checkJs`.
 
 You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely you can choose to check only a few `.js` files by adding `// @ts-check` comment to them without setting `--checkJs`. You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
 
@@ -247,7 +416,7 @@ const WithLocation = <T extends Constructor<Point>>(Base: T) =>
 
 ## `object` type
 
-TypeScript did not have a type that represents the non-primitive type, i.e. any thing that is not `number` | `string` | `boolean` | `symbol` | `null` | `undefined`. Enter the new `object` type. 
+TypeScript did not have a type that represents the non-primitive type, i.e. any thing that is not `number` | `string` | `boolean` | `symbol` | `null` | `undefined`. Enter the new `object` type.
 
 With `object` type, APIs like `Object.create` can be better represented. For example:
 ```ts
@@ -264,7 +433,7 @@ create(undefined); // Error
 
 ## Support for `new.target`
 
-The `new.target` meta-property is new syntax introduced in ES2015. When an instance of a constructor is created via `new`, the value of `new.target` is set to be a reference to the constructor function initially used to allocate the instance. If a function is called rather than constructed via `new`, `new.target` is set to `undefined`. 
+The `new.target` meta-property is new syntax introduced in ES2015. When an instance of a constructor is created via `new`, the value of `new.target` is set to be a reference to the constructor function initially used to allocate the instance. If a function is called rather than constructed via `new`, `new.target` is set to `undefined`.
 
 `new.target` comes in handy when `Object.setPrototypeOf` or `__proto__` needs to be set in a class constructor. One such use case is inheriting from `Error` in NodeJS v4 and higher.
 
@@ -335,7 +504,7 @@ interface StringMap<T> {
 const map: StringMap<number>;
 
 map["prop1"] = 1;
-map.prop2 = 2; 
+map.prop2 = 2;
 
 ```
 
@@ -345,7 +514,7 @@ This only apply to types with an *explicit* string index signature. It is still 
 
 TypeScript 2.2 adds support for using spread on a JSX element children. Please see [facebook/jsx#57](https://github.com/facebook/jsx/issues/57) for more details.
 
-#### Example 
+#### Example
 
 ```ts
 function Todo(prop: { key: number, todo: string }) {
@@ -363,7 +532,7 @@ let x: TodoListProps;
 <TodoList {...x} />
 ```
 
-## New `jsx: react-native` 
+## New `jsx: react-native`
 
 React-native build pipeline expects all files to have a `.js` extensions even if the file contains JSX syntax. The new `--jsx` value `react-native` will persevere the JSX syntax in the output file, but give it a `.js` extension.
 
@@ -961,8 +1130,8 @@ type T2 = (x?: number | undefined) => string;  // x has type number | undefined
 
 ### Non-null and non-undefined type guards
 
-A property access or a function call produces a compile-time error if the object or function is of a type that includes `null` or `undefined`. 
-However, type guards are extended to support non-null and non-undefined checks. 
+A property access or a function call produces a compile-time error if the object or function is of a type that includes `null` or `undefined`.
+However, type guards are extended to support non-null and non-undefined checks.
 
 #### Example
 
@@ -985,8 +1154,8 @@ The effects on subject variable types accurately reflect JavaScript semantics (e
 
 ### Dotted names in type guards
 
-Type guards previously only supported checking local variables and parameters. 
-Type guards now support checking "dotted names" consisting of a variable or parameter name followed one or more property accesses. 
+Type guards previously only supported checking local variables and parameters.
+Type guards now support checking "dotted names" consisting of a variable or parameter name followed one or more property accesses.
 
 #### Example
 
@@ -1066,7 +1235,7 @@ function processEntity(e?: Entity) {
 The new features are designed such that they can be used in both strict null checking mode and regular type checking mode.
 In particular, the `null` and `undefined` types are automatically erased from union types in regular type checking mode (because they are subtypes of all other types), and the `!` non-null assertion expression operator is permitted but has no effect in regular type checking mode. Thus, declaration files that are updated to use null- and undefined-aware types can still be used in regular type checking mode for backwards compatibility.
 
-In practical terms, strict null checking mode requires that all files in a compilation are null- and undefined-aware. 
+In practical terms, strict null checking mode requires that all files in a compilation are null- and undefined-aware.
 
 ## Control flow based type analysis
 
@@ -1123,7 +1292,7 @@ function mumble(check: boolean) {
 
 ## Tagged union types
 
-TypeScript 2.0 implements support for tagged (or discriminated) union types. 
+TypeScript 2.0 implements support for tagged (or discriminated) union types.
 Specifically, the TS compiler now support type guards that narrow union types based on tests of a discriminant property and furthermore extend that capability to `switch` statements.
 
 #### Example
@@ -1178,14 +1347,14 @@ function test2(s: Shape) {
 A *discriminant property type guard* is an expression of the form `x.p == v`, `x.p === v`, `x.p != v`, or `x.p !== v`, where `p` and `v` are a property and an expression of a string literal type or a union of string literal types.
 The discriminant property type guard narrows the type of `x` to those constituent types of `x` that have a discriminant property `p` with one of the possible values of `v`.
 
-Note that we currently only support discriminant properties of string literal types. 
+Note that we currently only support discriminant properties of string literal types.
 We intend to later add support for boolean and numeric literal types.
 
 ## The `never` type
 
 TypeScript 2.0 introduces a new primitive type `never`.
-The `never` type represents the type of values that never occur. 
-Specifically, `never` is the return type for functions that never return and `never` is the type of variables under type guards that are never true. 
+The `never` type represents the type of values that never occur.
+Specifically, `never` is the return type for functions that never return and `never` is the type of variables under type guards that are never true.
 
 The `never` type has the following characteristics:
 
@@ -1225,7 +1394,7 @@ function move1(direction: "up" | "down") {
         case "up":
             return 1;
         case "down":
-            return -1; 
+            return -1;
     }
     return error("Should never get here");
 }
@@ -1488,7 +1657,7 @@ So following our example, the `tsconfig.json` file should look like:
 
 ### Tracing module resolution
 
-`--traceResolution` offers a handy way to understand how modules have been resolved by the compiler. 
+`--traceResolution` offers a handy way to understand how modules have been resolved by the compiler.
 
 ```shell
 tsc --traceResolution
@@ -1590,7 +1759,7 @@ mathLib.isPrime(2);
 
 ## Optional class properties
 
-Optional properties and methods can now be declared in classes, similar to what is already permitted in interfaces. 
+Optional properties and methods can now be declared in classes, similar to what is already permitted in interfaces.
 
 #### Example
 
@@ -1608,7 +1777,7 @@ class Bar {
 }
 ```
 
-When compiled in `--strictNullChecks` mode, optional properties and methods automatically have `undefined` included in their type. Thus, the `b` property above is of type `number | undefined` and the `g` method above is of type `(() => number) | undefined`. 
+When compiled in `--strictNullChecks` mode, optional properties and methods automatically have `undefined` included in their type. Thus, the `b` property above is of type `number | undefined` and the `g` method above is of type `(() => number) | undefined`.
 Type guards can be used to strip away the `undefined` part of the type:
 
 ```ts
@@ -1642,7 +1811,7 @@ class Singleton {
             Singleton.instance = new Singleton();
         }
         return Singleton.instance;
-    } 
+    }
 }
 
 let e = new Singleton(); // Error: constructor of 'Singleton' is private.
@@ -1729,10 +1898,10 @@ tsc --target es5 --lib es5,es2015.promise
 }
 ```
 
-## Flag unused declarations with `--noUnusedParameters` and `--noUnusedLocals` 
+## Flag unused declarations with `--noUnusedParameters` and `--noUnusedLocals`
 
 TypeScript 2.0 has two new flags to help you maintain a clean code base.
-`--noUnusedParameters` flags any unused function or method parameters errors. 
+`--noUnusedParameters` flags any unused function or method parameters errors.
 `--noUnusedLocals` flags any unused local (un-exported) declaration like variables, functions, classes, imports, etc...
 Also, unused private members of a class would be flagged as errors under `--noUnusedLocals`.
 
@@ -1780,7 +1949,7 @@ This is an implementation for a [Stage-3 ECMAScript proposal](https://jeffmo.git
 #### Example
 ```ts
 function foo(
-  bar: Bar, 
+  bar: Bar,
   baz: Baz, // trailing commas are OK in parameter lists
 ) {
   // Implementation...
@@ -1798,7 +1967,7 @@ TypeScript 2.0 adds a new `--skipLibCheck` compiler option that causes type chec
 When a program includes large declaration files, the compiler spends a lot of time type checking declarations that are already known to not contain errors, and compile times may be significantly shortened by skipping declaration file type checks.
 
 Since declarations in one file can affect type checking in other files, some errors may not be detected when `--skipLibCheck` is specified.
-For example, if a non-declaration file augments a type declared in a declaration file, errors may result that are only reported when the declaration file is checked. 
+For example, if a non-declaration file augments a type declared in a declaration file, errors may result that are only reported when the declaration file is checked.
 However, in practice such situations are rare.
 
 ## Allow duplicate identifiers across declarations
@@ -1855,7 +2024,7 @@ assign(x, { e: 0 });  // Error
 ## Control flow analysis errors
 
 TypeScript 1.8 introduces control flow analysis to help catch common errors that users tend to run into.
-Read on to get more details, and check out these errors in action: 
+Read on to get more details, and check out these errors in action:
 
 ![cfa](https://cloud.githubusercontent.com/assets/8052307/5210657/c5ae0f28-7585-11e4-97d8-86169ef2a160.gif)
 
