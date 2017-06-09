@@ -40,7 +40,7 @@ TypeScript 2.4 introduces a few wonderful changes around the way generics are in
 ### Return types as inference targets
 
 For one, TypeScript can now make inferences for the return type of a call.
-This can improve your experiece and catch errors.
+This can improve your experience and catch errors.
 Something that now works:
 
 ```ts
@@ -79,7 +79,7 @@ let f: <T>(x: T) => T = y => y() + y.foo.bar;
 
 That last example isn't actually type-safe.
 
-In TypeScript 2.4, the function on the right side actually implicitly *gains* type parameters, and `y` is inferred to have the type of that type-parameter.
+In TypeScript 2.4, the function on the right side implicitly *gains* type parameters, and `y` is inferred to have the type of that type-parameter.
 
 If you use `y` in a way that the type parameter's constraint doesn't support, you'll correctly get an error.
 In this case, the constraint of `T` was (implicitly) `{}`, so the last example will appropriately fail.
