@@ -146,7 +146,7 @@ Use JSDoc `@augments` to specify the types explicitly. for instance:
 import { Component } from "react";
 
 /**
- * @augments {Component<{a: number}}, State>}
+ * @augments {Component<{a: number}, State>}
  */
 class MyComponent extends Component {
     render() {
