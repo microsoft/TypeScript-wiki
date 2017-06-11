@@ -127,16 +127,15 @@ An unspecified generic type parameter defaults to `any`. There are few places wh
 
 #### In extends clause:
 
-For instance, `React.Component` is defined to have two generic type parameters, `Props` and `State`. In a `.js` file, there is no legal way to specify these in the extends clause; By default the type arguments will be `any`:
+For instance, `React.Component` is defined to have two generic type parameters, `Props` and `State`. 
+In a `.js` file, there is no legal way to specify these in the extends clause. By default the type arguments will be `any`:
+
 ```js
 import { Component } from "react";
 
-/**
- * @augments {Component<{a: number}}, State>}
- */
 class MyComponent extends Component {
     render() {
-		this.props.b; // allowed, since this.props is of type any
+        this.props.b; // Allowed, since this.props is of type any
     }
 }
 ```
@@ -147,7 +146,7 @@ Use JSDoc `@augments` to specify the types explicitly. for instance:
 import { Component } from "react";
 
 /**
- * @augments {Component<{a: number}}, State>}
+ * @augments {Component<{a: number}, State>}
  */
 class MyComponent extends Component {
     render() {
@@ -162,14 +161,14 @@ An unspecified generic type argument in JSDoc defaults to any:
 
 ```js
 /** @type{Array} */
-var x;
+var x = [];
 
 x.push(1);        // OK
 x.push("string"); // OK, x is of type Array<any>
 
 
 /** @type{Array.<number>} */
-var y;
+var y = [];
 
 y.push(1);        // OK
 y.push("string"); // Error, string is not assignable to number
