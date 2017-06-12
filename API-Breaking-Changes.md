@@ -1,6 +1,6 @@
 # TypeScript 2.4
 
-- The following types/namespaces are now string enums: `ts.Extension`, `ts.ScriptElementKind`, `ts.HighlightSpanKind`, `ts.ClassificationTypeNames`, `protocol.CommandTypes`, `protocol.IndentStyle`, `protocol.JsxEmit`, `protocol.ModuleKind`, `protocol.ModuleResolutionKind`, `protocol.NewLineKind`, and `protocol.ScriptTarget`. Also, `ts.CommandNames` is now an alias for `protocol.CommandTypes`.
+- The following types/namespaces are now string enums: `ts.Extension`, `ts.ScriptElementKind`, `ts.HighlightSpanKind`, `ts.ClassificationTypeNames`, `protocol.CommandTypes`, `protocol.IndentStyle`, `protocol.JsxEmit`, `protocol.ModuleKind`, `protocol.ModuleResolutionKind`, `protocol.NewLineKind`, and `protocol.ScriptTarget`. Also, `ts.CommandNames` is now an alias for `protocol.CommandTypes`. See [#15966](https://github.com/Microsoft/TypeScript/pull/15966) and [#16425](https://github.com/Microsoft/TypeScript/pull/16425).
 
 - The type `EnumLiteralType` was removed and `LiteralType` is used instead. `LiteralType` also replaces `.text` with a `.value` which may be either a number or string. See [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486).
 
