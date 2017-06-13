@@ -20,7 +20,7 @@
 * [X] [Covariant checking for callback parameters](https://github.com/Microsoft/TypeScript/pull/15104)
 * [X] [String valued members in enums](https://github.com/Microsoft/TypeScript/pull/15486)
 * [X] [Weak type detection](https://github.com/Microsoft/TypeScript/pull/16047)
-* [ ] [ES dynamic `import()` expressions](https://github.com/Microsoft/TypeScript/pull/14774)
+* [X] [ES dynamic `import()` expressions](https://github.com/Microsoft/TypeScript/pull/14774)
 * [X] [Refactoring support in Language Service API](https://github.com/Microsoft/TypeScript/pull/15569)
     * [Refactor ES5 function to ES6 class in .js files](https://github.com/Microsoft/TypeScript/pull/15569)
 * [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
