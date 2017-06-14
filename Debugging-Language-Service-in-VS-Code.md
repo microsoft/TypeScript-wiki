@@ -30,7 +30,9 @@ a. In a shell, [export](http://stackoverflow.com/questions/1158091/defining-a-va
 
 b. Edit `extensions/typescript/src/typescriptServiceClient.ts`, setting the port to an open one.
 
-2) Update launch.json with an option to attach to the node instance, with sourcemaps from your `built/local` folder. You can use this option as a template:
+2) Update launch.json with an option to attach to the node instance, with sourcemaps from your `built/local` folder.
+
+Template for older VSCode:
 ```
 		{
 			"name": "Attach to TS Server",
@@ -41,6 +43,23 @@ b. Edit `extensions/typescript/src/typescriptServiceClient.ts`, setting the port
 			"outDir": "/path/to/repo/TypeScript/built/local"
 		},
 ```
+Template Newer VSCode (trying with version 1.13.1 with node V6.10):
+```
+	{
+			"name": "Attach to TS Server",
+			"type": "node",
+                        "request": "launch",
+                        "protocol": "legacy",
+			"port": 5859,
+                        "sourceMaps": true,
+			"outFiles": ["/path/to/repo/TypeScript/built/local"],
+                        "runtimeArgs": [
+                            "--debug=5859"
+                        ]
+	}
+```
+With Node version 8.0, `protocol` should be "inspector" (see: https://github.com/Microsoft/vscode/issues/26411#issuecomment-300607077)
+
 
 3) Launch an instance of development vs code, and open a ts file.
 
