@@ -37,7 +37,7 @@ In Visual Studio 2017 version 15.3 and later, the TypeScript version used is bou
 3. Go to the **TypeScript Build** tab
 4. Change **TypeScript version** to the desired version or "use latest available" to always default to the newest version installed
 
-![15.3 properties page](./15.3-properties.png "15.3 properties page")
+![15.3 properties page](https://user-images.githubusercontent.com/820883/27146889-b7498fd2-50ef-11e7-86c3-af1d84bf3d1d.png "15.3 properties page")
 
 When setting a TypeScript version on a project, the project becomes fixed on the that version.
 If a new TypeScript version becomes available through a Visual Studio update or a manual SDK download, the project will **still use the version it is fixed to**.
