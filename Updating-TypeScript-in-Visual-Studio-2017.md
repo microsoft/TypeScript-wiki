@@ -7,7 +7,7 @@ You will need Visual Studio 2017 version 15.2 or later in order to change your T
 Depending on which version you have, there are slightly different instructions for managing your TypeScript versions.
 That said, using the latest available version of Visual Studio will provide the best experience.  
 
-## Configuring TypeScript versions in Visual Studio 2017 version 15.2
+## Setting TypeScript versions in Visual Studio 2017 version 15.2
 
 During installation of Visual Studio 2017 version 15.2, TypeScript 2.2 will be automatically included with the Web, Node.js, Universal Windows, or Mobile JavaScript workloads. TypeScript 2.1 can also be selected from the 'Individual Components' installer page. 
 
@@ -28,7 +28,7 @@ In Visual Studio 2017 version 15.2 you are limited to setting a global TypeScrip
 This means that if you have two projects that use different TypeScript compiler versions, you will have to manually toggle the setting each time you switch projects.
 This is not ideal, so if possible, upgrade to Visual Studio 2017 15.3 and follow the instructions below.
 
-## Configuring TypeScript versions in Visual Studio 2017 version 15.3
+## Setting TypeScript versions in Visual Studio 2017 version 15.3
 
 In Visual Studio 2017 version 15.3 and later, the TypeScript version used is bound to individual projects.
 
