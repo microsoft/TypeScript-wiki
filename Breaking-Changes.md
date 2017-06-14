@@ -69,6 +69,120 @@ nested callback:
 f((nested: (error: number, result: any) => void) => { });
 ```
 
+## Weak Type Checking
+
+A weak type is a type that contains only optional properties. These
+types behave *almost* like `{}` &mdash; almost anything can be
+assigned to it. For example, this Options type is a weak type:
+
+```ts
+interface Options {
+    data?: string,
+    timeout?: number,
+    maxRetries?: number,
+}
+```
+
+In TypeScript 2.4, it’s now an error to assign anything to a weak type when there’s no overlap in properties. For example:
+
+```ts
+function sendMessage(options: Options) {
+    // ...
+}
+
+const opts = {
+    payload: "hello world!",
+    retryOnFail: true,
+}
+
+// Error!
+// No overlap between the type of 'opts' and 'Options' itself.
+// Maybe we meant to use 'data'/'maxRetries' instead of 'payload'/'retryOnFail'.
+sendMessage(opts);
+
+// Even more subtly wrong:
+sendMessage("Here is my payload! But I forgot to wrap it in an object literal.");
+```
+
+This catches lots of real bugs that Typescript previously missed. Most
+of these are easy to fix, but there are a couple of cases that are
+less obvious. Even for the subtle cases, you can override the check
+with a type assertion (eg `value as WeakType`).
+
+### Weak interface provides methods to subclasses ###
+
+```ts
+interface Methods {
+    method1(): number;
+    method2(a: string): string;
+}
+class B implements Methods {
+//                 ~~~~~~~
+//                 weak type error here
+    private _n: number;
+    method3(): number;
+}
+class C extends B {
+    method1(): string; // expected error, but didn't get one!
+}
+```
+
+Typescript inheritance doesn't actually work this way; `B` doesn't get
+any methods from `Methods`, and it definitely doesn't pass them on to
+subclasses like `C`. So `C` is free to incorrectly implement methods
+from `Methods`. The fix is to merge an interface with `class B`:
+
+```ts
+interface B extends Methods { }
+class B {
+    private _n: number;
+    method3(): number;
+}
+class C extends B {
+    method1(): string; // error: incorrect return type
+}
+```
+
+### Weak 'core' or 'data' type ###
+
+Often a big Javascript project will have a weak 'core' type that
+applies to every object in the project. The core type typically has
+only a couple of optional properties that most objects don't
+implement. Another pattern is to have a 'data' type that consists
+mostly of user-provided properties but allows users to override a
+couple of methods that, if overridden, need to have the right type.
+For example:
+
+For example,
+
+```ts
+interface Data {
+  beforeUpdate()?: void;
+}
+function register(data: Data) {
+  if (data.beforeUpdate) {
+    data.beforeUpdate();
+  }
+  // handle data normally
+}
+register({
+  your: 'data',
+  goes: 'here'
+  // most people don't need to implement beforeUpdate
+  // but this now causes a weak type error
+})
+```
+
+To fix the weak type error, `Data` needs to have a string index
+signature to indicate that it can hold unknown properties of any type:
+
+```ts
+interface Data {
+  beforeUpdate?(): void;
+  [s: string]: any;
+}
+```
+
 # TypeScript 2.3
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.3%22+label%3A%22Breaking+Change%22+is%3Aclosed).
