@@ -9,6 +9,6 @@ To set the version of TypeScript used by IntelliSense by using the setting shown
 (Figure 1) TypeScript Version Selection
 
 
-To change the TypeScript version used for building a project, set the MSBuild property [`<TypeScriptToolsVersions>`](http://www.typescriptlang.org/docs/handbook/compiler-options-in-msbuild.html#toolsversion) in the project file. For more information on MSBuild properties, see the TypeScript Handbook.
+To change the TypeScript version used for building a project, set the MSBuild property [`<TypeScriptToolsVersion>`](http://www.typescriptlang.org/docs/handbook/compiler-options-in-msbuild.html#toolsversion) in the project file. For more information on MSBuild properties, see the TypeScript Handbook.
 
 
