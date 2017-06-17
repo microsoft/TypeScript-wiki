@@ -511,7 +511,7 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
         };
     }
 
-    /** Serialize a class symbol infomration */
+    /** Serialize a class symbol information */
     function serializeClass(symbol: ts.Symbol) {
         let details = serializeSymbol(symbol);
 
