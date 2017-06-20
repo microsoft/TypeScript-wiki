@@ -1,5 +1,5 @@
 ### Before You Start
-First, refer to the [[TypeScript Design Goals]] page and make sure your proposal fits within those guidelines.
+First, refer to the [TypeScript Design Goals](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Design-Goals) page and make sure your proposal fits within those guidelines.
 
 Next, see if there are any related [existing suggestions](https://github.com/Microsoft/TypeScript/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3Asuggestion) in the issue tracker to avoid creating duplicate work.
 
