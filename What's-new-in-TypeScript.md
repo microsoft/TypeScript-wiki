@@ -2,7 +2,7 @@
 
 ## Dynamic Import Expressions
 
-Dynamic `import` expressions are a new feature and part of ECMAScript that allows users to asynchronously load a module at any arbitrary point in your program.
+Dynamic `import` expressions are a new feature and part of ECMAScript that allows users to asynchronously request a module at any arbitrary point in your program.
 
 This means that you can conditionally and lazily import other modules and libraries.
 For example, here's an `async` function that only imports a utility library when it's needed:
