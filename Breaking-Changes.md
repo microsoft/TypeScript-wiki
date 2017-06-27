@@ -6,6 +6,55 @@ These changes list where implementation differs between versions as the spec and
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.4%22+label%3A%22Breaking+Change%22+is%3Aclosed).
 
+## Weak Type Detection
+
+TypeScript 2.4 introduces the concept of "weak types".
+Any type that contains nothing but a set of all-optional properties is considered to be *weak*.
+For example, this `Options` type is a weak type:
+
+```ts
+interface Options {
+    data?: string,
+    timeout?: number,
+    maxRetries?: number,
+}
+```
+
+In TypeScript 2.4, it's now an error to assign anything to a weak type when there's no overlap in properties.
+For example:
+
+```ts
+function sendMessage(options: Options) {
+    // ...
+}
+
+const opts = {
+    payload: "hello world!",
+    retryOnFail: true,
+}
+
+// Error!
+sendMessage(opts);
+// No overlap between the type of 'opts' and 'Options' itself.
+// Maybe we meant to use 'data'/'maxRetries' instead of 'payload'/'retryOnFail'.
+```
+
+**Recommendation**
+
+
+## Return types as inference targets
+
+TypeScript can now make inferences from contextual types to the return type of a call.
+This means that some code may now appropriately error.
+As an example of a new errors you might spot as a result:
+
+```ts
+let x: Promise<string> = new Promise(resolve => {
+    resolve(10);
+    //      ~~ Error! Type 'number' is not assignable to 'string'.
+});
+```
+
 ## Stricter variance in callback parameters
 
 TypeScript's checking of callback parameters is now covariant with respect to immediate signature checks.
@@ -20,7 +69,8 @@ This is particularly true of Promises and Observables due to the way in which th
 Here is an example of improved Promise checking:
 
 ```ts
-let p: Promise<number> = new Promise((c, e) => { c(12) });
+let p = new Promise((c, e) => { c(12) });
+let u: Promise<number> = p;
     ~
 Type 'Promise<{}>' is not assignable to 'Promise<number>'
 ```
@@ -68,6 +118,38 @@ nested callback:
 ```ts
 f((nested: (error: number, result: any) => void) => { });
 ```
+
+## Stricter checking for generic functions
+
+TypeScript now tries to unify type parameters when comparing two single-signature types.
+As a result, you'll get stricter checks when relating two generic signatures, and may catch some bugs.
+
+```ts
+type A = <T, U>(x: T, y: U) => [T, U];
+type B = <S>(x: S, y: S) => [S, S];
+
+function f(a: A, b: B) {
+    a = b;  // Error
+    b = a;  // Ok
+}
+```
+
+## Type parameter inference from contextual types
+
+Prior to TypeScript 2.4, in the following example
+
+```ts
+let f: <T>(x: T) => T = y => y;
+```
+
+`y` would have the type `any`.
+This meant the program would type-check, but you could technically do anything with `y`, such as the following:
+
+```ts
+let f: <T>(x: T) => T = y => y() + y.foo.bar;
+```
+
+**Recommendation:** Appropriately re-evaluate whether your generics have the correct constraint, or are even necessary. As a last resort, annotate your parameters with the `any` type.
 
 # TypeScript 2.3
 
