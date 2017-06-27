@@ -41,6 +41,10 @@ sendMessage(opts);
 
 **Recommendation**
 
+1. Declare the properties if they really do exist.
+2. Add an index signature to the weak type (i.e. `[propName: string]: {}`).
+3. Use a type assertion (i.e. `opts as Options`).
+
 
 ## Return types as inference targets
 
