@@ -138,6 +138,10 @@ function f(a: A, b: B) {
 }
 ```
 
+**Recommendation**
+
+Either correct the definition or use `--noStrictGenericChecks`.
+
 ## Type parameter inference from contextual types
 
 Prior to TypeScript 2.4, in the following example
