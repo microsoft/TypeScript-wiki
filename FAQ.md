@@ -1335,12 +1335,12 @@ If you just want to include the JavaScript files for editing and don't need to c
 
 ### Why some comments are not preserved in emitted JavaScript even when `--removeComments` is not specified?
 
-TypeScript compiler uses position of a node in the abstract syntax tree to retrieve comments during emit.
-Because, the compiler does not store all tokens into the tree, some comments will be missed in an output JavaScript file.
+TypeScript compiler uses a position of a node in the abstract syntax tree to retrieve its comments during emit.
+Because, the compiler does not store all tokens into the tree, some comments may be missed in an output JavaScript file.
 For example, we do not store following tokens into the tree `,`, `{`, `}`, `(`, `)`.
 Therefore, trailing comments or leading comments of such token cannot be retrieved during emit.
-At the moment, there is not easy method to preserve such comments without storing those tokens.
-Doing so, however, can significantly increase the tree size and potentially have performance impact.\
+At the moment, there is not an easy method to preserve such comments without storing those tokens.
+Doing so, however, can significantly increase the tree size and potentially have performance impact.
 
 Some cases where TypeScript compiler will not be able to preserve your comments:
 
