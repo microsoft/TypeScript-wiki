@@ -1,3 +1,6 @@
+# TypeScript 2.5
+- `Symbol.name`, `Symbol.getName()`, and `Identifier.text` are all now of type `__String`. This is a special branded string to help track where strings are appropriately escaped and prevent their misuse. `escapeIdentifier` and `unescapeIdentifier` has been renamed to `escapeLeadingUnderscores` and `unescapeLeadingUnderscores` and had their types updated accordingly. Deprecated versions of `escapeIdentifier` and `unescapeIdentifier` still exist with the old name and type signature, however they will be removed in a future version.
+
 # TypeScript 2.4
 
 - The following types/namespaces are now string enums: `ts.Extension`, `ts.ScriptElementKind`, `ts.HighlightSpanKind`, `ts.ClassificationTypeNames`, `protocol.CommandTypes`, `protocol.IndentStyle`, `protocol.JsxEmit`, `protocol.ModuleKind`, `protocol.ModuleResolutionKind`, `protocol.NewLineKind`, and `protocol.ScriptTarget`. Also, `ts.CommandNames` is now an alias for `protocol.CommandTypes`. See [#15966](https://github.com/Microsoft/TypeScript/pull/15966) and [#16425](https://github.com/Microsoft/TypeScript/pull/16425).
