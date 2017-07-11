@@ -39,8 +39,8 @@ In Visual Studio 2017 version 15.3 and later, the TypeScript version used is bou
 
 ![15.3 properties page](https://user-images.githubusercontent.com/820883/27146889-b7498fd2-50ef-11e7-86c3-af1d84bf3d1d.png "15.3 properties page")
 
-When setting a TypeScript version on a project, the project becomes fixed on the that version.
-If a new TypeScript version becomes available through a Visual Studio update or a manual SDK download, the project will **still use the version it is fixed to**.
+When setting a TypeScript version on a project, the project becomes fixed on that version.
+Even if a new TypeScript version becomes available through a Visual Studio update or a manual SDK download, the project will **still use the version it is fixed to**.
 To stay on the latest version, we encourage you to set your projects to "use latest available" as described in step 4 above.
 
 > Note! If multiple projects are loaded with different TypeScript versions set in the properties page, the **latest** TypeScript version of all versions specified will take precedence.
