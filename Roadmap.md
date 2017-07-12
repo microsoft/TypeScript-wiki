@@ -17,7 +17,7 @@
 
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
-* [ ] [Refactoring for installing from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
+* [ ] [Quick fix for installing from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
 # 2.4 (June 2017)
 
