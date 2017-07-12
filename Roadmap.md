@@ -12,6 +12,10 @@
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
 
+# 2.5 (August 2017)
+
+- [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/10879)
+
 # 2.4 (June 2017)
 
 * [X] [Infer from generic function return types](https://github.com/Microsoft/TypeScript/pull/16072)
