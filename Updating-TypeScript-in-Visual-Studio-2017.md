@@ -20,7 +20,7 @@ To change TypeScript versions, change the following setting:
 (Figure 1) TypeScript Version Selection
 
 > Don't see the version you're looking for?  
-Make sure you have downloaded the correct SDK version from the [download center](https://www.microsoft.com/en-us/download/details.aspx?id=55258).
+Make sure you have downloaded the correct SDK version from the [download center](https://www.microsoft.com/en-us/download/details.aspx?id=55258) and restarted Visual Studio.
 
 To change the TypeScript version used for **building** a project, set the MSBuild property [`<TypeScriptToolsVersions>`](http://www.typescriptlang.org/docs/handbook/compiler-options-in-msbuild.html#toolsversion) in the project file. For more information on MSBuild properties, see the TypeScript Handbook.
 
