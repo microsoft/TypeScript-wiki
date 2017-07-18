@@ -68,9 +68,13 @@
     - [Why is a file in the `exclude` list still picked up by the compiler?](#why-is-a-file-in-the-exclude-list-still-picked-up-by-the-compiler)
     - [How can I specify an `include`?](#how-can-i-specify-an-include)
     - [Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?](#why-am-i-getting-the-error-ts5055-cannot-write-file-xxxjs-because-it-would-overwrite-input-file-when-using-javascript-files)
+  - [Comments](#comments)
+    - [Why some comments are not preserved in emitted JavaScript even when `--removeComments` is not specified?](#why-some-comments-are-not-preserved-in-emitted-javascript-even-when---removecomments-is-not-specified)
+    - [Why Copyright comments are removed when `--removeComments` is true?](#why-copyright-comments-are-removed-when---removecomments-is-true)
 - [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
     - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
     - ["Substitutability"](#substitutability)
+    - [Trailing, leading, and detached comments](#trailing-leading-and-detached-comments)
 - [GitHub Process Questions](#github-process-questions)
     - [What do the labels on these issues mean?](#what-do-the-labels-on-these-issues-mean)
     - [I disagree with the outcome of this suggestion](#i-disagree-with-the-outcome-of-this-suggestion)
@@ -1327,6 +1331,43 @@ If you don't want JavaScript files included in your project at all, simply set t
 If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files;
 If you just want to include the JavaScript files for editing and don't need to compile, set the `noEmit` compiler option to `true` to skip the emitting check.
 
+## Comments
+
+### Why some comments are not preserved in emitted JavaScript even when `--removeComments` is not specified?
+
+TypeScript compiler uses a position of a node in the abstract syntax tree to retrieve its comments during emit.
+Because, the compiler does not store all tokens into the tree, some comments may be missed in an output JavaScript file.
+For example, we do not store following tokens into the tree `,`, `{`, `}`, `(`, `)`.
+Therefore, trailing comments or leading comments of such token cannot be retrieved during emit.
+At the moment, there is not an easy method to preserve such comments without storing those tokens.
+Doing so, however, can significantly increase the tree size and potentially have performance impact.
+
+Some cases where TypeScript compiler will not be able to preserve your comments:
+
+```ts
+/* comment */
+<div>
+    {/* comment will not be emitted */}
+</div>
+
+var x = {
+    prop1: 1, // won't get emit because we can't retrieve this comment
+    prop2: 2  // will be emit
+}
+
+function foo() /* this comment can't be preserved */ { }
+```
+
+
+### Why Copyright comments are removed when `--removeComments` is true?
+
+TypeScript compiler will preserve copyright comment regardless of `--removeComments`.
+For a comment to be considered a copyright comment, it must have following characteristics:
+
+- a top-of-file comment following by empty line, separating it from the first statement.
+- begin with `/*!`
+
+
 -------------------------------------------------------------------------------------
 
 # Glossary and Terms in this FAQ
@@ -1360,6 +1401,23 @@ This is a principle that says if an object `X` can be used in place of some obje
 We also commonly say that `X` is *assignable to* `Y` (these terms have slightly different meanings in TypeScript, but the difference is not important here).
 
 In other words, if I ask for a `fork`, a `spork` is an acceptable *substitute* because it has the same functions and properties of a `fork` (three prongs and a handle).
+
+### Trailing, leading, and detached comments
+TypeScript classifies comments into three different types:
+
+- Leading comment  : a comment before a node followed by newline.
+- Trailing comment : a comment after a node and in the same line as the node.
+- Detached comment : a comment that is not part of any node such as copyright comment.
+```ts
+/*! Top-of-file copyright comment is a detached comment*/
+
+/* Leading comments of the function AST node*/
+function foo /*trailing comments of the function name, "foo", AST node*/ () {
+  /* Detached comment*/
+
+  let x = 10;
+}
+```
 
 ----------------------------------------------------------------------------------------
 
