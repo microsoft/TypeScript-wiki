@@ -30,7 +30,6 @@
 * [X] [ES dynamic `import()` expressions](https://github.com/Microsoft/TypeScript/pull/14774)
 * [X] [Refactoring support in Language Service API](https://github.com/Microsoft/TypeScript/pull/15569)
     * [Refactor ES5 function to ES6 class in .js files](https://github.com/Microsoft/TypeScript/pull/15569)
-* [ ] [Better error reporting for errors in `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/12336)
 
 # 2.3 (April 2017)
 
