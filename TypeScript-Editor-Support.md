@@ -32,8 +32,8 @@ Since it is also written in TypeScript, it can be easily extended if required.
 
 # Eclipse
 
+* [TypeScript IDE for Eclipse](https://github.com/angelozerr/typescript.java/wiki/Getting-Started), an Eclipse plugin developed by Angel Ozerr.
 * [Eclipse TypeScript Plug-in](https://github.com/palantir/eclipse-typescript), an Eclipse plugin developed by Palantir.
-* [typescript.java](https://github.com/angelozerr/typescript.java) an Eclipse plugin which consumes tsserver with JSDT Editor.
 
 # Emacs
 
