@@ -210,15 +210,14 @@ function fn10(/** string */ p1){}
  * @property {string[]} keys
  */
 class Foo {
-	/**
-	 * @param {string} [name = 'Foo']
-	 * @param {string[]} keys
-	 */
+    /**
+     * @param {string} [name = 'Foo']
+     * @param {string[]} keys
+     */
 	constructor(name = 'Foo', keys) {
-		this.name = name;
-		/** @type {string[]} keys */
-		this.keys = keys;
-	}
+        this.name = name;
+        /** @type {string[]} keys */
+        this.keys = keys;
+    }
 }
-
 ```
