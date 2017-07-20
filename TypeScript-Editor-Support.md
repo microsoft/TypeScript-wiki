@@ -50,7 +50,7 @@ Since it is also written in TypeScript, it can be easily extended if required.
 
 # Notepad++
 
-* [notepadplus-typescript](https://github.com/chai2010/notepadplus-typescript) - notepad++ support TypeScript (Windows).
+* [notepadplus-typescript](https://github.com/chai2010/notepadplus-typescript) - Notepad++ colorization support for TypeScript.
 
 # Sublime Text
 
