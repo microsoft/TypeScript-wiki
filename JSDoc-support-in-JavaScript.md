@@ -214,7 +214,7 @@ class Foo {
      * @param {string} [name = 'Foo']
      * @param {string[]} keys
      */
-	constructor(name = 'Foo', keys) {
+        constructor(name = 'Foo', keys) {
         this.name = name;
         /** @type {string[]} keys */
         this.keys = keys;
