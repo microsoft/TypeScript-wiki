@@ -7,6 +7,7 @@
  * [Emacs](#emacs)
  * [NeoVim](#neovim)
  * [NetBeans](#netbeans)
+ * [Notepad++](#notepad)
  * [Sublime Text](#sublime-text)
  * [Vim](#vim)
  * [Visual Studio](#visual-studio-20132015)
@@ -46,6 +47,10 @@ Since it is also written in TypeScript, it can be easily extended if required.
 # NetBeans
 
 * [nbts](https://github.com/Everlaw/nbts) - NetBeans TypeScript editor plugin
+
+# Notepad++
+
+* [notepadplus-typescript](https://github.com/chai2010/notepadplus-typescript) - Notepad++ colorization support for TypeScript.
 
 # Sublime Text
 
