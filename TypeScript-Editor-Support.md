@@ -32,7 +32,7 @@ Since it is also written in TypeScript, it can be easily extended if required.
 
 # Eclipse
 
-* [TypeScript IDE for Eclipse](https://github.com/angelozerr/typescript.java/wiki/Getting-Started), an Eclipse plugin developed by Angel Ozerr.
+* [TypeScript IDE for Eclipse](https://github.com/angelozerr/typescript.java/wiki/Getting-Started), an Eclipse plugin developed by Angelo Zerr.
 * [Eclipse TypeScript Plug-in](https://github.com/palantir/eclipse-typescript), an Eclipse plugin developed by Palantir.
 
 # Emacs
