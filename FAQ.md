@@ -294,7 +294,7 @@ In general, you should *never* find yourself declaring an `interface` with no pr
 > type SomeUrl = string;
 > type FirstName = string;
 > let x: SomeUrl = "http://www.typescriptlang.org/";
-> let y: FirstName = "Bob';
+> let y: FirstName = "Bob";
 > x = y; // Expected error
 > ```
 
