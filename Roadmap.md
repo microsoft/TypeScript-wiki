@@ -15,7 +15,8 @@
 
 # 2.5 (August 2017)
 
-* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/10879)
+* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
+    * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
 * [ ] [Quick fix for installing from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
