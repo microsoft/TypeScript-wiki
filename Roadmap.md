@@ -18,6 +18,7 @@
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
     * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
+* [X] [Quick fix for references to properties instead of types](https://github.com/Microsoft/TypeScript/pull/17462)
 * [ ] [Quick fix for installing from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
 # 2.4 (June 2017)
@@ -31,6 +32,7 @@
 * [X] [ES dynamic `import()` expressions](https://github.com/Microsoft/TypeScript/pull/14774)
 * [X] [Refactoring support in Language Service API](https://github.com/Microsoft/TypeScript/pull/15569)
     * [Refactor ES5 function to ES6 class in .js files](https://github.com/Microsoft/TypeScript/pull/15569)
+* [X] [Suggestions and quick fixes for spelling corrections in error messages](https://github.com/Microsoft/TypeScript/pull/15507)
 
 # 2.3 (April 2017)
 
