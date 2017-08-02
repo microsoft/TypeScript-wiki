@@ -20,7 +20,7 @@
     * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
 * [X] Quick fixes to...
-    * [X] [correct references to properties instead of types](https://github.com/Microsoft/TypeScript/pull/17462)
+    * [X] [correct references to types of properties]https://github.com/Microsoft/TypeScript/pull/17462)
     * [X] [correct uses of JSDoc types to TypeScript types](https://github.com/Microsoft/TypeScript/pull/17250)
 
 # 2.4 (June 2017)
