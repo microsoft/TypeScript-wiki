@@ -12,14 +12,16 @@
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
+* [Quick fix to install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
 # 2.5 (August 2017)
 
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
     * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
-* [X] [Quick fix for references to properties instead of types](https://github.com/Microsoft/TypeScript/pull/17462)
-* [ ] [Quick fix for installing from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
+* [X] Quick fixes to...
+    * [X] [correct references to properties instead of types](https://github.com/Microsoft/TypeScript/pull/17462)
+    * [X] [correct uses of JSDoc types to TypeScript types](https://github.com/Microsoft/TypeScript/pull/17250)
 
 # 2.4 (June 2017)
 
