@@ -63,6 +63,12 @@ var var8;
 /** @type {{a: string, b: number}} */
 var var9;
 
+// An object specification can include generic key names
+/** @type {{ [x: string]: string[] }} */
+var definedObjectKeysAndValues = {
+  'key': ['value'],
+};
+
 // "@typedef" maybe used to define complex types
 /**
  * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
