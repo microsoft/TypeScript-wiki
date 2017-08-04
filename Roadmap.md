@@ -19,7 +19,7 @@
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
     * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
-* [ ] [Refactoring to extract functions & methods](https://github.com/Microsoft/TypeScript/pull/16960)
+* [X] [Refactoring to extract functions & methods](https://github.com/Microsoft/TypeScript/pull/16960)
 * [X] Quick fixes to...
     * [X] [correct references to types of properties](https://github.com/Microsoft/TypeScript/pull/17462)
     * [X] [correct uses of JSDoc types to TypeScript types](https://github.com/Microsoft/TypeScript/pull/17250)
