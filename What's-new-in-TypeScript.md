@@ -1,3 +1,23 @@
+# TypeScript 2.5
+
+## Optional `catch` clause variables
+
+Thanks to work done by [@tinganho](https://github.com/tinganho), TypeScript 2.5 implements a new ECMAScript feature that allows users to omit the variable in `catch` clauses.
+For example, when using `JSON.parse` you may need to wrap calls to the function with a `try`/`catch`, but you may not end up using the `SyntaxError` that gets thrown when input is erroneous.
+
+```ts
+let input = "...";
+try {
+    JSON.parse(input);
+}
+catch {
+    // We don't care, the error message is typically useless,
+    // but we need to handle it with a try/catch.
+    console.log("Invalid JSON given\n\n" + input)
+}
+```
+
+
 # TypeScript 2.4
 
 ## Dynamic Import Expressions
