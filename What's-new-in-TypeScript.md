@@ -11,8 +11,7 @@ try {
     JSON.parse(input);
 }
 catch {
-    // We don't care, the error message is typically useless,
-    // but we need to handle it with a try/catch.
+    // ^ Notice that our `catch` clause doesn't declare a variable.
     console.log("Invalid JSON given\n\n" + input)
 }
 ```
