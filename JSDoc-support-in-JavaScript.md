@@ -203,4 +203,21 @@ function fn9(p1){}
 // Inline JsDoc comments (treated as 'any')
 function fn10(/** string */ p1){}
 
+// Class property declarations. Array properties will still need a @type
+// declaration within the constructor.
+/**
+ * @property {string} name
+ * @property {string[]} keys
+ */
+class Foo {
+    /**
+     * @param {string} [name = 'Foo']
+     * @param {string[]} keys
+     */
+        constructor(name = 'Foo', keys) {
+        this.name = name;
+        /** @type {string[]} keys */
+        this.keys = keys;
+    }
+}
 ```
