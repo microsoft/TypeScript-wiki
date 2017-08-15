@@ -14,10 +14,13 @@
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
 * [Quick fix to install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
-# 2.5 (August 2017)
+# 2.6 (October 2017)
 
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
-    * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
+* [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
+
+# 2.5 (August 2017)
+
 * [X] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
 * [x] [Refactoring to extract functions & methods](https://github.com/Microsoft/TypeScript/pull/16960)
 * [X] Quick fixes to...
