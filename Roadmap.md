@@ -23,6 +23,7 @@
 
 * [X] [Assertion/cast JSDoc syntax in `checkJs` mode](https://github.com/Microsoft/TypeScript/issues/5158)
 * [x] [Refactoring to extract functions & methods](https://github.com/Microsoft/TypeScript/pull/16960)
+* [X] [Optional `catch` binding](https://github.com/Microsoft/TypeScript/issues/17467)
 * [X] Quick fixes to...
     * [X] [correct references to types of properties](https://github.com/Microsoft/TypeScript/pull/17462)
     * [X] [correct uses of JSDoc types to TypeScript types](https://github.com/Microsoft/TypeScript/pull/17250)
