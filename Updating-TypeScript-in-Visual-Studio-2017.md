@@ -7,6 +7,23 @@ You will need Visual Studio 2017 version 15.2 or later in order to change your T
 Depending on which version you have, there are slightly different instructions for managing your TypeScript versions.
 That said, using the latest available version of Visual Studio will provide the best experience.  
 
+## Setting TypeScript versions in Visual Studio 2017 version 15.3
+
+In Visual Studio 2017 version 15.3 and later, the TypeScript version used is bound to individual projects.
+
+1. Right click on the project node in Solution Explorer 
+2. Click **Properties**
+3. Go to the **TypeScript Build** tab
+4. Change **TypeScript version** to the desired version or "use latest available" to always default to the newest version installed
+
+![15.3 properties page](https://user-images.githubusercontent.com/820883/27146889-b7498fd2-50ef-11e7-86c3-af1d84bf3d1d.png "15.3 properties page")
+
+When setting a TypeScript version on a project, the project becomes fixed on that version.
+Even if a new TypeScript version becomes available through a Visual Studio update or a manual SDK download, the project will **still use the version it is fixed to**.
+To stay on the latest version, we encourage you to set your projects to "use latest available" as described in step 4 above.
+
+> Note! If multiple projects are loaded with different TypeScript versions set in the properties page, the **latest** TypeScript version of all versions specified will take precedence.
+
 ## Setting TypeScript versions in Visual Studio 2017 version 15.2
 
 During installation of Visual Studio 2017 version 15.2, TypeScript 2.2 will be automatically included with the Web, Node.js, Universal Windows, or Mobile JavaScript workloads. TypeScript 2.1 can also be selected from the 'Individual Components' installer page. 
@@ -28,19 +45,3 @@ In Visual Studio 2017 version 15.2 you are limited to setting a global TypeScrip
 This means that if you have two projects that use different TypeScript compiler versions, you will have to manually toggle the setting each time you switch projects.
 This is not ideal, so if possible, upgrade to Visual Studio 2017 15.3 and follow the instructions below.
 
-## Setting TypeScript versions in Visual Studio 2017 version 15.3
-
-In Visual Studio 2017 version 15.3 and later, the TypeScript version used is bound to individual projects.
-
-1. Right click on the project node in Solution Explorer 
-2. Click **Properties**
-3. Go to the **TypeScript Build** tab
-4. Change **TypeScript version** to the desired version or "use latest available" to always default to the newest version installed
-
-![15.3 properties page](https://user-images.githubusercontent.com/820883/27146889-b7498fd2-50ef-11e7-86c3-af1d84bf3d1d.png "15.3 properties page")
-
-When setting a TypeScript version on a project, the project becomes fixed on that version.
-Even if a new TypeScript version becomes available through a Visual Studio update or a manual SDK download, the project will **still use the version it is fixed to**.
-To stay on the latest version, we encourage you to set your projects to "use latest available" as described in step 4 above.
-
-> Note! If multiple projects are loaded with different TypeScript versions set in the properties page, the **latest** TypeScript version of all versions specified will take precedence.
