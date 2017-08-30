@@ -1,4 +1,6 @@
  * [Unlabelled Issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+no%3Alabel): Issues which need to be analyzed and labelled
+* [Unlabelled VSCode Issues](https://github.com/Microsoft/TypeScript/issues?utf8=%E2%9C%93&q=is%3Aopen%20is%3Aissue%20label%3A%22VS%20Code%20Tracked%22%20-label%3A%22bug%22%20-label%3A%22Suggestion%22%20-label%3Aexternal): VSCode reported issues which need to be analyzed and labelled
+* [Needs Investigation Issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22Needs+Investigation%22): Dept of unlabeled issues
  * [Untriaged Suggestions](https://github.com/Microsoft/TypeScript/issues?utf8=%E2%9C%93&q=is%3Aopen+is%3Aissue+label%3A%22Suggestion%22+-label%3A%22Needs+Proposal%22+-label%3A%22Needs+More+Info%22+-label%3A%22In+Discussion%22+-label%3A%22Visual+Studio%22+-label%3A%22Revisit%22+-label%3A%22Accepting+PRs%22+-label%3A%22Committed%22): Issues with the `Suggestion` label but no sub-label
  * [Unplanned Bugs](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3Abug+no%3Amilestone): Issues that need to be assigned to a developer
  * [Bugs in 2.0.1 with No Assignee](https://github.com/Microsoft/TypeScript/issues?utf8=%E2%9C%93&q=is%3Aopen%20label%3Abug%20milestone%3A%22TypeScript%202.0.1%22%20no%3Aassignee)
