@@ -16,6 +16,9 @@
 
 # 2.6 (October 2017)
 
+* [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
+* [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
+* [ ] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
     * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 
