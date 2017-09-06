@@ -2,6 +2,29 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.6
+
+For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.6%22+label%3A%22Breaking+Change%22+is%3Aclosed).
+
+## Write-only references are unused
+
+The following code used to have no compile errors:
+
+```ts
+function f(n: number) {
+    n = 0;
+}
+
+class C {
+    private m: number;
+    constructor() {
+        this.m = 0;
+    }
+}
+```
+
+Now when the `--noUnusedLocals` and `--noUnusedParameters` compiler options are enabled, both `n` and `m` will be marked as unused, because their values are never *read*. Previously TypeScript would only check whether their values were *referenced*.
+
 # TypeScript 2.4
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.4%22+label%3A%22Breaking+Change%22+is%3Aclosed).
