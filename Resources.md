@@ -6,6 +6,7 @@
 * [Love for TypeScript](https://github.com/Microsoft/TypeScript/issues/10011)
 * [Heap Blog - Goodbye CoffeeScript, Hello TypeScript](http://blog.heapanalytics.com/goodbye-coffeescript-hello-typescript/)
 * [Cycligent.com/blog - TypeScript Seals My Penchant for JavaScript](https://www.cycligent.com/blog/typescript-seals-my-penchant-for-javascript/)
+* [Tumblr engineering on flow vs typescript](https://engineering.tumblr.com/post/165261504692/flow-and-typescript)
 
 ## Talks
 
