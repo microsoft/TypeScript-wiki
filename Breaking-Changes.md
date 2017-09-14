@@ -25,6 +25,23 @@ class C {
 
 Now when the `--noUnusedLocals` and `--noUnusedParameters` [compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) are enabled, both `n` and `m` will be marked as unused, because their values are never *read*. Previously TypeScript would only check whether their values were *referenced*.
 
+##Arbitrary expressions are forbidden in export assignments in ambient contexts
+
+Previously, constructs like
+```ts
+declare module "foo" {
+    export default "some" + "string";
+}
+```
+was not flagged as an error in ambient contexts - expressions are not generally allowed in declaration files or ambient modules, as things like `typeof` have unclear intent. Now, anything which is not an identifier or qualified name is flagged as an error. The correct way to make a DTS for a module with the value shape described above would be like so:
+```ts
+declare module "foo" {
+    const _default: string;
+    export default _default;
+}
+```
+The compiler already generated definitions like this, so this should only be an issue for definitions which were written by hand.
+
 # TypeScript 2.4
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.4%22+label%3A%22Breaking+Change%22+is%3Aclosed).
