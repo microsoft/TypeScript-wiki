@@ -33,7 +33,7 @@ declare module "foo" {
     export default "some" + "string";
 }
 ```
-was not flagged as an error in ambient contexts - expressions are not generally allowed in declaration files or ambient modules, as things like `typeof` have unclear intent. Now, anything which is not an identifier or qualified name is flagged as an error. The correct way to make a DTS for a module with the value shape described above would be like so:
+was not flagged as an error in ambient contexts. Expressions are generally forbidden in declaration files and ambient modules, as things like `typeof` have unclear intent, so this was inconsistent with our handling of executable code elsewhere in these contexts. Now, anything which is not an identifier or qualified name is flagged as an error. The correct way to make a DTS for a module with the value shape described above would be like so:
 ```ts
 declare module "foo" {
     const _default: string;
