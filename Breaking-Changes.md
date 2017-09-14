@@ -25,7 +25,7 @@ class C {
 
 Now when the `--noUnusedLocals` and `--noUnusedParameters` [compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) are enabled, both `n` and `m` will be marked as unused, because their values are never *read*. Previously TypeScript would only check whether their values were *referenced*.
 
-##Arbitrary expressions are forbidden in export assignments in ambient contexts
+## Arbitrary expressions are forbidden in export assignments in ambient contexts
 
 Previously, constructs like
 ```ts
