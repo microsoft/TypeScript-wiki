@@ -16,6 +16,7 @@
 
 # 2.6 (October 2017)
 
+* [ ] [Strict function types](https://github.com/Microsoft/TypeScript/pull/18654)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
 * [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
 * [ ] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
