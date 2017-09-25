@@ -296,7 +296,7 @@ function fn9(p1){}
 function fn10(/** string */ p1){}
 
 // Flow style comments not supported
-function fn11(p1/*:string */, p2/*: number */)/*: number */{
+function fn11(p1/*: string */, p2/*: number */)/*: number */{
   return p2;
 }
 
