@@ -4,12 +4,14 @@ when using JsDoc annotations to provide type information in JavaScript files.
 Note any tags which are not  explicitly listed below (such as `@constructor`)
 are not yet supported.
 
-```javascript
-// === Supported ===
+Your Javascript code with Jsdoc can be typechecked by typescript. See [Type Checking JavaScript Files](Type-Checking-JavaScript-Files.md)
 
-// You can use the "@type" tag and reference a type name (either primitive, 
+##  Variables
+
+```javascript
+// You can use the "@type" tag and reference a type name (either primitive,
 // defined in a TypeScript declaration, or in a JSDoc "@typedef" tag)
-/** 
+/**
  * @type {string}
  */
 var var1;
@@ -20,26 +22,13 @@ var var2;
 /** @type {PromiseLike<string>} */
 var var3;
 
-
-// Likewise, for the return type of a function
 /**
- * @return {PromiseLike<string>}
- */
-function fn1(){}
-
-/**
- * @returns {{a: string, b: number}} - May use '@returns' as well as '@return'
- */
-function fn2(){}
-
-
-/** 
  * The type specifier can specify a union type - e.g. a string or a boolean
- * @type {(string | boolean)} 
+ * @type {(string | boolean)}
  */
 var var4;
 
-/** 
+/**
  * Note that parens are options for union types
  * @type {string | boolean}
  */
@@ -59,10 +48,37 @@ var var8;
 
 
 // An object specification may also be used within the braces
-// For example, an object with properties 'a' (string) and 'b' (number)
-/** @type {{a: string, b: number}} */
+// For example, an object used as a boolean map
+/** @type {{[a: string]: boolean}} */
 var var9;
+```
 
+Equivalent Typescript:
+
+```typescript
+var var1: string;
+
+var var2: Window;
+
+var var3: PromiseLike<string>;
+
+var var4: (string | boolean);
+
+var var5: string | boolean;
+
+var var6: number[];
+
+var var7: number[];
+
+var var8: number[];
+
+var var9: {[a: string]: boolean};
+
+```
+
+## Interfaces
+
+```javascript
 // "@typedef" maybe used to define complex types
 /**
  * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
@@ -84,13 +100,53 @@ var specialTypeObject;
  */
 /** @type {SpecialType1} */
 var specialTypeObject1;
+```
+
+Equivalent typescript:
+
+```typescript
+interface SpecialType {
+  prop1: string;
+  prop2: number;
+  prop3?: number;
+  prop4?: number;
+  /** Default 42. Can't have default values in TS interface */
+  prop5?: number;
+}
+
+var specialTypeObject: SpecialType;
+
+interface SpecialType1 {
+  prop1: string;
+  prop2: number;
+  prop3?: number;
+}
+
+var specialTypeObject1: SpecialType1;
+
+```
+
+## Functions
+
+```javascript
+
+// Likewise, for the return type of a function
+/**
+ * @return {PromiseLike<string>}
+ */
+function fn1(){}
+
+/**
+ * @returns {{a: string, b: number}} - May use '@returns' as well as '@return'
+ */
+function fn2(){}
 
 
 // Parameters may be declared in a variety of syntactic forms
 /**
  * @param p0 {string} - A string param declared using TS-style
- * @param {string}  p1 - A string param. 
- * @param {string=} p2 - An optional param 
+ * @param {string}  p1 - A string param.
+ * @param {string=} p2 - An optional param
  * @param {string} [p3] - Another optional param.
  * @param {string} [p4="test"] - An optional param with a default value
  * @return {string} This is the result
@@ -162,9 +218,45 @@ var sfc = (test) => <div>{test.a.charAt(0)}</div>;
  * @param {{new(...args: any[]): object}} C - The class to register
  */
 function registerClass(C) {}
+```
 
+Equivalent in Typescript:
 
+```typescript
+function fn1(): PromiseLike<string> {}
 
+function fn2(): {a: string, b: number} {}
+
+function f3(p0: string, p1: string, p2?: string, p3?: string, p4: string = "test"): string {}
+
+function fn4<T>(p1: T): T {}
+
+var fn5: (string, boolean) => number;
+
+var fn6: Function;
+
+var fn7: Function;
+
+function fn8(p1: any, p2: any) {}
+
+var someObj = {
+  x: function (param1: string) {}
+}
+
+let someFunc = function(): Window {}
+
+Foo.prototype.sayHi = (greeting: string) => console.log("Hi!")
+
+let myArrow = x: number => x * x;
+
+var sfc = (test: {a: string, b: number}) => <div>{test.a.charAt(0)}</div>;
+
+function registerClass(C: new(...args: any[]) => object) {}
+```
+
+## Not Supported
+
+```javascript
 // === Below forms are not supported ===
 
 /** @type {Object.<string, number>} */
@@ -177,9 +269,9 @@ var var10;
 function fn7(param1) {}
 
 function FN8(){}
-/** 
+/**
  * Refering to objects in the value space as types doesn't work
- * @type {FN8} 
+ * @type {FN8}
  */
 var var11;
 
@@ -202,5 +294,10 @@ function fn9(p1){}
 
 // Inline JsDoc comments (treated as 'any')
 function fn10(/** string */ p1){}
+
+// Flow style comments not supported
+function fn11(p1/*:string */, p2/*: number */)/*: number */{
+  return p2;
+}
 
 ```
