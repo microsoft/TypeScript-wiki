@@ -4,7 +4,7 @@ when using JsDoc annotations to provide type information in JavaScript files.
 Note any tags which are not  explicitly listed below (such as `@constructor`)
 are not yet supported.
 
-Your Javascript code with Jsdoc can be typechecked by typescript. See [Type Checking JavaScript Files](Type-Checking-JavaScript-Files.md)
+Your JSDoc-annotated JavaScript code can also be type-checked by TypeScript. See [Type Checking JavaScript Files](Type-Checking-JavaScript-Files.md)
 
 ##  Variables
 
@@ -53,7 +53,7 @@ var var8;
 var var9;
 ```
 
-Equivalent Typescript:
+The above declarations are equivalent to the following TypeScript code:
 
 ```typescript
 var var1: string;
@@ -73,7 +73,6 @@ var var7: number[];
 var var8: number[];
 
 var var9: {[a: string]: boolean};
-
 ```
 
 ## Interfaces
@@ -102,7 +101,7 @@ var specialTypeObject;
 var specialTypeObject1;
 ```
 
-Equivalent typescript:
+The above declarations are equivalent to the following TypeScript code:
 
 ```typescript
 interface SpecialType {
@@ -220,7 +219,7 @@ var sfc = (test) => <div>{test.a.charAt(0)}</div>;
 function registerClass(C) {}
 ```
 
-Equivalent in Typescript:
+The above declarations are equivalent to the following TypeScript code:
 
 ```typescript
 function fn1(): PromiseLike<string> {}
