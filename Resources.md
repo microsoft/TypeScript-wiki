@@ -1,5 +1,6 @@
 ## Articles
 
+* [TypeScript at Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
 * [Migrating a 10,000-line legacy JavaScript codebase to TypeScript](http://www.pgbovine.net/migrating-legacy-codebase-to-typescript.htm)
 * [Why we love TypeScript: Delve and TypeScript](https://medium.com/@delveeng/why-we-love-typescript-bec2df88d6c2#.yonceora3)
 * [What is TypeScript and why would I use it in place of JavaScript? (stackoverflow.com)](http://stackoverflow.com/questions/12694530/what-is-typescript-and-why-would-i-use-it-in-place-of-javascript)
