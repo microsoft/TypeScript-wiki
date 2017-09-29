@@ -206,5 +206,7 @@ Local testing of your plugin is similar to testing other node modules. To set up
 ## Real-world Plugins
 
 Some other TypeScript Language Service Plugin implementations you can look at for reference:
+
 * https://github.com/angular/angular/blob/master/packages/language-service/src/ts_plugin.ts
 * https://github.com/Quramy/ts-graphql-plugin
+* https://github.com/Microsoft/typescript-styled-plugin
