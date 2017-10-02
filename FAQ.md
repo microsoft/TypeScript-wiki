@@ -655,7 +655,7 @@ class Bravo { x: number }
 class Charlie { private x: number }
 class Delta { private x: number }
 
-let a = new Alpha(), b = new Beta(), c = new Charlie(), d = new Delta();
+let a = new Alpha(), b = new Bravo(), c = new Charlie(), d = new Delta();
 
 a = b; // OK
 c = d; // Error
