@@ -14,16 +14,20 @@
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
 * [Quick fix to install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
+# 2.7
+
+* [ ] [Support for properties named with with `const`-declared symbols]
+
 # 2.6 (October 2017)
 
 * [X] [Strict function types](https://github.com/Microsoft/TypeScript/pull/18654)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
 * [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
-* [ ] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
+(https://github.com/Microsoft/TypeScript/pull/15473)
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
     * [ ] [Speed improvements to `--watch` by using this API](https://github.com/Microsoft/TypeScript/issues/10879)
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)
-* [ ] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
+* [X] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
 
 # 2.5 (August 2017)
 
