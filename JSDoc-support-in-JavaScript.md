@@ -63,7 +63,7 @@ var var8;
 /** @type {{a: string, b: number}} */
 var var9;
 
-// "@typedef" maybe used to define complex types
+// "@typedef" may be used to define complex types
 /**
  * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
  * @property {string} prop1 - a string property of SpecialType
