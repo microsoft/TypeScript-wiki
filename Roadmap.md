@@ -23,7 +23,9 @@
 
 * [X] [Strict function types](https://github.com/Microsoft/TypeScript/pull/18654)
 * [X] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
+* [X] [Include localized diagnostics in npm](https://github.com/Microsoft/TypeScript/pull/18702)
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)
+* [X] [Extract locals](https://github.com/Microsoft/TypeScript/pull/18783)
 * [x] [Speed improvements to `--watch`](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
 * [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
