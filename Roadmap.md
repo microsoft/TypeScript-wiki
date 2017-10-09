@@ -29,6 +29,7 @@
 * [x] [Speed improvements to `--watch`](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
 * [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
+* [X] [Support outlining for `// #regions`](https://github.com/Microsoft/TypeScript/issues/11073)
 * [ ] [Refactor JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
 
 # 2.5 (August 2017)
