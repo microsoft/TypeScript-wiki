@@ -1,3 +1,88 @@
+# TypeScript 2.6
+
+## Strict function types
+
+TypeScript 2.6 introduces a new strict checking flag, `--strictFunctionTypes`.
+The `--strictFunctionTypes` switch is part of the `--strict` family of switches, meaning that it defaults to on in `--strict` mode.
+You can opt-out by setting `--strictFunctionTypes false` on your commandline or in your tsconfig.json.
+
+Under `--strictFunctionTypes` function type parameter positions are checked _contravariantly_ instead of _bivariantly_.
+For some background on what varience meanes for funciton types check out [What are covariance and contravariance?](https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
+
+The stricter checking applies to all function types, *except* those originating in method or construcor declarations.
+Methods are excluded specifically to ensure generic classes and interfaces (such as `Array<T>`) continue to mostly relate covariantly.
+
+Consider the following example in which `Animal` is the supertype of `Dog` and `Cat`:
+
+```ts
+declare let f1: (x: Animal) => void;
+declare let f2: (x: Dog) => void;
+declare let f3: (x: Cat) => void;
+f1 = f2;  // Error with --strictFunctionTypes
+f2 = f1;  // Ok
+f2 = f3;  // Error
+```
+
+The first assignment is permitted in default type checking mode, but flagged as an error in strict function types mode.
+Intuitively, the default mode permits the assignment because it is _possibly_ sound, whereas strict function types mode makes it an error because it isn't _provably_ sound.
+In either mode the third assignment is an error because it is _never_ sound.
+
+Another way to describe the example is that the type `(x: T) => void` is _bivariant_ (i.e. covariant _or_ contravariant) for `T` in default type checking mode, but _contravariant_ for `T` in strict function types mode.
+
+#### Example
+
+```ts
+interface Comparer<T> {
+    compare: (a: T, b: T) => number;
+}
+
+declare let animalComparer: Comparer<Animal>;
+declare let dogComparer: Comparer<Dog>;
+
+animalComparer = dogComparer;  // Error
+dogComparer = animalComparer;  // Ok
+```
+
+The first assignment is now an error. Effectively, `T` is contravariant in `Comparer<T>` because it is used only in function type parameter positions.
+
+By the way, note that whereas some languages (e.g. C# and Scala) require variance annotations (`out`/`in` or `+`/`-`), variance emerges naturally from the actual use of a type parameter within a generic type due to TypeScript's structural type system.
+
+#### Note:
+
+Under `--strictFunctionTypes` the first assignment is still permitted if `compare` was declared as a method. 
+Effectively, `T` is bivariant in `Comparer<T>` because it is used only in method parameter positions. 
+
+```ts
+interface Comparer<T> {
+    compare(a: T, b: T): number;
+}
+
+declare let animalComparer: Comparer<Animal>;
+declare let dogComparer: Comparer<Dog>;
+
+animalComparer = dogComparer;  // Ok because of bivariance
+dogComparer = animalComparer;  // Ok
+```
+
+TypeScript 2.6 also improves type inference involving contravariant positions:
+
+```ts
+function combine<T>(...funcs: ((x: T) => void)[]): (x: T) => void {
+    return x => {
+        for (const f of funcs) f(x);
+    }
+}
+
+function animalFunc(x: Animal) {}
+function dogFunc(x: Dog) {}
+
+let combined = combine(animalFunc, dogFunc);  // (x: Dog) => void
+```
+
+Above, all inferences for `T` originate in contravariant positions, and we therefore infer the *best common subtype* for `T`.
+This contrasts with inferences from covariant positions, where we infer the *best common supertype*. 
+
+
 # TypeScript 2.5
 
 ## Optional `catch` clause variables
