@@ -82,6 +82,51 @@ let combined = combine(animalFunc, dogFunc);  // (x: Dog) => void
 Above, all inferences for `T` originate in contravariant positions, and we therefore infer the *best common subtype* for `T`.
 This contrasts with inferences from covariant positions, where we infer the *best common supertype*.
 
+## Cache tagged template objects in modules
+
+TypeScript 2.6 fixes the tagged string template emit to align better with the ECMAScript spec.
+As per the [ECMAScript spec](https://tc39.github.io/ecma262/#sec-gettemplateobject), every time a template tag is evaluated, the _same_ strings object should be passed as the first argument.
+Before TypeScript 2.6, the generated output was a new string.
+Though the string contents are the same, this emit affects frameworks that use the identity of the string for cache invalidation purposes, e.g. [Polymer](https://github.com/PolymerLabs/lit-html/issues/58).
+
+#### Example
+
+```ts
+export function id(x: TemplateStringsArray) {
+    return x;
+}
+
+export function templateObjectFactory() {
+    return id`hello world`;
+}
+
+let result = templateObjectFactory() === templateObjectFactory(); // true in TS 2.6
+```
+
+Results in the following generated code:
+
+```js
+"use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+function id(x) {
+    return x;
+}
+
+var _a;
+function templateObjectFactory() {
+    return id(_a || (_a = __makeTemplateObject(["hello world"], ["hello world"])));
+}
+
+var result = templateObjectFactory() === templateObjectFactory();
+```
+
+> Note: This change brings a new emit helper, `__makeTemplateObject`;
+if you are using `--importHelpers` with [`tslib`](https://github.com/Microsoft/tslib), an updated to version 1.8 or later.
+
 
 # TypeScript 2.5
 
