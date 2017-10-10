@@ -199,6 +199,25 @@ wn' 'es2016.array.include' 'es2017.object' 'es2017.sharedmemory' 'es2017.string'
  @<ファイル>  
 ```
 
+## Suppress errors in .ts files using '// @ts-ignore' comments
+
+TypeScript 2.6 support suppressing errors in .js files using `// @ts-ignore` comments placed above the offending lines. 
+
+#### Example
+
+```ts
+if (false) {
+    // @ts-ignore: Unreachable code error
+    console.log("hello");
+}
+```
+
+A `// @ts-ignore` comment suppresses all errors that originate on the following line.
+It is recommended practice to have the remainder of the comment following `@ts-ignore` explain which error is being suppressed.
+
+Please note that this comment only suppresses the error reporting, and we recommend you use this comments _very sparingly_.
+
+
 # TypeScript 2.5
 
 ## Optional `catch` clause variables
