@@ -227,6 +227,38 @@ Projects with large number of files should reap the most benefit from this chang
 The new implementation also brings performance enhancements to watching in tsserver.
 The watcher logic has been completely rewritten to respond faster to change events.
 
+## Write-only references now flagged as unused
+
+TypeScript 2.6 adds revised implementation  the `--noUnusedLocals` and `--noUnusedParameters` [compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
+Declarations are only written to but never read from are now flagged as unused.
+
+#### Example
+
+Bellow both `n` and `m` will be marked as unused, because their values are never *read*. Previously TypeScript would only check whether their values were *referenced*.
+
+```ts
+function f(n: number) {
+    n = 0;
+}
+
+class C {
+    private m: number;
+    constructor() {
+        this.m = 0;
+    }
+}
+```
+
+Also functions that are only called within their own bodies are considered unused.
+
+#### Example
+
+```ts
+function f() { 
+    f(); // Error: 'f' is declared but its value is never read
+}
+```
+
 # TypeScript 2.5
 
 ## Optional `catch` clause variables
