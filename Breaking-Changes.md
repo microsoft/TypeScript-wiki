@@ -25,6 +25,14 @@ class C {
 
 Now when the `--noUnusedLocals` and `--noUnusedParameters` [compiler options](https://www.typescriptlang.org/docs/handbook/compiler-options.html) are enabled, both `n` and `m` will be marked as unused, because their values are never *read*. Previously TypeScript would only check whether their values were *referenced*.
 
+Also recursive functions that are only called within their own bodies are considered unused.
+
+```ts
+function f() { 
+    f(); // Error: 'f' is declared but its value is never read
+}
+```
+
 ## Arbitrary expressions are forbidden in export assignments in ambient contexts
 
 Previously, constructs like
