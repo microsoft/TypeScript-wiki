@@ -16,7 +16,6 @@
 # 2.7
 
 * [ ] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
-* [X] [Quick fix for uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 
 # 2.6 (October 2017)
@@ -25,12 +24,13 @@
 * [X] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
 * [X] [Include localized diagnostics in npm](https://github.com/Microsoft/TypeScript/pull/18702)
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)
-* [X] [Extract constants/locals in refactorings](https://github.com/Microsoft/TypeScript/pull/18783)
 * [x] [Speed improvements to `--watch`](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
-* [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
-* [X] [Support outlining for `// #regions`](https://github.com/Microsoft/TypeScript/issues/11073)
+* [X] [Extract constants/locals in refactorings](https://github.com/Microsoft/TypeScript/pull/18783)
 * [ ] [Refactor JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
+* [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
+* [X] [Quick fix for uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
+* [X] [Support outlining for `// #regions`](https://github.com/Microsoft/TypeScript/issues/11073)
 
 # 2.5 (August 2017)
 
