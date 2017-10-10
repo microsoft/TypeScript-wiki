@@ -4,12 +4,12 @@
 
 TypeScript 2.6 introduces a new strict checking flag, `--strictFunctionTypes`.
 The `--strictFunctionTypes` switch is part of the `--strict` family of switches, meaning that it defaults to on in `--strict` mode.
-You can opt-out by setting `--strictFunctionTypes false` on your commandline or in your tsconfig.json.
+You can opt-out by setting `--strictFunctionTypes false` on your command line or in your tsconfig.json.
 
 Under `--strictFunctionTypes` function type parameter positions are checked _contravariantly_ instead of _bivariantly_.
-For some background on what varience meanes for funciton types check out [What are covariance and contravariance?](https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
+For some background on what variance means for function types check out [What are covariance and contravariance?](https://www.stephanboyer.com/post/132/what-are-covariance-and-contravariance).
 
-The stricter checking applies to all function types, *except* those originating in method or construcor declarations.
+The stricter checking applies to all function types, *except* those originating in method or constructor declarations.
 Methods are excluded specifically to ensure generic classes and interfaces (such as `Array<T>`) continue to mostly relate covariantly.
 
 Consider the following example in which `Animal` is the supertype of `Dog` and `Cat`:
@@ -80,7 +80,7 @@ let combined = combine(animalFunc, dogFunc);  // (x: Dog) => void
 ```
 
 Above, all inferences for `T` originate in contravariant positions, and we therefore infer the *best common subtype* for `T`.
-This contrasts with inferences from covariant positions, where we infer the *best common supertype*. 
+This contrasts with inferences from covariant positions, where we infer the *best common supertype*.
 
 
 # TypeScript 2.5
