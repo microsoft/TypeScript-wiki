@@ -368,7 +368,7 @@ function getCursorPos(): ScreenCoordinate {
 
 See also [#202](https://github.com/Microsoft/TypeScript/issues/202) for a suggestion tracking making this more intuitive.
 
-### How do I check at runtime if an object implements some interface?
+### How do I check at run-time if an object implements some interface?
 
 > I want to write some code like this:
 > ```ts
@@ -418,7 +418,7 @@ or this
 > ```
 
 TypeScript has *type assertions*, not *type casts*.
-The intent of `<T>x` is to say "TypeScript, please treat `x` as a `T`", not to perform a typesafe runtime conversion.
+The intent of `<T>x` is to say "TypeScript, please treat `x` as a `T`", not to perform a type-safe run-time conversion.
 Because types are erased, there is no direct equivalent of C#'s `expr as` type or `(type)expr` syntax.
 
 
@@ -1086,7 +1086,7 @@ When React instantiates a component, it's invoking a *constructor function*.
 So when TypeScript sees a JSX `<TagName />`, it is validating that the result of *constructing* `TagName` produces a valid component.
 
 But by declaring `let SomeThing: Display`, the code is indicating that `SomeThing` is the class *instance*, not the class *constructor*.
-Indeed, it would be a runtime error to write:
+Indeed, it would be a run-time error to write:
 ```ts
 let SomeThing = new Display();
 let jsx = <SomeThing />; // Not gonna work
@@ -1427,14 +1427,14 @@ function foo /*trailing comments of the function name, "foo", AST node*/ () {
 > What are all the labels people keep putting on my issues?
 
 * **help wanted**: We are accepting pull requests to implement this feature or fix this bug. PRs must adhere to the rules specified in `CONTRIBUTING.md`
-* **Breaking Change**: Fixing this bug or implenting this feature will break code that someone could have plausibly written (i.e. we do not consider new errors in nonsense code like `undefined.throwSomething()` to be breaking changes)
+* **Breaking Change**: Fixing this bug or implementing this feature will break code that someone could have plausibly written (i.e. we do not consider new errors in nonsense code like `undefined.throwSomething()` to be breaking changes)
 * **By Design**: This is an intentional behavior of TypeScript
 * **Canonical**: This issue contains a lengthy explanation of a common question or misconception
 * **Committed**: Someone from the TypeScript team will fix this bug or implement this feature
 * **Declined**: For reasons explained in the issue, we are not going to accept this suggestion (note: See "I disagree with the outcome..." section)
 * **Discussion**: This issue is a discussion with no defined outcome. The TypeScript team may weigh in on these issues, but they are not regularly reviewed
 * **Duplicate**: This issue is the same, or has the same root cause, as another issue
-* **Effort**: Easy/Moderate/Difficult: For issues marked as 'help wanted', these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modfiying lib.d.s are generally Easy; work that requires understanding the basics of the codebase is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
+* **Effort**: Easy/Moderate/Difficult: For issues marked as 'help wanted', these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modifying lib.d.s are generally Easy; work that requires understanding the basics of the code base is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
 * **good first issue**: These are 'Effort: easy' issues, good for your first contribution
 * **ES6 / ES7 / ES Next**: Refers to issues related to features found in these specific ECMAScript versions
 * **External**: Catch-all bucket when an issue reported is not an issue with TypeScript, but rather an external tool, library, website, person, or situation
