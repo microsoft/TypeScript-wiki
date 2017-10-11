@@ -1426,7 +1426,7 @@ function foo /*trailing comments of the function name, "foo", AST node*/ () {
 ### What do the labels on these issues mean?
 > What are all the labels people keep putting on my issues?
 
-* **Accepting PRs**: We are accepting pull requests to implement this feature or fix this bug. PRs must adhere to the rules specified in `CONTRIBUTING.md`
+* **help wanted**: We are accepting pull requests to implement this feature or fix this bug. PRs must adhere to the rules specified in `CONTRIBUTING.md`
 * **Breaking Change**: Fixing this bug or implenting this feature will break code that someone could have plausibly written (i.e. we do not consider new errors in nonsense code like `undefined.throwSomething()` to be breaking changes)
 * **By Design**: This is an intentional behavior of TypeScript
 * **Canonical**: This issue contains a lengthy explanation of a common question or misconception
@@ -1434,7 +1434,8 @@ function foo /*trailing comments of the function name, "foo", AST node*/ () {
 * **Declined**: For reasons explained in the issue, we are not going to accept this suggestion (note: See "I disagree with the outcome..." section)
 * **Discussion**: This issue is a discussion with no defined outcome. The TypeScript team may weigh in on these issues, but they are not regularly reviewed
 * **Duplicate**: This issue is the same, or has the same root cause, as another issue
-* **Effort**: Easy/Moderate/Difficult: For issues Accepting PRs, these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modfiying lib.d.s are generally Easy; work that requires understanding the basics of the codebase is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
+* **Effort**: Easy/Moderate/Difficult: For issues marked as 'help wanted', these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modfiying lib.d.s are generally Easy; work that requires understanding the basics of the codebase is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
+* **good first issue**: These are 'Effort: easy' issues, good for your first contribution
 * **ES6 / ES7 / ES Next**: Refers to issues related to features found in these specific ECMAScript versions
 * **External**: Catch-all bucket when an issue reported is not an issue with TypeScript, but rather an external tool, library, website, person, or situation
 * **Fixed**: This bug has been fixed. Generally, you will see these bugs fixed in the nightly version(`npm install typescript@next`) within 24-48 hours
