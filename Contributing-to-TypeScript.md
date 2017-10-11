@@ -24,7 +24,7 @@ We'll be using Labels to track the status of suggestions or feature requests. Yo
  * `Needs More Info`: A proposal exists, but there are follow-up questions that need to be addressed
  * `In Discussion`: This is being discussed by the TypeScript design team. You can expect this phase to take at least a few weeks, depending on our schedule
  * `Ready to Implement`: The proposal is accepted and has been designed enough that it can be implemented now
- * `Accepting PRs`: We are accepting pull requests that fully implement this feature
+ * `help wanted`: We are accepting pull requests that fully implement this feature
  * `Committed`: We have allocated time on the team schedule to implement this feature
 
 Declined suggestions will have the `Declined` label along with one of the following:
