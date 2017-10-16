@@ -1,7 +1,7 @@
 # JavaScript "Salsa" Language Service
 
 Visual Studio 2017 includes the new JavaScript language service, 
-internally codenamed "Salsa".
+codenamed "Salsa".
 
 Salsa also powers the JavaScript language service in VS Code, and most of the below
 info applies there also. See [VSCode release notes](https://github.com/Microsoft/vscode-docs/blob/vnext/release-notes/latest.md#languages---javascript)
