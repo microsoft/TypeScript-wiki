@@ -11,7 +11,6 @@
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
-* [Quick fix to install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 
 # 2.7
 
@@ -27,9 +26,10 @@
 * [x] [Speed improvements to `--watch`](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
 * [X] [Extract constants/locals in refactorings](https://github.com/Microsoft/TypeScript/pull/18783)
-* [ ] [Refactor JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
-* [ ] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
+* [X] [Refactor JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
+* [X] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
 * [X] [Quick fix for uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
+* [ ] [Quick fix to install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 * [X] [Support outlining for `// #regions`](https://github.com/Microsoft/TypeScript/issues/11073)
 
 # 2.5 (August 2017)
