@@ -25,11 +25,13 @@
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)
 * [x] [Speed improvements to `--watch`](https://github.com/Microsoft/TypeScript/issues/10879)
 * [ ] [Automatic imports from completion lists](https://github.com/Microsoft/TypeScript/issues/7849)
-* [X] [Extract constants/locals in refactorings](https://github.com/Microsoft/TypeScript/pull/18783)
-* [X] [Refactor JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
-* [X] [Quick fix to infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
-* [X] [Quick fix for uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
-* [ ] [Quick fix to install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
+* [X] Refactors to...
+  * [X] [Extract constants/locals in refactorings](https://github.com/Microsoft/TypeScript/pull/18783)
+  * [X] [Convert JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
+* [X] Quick fixes to...
+  * [X] [Infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
+  * [X] [Add uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
+  * [ ] [Install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 * [X] [Support outlining for `// #regions`](https://github.com/Microsoft/TypeScript/issues/11073)
 
 # 2.5 (August 2017)
