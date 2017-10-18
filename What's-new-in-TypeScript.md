@@ -437,9 +437,9 @@ For example, this `Options` type is a weak type:
 
 ```ts
 interface Options {
-    data?: string,
-    timeout?: number,
-    maxRetries?: number,
+    data?: string;
+    timeout?: number;
+    maxRetries?: number;
 }
 ```
 

@@ -102,7 +102,7 @@ function create(info: ts.server.PluginCreateInfo) {
     // Get a list of things to remove from the completion list from the config object.
     // If nothing was specified, we'll just remove 'caller'
     const whatToRemove: string[] = info.config.remove || ['caller'];
-    
+
     // ... (set up decorator here) ...
 
     // Remove specified entries from completion list
@@ -210,3 +210,4 @@ Some other TypeScript Language Service Plugin implementations you can look at fo
 * https://github.com/angular/angular/blob/master/packages/language-service/src/ts_plugin.ts
 * https://github.com/Quramy/ts-graphql-plugin
 * https://github.com/Microsoft/typescript-styled-plugin
+* https://github.com/angelozerr/tslint-language-service/
