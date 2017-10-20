@@ -5,13 +5,19 @@ Keep in mind that this is not yet a stable API - we’re releasing this as versi
 
 First you'll need to install TypeScript >=1.6 from `npm`.
 
-> ##### For API Samples compatible with **TypeScript == 1.4** please see [[Using the Compiler API (TypeScript 1.4)]]
-
-Once that's done, you'll need to link it from wherever your project resides. If you don't link from within a Node project, it will just link globally.
+Once that's done, you'll need to link it from wherever your project resides.
+If you don't link from within a Node project, it will just link globally.
 
 ```
 npm install -g typescript
 npm link typescript
+```
+
+You will also need the node defintion file for some of these samples.
+To aquire the defintion file, run:
+
+```
+npm install @types/node
 ```
 
 That's it, you're ready to go. Now you can try out some of the following examples.
@@ -21,8 +27,6 @@ That's it, you're ready to go. Now you can try out some of the following example
 Let's try to write a barebones compiler that will take a list of TypeScript files and compile down to their corresponding JavaScript. We will need to create a `Program`. This is as simple as calling `createProgram`. `createProgram` abstracts any interaction with the underlying system in the `CompilerHost` interface. The `CompilerHost` allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For convenience, we expose a function to create a default host using `createCompilerHost`.
 
 ```TypeScript
-/// <reference path="typings/node/node.d.ts" />
-
 import * as ts from "typescript";
 
 function compile(fileNames: string[], options: ts.CompilerOptions): void {
@@ -32,9 +36,14 @@ function compile(fileNames: string[], options: ts.CompilerOptions): void {
     let allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
 
     allDiagnostics.forEach(diagnostic => {
-        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
-        let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-        console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
+        if (diagnostic.file) {
+            let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
+            let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
+            console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
+        }
+        else {
+            console.log(`${ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')}`);
+        }
     });
 
     let exitCode = emitResult.emitSkipped ? 1 : 0;
@@ -73,8 +82,6 @@ As an example of how one could traverse the AST, consider a minimal linter that 
 * The "stricter" equality operators (`===`/`!==`) are used instead of the "loose" ones (`==`/`!=`).
 
 ```ts
-/// <reference path="typings/node/node.d.ts" />
-
 import {readFileSync} from "fs";
 import * as ts from "typescript";
 
@@ -124,7 +131,7 @@ export function delint(sourceFile: ts.SourceFile) {
 const fileNames = process.argv.slice(2);
 fileNames.forEach(fileName => {
     // Parse a file
-    let sourceFile = ts.createSourceFile(fileName, readFileSync(fileName).toString(), ts.ScriptTarget.ES6, /*setParentNodes */ true);
+    let sourceFile = ts.createSourceFile(fileName, readFileSync(fileName).toString(), ts.ScriptTarget.ES2015, /*setParentNodes */ true);
 
     // delint it
     delint(sourceFile);
@@ -141,8 +148,6 @@ The services layer provide a set of additional utilities that can help simplify 
 We will achieve this through creating a LanguageService object. Similar to the program in the previous example, we need a LanguageServiceHost. The LanguageServiceHost augments the concept of a file with a version, isOpen flag, and a ScriptSnapshot. Version allows the language service to track changes to files. isOpen tells the language service to keep AST in memory as the file is in use. ScriptSnapshot is an abstraction over text that allows the language service to query for changes.
 
 ```ts
-/// <reference path="typings/node/node.d.ts" />
-
 import * as fs from "fs";
 import * as ts from "typescript";
 
@@ -222,7 +227,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
         allDiagnostics.forEach(diagnostic => {
             let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
             if (diagnostic.file) {
-                let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+                let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
                 console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
             }
             else {
@@ -234,7 +239,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 
 // Initialize files constituting the program as all .ts files in the current directory
 const currentDirectoryFiles = fs.readdirSync(process.cwd()).
-    filter(fileName=> fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
+    filter(fileName => fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
 
 // Start the watcher
 watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
@@ -270,8 +275,8 @@ export interface TranspileOutput {
  * - allowNonTsExtensions = true
  * - noLib = true
  * - noResolve = true
- */    
-export function transpileModule(input: string, transpileOptions: TranspileOptions): TranspileOutput 
+ */
+export function transpileModule(input: string, transpileOptions: TranspileOptions): TranspileOutput
 ```
 
 and here is the appropriate version of `transpile`:
@@ -284,7 +289,7 @@ export function transpile(input: string, compilerOptions?: CompilerOptions, file
 
 ```ts
 var ts = require("typescript");
-var content = 
+var content =
     "import {f} from \"foo\"\n" +
     "export var x = f()";
 
@@ -306,21 +311,19 @@ If it is set and is not `JsxEmit.None`, then source text will be interpreted as 
 ## Customizing module resolution
 
 You can override the standard way the compiler uses to resolve modules by implementing optional method: `CompilerHost.resolveModuleNames`:
-> `CompilerHost.resolveModuleNames(moduleNames: string[], containingFile: string): string[]`. 
+> `CompilerHost.resolveModuleNames(moduleNames: string[], containingFile: string): string[]`.
 
 The method is given a list of module names in a file, and is expected to return an array of size `moduleNames.length`, each element of the array stores either:
 
-*  an instance of `ResolvedModule` with non-empty property `resolvedFileName` - resolution for corresponding name from `moduleNames` array or 
-* `undefined` if module name cannot be resolved. 
+*  an instance of `ResolvedModule` with non-empty property `resolvedFileName` - resolution for corresponding name from `moduleNames` array or
+* `undefined` if module name cannot be resolved.
 
 You can invoke the standard module resolution process via calling `resolveModuleName`:
-> `resolveModuleName(moduleName: string, containingFile: string, options: CompilerOptions, moduleResolutionHost: ModuleResolutionHost): ResolvedModuleNameWithFallbackLocations`. 
+> `resolveModuleName(moduleName: string, containingFile: string, options: CompilerOptions, moduleResolutionHost: ModuleResolutionHost): ResolvedModuleNameWithFallbackLocations`.
 
-This function returns an object that stores result of module resolution (value of `resolvedModule` property) as well as list of file names that were considered candidates before making current decision. 
+This function returns an object that stores result of module resolution (value of `resolvedModule` property) as well as list of file names that were considered candidates before making current decision.
 
 ```ts
-/// <reference types="node" />
-
 import * as ts from "typescript";
 import * as path from "path";
 
@@ -330,6 +333,7 @@ function createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: 
         getDefaultLibFileName: () => "lib.d.ts",
         writeFile: (fileName, content) => ts.sys.writeFile(fileName, content),
         getCurrentDirectory: () => ts.sys.getCurrentDirectory(),
+        getDirectories: (path) => ts.sys.getDirectories(path),
         getCanonicalFileName: fileName => ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
         getNewLine: () => ts.sys.newLine,
         useCaseSensitiveFileNames: () => ts.sys.useCaseSensitiveFileNames,
@@ -337,38 +341,39 @@ function createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: 
         readFile,
         resolveModuleNames
     }
-    
+
     function fileExists(fileName: string): boolean {
         return ts.sys.fileExists(fileName);
     }
-    
-    function readFile(fileName: string): string {
+
+    function readFile(fileName: string): string | undefined {
         return ts.sys.readFile(fileName);
     }
-    
+
     function getSourceFile(fileName: string, languageVersion: ts.ScriptTarget, onError?: (message: string) => void) {
         const sourceText = ts.sys.readFile(fileName);
         return sourceText !== undefined ? ts.createSourceFile(fileName, sourceText, languageVersion) : undefined;
     }
 
     function resolveModuleNames(moduleNames: string[], containingFile: string): ts.ResolvedModule[] {
-        return moduleNames.map(moduleName => {
+        const resolvedModules: ts.ResolvedModule[] = [];
+        for (const moduleName of moduleNames) {
             // try to use standard resolution
-            let result = ts.resolveModuleName(moduleName, containingFile, options, {fileExists, readFile});
+            let result = ts.resolveModuleName(moduleName, containingFile, options, { fileExists, readFile });
             if (result.resolvedModule) {
-                return result.resolvedModule;
+                resolvedModules.push(result.resolvedModule);
             }
-
-            // check fallback locations, for simplicity assume that module at location should be represented by '.d.ts' file
-            for (const location of moduleSearchLocations) {
-                const modulePath = path.join(location, moduleName + ".d.ts");
-                if (fileExists(modulePath)) {
-                    return { resolvedFileName: modulePath }
+            else {
+                // check fallback locations, for simplicity assume that module at location should be represented by '.d.ts' file
+                for (const location of moduleSearchLocations) {
+                    const modulePath = path.join(location, moduleName + ".d.ts");
+                    if (fileExists(modulePath)) {
+                        resolvedModules.push({ resolvedFileName: modulePath });
+                    }
                 }
-            } 
-
-            return undefined;
-        });
+            }
+        }
+        return resolvedModules;
     }
 }
 
@@ -376,7 +381,7 @@ function compile(sourceFiles: string[], moduleSearchLocations: string[]): void {
     const options: ts.CompilerOptions = { module: ts.ModuleKind.AMD, target: ts.ScriptTarget.ES5 };
     const host = createCompilerHost(options, moduleSearchLocations);
     const program = ts.createProgram(sourceFiles, options, host);
-    
+
     /// do something with program...
 }
 ```
@@ -449,8 +454,6 @@ In this example we will walk the AST and use the checker to serialize class info
 We'll use the type checker to get symbol and type information, while grabbing JSDoc comments for exported classes, their constructors, and respective constructor parameters.
 
 ```ts
-/// <reference path="typings/node/node.d.ts" />
-
 import * as ts from "typescript";
 import * as fs from "fs";
 
@@ -468,16 +471,18 @@ interface DocEntry {
 function generateDocumentation(fileNames: string[], options: ts.CompilerOptions): void {
     // Build a program using the set of root file names in fileNames
     let program = ts.createProgram(fileNames, options);
-    
+
     // Get the checker, we will use it to find more about classes
     let checker = program.getTypeChecker();
 
     let output: DocEntry[] = [];
 
-    // Visit every sourceFile in the program    
+    // Visit every sourceFile in the program
     for (const sourceFile of program.getSourceFiles()) {
-        // Walk the tree to search for classes
-        ts.forEachChild(sourceFile, visit);
+        if (!sourceFile.isDeclarationFile) {
+            // Walk the tree to search for classes
+            ts.forEachChild(sourceFile, visit);
+        }
     }
 
     // print out the doc
@@ -485,32 +490,34 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
 
     return;
 
-    /** visit nodes finding exported classes */    
+    /** visit nodes finding exported classes */
     function visit(node: ts.Node) {
         // Only consider exported nodes
         if (!isNodeExported(node)) {
             return;
         }
 
-        if (node.kind === ts.SyntaxKind.ClassDeclaration) {
+        if (ts.isClassDeclaration(node) && node.name) {
             // This is a top level class, get its symbol
-            let symbol = checker.getSymbolAtLocation((<ts.ClassDeclaration>node).name);
-            output.push(serializeClass(symbol));
+            let symbol = checker.getSymbolAtLocation(node.name);
+            if (symbol) {
+                output.push(serializeClass(symbol));
+            }
             // No need to walk any further, class expressions/inner declarations
             // cannot be exported
         }
-        else if (node.kind === ts.SyntaxKind.ModuleDeclaration) {
+        else if (ts.isModuleDeclaration(node)) {
             // This is a namespace, visit its children
             ts.forEachChild(node, visit);
         }
     }
 
-    /** Serialize a symbol into a json object */    
+    /** Serialize a symbol into a json object */
     function serializeSymbol(symbol: ts.Symbol): DocEntry {
         return {
             name: symbol.getName(),
             documentation: ts.displayPartsToString(symbol.getDocumentationComment()),
-            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration))
+            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!))
         };
     }
 
@@ -519,7 +526,7 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
         let details = serializeSymbol(symbol);
 
         // Get the construct signatures
-        let constructorType = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration);
+        let constructorType = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!);
         details.constructors = constructorType.getConstructSignatures().map(serializeSignature);
         return details;
     }
@@ -535,7 +542,7 @@ function generateDocumentation(fileNames: string[], options: ts.CompilerOptions)
 
     /** True if this is visible outside this file, false otherwise */
     function isNodeExported(node: ts.Node): boolean {
-        return (node.flags & ts.NodeFlags.Export) !== 0 || (node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
+        return (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export) !== 0 || (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
     }
 }
 
@@ -547,18 +554,18 @@ generateDocumentation(process.argv.slice(2), {
 to try this:
 
 ```shell
-tsc docGenerator.ts --m commonjs 
+tsc docGenerator.ts --m commonjs
 node docGenerator.js test.ts
 ```
 
 Passing an input like:
 
 ```ts
-/** 
- * Documentation for C 
+/**
+ * Documentation for C
  */
-class C { 
-    /** 
+class C {
+    /**
      * constructor documentation
      * @param a my parameter documentation
      * @param b another parameter documentation
