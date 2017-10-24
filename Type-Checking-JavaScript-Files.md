@@ -8,7 +8,7 @@ Here are some notable differences on how checking work in `.js` file from `.ts` 
 ## Using types in JSDoc
 
 In a `.js` file, types can often be inferred just like in `.ts` files.
-Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations do in a `.ts` file. 
+Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations do in a `.ts` file.
 
 JSDoc annotations adorning a declaration will be used to set the type of that declaration. For example:
 
@@ -24,7 +24,7 @@ You can find the full list of supported JSDoc patterns in the [JSDoc support in 
 
 ## Property declaration inferred from assignments in class bodies
 
-ES2015/ES6 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like in the case of object literals. 
+ES2015/ES6 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like in the case of object literals.
 
 In a `.js` file property declarations are inferred from assignments to the properties inside the class body. The type of properties is the union of the types of all the right-hand values in these assignments. Properties defined in the constructor are always assumed to exist, where as ones defined in methods, getters, or setters are considered optional.
 
@@ -58,7 +58,7 @@ const fs = require("fs");
 
 // export function readFile
 module.exports.readFile = function(f) {
-	return fs.readFileSync(f);	
+	return fs.readFileSync(f);
 }
 ```
 
@@ -84,7 +84,7 @@ obj.b = 2;  // Error, type {a: number} does not have property b
 
 ## Function parameters are optional by default
 
-Since there is no way to specify optionality on parameters in JS (without specifying a default value), all function parameters in `.js` file are considered optional. Calls with fewer arguments are allowed. 
+Since there is no way to specify optionality on parameters in JS (without specifying a default value), all function parameters in `.js` file are considered optional. Calls with fewer arguments are allowed.
 
 It is important to note that it is an error to call a function with too many arguments.
 
@@ -127,7 +127,7 @@ An unspecified generic type parameter defaults to `any`. There are few places wh
 
 #### In extends clause:
 
-For instance, `React.Component` is defined to have two generic type parameters, `Props` and `State`. 
+For instance, `React.Component` is defined to have two generic type parameters, `Props` and `State`.
 In a `.js` file, there is no legal way to specify these in the extends clause. By default the type arguments will be `any`:
 
 ```js
