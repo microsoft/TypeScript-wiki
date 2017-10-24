@@ -12,8 +12,9 @@
 * Decorators for function expressions/arrow functions
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
 
-# 2.7
+# 2.7 (January 2018)
 
+* [ ] [Support for JSX Fragment](https://github.com/Microsoft/TypeScript/pull/19249)
 * [ ] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 
