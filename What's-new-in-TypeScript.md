@@ -140,7 +140,7 @@ Error messages in Russian:
 c:\ts>tsc --v
 Version 2.6.0-dev.20171003
 
-c:\ts>tsc --locale rus --pretty c:\test\a.ts
+c:\ts>tsc --locale ru --pretty c:\test\a.ts
 
 ../test/a.ts(1,5): error TS2322: Тип ""string"" не может быть назначен для типа "number".
 
@@ -154,7 +154,7 @@ And help in Japanese:
 PS C:\ts> tsc --v
 Version 2.6.0-dev.20171003
 
-PS C:\ts> tsc --locale jpn
+PS C:\ts> tsc --locale ja-jp
 バージョン 2.6.0-dev.20171003
 構文: tsc [オプション] [ファイル ...]
 
