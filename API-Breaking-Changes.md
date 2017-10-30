@@ -1,3 +1,7 @@
+# TypeScript 2.6
+
+- Some services methods have additional parameters. Plugins that wrap the language service must pass these parameters along to the original implementation. See [#19507](https://github.com/Microsoft/TypeScript/pull/19507#issuecomment-340600363)
+
 # TypeScript 2.5
 - `Symbol.name`, `Symbol.getName()`, and `Identifier.text` are all now of type `__String`. This is a special branded string to help track where strings are appropriately escaped and prevent their misuse. `escapeIdentifier` and `unescapeIdentifier` has been renamed to `escapeLeadingUnderscores` and `unescapeLeadingUnderscores` and had their types updated accordingly. Deprecated versions of `escapeIdentifier` and `unescapeIdentifier` still exist with the old name and type signature, however they will be removed in a future version. See [#16915](https://github.com/Microsoft/TypeScript/issues/16915).
 
