@@ -1104,18 +1104,18 @@ The easiest fix is to use the `typeof` type operator.
 > If I write code like this:
 > ```ts
 > class Foo {
-> 	private x = 0;
-> 	increment(): number {
-> 		this.x++;
->       return x;
-> 	}
+>     private x = 0;
+>     increment(): number {
+>         this.x++;
+>         return x;
+>     }
 > }
 > ```
 > You should emit code like this so that 'x' is truly private:
 > ```js
 > var Foo = (function () {
-> 	  var x = 0;
-> 	
+>     var x = 0;
+> 
 >     function Foo() {
 >     }
 >     Foo.prototype.increment = function () {
