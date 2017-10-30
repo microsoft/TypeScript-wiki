@@ -32,7 +32,7 @@
   * [X] [Convert JSDoc type annotations to TypeScript](https://github.com/Microsoft/TypeScript/pull/18747)
 * [X] Quick fixes to...
   * [X] [Infer from usage on `noImplicitAny` errors](https://github.com/Microsoft/TypeScript/pull/14786)
-  * [X] [Add uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
+  * [X] [Invoke uncalled decorators](https://github.com/Microsoft/TypeScript/pull/18969)
   * [X] [Install from `@types`](https://github.com/Microsoft/TypeScript/issues/14423)
 * [X] [Support outlining for `// #regions`](https://github.com/Microsoft/TypeScript/issues/11073)
 
