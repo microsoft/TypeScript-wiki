@@ -104,7 +104,7 @@ Option                        | Description
 `--cancellationPipeName`      | Name of the pipe used as a request cancellation semaphore. See [Cancellation](#cancellation) for more information.
 `--eventPort`                 | Port used for receiving events. If non is specified events are sent to stdout.
 `--useSingleInferredProject`  | Put all open .ts and .js files that do not have a .tsconfig file in a common project
-
+`--locale`                    | The locale to use to show error messages, e.g. en-us. <br/>Possible values are:  <br/>► English (US): `en` <br/>► Czech: `cs` <br/>► German: `de` <br/>► Spanish: `es` <br/>► French: `fr` <br/>► Italian: `it` <br/>► Japanese: `ja` <br/>► Korean: `ko` <br/>► Polish: `pl` <br/>► Portuguese(Brazil): `pt-BR` <br/>► Russian: `ru` <br/>► Turkish: `tr` <br/>► Simplified Chinese: `zh-CN`  <br/>► Traditional Chinese: `zh-TW`
 
 # Project System
 
