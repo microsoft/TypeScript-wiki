@@ -1,15 +1,14 @@
 The below code outlines which constructs are currently supported or not supported
-when using JsDoc annotations to provide type information in JavaScript files.
+when using JSDoc annotations to provide type information in JavaScript files.
 
-Note any tags which are not  explicitly listed below (such as `@constructor`)
-are not yet supported.
+Note any tags which are not explicitly listed below (such as `@constructor`) are not yet supported.
 
-```javascript
+```js
 // === Supported ===
 
-// You can use the "@type" tag and reference a type name (either primitive, 
+// You can use the "@type" tag and reference a type name (either primitive,
 // defined in a TypeScript declaration, or in a JSDoc "@typedef" tag)
-/** 
+/**
  * @type {string}
  */
 var var1;
@@ -33,13 +32,13 @@ function fn1(){}
 function fn2(){}
 
 
-/** 
+/**
  * The type specifier can specify a union type - e.g. a string or a boolean
- * @type {(string | boolean)} 
+ * @type {(string | boolean)}
  */
 var var4;
 
-/** 
+/**
  * Note that parens are options for union types
  * @type {string | boolean}
  */
@@ -89,8 +88,8 @@ var specialTypeObject1;
 // Parameters may be declared in a variety of syntactic forms
 /**
  * @param p0 {string} - A string param declared using TS-style
- * @param {string}  p1 - A string param. 
- * @param {string=} p2 - An optional param 
+ * @param {string}  p1 - A string param.
+ * @param {string=} p2 - An optional param
  * @param {string} [p3] - Another optional param.
  * @param {string} [p4="test"] - An optional param with a default value
  * @return {string} This is the result
@@ -163,44 +162,77 @@ var sfc = (test) => <div>{test.a.charAt(0)}</div>;
  */
 function registerClass(C) {}
 
-
-
-// === Below forms are not supported ===
-
-/** @type {Object.<string, number>} */
+/**
+ * A map-like object that maps arbitrary `string` properties to `number`s.
+ *
+ * @type {Object.<string, number>}
+ */
 var var10;
 
 /**
- * @param {object} param1 - Listing properties on an object type does not work
+ * Listing properties that exist on `param1` through dotted param names.
+ *
+ * @param {object} param1
  * @param {string} param1.name
  */
-function fn7(param1) {}
+function fn8(param1) {
+  return param1.name;
+}
 
-function FN8(){}
-/** 
- * Refering to objects in the value space as types doesn't work
- * @type {FN8} 
+/**
+ * @param {...string} p1 - A 'rest' arg (array) of strings. (treated as 'any')
+ */
+function fn10(p1){}
+
+/**
+ * @param {...string} p1 - A 'rest' arg (array) of strings. (treated as 'any')
+ */
+function fn9(p1) {
+  return p1.join();
+}
+
+// We can "cast" types to other types using a JSDoc type assertion
+// by adding an `@type` tag around any parenthesized expression.
+
+/**
+ * @type {number | string}
+ */
+var numberOrString = Math.random() < 0.5 ? "hello" : 100;
+var typeAssertedNumber = /** @type {number} */ (numberOrString)
+```
+
+## Patterns that are known NOT to be supported
+
+```js
+function SomeFunction(){}
+/**
+ * Refering to objects in the value space as types isn't guaranteed to work.
+ *
+ * @type {SomeFunction}
  */
 var var11;
 
-
-/** @type {{a: string, b: number=}} */
-var var12; // Optional members of object literals (optionality is ignored)
-
-
-/** @type {?number} */
-var var13; // A 'nullable' number (treated as just 'number')
-
-
-/** @type {!number} */
-var var14; // A 'non-nullable' number (treated as just 'number')
+/**
+ * Optional members of object literals (optionality is ignored)
+ *
+ * @type {{a: string, b: number=}}
+ */
+var var12;
 
 /**
- * @param {...string} - A 'rest' arg (array) of strings. (treated as 'any')
+ * A nullable number (treated as just `number` unless using `strictNullTypes`)
+ *
+ * @type {?number}
  */
-function fn9(p1){}
+var var13;
+
+/**
+ * A 'non-nullable number (treated as just `number`)
+ *
+ * @type {!number}
+ */
+var var14;
 
 // Inline JsDoc comments (treated as 'any')
-function fn10(/** string */ p1){}
-
+function fn10(/** string */ p1) {}
 ```
