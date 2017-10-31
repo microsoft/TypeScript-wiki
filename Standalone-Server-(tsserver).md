@@ -10,7 +10,7 @@ The executable can be found in lib folder under the typescript package.
 
 ```cmd
 npm install --save typescript
-ls node_modules\lib\tsserver.js
+ls node_modules\typescript\lib\tsserver.js
 ```
 
 ## Message format
