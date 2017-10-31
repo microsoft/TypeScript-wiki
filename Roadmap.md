@@ -2,7 +2,6 @@
 
 # Future
 
-* Support [type-checking of computed properties for constants and Symbols](https://github.com/Microsoft/TypeScript/issues/5579)
 * [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
 * [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
