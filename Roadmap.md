@@ -18,6 +18,7 @@
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 * [X] [Improved type inference for object literals](https://github.com/Microsoft/TypeScript/pull/19513)
 * [X] [Improved handling of structurally identical classes](https://github.com/Microsoft/TypeScript/pull/19671)
+* [ ] [Support for Babel-style synthesized namespaces with `default` members for CommonJS/AMD modules](https://github.com/Microsoft/TypeScript/pull/19675)
 
 # 2.6 (October 2017)
 
