@@ -1316,6 +1316,8 @@ That was `tsconfig.json` automatic inclusion. There is a different issue, which 
 
 So to exclude a file from the compilation, you need to exclude and all **all** files that has an `import` or `/// <reference path="..." />` directives to it.
 
+Use `tsc --listFiles` to list what files are included in your compilation, and `tsc --traceResolution` to see why they were included.
+
 ### How can I specify an `include`?
 
 There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
