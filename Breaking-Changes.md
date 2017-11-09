@@ -2,6 +2,52 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.7
+
+For a full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.7%22+label%3A%22Breaking+Change%22+is%3Aclosed).
+
+## Tuples now have a fixed length property
+
+The following code used to have no compile errors:
+
+```ts
+var pair: [number, number] = [1, 2];
+var triple: [number, number, number] = [1, 2, 3];
+pair = triple;
+```
+
+However, this *was* an error:
+
+```ts
+triple = pair;
+```
+
+Now both assignments are an error.
+This is because tuples now have a length property whose type is their length.
+So `pair.length: 2`, but `triple.length: 3`.
+
+Note that certain non-tuple patterns were allowed previously, but are no longer allowed:
+
+```ts
+const struct: [string, number] = ['key'];
+for (const n of numbers) {
+  struct.push(n);
+}
+```
+
+The best fix for this is to make your own type that extends Array:
+
+```ts
+interface Struct extends Array<string | number> {
+  '0': string;
+  '1'?: number;
+}
+const struct: Struct = ['key'];
+for (const n of numbers) {
+  struct.push(n);
+}
+```
+
 # TypeScript 2.6
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.6%22+label%3A%22Breaking+Change%22+is%3Aclosed).
