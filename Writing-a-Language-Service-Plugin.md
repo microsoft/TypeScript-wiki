@@ -25,11 +25,11 @@ Let's write a simple plugin. Our plugin will remove a user-configurable list of 
 
 ### Setup and Initialization
 
-When your plugin is loaded, it's first initialized as a factory function with its first parameter set to `{typescript: ts}`. It's important to use *this* value, rather than the imported `ts` module, because any version of TypeScript might be loaded by tsserver. If you use any other object, you'll run into compatibility problems later because enum values may change between versions.
+When your plugin is loaded, it's first initialized as a factory function with its first parameter set to `{typescript: ts}`. It's important to use *this* value, rather than the imported `ts` module, because any version of TypeScript might be loaded by tsserver. If you use any other object, you'll run into compatibility problems later because enum values may change between versions. Note below that ts_module is imported *only* for the type annotation.
 
 Here's the minimal code that handles this injected `ts` value:
 ```ts
-import * as ts_module from "../node_modules/typescript/lib/tsserverlibrary";
+import * as ts_module from "typescript/lib/tsserverlibrary";
 
 function init(modules: {typescript: typeof ts_module}) {
     const ts = modules.typescript;
@@ -50,13 +50,7 @@ function init(modules: {typescript: typeof ts_module}) {
 
     function create(info: ts.server.PluginCreateInfo) {
         // Set up decorator
-        const proxy = Object.create(null) as ts.LanguageService;
-        const oldLS = info.languageService;
-        for (const k in oldLS) {
-            (<any>proxy)[k] = function () {
-                return oldLS[k].apply(oldLS, arguments);
-            }
-        }
+        const proxy = {...info.languageService};
         return proxy;
     }
 
@@ -77,6 +71,10 @@ To enable this plugin, users will add an entry to the `plugins` list in their `t
     }
 }
 ```
+
+By default, this name is interpreted as an NPM package name; that is, it can be either the name of
+an NPM package with an `index.js` file, or it can be a path to a directory with an `index.js` file.
+See below for tips on testing your plugin locally.
 
 ### Customizing Behavior
 
@@ -142,8 +140,8 @@ Ensure that the containing directory (`C:\SomeFolder` in this example) exists an
 
 You can write to this log by calling into the TypeScript project's logging service:
 ```ts
-    function create(info: ts.server.PluginCreateInfo) {
-        info.project.projectService.logger.info("I'm getting set up now! Check the log for this message.");
+function create(info: ts.server.PluginCreateInfo) {
+    info.project.projectService.logger.info("I'm getting set up now! Check the log for this message.");
 ```
 
 ## Putting it all together
@@ -163,13 +161,7 @@ function init(modules: {typescript: typeof ts_module}) {
         info.project.projectService.logger.info("I'm getting set up now! Check the log for this message.");
 
         // Set up decorator
-   	    const proxy = Object.create(null) as ts.LanguageService;
-	    const oldLS = info.languageService;
-	    for (const k in oldLS) {
-	        (<any>proxy)[k] = function () {
-	            return oldLS[k].apply(oldLS, arguments);
-	        }
-	    }
+        const proxy = {...info.languageService};
 
         // Remove specified entries from completion list
         proxy.getCompletionsAtPosition = (fileName, position) => {
@@ -202,6 +194,9 @@ Local testing of your plugin is similar to testing other node modules. To set up
  * In your sample project, run `npm link your_plugin_name`
  * Add an entry to the `plugins` field of the `tsconfig.json`
  * Rebuild your plugin and restart your editor to pick up code changes
+
+**Note**: If you're using Visual Studio Code, you'll have to give an absolute path to your plugin's
+code instead of just the plugin name. Subscribe to #20289 for updates.
 
 ## Real-world Plugins
 
