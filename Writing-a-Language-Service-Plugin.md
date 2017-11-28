@@ -196,15 +196,39 @@ export = init;
 
 ## Testing Locally
 
-Local testing of your plugin is similar to testing other node modules. To set up a sample project where you can easily test plugin changes:
+To locally test your plugin, set up a sample project and give it the path to your plugin in the
+tsconfig.json file. For example:
+
+```
+your_plugin/index.ts
+your_plugin/index.js (compiled by tsc)
+sample_project/tsconfig.json
+```
+
+where `sample_project/tsconfig.json` contains
+
+```json
+{
+    "compilerOptions": {
+        "plugins": [{
+            "name": "../your_plugin",
+        }]
+    }
+}
+```
+
+Alternatively, you can test your plugin similarly to how you would test other node modules. To set
+up a sample project where you can easily test plugin changes:
 
  * Run `npm link` from your plugin directory
  * In your sample project, run `npm link your_plugin_name`
  * Add an entry to the `plugins` field of the `tsconfig.json`
  * Rebuild your plugin and restart your editor to pick up code changes
 
-**Note**: If you're using Visual Studio Code, you'll have to give an absolute path to your plugin's
-code instead of just the plugin name. Subscribe to #20289 for updates.
+**Note**: If you're using Visual Studio Code, you'll have to use the first approach above, with a
+path to the module, or run the "TypeScript: Select TypeScript Version" command and choose "Use
+Workspace Version", or click the version number between "TypeScript" and 😃 in the lower-right
+corner. Otherwise, VS Code will not be able to find your plugin.
 
 ## Real-world Plugins
 
