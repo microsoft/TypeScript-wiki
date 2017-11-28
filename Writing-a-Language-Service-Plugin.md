@@ -50,7 +50,11 @@ function init(modules: {typescript: typeof ts_module}) {
 
     function create(info: ts.server.PluginCreateInfo) {
         // Set up decorator
-        const proxy = {...info.languageService};
+        const proxy: ts.LanguageService = Object.create(null);        
+        for (let k of Object.keys(info.languageService) as Array<keyof ts.LanguageService>) {
+            const x = info.languageService[k];
+            proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
+        }
         return proxy;
     }
 
@@ -161,7 +165,11 @@ function init(modules: {typescript: typeof ts_module}) {
         info.project.projectService.logger.info("I'm getting set up now! Check the log for this message.");
 
         // Set up decorator
-        const proxy = {...info.languageService};
+        const proxy: ts.LanguageService = Object.create(null);        
+        for (let k of Object.keys(info.languageService) as Array<keyof ts.LanguageService>) {
+            const x = info.languageService[k];
+            proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
+        }
 
         // Remove specified entries from completion list
         proxy.getCompletionsAtPosition = (fileName, position) => {
