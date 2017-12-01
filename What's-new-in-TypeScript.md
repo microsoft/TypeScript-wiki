@@ -115,7 +115,7 @@ render() {
 ```
 
 Under `--jsx preserve`, the new syntax is left untouched for TypeScript emit. Otherwise, for `--jsx react`, `<>...</>` is compiled to `React.createElement(React.Fragment, null, ...)`, where `React.createElement` respects `--jsxFactory`.
-Note that `<>...</>` produces an error when `--jsx react` and `--jsxFactory` are used together.
+Note that it is an error to use `<>...</>` when `--jsx react` and `--jsxFactory` are both enabled.
 
 Please refer to [the React blog](https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html) for more details on fragments and the new syntax.
 
