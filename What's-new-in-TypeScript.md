@@ -85,18 +85,20 @@ This contrasts with inferences from covariant positions, where we infer the *bes
 ## Support for JSX Fragment Syntax
 
 TypeScript 2.6.2 adds support for the new `<>...</>` syntax for fragments in JSX.
-It is frequently desirable to return multiple JSX elements from a component, as in the following scenario:
+It is frequently desirable to return multiple children from a component. 
+However, this is invalid, so the usual approach has been to wrap the text in an extra element, such as a `<div>` or `<span>` as shown below.
 
 ```tsx
 render() {
     return (
-        Some text.
-        <h2>A heading</h2>
-        More text.
+        <div>
+            Some text.
+            <h2>A heading</h2>
+            More text.
+        </div>
     );
 }
 ```
-Since this is not a single element, this gives an error, so a common solution would be to wrap the text in an extra element, such as a `<div>` or `<span>`.
 
 To address this pattern, React introduced the `React.Fragment` component, which provides a dedicated way to wrap such elements without adding an element to the DOM.
 Correspondingly, the `<>...</>` syntax was added to JSX to facilitate this new construct. Therefore, the above scenario becomes:
@@ -113,7 +115,7 @@ render() {
 ```
 
 Under `--jsx preserve`, the new syntax is left untouched for TypeScript emit. Otherwise, for `--jsx react`, `<>...</>` is compiled to `React.createElement(React.Fragment, null, ...)`, where `React.createElement` respects `--jsxFactory`.
-Note that due to inconsistent non-React framework support for fragments, `<>...</>` produces an error when `--jsx react` and `--jsxFactory` are used together.
+Note that `<>...</>` produces an error when `--jsx react` and `--jsxFactory` are used together.
 
 Please refer to [the React blog](https://reactjs.org/blog/2017/11/28/react-v16.2.0-fragment-support.html) for more details on fragments and the new syntax.
 
