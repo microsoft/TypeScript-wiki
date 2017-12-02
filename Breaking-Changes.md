@@ -48,6 +48,15 @@ for (const n of numbers) {
 }
 ```
 
+## Under `allowSyntheticDefaultImports`, types for default imports are synthesized less often for TS and JS files
+
+In the past, we'd synthesize a default import in the typesystem for a TS or JS file written like so:
+```ts
+export const foo = 12;
+```
+meaning the module would have the type `{foo: number, default: {foo: number}}`.
+This would be wrong, because the file would be emitted with an `__esModule` marker, so no popular module loader would ever create a synthetic default for it when loading the file, and the `default` member that the typesystem inferred was there would never exist at runtime. Now that we emulate this synthetic default behavior in our emit under the `ESModuleInterop` flag, we've tightened the typechecker behavior to match the shape you'd expect to see at runtime. Without the intervention of other tools at runtime, this change should only point out mistakenly incorrect import default usages which should be changed to namespace imports.
+
 # TypeScript 2.6
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.6%22+label%3A%22Breaking+Change%22+is%3Aclosed).

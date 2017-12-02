@@ -13,16 +13,22 @@
 
 # 2.7 (January 2018)
 
-* [x] [Support for JSX Fragment](https://github.com/Microsoft/TypeScript/pull/19249)
-* [ ] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
-* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
+* [X] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
+* [X] [Strict property initialization checks in classes](https://github.com/Microsoft/TypeScript/pull/20075)
+* [X] [Definite assignment assertions](https://github.com/Microsoft/TypeScript/pull/20166)
 * [X] [Improved type inference for object literals](https://github.com/Microsoft/TypeScript/pull/19513)
 * [X] [Improved handling of structurally identical classes](https://github.com/Microsoft/TypeScript/pull/19671)
+* [ ] [Numeric separators](https://github.com/Microsoft/TypeScript/pull/20324)
+* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 * [ ] [Support for Babel-style synthesized namespaces with `default` members for CommonJS/AMD modules](https://github.com/Microsoft/TypeScript/pull/19675)
+* [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
+* [ ] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
+* [ ] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
 
 # 2.6 (October 2017)
 
 * [X] [Strict function types](https://github.com/Microsoft/TypeScript/pull/18654)
+* [x] [Support for JSX Fragment](https://github.com/Microsoft/TypeScript/pull/19249)
 * [X] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
 * [X] [Include localized diagnostics in npm](https://github.com/Microsoft/TypeScript/pull/18702)
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)
