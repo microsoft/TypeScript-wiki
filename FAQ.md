@@ -265,12 +265,12 @@ Note that this sort of enforcement wouldn't ever directly fix a bug.
 In other words, in a hypothetical world where `forEach` callbacks were required to accept a minimum of one argument, you'd have this code:
 ```ts
 [1, 2, 3].forEach(() => console.log("just counting"));
-                  ~~~ Error, not enough arguments?
+             //   ~~ Error, not enough arguments?
 ```
 which would be "fixed", but *not made any more correct*, by adding a parameter:
 ```ts
 [1, 2, 3].forEach(x => console.log("just counting"));
-                 @@@ OK, but doesn't do anything different at all
+               // OK, but doesn't do anything different at all
 ```
 
 ### Why are functions returning non-`void` assignable to function returning `void`?
