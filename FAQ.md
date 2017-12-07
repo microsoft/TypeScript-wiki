@@ -239,6 +239,40 @@ This is isomorphic to the example that "wanted" an error.
 At runtime, `forEach` invokes the given callback with three arguments (value, index, array), but most of the time the callback only uses one or two of the arguments.
 This is a very common JavaScript pattern and it would be burdensome to have to explicitly declare unused parameters.
 
+> But `forEach` should just mark its parameters as optional!
+> e.g. `forEach(callback: (element?: T, index?: number, array?: T[]))`
+
+This is *not* what an optional callback parameter means.
+Function signatures are always read from the *caller's* perspective.
+If `forEach` declared that its callback parameters were optional, the meaning of that is "`forEach` **might call the callback with 0 arguments**".
+
+The meaning of an optional callback parameter is *this*:
+```ts
+// Invoke the provided function with 0 or 1 argument
+function maybeCallWithArg(callback: (x?: number) => void) {
+    if (Math.random() > 0.5) {
+       callback();
+    } else {
+       callback(42);
+    }
+}
+```
+`forEach` *always* provides all three arguments to its callback.
+You don't have to check for the `index` argument to be `undefined` - it's always there; it's not optional.
+
+There is currently not a way in TypeScript to indicate that a callback parameter *must* be present.
+Note that this sort of enforcement wouldn't ever directly fix a bug.
+In other words, in a hypothetical world where `forEach` callbacks were required to accept a minimum of one argument, you'd have this code:
+```ts
+[1, 2, 3].forEach(() => console.log("just counting"));
+                  ~~~ Error, not enough arguments?
+```
+which would be "fixed", but *not made any more correct*, by adding a parameter:
+```ts
+[1, 2, 3].forEach(x => console.log("just counting"));
+                 @@@ OK, but doesn't do anything different at all
+```
+
 ### Why are functions returning non-`void` assignable to function returning `void`?
 
 > I wrote some code like this and expected an error:
