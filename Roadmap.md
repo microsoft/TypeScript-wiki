@@ -18,6 +18,7 @@
 * [X] [Definite assignment assertions](https://github.com/Microsoft/TypeScript/pull/20166)
 * [X] [Improved type inference for object literals](https://github.com/Microsoft/TypeScript/pull/19513)
 * [X] [Improved handling of structurally identical classes](https://github.com/Microsoft/TypeScript/pull/19671)
+* [X] [Fixed length tuples](https://github.com/Microsoft/TypeScript/pull/17765)
 * [ ] [Numeric separators](https://github.com/Microsoft/TypeScript/pull/20324)
 * [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 * [ ] [Support for Babel-style synthesized namespaces with `default` members for CommonJS/AMD modules](https://github.com/Microsoft/TypeScript/pull/19675)
