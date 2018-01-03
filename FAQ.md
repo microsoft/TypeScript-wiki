@@ -1099,43 +1099,6 @@ The easiest fix is to use the `typeof` type operator.
 
 ## Things That Don't Work
 
-### You should emit classes like this so they have real private members
-
-> If I write code like this:
-> ```ts
-> class Foo {
->     private x = 0;
->     increment(): number {
->         this.x++;
->         return x;
->     }
-> }
-> ```
-> You should emit code like this so that 'x' is truly private:
-> ```js
-> var Foo = (function () {
->     var x = 0;
-> 
->     function Foo() {
->     }
->     Foo.prototype.increment = function () {
->         x++;
->         return x;
->     };
->     return Foo;
-> })();
-> ```
-
-This code doesn't work.
-It creates a *single* private field that all classes share:
-```js
-var a = new Foo();
-a.increment(); // Prints 1
-a.increment(); // Prints 2
-var b = new Foo(); // Should not affect a
-a.increment(); // Prints 1
-```
-
 ### You should emit classes like this so they don't lose `this` in callbacks
 > If I write code like this:
 > ```ts
