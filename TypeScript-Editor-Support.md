@@ -80,9 +80,11 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
 
-TypeScript for Visual Studio 2015 can be found [here](http://www.microsoft.com/en-us/download/details.aspx?id=48593)
+TypeScript for Visual Studio 2017 with [version 15.2 or later](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes-v15.2) can be found [here](https://www.microsoft.com/en-us/download/details.aspx?id=55258)
 
-TypeScript for Visual Studio 2013 can be found [here](https://www.microsoft.com/en-us/download/details.aspx?id=48739)
+TypeScript for Visual Studio 2015 with [update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs) can be found [here](http://www.microsoft.com/en-us/download/details.aspx?id=48593)
+
+TypeScript for Visual Studio 2013 can be found [here](https://www.microsoft.com/en-us/download/details.aspx?id=48739); however, its latest supported version is TypeScript 1.8.5.
 
 # Visual Studio Code
 
