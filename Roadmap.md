@@ -20,11 +20,12 @@
 * [X] [Improved handling of structurally identical classes](https://github.com/Microsoft/TypeScript/pull/19671)
 * [X] [Type guards inferred from `in` operator](https://github.com/Microsoft/TypeScript/issues/10485)
 * [X] [Numeric separators](https://github.com/Microsoft/TypeScript/pull/20324)
-* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 * [X] [Support for `import d from "cjs"` form CommonJS modules with `--esModuleInterop`](https://github.com/Microsoft/TypeScript/pull/19675)
+* [X] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
+* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
 * [ ] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
-* [X] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
+
 
 # 2.6 (October 2017)
 
