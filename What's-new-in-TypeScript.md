@@ -46,7 +46,52 @@ You can set the `strictPropertyInitialization` setting to `false` in your `tscon
 
 ## Definite Assignment Assertions
 
-TODO
+The definite assignment assertion is a feature that allows a `!` to be placed after instance property and variable declarations to relay to TypeScript that a variable is indeed assigned for all intents and purposes, even if TypeScript's analyses cannot detect so.
+
+For example:
+
+```ts
+let x: number;
+initialize();
+console.log(x + x);
+//          ~   ~
+// Error! Variable 'x' is used before being assigned.
+
+function initialize() {
+    x = 10;
+}
+```
+
+With definite assignment assertions, we can assert that `x` is really assigned by appending an `!` to its declaration:
+
+```ts
+// Notice the '!'
+let x!: number;
+initialize();
+
+// No error!
+console.log(x + x);
+
+function initialize() {
+    x = 10;
+}
+```
+
+In a sense, the definite assignment assertion operator is the dual of the non-null assertion operator (in which *expressions* are post-fixed with a `!`), which we could also have used in the example.
+
+```ts
+let x: number;
+initialize();
+
+// No error!
+console.log(x! + x!);
+
+function initialize() {
+    x = 10;
+
+```
+
+In our example, we knew that all uses of `x` would be initialized so it makes more sense to use definite assignment assertions than non-null assertions.
 
 # TypeScript 2.6
 
