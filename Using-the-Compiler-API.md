@@ -140,6 +140,8 @@ fileNames.forEach(fileName => {
 
 In this example, we did not need to create a type checker because all we wanted to do was traverse each `SourceFile`.
 
+All possible ```ts.SyntaxKind``` can be found under enum [here](https://github.com/Microsoft/TypeScript/blob/964565e06968259fc4e6de6f1e88ab5e0663a94a/lib/typescript.d.ts#L62).
+
 ## Incremental build support using the language services
 
 > Please refer to the [[Using the Language Service API]] page for more details.
