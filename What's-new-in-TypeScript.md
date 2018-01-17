@@ -1,3 +1,53 @@
+# TypeScript 2.7
+
+## Strict Class Initialization
+
+TypeScript 2.7 introduces a new flag called `--strictPropertyInitialization`.
+This flag performs checks to ensure that each instance property of a class gets initialized in the constructor body, or by a property initializer.
+For example
+
+```ts
+class C {
+    foo: number;
+    bar = "hello";
+    baz: boolean;
+//  ~~~
+//  Error! Property 'baz' has no initializer and is not definitely assigned in the constructor.
+
+    constructor() {
+        this.foo = 42;
+    }
+}
+```
+
+In the above, if we truly meant for `baz` to potentially be `undefined`, we should have declared it with the type `boolean | undefined`.
+
+There are certain scenarios where properties can be initialized indirectly (perhaps by a helper method or dependency injection library), in which case you can use the new *definite assignment assertion modifiers* for your properties (discussed below).
+
+```ts
+class C {
+    foo!: number;
+    // ^
+    // Notice this '!' modifier.
+    // This is the "definite assignment assertion"
+
+    constructor() {
+        this.initialize();
+    }
+
+    initialize() {
+        this.foo = 0;
+    }
+}
+```
+
+Keep in mind that `--strictPropertyInitialization` will be turned on along with other `--strict` mode flags, which can impact your project.
+You can set the `strictPropertyInitialization` setting to `false` in your `tsconfig.json`'s `compilerOptions`, or `--strictPropertyInitialization false` on the command line to turn off this checking.
+
+## Definite Assignment Assertions
+
+TODO
+
 # TypeScript 2.6
 
 ## Strict function types
