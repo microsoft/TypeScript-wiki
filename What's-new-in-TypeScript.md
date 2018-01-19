@@ -93,6 +93,38 @@ function initialize() {
 
 In our example, we knew that all uses of `x` would be initialized so it makes more sense to use definite assignment assertions than non-null assertions.
 
+## Fixed Length Tuples
+
+In TypeScript 2.6 and earlier, `[number, string, string]` was considered a subtype of `[number, string]`.
+This was motivated by TypeScript's structural nature; the first and second elements of a `[number, string, string]` are respectively subtypes of the first and second elements of `[number, string]`.
+However, after examining real world usage of tuples, we noticed that most situations in which this was permitted was typically undesirable.
+
+In TypeScript 2.7, tuples of different arities are no longer assignable to each other.
+Thanks to a pull request from [Tycho Grouwstra](https://github.com/tycho01), tuple types now encode their arity into the type of their respective `length` property.
+This is accomplished by leveraging numeric literal types, which now allow tuples to be distinct from tuples of different arities.
+
+Conceptually, you might consider the type `[number, string]` to be equivalent to the following declaration of `NumStrTuple`:
+
+```ts
+interface NumStrTuple extends Array<number | string> {
+    0: number;
+    1: string;
+    length: 2; // using the numeric literal type '2'
+}
+```
+
+Note that this is a breaking change for some code.
+If you need to resort to the original behavior in which tuples only enforce a minimum length, you can use a similar declaration that does not explicitly define a `length` property, falling back to `number`.
+
+```ts
+interface MinimumNumStrTuple extends Array<number | string> {
+    0: number;
+    1: string;
+}
+```
+
+Note that this does not imply tuples represent immutable arrays, but it is an implied convention.
+
 # TypeScript 2.6
 
 ## Strict function types
