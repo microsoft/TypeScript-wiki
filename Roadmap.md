@@ -11,11 +11,9 @@
 * Decorators for function expressions/arrow functions
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
 
-<!--
 # 2.8 (March 2018)
 * [ ] Conditional types
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
--->
 
 # 2.7 (January 2018)
 
@@ -29,7 +27,7 @@
 * [X] [Support for `import d from "cjs"` form CommonJS modules with `--esModuleInterop`](https://github.com/Microsoft/TypeScript/pull/19675)
 * [X] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
 * [X] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
-* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
+* [X] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
 
 
 # 2.6 (October 2017)
