@@ -12,7 +12,8 @@ class C {
     bar = "hello";
     baz: boolean;
 //  ~~~
-//  Error! Property 'baz' has no initializer and is not definitely assigned in the constructor.
+//  Error! Property 'baz' has no initializer and is not definitely assigned in the 
+//         constructor.
 
     constructor() {
         this.foo = 42;
