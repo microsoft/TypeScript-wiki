@@ -125,6 +125,117 @@ interface MinimumNumStrTuple extends Array<number | string> {
 
 Note that this does not imply tuples represent immutable arrays, but it is an implied convention.
 
+## Improved type inference for object literals 
+
+TypeScript 2.7 improves type inference for multiple object literals occurring in the same context.
+When multiple object literal types contribute to a union type, we now *normalize* the object literal types such that all properties are present in each constituent of the union type. 
+
+Consider:
+
+```ts
+const obj = test ? { text: "hello" } : {};  // { text: string } | { text?: undefined }
+const s = obj.text;  // string | undefined
+```
+
+Previously type `{}` was inferred for `obj` and the second line subsequently caused an error because `obj` would appear to have no properties. 
+That obviously wasn't ideal.
+
+#### Example
+
+```ts
+// let obj: { a: number, b: number } |
+//     { a: string, b?: undefined } |
+//     { a?: undefined, b?: undefined }
+let obj = [{ a: 1, b: 2 }, { a: "abc" }, {}][0];
+obj.a;  // string | number | undefined
+obj.b;  // number | undefined
+```
+
+Multiple object literal type inferences for the same type parameter are similarly collapsed into a single normalized union type:
+
+```ts
+declare function f<T>(...items: T[]): T;
+// let obj: { a: number, b: number } |
+//     { a: string, b?: undefined } |
+//     { a?: undefined, b?: undefined }
+let obj = f({ a: 1, b: 2 }, { a: "abc" }, {});
+obj.a;  // string | number | undefined
+obj.b;  // number | undefined
+```
+
+## Improved handling of structurally identical classes and `instanceof` expressions
+
+TypeScript 2.7 improves the handling of structurally identical classes in union types and `instanceof` expressions:
+
+* Structurally identical, but distinct, class types are now preserved in union types (instead of eliminating all but one).
+* Union type subtype reduction only removes a class type if it is a subclass of *and* derives from another class type in the union.
+* Type checking of the `instanceof` operator is now based on whether the type of the left operand *derives from* the type indicated by the right operand (as opposed to a structural subtype check).
+
+This means that union types and `instanceof` properly distinguish between structurally identical classes. 
+
+#### Example: 
+
+```ts
+class A {}
+class B extends A {}
+class C extends A {}
+class D extends A { c: string }
+class E extends D {}
+
+let x1 = !true ? new A() : new B();  // A
+let x2 = !true ? new B() : new C();  // B | C (previously B)
+let x3 = !true ? new C() : new D();  // C | D (previously C)
+
+let a1 = [new A(), new B(), new C(), new D(), new E()];  // A[]
+let a2 = [new B(), new C(), new D(), new E()];  // (B | C | D)[] (previously B[])
+
+function f1(x: B | C | D) {
+    if (x instanceof B) {
+        x;  // B (previously B | D)
+    }
+    else if (x instanceof C) {
+        x;  // C
+    }
+    else {
+        x;  // D (previously never)
+    }
+}
+```
+
+## Type guards inferred from  `in` operator
+
+The `in` operator now acts as a narrowing expression for types.
+
+For a `n in x` expression, where `n` is a string literal or string literal type and `x` is a union type, the "true" branch narrows to types which have an optional or required property `n`, and the "false" branch narrows to types which have an optional or missing property `n`.
+
+#### Example
+
+```ts
+interface A { a: number };
+interface B { b: string };
+
+function foo(x: A | B) {
+    if ("a" in x) {
+        return x.a;
+    }
+    return x.b;
+}
+```
+
+## Numeric separators
+
+TypeScript 2.7 brings support for [ES Numeric Separators](https://github.com/tc39/proposal-numeric-separator). 
+Numeric literals can now be separated into segments using `_`.
+
+##### Example
+
+```ts
+const milion = 1_000_000;
+const phone = 555_734_2231;
+const bytes = 0xFF_0C_00_FF;
+const word = 0b1100_0011_1101_0001;
+```
+
 # TypeScript 2.6
 
 ## Strict function types
