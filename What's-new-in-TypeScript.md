@@ -287,6 +287,17 @@ const bytes = 0xFF_0C_00_FF;
 const word = 0b1100_0011_1101_0001;
 ```
 
+## Cleaner output in `--watch` mode
+
+TypeScript's `--watch` mode now clears the screen after a re-compilation is requested. 
+
+## Prettier `--pretty` output
+
+TypeScript's `--pretty` flag can make error messages easier to read and manage.
+`--pretty` now uses colors for file names, diagnostic codes, and line numbers. 
+File names and positions are now also formatted to allow navigation in common terminals (e.g. Visual Studio Code terminal).
+
+
 # TypeScript 2.6
 
 ## Strict function types
