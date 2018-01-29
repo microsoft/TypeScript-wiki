@@ -1,5 +1,88 @@
 # TypeScript 2.7
 
+## Constant-named properties
+
+TypeScript 2.7 adds support for declaring const-named properties on types including ECMAScript symbols.
+
+#### Example
+
+```ts
+// Lib
+export const SERIALIZE = Symbol("serialize-method-key");
+
+export interface  {
+    [SERIALIZE](obj: {}): string;
+}
+```
+
+```ts
+// consumer
+
+import { SERIALIZE, Serializable } from "lib";
+
+class JSONSerializableItem implements Serializable {
+    [SERIALIZE](obj: {}) {
+        return JSON.stringify(obj);
+    }
+}
+```
+
+This also applies to numeric and string literals.
+
+#### Example
+
+```ts
+const Foo = "Foo";
+const Bar = "Bar";
+
+let x = {
+    [Foo]: 100,
+    [Bar]: "hello",
+};
+
+let a = x[Foo]; // has type 'number'
+let b = x[Bar]; // has type 'string'
+```
+
+### `unique symbol`
+
+To enable treating symbols as unique literals  a new type `unique symbol` is available.
+`unique symbol` is are subtype of `symbol`, and are produced only from calling `Symbol()` or `Symbol.for()`, or from explicit type annotations.
+The new type is only allowed on `const` declarations and `readonly static` properties, and in order to reference a specific unique symbol, you'll have to use the `typeof` operator.
+Each reference to a `unique symbol` implies a completely unique identity that's tied to a given declaration.
+
+#### Example
+
+```ts
+// Works
+declare const Foo: unique symbol;
+
+// Error! 'Bar' isn't a constant.
+let Bar: unique symbol = Symbol();
+
+// Works - refers to a unique symbol, but its identity is tied to 'Foo'.
+let Baz: typeof Foo = Foo;
+
+// Also works.
+class C {
+    static readonly StaticSymbol: unique symbol = Symbol();
+}
+```
+
+Because each `unique symbol` has a completely separate identity, no two `unique symbol` types are assignable or comparable to each other.
+
+#### Example
+
+```ts
+const Foo = Symbol();
+const Bar = Symbol();
+
+// Error: can't compare two unique symbols.
+if (Foo === Bar) {
+    // ...
+}
+```
+
 ## Strict Class Initialization
 
 TypeScript 2.7 introduces a new flag called `--strictPropertyInitialization`.
