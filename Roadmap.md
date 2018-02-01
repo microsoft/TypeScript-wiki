@@ -28,7 +28,7 @@
 * [X] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
 * [X] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
 * [X] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/pull/20234)
-
+* [X] [Quick fix to add missing `async` keyword](https://github.com/Microsoft/TypeScript/pull/21069)
 
 # 2.6 (October 2017)
 
