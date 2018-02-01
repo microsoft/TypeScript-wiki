@@ -29,6 +29,8 @@
 * [X] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
 * [X] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/pull/20234)
 * [X] [Quick fix to add missing `async` keyword](https://github.com/Microsoft/TypeScript/pull/21069)
+* [X] [Completion list preselects suggested item based on context](https://github.com/Microsoft/TypeScript/pull/20020)
+* [X] Completion list includes [`this.`](https://github.com/Microsoft/TypeScript/pull/21231), [brackets](https://github.com/Microsoft/TypeScript/pull/20547), and [curlies for JSX](https://github.com/Microsoft/TypeScript/pull/21372)
 
 # 2.6 (October 2017)
 
