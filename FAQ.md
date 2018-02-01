@@ -969,7 +969,7 @@ function create<T>(ctor: { new(): T }) {
 }
 var c = create(MyClass); // c: MyClass
 
-function isReallyInstanceOf<T>(ctor: { new(...args: any) => T }, obj: T) {
+function isReallyInstanceOf<T>(ctor: { new(...args: any[]): T }, obj: T) {
   return obj instanceof ctor;
 }
 ```
