@@ -57,6 +57,22 @@ export const foo = 12;
 meaning the module would have the type `{foo: number, default: {foo: number}}`.
 This would be wrong, because the file would be emitted with an `__esModule` marker, so no popular module loader would ever create a synthetic default for it when loading the file, and the `default` member that the typesystem inferred was there would never exist at runtime. Now that we emulate this synthetic default behavior in our emit under the `ESModuleInterop` flag, we've tightened the typechecker behavior to match the shape you'd expect to see at runtime. Without the intervention of other tools at runtime, this change should only point out mistakenly incorrect import default usages which should be changed to namespace imports.
 
+## Stricter checking for indexed access generic type constraints
+
+Previously the constraint of an indexed access type was only computed if the type had an index signature, otherwise it was `any`. That allowed invalid assignments to go unchecked. In TS 2.7.1, the compiler is a bit smarter here, and will compute the constraint to be the union of all possible properties here.
+
+```ts
+interface O {
+    foo?: string;
+}
+
+function fails<K extends keyof O>(o: O, k: K) {
+    var s: string = o[k]; // Previously allowed, now an error
+                          // string | undefined is not assignable to a string
+}
+
+```
+
 # TypeScript 2.6
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.6%22+label%3A%22Breaking+Change%22+is%3Aclosed).
