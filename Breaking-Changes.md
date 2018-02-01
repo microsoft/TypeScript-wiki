@@ -72,6 +72,22 @@ function fails<K extends keyof O>(o: O, k: K) {
 }
 
 ```
+## `in` expressions are treated as type guards
+
+For a `n in x` expression, where `n` is a string literal or string literal type and `x` is a union type, the "true" branch narrows to types which have an optional or required property `n`, and the "false" branch narrows to types which have an optional or missing property `n`. This may result in cases where the type of a variable is narrowed to `never` in the false branch if the type is declared to always have the the property `n`.
+
+```ts
+
+
+var x: { foo: number };
+
+if ("foo" in x) {
+    x; // { foo: number }
+}
+else {
+    x; // never
+}
+```
 
 # TypeScript 2.6
 
