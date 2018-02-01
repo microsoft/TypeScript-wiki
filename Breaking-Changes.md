@@ -104,6 +104,21 @@ var a = Math.random() ? new Animal() : new Dog();
 // typeof a now Animal | Dog, previously Animal
 ```
 
+## `CustomEvent` is now a generic type
+
+`CustomEvent` now has a type parameter for the type of the `details` property. If you are extending from it, you will need to specify an additional type parameter.
+
+```ts
+class MyCustomEvent extends CustomEvent {
+}
+```
+should become
+
+```ts
+class MyCustomEvent extends CustomEvent<any> {
+}
+```
+
 # TypeScript 2.6
 
 For full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.6%22+label%3A%22Breaking+Change%22+is%3Aclosed).
