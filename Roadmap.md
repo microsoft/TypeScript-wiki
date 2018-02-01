@@ -13,7 +13,7 @@
 
 # 2.7 (January 2018)
 
-* [X] [Support for properties named with with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
+* [X] [Support for properties named with `const`-declared symbols](https://github.com/Microsoft/TypeScript/pull/15473)
 * [X] [Strict property initialization checks in classes](https://github.com/Microsoft/TypeScript/pull/20075)
 * [X] [Definite assignment assertions](https://github.com/Microsoft/TypeScript/pull/20166)
 * [X] [Improved type inference for object literals](https://github.com/Microsoft/TypeScript/pull/19513)
