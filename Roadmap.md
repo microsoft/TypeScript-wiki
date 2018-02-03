@@ -13,6 +13,7 @@
 
 # 2.8 (March 2018)
 * [ ] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
+* [ ] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
 
 # 2.7 (January 2018)
