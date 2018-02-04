@@ -12,8 +12,8 @@
 * [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
 
 # 2.8 (March 2018)
-* [ ] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
-* [ ] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
+* [X] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
+* [X] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
 
 # 2.7 (January 2018)
