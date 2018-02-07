@@ -142,12 +142,88 @@ In this example, we did not need to create a type checker because all we wanted 
 
 All possible ```ts.SyntaxKind``` can be found under enum [here](https://github.com/Microsoft/TypeScript/blob/964565e06968259fc4e6de6f1e88ab5e0663a94a/lib/typescript.d.ts#L62).
 
+## Writing an incremental program watcher
+
+TypeScript 2.7 introduces a new API for creating "watcher" programs that provide set of APIs that are smart enough to cache errors and emit on modules from previous compilations if they or their dependencies haven't been updated in a cascading manner.
+
+This API is used internally in the compiler to implement its `--watch` mode, but can also be leveraged by other tools.
+
+```ts
+import fs = require("fs");
+import path = require("path");
+import ts = require("typescript");
+
+const formatHost: ts.FormatDiagnosticsHost = {
+    getCanonicalFileName: path => path,
+    getCurrentDirectory: ts.sys.getCurrentDirectory,
+    getNewLine: () => ts.sys.newLine,
+}
+
+function watchMain() {
+    const configPath = ts.findConfigFile(/*searchPath*/ "./", ts.sys.fileExists, "tsconfig.json");
+    if (!configPath) {
+        throw new Error("Could not find a valid 'tsconfig.json'.");
+    }
+
+    // TypeScript can use several different program creation "strategies":
+    //  * ts.createEmitAndSemanticDiagnosticsBuilderProgram,
+    //  * ts.createSemanticDiagnosticsBuilderProgram
+    //  * ts.createAbstractBuilder
+    // The first two produce "builder programs". These use an incremental strategy to only re-check and emit files whose
+    // contents may have changed, or whose dependencies may have changes which may impact change the result of prior type-check and emit.
+    // The last uses an ordinary program which does a full type check after every change.
+    // Between `createEmitAndSemanticDiagnosticsBuilderProgram` and `createSemanticDiagnosticsBuilderProgram`, the only difference is emit.
+    // For pure type-checking scenarios, or when another tool/process handles emit, using `createSemanticDiagnosticsBuilderProgram` may be more desirable.
+    const createProgram = ts.createSemanticDiagnosticsBuilderProgram;
+
+    // Note that there is another overload for `createWatchCompilerHost` that takes a set of root files.
+    const host = ts.createWatchCompilerHost(configPath, {}, ts.sys,
+        createProgram,
+        reportDiagnostic,
+        reportWatchStatusChanged,
+    );
+
+    // You can technically override any given hook on the host, though you probably don't need to.
+    // Note that we're assuming `origCreateProgram` and `origPostProgramCreate` doesn't use `this` at all.
+    const origCreateProgram = host.createProgram;
+    host.createProgram = (rootNames: ReadonlyArray<string>, options, host, oldProgram) => {
+        console.log("** We're about to create the program! **");
+        return origCreateProgram(rootNames, options, host, oldProgram);
+    }
+    const origPostProgramCreate = host.afterProgramCreate;
+
+    host.afterProgramCreate = program => {
+        console.log("** We finished making the program! **");
+        origPostProgramCreate!(program);
+    };
+
+    // `createWatchProgram` creates an initial program, watches files, and updates the program over time.
+    ts.createWatchProgram(host);
+}
+
+function reportDiagnostic(diagnostic: ts.Diagnostic) {
+    console.error(ts.formatDiagnostic(diagnostic, formatHost));
+}
+
+/**
+ * Prints a diagnostic every time the watch status changes.
+ * This is mainly for messages like "Starting compilation" or "Compilation completed".
+ */
+function reportWatchStatusChanged(diagnostic: ts.Diagnostic) {
+    console.info(ts.formatDiagnostic(diagnostic, formatHost));
+}
+
+watchMain();
+```
+
 ## Incremental build support using the language services
 
 > Please refer to the [[Using the Language Service API]] page for more details.
 
 The services layer provide a set of additional utilities that can help simplify some complex scenarios. In the snippet below, we will try to build an incremental build server that watches a set of files and updates only the outputs of the files that changed.
-We will achieve this through creating a LanguageService object. Similar to the program in the previous example, we need a LanguageServiceHost. The LanguageServiceHost augments the concept of a file with a version, isOpen flag, and a ScriptSnapshot. Version allows the language service to track changes to files. isOpen tells the language service to keep AST in memory as the file is in use. ScriptSnapshot is an abstraction over text that allows the language service to query for changes.
+We will achieve this through creating a LanguageService object. Similar to the program in the previous example, we need a LanguageServiceHost. The LanguageServiceHost augments the concept of a file with a `version`, an `isOpen` flag, and a `ScriptSnapshot`. The `version` allows the language service to track changes to files. `isOpen` tells the language service to keep AST in memory as the file is in use. `ScriptSnapshot` is an abstraction over text that allows the language service to query for changes.
+
+If you are simply trying to implement watch-style functionality, we encourage you to explore the above watcher API.
 
 ```ts
 import * as fs from "fs";
