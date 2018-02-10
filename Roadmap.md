@@ -14,7 +14,7 @@
 # 2.8 (March 2018)
 * [X] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
 * [X] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
-* [ ] [Predefined conditional types](https://github.com/Microsoft/TypeScript/pull/21847)
+* [X] [Predefined conditional types](https://github.com/Microsoft/TypeScript/pull/21847)
 * [X] New [`--emitDeclarationOnly`](https://github.com/Microsoft/TypeScript/pull/20735)
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
 
