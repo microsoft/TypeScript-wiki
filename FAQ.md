@@ -6,6 +6,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+  - [Common "Bugs" That Aren't Bugs](#common-bugs-that-arent-bugs)
   - [Common Feature Requests](#common-feature-requests)
   - [Type System Behavior](#type-system-behavior)
     - [What is structural typing?](#what-is-structural-typing)
@@ -17,7 +18,7 @@
     - [Why are all types assignable to empty interfaces?](#why-are-all-types-assignable-to-empty-interfaces)
     - [Can I make a type alias nominal?](#can-i-make-a-type-alias-nominal)
     - [How do I prevent two types from being structurally compatible?](#how-do-i-prevent-two-types-from-being-structurally-compatible)
-    - [How do I check at runtime if an object implements some interface?](#how-do-i-check-at-runtime-if-an-object-implements-some-interface)
+    - [How do I check at run-time if an object implements some interface?](#how-do-i-check-at-run-time-if-an-object-implements-some-interface)
     - [Why doesn't this incorrect cast throw a runtime error?](#why-doesnt-this-incorrect-cast-throw-a-runtime-error)
     - [Why don't I get type checking for `(number) => string` or `(T) => T`?](#why-dont-i-get-type-checking-for-number--string-or-t--t)
     - [Why am I getting an error about a missing index signature?](#why-am-i-getting-an-error-about-a-missing-index-signature)
@@ -81,24 +82,36 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## Common "Bugs" That Aren't Bugs
+
+> I've found a long-overlooked bug in TypeScript!
+
+Here are some behaviors that look may look like bugs, but aren't.
+
+ * These two empty classes can be used in place of each other
+   * See the [FAQ Entry on this page](#why-do-these-empty-classes-behave-strangely)
+ * I can use a non-`void`-returning function where one returning `void` is expected
+   * See the [FAQ Entry on this page](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
+   * Prior discussion at #4544
+ * I'm allowed to use a shorter parameter list where a longer one is expected
+   * See the [FAQ Entry on this page](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
+   * Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868
+ * `private` class members are actually visible at runtime
+   * See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
+   * Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
+
 ## Common Feature Requests
 > I want to request one of the following features...
 
 Here's a list of common feature requests and their corresponding issue.
 Please leave comments in these rather than logging new issues.
-* Non-nullable values [#185](https://github.com/Microsoft/TypeScript/issues/185)
+* Safe navigation operator, AKA CoffeeScript's null conditional/propagating/propagation operator, AKA C#'s' ?. operator [#16](https://github.com/Microsoft/TypeScript/issues/16)
 * Minification [#8](https://github.com/Microsoft/TypeScript/issues/8)
-* Read-only properties [#12](https://github.com/Microsoft/TypeScript/issues/12)
 * Extension methods [#9](https://github.com/Microsoft/TypeScript/issues/9)
 * Partial classes [#563](https://github.com/Microsoft/TypeScript/issues/563)
-* Non-numeric or string-based `enum`s [#1206](https://github.com/Microsoft/TypeScript/issues/1206)
-* Wildcards or globbing in tsconfig.json: [#1927](https://github.com/Microsoft/TypeScript/issues/1927)
-* Safe navigation operator, AKA CoffeeScript's null conditional/propagating/propagation operator, AKA C#'s' ?. operator [#16](https://github.com/Microsoft/TypeScript/issues/16)
 * Something to do with `this` [#513](https://github.com/Microsoft/TypeScript/issues/513)
-* Generic type parameter defaults [#2175](https://github.com/Microsoft/TypeScript/issues/2175)
 * Strong typing of `Function` members `call`/`bind`/`apply` [#212](https://github.com/Microsoft/TypeScript/issues/212)
-* Function overloading [#3442](https://github.com/Microsoft/TypeScript/issues/3442)
-* Referencing generic components in JSX [#6395](https://github.com/Microsoft/TypeScript/issues/6395) 
+* Runtime function overloading [#3442](https://github.com/Microsoft/TypeScript/issues/3442)
 
 ## Type System Behavior
 
