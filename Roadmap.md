@@ -18,7 +18,8 @@
 * [ ] [Improved control over mapped type modifiers](https://github.com/Microsoft/TypeScript/pull/21919)
 * [X] New [`--emitDeclarationOnly`](https://github.com/Microsoft/TypeScript/pull/20735)
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
-* [ ] [Organize imports](https://github.com/Microsoft/TypeScript/pull/21909)
+* [X] New [Organize imports](https://github.com/Microsoft/TypeScript/pull/21909) command
+* [X] [Quick fix for uninitalized class properties](https://github.com/Microsoft/TypeScript/issues/21509)
 
 # 2.7 (January 2018)
 
