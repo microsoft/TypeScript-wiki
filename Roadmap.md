@@ -15,7 +15,7 @@
 * [X] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
 * [X] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
 * [X] [Predefined conditional types in `lib.d.ts`](https://github.com/Microsoft/TypeScript/pull/21847)
-* [ ] [Improved control over mapped type modifiers](https://github.com/Microsoft/TypeScript/pull/21919)
+* [X] [Improved control over mapped type modifiers](https://github.com/Microsoft/TypeScript/pull/21919)
 * [X] New [`--emitDeclarationOnly`](https://github.com/Microsoft/TypeScript/pull/20735)
 * [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
 * [X] New [Organize imports](https://github.com/Microsoft/TypeScript/pull/21909) command
