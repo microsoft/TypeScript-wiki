@@ -1,3 +1,6 @@
+# TypeScript 2.8
+- `getJsxIntrinsicTagNames` has been removed and replaced with `getJsxIntrinsicTagNamesAt`, which requires a node to use as the location to look up the valid intrinsic names at (to handle locally-scoped JSX namespaces).
+
 # TypeScript 2.6
 
 - Some services methods (`getCompletionEntryDetails` and `getCompletionEntrySymbols`) have additional parameters. Plugins that wrap the language service must pass these parameters along to the original implementation. See [#19507](https://github.com/Microsoft/TypeScript/pull/19507#issuecomment-340600363)
