@@ -1,3 +1,11 @@
+# TypeScript 2.8
+
+## [Conditional Types](https://github.com/Microsoft/TypeScript/pull/21316)
+
+## [Per-file JSX factories](https://github.com/Microsoft/TypeScript/pull/21218)
+
+## [Locally scoped JSX namespaces](https://github.com/Microsoft/TypeScript/pull/22207)
+
 # TypeScript 2.7
 
 ## Constant-named properties
