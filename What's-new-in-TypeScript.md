@@ -6,6 +6,10 @@
 
 ## [Locally scoped JSX namespaces](https://github.com/Microsoft/TypeScript/pull/22207)
 
+## [--emitDeclarationsOnly](https://github.com/Microsoft/TypeScript/pull/20735)
+
+## ['Organize Imports' Suite of Refactorings](https://github.com/Microsoft/TypeScript/issues/10020)
+
 # TypeScript 2.7
 
 ## Constant-named properties
