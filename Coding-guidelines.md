@@ -2,7 +2,11 @@
 
 # This is ***NOT*** a prescriptive guideline for the TypeScript community
 
-# These guidelines are meant for **contributors to the TypeScript project**. Feel free to adopt them for your own team.
+# These guidelines are meant for **contributors to the TypeScript project's codebase**.
+
+# We have chosen many of them for team consistency. Feel free to adopt them for your own team.
+
+# AGAIN: This is ***NOT*** a prescriptive guideline for the TypeScript community
 
 # **Please do not file issues about these guidelines.**
 
