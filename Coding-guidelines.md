@@ -71,9 +71,8 @@ Diagnostics are categorized into general ranges. If adding a new diagnostic mess
 
 For a variety of reasons, we avoid certain constructs, and use some of our own. Among them:
 
-1. Do not use ECMAScript 5 functions; instead use those found in [core.ts](https://github.com/Microsoft/TypeScript/blob/master/src/compiler/core.ts).
-2. Do not use `for..in` statements; instead, use `ts.forEach`, `ts.forEachKey` and `ts.forEachValue`. Be aware of their slightly different semantics.
-3. Try to use `ts.forEach`, `ts.map`, and `ts.filter` instead of loops when it is not strongly inconvenient.
+1. Do not use `for..in` statements; instead, use `ts.forEach`, `ts.forEachKey` and `ts.forEachValue`. Be aware of their slightly different semantics.
+2. Try to use `ts.forEach`, `ts.map`, and `ts.filter` instead of loops when it is not strongly inconvenient.
 
 ## Style
 
