@@ -58,7 +58,7 @@ From here, there are different steps for debugging the client- and server-side, 
        "sourceMaps": true,
        "outFiles": ["/path/to/repo/TypeScript/built/local"],
        "runtimeArgs": [
-           "--debug=5859"
+           "--inspect=5859"
        ]
    }
    ```
