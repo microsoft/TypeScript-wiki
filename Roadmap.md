@@ -2,19 +2,18 @@
 
 # Future
 
-* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [Support for project references/composite projects](https://github.com/Microsoft/TypeScript/issues/3469)
 * [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * Implement new ES Decorator proposal
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
-* [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues
-/14844)
 
 # 2.9 (May 2018)
 
-* [ ] Allow `import(...)`-ing types at any location
+* [ ] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues
+/14844))
 
 # 2.8 (March 2018)
 
