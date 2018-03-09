@@ -9,9 +9,15 @@
 * Implement new ES Decorator proposal
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * Decorators for function expressions/arrow functions
-* [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
+* [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues
+/14844)
+
+# 2.9 (May 2018)
+
+* [ ] Allow `import(...)`-ing types at any location
 
 # 2.8 (March 2018)
+
 * [X] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
 * [X] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
 * [X] [Predefined conditional types in `lib.d.ts`](https://github.com/Microsoft/TypeScript/pull/21847)
