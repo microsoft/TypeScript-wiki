@@ -2,6 +2,25 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.8
+
+## Unused type parameters are checked under `--noUnusedParameters`
+
+As per [#20568](https://github.com/Microsoft/TypeScript/issues/20568), unused type parameters were previously reported under `--noUnusedLocals`, but are now instead reported under `--noUnusedParameters`.
+
+## `HTMLObjectElement` no longer has an `alt` attribute
+
+As per [#21386](https://github.com/Microsoft/TypeScript/issues/21386), the DOM libraries have been updated to reflect the WHATWG standard.
+
+If you need to continue using the `alt` attribute, consider reopening `HTMLObjectElement` via interface merging in the global scope:
+
+```ts
+// Must be in a global .ts file or a 'declare global' block.
+interface HTMLObjectElement {
+    alt: string;
+}
+```
+
 # TypeScript 2.7
 
 For a full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.7%22+label%3A%22Breaking+Change%22+is%3Aclosed).
