@@ -21,10 +21,10 @@
 * [X] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
 * [X] [Predefined conditional types in `lib.d.ts`](https://github.com/Microsoft/TypeScript/pull/21847)
 * [X] [Improved control over mapped type modifiers](https://github.com/Microsoft/TypeScript/pull/21919)
-* [X] [Improved 'keyof' with intersection types](https://github.com/Microsoft/TypeScript/pull/22300)
+* [X] [Improved `keyof` with intersection types](https://github.com/Microsoft/TypeScript/pull/22300)
 * [X] New [`--emitDeclarationOnly`](https://github.com/Microsoft/TypeScript/pull/20735)
 * [X] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
-* [X] [Support for per-file jsx pragmas](https://github.com/Microsoft/TypeScript/pull/21218)
+* [X] [Support for per-file JSX pragmas](https://github.com/Microsoft/TypeScript/pull/21218)
 * [X] New [Organize imports](https://github.com/Microsoft/TypeScript/pull/21909) command
 * [X] [Quick fix for uninitalized class properties](https://github.com/Microsoft/TypeScript/issues/21509)
 
