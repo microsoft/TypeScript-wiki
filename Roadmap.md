@@ -26,7 +26,7 @@
 * [X] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
 * [X] [Support for per-file JSX pragmas](https://github.com/Microsoft/TypeScript/pull/21218)
 * [X] New [Organize imports](https://github.com/Microsoft/TypeScript/pull/21909) command
-* [X] [Quick fix for uninitalized class properties](https://github.com/Microsoft/TypeScript/issues/21509)
+* [X] [Quick fix for uninitialized class properties](https://github.com/Microsoft/TypeScript/issues/21509)
 
 # 2.7 (January 2018)
 
