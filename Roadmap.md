@@ -48,7 +48,7 @@
 # 2.6 (October 2017)
 
 * [X] [Strict function types](https://github.com/Microsoft/TypeScript/pull/18654)
-* [x] [Support for JSX Fragment](https://github.com/Microsoft/TypeScript/pull/19249)
+* [x] [Support for JSX Fragments](https://github.com/Microsoft/TypeScript/pull/19249)
 * [X] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
 * [X] [Include localized diagnostics in npm](https://github.com/Microsoft/TypeScript/pull/18702)
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)
