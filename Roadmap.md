@@ -14,6 +14,7 @@
 # 2.9 (May 2018)
 
 * [ ] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
+* [X] [Support for generic JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
 
 # 2.8 (March 2018)
 
