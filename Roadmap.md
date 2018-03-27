@@ -15,6 +15,7 @@
 
 * [ ] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
 * [X] [Support for generic JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
+* [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
 
 # 2.8 (March 2018)
 
