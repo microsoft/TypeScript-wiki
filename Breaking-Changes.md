@@ -2,6 +2,20 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.9
+
+## Trailing commas not allowed on rest parameters
+
+The following code is a compiler error as of [#22262](https://github.com/Microsoft/TypeScript/pull/22262):
+```ts
+function f(
+    a: number,
+    ...b: number[], // Illegal trailing comma
+) {}
+```
+
+Trailing commas on rest parameters are not valid JavaScript, and the syntax is now an error in TypeScript too.
+
 # TypeScript 2.8
 
 ## Unused type parameters are checked under `--noUnusedParameters`
