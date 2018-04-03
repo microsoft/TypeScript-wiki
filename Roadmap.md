@@ -17,6 +17,7 @@
 * [X] [Support for generic JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
 * [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
+* [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [ ] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
 
 # 2.8 (March 2018)
