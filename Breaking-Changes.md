@@ -22,6 +22,24 @@ Trailing commas on rest parameters are not valid JavaScript, and the syntax is n
 
 As per [#20568](https://github.com/Microsoft/TypeScript/issues/20568), unused type parameters were previously reported under `--noUnusedLocals`, but are now instead reported under `--noUnusedParameters`.
 
+## Some MS-specific types are removed from `lib.d.ts`
+
+Some MS-specific types are removed from the DOM definition to better align with the standard. Types removed include:
+* `MSApp`
+* `MSAppAsyncOperation`
+* `MSAppAsyncOperationEventMap`
+* `MSBaseReader`
+* `MSBaseReaderEventMap`
+* `MSExecAtPriorityFunctionCallback`
+* `MSHTMLWebViewElement`
+* `MSManipulationEvent`
+* `MSRangeCollection`
+* `MSSiteModeEvent`
+* `MSUnsafeFunctionCallback`
+* `MSWebViewAsyncOperation`
+* `MSWebViewAsyncOperationEventMap`
+* `MSWebViewSettings`
+
 ## `HTMLObjectElement` no longer has an `alt` attribute
 
 As per [#21386](https://github.com/Microsoft/TypeScript/issues/21386), the DOM libraries have been updated to reflect the WHATWG standard.
