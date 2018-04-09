@@ -2,14 +2,36 @@
 
 # Future
 
-* [Support for project references](https://github.com/Microsoft/TypeScript/issues/3469)
+* [Support for project references/composite projects](https://github.com/Microsoft/TypeScript/issues/3469)
 * [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * Implement new ES Decorator proposal
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
+* [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
-* [Investigate a way to reference types within a module without import declarations](https://github.com/Microsoft/TypeScript/issues/14844)
+
+# 2.9 (May 2018)
+
+* [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
+* [X] [Support for generic JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
+* [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
+* [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
+* [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
+* [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
+
+# 2.8 (March 2018)
+
+* [X] [Conditional types](https://github.com/Microsoft/TypeScript/pull/21316)
+* [X] [Type inference in conditional types](https://github.com/Microsoft/TypeScript/pull/21496)
+* [X] [Predefined conditional types in `lib.d.ts`](https://github.com/Microsoft/TypeScript/pull/21847)
+* [X] [Improved control over mapped type modifiers](https://github.com/Microsoft/TypeScript/pull/21919)
+* [X] [Improved `keyof` with intersection types](https://github.com/Microsoft/TypeScript/pull/22300)
+* [X] New [`--emitDeclarationOnly`](https://github.com/Microsoft/TypeScript/pull/20735)
+* [X] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
+* [X] [Support for per-file JSX pragmas](https://github.com/Microsoft/TypeScript/pull/21218)
+* [X] New [Organize imports](https://github.com/Microsoft/TypeScript/pull/21909) command
+* [X] [Quick fix for uninitialized class properties](https://github.com/Microsoft/TypeScript/issues/21509)
 
 # 2.7 (January 2018)
 
@@ -19,17 +41,21 @@
 * [X] [Improved type inference for object literals](https://github.com/Microsoft/TypeScript/pull/19513)
 * [X] [Improved handling of structurally identical classes](https://github.com/Microsoft/TypeScript/pull/19671)
 * [X] [Fixed length tuples](https://github.com/Microsoft/TypeScript/pull/17765)
-* [ ] [Numeric separators](https://github.com/Microsoft/TypeScript/pull/20324)
-* [ ] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/issues/17493)
-* [ ] [Support for Babel-style synthesized namespaces with `default` members for CommonJS/AMD modules](https://github.com/Microsoft/TypeScript/pull/19675)
-* [ ] [Better handling for namespace-patterns in .js files](https://github.com/Microsoft/TypeScript/issues/7632)
-* [ ] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
-* [ ] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
+* [X] [Type guards inferred from `in` operator](https://github.com/Microsoft/TypeScript/issues/10485)
+* [X] [Numeric separators](https://github.com/Microsoft/TypeScript/pull/20324)
+* [X] [Support for `import d from "cjs"` form CommonJS modules with `--esModuleInterop`](https://github.com/Microsoft/TypeScript/pull/19675)
+* [X] [Apply all quick fixes in a file](https://github.com/Microsoft/TypeScript/pull/20338)
+* [X] [Refactors to convert CommonJS module to ES6 module](https://github.com/Microsoft/TypeScript/pull/19916)
+* [X] [Support for incremental builder compiler API](https://github.com/Microsoft/TypeScript/pull/20234)
+* [X] [Quick fix to add missing `async` keyword](https://github.com/Microsoft/TypeScript/pull/21069)
+* [X] [Completion list preselects suggested item based on context](https://github.com/Microsoft/TypeScript/pull/20020)
+* [X] Completion list includes [`this.`](https://github.com/Microsoft/TypeScript/pull/21231), [brackets](https://github.com/Microsoft/TypeScript/pull/20547), and [curlies for JSX](https://github.com/Microsoft/TypeScript/pull/21372)
+>>>>>>> 4bbfddf12017d43fc4b67b7d1da6acf4397b7b96
 
 # 2.6 (October 2017)
 
 * [X] [Strict function types](https://github.com/Microsoft/TypeScript/pull/18654)
-* [x] [Support for JSX Fragment](https://github.com/Microsoft/TypeScript/pull/19249)
+* [x] [Support for JSX Fragments](https://github.com/Microsoft/TypeScript/pull/19249)
 * [X] [Cached tagged template objects in modules](https://github.com/Microsoft/TypeScript/pull/18300)
 * [X] [Include localized diagnostics in npm](https://github.com/Microsoft/TypeScript/pull/18702)
 * [X] [Suppress errors in .ts files using `// @ts-ignore` comments](https://github.com/Microsoft/TypeScript/pull/18457)

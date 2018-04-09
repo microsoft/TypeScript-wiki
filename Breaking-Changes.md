@@ -2,6 +2,57 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 2.9
+
+## Trailing commas not allowed on rest parameters
+
+The following code is a compiler error as of [#22262](https://github.com/Microsoft/TypeScript/pull/22262):
+```ts
+function f(
+    a: number,
+    ...b: number[], // Illegal trailing comma
+) {}
+```
+
+Trailing commas on rest parameters are not valid JavaScript, and the syntax is now an error in TypeScript too.
+
+# TypeScript 2.8
+
+## Unused type parameters are checked under `--noUnusedParameters`
+
+As per [#20568](https://github.com/Microsoft/TypeScript/issues/20568), unused type parameters were previously reported under `--noUnusedLocals`, but are now instead reported under `--noUnusedParameters`.
+
+## Some MS-specific types are removed from `lib.d.ts`
+
+Some MS-specific types are removed from the DOM definition to better align with the standard. Types removed include:
+* `MSApp`
+* `MSAppAsyncOperation`
+* `MSAppAsyncOperationEventMap`
+* `MSBaseReader`
+* `MSBaseReaderEventMap`
+* `MSExecAtPriorityFunctionCallback`
+* `MSHTMLWebViewElement`
+* `MSManipulationEvent`
+* `MSRangeCollection`
+* `MSSiteModeEvent`
+* `MSUnsafeFunctionCallback`
+* `MSWebViewAsyncOperation`
+* `MSWebViewAsyncOperationEventMap`
+* `MSWebViewSettings`
+
+## `HTMLObjectElement` no longer has an `alt` attribute
+
+As per [#21386](https://github.com/Microsoft/TypeScript/issues/21386), the DOM libraries have been updated to reflect the WHATWG standard.
+
+If you need to continue using the `alt` attribute, consider reopening `HTMLObjectElement` via interface merging in the global scope:
+
+```ts
+// Must be in a global .ts file or a 'declare global' block.
+interface HTMLObjectElement {
+    alt: string;
+}
+```
+
 # TypeScript 2.7
 
 For a full list of breaking changes see the [breaking change issues](https://github.com/Microsoft/TypeScript/issues?q=is%3Aissue+milestone%3A%22TypeScript+2.7%22+label%3A%22Breaking+Change%22+is%3Aclosed).
@@ -56,6 +107,68 @@ export const foo = 12;
 ```
 meaning the module would have the type `{foo: number, default: {foo: number}}`.
 This would be wrong, because the file would be emitted with an `__esModule` marker, so no popular module loader would ever create a synthetic default for it when loading the file, and the `default` member that the typesystem inferred was there would never exist at runtime. Now that we emulate this synthetic default behavior in our emit under the `ESModuleInterop` flag, we've tightened the typechecker behavior to match the shape you'd expect to see at runtime. Without the intervention of other tools at runtime, this change should only point out mistakenly incorrect import default usages which should be changed to namespace imports.
+
+## Stricter checking for indexed access generic type constraints
+
+Previously the constraint of an indexed access type was only computed if the type had an index signature, otherwise it was `any`. That allowed invalid assignments to go unchecked. In TS 2.7.1, the compiler is a bit smarter here, and will compute the constraint to be the union of all possible properties here.
+
+```ts
+interface O {
+    foo?: string;
+}
+
+function fails<K extends keyof O>(o: O, k: K) {
+    var s: string = o[k]; // Previously allowed, now an error
+                          // string | undefined is not assignable to a string
+}
+
+```
+## `in` expressions are treated as type guards
+
+For a `n in x` expression, where `n` is a string literal or string literal type and `x` is a union type, the "true" branch narrows to types which have an optional or required property `n`, and the "false" branch narrows to types which have an optional or missing property `n`. This may result in cases where the type of a variable is narrowed to `never` in the false branch if the type is declared to always have the the property `n`.
+
+```ts
+var x: { foo: number };
+
+if ("foo" in x) {
+    x; // { foo: number }
+}
+else {
+    x; // never
+}
+```
+
+## Structurally-equivalent classes are not reduced in conditional operator
+
+Previously classes that were structurally equivalent were reduced to their best common type in a conditional or `||` operator. Now these classes are maintained in a union type to allow for more accurate checking for `instanceof` operators.
+
+```ts
+class Animal { 
+
+}
+
+class Dog { 
+    park() { }
+}
+
+var a = Math.random() ? new Animal() : new Dog();
+// typeof a now Animal | Dog, previously Animal
+```
+
+## `CustomEvent` is now a generic type
+
+`CustomEvent` now has a type parameter for the type of the `details` property. If you are extending from it, you will need to specify an additional type parameter.
+
+```ts
+class MyCustomEvent extends CustomEvent {
+}
+```
+should become
+
+```ts
+class MyCustomEvent extends CustomEvent<any> {
+}
+```
 
 # TypeScript 2.6
 
