@@ -19,6 +19,7 @@
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
 * [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
+* [X] [Refactor to convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
 
 # 2.8 (March 2018)
 
