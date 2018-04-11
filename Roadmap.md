@@ -51,7 +51,6 @@
 * [X] [Quick fix to add missing `async` keyword](https://github.com/Microsoft/TypeScript/pull/21069)
 * [X] [Completion list preselects suggested item based on context](https://github.com/Microsoft/TypeScript/pull/20020)
 * [X] Completion list includes [`this.`](https://github.com/Microsoft/TypeScript/pull/21231), [brackets](https://github.com/Microsoft/TypeScript/pull/20547), and [curlies for JSX](https://github.com/Microsoft/TypeScript/pull/21372)
->>>>>>> 4bbfddf12017d43fc4b67b7d1da6acf4397b7b96
 
 # 2.6 (October 2017)
 
