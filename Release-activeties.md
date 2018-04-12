@@ -35,8 +35,8 @@
 #### Visual Studio Marketplace
 * [ ] Publish VS 2015 and VS 2017 installers under [TypeScript team](https://marketplace.visualstudio.com/search?term=publisher%3A%22TypeScript%20Team%22&target=VS&category=All%20categories&vsVersion=&sortBy=Relevance)
 
-#### [Sublime-text](https://github.com/Microsoft/TypeScript-Sublime-Plugin)
-* [ ] Update version of tsserver, test and tag
+#### TypeScript-Sublime-Plugin
+* [ ] Update version of [tsserver](https://github.com/Microsoft/TypeScript-Sublime-Plugin/tree/master/tsserver), test and tag
 
 ## New compiler option added
 
