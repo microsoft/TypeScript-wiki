@@ -1,5 +1,7 @@
 ## Release activities
 
+This is the list of release activities need for every TypeScript release. Additional activities are also needed if a new syntax is introduced or a new compiler option gets added.
+
 #### Release
 * [ ] [Tag](https://github.com/Microsoft/TypeScript/tags) release branch
 * [ ] Update [AUTHORS.md](https://github.com/Microsoft/TypeScript/blob/master/AUTHORS.md) for the release ([script](https://github.com/Microsoft/TypeScript/blob/master/scripts/authors.ts))
@@ -38,28 +40,33 @@
 #### TypeScript-Sublime-Plugin
 * [ ] Update version of [tsserver](https://github.com/Microsoft/TypeScript-Sublime-Plugin/tree/master/tsserver), test and tag
 
-## New compiler option added
 
-### MSBuild tasks and targets
+## Additional activities
+
+When a new syntax or a new compiler option is introduced, find below the list of additional release activities needed:
+
+### New compiler option added
+
+#### MSBuild tasks and targets
 * [ ] Add support for new option in MSBuild tasks and targets (see [handbook](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options%20in%20MSBuild.md))
 
-### Handbook
+#### Handbook
 * [ ] Add new option to [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
 * [ ] Add new option to [Compiler Options in MSBuild](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options%20in%20MSBuild.md)
 
-### SchemaStore
+#### SchemaStore
 * [ ] Add new option to [tsconfig.json schema](https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/tsconfig.json)
 * [ ] Add new option to [jsconfig.json schema](https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/jsconfig.json)
 
-## New syntax introduced
+### New syntax introduced
 
-### Colorization
+#### Colorization
 * [ ] Add colorization support in [TypeScript-TmLanguage](https://github.com/Microsoft/TypeScript-TmLanguage)
 
-### babel
+#### babel
 * [ ] Add parsing support in [Babylon](https://github.com/babel/babel/tree/master/packages/babylon)
 * [ ] Add emit support to [babel-plugin-syntax-typescript](https://github.com/babel/babel/tree/master/packages/babel-plugin-syntax-typescript)
 * [ ] Update the [TypeScript-Babel-Starter](https://github.com/Microsoft/TypeScript-Babel-Starter#readme) as needed
 
-### Handbook
+#### Handbook
 * [ ] Add new section for the new feature in the [handbook](https://github.com/Microsoft/TypeScript-Handbook)
