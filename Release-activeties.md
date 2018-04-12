@@ -40,6 +40,11 @@ This is the list of release activities need for every TypeScript release. [Addit
 #### TypeScript-Sublime-Plugin
 * [ ] Update version of [tsserver](https://github.com/Microsoft/TypeScript-Sublime-Plugin/tree/master/tsserver), test and tag
 
+#### Website
+* [ ] Update handbook
+* [ ] Add new release notes page
+* [ ] Update playground
+* [ ] Update version strings in the download banner
 
 ## Additional activities
 
