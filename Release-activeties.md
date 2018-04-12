@@ -1,6 +1,6 @@
 ## Release activities
 
-This is the list of release activities need for every TypeScript release. Additional activities are also needed if a new syntax is introduced or a new compiler option gets added.
+This is the list of release activities need for every TypeScript release. [Additional activities](#additional-activities) are also needed if a new syntax is introduced or a new compiler option gets added.
 
 #### Release
 * [ ] [Tag](https://github.com/Microsoft/TypeScript/tags) release branch
