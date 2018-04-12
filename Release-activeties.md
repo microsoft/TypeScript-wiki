@@ -18,10 +18,10 @@ This is the list of release activities need for every TypeScript release. [Addit
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
 
 
-#### [types-publisher](https://github.com/Microsoft/types-publisher)
-* [ ] https://github.com/Microsoft/definitelytyped-header-parser needs updating, publish new versions
-* [ ] update dependency
-* [ ] need to run the tagging script
+#### types-publisher
+* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser), and publish new version
+* [ ] Update [types-publisher]((https://github.com/Microsoft/types-publisher)) dependency to the new header-parser
+* [ ] Run the tagging script to tag for new version (version of `typescript@next`)
 
 #### npm
 * [ ] Publish new version of [typescript](https://www.npmjs.com/package/typescript)
