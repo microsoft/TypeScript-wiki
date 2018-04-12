@@ -1,7 +1,5 @@
 ## Release activities
 
-### Github
-
 #### Release
 * [ ] [Tag](https://github.com/Microsoft/TypeScript/tags) release branch
 * [ ] Update [AUTHORS.md](https://github.com/Microsoft/TypeScript/blob/master/AUTHORS.md) for the release ([script](https://github.com/Microsoft/TypeScript/blob/master/scripts/authors.ts))
@@ -18,27 +16,26 @@
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
 
 
-### [types-publisher](https://github.com/Microsoft/types-publisher)
+#### [types-publisher](https://github.com/Microsoft/types-publisher)
 * [ ] https://github.com/Microsoft/definitelytyped-header-parser needs updating, publish new versions
 * [ ] update dependency
 * [ ] need to run the tagging script
 
-### npm
+#### npm
 * [ ] Publish new version of [typescript](https://www.npmjs.com/package/typescript)
 * [ ] Publish new version of [tslib](https://www.npmjs.com/package/tslib) (if needed)
 
-
-### Download Center
+#### Download Center
 * [ ] Upload Visual Studio 2017 installer to https://www.microsoft.com/en-us/download/details.aspx?id=55258
 * [ ] Upload Visual Studio 2015 installer to https://www.microsoft.com/en-us/download/details.aspx?id=48593
 
-### Nuget
+#### Nuget
 * [ ] Publish new release to https://www.nuget.org/packages/Microsoft.TypeScript.MSBuild/
 
-### Visual Studio Marketplace
+#### Visual Studio Marketplace
 * [ ] Publish VS 2015 and VS 2017 installers under [TypeScript team](https://marketplace.visualstudio.com/search?term=publisher%3A%22TypeScript%20Team%22&target=VS&category=All%20categories&vsVersion=&sortBy=Relevance)
 
-### [Sublime-text](https://github.com/Microsoft/TypeScript-Sublime-Plugin)
+#### [Sublime-text](https://github.com/Microsoft/TypeScript-Sublime-Plugin)
 * [ ] Update version of tsserver, test and tag
 
 ## New compiler option added
