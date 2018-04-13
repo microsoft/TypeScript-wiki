@@ -16,13 +16,13 @@ If you're using a template you installed from the web or gallery, we would prefe
 
 If you're not sure how to reproduce the problem from a fresh project, a zip file containing your entire solution folder is often the next best thing. A Microsoft employee will provide you an email address to send it to, and we'll work with you 1:1 to determine what the issue is.
 
-### Sidebar: NDAs and Confidentiality
+#### Sidebar: NDAs and Confidentiality
 
 Keeping the security and confidentiality of your code is absolutely critical to us. You can be assured that the contents and nature of any files you send will *not* be disclosed in any way. We will delete these files as soon as possible, and our interaction with your files will be kept to the minimum required to diagnose the underlying issue.
 
 If your organization requires the signing of a Non-disclosure Agreement (NDA), in most cases we will be able to sign such an NDA to facilitate debugging an issue. Please follow up via email with the provided engineer and they will be able to provide more details.
 
-### Anonymization / Simplification
+#### Anonymization / Simplification
 
 If the content and names of your files are irrelevant to the issue at hand, a simplified/cleansed version of the above zip file is also very much acceptable. The smallest and simplest zip file that can reproduce the problem is always preferred - if you *can* send us a single project out of your solution that still reliably demonstrates the issue, we'd prefer it over a larger one.
 
