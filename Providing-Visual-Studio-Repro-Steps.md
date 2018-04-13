@@ -1,5 +1,3 @@
-# Providing Visual Studio Repro Steps
-
 Due to the complexity of Visual Studio and the variety of projects you can write in it, simple screenshots or text descriptions are often not enough for us (the developers who work on Visual Studio) to be able to address a problem. We need to be able to reliably reproduce a problem first in order to understand what the issue is, and second to ensure that the fixes we provide fully address the problem.
 
 This document is a guide to how to provide repro steps when you encounter a problem in Visual Studio. We provide here many different options, listed in *preference* order - please try to provide the first listed option that you are able to.
