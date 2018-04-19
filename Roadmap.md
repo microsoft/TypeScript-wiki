@@ -15,7 +15,7 @@
 
 * [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
 * [X] [Support for generic JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
-* [ ] [Support for generic tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
+* [X] [Support for generic tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
 * [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
 * [X] [`--pretty` error output by default, and `--diagnosticStyle`](https://github.com/Microsoft/TypeScript/pull/23408)
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
