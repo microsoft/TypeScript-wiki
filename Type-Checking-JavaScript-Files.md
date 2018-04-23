@@ -1,6 +1,6 @@
-TypeScript 2.3 and later support a mode of type-checking and reporting errors in `.js` files with `--checkJs`.
+TypeScript 2.3 and later support type-checking and reporting errors in `.js` files with `--checkJs`.
 
-You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely you can choose to check only a few `.js` files by adding `// @ts-check` comment to them without setting `--checkJs`.
+You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely, you can choose to check only a few `.js` files by adding a `// @ts-check` comment to them without setting `--checkJs`.
 You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
 
 Here are some notable differences on how checking work in `.js` file from `.ts` file:
@@ -9,6 +9,8 @@ Here are some notable differences on how checking work in `.js` file from `.ts` 
 
 In a `.js` file, types can often be inferred just like in `.ts` files.
 Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations do in a `.ts` file.
+Just like Typescript, `--noImplicitAny` will give you errors on the places that the compiler could not infer a type.
+(With the exception of open-ended object literals; see below for details.)
 
 JSDoc annotations adorning a declaration will be used to set the type of that declaration. For example:
 
@@ -22,45 +24,95 @@ x = false;  // Error: boolean is not assignable to number
 
 You can find the full list of supported JSDoc patterns in the [JSDoc support in JavaScript documentation](https://github.com/Microsoft/TypeScript/wiki/JSDoc-support-in-JavaScript).
 
+
 ## Property declaration inferred from assignments in class bodies
 
 ES2015/ES6 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like in the case of object literals.
 
-In a `.js` file property declarations are inferred from assignments to the properties inside the class body. The type of properties is the union of the types of all the right-hand values in these assignments. Properties defined in the constructor are always assumed to exist, where as ones defined in methods, getters, or setters are considered optional.
+In a `.js` file, property declarations are inferred from assignments to the properties inside the class body.
+The type of properties is the type given in the constructor, unless it's not defined there, or the type in the constructor is undefined or null.
+In that case, the type is the union of the types of all the right-hand values in these assignments.
+Properties defined in the constructor are always assumed to exist, where as ones defined just in methods, getters, or setters are considered optional.
 
-Adorn property assignments with JSDoc to specify the type of the property as needed. For instance:
+```js
+class C {
+    constructor() {
+        this.x = 0
+    }
+    method() {
+        this.x = false // error, x is a number
+        this.y = 'ok'  // ok, but y could also be undefined
+    }
+    method2() {
+        this.y = true  // also, ok, y's type is string | boolean | undefined
+    }
+}
+```
+
+If the property type can't be inferred, annotate the assignment in the constructor with JSDoc to specify the type.
+You don't even have to give a value if it will be initialised later:
 
 ```js
 class C {
     constructor() {
         /** @type {number | undefined} */
         this.prop = undefined;
-
+        /** @type {number | undefined} */
+        this.count;
     }
 }
 
 
 let c = new C();
 c.prop = 0;         // OK
-c.prop = "string";  // Error: string is not assignable to number|undefined
+c.count = "string";  // Error: string is not assignable to number|undefined
 ```
 
 If properties are never set in the class body, they are considered unknown. If your class has properties that are only read from, consider adding an initialization in the constructor to undefined, e.g. `this.prop = undefined;`.
+
+## null/undefined/[] initializers are of type any or any[]
+
+Any variable, parameter or property that is initialized with null or undefined will have type any, even if strict null checks is turned on.
+Any variable, parameter or property that is initialized with [] will have type any[], even if strict null checks is turned on.
+The only exception is for properties that have multiple initializers as described above.
+
+## Constructor functions work basically the same as classes
+
+Right down to methods. Lots of detail needs to go here. Kind of surprised there was none.
+
+## Many things are namespaces now
+
+Constructor functions are namespaces:
+
+```js
+function Outer() {
+  this.y = 2
+}
+Outer.Inner = class {
+}
+```
+
+TODO: Other kinds of initializers
+
+TODO: Much more
 
 ## CommonJS module input support
 
 In a `.js` files CommonJS module format is allowed as an input module format. Assignments to `exports`, and `module.exports` are recognized as export declarations. Similarly, `require` function calls are recognized as module imports. For example:
 
-```ts
-// import module "fs"
+```js
+// same as `import module "fs"`
 const fs = require("fs");
 
 
-// export function readFile
+// same as `export function readFile`
 module.exports.readFile = function(f) {
     return fs.readFileSync(f);
 }
 ```
+
+The module support in Javascript is much more syntactically forgiving than Typescript's module support.
+Most combinations of assignments and declarations are supported.
 
 ## Object literals are open-ended
 
@@ -120,6 +172,7 @@ sayHello();
 
 A function whose body has a reference to the `arguments` reference is implicitly considered to have a var-arg parameter (i.e. `(...arg: any[]) => any`). Use JSDoc var-arg syntax to specify the type of the arguments.
 
+TODO: Give an example of the correct jsdoc
 
 ## Unspecified type parameters default to `any`
 
