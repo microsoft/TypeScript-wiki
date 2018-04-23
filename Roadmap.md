@@ -13,12 +13,17 @@
 
 # 2.9 (May 2018)
 
+* [ ] [Support number and symbol named properties with keyof and mapped types](https://github.com/Microsoft/TypeScript/pull/23592)
 * [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
-* [X] [Support for generic JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
+* [X] [Support for passing generics to JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
+* [X] [Support for passing generics to tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
 * [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
+* [X] [`--pretty` error output by default, and `--diagnosticStyle`](https://github.com/Microsoft/TypeScript/pull/23408)
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
 * [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
+* [X] New [rename file](https://github.com/Microsoft/TypeScript/pull/23573) command
+* [X] [Refactor to convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
 
 # 2.8 (March 2018)
 
@@ -50,7 +55,6 @@
 * [X] [Quick fix to add missing `async` keyword](https://github.com/Microsoft/TypeScript/pull/21069)
 * [X] [Completion list preselects suggested item based on context](https://github.com/Microsoft/TypeScript/pull/20020)
 * [X] Completion list includes [`this.`](https://github.com/Microsoft/TypeScript/pull/21231), [brackets](https://github.com/Microsoft/TypeScript/pull/20547), and [curlies for JSX](https://github.com/Microsoft/TypeScript/pull/21372)
->>>>>>> 4bbfddf12017d43fc4b67b7d1da6acf4397b7b96
 
 # 2.6 (October 2017)
 
