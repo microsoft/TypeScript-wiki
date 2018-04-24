@@ -89,9 +89,9 @@ C.prototype.method = function() {
 }
 ```
 
-## CommonJS module are supported
+## CommonJS modules are supported
 
-In a `.js` file, Typescript understands the CommonJS module format is allowed as an input module format.
+In a `.js` file, Typescript understands the CommonJS module format.
 Assignments to `exports` and `module.exports` are recognized as export declarations.
 Similarly, `require` function calls are recognized as module imports. For example:
 
@@ -109,21 +109,55 @@ module.exports.readFile = function(f) {
 The module support in Javascript is much more syntactically forgiving than Typescript's module support.
 Most combinations of assignments and declarations are supported.
 
-## Many things are namespaces now
+## Classes, functions, and object literals are namespaces
 
-Constructor functions are namespaces:
+Classes are namespaces in `.js` files.
+This can be used to nest classes, for example:
+
+
+```js
+class C {
+}
+C.D = class {
+}
+```
+
+And, for pre-ES2015 code, it can be used to simulate `static` methods:
 
 ```js
 function Outer() {
   this.y = 2
 }
-Outer.Inner = class {
+Outer.Inner = function() {
+  this.yy = 2
 }
 ```
 
-TODO: Other kinds of initializers (IIFEs, {}, classes, functions)
-TODO: Other variant patterns
-TODO: Nested nested example
+It can also be used to create simple namespaces:
+
+```js
+var ns = {}
+ns.C = class {
+}
+ns.func = function() {
+}
+```
+
+Other variants are allowed as well:
+
+```js
+// IIFE
+var ns = (function (n) {
+  return n || {};
+})();
+ns.CONST = 1
+
+// defaulting to global
+var assign = assign || function() {
+  // code goes here
+}
+assign.extra = 1
+```
 
 ## Object literals are open-ended
 
