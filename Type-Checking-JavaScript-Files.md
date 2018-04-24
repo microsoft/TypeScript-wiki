@@ -3,12 +3,12 @@ TypeScript 2.3 and later support type-checking and reporting errors in `.js` fil
 You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely, you can choose to check only a few `.js` files by adding a `// @ts-check` comment to them without setting `--checkJs`.
 You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
 
-Here are some notable differences on how checking work in `.js` file from `.ts` file:
+Here are some notable differences on how checking works in `.js` files compared to `.ts` files:
 
 ## JSDoc types are used for type information
 
 In a `.js` file, types can often be inferred just like in `.ts` files.
-Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations do in a `.ts` file.
+Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations are used in a `.ts` file.
 Just like Typescript, `--noImplicitAny` will give you errors on the places that the compiler could not infer a type.
 (With the exception of open-ended object literals; see below for details.)
 
@@ -51,7 +51,9 @@ class C {
 }
 ```
 
-If the property type can't be inferred, annotate the assignment in the constructor with JSDoc to specify the type.
+
+If properties are never set in the class body, they are considered unknown.
+If your class has properties that are only read from, add and then annotate a declaration in the constructor with JSDoc to specify the type.
 You don't even have to give a value if it will be initialised later:
 
 ```js
@@ -70,13 +72,11 @@ c.prop = 0;          // OK
 c.count = "string";  // Error: string is not assignable to number|undefined
 ```
 
-If properties are never set in the class body, they are considered unknown. If your class has properties that are only read from, consider adding an initialization in the constructor to undefined, e.g. `this.prop = undefined;`.
-
 ## Constructor functions are equivalent to classes
 
-Before ES2015, Javascript used constructor functions in place of classes.
+Before ES2015, Javascript used constructor functions instead of classes.
 The compiler supports this pattern and understands constructor functions as equivalent to ES2015 classes.
-The property inferences rules described above work exactly the same way.
+The property inference rules described above work exactly the same way.
 
 ```js
 function C() {
@@ -98,7 +98,6 @@ Similarly, `require` function calls are recognized as module imports. For exampl
 ```js
 // same as `import module "fs"`
 const fs = require("fs");
-
 
 // same as `export function readFile`
 module.exports.readFile = function(f) {
@@ -122,7 +121,7 @@ C.D = class {
 }
 ```
 
-And, for pre-ES2015 code, it can be used to simulate `static` methods:
+And, for pre-ES2015 code, it can be used to simulate static methods:
 
 ```js
 function Outer() {
@@ -209,7 +208,7 @@ It is important to note that it is an error to call a function with too many arg
 For instance:
 
 ```js
-function bar(a, b){
+function bar(a, b) {
     console.log(a + " " + b);
 }
 
