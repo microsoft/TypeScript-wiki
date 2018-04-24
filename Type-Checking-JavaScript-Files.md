@@ -72,14 +72,14 @@ c.count = "string";  // Error: string is not assignable to number|undefined
 
 If properties are never set in the class body, they are considered unknown. If your class has properties that are only read from, consider adding an initialization in the constructor to undefined, e.g. `this.prop = undefined;`.
 
-## Constructor functions work basically the same as classes
+## Constructor functions are equivalent to classes
 
-Before ES2015, Javascript used constructor functions to model classes.
+Before ES2015, Javascript used constructor functions in place of classes.
 The compiler supports this pattern and understands constructor functions as equivalent to ES2015 classes.
 The property inferences rules described above work exactly the same way.
 
 ```js
-function C {
+function C() {
     this.constructorOnly = 0
     this.constructorUnknown = undefined
 }
@@ -89,9 +89,11 @@ C.prototype.method = function() {
 }
 ```
 
-## CommonJS module input support
+## CommonJS module are supported
 
-In a `.js` file, Typescript understands the CommonJS module format is allowed as an input module format. Assignments to `exports`, and `module.exports` are recognized as export declarations. Similarly, `require` function calls are recognized as module imports. For example:
+In a `.js` file, Typescript understands the CommonJS module format is allowed as an input module format.
+Assignments to `exports` and `module.exports` are recognized as export declarations.
+Similarly, `require` function calls are recognized as module imports. For example:
 
 ```js
 // same as `import module "fs"`
@@ -107,11 +109,28 @@ module.exports.readFile = function(f) {
 The module support in Javascript is much more syntactically forgiving than Typescript's module support.
 Most combinations of assignments and declarations are supported.
 
-TODO: Enumerate the kinds of modules and things
+## Many things are namespaces now
+
+Constructor functions are namespaces:
+
+```js
+function Outer() {
+  this.y = 2
+}
+Outer.Inner = class {
+}
+```
+
+TODO: Other kinds of initializers (IIFEs, {}, classes, functions)
+TODO: Other variant patterns
+TODO: Nested nested example
 
 ## Object literals are open-ended
 
-By default object literals in variable declarations provide the type of a declaration. No new members can be added that were not specified in the original initialization. This rule is relaxed in a `.js` file; object literals have an open-ended type, allowing adding and looking up properties that were not defined originally. For instance:
+In a `.ts` file, an object literal that initializes a variable declaration gives its type to the declaration.
+No new members can be added that were not specified in the original literal.
+This rule is relaxed in a `.js` file; object literals have an open-ended type (an index signature) that allows adding and looking up properties that were not defined originally.
+For instance:
 
 ```js
 var obj = { a: 1 };
@@ -145,23 +164,6 @@ var foo = new Foo();
 foo.l.push(foo.i);
 foo.l.push("end");
 ```
-
-## Many things are namespaces now
-
-Constructor functions are namespaces:
-
-```js
-function Outer() {
-  this.y = 2
-}
-Outer.Inner = class {
-}
-```
-
-TODO: Other kinds of initializers (IIFEs, {}, classes, functions)
-TODO: Other variant patterns
-TODO: Nested nested example
-
 
 ## Function parameters are optional by default
 
