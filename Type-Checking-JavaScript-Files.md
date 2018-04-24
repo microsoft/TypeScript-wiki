@@ -25,26 +25,28 @@ x = false;  // Error: boolean is not assignable to number
 You can find the full list of supported JSDoc patterns in the [JSDoc support in JavaScript documentation](https://github.com/Microsoft/TypeScript/wiki/JSDoc-support-in-JavaScript).
 
 
-## Property declaration inferred from assignments in class bodies
+## Properties are inferred from assignments in class bodies
 
-ES2015/ES6 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like in the case of object literals.
+ES2015 does not have a means for declaring properties on classes. Properties are dynamically assigned, just like object literals.
 
-In a `.js` file, property declarations are inferred from assignments to the properties inside the class body.
+In a `.js` file, the compiler infers properties from property assignments inside the class body.
 The type of properties is the type given in the constructor, unless it's not defined there, or the type in the constructor is undefined or null.
 In that case, the type is the union of the types of all the right-hand values in these assignments.
-Properties defined in the constructor are always assumed to exist, where as ones defined just in methods, getters, or setters are considered optional.
+Properties defined in the constructor are always assumed to exist, whereas ones defined just in methods, getters, or setters are considered optional.
 
 ```js
 class C {
     constructor() {
-        this.x = 0
+        this.constructorOnly = 0
+        this.constructorUnknown = undefined
     }
     method() {
-        this.x = false // error, x is a number
-        this.y = 'ok'  // ok, but y could also be undefined
+        this.constructorOnly = false // error, constructorOnly is a number
+        this.constructorUnknown = "plunkbat" // ok, constructorUnknown is string | undefined
+        this.methodOnly = 'ok'  // ok, but y could also be undefined
     }
     method2() {
-        this.y = true  // also, ok, y's type is string | boolean | undefined
+        this.methodOnly = true  // also, ok, y's type is string | boolean | undefined
     }
 }
 ```
@@ -64,41 +66,32 @@ class C {
 
 
 let c = new C();
-c.prop = 0;         // OK
+c.prop = 0;          // OK
 c.count = "string";  // Error: string is not assignable to number|undefined
 ```
 
 If properties are never set in the class body, they are considered unknown. If your class has properties that are only read from, consider adding an initialization in the constructor to undefined, e.g. `this.prop = undefined;`.
 
-## null/undefined/[] initializers are of type any or any[]
-
-Any variable, parameter or property that is initialized with null or undefined will have type any, even if strict null checks is turned on.
-Any variable, parameter or property that is initialized with [] will have type any[], even if strict null checks is turned on.
-The only exception is for properties that have multiple initializers as described above.
-
 ## Constructor functions work basically the same as classes
 
-Right down to methods. Lots of detail needs to go here. Kind of surprised there was none.
-
-## Many things are namespaces now
-
-Constructor functions are namespaces:
+Before ES2015, Javascript used constructor functions to model classes.
+The compiler supports this pattern and understands constructor functions as equivalent to ES2015 classes.
+The property inferences rules described above work exactly the same way.
 
 ```js
-function Outer() {
-  this.y = 2
+function C {
+    this.constructorOnly = 0
+    this.constructorUnknown = undefined
 }
-Outer.Inner = class {
+C.prototype.method = function() {
+    this.constructorOnly = false // error
+    this.constructorUnknown = "plunkbat" // OK, the type is string | undefined
 }
 ```
 
-TODO: Other kinds of initializers
-
-TODO: Much more
-
 ## CommonJS module input support
 
-In a `.js` files CommonJS module format is allowed as an input module format. Assignments to `exports`, and `module.exports` are recognized as export declarations. Similarly, `require` function calls are recognized as module imports. For example:
+In a `.js` file, Typescript understands the CommonJS module format is allowed as an input module format. Assignments to `exports`, and `module.exports` are recognized as export declarations. Similarly, `require` function calls are recognized as module imports. For example:
 
 ```js
 // same as `import module "fs"`
@@ -113,6 +106,8 @@ module.exports.readFile = function(f) {
 
 The module support in Javascript is much more syntactically forgiving than Typescript's module support.
 Most combinations of assignments and declarations are supported.
+
+TODO: Enumerate the kinds of modules and things
 
 ## Object literals are open-ended
 
@@ -132,6 +127,40 @@ Similar to other special JS checking behaviors, this behavior can be changed by 
 var obj = { a: 1 };
 obj.b = 2;  // Error, type {a: number} does not have property b
 ```
+
+## null/undefined/[] initializers are of type any or any[]
+
+Any variable, parameter or property that is initialized with null or undefined will have type any, even if strict null checks is turned on.
+Any variable, parameter or property that is initialized with [] will have type any[], even if strict null checks is turned on.
+The only exception is for properties that have multiple initializers as described above.
+
+```js
+function Foo(i = null) {
+    if (!i) i = 1;
+    var j = undefined;
+    j = 2;
+    this.l = [];
+}
+var foo = new Foo();
+foo.l.push(foo.i);
+foo.l.push("end");
+```
+
+## Many things are namespaces now
+
+Constructor functions are namespaces:
+
+```js
+function Outer() {
+  this.y = 2
+}
+Outer.Inner = class {
+}
+```
+
+TODO: Other kinds of initializers (IIFEs, {}, classes, functions)
+TODO: Other variant patterns
+TODO: Nested nested example
 
 
 ## Function parameters are optional by default
