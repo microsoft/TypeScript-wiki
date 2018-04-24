@@ -173,7 +173,7 @@ obj.b = 2;  // Allowed
 
 Object literals get a default index signature `[x:string]: any` that allows them to be treated as open maps instead of closed objects.
 
-Similar to other special JS checking behaviors, this behavior can be changed by specifying a JSDoc type for the variable. For example:
+Like other special JS checking behaviors, this behavior can be changed by specifying a JSDoc type for the variable. For example:
 
 ```js
 /** @type {{a: number}} */
@@ -181,7 +181,7 @@ var obj = { a: 1 };
 obj.b = 2;  // Error, type {a: number} does not have property b
 ```
 
-## null/undefined/[] initializers are of type any or any[]
+## null, undefined, and empty array initializers are of type any or any[]
 
 Any variable, parameter or property that is initialized with null or undefined will have type any, even if strict null checks is turned on.
 Any variable, parameter or property that is initialized with [] will have type any[], even if strict null checks is turned on.
@@ -201,7 +201,8 @@ foo.l.push("end");
 
 ## Function parameters are optional by default
 
-Since there is no way to specify optionality on parameters in JS (without specifying a default value), all function parameters in `.js` file are considered optional. Calls with fewer arguments are allowed.
+Since there is no way to specify optionality on parameters in pre-ES2015 Javascript, all function parameters in `.js` file are considered optional.
+Calls with fewer arguments than the declared number of parameters are allowed.
 
 It is important to note that it is an error to call a function with too many arguments.
 
@@ -217,7 +218,8 @@ bar(1, 2);
 bar(1, 2, 3); // Error, too many arguments
 ```
 
-JSDoc annotated functions are excluded from this rule. Use JSDoc optional parameter syntax to express optionality. e.g.:
+JSDoc annotated functions are excluded from this rule.
+Use JSDoc optional parameter syntax to express optionality. e.g.:
 
 ```js
 /**
@@ -237,13 +239,22 @@ sayHello();
 
 A function whose body has a reference to the `arguments` reference is implicitly considered to have a var-arg parameter (i.e. `(...arg: any[]) => any`). Use JSDoc var-arg syntax to specify the type of the arguments.
 
-TODO: Give an example of the correct jsdoc
+```js
+/** @param {...number} args */
+function sum(/* numbers */) {
+    var total = 0
+    for (var i = 0; i < arguments.length; i++) {
+      total += arguments[i]
+    }
+    return total
+}
+```
 
 ## Unspecified type parameters default to `any`
 
-An unspecified generic type parameter defaults to `any`. There are few places where this happens:
+Since there is no natural syntax for specifying generic type parameters in Javascript, an unspecified generic type parameter defaults to `any`.
 
-#### In extends clause:
+### In extends clause:
 
 For instance, `React.Component` is defined to have two generic type parameters, `Props` and `State`.
 In a `.js` file, there is no legal way to specify these in the extends clause. By default the type arguments will be `any`:
@@ -273,7 +284,7 @@ class MyComponent extends Component {
 }
 ```
 
-#### In JSDoc references
+### In JSDoc references
 
 An unspecified generic type argument in JSDoc defaults to any:
 
@@ -293,7 +304,7 @@ y.push("string"); // Error, string is not assignable to number
 
 ```
 
-#### In function calls
+### In function calls
 
 A call to generic functions uses arguments to infer the generic type parameters. Sometimes this process fails to infer any types, mainly because of lack on inference sources; in these cases, the generic type parameters will default to `any`. For example:
 
