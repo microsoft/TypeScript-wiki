@@ -13,7 +13,7 @@
 
 # 2.9 (May 2018)
 
-* [ ] [Support number and symbol named properties with keyof and mapped types](https://github.com/Microsoft/TypeScript/pull/23592)
+* [X] [Support number and symbol named properties with keyof and mapped types](https://github.com/Microsoft/TypeScript/pull/23592)
 * [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
 * [X] [Support for passing generics to JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
 * [X] [Support for passing generics to tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
