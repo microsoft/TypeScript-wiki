@@ -5,7 +5,7 @@ You can also ignore errors on specific lines by adding `// @ts-ignore` on the pr
 
 Here are some notable differences on how checking work in `.js` file from `.ts` file:
 
-## Using types in JSDoc
+## JSDoc types are used for type information
 
 In a `.js` file, types can often be inferred just like in `.ts` files.
 Likewise, when types can't be inferred, they can be specified using JSDoc the same way that type annotations do in a `.ts` file.
