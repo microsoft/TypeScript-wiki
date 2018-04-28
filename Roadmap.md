@@ -19,6 +19,7 @@
 * [X] [Support for passing generics to tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
 * [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
 * [X] [`--pretty` error output by default, and `--diagnosticStyle`](https://github.com/Microsoft/TypeScript/pull/23408)
+* [X] [Support for `import.meta`](https://github.com/Microsoft/TypeScript/pull/23327)
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
 * [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
