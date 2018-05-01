@@ -27,7 +27,9 @@
 * [X] Refactors to...
   * [ ] [Move to a new file](https://github.com/Microsoft/TypeScript/pull/23726)
   * [X] [Convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
-* [X] Quick fix to [convert `require` to `import` in `.ts` files](https://github.com/Microsoft/TypeScript/pull/23711)
+* [X] Quick fix to...
+  * [X] [convert `require` to `import` in `.ts` files](https://github.com/Microsoft/TypeScript/pull/23711)
+  * [ ] [Install `@types/node` for built-in node modules](https://github.com/Microsoft/TypeScript/pull/23807)
 
 # 2.8 (March 2018)
 
