@@ -14,15 +14,15 @@
 # 2.9 (May 2018)
 
 * [X] [Support number and symbol named properties with keyof and mapped types](https://github.com/Microsoft/TypeScript/pull/23592)
-* [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
 * [X] [Support for passing generics to JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
 * [X] [Support for passing generics to tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
-* [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
+* [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
 * [X] [`--pretty` error output by default, and `--diagnosticStyle`](https://github.com/Microsoft/TypeScript/pull/23408)
 * [X] [Support for `import.meta`](https://github.com/Microsoft/TypeScript/pull/23327)
+* [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
-* [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
+* [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] New [rename file](https://github.com/Microsoft/TypeScript/pull/23573) command
 * [X] Refactors to...
   * [ ] [Move to a new file](https://github.com/Microsoft/TypeScript/pull/23726)
