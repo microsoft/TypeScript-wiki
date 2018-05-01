@@ -23,7 +23,7 @@
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
 * [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
-* [X] New [rename file](https://github.com/Microsoft/TypeScript/pull/23573) command
+* [X] New [Rename File](https://github.com/Microsoft/TypeScript/pull/23573) command
 * [X] Refactors to...
   * [ ] [Move to a new file](https://github.com/Microsoft/TypeScript/pull/23726)
   * [X] [Convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
