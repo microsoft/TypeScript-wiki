@@ -24,7 +24,9 @@
 * [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
 * [X] New [rename file](https://github.com/Microsoft/TypeScript/pull/23573) command
-* [X] [Refactor to convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
+* [X] Refactors to...
+  * [ ] [Move to a new file](https://github.com/Microsoft/TypeScript/pull/23726)
+  * [X] [Convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
 
 # 2.8 (March 2018)
 
