@@ -19,6 +19,7 @@
 * [X] [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
 * [X] [`--pretty` error output by default](https://github.com/Microsoft/TypeScript/pull/23408)
 * [X] [Support for `import.meta`](https://github.com/Microsoft/TypeScript/pull/23327)
+* [X] New [`--resolveJsonModule`](https://github.com/Microsoft/TypeScript/pull/22167)
 * [X] [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
 * [X] [Show suggestion diagnostics for open files](https://github.com/Microsoft/TypeScript/pull/22204)
 * [X] [Show unused declarations as suggestions](https://github.com/Microsoft/TypeScript/pull/22361)
