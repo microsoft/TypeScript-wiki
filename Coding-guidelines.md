@@ -2,7 +2,7 @@
 
 # THIS PAGE PROBABLY DOES **NOT** PERTAIN TO YOU
 
-# NOTE: These are Coding Guidelines for ***Contributors to TypeScript***
+# These are Coding Guidelines for ***Contributors to TypeScript***
 
 # This is ***NOT*** a prescriptive guideline for the TypeScript community
 
