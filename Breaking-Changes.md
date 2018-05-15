@@ -14,6 +14,10 @@ function f(
 ) {}
 ```
 
+## In `strictNullChecks`, an unconstrained type parameter is no longer assignable to `object`
+
+It may be fulfilled with any type (eg, `string` or `number`), so it was incorrect to allow. If you encounter this issue, either constraint your type parameter to `object` to only allow object types, or compare against `{}` instead of `object` (if the intent was to allow any type).
+
 Trailing commas on rest parameters are not valid JavaScript, and the syntax is now an error in TypeScript too.
 
 # TypeScript 2.8
