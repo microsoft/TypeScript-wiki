@@ -24,7 +24,7 @@ function f<T>(x: T) {
 }
 ```
 
-It may be fulfilled with any type (eg, `string` or `number`), so it was incorrect to allow. If you encounter this issue, either constraint your type parameter to `object` to only allow object types, or compare against `{}` instead of `object` (if the intent was to allow any type).
+It may be fulfilled with any type (eg, `string` or `number`), so it was incorrect to allow. If you encounter this issue, either constrain your type parameter to `object` to only allow object types for it, or compare against `{}` instead of `object` (if the intent was to allow any type).
 
 
 # TypeScript 2.8
