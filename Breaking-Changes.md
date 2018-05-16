@@ -4,6 +4,35 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 2.9
 
+## `keyof` now includes `string`, `number` and `symbol` keys
+
+TypeScript 2.9 generalizes index types to include `number` and `symbol` named properties. Previously, the `keyof` operator and mapped types only supported `string` named properties. 
+
+```ts
+function useKey<T, K extends keyof T>(o: T, k: K) {
+    var name: string = k;  // Error: keyof T is not assignable to string
+}
+```
+
+### Recommendations:
+* If your functions are only able to handle string named property keys, use `Extract<keyof T, string>` in the declaration:
+
+  ```ts
+  function useKey<T, K extends Extract<keyof T, string>>(o: T, k: K) {
+    var name: string = k;  // OK 
+  }
+  ```
+
+* If your functions are open to handling all property keys, then the changes should be done down-stream:
+
+  ```ts
+  function useKey<T, K extends keyof T>(o: T, k: K) {
+    var name: string | number | symbol = k; 
+  }
+  ```
+
+* Otherwise use `--keyofStringsOnly` compiler option to disable the new behavior.
+
 ## Trailing commas not allowed on rest parameters
 
 The following code is a compiler error as of [#22262](https://github.com/Microsoft/TypeScript/pull/22262):
