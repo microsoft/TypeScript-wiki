@@ -144,13 +144,14 @@ All possible ```ts.SyntaxKind``` can be found under enum [here](https://github.c
 
 ## Writing an incremental program watcher
 
-TypeScript 2.7 introduces a new API for creating "watcher" programs that provide set of APIs that are smart enough to cache errors and emit on modules from previous compilations if they or their dependencies haven't been updated in a cascading manner.
+TypeScript 2.7 introduces two new APIs: one for creating "watcher" programs that provide set of APIs to trigger rebuilds, and a "builder" API that watchers can take advantage of.
+`BuilderProgram`s are `Program` instances that are smart enough to cache errors and emit on modules from previous compilations if they or their dependencies haven't been updated in a cascading manner.
+A watcher can leverage builder program instances to only update results (like errors, and emit) of affected files in a compilation.
+This can speed up large projects with many files.
 
-This API is used internally in the compiler to implement its `--watch` mode, but can also be leveraged by other tools.
+This API is used internally in the compiler to implement its `--watch` mode, but can also be leveraged by other tools as follows:
 
 ```ts
-import fs = require("fs");
-import path = require("path");
 import ts = require("typescript");
 
 const formatHost: ts.FormatDiagnosticsHost = {
@@ -202,7 +203,9 @@ function watchMain() {
 }
 
 function reportDiagnostic(diagnostic: ts.Diagnostic) {
-    console.error(ts.formatDiagnostic(diagnostic, formatHost));
+    console.error("Error", diagnostic.code, ":",
+        ts.flattenDiagnosticMessageText(diagnostic.messageText, formatHost.getNewLine())
+    );
 }
 
 /**
