@@ -1,3 +1,14 @@
+# TypeScript 2.9
+
+## [Support number and symbol named properties with keyof and mapped types](https://github.com/Microsoft/TypeScript/pull/23592)
+## [Support for passing generics to JSX elements](https://github.com/Microsoft/TypeScript/pull/22415)
+## [Support for passing generics to tagged template calls](https://github.com/Microsoft/TypeScript/pull/23430)
+## [Allow `import(...)`-ing types at any location](https://github.com/Microsoft/TypeScript/issues/14844)
+## [`--pretty` error output by default](https://github.com/Microsoft/TypeScript/pull/23408)
+## [Support for `import.meta`](https://github.com/Microsoft/TypeScript/pull/23327)
+## New [`--resolveJsonModule`](https://github.com/Microsoft/TypeScript/pull/22167)
+## [Declaration source maps and code navigation via them](https://github.com/Microsoft/TypeScript/pull/22658)
+
 # TypeScript 2.8
 
 ## Conditional Types
