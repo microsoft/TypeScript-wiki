@@ -8,6 +8,7 @@ Note any tags which are not explicitly listed below (such as `@constructor`) are
 
 // You can use the "@type" tag and reference a type name (either primitive,
 // defined in a TypeScript declaration, or in a JSDoc "@typedef" tag)
+// You can use any Typescript type, and most JSDoc types.
 /**
  * @type {string}
  */
@@ -63,6 +64,7 @@ var var8;
 var var9;
 
 // "@typedef" may be used to define complex types
+// (this same same syntax works with @param)
 /**
  * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
  * @property {string} prop1 - a string property of SpecialType
@@ -97,6 +99,13 @@ var specialTypeObject1;
 function fn3(p0, p1, p2, p3, p4){
   // TODO
 }
+
+// Index signatures
+/** @type {Object.<string, object>} */
+var map;
+/** @type {Object.<number, object>} */
+var arrayLike;
+// equivalent to { [s: string]: any } and { [n: number]: any }
 
 
 // Generic types may also be used
@@ -220,7 +229,7 @@ var var11;
 var var12;
 
 /**
- * A nullable number (treated as just `number` unless using `strictNullTypes`)
+ * A nullable number (only works if `strictNullChecks` is on)
  *
  * @type {?number}
  */
