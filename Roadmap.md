@@ -26,7 +26,7 @@
 * [X] [Support setting quote style in quick fixes and refactorings](https://github.com/Microsoft/TypeScript/pull/22236)
 * [X] New [Rename File](https://github.com/Microsoft/TypeScript/pull/23573) command
 * [X] Refactors to...
-  * [ ] [Move to a new file](https://github.com/Microsoft/TypeScript/pull/23726)
+  * [X] [Move to a new file](https://github.com/Microsoft/TypeScript/pull/23726)
   * [X] [Convert property to getter/setter](https://github.com/Microsoft/TypeScript/pull/22143)
 * [X] Quick fix to...
   * [X] [Convert `require` to `import` in `.ts` files](https://github.com/Microsoft/TypeScript/pull/23711)
