@@ -106,6 +106,7 @@ Option                        | Description
 `--suppressDiagnosticEvents`  | Opt out of receiving events when new diagnostics are discovered (i.e. must request them explicitly).
 `--eventPort`                 | Port used for receiving events. If non is specified events are sent to stdout.
 `--useSingleInferredProject`  | Put all open .ts and .js files that do not have a .tsconfig file in a common project
+`--noGetErrOnBackgroundUpdate`| Opt out of starting `getErr` on `projectsUpdatedInBackground` event
 `--locale`                    | The locale to use to show error messages, e.g. en-us. <br/>Possible values are:  <br/>► English (US): `en` <br/>► Czech: `cs` <br/>► German: `de` <br/>► Spanish: `es` <br/>► French: `fr` <br/>► Italian: `it` <br/>► Japanese: `ja` <br/>► Korean: `ko` <br/>► Polish: `pl` <br/>► Portuguese(Brazil): `pt-BR` <br/>► Russian: `ru` <br/>► Turkish: `tr` <br/>► Simplified Chinese: `zh-CN`  <br/>► Traditional Chinese: `zh-TW`
 
 # Project System
