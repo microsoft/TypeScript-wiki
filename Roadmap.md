@@ -17,6 +17,11 @@
 * [ ] [Named Type Arguments & Partial Type Argument Inference](https://github.com/Microsoft/TypeScript/pull/23696)
 * [ ] ['lib' reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
 * [ ] New ['--strictAny'](https://github.com/Microsoft/TypeScript/pull/24423)
+* [X] Refactor for:
+  * [X] [Convert named imports to namespace and back](https://github.com/Microsoft/TypeScript/pull/24469)
+* [X] Code fix for:
+  * [X] [Removing unused labels](https://github.com/Microsoft/TypeScript/pull/24037)
+  * [X] [Removing unreacble code](https://github.com/Microsoft/TypeScript/pull/24028)
 
 # 2.9 (May 2018)
 
