@@ -13,7 +13,7 @@
 
 # 3.0 (July 2018)
 
-* [ ] [New 'unknown' top type](https://github.com/Microsoft/TypeScript/pull/24439)
+* [X] [New 'unknown' top type](https://github.com/Microsoft/TypeScript/pull/24439)
 * [ ] [Named Type Arguments & Partial Type Argument Inference](https://github.com/Microsoft/TypeScript/pull/23696)
 * [ ] ['lib' reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
 * [ ] New ['--strictAny'](https://github.com/Microsoft/TypeScript/pull/24423)
