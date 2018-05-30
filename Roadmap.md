@@ -21,7 +21,7 @@
   * [X] [Convert named imports to namespace and back](https://github.com/Microsoft/TypeScript/pull/24469)
 * [X] Code fix for:
   * [X] [Removing unused labels](https://github.com/Microsoft/TypeScript/pull/24037)
-  * [X] [Removing unreacble code](https://github.com/Microsoft/TypeScript/pull/24028)
+  * [X] [Removing unreachable code](https://github.com/Microsoft/TypeScript/pull/24028)
 
 # 2.9 (May 2018)
 
