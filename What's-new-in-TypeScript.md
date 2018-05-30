@@ -131,6 +131,21 @@ function useKey<T, K extends keyof T>(o: T, k: K) {
 
 ## Generic type arguments in JSX elements
 
+JSX elements now allow passing type arguments to generic components.
+
+#### Example
+
+```ts
+class GenericComponent<P> extends React.Component<P> {
+    internalProp: P;
+}
+
+type Props = { a: number; b: string; };
+
+const x = <GenericComponent<Props> a={10} b="hi"/>; // OK
+
+const y = <GenericComponent<Props> a={10} b={20} />; // Error
+```
 
 ## Generic type arguments in generic tagged templates
 
