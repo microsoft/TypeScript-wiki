@@ -11,6 +11,13 @@
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 3.0 (July 2018)
+
+* [ ] [New 'unknown' top type](https://github.com/Microsoft/TypeScript/pull/24439)
+* [ ] [Named Type Arguments & Partial Type Argument Inference](https://github.com/Microsoft/TypeScript/pull/23696)
+* [ ] ['lib' reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
+* [ ] New ['--strictAny'](https://github.com/Microsoft/TypeScript/pull/24423)
+
 # 2.9 (May 2018)
 
 * [X] [Support number and symbol named properties with keyof and mapped types](https://github.com/Microsoft/TypeScript/pull/23592)
