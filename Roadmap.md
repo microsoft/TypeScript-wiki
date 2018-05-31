@@ -17,6 +17,7 @@
 * [ ] New ['--strictAny'](https://github.com/Microsoft/TypeScript/pull/24423)
 * [ ] [Named Type Arguments & Partial Type Argument Inference](https://github.com/Microsoft/TypeScript/pull/23696)
 * [ ] ['lib' reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
+* [ ] [Support for `defaultProps` and `PropTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
 * [X] Refactor to...
   * [X] [Convert named imports to namespace and back](https://github.com/Microsoft/TypeScript/pull/24469)
 * [X] Quick fixes to...
