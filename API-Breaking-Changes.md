@@ -1,6 +1,6 @@
 # TypeScript 3.0
 
-The deprecated internal method `LanguageService#getSourceFile` has been removed.
+The deprecated internal method `LanguageService#getSourceFile` has been removed. See #24540.
 
 # TypeScript 2.8
 - `getJsxIntrinsicTagNames` has been removed and replaced with `getJsxIntrinsicTagNamesAt`, which requires a node to use as the location to look up the valid intrinsic names at (to handle locally-scoped JSX namespaces).
