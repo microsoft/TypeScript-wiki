@@ -14,7 +14,6 @@
 # 3.0 (July 2018)
 
 * [X] [New 'unknown' top type](https://github.com/Microsoft/TypeScript/pull/24439)
-* [ ] New ['--strictAny'](https://github.com/Microsoft/TypeScript/pull/24423)
 * [ ] [Named Type Arguments & Partial Type Argument Inference](https://github.com/Microsoft/TypeScript/pull/23696)
 * [ ] ['lib' reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
 * [ ] [Support for `defaultProps` and `PropTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
