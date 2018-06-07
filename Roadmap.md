@@ -14,6 +14,7 @@
 # 3.0 (July 2018)
 
 * [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
+* [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
 * [X] [`/// <reference lib="..." />` reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
 * [ ] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
