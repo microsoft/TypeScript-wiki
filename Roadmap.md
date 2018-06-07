@@ -13,12 +13,12 @@
 
 # 3.0 (July 2018)
 
-* [X] [New 'unknown' top type](https://github.com/Microsoft/TypeScript/pull/24439)
-* [ ] [Named Type Arguments & Partial Type Argument Inference](https://github.com/Microsoft/TypeScript/pull/23696)
-* [X] ['lib' reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
-* [ ] [Support for `defaultProps` and `PropTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
-* [X] Refactor to...
-  * [X] [Convert named imports to namespace and back](https://github.com/Microsoft/TypeScript/pull/24469)
+* [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
+* [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
+* [X] [`/// <reference lib="..." />` reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
+* [ ] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
+* [X] Refactors to...
+  * [X] [Convert named imports to namespace imports and back](https://github.com/Microsoft/TypeScript/pull/24469)
 * [X] Quick fixes to...
   * [X] [Remove unused labels](https://github.com/Microsoft/TypeScript/pull/24037)
   * [X] [Remove unreachable code](https://github.com/Microsoft/TypeScript/pull/24028)
