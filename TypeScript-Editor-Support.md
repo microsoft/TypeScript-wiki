@@ -76,6 +76,10 @@ endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
 ```
 
+* [mhartington/nvim-typescript](https://github.com/mhartington/nvim-typescript)
+
+As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
+
 # Visual Studio 2013/2015
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
