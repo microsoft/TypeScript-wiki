@@ -2,7 +2,7 @@
 
 ## NuGet
 
-In releases 2.3 and above, TypeScript MSBuild can be used with MSBuild on non-Window platforms.
+In releases 2.3 and above, TypeScript MSBuild can be used with MSBuild on non-Windows platforms.
 
 ### Package structure
 
@@ -51,7 +51,7 @@ The installer install files into following folders:
 
 1. Microsoft SDKs Folder
 
-    The installer installs a sub-folder called `TypeScript` into `%ProgramFile%/Microsoft SDKs`.
+    The installer installs a sub-folder called `TypeScript` into `"%ProgramFiles%\Microsoft SDKs"`.
 
     * Before version 2.3
 
