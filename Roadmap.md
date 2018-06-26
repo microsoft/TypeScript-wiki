@@ -13,7 +13,7 @@
 
 # 3.0 (July 2018)
 
-* [ ] [Tuples in rest parameters and spread expressions](https://github.com/Microsoft/TypeScript/pull/24897)
+* [X] [Tuples in rest parameters and spread expressions](https://github.com/Microsoft/TypeScript/pull/24897)
 * [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
