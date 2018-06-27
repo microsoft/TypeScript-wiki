@@ -13,6 +13,7 @@
 
 # 3.0 (July 2018)
 
+* [X] [Tuples in rest parameters and spread expressions](https://github.com/Microsoft/TypeScript/pull/24897)
 * [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
@@ -20,6 +21,7 @@
 * [ ] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
 * [X] Refactors to...
   * [X] [Convert named imports to namespace imports and back](https://github.com/Microsoft/TypeScript/pull/24469)
+  * [X] [Add or remove braces from arrow function](https://github.com/Microsoft/TypeScript/pull/23423)
 * [X] Quick fixes to...
   * [X] [Remove unused labels](https://github.com/Microsoft/TypeScript/pull/24037)
   * [X] [Remove unreachable code](https://github.com/Microsoft/TypeScript/pull/24028)
