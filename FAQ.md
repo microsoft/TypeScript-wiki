@@ -438,7 +438,7 @@ See also [#202](https://github.com/Microsoft/TypeScript/issues/202) for a sugges
 TypeScript types are erased (https://en.wikipedia.org/wiki/Type_erasure) during compilation.
 This means there is no built-in mechanism for performing runtime type checks.
 It's up to you to decide how you want to distinguish objects.
-A popular method is to check for properties an on object.
+A popular method is to check for properties on an object.
 You can use user-defined type guards to accomplish this:
 
 ```ts
