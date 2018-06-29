@@ -46,19 +46,25 @@ From here, there are different steps for debugging the client- and server-side, 
 
 2. Update `launch.json` with an option to attach to the node instance, with sourcemaps from your `built/local` folder.
 
-   For VS Code v1.13.1+ and Node v8.0+, this will look like the following:
+   For VS Code v1.13.1+ and Node v8.0+, your `launch.json` might look like the following:
 
-   ```json
+   ```json5
    {
-       "name": "Attach to TS Server",
-       "type": "node",
-       "request": "launch",
-       "protocol": "inspector",
-       "port": 5859,
-       "sourceMaps": true,
-       "outFiles": ["/path/to/repo/TypeScript/built/local"],
-       "runtimeArgs": [
-           "--inspect=5859"
+       "version": "0.2.0",
+       "configurations": [
+           // Other configs
+           {
+               "name": "Attach to TS Server",
+               "type": "node",
+               "request": "launch",
+               "protocol": "inspector",
+               "port": 5859,
+               "sourceMaps": true,
+               "outFiles": ["/path/to/repo/TypeScript/built/local"],
+               "runtimeArgs": [
+                    "--inspect=5859"
+               ]
+           }
        ]
    }
    ```
