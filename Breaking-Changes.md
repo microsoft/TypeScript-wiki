@@ -6,7 +6,7 @@ These changes list where implementation differs between versions as the spec and
 
 ## `keyof` now includes `string`, `number` and `symbol` keys
 
-TypeScript 2.9 generalizes index types to include `number` and `symbol` named properties. Previously, the `keyof` operator and mapped types only supported `string` named properties. 
+TypeScript 2.9 generalizes index types to include `number` and `symbol` named properties. Previously, the `keyof` operator and mapped types only supported `string` named properties.
 
 ```ts
 function useKey<T, K extends keyof T>(o: T, k: K) {
@@ -19,7 +19,7 @@ function useKey<T, K extends keyof T>(o: T, k: K) {
 
   ```ts
   function useKey<T, K extends Extract<keyof T, string>>(o: T, k: K) {
-    var name: string = k;  // OK 
+    var name: string = k;  // OK
   }
   ```
 
@@ -27,7 +27,7 @@ function useKey<T, K extends keyof T>(o: T, k: K) {
 
   ```ts
   function useKey<T, K extends keyof T>(o: T, k: K) {
-    var name: string | number | symbol = k; 
+    var name: string | number | symbol = k;
   }
   ```
 
@@ -183,11 +183,11 @@ else {
 Previously classes that were structurally equivalent were reduced to their best common type in a conditional or `||` operator. Now these classes are maintained in a union type to allow for more accurate checking for `instanceof` operators.
 
 ```ts
-class Animal { 
+class Animal {
 
 }
 
-class Dog { 
+class Dog {
     park() { }
 }
 
@@ -236,7 +236,7 @@ Now when the `--noUnusedLocals` and `--noUnusedParameters` [compiler options](ht
 Also recursive functions that are only called within their own bodies are considered unused.
 
 ```ts
-function f() { 
+function f() {
     f(); // Error: 'f' is declared but its value is never read
 }
 ```
@@ -365,11 +365,13 @@ that takes a callback, which takes a nested callback. The nested
 callback is now checked co-variantly.
 
 ```ts
-declare function f(callback: (nested: (error: number, result: any) => void, index: number) => void): void;
+declare function f(
+  callback: (nested: (error: number, result: any) => void, index: number) => void
+): void;
 
 f((nested: (error: number) => void) => { log(error) });
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  '(error: number) => void' is not assignable to (error: number, result: any) => void'
+'(error: number) => void' is not assignable to (error: number, result: any) => void'
 ```
 
 The fix is easy in this case. Just add the missing parameter to the
@@ -637,10 +639,10 @@ let y = (void a, 1); // no warning for `a`
 
 ## Changes to DOM API's in the standard library
 
-* **Node.firstChild**, **Node.lastChild**, **Node.nextSibling**, **Node.previousSibling**, **Node.parentElement** and **Node.parentNode** are now `Node | null` instead of `Node`. 
- 
- See [#11113](https://github.com/Microsoft/TypeScript/issues/11113) for more details. 
- 
+* **Node.firstChild**, **Node.lastChild**, **Node.nextSibling**, **Node.previousSibling**, **Node.parentElement** and **Node.parentNode** are now `Node | null` instead of `Node`.
+
+ See [#11113](https://github.com/Microsoft/TypeScript/issues/11113) for more details.
+
  Recommendation is to explicitly check for `null` or use the `!` assertion operator (e.g. `node.lastChild!`).
 
 # TypeScript 2.0

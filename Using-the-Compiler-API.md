@@ -30,30 +30,42 @@ Let's try to write a barebones compiler that will take a list of TypeScript file
 import * as ts from "typescript";
 
 function compile(fileNames: string[], options: ts.CompilerOptions): void {
-    let program = ts.createProgram(fileNames, options);
-    let emitResult = program.emit();
+  let program = ts.createProgram(fileNames, options);
+  let emitResult = program.emit();
 
-    let allDiagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
+  let allDiagnostics = ts
+    .getPreEmitDiagnostics(program)
+    .concat(emitResult.diagnostics);
 
-    allDiagnostics.forEach(diagnostic => {
-        if (diagnostic.file) {
-            let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
-            let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n');
-            console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
-        }
-        else {
-            console.log(`${ts.flattenDiagnosticMessageText(diagnostic.messageText, '\n')}`);
-        }
-    });
+  allDiagnostics.forEach(diagnostic => {
+    if (diagnostic.file) {
+      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+        diagnostic.start!
+      );
+      let message = ts.flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        "\n"
+      );
+      console.log(
+        `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
+      );
+    } else {
+      console.log(
+        `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`
+      );
+    }
+  });
 
-    let exitCode = emitResult.emitSkipped ? 1 : 0;
-    console.log(`Process exiting with code '${exitCode}'.`);
-    process.exit(exitCode);
+  let exitCode = emitResult.emitSkipped ? 1 : 0;
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
 }
 
 compile(process.argv.slice(2), {
-    noEmitOnError: true, noImplicitAny: true,
-    target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS
+  noEmitOnError: true,
+  noImplicitAny: true,
+  target: ts.ScriptTarget.ES5,
+  module: ts.ModuleKind.CommonJS
 });
 ```
 
@@ -66,7 +78,9 @@ import * as ts from "typescript";
 
 const source = "let x: string  = 'string'";
 
-let result = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS } });
+let result = ts.transpileModule(source, {
+  compilerOptions: { module: ts.ModuleKind.CommonJS }
+});
 
 console.log(JSON.stringify(result));
 ```
@@ -82,59 +96,82 @@ As an example of how one could traverse the AST, consider a minimal linter that 
 * The "stricter" equality operators (`===`/`!==`) are used instead of the "loose" ones (`==`/`!=`).
 
 ```ts
-import {readFileSync} from "fs";
+import { readFileSync } from "fs";
 import * as ts from "typescript";
 
 export function delint(sourceFile: ts.SourceFile) {
-    delintNode(sourceFile);
+  delintNode(sourceFile);
 
-    function delintNode(node: ts.Node) {
-        switch (node.kind) {
-            case ts.SyntaxKind.ForStatement:
-            case ts.SyntaxKind.ForInStatement:
-            case ts.SyntaxKind.WhileStatement:
-            case ts.SyntaxKind.DoStatement:
-                if ((<ts.IterationStatement>node).statement.kind !== ts.SyntaxKind.Block) {
-                    report(node, "A looping statement's contents should be wrapped in a block body.");
-                }
-                break;
-
-            case ts.SyntaxKind.IfStatement:
-                let ifStatement = (<ts.IfStatement>node);
-                if (ifStatement.thenStatement.kind !== ts.SyntaxKind.Block) {
-                    report(ifStatement.thenStatement, "An if statement's contents should be wrapped in a block body.");
-                }
-                if (ifStatement.elseStatement &&
-                    ifStatement.elseStatement.kind !== ts.SyntaxKind.Block &&
-                    ifStatement.elseStatement.kind !== ts.SyntaxKind.IfStatement) {
-                    report(ifStatement.elseStatement, "An else statement's contents should be wrapped in a block body.");
-                }
-                break;
-
-            case ts.SyntaxKind.BinaryExpression:
-                let op = (<ts.BinaryExpression>node).operatorToken.kind;
-                if (op === ts.SyntaxKind.EqualsEqualsToken || op == ts.SyntaxKind.ExclamationEqualsToken) {
-                    report(node, "Use '===' and '!=='.")
-                }
-                break;
+  function delintNode(node: ts.Node) {
+    switch (node.kind) {
+      case ts.SyntaxKind.ForStatement:
+      case ts.SyntaxKind.ForInStatement:
+      case ts.SyntaxKind.WhileStatement:
+      case ts.SyntaxKind.DoStatement:
+        if ((<ts.IterationStatement>node).statement.kind !== ts.SyntaxKind.Block) {
+          report(
+            node,
+            "A looping statement's contents should be wrapped in a block body."
+          );
         }
+        break;
 
-        ts.forEachChild(node, delintNode);
+      case ts.SyntaxKind.IfStatement:
+        let ifStatement = <ts.IfStatement>node;
+        if (ifStatement.thenStatement.kind !== ts.SyntaxKind.Block) {
+          report(
+            ifStatement.thenStatement,
+            "An if statement's contents should be wrapped in a block body."
+          );
+        }
+        if (
+          ifStatement.elseStatement &&
+          ifStatement.elseStatement.kind !== ts.SyntaxKind.Block &&
+          ifStatement.elseStatement.kind !== ts.SyntaxKind.IfStatement
+        ) {
+          report(
+            ifStatement.elseStatement,
+            "An else statement's contents should be wrapped in a block body."
+          );
+        }
+        break;
+
+      case ts.SyntaxKind.BinaryExpression:
+        let op = (<ts.BinaryExpression>node).operatorToken.kind;
+        if (
+          op === ts.SyntaxKind.EqualsEqualsToken ||
+          op == ts.SyntaxKind.ExclamationEqualsToken
+        ) {
+          report(node, "Use '===' and '!=='.");
+        }
+        break;
     }
 
-    function report(node: ts.Node, message: string) {
-        let { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-        console.log(`${sourceFile.fileName} (${line + 1},${character + 1}): ${message}`);
-    }
+    ts.forEachChild(node, delintNode);
+  }
+
+  function report(node: ts.Node, message: string) {
+    let { line, character } = sourceFile.getLineAndCharacterOfPosition(
+      node.getStart()
+    );
+    console.log(
+      `${sourceFile.fileName} (${line + 1},${character + 1}): ${message}`
+    );
+  }
 }
 
 const fileNames = process.argv.slice(2);
 fileNames.forEach(fileName => {
-    // Parse a file
-    let sourceFile = ts.createSourceFile(fileName, readFileSync(fileName).toString(), ts.ScriptTarget.ES2015, /*setParentNodes */ true);
+  // Parse a file
+  let sourceFile = ts.createSourceFile(
+    fileName,
+    readFileSync(fileName).toString(),
+    ts.ScriptTarget.ES2015,
+    /*setParentNodes */ true
+  );
 
-    // delint it
-    delint(sourceFile);
+  // delint it
+  delint(sourceFile);
 });
 ```
 
@@ -155,57 +192,84 @@ This API is used internally in the compiler to implement its `--watch` mode, but
 import ts = require("typescript");
 
 const formatHost: ts.FormatDiagnosticsHost = {
-    getCanonicalFileName: path => path,
-    getCurrentDirectory: ts.sys.getCurrentDirectory,
-    getNewLine: () => ts.sys.newLine,
-}
+  getCanonicalFileName: path => path,
+  getCurrentDirectory: ts.sys.getCurrentDirectory,
+  getNewLine: () => ts.sys.newLine
+};
 
 function watchMain() {
-    const configPath = ts.findConfigFile(/*searchPath*/ "./", ts.sys.fileExists, "tsconfig.json");
-    if (!configPath) {
-        throw new Error("Could not find a valid 'tsconfig.json'.");
-    }
+  const configPath = ts.findConfigFile(
+    /*searchPath*/ "./",
+    ts.sys.fileExists,
+    "tsconfig.json"
+  );
+  if (!configPath) {
+    throw new Error("Could not find a valid 'tsconfig.json'.");
+  }
 
-    // TypeScript can use several different program creation "strategies":
-    //  * ts.createEmitAndSemanticDiagnosticsBuilderProgram,
-    //  * ts.createSemanticDiagnosticsBuilderProgram
-    //  * ts.createAbstractBuilder
-    // The first two produce "builder programs". These use an incremental strategy to only re-check and emit files whose
-    // contents may have changed, or whose dependencies may have changes which may impact change the result of prior type-check and emit.
-    // The last uses an ordinary program which does a full type check after every change.
-    // Between `createEmitAndSemanticDiagnosticsBuilderProgram` and `createSemanticDiagnosticsBuilderProgram`, the only difference is emit.
-    // For pure type-checking scenarios, or when another tool/process handles emit, using `createSemanticDiagnosticsBuilderProgram` may be more desirable.
-    const createProgram = ts.createSemanticDiagnosticsBuilderProgram;
+  // TypeScript can use several different program creation "strategies":
+  //  * ts.createEmitAndSemanticDiagnosticsBuilderProgram,
+  //  * ts.createSemanticDiagnosticsBuilderProgram
+  //  * ts.createAbstractBuilder
+  // The first two produce "builder programs". These use an incremental strategy
+  // to only re-check and emit files whose contents may have changed, or whose
+  // dependencies may have changes which may impact change the result of prior
+  // type-check and emit.
+  // The last uses an ordinary program which does a full type check after every
+  // change.
+  // Between `createEmitAndSemanticDiagnosticsBuilderProgram` and
+  // `createSemanticDiagnosticsBuilderProgram`, the only difference is emit.
+  // For pure type-checking scenarios, or when another tool/process handles emit,
+  // using `createSemanticDiagnosticsBuilderProgram` may be more desirable.
+  const createProgram = ts.createSemanticDiagnosticsBuilderProgram;
 
-    // Note that there is another overload for `createWatchCompilerHost` that takes a set of root files.
-    const host = ts.createWatchCompilerHost(configPath, {}, ts.sys,
-        createProgram,
-        reportDiagnostic,
-        reportWatchStatusChanged,
-    );
+  // Note that there is another overload for `createWatchCompilerHost` that takes
+  // a set of root files.
+  const host = ts.createWatchCompilerHost(
+    configPath,
+    {},
+    ts.sys,
+    createProgram,
+    reportDiagnostic,
+    reportWatchStatusChanged
+  );
 
-    // You can technically override any given hook on the host, though you probably don't need to.
-    // Note that we're assuming `origCreateProgram` and `origPostProgramCreate` doesn't use `this` at all.
-    const origCreateProgram = host.createProgram;
-    host.createProgram = (rootNames: ReadonlyArray<string>, options, host, oldProgram) => {
-        console.log("** We're about to create the program! **");
-        return origCreateProgram(rootNames, options, host, oldProgram);
-    }
-    const origPostProgramCreate = host.afterProgramCreate;
+  // You can technically override any given hook on the host, though you probably
+  // don't need to.
+  // Note that we're assuming `origCreateProgram` and `origPostProgramCreate`
+  // doesn't use `this` at all.
+  const origCreateProgram = host.createProgram;
+  host.createProgram = (
+    rootNames: ReadonlyArray<string>,
+    options,
+    host,
+    oldProgram
+  ) => {
+    console.log("** We're about to create the program! **");
+    return origCreateProgram(rootNames, options, host, oldProgram);
+  };
+  const origPostProgramCreate = host.afterProgramCreate;
 
-    host.afterProgramCreate = program => {
-        console.log("** We finished making the program! **");
-        origPostProgramCreate!(program);
-    };
+  host.afterProgramCreate = program => {
+    console.log("** We finished making the program! **");
+    origPostProgramCreate!(program);
+  };
 
-    // `createWatchProgram` creates an initial program, watches files, and updates the program over time.
-    ts.createWatchProgram(host);
+  // `createWatchProgram` creates an initial program, watches files, and updates
+  // the program over time.
+  ts.createWatchProgram(host);
 }
 
 function reportDiagnostic(diagnostic: ts.Diagnostic) {
-    console.error("Error", diagnostic.code, ":",
-        ts.flattenDiagnosticMessageText(diagnostic.messageText, formatHost.getNewLine())
-    );
+  console.error(
+    "Error",
+    diagnostic.code,
+    ":",
+    ts.flattenDiagnosticMessageText(
+      diagnostic.messageText,
+      formatHost.getNewLine()
+    )
+  );
 }
 
 /**
@@ -213,7 +277,7 @@ function reportDiagnostic(diagnostic: ts.Diagnostic) {
  * This is mainly for messages like "Starting compilation" or "Compilation completed".
  */
 function reportWatchStatusChanged(diagnostic: ts.Diagnostic) {
-    console.info(ts.formatDiagnostic(diagnostic, formatHost));
+  console.info(ts.formatDiagnostic(diagnostic, formatHost));
 }
 
 watchMain();
@@ -233,94 +297,104 @@ import * as fs from "fs";
 import * as ts from "typescript";
 
 function watch(rootFileNames: string[], options: ts.CompilerOptions) {
-    const files: ts.MapLike<{ version: number }> = {};
+  const files: ts.MapLike<{ version: number }> = {};
 
-    // initialize the list of files
-    rootFileNames.forEach(fileName => {
-        files[fileName] = { version: 0 };
+  // initialize the list of files
+  rootFileNames.forEach(fileName => {
+    files[fileName] = { version: 0 };
+  });
+
+  // Create the language service host to allow the LS to communicate with the host
+  const servicesHost: ts.LanguageServiceHost = {
+    getScriptFileNames: () => rootFileNames,
+    getScriptVersion: fileName =>
+      files[fileName] && files[fileName].version.toString(),
+    getScriptSnapshot: fileName => {
+      if (!fs.existsSync(fileName)) {
+        return undefined;
+      }
+
+      return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString());
+    },
+    getCurrentDirectory: () => process.cwd(),
+    getCompilationSettings: () => options,
+    getDefaultLibFileName: options => ts.getDefaultLibFilePath(options),
+    fileExists: ts.sys.fileExists,
+    readFile: ts.sys.readFile,
+    readDirectory: ts.sys.readDirectory
+  };
+
+  // Create the language service files
+  const services = ts.createLanguageService(
+    servicesHost,
+    ts.createDocumentRegistry()
+  );
+
+  // Now let's watch the files
+  rootFileNames.forEach(fileName => {
+    // First time around, emit all files
+    emitFile(fileName);
+
+    // Add a watch on the file to handle next change
+    fs.watchFile(fileName, { persistent: true, interval: 250 }, (curr, prev) => {
+      // Check timestamp
+      if (+curr.mtime <= +prev.mtime) {
+        return;
+      }
+
+      // Update the version to signal a change in the file
+      files[fileName].version++;
+
+      // write the changes to disk
+      emitFile(fileName);
     });
+  });
 
-    // Create the language service host to allow the LS to communicate with the host
-    const servicesHost: ts.LanguageServiceHost = {
-        getScriptFileNames: () => rootFileNames,
-        getScriptVersion: (fileName) => files[fileName] && files[fileName].version.toString(),
-        getScriptSnapshot: (fileName) => {
-            if (!fs.existsSync(fileName)) {
-                return undefined;
-            }
+  function emitFile(fileName: string) {
+    let output = services.getEmitOutput(fileName);
 
-            return ts.ScriptSnapshot.fromString(fs.readFileSync(fileName).toString());
-        },
-        getCurrentDirectory: () => process.cwd(),
-        getCompilationSettings: () => options,
-        getDefaultLibFileName: (options) => ts.getDefaultLibFilePath(options),
-        fileExists: ts.sys.fileExists,
-        readFile: ts.sys.readFile,
-        readDirectory: ts.sys.readDirectory,
-    };
-
-    // Create the language service files
-    const services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry())
-
-    // Now let's watch the files
-    rootFileNames.forEach(fileName => {
-        // First time around, emit all files
-        emitFile(fileName);
-
-        // Add a watch on the file to handle next change
-        fs.watchFile(fileName,
-            { persistent: true, interval: 250 },
-            (curr, prev) => {
-                // Check timestamp
-                if (+curr.mtime <= +prev.mtime) {
-                    return;
-                }
-
-                // Update the version to signal a change in the file
-                files[fileName].version++;
-
-                // write the changes to disk
-                emitFile(fileName);
-            });
-    });
-
-    function emitFile(fileName: string) {
-        let output = services.getEmitOutput(fileName);
-
-        if (!output.emitSkipped) {
-            console.log(`Emitting ${fileName}`);
-        }
-        else {
-            console.log(`Emitting ${fileName} failed`);
-            logErrors(fileName);
-        }
-
-        output.outputFiles.forEach(o => {
-            fs.writeFileSync(o.name, o.text, "utf8");
-        });
+    if (!output.emitSkipped) {
+      console.log(`Emitting ${fileName}`);
+    } else {
+      console.log(`Emitting ${fileName} failed`);
+      logErrors(fileName);
     }
 
-    function logErrors(fileName: string) {
-        let allDiagnostics = services.getCompilerOptionsDiagnostics()
-            .concat(services.getSyntacticDiagnostics(fileName))
-            .concat(services.getSemanticDiagnostics(fileName));
+    output.outputFiles.forEach(o => {
+      fs.writeFileSync(o.name, o.text, "utf8");
+    });
+  }
 
-        allDiagnostics.forEach(diagnostic => {
-            let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
-            if (diagnostic.file) {
-                let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
-                console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
-            }
-            else {
-                console.log(`  Error: ${message}`);
-            }
-        });
-    }
+  function logErrors(fileName: string) {
+    let allDiagnostics = services
+      .getCompilerOptionsDiagnostics()
+      .concat(services.getSyntacticDiagnostics(fileName))
+      .concat(services.getSemanticDiagnostics(fileName));
+
+    allDiagnostics.forEach(diagnostic => {
+      let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+      if (diagnostic.file) {
+        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+          diagnostic.start!
+        );
+        console.log(
+          `  Error ${diagnostic.file.fileName} (${line + 1},${character +
+            1}): ${message}`
+        );
+      } else {
+        console.log(`  Error: ${message}`);
+      }
+    });
+  }
 }
 
 // Initialize files constituting the program as all .ts files in the current directory
-const currentDirectoryFiles = fs.readdirSync(process.cwd()).
-    filter(fileName => fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
+const currentDirectoryFiles = fs
+  .readdirSync(process.cwd())
+  .filter(
+    fileName =>
+      fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts"
+  );
 
 // Start the watcher
 watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
@@ -335,21 +409,22 @@ Here is the relevant signature of `transpileModule`:
 
 ```ts
 export interface TranspileOptions {
-    compilerOptions?: CompilerOptions;
-    fileName?: string;
-    reportDiagnostics?: boolean;
-    moduleName?: string;
-    renamedDependencies?: Map<string>;
+  compilerOptions?: CompilerOptions;
+  fileName?: string;
+  reportDiagnostics?: boolean;
+  moduleName?: string;
+  renamedDependencies?: Map<string>;
 }
 
 export interface TranspileOutput {
-    outputText: string;
-    diagnostics?: Diagnostic[];
-    sourceMapText?: string;
+  outputText: string;
+  diagnostics?: Diagnostic[];
+  sourceMapText?: string;
 }
 
 /*
- * This function will compile source text from 'input' argument using specified compiler options.
+ * This function will compile source text from 'input' argument using specified
+ * compiler options.
  * If not options are provided - it will use a set of default compiler options.
  * Extra compiler options that will unconditionally be used by this function are:
  * - isolatedModules = true
@@ -357,31 +432,47 @@ export interface TranspileOutput {
  * - noLib = true
  * - noResolve = true
  */
-export function transpileModule(input: string, transpileOptions: TranspileOptions): TranspileOutput
+export function transpileModule(
+  input: string,
+  transpileOptions: TranspileOptions
+): TranspileOutput;
 ```
 
 and here is the appropriate version of `transpile`:
 
 ```ts
-export function transpile(input: string, compilerOptions?: CompilerOptions, fileName?: string, diagnostics?: Diagnostic[], moduleName?: string): string;
+export function transpile(
+  input: string,
+  compilerOptions?: CompilerOptions,
+  fileName?: string,
+  diagnostics?: Diagnostic[],
+  moduleName?: string
+): string;
 ```
 
 > Historical note: initially only `transpile` function existed, however it was pretty difficult to extend (i.e to add new input parameters or return some extra information like source maps) without breaking existing consumers. As a result `transpile` is currently considered deprecated and superseded by `transpileModule`.
 
 ```ts
 var ts = require("typescript");
-var content =
-    "import {f} from \"foo\"\n" +
-    "export var x = f()";
+var content = 'import {f} from "foo"\n' + "export var x = f()";
 
 var compilerOptions = { module: ts.ModuleKind.System };
 
-var res1 = ts.transpileModule(content, {compilerOptions: compilerOptions, moduleName: "myModule2"});
+var res1 = ts.transpileModule(content, {
+  compilerOptions: compilerOptions,
+  moduleName: "myModule2"
+});
 console.log(res1.outputText);
 
-console.log("============")
+console.log("============");
 
-var res2 = ts.transpile(content, compilerOptions, /*fileName*/ undefined, /*diagnostics*/ undefined, /*moduleName*/ "myModule1");
+var res2 = ts.transpile(
+  content,
+  compilerOptions,
+  /*fileName*/ undefined,
+  /*diagnostics*/ undefined,
+  /*moduleName*/ "myModule1"
+);
 console.log(res2);
 ```
 
@@ -408,62 +499,81 @@ This function returns an object that stores result of module resolution (value o
 import * as ts from "typescript";
 import * as path from "path";
 
-function createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: string[]): ts.CompilerHost {
-    return {
-        getSourceFile,
-        getDefaultLibFileName: () => "lib.d.ts",
-        writeFile: (fileName, content) => ts.sys.writeFile(fileName, content),
-        getCurrentDirectory: () => ts.sys.getCurrentDirectory(),
-        getDirectories: (path) => ts.sys.getDirectories(path),
-        getCanonicalFileName: fileName => ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
-        getNewLine: () => ts.sys.newLine,
-        useCaseSensitiveFileNames: () => ts.sys.useCaseSensitiveFileNames,
+function createCompilerHost(
+  options: ts.CompilerOptions,
+  moduleSearchLocations: string[]
+): ts.CompilerHost {
+  return {
+    getSourceFile,
+    getDefaultLibFileName: () => "lib.d.ts",
+    writeFile: (fileName, content) => ts.sys.writeFile(fileName, content),
+    getCurrentDirectory: () => ts.sys.getCurrentDirectory(),
+    getDirectories: path => ts.sys.getDirectories(path),
+    getCanonicalFileName: fileName =>
+      ts.sys.useCaseSensitiveFileNames ? fileName : fileName.toLowerCase(),
+    getNewLine: () => ts.sys.newLine,
+    useCaseSensitiveFileNames: () => ts.sys.useCaseSensitiveFileNames,
+    fileExists,
+    readFile,
+    resolveModuleNames
+  };
+
+  function fileExists(fileName: string): boolean {
+    return ts.sys.fileExists(fileName);
+  }
+
+  function readFile(fileName: string): string | undefined {
+    return ts.sys.readFile(fileName);
+  }
+
+  function getSourceFile(
+    fileName: string,
+    languageVersion: ts.ScriptTarget,
+    onError?: (message: string) => void
+  ) {
+    const sourceText = ts.sys.readFile(fileName);
+    return sourceText !== undefined
+      ? ts.createSourceFile(fileName, sourceText, languageVersion)
+      : undefined;
+  }
+
+  function resolveModuleNames(
+    moduleNames: string[],
+    containingFile: string
+  ): ts.ResolvedModule[] {
+    const resolvedModules: ts.ResolvedModule[] = [];
+    for (const moduleName of moduleNames) {
+      // try to use standard resolution
+      let result = ts.resolveModuleName(moduleName, containingFile, options, {
         fileExists,
-        readFile,
-        resolveModuleNames
-    }
-
-    function fileExists(fileName: string): boolean {
-        return ts.sys.fileExists(fileName);
-    }
-
-    function readFile(fileName: string): string | undefined {
-        return ts.sys.readFile(fileName);
-    }
-
-    function getSourceFile(fileName: string, languageVersion: ts.ScriptTarget, onError?: (message: string) => void) {
-        const sourceText = ts.sys.readFile(fileName);
-        return sourceText !== undefined ? ts.createSourceFile(fileName, sourceText, languageVersion) : undefined;
-    }
-
-    function resolveModuleNames(moduleNames: string[], containingFile: string): ts.ResolvedModule[] {
-        const resolvedModules: ts.ResolvedModule[] = [];
-        for (const moduleName of moduleNames) {
-            // try to use standard resolution
-            let result = ts.resolveModuleName(moduleName, containingFile, options, { fileExists, readFile });
-            if (result.resolvedModule) {
-                resolvedModules.push(result.resolvedModule);
-            }
-            else {
-                // check fallback locations, for simplicity assume that module at location should be represented by '.d.ts' file
-                for (const location of moduleSearchLocations) {
-                    const modulePath = path.join(location, moduleName + ".d.ts");
-                    if (fileExists(modulePath)) {
-                        resolvedModules.push({ resolvedFileName: modulePath });
-                    }
-                }
-            }
+        readFile
+      });
+      if (result.resolvedModule) {
+        resolvedModules.push(result.resolvedModule);
+      } else {
+        // check fallback locations, for simplicity assume that module at location
+        // should be represented by '.d.ts' file
+        for (const location of moduleSearchLocations) {
+          const modulePath = path.join(location, moduleName + ".d.ts");
+          if (fileExists(modulePath)) {
+            resolvedModules.push({ resolvedFileName: modulePath });
+          }
         }
-        return resolvedModules;
+      }
     }
+    return resolvedModules;
+  }
 }
 
 function compile(sourceFiles: string[], moduleSearchLocations: string[]): void {
-    const options: ts.CompilerOptions = { module: ts.ModuleKind.AMD, target: ts.ScriptTarget.ES5 };
-    const host = createCompilerHost(options, moduleSearchLocations);
-    const program = ts.createProgram(sourceFiles, options, host);
+  const options: ts.CompilerOptions = {
+    module: ts.ModuleKind.AMD,
+    target: ts.ScriptTarget.ES5
+  };
+  const host = createCompilerHost(options, moduleSearchLocations);
+  const program = ts.createProgram(sourceFiles, options, host);
 
-    /// do something with program...
+  /// do something with program...
 }
 ```
 
@@ -480,51 +590,64 @@ Here is an example that utilizes both to produce a factorial function:
 import ts = require("typescript");
 
 function makeFactorialFunction() {
-    const functionName = ts.createIdentifier("factorial");
-    const paramName = ts.createIdentifier("n");
-    const parameter = ts.createParameter(
-        /*decorators*/ undefined,
-        /*modifiers*/ undefined,
-        /*dotDotDotToken*/ undefined,
-        paramName);
+  const functionName = ts.createIdentifier("factorial");
+  const paramName = ts.createIdentifier("n");
+  const parameter = ts.createParameter(
+    /*decorators*/ undefined,
+    /*modifiers*/ undefined,
+    /*dotDotDotToken*/ undefined,
+    paramName
+  );
 
-    const condition = ts.createBinary(
-        paramName,
-        ts.SyntaxKind.LessThanEqualsToken,
-        ts.createLiteral(1));
+  const condition = ts.createBinary(
+    paramName,
+    ts.SyntaxKind.LessThanEqualsToken,
+    ts.createLiteral(1)
+  );
 
-    const ifBody = ts.createBlock(
-        [ts.createReturn(ts.createLiteral(1))],
-        /*multiline*/ true)
-    const decrementedArg = ts.createBinary(paramName, ts.SyntaxKind.MinusToken, ts.createLiteral(1))
-    const recurse = ts.createBinary(
-        paramName,
-        ts.SyntaxKind.AsteriskToken,
-        ts.createCall(functionName, /*typeArgs*/undefined, [decrementedArg]));
-    const statements = [
-        ts.createIf(condition, ifBody),
-        ts.createReturn(
-            recurse
-        ),
-    ];
+  const ifBody = ts.createBlock(
+    [ts.createReturn(ts.createLiteral(1))],
+    /*multiline*/ true
+  );
+  const decrementedArg = ts.createBinary(
+    paramName,
+    ts.SyntaxKind.MinusToken,
+    ts.createLiteral(1)
+  );
+  const recurse = ts.createBinary(
+    paramName,
+    ts.SyntaxKind.AsteriskToken,
+    ts.createCall(functionName, /*typeArgs*/ undefined, [decrementedArg])
+  );
+  const statements = [ts.createIf(condition, ifBody), ts.createReturn(recurse)];
 
-    return ts.createFunctionDeclaration(
-        /*decorators*/ undefined,
-        /*modifiers*/[ts.createToken(ts.SyntaxKind.ExportKeyword)],
-        /*asteriskToken*/ undefined,
-        functionName,
-        /*typeParameters*/ undefined,
-        [parameter],
-        /*returnType*/ ts.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-        ts.createBlock(statements, /*multiline*/ true),
-    )
+  return ts.createFunctionDeclaration(
+    /*decorators*/ undefined,
+    /*modifiers*/ [ts.createToken(ts.SyntaxKind.ExportKeyword)],
+    /*asteriskToken*/ undefined,
+    functionName,
+    /*typeParameters*/ undefined,
+    [parameter],
+    /*returnType*/ ts.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    ts.createBlock(statements, /*multiline*/ true)
+  );
 }
 
-const resultFile = ts.createSourceFile("someFileName.ts", "", ts.ScriptTarget.Latest, /*setParentNodes*/ false, ts.ScriptKind.TS);
+const resultFile = ts.createSourceFile(
+  "someFileName.ts",
+  "",
+  ts.ScriptTarget.Latest,
+  /*setParentNodes*/ false,
+  ts.ScriptKind.TS
+);
 const printer = ts.createPrinter({
-    newLine: ts.NewLineKind.LineFeed,
+  newLine: ts.NewLineKind.LineFeed
 });
-const result = printer.printNode(ts.EmitHint.Unspecified, makeFactorialFunction(), resultFile);
+const result = printer.printNode(
+  ts.EmitHint.Unspecified,
+  makeFactorialFunction(),
+  resultFile
+);
 
 console.log(result);
 ```
@@ -539,96 +662,109 @@ import * as ts from "typescript";
 import * as fs from "fs";
 
 interface DocEntry {
-    name?: string,
-    fileName?: string,
-    documentation?: string,
-    type?: string,
-    constructors?: DocEntry[],
-    parameters?: DocEntry[],
-    returnType?: string
-};
+  name?: string;
+  fileName?: string;
+  documentation?: string;
+  type?: string;
+  constructors?: DocEntry[];
+  parameters?: DocEntry[];
+  returnType?: string;
+}
 
 /** Generate documentation for all classes in a set of .ts files */
-function generateDocumentation(fileNames: string[], options: ts.CompilerOptions): void {
-    // Build a program using the set of root file names in fileNames
-    let program = ts.createProgram(fileNames, options);
+function generateDocumentation(
+  fileNames: string[],
+  options: ts.CompilerOptions
+): void {
+  // Build a program using the set of root file names in fileNames
+  let program = ts.createProgram(fileNames, options);
 
-    // Get the checker, we will use it to find more about classes
-    let checker = program.getTypeChecker();
+  // Get the checker, we will use it to find more about classes
+  let checker = program.getTypeChecker();
 
-    let output: DocEntry[] = [];
+  let output: DocEntry[] = [];
 
-    // Visit every sourceFile in the program
-    for (const sourceFile of program.getSourceFiles()) {
-        if (!sourceFile.isDeclarationFile) {
-            // Walk the tree to search for classes
-            ts.forEachChild(sourceFile, visit);
-        }
+  // Visit every sourceFile in the program
+  for (const sourceFile of program.getSourceFiles()) {
+    if (!sourceFile.isDeclarationFile) {
+      // Walk the tree to search for classes
+      ts.forEachChild(sourceFile, visit);
+    }
+  }
+
+  // print out the doc
+  fs.writeFileSync("classes.json", JSON.stringify(output, undefined, 4));
+
+  return;
+
+  /** visit nodes finding exported classes */
+  function visit(node: ts.Node) {
+    // Only consider exported nodes
+    if (!isNodeExported(node)) {
+      return;
     }
 
-    // print out the doc
-    fs.writeFileSync("classes.json", JSON.stringify(output, undefined, 4));
-
-    return;
-
-    /** visit nodes finding exported classes */
-    function visit(node: ts.Node) {
-        // Only consider exported nodes
-        if (!isNodeExported(node)) {
-            return;
-        }
-
-        if (ts.isClassDeclaration(node) && node.name) {
-            // This is a top level class, get its symbol
-            let symbol = checker.getSymbolAtLocation(node.name);
-            if (symbol) {
-                output.push(serializeClass(symbol));
-            }
-            // No need to walk any further, class expressions/inner declarations
-            // cannot be exported
-        }
-        else if (ts.isModuleDeclaration(node)) {
-            // This is a namespace, visit its children
-            ts.forEachChild(node, visit);
-        }
+    if (ts.isClassDeclaration(node) && node.name) {
+      // This is a top level class, get its symbol
+      let symbol = checker.getSymbolAtLocation(node.name);
+      if (symbol) {
+        output.push(serializeClass(symbol));
+      }
+      // No need to walk any further, class expressions/inner declarations
+      // cannot be exported
+    } else if (ts.isModuleDeclaration(node)) {
+      // This is a namespace, visit its children
+      ts.forEachChild(node, visit);
     }
+  }
 
-    /** Serialize a symbol into a json object */
-    function serializeSymbol(symbol: ts.Symbol): DocEntry {
-        return {
-            name: symbol.getName(),
-            documentation: ts.displayPartsToString(symbol.getDocumentationComment()),
-            type: checker.typeToString(checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!))
-        };
-    }
+  /** Serialize a symbol into a json object */
+  function serializeSymbol(symbol: ts.Symbol): DocEntry {
+    return {
+      name: symbol.getName(),
+      documentation: ts.displayPartsToString(symbol.getDocumentationComment()),
+      type: checker.typeToString(
+        checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!)
+      )
+    };
+  }
 
-    /** Serialize a class symbol information */
-    function serializeClass(symbol: ts.Symbol) {
-        let details = serializeSymbol(symbol);
+  /** Serialize a class symbol information */
+  function serializeClass(symbol: ts.Symbol) {
+    let details = serializeSymbol(symbol);
 
-        // Get the construct signatures
-        let constructorType = checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!);
-        details.constructors = constructorType.getConstructSignatures().map(serializeSignature);
-        return details;
-    }
+    // Get the construct signatures
+    let constructorType = checker.getTypeOfSymbolAtLocation(
+      symbol,
+      symbol.valueDeclaration!
+    );
+    details.constructors = constructorType
+      .getConstructSignatures()
+      .map(serializeSignature);
+    return details;
+  }
 
-    /** Serialize a signature (call or construct) */
-    function serializeSignature(signature: ts.Signature) {
-        return {
-            parameters: signature.parameters.map(serializeSymbol),
-            returnType: checker.typeToString(signature.getReturnType()),
-            documentation: ts.displayPartsToString(signature.getDocumentationComment())
-        };
-    }
+  /** Serialize a signature (call or construct) */
+  function serializeSignature(signature: ts.Signature) {
+    return {
+      parameters: signature.parameters.map(serializeSymbol),
+      returnType: checker.typeToString(signature.getReturnType()),
+      documentation: ts.displayPartsToString(signature.getDocumentationComment())
+    };
+  }
 
-    /** True if this is visible outside this file, false otherwise */
-    function isNodeExported(node: ts.Node): boolean {
-        return (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export) !== 0 || (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile);
-    }
+  /** True if this is visible outside this file, false otherwise */
+  function isNodeExported(node: ts.Node): boolean {
+    return (
+      (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export) !== 0 ||
+      (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile)
+    );
+  }
 }
 
 generateDocumentation(process.argv.slice(2), {
-    target: ts.ScriptTarget.ES5, module: ts.ModuleKind.CommonJS
+  target: ts.ScriptTarget.ES5,
+  module: ts.ModuleKind.CommonJS
 });
 ```
 
