@@ -229,11 +229,11 @@ so we have to take a correctness trade-off for the specific case of function arg
 > function handler(arg: string) {
 >     // ....
 > }
-> 
+>
 > function doSomething(callback: (arg1: string, arg2: number) => void) {
 >     callback('hello', 42);
 > }
-> 
+>
 > // Expected error because 'doSomething' wants a callback of
 > // 2 parameters, but 'handler' only accepts 1
 > doSomething(handler);
@@ -293,12 +293,13 @@ which would be "fixed", but *not made any more correct*, by adding a parameter:
 > function doSomething(): number {
 >     return 42;
 > }
-> 
+>
 > function callMeMaybe(callback: () => void) {
 >     callback();
 > }
-> 
-> // Expected an error because 'doSomething' returns number, but 'callMeMaybe' expects void-returning function
+>
+> // Expected an error because 'doSomething' returns number, but 'callMeMaybe'
+> // expects void-returning function
 > callMeMaybe(doSomething);
 > ```
 
@@ -426,7 +427,7 @@ See also [#202](https://github.com/Microsoft/TypeScript/issues/202) for a sugges
 > interface SomeOtherInterface {
 >   questions: string[];
 > }
-> 
+>
 > function f(x: SomeInterface|SomeOtherInterface) {
 >   // Can't use instanceof on interface, help?
 >   if (x instanceof SomeInterface) {
@@ -502,16 +503,16 @@ To avoid this problem, turn on the `noImplicitAny` flag, which will issue a warn
 > interface StringMap {
 >   [key: string]: string;
 > }
-> 
+>
 > function a(): StringMap {
 >   return { a: "1" }; // OK
 > }
-> 
+>
 > function b(): StringMap {
 >   var result: StringMap = { a: "1" };
 >   return result; // OK
 > }
-> 
+>
 > function c(): StringMap {
 >   var result = { a: "1" };
 >   return result; // Error - result lacks index signature, why?
@@ -607,15 +608,15 @@ function createLog(source:string, message?:string): number {
 }
 ```
 
-The rationale here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive that what you would want your users to call you through. 
+The rationale here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive that what you would want your users to call you through.
 
 For instance you can require your users to call you using matching pairs of arguments, and implement this correctly without having to allow mixed argument types:
 
 ```ts
 function compare(a: string, b: string): void;
 function compare(a: number, b: number): void;
-function compare(a: string|number, b: string|number): void { // Just an implementation and not visible to callers
-
+function compare(a: string|number, b: string|number): void {
+  // Just an implementation and not visible to callers
 }
 
 compare(1,2) // OK
@@ -672,7 +673,7 @@ function f({x = 0}) {
 > I wrote some code like this and expected an error:
 > ```ts
 > class Empty { /* empty */ }
-> 
+>
 > var e2: Empty = window;
 > ```
 
@@ -724,10 +725,10 @@ When a member is private or protected, it must *originate in the same declaratio
 >     this.someMethod(); // Throws error "this.method is not a function"
 >   }
 >   someMethod() {
->     
->   } 
+>
+>   }
 > }
-> 
+>
 > let obj = new MyClass();
 > window.setTimeout(obj.someCallback, 10);
 > ```
@@ -801,13 +802,13 @@ See http://stackoverflow.com/a/14348084/1704166
 ### What does it mean for an interface to extend a class?
 
 > What does this code mean?
-> 
+>
 > ```ts
 > class Foo {
 >   /* ... */
 > }
 > interface Bar extends Foo {
->   
+>
 > }
 > ```
 
@@ -821,7 +822,7 @@ In general, this pattern is best avoided, especially if `Foo` has private member
 > ```ts
 > /** file1.ts **/
 > class Alpha { /* ... */ }
-> 
+>
 > /** file2.ts **/
 > class Bravo extends Alpha { /* ... */ }
 > ```
@@ -838,7 +839,7 @@ Add a script tag for the base class's output *before* the script tag for the der
 > ```ts
 > /** file1.ts **/
 > class Alpha { /* ... */ }
-> 
+>
 > /** file2.ts **/
 > class Bravo extends Alpha { /* ... */ }
 > ```
@@ -956,7 +957,7 @@ The type will have unexpected compatibility (as shown here) and will also fail t
 >   // TODO: Implement
 >   return undefined;
 > }
-> 
+>
 > var x: MyNamed<string>;
 > var y = findByName(x); // expected y: string, got y: {}
 > ```
@@ -998,7 +999,7 @@ See the previous question for more reasons why this is bad.
 >   let y = new xType();
 >   // Same here?
 >   if(someVar instanceof typeof T) {
-> 
+>
 >   }
 >   // How do I instantiate?
 >   let z = new T();
@@ -1025,18 +1026,18 @@ function isReallyInstanceOf<T>(ctor: { new(...args: any[]): T }, obj: T) {
 ## Modules
 
 ### Why are imports being elided in my emit?
- 
+
 > I wrote some code like this
 > ```ts
 > import someModule = require('./myMod');
-> 
+>
 > let x: someModule.SomeType = /* something */;
 > ```
-> 
+>
 > and the emit looked like this:
 > ```js
 > // Expected to see "var someModule = require('./myMod');" here!
-> 
+>
 > var x = /* something */;
 > ```
 
@@ -1122,7 +1123,7 @@ TODO: Answer
 > class Display extends React.Component<any, any> {
 >     render() { ... }
 > }
-> 
+>
 > let SomeThing: Display = /* ... */;
 > // Error here, isn't this OK?
 > let jsx = <SomeThing />;
@@ -1162,7 +1163,7 @@ The easiest fix is to use the `typeof` type operator.
 > ```js
 > var Foo = (function () {
 >     var x = 0;
-> 
+>
 >     function Foo() {
 >     }
 >     Foo.prototype.increment = function () {
@@ -1196,7 +1197,7 @@ a.increment(); // Prints 1
 > var MyClass = (function () {
 >     function MyClass() {
 > 		this.method = function() {
-> 			
+>
 > 		}
 >     }
 >     return MyClass;
@@ -1253,7 +1254,7 @@ TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1
 ## External Tools
 
 ### How do I write unit tests with TypeScript?
-TODO: Answer
+* [Typescript Deep Dive](https://basarat.gitbooks.io/typescript/docs/testing/jest.html)
 
 
 -------------------------------------------------------------------------------------
@@ -1270,9 +1271,9 @@ TODO: Answer
 > }
 > doSomething();
 > ```
-> 
+>
 > I compiled it with `tsc --module commonjs myApp.ts --out app.js` and ran `node app.js` and got the expected output.
-> 
+>
 > Then I added an `import` to it:
 > ```ts
 > import fs = require('fs');
@@ -1281,7 +1282,7 @@ TODO: Answer
 > }
 > doSomething();
 > ```
-> 
+>
 > Or added an `export` to it:
 > ```ts
 > export function doSomething() {
@@ -1289,12 +1290,12 @@ TODO: Answer
 > }
 > doSomething();
 > ```
-> 
+>
 > And now nothing happens when I run `app.js`!
 
 Modules -- those files containing top-level `export` or `import` statements -- are always compiled 1:1 with their corresponding js files.
 The `--out` option only controls where *script* (non-module) code is emitted.
-In this case, you should be running `node myApp.js`, because the *module* `myApp.ts` is always emitted to the file `myApp.js`.  
+In this case, you should be running `node myApp.js`, because the *module* `myApp.ts` is always emitted to the file `myApp.js`.
 
 This behavior has been fixed as of TypeScript 1.8; combining `--out` and `--module` is now an error for CommonJS module output.
 
@@ -1355,7 +1356,7 @@ To ensure the output does not change with adding new files specify `--rootDir` o
 
 ### Why is a file in the `exclude` list still picked up by the compiler?
 
-`tsconfig.json` turns a folder into a “project”. Without specifying any `“exclude”` or `“files”` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation. 
+`tsconfig.json` turns a folder into a “project”. Without specifying any `“exclude”` or `“files”` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation.
 
 If you want to exclude some of the files use `“exclude”`, if you would rather specify all the files instead of letting the compiler look them up, use `“files”`.
 
@@ -1375,7 +1376,7 @@ For a TypeScript file, the TypeScript compiler by default emits the generated Ja
 Because the TypeScript files and emitted JavaScript files always have different file extensions, it is safe to do so.
 However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidently overwriting your source file, the  compiler will issue this warning and skip writing the output files.
 
-There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` file in the project root to enable this. 
+There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` file in the project root to enable this.
 If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`;
 If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files;
 If you just want to include the JavaScript files for editing and don't need to compile, set the `noEmit` compiler option to `true` to skip the emitting check.
