@@ -18,7 +18,7 @@
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
 * [X] [`/// <reference lib="..." />` reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
-* [ ] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
+* [X] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
 * [X] Refactors to...
   * [X] [Convert named imports to namespace imports and back](https://github.com/Microsoft/TypeScript/pull/24469)
   * [X] [Add or remove braces from arrow function](https://github.com/Microsoft/TypeScript/pull/23423)
