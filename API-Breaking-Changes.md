@@ -1,6 +1,7 @@
 # TypeScript 3.0
 
-The deprecated internal method `LanguageService#getSourceFile` has been removed. See #24540.
+- The deprecated internal method `LanguageService#getSourceFile` has been removed. See #24540.
+- The deprecated function `TypeChecker#getSymbolDisplayBuilder` and associated interfaces have been removed. See #25331. The emitter and node builder should be used instead.
 
 # TypeScript 2.8
 - `getJsxIntrinsicTagNames` has been removed and replaced with `getJsxIntrinsicTagNamesAt`, which requires a node to use as the location to look up the valid intrinsic names at (to handle locally-scoped JSX namespaces).
