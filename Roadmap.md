@@ -2,7 +2,6 @@
 
 # Future
 
-* [Support for project references/composite projects](https://github.com/Microsoft/TypeScript/issues/3469)
 * [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
@@ -12,12 +11,17 @@
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
-# 3.0 (July 2018)
+# 3.1 (August 2018)
 
-* [X] [Tuples in rest parameters and spread expressions](https://github.com/Microsoft/TypeScript/pull/24897)
-* [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
+
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
+
+# 3.0 (July 2018)
+
+* [X] [Support for project references/composite projects](https://github.com/Microsoft/TypeScript/issues/3469)
+* [X] [Tuples in rest parameters and spread expressions](https://github.com/Microsoft/TypeScript/pull/24897)
+* [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
 * [X] [`/// <reference lib="..." />` reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
 * [X] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
 * [ ] Error UX improvements
