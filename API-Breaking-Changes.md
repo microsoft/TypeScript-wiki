@@ -3,7 +3,7 @@
 - The deprecated internal method `LanguageService#getSourceFile` has been removed. See #24540.
 - The deprecated function `TypeChecker#getSymbolDisplayBuilder` and associated interfaces have been removed. See [#25331](https://github.com/Microsoft/TypeScript/pull/25331). The emitter and node builder should be used instead.
 - The deprecated functions `escapeIdentifier` and `unescapeIdentifier` have been removed. Due to changing how the identifier name API worked in general, they have been identity functions for a few releases, so if you need your code to behave the same way, simply removing the calls should be sufficient. Alternatively, the typesafe `escapeLeadingUnderscores` and `unescapeLeadingUnderscores` should be used if the types indicate they are required (as they are used to convert to or from branded `__String` and `string` types).
-- The `TypeChecker#getSuggestionForNonexistentProperty`, `TypeChecker#getSuggestionForNonexistentSymbol`, and `TypeChecker#getSuggestionForNonexistentModule` methods have been made internal See [#25520](https://github.com/Microsoft/TypeScript/pull/25520).
+- The `TypeChecker#getSuggestionForNonexistentProperty`, `TypeChecker#getSuggestionForNonexistentSymbol`, and `TypeChecker#getSuggestionForNonexistentModule` methods have been made internal, and are no longer part of our public API. See [#25520](https://github.com/Microsoft/TypeScript/pull/25520).
 
 # TypeScript 2.8
 - `getJsxIntrinsicTagNames` has been removed and replaced with `getJsxIntrinsicTagNamesAt`, which requires a node to use as the location to look up the valid intrinsic names at (to handle locally-scoped JSX namespaces).
