@@ -24,9 +24,9 @@
 * [X] [New `unknown` top type](https://github.com/Microsoft/TypeScript/pull/24439)
 * [X] [`/// <reference lib="..." />` reference directives](https://github.com/Microsoft/TypeScript/pull/23893)
 * [X] [Support for `defaultProps` and `propTypes` in React JSX elements](https://github.com/Microsoft/TypeScript/pull/24422)
-* [ ] Error UX improvements
-  * [ ] [Related error spans](https://github.com/Microsoft/TypeScript/issues/25257)
-  * [ ] [Improved message quality and suggestions](https://github.com/Microsoft/TypeScript/issues/25310)
+* [X] Error UX improvements
+  * [X] [Related error spans](https://github.com/Microsoft/TypeScript/issues/25257)
+  * [X] [Improved message quality and suggestions](https://github.com/Microsoft/TypeScript/issues/25310)
 * [X] Refactors to...
   * [X] [Convert named imports to namespace imports and back](https://github.com/Microsoft/TypeScript/pull/24469)
   * [X] [Add or remove braces from arrow function](https://github.com/Microsoft/TypeScript/pull/23423)
