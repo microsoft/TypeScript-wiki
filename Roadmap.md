@@ -34,6 +34,7 @@
   * [X] [Remove unused labels](https://github.com/Microsoft/TypeScript/pull/24037)
   * [X] [Remove unreachable code](https://github.com/Microsoft/TypeScript/pull/24028)
 * [X] [Outlining spans for JSX expressions](https://github.com/Microsoft/TypeScript/issues/23273)
+* [X] [Auto-closing JSX tags](https://github.com/Microsoft/TypeScript/issues/20811)
 
 # 2.9 (May 2018)
 
