@@ -2,6 +2,12 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.0
+
+## The `unknown` keyword is reserved
+
+`unknown` is now a reserved type name, as it is now a built-in type. Depending on your intended use of `unknown`, you may want to remove the declaration entirely (favoring the newly introduced `unknown` type), or rename it to something else.
+
 # TypeScript 2.9
 
 ## `keyof` now includes `string`, `number` and `symbol` keys
