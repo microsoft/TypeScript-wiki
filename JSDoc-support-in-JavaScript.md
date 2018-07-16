@@ -208,6 +208,35 @@ function fn9(p1) {
  */
 var numberOrString = Math.random() < 0.5 ? "hello" : 100;
 var typeAssertedNumber = /** @type {number} */ (numberOrString)
+
+// We can also import declarations from other files using 
+// 'import' types:
+
+/**
+ * @param p { import("./a").Pet }
+ */
+function walk(p) {
+    console.log(`Walking ${p.name}...`);
+}
+
+// 'import' types can also be used in type alias declarations
+
+/**
+ * @type Pet { import("./a").Pet }
+ */
+
+/**
+ * @type {Pet}
+ */
+var myPet;
+myPet.name;
+
+// 'import' types can be used to get the type of a value from a module
+
+/**
+ * @type {typeof import("./a").x }
+ */
+var x = require("./a").x;
 ```
 
 ## Patterns that are known NOT to be supported
