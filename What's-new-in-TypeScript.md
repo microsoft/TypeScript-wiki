@@ -330,7 +330,7 @@ TypeScript adds a new triple-slash-reference directive (`/// <reference lib="nam
 
 Built-in _lib_ files are referenced in the same fashion as the `"lib"` compiler option in _tsconfig.json_ (e.g. use `lib="es2015"` and not `lib="lib.es2015.d.ts"`, etc.).
 
-For declaration file authors who relay on built-in types, e.g. DOM APIs or built-in JS runtime constructors like `Symbol` or `Iterable`, tribble-slash-reference lib directives are the recommended. Previously these .d.ts files had to add forward/duplicate declarations of such types.
+For declaration file authors who relay on built-in types, e.g. DOM APIs or built-in JS run-time constructors like `Symbol` or `Iterable`, triple-slash-reference lib directives are the recommended. Previously these .d.ts files had to add forward/duplicate declarations of such types.
 
 ##### Example
 
