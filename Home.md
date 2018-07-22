@@ -18,11 +18,15 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 
 # Tutorials
 
-* [Using React and Webpack with TypeScript](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/React%20%26%20Webpack.md)
-* [Using Knockout with TypeScript](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/Knockout.md)
-* [Using ASP.NET Core with TypeScript](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/ASP.NET%20Core.md)
-* [Using ASP.NET 4 with TypeScript](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/ASP.NET%204.md)
-* [Setting up Gulp with TypeScript, Browserify, Uglify, and Watchify](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/Gulp.md)
+[See our full list of quick starts](https://www.typescriptlang.org/samples/), which include
+
+* [Angular](https://angular.io/docs/ts/latest/quickstart.html)
+* [React](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter)
+* [Vue](https://github.com/Microsoft/TypeScript-Vue-Starter#typescript-vue-starter)
+* [Glimmer](https://glimmerjs.com/guides/installing)
+* [Dojo 2](https://dojo.io/tutorials/002_creating_an_application/)
+* [Knockout](https://github.com/Microsoft/TypeScript-Knockout-Starter#typescript-knockout-starter)
+* [Node.js/Express](https://github.com/Microsoft/TypeScript-Node-Starter#typescript-node-starter)
 
 # Advanced Topics
 
