@@ -16,9 +16,9 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [Nightly Builds](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
-# Tutorials
+# Tutorial
 
-[See our full list of quick starts](https://www.typescriptlang.org/samples/), which include
+[See our full list of quick starts](https://www.typescriptlang.org/samples/) which includes
 
 * [Angular](https://angular.io/docs/ts/latest/quickstart.html)
 * [React](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter)
