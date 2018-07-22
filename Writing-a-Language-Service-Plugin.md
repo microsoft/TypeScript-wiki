@@ -31,9 +31,9 @@ Here's the minimal code that handles this injected `ts` value:
 ```ts
 import * as ts_module from "typescript/lib/tsserverlibrary";
 
-function init(modules: {typescript: typeof ts_module}) {
-    const ts = modules.typescript;
-    /* More to come here */
+function init(modules: { typescript: typeof ts_module }) {
+  const ts = modules.typescript;
+  /* More to come here */
 }
 
 export = init;
@@ -45,20 +45,22 @@ TypeScript Language Service Plugins use the [Decorator Pattern](https://en.wikip
 
 Let's fill in some more code to properly set up a decorator:
 ```ts
-function init(modules: {typescript: typeof ts_module}) {
-    const ts = modules.typescript;
+function init(modules: { typescript: typeof ts_module }) {
+  const ts = modules.typescript;
 
-    function create(info: ts.server.PluginCreateInfo) {
-        // Set up decorator
-        const proxy: ts.LanguageService = Object.create(null);        
-        for (let k of Object.keys(info.languageService) as Array<keyof ts.LanguageService>) {
-            const x = info.languageService[k];
-            proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
-        }
-        return proxy;
+  function create(info: ts.server.PluginCreateInfo) {
+    // Set up decorator
+    const proxy: ts.LanguageService = Object.create(null);
+    for (let k of Object.keys(info.languageService) as Array<
+      keyof ts.LanguageService
+    >) {
+      const x = info.languageService[k];
+      proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
     }
+    return proxy;
+  }
 
-    return { create };
+  return { create };
 }
 ```
 
@@ -88,9 +90,9 @@ We'll change the `getCompletionsAtPosition` function to remove certain entries n
 ```ts
 // Remove specified entries from completion list
 proxy.getCompletionsAtPosition = (fileName, position) => {
-    const prior = info.languageService.getCompletionsAtPosition(fileName, position);
-    prior.entries = prior.entries.filter(e => e.name !== 'caller');
-    return prior;
+  const prior = info.languageService.getCompletionsAtPosition(fileName, position);
+  prior.entries = prior.entries.filter(e => e.name !== "caller");
+  return prior;
 };
 ```
 
@@ -101,18 +103,22 @@ Users can customize your plugin behavior by providing additional data in their `
 Let's allow the user to customize the list of names to remove from the completion list:
 ```ts
 function create(info: ts.server.PluginCreateInfo) {
-    // Get a list of things to remove from the completion list from the config object.
-    // If nothing was specified, we'll just remove 'caller'
-    const whatToRemove: string[] = info.config.remove || ['caller'];
+  // Get a list of things to remove from the completion list from the config object.
+  // If nothing was specified, we'll just remove 'caller'
+  const whatToRemove: string[] = info.config.remove || ["caller"];
 
-    // ... (set up decorator here) ...
+  // ... (set up decorator here) ...
 
-    // Remove specified entries from completion list
-    proxy.getCompletionsAtPosition = (fileName, position) => {
-        const prior = info.languageService.getCompletionsAtPosition(fileName, position);
-        prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
-        return prior;
-    };
+  // Remove specified entries from completion list
+  proxy.getCompletionsAtPosition = (fileName, position) => {
+    const prior = info.languageService.getCompletionsAtPosition(
+      fileName,
+      position
+    );
+    prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
+    return prior;
+  };
+}
 ```
 
 The new `tsconfig.json` file might look like this:
@@ -145,7 +151,10 @@ Ensure that the containing directory (`C:\SomeFolder` in this example) exists an
 You can write to this log by calling into the TypeScript project's logging service:
 ```ts
 function create(info: ts.server.PluginCreateInfo) {
-    info.project.projectService.logger.info("I'm getting set up now! Check the log for this message.");
+  info.project.projectService.logger.info(
+    "I'm getting set up now! Check the log for this message."
+  );
+}
 ```
 
 ## Putting it all together
@@ -153,42 +162,52 @@ function create(info: ts.server.PluginCreateInfo) {
 ```ts
 import * as ts_module from "../node_modules/typescript/lib/tsserverlibrary";
 
-function init(modules: {typescript: typeof ts_module}) {
-    const ts = modules.typescript;
+function init(modules: { typescript: typeof ts_module }) {
+  const ts = modules.typescript;
 
-    function create(info: ts.server.PluginCreateInfo) {
-        // Get a list of things to remove from the completion list from the config object.
-        // If nothing was specified, we'll just remove 'caller'
-        const whatToRemove: string[] = info.config.remove || ['caller'];
+  function create(info: ts.server.PluginCreateInfo) {
+    // Get a list of things to remove from the completion list from the config object.
+    // If nothing was specified, we'll just remove 'caller'
+    const whatToRemove: string[] = info.config.remove || ["caller"];
 
-        // Diagnostic logging
-        info.project.projectService.logger.info("I'm getting set up now! Check the log for this message.");
+    // Diagnostic logging
+    info.project.projectService.logger.info(
+      "I'm getting set up now! Check the log for this message."
+    );
 
-        // Set up decorator
-        const proxy: ts.LanguageService = Object.create(null);        
-        for (let k of Object.keys(info.languageService) as Array<keyof ts.LanguageService>) {
-            const x = info.languageService[k];
-            proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
-        }
-
-        // Remove specified entries from completion list
-        proxy.getCompletionsAtPosition = (fileName, position) => {
-            const prior = info.languageService.getCompletionsAtPosition(fileName, position);
-            const oldLength = prior.entries.length;
-            prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
-
-            // Sample logging for diagnostic purposes
-            if (oldLength !== prior.entries.length) {
-                info.project.projectService.logger.info(`Removed ${oldLength - prior.entries.length} entries from the completion list`);
-            }
-
-            return prior;
-        };
-
-        return proxy;
+    // Set up decorator
+    const proxy: ts.LanguageService = Object.create(null);
+    for (let k of Object.keys(info.languageService) as Array<
+      keyof ts.LanguageService
+    >) {
+      const x = info.languageService[k];
+      proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
     }
 
-    return { create };
+    // Remove specified entries from completion list
+    proxy.getCompletionsAtPosition = (fileName, position) => {
+      const prior = info.languageService.getCompletionsAtPosition(
+        fileName,
+        position
+      );
+      const oldLength = prior.entries.length;
+      prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
+
+      // Sample logging for diagnostic purposes
+      if (oldLength !== prior.entries.length) {
+        const entriesRemoved = oldLength - prior.entries.length;
+        info.project.projectService.logger.info(
+          `Removed ${entriesRemoved} entries from the completion list`
+        );
+      }
+
+      return prior;
+    };
+
+    return proxy;
+  }
+
+  return { create };
 }
 
 export = init;

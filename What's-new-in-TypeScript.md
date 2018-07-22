@@ -432,8 +432,8 @@ const symbolToNumberMap = {
     [sym3]: 3
 };
 
-type KE = keyof typeof enumToStringMap;     // Enum (i.e. Enum.A | Enum.B | Enum.C)
-type KS = keyof typeof symbolToNumberMap;   // typeof sym1 | typeof sym2 | typeof sym3
+type KE = keyof typeof enumToStringMap;   // Enum (i.e. Enum.A | Enum.B | Enum.C)
+type KS = keyof typeof symbolToNumberMap; // typeof sym1 | typeof sym2 | typeof sym3
 
 function getValue<T, K extends keyof T>(obj: T, key: K): T[K] {
     return obj[key];
@@ -1032,7 +1032,7 @@ C.prototype.q = function(r) {
 
 ### Nested and merged declarations
 
-Nesting works to any level now, and merges correctly across files. Previously neither was the case. 
+Nesting works to any level now, and merges correctly across files. Previously neither was the case.
 
 ```js
 var app = window.app || {};
@@ -1168,7 +1168,7 @@ class C {
     bar = "hello";
     baz: boolean;
 //  ~~~
-//  Error! Property 'baz' has no initializer and is not definitely assigned in the 
+//  Error! Property 'baz' has no initializer and is not definitely assigned in the
 //         constructor.
 
     constructor() {
@@ -1282,10 +1282,10 @@ interface MinimumNumStrTuple extends Array<number | string> {
 
 Note that this does not imply tuples represent immutable arrays, but it is an implied convention.
 
-## Improved type inference for object literals 
+## Improved type inference for object literals
 
 TypeScript 2.7 improves type inference for multiple object literals occurring in the same context.
-When multiple object literal types contribute to a union type, we now *normalize* the object literal types such that all properties are present in each constituent of the union type. 
+When multiple object literal types contribute to a union type, we now *normalize* the object literal types such that all properties are present in each constituent of the union type.
 
 Consider:
 
@@ -1294,7 +1294,7 @@ const obj = test ? { text: "hello" } : {};  // { text: string } | { text?: undef
 const s = obj.text;  // string | undefined
 ```
 
-Previously type `{}` was inferred for `obj` and the second line subsequently caused an error because `obj` would appear to have no properties. 
+Previously type `{}` was inferred for `obj` and the second line subsequently caused an error because `obj` would appear to have no properties.
 That obviously wasn't ideal.
 
 #### Example
@@ -1328,9 +1328,9 @@ TypeScript 2.7 improves the handling of structurally identical classes in union 
 * Union type subtype reduction only removes a class type if it is a subclass of *and* derives from another class type in the union.
 * Type checking of the `instanceof` operator is now based on whether the type of the left operand *derives from* the type indicated by the right operand (as opposed to a structural subtype check).
 
-This means that union types and `instanceof` properly distinguish between structurally identical classes. 
+This means that union types and `instanceof` properly distinguish between structurally identical classes.
 
-#### Example: 
+#### Example:
 
 ```ts
 class A {}
@@ -1386,7 +1386,7 @@ The change brings the generated output from TypeScript closer to that generated 
 
 Previously CommonJS/AMD/UMD modules were treated in the same way as ES6 modules, resulting in a couple of problems. Namely:
 
-* TypeScript treats a namespace import (i.e. `import * as foo from "foo"`) for a CommonJS/AMD/UMD module as equivalent to `const foo = require("foo")`. 
+* TypeScript treats a namespace import (i.e. `import * as foo from "foo"`) for a CommonJS/AMD/UMD module as equivalent to `const foo = require("foo")`.
 Things are simple here, but they don't work out if the primary object being imported is a primitive or a class or a function.
 ECMAScript spec stipulates that a namespace record is a plain object, and that a namespace import (`foo` in the example above) is not callable, though allowed by TypeScript
 
@@ -1397,7 +1397,7 @@ Under the new `--esModuleInterop` these two issues should be addressed:
 * A namespace import (i.e. `import * as foo from "foo"`) is now correctly flagged as uncallabale. Calling it will result in an error.
 * Default imports to CommonJS/AMD/UMD are now allowed (e.g. `import fs from "fs"`), and should work as expected.
 
-> Note: The new behavior is added under a flag to avoid unwarranted breaks to existing code bases. We highly recommend applying it both to new and existing projects. 
+> Note: The new behavior is added under a flag to avoid unwarranted breaks to existing code bases. We highly recommend applying it both to new and existing projects.
 > For existing projects, namespace imports (`import * as express from "express"; express();`) will need to be converted to default imports (`import express from "express"; express();`).
 
 #### Example
@@ -1431,7 +1431,7 @@ var bar_1 = __importDefault(require("bar"));
 
 ## Numeric separators
 
-TypeScript 2.7 brings support for [ES Numeric Separators](https://github.com/tc39/proposal-numeric-separator). 
+TypeScript 2.7 brings support for [ES Numeric Separators](https://github.com/tc39/proposal-numeric-separator).
 Numeric literals can now be separated into segments using `_`.
 
 ##### Example
@@ -1445,12 +1445,12 @@ const word = 0b1100_0011_1101_0001;
 
 ## Cleaner output in `--watch` mode
 
-TypeScript's `--watch` mode now clears the screen after a re-compilation is requested. 
+TypeScript's `--watch` mode now clears the screen after a re-compilation is requested.
 
 ## Prettier `--pretty` output
 
 TypeScript's `--pretty` flag can make error messages easier to read and manage.
-`--pretty` now uses colors for file names, diagnostic codes, and line numbers. 
+`--pretty` now uses colors for file names, diagnostic codes, and line numbers.
 File names and positions are now also formatted to allow navigation in common terminals (e.g. Visual Studio Code terminal).
 
 
@@ -1505,8 +1505,8 @@ By the way, note that whereas some languages (e.g. C# and Scala) require varianc
 
 #### Note:
 
-Under `--strictFunctionTypes` the first assignment is still permitted if `compare` was declared as a method. 
-Effectively, `T` is bivariant in `Comparer<T>` because it is used only in method parameter positions. 
+Under `--strictFunctionTypes` the first assignment is still permitted if `compare` was declared as a method.
+Effectively, `T` is bivariant in `Comparer<T>` because it is used only in method parameter positions.
 
 ```ts
 interface Comparer<T> {
@@ -1541,7 +1541,7 @@ This contrasts with inferences from covariant positions, where we infer the *bes
 ## Support for JSX Fragment Syntax
 
 TypeScript 2.6.2 adds support for the new `<>...</>` syntax for fragments in JSX.
-It is frequently desirable to return multiple children from a component. 
+It is frequently desirable to return multiple children from a component.
 However, this is invalid, so the usual approach has been to wrap the text in an extra element, such as a `<div>` or `<span>` as shown below.
 
 ```tsx
@@ -1689,12 +1689,12 @@ wn' 'es2016.array.include' 'es2017.object' 'es2017.sharedmemory' 'es2017.string'
  --noImplicitReturns                        関数の一部のコード パスが値を返さない場合にエラーを報告します。
  --noFallthroughCasesInSwitch               switch ステートメントに case のフォールスルーがある場合にエラーを報告します。
  --types                                    コンパイルに含む型宣言ファイル。
- @<ファイル>  
+ @<ファイル>
 ```
 
 ## Suppress errors in .ts files using '// @ts-ignore' comments
 
-TypeScript 2.6 support suppressing errors in .js files using `// @ts-ignore` comments placed above the offending lines. 
+TypeScript 2.6 support suppressing errors in .js files using `// @ts-ignore` comments placed above the offending lines.
 
 #### Example
 
@@ -1710,7 +1710,7 @@ It is recommended practice to have the remainder of the comment following `@ts-i
 
 Please note that this comment only suppresses the error reporting, and we recommend you use this comments _very sparingly_.
 
-## Faster `tsc --watch` 
+## Faster `tsc --watch`
 
 TypeScript 2.6 brings a faster `--watch` implementation.
 The new version optimizes code generation and checking for code bases using ES modules.
@@ -1747,7 +1747,7 @@ Also functions that are only called within their own bodies are considered unuse
 #### Example
 
 ```ts
-function f() { 
+function f() {
     f(); // Error: 'f' is declared but its value is never read
 }
 ```
