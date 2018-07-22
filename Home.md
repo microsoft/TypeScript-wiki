@@ -16,7 +16,7 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 * [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
 * [Nightly Builds](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
-# Tutorial
+# Tutorials
 
 [See our full list of quick starts](https://www.typescriptlang.org/samples/) which includes
 
