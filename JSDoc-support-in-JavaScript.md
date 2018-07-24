@@ -63,6 +63,14 @@ var var8;
 /** @type {{a: string, b: number}} */
 var var9;
 
+// You can specify as an HTML Element
+
+// An element with dom properties
+/** @type {HTMLElement} myElement */
+var myElement = document.querySelector(selector);
+element.dataset.myData = '';
+
+
 // "@typedef" may be used to define complex types
 // (this same same syntax works with @param)
 /**
