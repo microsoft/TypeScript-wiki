@@ -16,6 +16,8 @@
 
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
+* Refactorings to...
+  * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
 
 # 3.0 (July 2018)
 
