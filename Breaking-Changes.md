@@ -2,6 +2,162 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.1
+
+## Some vendor-specific types are removed from `lib.d.ts`
+
+The library is partially generated from webidl files from the DOM specs, and as a result some vendor-specific types have been removed. 
+
+Here is the full list of removed types:
+
+* `CanvasRenderingContext2D.mozImageSmoothingEnabled`
+* `CanvasRenderingContext2D.msFillRule`
+* `CanvasRenderingContext2D.oImageSmoothingEnabled`
+* `CanvasRenderingContext2D.webkitImageSmoothingEnabled`
+* `Document.caretRangeFromPoint`
+* `Document.createExpression`
+* `Document.createNSResolver`
+* `Document.execCommandShowHelp`
+* `Document.exitFullscreen`
+* `Document.exitPointerLock`
+* `Document.focus`
+* `Document.fullscreenElement`
+* `Document.fullscreenEnabled`
+* `Document.getSelection`
+* `Document.msCapsLockWarningOff`
+* `Document.msCSSOMElementFloatMetrics`
+* `Document.onvisibilitychange`
+* `Document.onwebkitfullscreenchange`
+* `Document.onwebkitfullscreenerror`
+* `Document.pointerLockElement`
+* `Document.queryCommandIndeterm`
+* `Document.URLUnencoded`
+* `Document.webkitCurrentFullScreenElement`
+* `Document.webkitFullscreenElement`
+* `Document.webkitFullscreenEnabled`
+* `Document.webkitIsFullScreen`
+* `Document.xmlEncoding`
+* `Document.xmlStandalone`
+* `Document.xmlVersion`
+* `DocumentType.entities`
+* `DocumentType.internalSubset`
+* `DocumentType.notations`
+* `DOML2DeprecatedSizeProperty`
+* `Element.msContentZoomFactor`
+* `Element.msGetUntransformedBounds`
+* `Element.msMatchesSelector`
+* `Element.msRegionOverflow`
+* `Element.msReleasePointerCapture`
+* `Element.msSetPointerCapture`
+* `Element.msZoomTo`
+* `Element.onwebkitfullscreenchange`
+* `Element.onwebkitfullscreenerror`
+* `Element.outerHTML`
+* `Element.webkitRequestFullScreen`
+* `Element.webkitRequestFullscreen`
+* `ElementCSSInlineStyle`
+* `ExtendableEventInit`
+* `ExtendableMessageEventInit`
+* `FetchEventInit`
+* `GenerateAssertionCallback`
+* `HTMLAnchorElement.Methods`
+* `HTMLAnchorElement.mimeType`
+* `HTMLAnchorElement.nameProp`
+* `HTMLAnchorElement.protocolLong`
+* `HTMLAnchorElement.urn`
+* `HTMLAreasCollection`
+* `HTMLHeadElement.profile`
+* `HTMLImageElement.msGetAsCastingSource`
+* `HTMLImageElement.msGetAsCastingSource`
+* `HTMLImageElement.msKeySystem`
+* `HTMLImageElement.msPlayToDisabled`
+* `HTMLImageElement.msPlayToDisabled`
+* `HTMLImageElement.msPlayToPreferredSourceUri`
+* `HTMLImageElement.msPlayToPreferredSourceUri`
+* `HTMLImageElement.msPlayToPrimary`
+* `HTMLImageElement.msPlayToPrimary`
+* `HTMLImageElement.msPlayToSource`
+* `HTMLImageElement.msPlayToSource`
+* `HTMLImageElement.x`
+* `HTMLImageElement.y`
+* `HTMLInputElement.webkitdirectory`
+* `HTMLLinkElement.import`
+* `HTMLMetaElement.charset`
+* `HTMLMetaElement.url`
+* `HTMLSourceElement.msKeySystem`
+* `HTMLStyleElement.disabled`
+* `HTMLSummaryElement`
+* `MediaQueryListListener`
+* `MSAccountInfo`
+* `MSAudioLocalClientEvent`
+* `MSAudioLocalClientEvent`
+* `MSAudioRecvPayload`
+* `MSAudioRecvSignal`
+* `MSAudioSendPayload`
+* `MSAudioSendSignal`
+* `MSConnectivity`
+* `MSCredentialFilter`
+* `MSCredentialParameters`
+* `MSCredentials`
+* `MSCredentialSpec`
+* `MSDCCEvent`
+* `MSDCCEventInit`
+* `MSDelay`
+* `MSDescription`
+* `MSDSHEvent`
+* `MSDSHEventInit`
+* `MSFIDOCredentialParameters`
+* `MSIceAddrType`
+* `MSIceType`
+* `MSIceWarningFlags`
+* `MSInboundPayload`
+* `MSIPAddressInfo`
+* `MSJitter`
+* `MSLocalClientEvent`
+* `MSLocalClientEventBase`
+* `MSNetwork`
+* `MSNetworkConnectivityInfo`
+* `MSNetworkInterfaceType`
+* `MSOutboundNetwork`
+* `MSOutboundPayload`
+* `MSPacketLoss`
+* `MSPayloadBase`
+* `MSPortRange`
+* `MSRelayAddress`
+* `MSSignatureParameters`
+* `MSStatsType`
+* `MSStreamReader`
+* `MSTransportDiagnosticsStats`
+* `MSUtilization`
+* `MSVideoPayload`
+* `MSVideoRecvPayload`
+* `MSVideoResolutionDistribution`
+* `MSVideoSendPayload`
+* `NotificationEventInit`
+* `PushEventInit`
+* `PushSubscriptionChangeInit`
+* `RTCIdentityAssertionResult`
+* `RTCIdentityProvider`
+* `RTCIdentityProviderDetails`
+* `RTCIdentityValidationResult`
+* `SVGElement.xmlbase`
+* `SVGGraphicsElement.farthestViewportElement`
+* `SVGGraphicsElement.getTransformToElement`
+* `SVGGraphicsElement.nearestViewportElement`
+* `SVGStylable`
+* `SVGTests.hasExtension`
+* `SVGTests.requiredFeatures`
+* `SyncEventInit`
+* `ValidateAssertionCallback`
+* `WebKitDirectoryEntry`
+* `WebKitDirectoryReader`
+* `WebKitEntriesCallback`
+* `WebKitEntry`
+* `WebKitErrorCallback`
+* `WebKitFileCallback`
+* `WebKitFileEntry`
+* `WebKitFileSystem`
+
 # TypeScript 3.0
 
 ## The `unknown` keyword is reserved
