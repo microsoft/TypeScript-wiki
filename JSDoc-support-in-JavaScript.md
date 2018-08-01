@@ -1,4 +1,4 @@
-The below code outlines which constructs are currently supported or not supported
+The list below outlines which constructs are currently supported
 when using JSDoc annotations to provide type information in JavaScript files.
 
 Note any tags which are not explicitly listed below (such as `@async`) are not yet supported.
