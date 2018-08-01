@@ -1,78 +1,220 @@
 The below code outlines which constructs are currently supported or not supported
 when using JSDoc annotations to provide type information in JavaScript files.
 
-Note any tags which are not explicitly listed below (such as `@constructor`) are not yet supported.
+Note any tags which are not explicitly listed below (such as `@async`) are not yet supported.
+
+* `@type`
+* `@param` (or `@arg` or `@argument`)
+* `@returns` (or `@return`)
+* `@typedef`
+* `@callback`
+* `@template`
+* `@class` (or `@constructor`)
+* `@this`
+* `@augments` (or `@extends`)
+* `@enum`
+
+The meaning is usually the same, or a superset, of the meaning of the tag given at usejsdoc.org.
+The code below describes the differences and gives some example usage of each tag.
+
+## `@type`
+
+You can use the "@type" tag and reference a type name (either primitive, defined in a TypeScript declaration, or in a JSDoc "@typedef" tag).
+You can use any Typescript type, and most JSDoc types.
 
 ```js
-// === Supported ===
-
-// You can use the "@type" tag and reference a type name (either primitive,
-// defined in a TypeScript declaration, or in a JSDoc "@typedef" tag)
-// You can use any Typescript type, and most JSDoc types.
 /**
  * @type {string}
  */
-var var1;
+var s;
 
 /** @type {Window} */
-var var2;
+var win;
 
 /** @type {PromiseLike<string>} */
-var var3;
+var promisedString;
 
-
-// Likewise, for the return type of a function
-/**
- * @return {PromiseLike<string>}
- */
-function fn1(){}
-
-/**
- * @returns {{a: string, b: number}} - May use '@returns' as well as '@return'
- */
-function fn2(){}
-
-
-/**
- * The type specifier can specify a union type - e.g. a string or a boolean
- * @type {(string | boolean)}
- */
-var var4;
-
-/**
- * Note that parens are options for union types
- * @type {string | boolean}
- */
-var var5;
-
-
-// You can specify an array type (e.g. an array of numbers)
-/** @type {number[]} */
-var var6;
-
-// An array of numbers (alternate syntax)
-/** @type {Array.<number>} */
-var var7;
-
-/** @type {Array<number>} */
-var var8;
-
-
-// An object specification may also be used within the braces
-// For example, an object with properties 'a' (string) and 'b' (number)
-/** @type {{a: string, b: number}} */
-var var9;
-
-// You can specify as an HTML Element
-
-// An element with dom properties
-/** @type {HTMLElement} myElement */
+// You can specify an HTML Element with DOM properties
+/** @type {HTMLElement} */
 var myElement = document.querySelector(selector);
 element.dataset.myData = '';
 
+```
 
-// "@typedef" may be used to define complex types
-// (this same same syntax works with @param)
+`@type` can specify a union type &mdash; for example, something can be either a string or a boolean.
+
+```js
+/**
+ * @type {(string | boolean)}
+ */
+var sb;
+```
+
+Note that parentheses are optional for union types.
+
+```js
+/**
+ * @type {string | boolean}
+ */
+var sb;
+```
+
+You can specify array types using a variety of syntaxes:
+
+```js
+/** @type {number[]} */
+var ns;
+/** @type {Array.<number>} */
+var nds;
+/** @type {Array<number>} */
+var nas;
+```
+
+You can also specify object literal types.
+For example, an object with properties 'a' (string) and 'b' (number) uses the following syntax:
+
+```js
+/** @type {{ a: string, b: number }} */
+var var9;
+```
+
+You can specify map-like and array-like objects using string and number index signatures, using either standard JSDoc syntax or Typescript syntax.
+
+```js
+/**
+ * A map-like object that maps arbitrary `string` properties to `number`s.
+ *
+ * @type {Object.<string, number>}
+ */
+var stringToNumber;
+
+/** @type {Object.<number, object>} */
+var arrayLike;
+```
+
+The preceding two types are equivalent to the Typescript types `{ [x: string]: number }` and `{ [x: number]: any }`. The compiler understands both syntaxes.
+
+You can specify function types using either Typescript or Closure syntax:
+
+```js
+/** @type {function(string, boolean): number} Closure syntax */
+var sbn;
+/** @type {(s: string, b: boolean) => number} Typescript syntax */
+var sbn2;
+```
+
+Or you can just use the unspecified `Function` type:
+
+```js
+/** @type {Function} */
+var fn7;
+/** @type {function} */
+var fn6;
+```
+
+Other types from Closure also work:
+
+```js
+/**
+ * @type {*} - can be 'any' type
+ */
+var star;
+/**
+ * @type {?} - unknown type (same as 'any')
+ */
+var question;
+```
+
+### Casts
+
+Typescript borrows cast syntax from Closure.
+This lets you cast types to other types by adding a `@type` tag before any parenthesized expression.
+
+```js
+/**
+ * @type {number | string}
+ */
+var numberOrString = Math.random() < 0.5 ? "hello" : 100;
+var typeAssertedNumber = /** @type {number} */ (numberOrString)
+```
+
+### Import types
+
+You can also import declarations from other files using import types.
+This syntax is Typescript-specific and differs from the JSDoc standard:
+
+```js
+/**
+ * @param p { import("./a").Pet }
+ */
+function walk(p) {
+    console.log(`Walking ${p.name}...`);
+}
+```
+
+import types can also be used in type alias declarations:
+
+```js
+/**
+ * @typedef Pet { import("./a").Pet }
+ */
+
+/**
+ * @type {Pet}
+ */
+var myPet;
+myPet.name;
+```
+
+import types can be used to get the type of a value from a module if you don't know the type, or if it has a large type that is annoying to type:
+
+```js
+/**
+ * @type {typeof import("./a").x }
+ */
+var x = require("./a").x;
+```
+
+## `@param` and `@returns`
+
+`@param` uses the same type syntax as `@type`, but adds a parameter name.
+The parameter may also be declared optional by surrounding the name with square brackets:
+
+```js
+// Parameters may be declared in a variety of syntactic forms
+/**
+ * @param {string}  p1 - A string param.
+ * @param {string=} p2 - An optional param (Closure syntax)
+ * @param {string} [p3] - Another optional param (JSDoc syntax).
+ * @param {string} [p4="test"] - An optional param with a default value
+ * @return {string} This is the result
+ */
+function stringsStringStrings(p1, p2, p3, p4){
+  // TODO
+}
+```
+
+Likewise, for the return type of a function:
+
+```js
+/**
+ * @return {PromiseLike<string>}
+ */
+function ps(){}
+
+/**
+ * @returns {{ a: string, b: number }} - May use '@returns' as well as '@return'
+ */
+function ab(){}
+```
+
+## `@typedef`, `@callback`, and `@param`
+
+`@typedef` may be used to define complex types.
+Similar syntax works with `@param`.
+
+
+```js
 /**
  * @typedef {Object} SpecialType - creates a new type named 'SpecialType'
  * @property {string} prop1 - a string property of SpecialType
@@ -83,8 +225,11 @@ element.dataset.myData = '';
  */
 /** @type {SpecialType} */
 var specialTypeObject;
+```
 
-// You can use both 'object' and 'Object'
+You can use either `object` or `Object` on the first line.
+
+```js
 /**
  * @typedef {object} SpecialType1 - creates a new type named 'SpecialType'
  * @property {string} prop1 - a string property of SpecialType
@@ -93,54 +238,86 @@ var specialTypeObject;
  */
 /** @type {SpecialType1} */
 var specialTypeObject1;
+```
+
+`@param` allows a similar syntax for one-off type specifications.
+Note that the nested property names must be prefixed with the name of the parameter:
 
 
-// Parameters may be declared in a variety of syntactic forms
+```js
 /**
- * @param p0 {string} - A string param declared using TS-style
- * @param {string}  p1 - A string param.
- * @param {string=} p2 - An optional param
- * @param {string} [p3] - Another optional param.
- * @param {string} [p4="test"] - An optional param with a default value
- * @return {string} This is the result
+ * @param {Object} options - The shape is the same as SpecialType above
+ * @param {string} options.prop1
+ * @param {number} options.prop2
+ * @param {number=} options.prop3
+ * @param {number} [options.prop4]
+ * @param {number} [options.prop5=42]
  */
-function fn3(p0, p1, p2, p3, p4){
-  // TODO
+function special(options) {
+  return (options.prop4 || 1001) + options.prop5;
 }
+```
 
-// Index signatures
-/** @type {Object.<string, object>} */
-var map;
-/** @type {Object.<number, object>} */
-var arrayLike;
-// equivalent to { [s: string]: any } and { [n: number]: any }
+`@callback` is similar to `@typedef`, but it specifies a function type instead of an object type:
 
+```js
+/**
+ * @callback Predicate
+ * @param {string} data
+ * @param {number} [index]
+ * @returns {boolean}
+ */
+/** @type {Predicate} */
+const ok = s => !(s.length % 2);
+```
 
-// Generic types may also be used
+Of course, any of these types can be declared using Typescript syntax in a single-line `@typedef`:
+
+```js
+/** @typedef {{ prop1: string, prop2: string, prop3?: number }} SpecialType */
+/** @typedef {(data: string, index?: number) => boolean} Predicate */
+```
+
+## `@template`
+
+You can declare generic types with the `@template` tag:
+
+```js
 /**
  * @template T
  * @param {T} p1 - A generic parameter that flows through to the return type
  * @return {T}
  */
-function fn4(p1){}
+function id(x){ return x }
+```
 
-// Define function type
-/** @type {function(string, boolean): number} */
-var fn5;
+Use comma or multiple tags to declare multiple type parameters:
 
-// Both "fn6" and "fn7" have same type of Function type.
-/** @type {function} */
-var fn6;
-
-/** @type {Function} */
-var fn7;
-
+```js
 /**
- * @param {*} p1 - Param can be 'any' type
- * @param {?} p2 - Param is of unknown type (same as 'any')
+ * @template T,U,V
+ * @template W,X
  */
-function fn8(p1, p2){}
+```
 
+You can also specify a type constraint before the type parameter name.
+Only the first type parameter in a list is constrained:
+
+```js
+/**
+ * @template {string} K - K must be a string or string literal
+ * @template {{ serious(): string }} Seriousalizable - must have a serious method
+ * @param {K} key
+ * @param {Seriousalizable} object
+ */
+function seriousalize(key, object) {
+  // ????
+}
+```
+
+## More examples
+
+```js
 var someObj = {
   /**
    * @param {string} param1 - Docs on property assignments work
@@ -173,28 +350,11 @@ let myArrow = x => x * x;
 var sfc = (test) => <div>{test.a.charAt(0)}</div>;
 
 /**
- * A parameter can be a class constructor.
+ * A parameter can be a class constructor, using Closure syntax.
  *
  * @param {{new(...args: any[]): object}} C - The class to register
  */
 function registerClass(C) {}
-
-/**
- * A map-like object that maps arbitrary `string` properties to `number`s.
- *
- * @type {Object.<string, number>}
- */
-var var10;
-
-/**
- * Listing properties that exist on `param1` through dotted param names.
- *
- * @param {object} param1
- * @param {string} param1.name
- */
-function fn8(param1) {
-  return param1.name;
-}
 
 /**
  * @param {...string} p1 - A 'rest' arg (array) of strings. (treated as 'any')
@@ -207,78 +367,62 @@ function fn10(p1){}
 function fn9(p1) {
   return p1.join();
 }
-
-// We can "cast" types to other types using a JSDoc type assertion
-// by adding an `@type` tag around any parenthesized expression.
-
-/**
- * @type {number | string}
- */
-var numberOrString = Math.random() < 0.5 ? "hello" : 100;
-var typeAssertedNumber = /** @type {number} */ (numberOrString)
-
-// We can also import declarations from other files using 
-// 'import' types:
-
-/**
- * @param p { import("./a").Pet }
- */
-function walk(p) {
-    console.log(`Walking ${p.name}...`);
-}
-
-// 'import' types can also be used in type alias declarations
-
-/**
- * @type Pet { import("./a").Pet }
- */
-
-/**
- * @type {Pet}
- */
-var myPet;
-myPet.name;
-
-// 'import' types can be used to get the type of a value from a module
-
-/**
- * @type {typeof import("./a").x }
- */
-var x = require("./a").x;
 ```
 
 ## Patterns that are known NOT to be supported
 
+Referring to objects in the value space as types doesn't work unless the object also creates a type, like a constructor function.
+
 ```js
-function SomeFunction(){}
-/**
- * Refering to objects in the value space as types isn't guaranteed to work.
- *
- * @type {SomeFunction}
- */
-var var11;
+function aNormalFunction() {
 
+}
 /**
- * Optional members of object literals (optionality is ignored)
- *
- * @type {{a: string, b: number=}}
+ * @type {aNormalFunction}
  */
-var var12;
-
+var wrong;
 /**
- * A nullable number (only works if `strictNullChecks` is on)
- *
- * @type {?number}
+ * Use 'typeof' instead:
+ * @type {typeof aNormalFunction}
  */
-var var13;
-
-/**
- * A 'non-nullable number (treated as just `number`)
- *
- * @type {!number}
- */
-var var14;
-
-// Inline JsDoc comments (treated as 'any')
-function fn10(/** string */ p1) {}
+var right;
 ```
+
+Postfix equals on a property type in an object literal type doesn't specify an optional property:
+
+```js
+/**
+ * @type {{ a: string, b: number= }}
+ */
+var wrong;
+/**
+ * Use postfix question on the property name instead:
+ * @type {{ a: string, b?: number }}
+ */
+var right;
+```
+
+Nullable types only have meaning if `strictNullChecks` is on:
+
+```js
+/**
+ * @type {?number}
+ * With strictNullChecks: true -- number | null
+ * With strictNullChecks: off  -- number
+ */
+var nullable;
+```
+
+Non-nullable types have no meaning and are treated just as their original type:
+
+```js
+/**
+ * @type {!number}
+ * Just has type number
+ */
+var normal;
+```
+
+Unlike JSDoc's type system, Typescript only allows you to mark types as containing null or not.
+There is no explicit non-nullability -- if strictNullChecks is on, then `number` is not nullable.
+If it is off, then `number` is nullable.

@@ -2,6 +2,8 @@ TypeScript 2.3 and later support type-checking and reporting errors in `.js` fil
 
 You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely, you can choose to check only a few `.js` files by adding a `// @ts-check` comment to them without setting `--checkJs`.
 You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
+Note that if you have a `tsconfig.json`, JS checking will respect strict flags like `noImplicitAny`, `strictNullChecks`, etc.
+However, because of the relative looseness of JS checking, combining strict flags with it may be surprising.
 
 Here are some notable differences on how checking works in `.js` files compared to `.ts` files:
 
@@ -170,7 +172,7 @@ var obj = { a: 1 };
 obj.b = 2;  // Allowed
 ```
 
-Object literals get a default index signature `[x:string]: any` that allows them to be treated as open maps instead of closed objects.
+Object literals behave as if they have an index signature `[x:string]: any` that allows them to be treated as open maps instead of closed objects.
 
 Like other special JS checking behaviors, this behavior can be changed by specifying a JSDoc type for the variable. For example:
 
@@ -251,11 +253,11 @@ function sum(/* numbers */) {
 
 ## Unspecified type parameters default to `any`
 
-Since there is no natural syntax for specifying generic type parameters in Javascript, an unspecified generic type parameter defaults to `any`.
+Since there is no natural syntax for specifying generic type parameters in Javascript, an unspecified type parameter defaults to `any`.
 
 ### In extends clause:
 
-For instance, `React.Component` is defined to have two generic type parameters, `Props` and `State`.
+For instance, `React.Component` is defined to have two type parameters, `Props` and `State`.
 In a `.js` file, there is no legal way to specify these in the extends clause. By default the type arguments will be `any`:
 
 ```js
@@ -285,7 +287,7 @@ class MyComponent extends Component {
 
 ### In JSDoc references
 
-An unspecified generic type argument in JSDoc defaults to any:
+An unspecified type argument in JSDoc defaults to any:
 
 ```js
 /** @type{Array} */
@@ -305,7 +307,7 @@ y.push("string"); // Error, string is not assignable to number
 
 ### In function calls
 
-A call to generic functions uses arguments to infer the generic type parameters. Sometimes this process fails to infer any types, mainly because of lack on inference sources; in these cases, the generic type parameters will default to `any`. For example:
+A call to a generic function uses the arguments to infer the type parameters. Sometimes this process fails to infer any types, mainly because of lack of inference sources; in these cases, the type parameters will default to `any`. For example:
 
 ```js
 var p = new Promise((resolve, reject) => { reject() });
