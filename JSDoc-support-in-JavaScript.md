@@ -11,7 +11,7 @@ Note any tags which are not explicitly listed below (such as `@async`) are not y
 * `@template`
 * `@class` (or `@constructor`)
 * `@this`
-* `@augments` (or `@extends`)
+* `@extends` (or `@augments`)
 * `@enum`
 
 The meaning is usually the same, or a superset, of the meaning of the tag given at usejsdoc.org.
@@ -312,6 +312,89 @@ Only the first type parameter in a list is constrained:
  */
 function seriousalize(key, object) {
   // ????
+}
+```
+
+## `@constructor`
+
+The compiler infers constructor functions based on this-property assignments, but you can make checking stricter and suggestions better if you add a `@constructor` tag:
+
+```js
+/**
+ * @constructor
+ * @param {number} data
+ */
+function C(data) {
+  this.size = 0;
+  this.initialize(data); // Should error, initializer expects a string
+}
+/**
+ * @param {string} s
+ */
+C.prototype.initialize = function (s) {
+  this.size = s.length
+}
+
+var c = new C(0);
+var result = C(1); // C should only be called with new
+```
+
+With `@constructor`, `this` is checked inside the constructor function `C`, so you will get suggestions for the `initialize` method and an error if you pass it a number. You will also get an error if you call `C` instead of constructing it.
+
+Unfortunately, this means that constructor functions that are also callable cannot use `@constructor`.
+
+## `@this`
+
+The compiler can usually figure out the type of `this` when it has some context to work with. When it doesn't, you can explicitly specify the type of `this` with `@this`:
+
+```js
+/**
+ * @this {HTMLElement}
+ * @param {*} e
+ */
+function callbackForLater(e) {
+    this.clientHeight = parseInt(e) // should be fine!
+}
+```
+
+## `@extends`
+
+When Javascript classes extend a generic base class, there is nowhere to specify what the type parameter should be. The `@extends` tag provides a place for that type parameter:
+
+```js
+/**
+ * @template T
+ * @extends {Set<T>}
+ */
+class SortableSet extends Set {
+  // ...
+}
+```
+
+Note that `@extends` only works with classes. Currently, there is no way for a constructor function extend a class.
+
+
+## `@enum`
+
+The `@enum` tag allows you to create an object literal whose members are all of a specified type. Unlike most object literals in Javascript, it does not allow other members.
+
+```js
+/** @enum {number} */
+const JSDocState = {
+  BeginningOfLine: 0,
+  SawAsterisk: 1,
+  SavingComments: 2,
+}
+```
+
+Note that `@enum` is quite different from, and much simpler than, Typescript's `enum`. However, unlike Typescript's enums, `@enum` can have any type:
+
+```js
+/** @enum {function(number): number} */
+const Math = {
+  add1: n => n + 1,
+  id: n => -n,
+  sub1: n => n - 1,
 }
 ```
 
