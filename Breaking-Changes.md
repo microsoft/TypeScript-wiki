@@ -26,6 +26,8 @@ Here is the full list of removed types:
 * `Document.getSelection`
 * `Document.msCapsLockWarningOff`
 * `Document.msCSSOMElementFloatMetrics`
+* `Document.msElementsFromRect`
+* `Document.msElementsFromPoint`
 * `Document.onvisibilitychange`
 * `Document.onwebkitfullscreenchange`
 * `Document.onwebkitfullscreenerror`
