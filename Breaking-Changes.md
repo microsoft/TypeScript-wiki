@@ -161,6 +161,7 @@ Here is the full list of removed types:
 * `WebKitFileEntry`
 * `WebKitFileSystem`
 * `Window.clearImmediate`
+* `Window.msSetImmediate`
 * `Window.setImmediate`
 
 ### Recommendations:
