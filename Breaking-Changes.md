@@ -141,6 +141,8 @@ Here is the full list of removed types:
 * `RTCIdentityProvider`
 * `RTCIdentityProviderDetails`
 * `RTCIdentityValidationResult`
+* `Screen.deviceXDPI`
+* `Screen.logicalXDPI`
 * `SVGElement.xmlbase`
 * `SVGGraphicsElement.farthestViewportElement`
 * `SVGGraphicsElement.getTransformToElement`
