@@ -54,7 +54,6 @@ Here is the full list of removed types:
 * `Element.msZoomTo`
 * `Element.onwebkitfullscreenchange`
 * `Element.onwebkitfullscreenerror`
-* `Element.outerHTML`
 * `Element.webkitRequestFullScreen`
 * `Element.webkitRequestFullscreen`
 * `ElementCSSInlineStyle`
@@ -159,6 +158,30 @@ Here is the full list of removed types:
 * `WebKitFileCallback`
 * `WebKitFileEntry`
 * `WebKitFileSystem`
+* `Window.clearImmediate`
+* `Window.setImmediate`
+
+### Recommendations:
+
+If your run-time guaranteed to have some of these names available at run-time (e.g. IE-only app) add the declarations locally in your project, e.g.:
+
+To Add `Element.msMatchesSelector` back, add the flowing to a local `dom.ie.d.ts`
+
+```ts
+interface Element {
+    msMatchesSelector(selectors: string): boolean;
+}
+```
+
+Similarly to add `clearImmediate` and `setImmediate`, add a declaration for `Window` in your local `dom.ie.d.ts`:
+
+```ts
+interface Window { 
+    clearImmediate(handle: number): void;
+    setImmediate(handler: (...args: any[]) => void): number;
+    setImmediate(handler: any, ...args: any[]): number;
+}
+```
 
 # TypeScript 3.0
 
