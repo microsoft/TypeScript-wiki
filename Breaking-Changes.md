@@ -8,10 +8,7 @@ These changes list where implementation differs between versions as the spec and
 
 The library is partially generated from webidl files from the DOM specs, and as a result some vendor-specific types have been removed. 
 
-<details>
-<summary>
-Click here to the full list of removed types:
-</summary>
+<details><summary>Click here to the full list of removed types:</summary><p>
 * `CanvasRenderingContext2D.mozImageSmoothingEnabled`
 * `CanvasRenderingContext2D.msFillRule`
 * `CanvasRenderingContext2D.oImageSmoothingEnabled`
@@ -165,7 +162,7 @@ Click here to the full list of removed types:
 * `Window.clearImmediate`
 * `Window.msSetImmediate`
 * `Window.setImmediate`
-</details>
+</p></details>
 
 ### Recommendations:
 
