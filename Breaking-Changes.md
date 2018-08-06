@@ -192,6 +192,21 @@ interface Window {
 
 `unknown` is now a reserved type name, as it is now a built-in type. Depending on your intended use of `unknown`, you may want to remove the declaration entirely (favoring the newly introduced `unknown` type), or rename it to something else.
 
+## Intersecting with `null`/`undefined` reduces to `null`/`undefined` outside of `strictNullChecks`
+
+In the following example, `A` has the type `null` and `B` has the type `undefined` when `strictNullChecks` is turned off:
+
+```ts
+type A = { a: number } & null;      // null
+type B = { a: number } & undefined; // undefined
+```
+
+This is because TypeScript 3.0 is better at reducing subtypes and supertypes in intersection and union types respectively; however, because `null` and `undefined` are both considered subtypes of every other type when `strictNullChecks` is off, an intersection with some object type and either will always reduce to `null` or `undefined`.
+
+### Recommendation
+
+If you were relying on `null` and `undefined` to be ["identity" elements](https://en.wikipedia.org/wiki/Identity_element) under intersections, you should look for a way to use `unknown` instead of `null` or `undefined` wherever they appeared
+
 # TypeScript 2.9
 
 ## `keyof` now includes `string`, `number` and `symbol` keys
