@@ -13,9 +13,10 @@
 
 # 3.1 (August 2018)
 
-
+* [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Named type arguments & partial type argument inference](https://github.com/Microsoft/TypeScript/pull/23696)
+* [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 * [ ] Refactorings to...
   * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
 
