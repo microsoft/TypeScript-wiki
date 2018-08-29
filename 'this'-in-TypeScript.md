@@ -113,3 +113,23 @@ window.setTimeout(x.someMethod.bind(x), 100);
  * Bad: In TypeScript, this currently has no type safety
  * Bad: Only available in [ECMAScript 5](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) or newer
  * Bad: You have to type the instance name twice
+
+### Specify type of `this` in function signature
+See details [here](https://www.typescriptlang.org/docs/handbook/functions.html#this-parameters).
+
+```ts
+interface SomeEvent {
+    cancelable: boolean;
+    preventDefault(): void;
+}
+
+function eventHandler(this: SomeEvent) {
+    if (this.cancelable) {
+        this.preventDefault();
+    }
+    // ...        
+}
+```
+
+ * Good: The function has type information of the context it is supposed to run in, which is helpful in type checking and IDE completion
+ * Bad: The syntax of having `this` type declaration among function arguments might be confusing for developers at reading-time
