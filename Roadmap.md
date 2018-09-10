@@ -22,6 +22,7 @@
 
 * [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
 * [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
+* [X] [Refactor from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
 
 # 3.0 (July 2018)
 
