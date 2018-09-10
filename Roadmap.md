@@ -11,14 +11,17 @@
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
-# 3.1 (August 2018)
+# 3.2 (November 2018)
 
-* [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
-* [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 * [ ] Refactorings to...
   * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+
+# 3.1 (September 2018)
+
+* [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
+* [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 
 # 3.0 (July 2018)
 
