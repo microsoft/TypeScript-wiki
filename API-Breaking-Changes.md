@@ -1,3 +1,7 @@
+# TypeScript 3.1
+
+- `SymbolFlags.JSContainer` has been renamed to `SymbolFlags.Assignment` to reflect that Typescript now supports expando assignments to functions.
+
 # TypeScript 3.0
 
 - The deprecated internal method `LanguageService#getSourceFile` has been removed. See #24540.
@@ -31,11 +35,11 @@ See https://github.com/Microsoft/TypeScript/pull/15594 for more details.
 
 # TypeScript 2.1
 
-- `ParseConfigHost` now require a new member `readFile` to support [configuration inheritance](https://github.com/Microsoft/TypeScript/pull/9941).
+- `ParseConfigHost` now requires a new member `readFile` to support [configuration inheritance](https://github.com/Microsoft/TypeScript/pull/9941).
 
 # TypeScript 1.9
 
-- `LanguageService.getSourceFile` is removed (https://github.com/Microsoft/TypeScript/pull/7584), `LanguageService.getProgram().getSourceFile` should be used instead.
+- [`LanguageService.getSourceFile` is removed](https://github.com/Microsoft/TypeScript/pull/7584); `LanguageService.getProgram().getSourceFile` should be used instead.
 
 # TypeScript 1.7
 
