@@ -6,7 +6,7 @@ These changes list where implementation differs between versions as the spec and
 
 ## Some vendor-specific types are removed from `lib.d.ts`
 
-The library is partially generated from webidl files from the DOM specs, and as a result some vendor-specific types have been removed. 
+TypeScript's built-in `.d.ts` library (`lib.d.ts` and family) is now partially generated from Web IDL files from the DOM specification. As a result some vendor-specific types have been removed. 
 
 <details><summary>Click here to the full list of removed types:</summary><p>
 
