@@ -177,7 +177,7 @@ interface Element {
 }
 ```
 
-Similarly to add `clearImmediate` and `setImmediate`, add a declaration for `Window` in your local `dom.ie.d.ts`:
+Similarly, to add `clearImmediate` and `setImmediate`, you can add a declaration for `Window` in your local `dom.ie.d.ts`:
 
 ```ts
 interface Window { 
@@ -186,6 +186,24 @@ interface Window {
     setImmediate(handler: any, ...args: any[]): number;
 }
 ```
+
+## Narrowing functions now intersects `{}`, `Object`, and unconstrained generic type parameters.
+
+The following code will now complain about `x` no longer being callable:
+
+```ts
+function foo<T>(x: T | (() => string)) {
+    if (typeof x === "function") {
+        x();
+//      ~~~
+// Cannot invoke an expression whose type lacks a call signature. Type '(() => string) | (T & Function)' has no compatible call signatures.
+    }
+}
+```
+
+This is because, unlike previously where `T` would be narrowed away, it is now *expanded* into `T & Function`. However, because this type has no call signatures declared, the type system won't find any common call signature between `T & Function` and `() => string`.
+
+Instead, consider using a more specific type than `{}` or `Object`, and consider adding additional constraints to what you expect `T` might be.
 
 # TypeScript 3.0
 
