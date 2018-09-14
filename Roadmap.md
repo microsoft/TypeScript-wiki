@@ -14,7 +14,7 @@
 # 3.2 (November 2018)
 
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
-* [ ] [partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
+* [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] Refactorings to...
   * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
 
@@ -22,6 +22,7 @@
 
 * [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
 * [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
+* [X] [`typesVersions` redirects](https://github.com/Microsoft/TypeScript/issues/22605)
 * [X] [Error UX improvements](https://github.com/Microsoft/TypeScript/issues/26077)
 * [X] [Refactor from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
 
