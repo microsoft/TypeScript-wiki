@@ -39,7 +39,7 @@ See https://github.com/Microsoft/TypeScript/pull/15594 for more details.
 
 # TypeScript 1.9
 
-- [`LanguageService.getSourceFile` is removed](https://github.com/Microsoft/TypeScript/pull/7584); `LanguageService.getProgram().getSourceFile` should be used instead.
+- [`LanguageService.getSourceFile` has been removed](https://github.com/Microsoft/TypeScript/pull/7584); `LanguageService.getProgram().getSourceFile` should be used instead.
 
 # TypeScript 1.7
 

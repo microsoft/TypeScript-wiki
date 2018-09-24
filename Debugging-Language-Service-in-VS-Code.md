@@ -42,7 +42,7 @@ From here, there are different steps for debugging the client- and server-side, 
     $env:TSS_DEBUG = 5859
     ```
 
-    * Manually edit `extensions/typescript/src/typescriptServiceClient.ts` in your development-side VS Code, setting the port to an open one.
+    * Alternatively, manually edit `extensions/typescript/src/typescriptServiceClient.ts` in your development-side VS Code, setting the port to an open one.
 
 2. Update `launch.json` with an option to attach to the node instance, with sourcemaps from your `built/local` folder.
 

@@ -2,11 +2,229 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.1
+
+## Some vendor-specific types are removed from `lib.d.ts`
+
+TypeScript's built-in `.d.ts` library (`lib.d.ts` and family) is now partially generated from Web IDL files from the DOM specification. As a result some vendor-specific types have been removed. 
+
+<details><summary>Click here to the full list of removed types:</summary><p>
+
+* `CanvasRenderingContext2D.mozImageSmoothingEnabled`
+* `CanvasRenderingContext2D.msFillRule`
+* `CanvasRenderingContext2D.oImageSmoothingEnabled`
+* `CanvasRenderingContext2D.webkitImageSmoothingEnabled`
+* `Document.caretRangeFromPoint`
+* `Document.createExpression`
+* `Document.createNSResolver`
+* `Document.execCommandShowHelp`
+* `Document.exitFullscreen`
+* `Document.exitPointerLock`
+* `Document.focus`
+* `Document.fullscreenElement`
+* `Document.fullscreenEnabled`
+* `Document.getSelection`
+* `Document.msCapsLockWarningOff`
+* `Document.msCSSOMElementFloatMetrics`
+* `Document.msElementsFromRect`
+* `Document.msElementsFromPoint`
+* `Document.onvisibilitychange`
+* `Document.onwebkitfullscreenchange`
+* `Document.onwebkitfullscreenerror`
+* `Document.pointerLockElement`
+* `Document.queryCommandIndeterm`
+* `Document.URLUnencoded`
+* `Document.webkitCurrentFullScreenElement`
+* `Document.webkitFullscreenElement`
+* `Document.webkitFullscreenEnabled`
+* `Document.webkitIsFullScreen`
+* `Document.xmlEncoding`
+* `Document.xmlStandalone`
+* `Document.xmlVersion`
+* `DocumentType.entities`
+* `DocumentType.internalSubset`
+* `DocumentType.notations`
+* `DOML2DeprecatedSizeProperty`
+* `Element.msContentZoomFactor`
+* `Element.msGetUntransformedBounds`
+* `Element.msMatchesSelector`
+* `Element.msRegionOverflow`
+* `Element.msReleasePointerCapture`
+* `Element.msSetPointerCapture`
+* `Element.msZoomTo`
+* `Element.onwebkitfullscreenchange`
+* `Element.onwebkitfullscreenerror`
+* `Element.webkitRequestFullScreen`
+* `Element.webkitRequestFullscreen`
+* `ElementCSSInlineStyle`
+* `ExtendableEventInit`
+* `ExtendableMessageEventInit`
+* `FetchEventInit`
+* `GenerateAssertionCallback`
+* `HTMLAnchorElement.Methods`
+* `HTMLAnchorElement.mimeType`
+* `HTMLAnchorElement.nameProp`
+* `HTMLAnchorElement.protocolLong`
+* `HTMLAnchorElement.urn`
+* `HTMLAreasCollection`
+* `HTMLHeadElement.profile`
+* `HTMLImageElement.msGetAsCastingSource`
+* `HTMLImageElement.msGetAsCastingSource`
+* `HTMLImageElement.msKeySystem`
+* `HTMLImageElement.msPlayToDisabled`
+* `HTMLImageElement.msPlayToDisabled`
+* `HTMLImageElement.msPlayToPreferredSourceUri`
+* `HTMLImageElement.msPlayToPreferredSourceUri`
+* `HTMLImageElement.msPlayToPrimary`
+* `HTMLImageElement.msPlayToPrimary`
+* `HTMLImageElement.msPlayToSource`
+* `HTMLImageElement.msPlayToSource`
+* `HTMLImageElement.x`
+* `HTMLImageElement.y`
+* `HTMLInputElement.webkitdirectory`
+* `HTMLLinkElement.import`
+* `HTMLMetaElement.charset`
+* `HTMLMetaElement.url`
+* `HTMLSourceElement.msKeySystem`
+* `HTMLStyleElement.disabled`
+* `HTMLSummaryElement`
+* `MediaQueryListListener`
+* `MSAccountInfo`
+* `MSAudioLocalClientEvent`
+* `MSAudioLocalClientEvent`
+* `MSAudioRecvPayload`
+* `MSAudioRecvSignal`
+* `MSAudioSendPayload`
+* `MSAudioSendSignal`
+* `MSConnectivity`
+* `MSCredentialFilter`
+* `MSCredentialParameters`
+* `MSCredentials`
+* `MSCredentialSpec`
+* `MSDCCEvent`
+* `MSDCCEventInit`
+* `MSDelay`
+* `MSDescription`
+* `MSDSHEvent`
+* `MSDSHEventInit`
+* `MSFIDOCredentialParameters`
+* `MSIceAddrType`
+* `MSIceType`
+* `MSIceWarningFlags`
+* `MSInboundPayload`
+* `MSIPAddressInfo`
+* `MSJitter`
+* `MSLocalClientEvent`
+* `MSLocalClientEventBase`
+* `MSNetwork`
+* `MSNetworkConnectivityInfo`
+* `MSNetworkInterfaceType`
+* `MSOutboundNetwork`
+* `MSOutboundPayload`
+* `MSPacketLoss`
+* `MSPayloadBase`
+* `MSPortRange`
+* `MSRelayAddress`
+* `MSSignatureParameters`
+* `MSStatsType`
+* `MSStreamReader`
+* `MSTransportDiagnosticsStats`
+* `MSUtilization`
+* `MSVideoPayload`
+* `MSVideoRecvPayload`
+* `MSVideoResolutionDistribution`
+* `MSVideoSendPayload`
+* `NotificationEventInit`
+* `PushEventInit`
+* `PushSubscriptionChangeInit`
+* `RTCIdentityAssertionResult`
+* `RTCIdentityProvider`
+* `RTCIdentityProviderDetails`
+* `RTCIdentityValidationResult`
+* `Screen.deviceXDPI`
+* `Screen.logicalXDPI`
+* `SVGElement.xmlbase`
+* `SVGGraphicsElement.farthestViewportElement`
+* `SVGGraphicsElement.getTransformToElement`
+* `SVGGraphicsElement.nearestViewportElement`
+* `SVGStylable`
+* `SVGTests.hasExtension`
+* `SVGTests.requiredFeatures`
+* `SyncEventInit`
+* `ValidateAssertionCallback`
+* `WebKitDirectoryEntry`
+* `WebKitDirectoryReader`
+* `WebKitEntriesCallback`
+* `WebKitEntry`
+* `WebKitErrorCallback`
+* `WebKitFileCallback`
+* `WebKitFileEntry`
+* `WebKitFileSystem`
+* `Window.clearImmediate`
+* `Window.msSetImmediate`
+* `Window.setImmediate`
+</p></details>
+
+### Recommendations:
+
+If your run-time guaranteed to have some of these names available at run-time (e.g. IE-only app) add the declarations locally in your project, e.g.:
+
+To Add `Element.msMatchesSelector` back, add the flowing to a local `dom.ie.d.ts`
+
+```ts
+interface Element {
+    msMatchesSelector(selectors: string): boolean;
+}
+```
+
+Similarly, to add `clearImmediate` and `setImmediate`, you can add a declaration for `Window` in your local `dom.ie.d.ts`:
+
+```ts
+interface Window { 
+    clearImmediate(handle: number): void;
+    setImmediate(handler: (...args: any[]) => void): number;
+    setImmediate(handler: any, ...args: any[]): number;
+}
+```
+
+## Narrowing functions now intersects `{}`, `Object`, and unconstrained generic type parameters.
+
+The following code will now complain about `x` no longer being callable:
+
+```ts
+function foo<T>(x: T | (() => string)) {
+    if (typeof x === "function") {
+        x();
+//      ~~~
+// Cannot invoke an expression whose type lacks a call signature. Type '(() => string) | (T & Function)' has no compatible call signatures.
+    }
+}
+```
+
+This is because, unlike previously where `T` would be narrowed away, it is now *expanded* into `T & Function`. However, because this type has no call signatures declared, the type system won't find any common call signature between `T & Function` and `() => string`.
+
+Instead, consider using a more specific type than `{}` or `Object`, and consider adding additional constraints to what you expect `T` might be.
+
 # TypeScript 3.0
 
 ## The `unknown` keyword is reserved
 
 `unknown` is now a reserved type name, as it is now a built-in type. Depending on your intended use of `unknown`, you may want to remove the declaration entirely (favoring the newly introduced `unknown` type), or rename it to something else.
+
+## Intersecting with `null`/`undefined` reduces to `null`/`undefined` outside of `strictNullChecks`
+
+In the following example, `A` has the type `null` and `B` has the type `undefined` when `strictNullChecks` is turned off:
+
+```ts
+type A = { a: number } & null;      // null
+type B = { a: number } & undefined; // undefined
+```
+
+This is because TypeScript 3.0 is better at reducing subtypes and supertypes in intersection and union types respectively; however, because `null` and `undefined` are both considered subtypes of every other type when `strictNullChecks` is off, an intersection with some object type and either will always reduce to `null` or `undefined`.
+
+### Recommendation
+
+If you were relying on `null` and `undefined` to be ["identity" elements](https://en.wikipedia.org/wiki/Identity_element) under intersections, you should look for a way to use `unknown` instead of `null` or `undefined` wherever they appeared
 
 # TypeScript 2.9
 
