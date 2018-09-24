@@ -169,7 +169,7 @@ TypeScript's built-in `.d.ts` library (`lib.d.ts` and family) is now partially g
 
 If your run-time guaranteed to have some of these names available at run-time (e.g. IE-only app) add the declarations locally in your project, e.g.:
 
-To Add `Element.msMatchesSelector` back, add the flowing to a local `dom.ie.d.ts`
+To Add `Element.msMatchesSelector` back, add the following to a local `dom.ie.d.ts`
 
 ```ts
 interface Element {
