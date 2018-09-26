@@ -13,6 +13,7 @@
 
 # 3.2 (November 2018)
 
+* [X] [Strict bind, call, and apply methods on functions](https://github.com/Microsoft/TypeScript/pull/27028)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] Refactorings to...

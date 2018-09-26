@@ -8,7 +8,7 @@ These changes list where implementation differs between versions as the spec and
 
 TypeScript's built-in `.d.ts` library (`lib.d.ts` and family) is now partially generated from Web IDL files from the DOM specification. As a result some vendor-specific types have been removed. 
 
-<details><summary>Click here to the full list of removed types:</summary><p>
+<details><summary>Click here to read the full list of removed types:</summary><p>
 
 * `CanvasRenderingContext2D.mozImageSmoothingEnabled`
 * `CanvasRenderingContext2D.msFillRule`
@@ -167,9 +167,9 @@ TypeScript's built-in `.d.ts` library (`lib.d.ts` and family) is now partially g
 
 ### Recommendations:
 
-If your run-time guaranteed to have some of these names available at run-time (e.g. IE-only app) add the declarations locally in your project, e.g.:
+If your run-time guarantees that some of these names are available at run-time (e.g. for an IE-only app), add the declarations locally in your project, e.g.:
 
-To Add `Element.msMatchesSelector` back, add the flowing to a local `dom.ie.d.ts`
+For `Element.msMatchesSelector`, add the following to a local `dom.ie.d.ts`
 
 ```ts
 interface Element {
