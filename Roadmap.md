@@ -16,8 +16,9 @@
 * [X] [Strict bind, call, and apply methods on functions](https://github.com/Microsoft/TypeScript/pull/27028)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
+* [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796)
 * [ ] Refactorings to...
-  * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+  * [X] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
 
 # 3.1 (September 2018)
 
