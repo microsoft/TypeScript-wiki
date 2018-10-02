@@ -1374,7 +1374,7 @@ There is no way now to indicate an `“include”` to a file outside the current
 
 For a TypeScript file, the TypeScript compiler by default emits the generated JavaScript files in the same directory with the same base file name.
 Because the TypeScript files and emitted JavaScript files always have different file extensions, it is safe to do so.
-However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidently overwriting your source file, the  compiler will issue this warning and skip writing the output files.
+However, if you have set the `allowJs` compiler option to `true` and didn't set any emit output options (`outFile` and `outDir`), the compiler will try to emit JavaScript source files by the same rule, which will result in the emitted JavaScript file having the same file name with the source file. To avoid accidentally overwriting your source file, the  compiler will issue this warning and skip writing the output files.
 
 There are multiple ways to solve this issue, though all of them involve configuring compiler options, therefore it is recommended that you have a `tsconfig.json` file in the project root to enable this.
 If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`;
