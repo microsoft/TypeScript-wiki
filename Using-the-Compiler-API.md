@@ -756,7 +756,7 @@ function generateDocumentation(
   /** True if this is visible outside this file, false otherwise */
   function isNodeExported(node: ts.Node): boolean {
     return (
-      (ts.getCombinedModifierFlags(<ts.Declaration>node) & ts.ModifierFlags.Export) !== 0 ||
+      (ts.getCombinedModifierFlags(node as ts.Declaration) & ts.ModifierFlags.Export) !== 0 ||
       (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile)
     );
   }
