@@ -24,6 +24,12 @@ x = 0;      // OK
 x = false;  // Error: boolean is not assignable to number
 ```
 
+Types can be cast:
+
+```js
+var x = /** @type {SomeType} */ (AnyParenthesizedExpression);
+```
+
 You can find the full list of supported JSDoc patterns in the [JSDoc support in JavaScript documentation](https://github.com/Microsoft/TypeScript/wiki/JSDoc-support-in-JavaScript).
 
 
