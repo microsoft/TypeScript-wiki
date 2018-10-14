@@ -80,6 +80,16 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 
 As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
 
+* [coc.nvim](https://github.com/neoclide/coc.nvim)
+  
+Install [coc-tsserver](https://github.com/neoclide/coc-tsserver) by command:
+
+``` vim
+:CocInstall coc-tsserver
+```
+
+[coc-tsserver](https://github.com/neoclide/coc-tsserver) provide almost same features as typescript language extension of VSCode, including completion of function calls as snippets, auto import after completion etc.
+
 # Visual Studio 2013/2015
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
