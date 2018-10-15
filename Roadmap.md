@@ -14,6 +14,7 @@
 # 3.2 (November 2018)
 
 * [X] [Strict bind, call, and apply methods on functions](https://github.com/Microsoft/TypeScript/pull/27028)
+* [ ] [Allow non-unit types in union discriminants](https://github.com/Microsoft/TypeScript/pull/27695)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796)
