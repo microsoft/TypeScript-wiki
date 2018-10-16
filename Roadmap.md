@@ -18,8 +18,8 @@
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796)
-* [ ] Refactorings to...
-  * [X] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+* [ ] Quick fixes to...
+  * [ ] Scaffold local `@types` packages with dts-gen
 
 # 3.1 (September 2018)
 
@@ -27,7 +27,9 @@
 * [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 * [X] [`typesVersions` redirects](https://github.com/Microsoft/TypeScript/issues/22605)
 * [X] [Error UX improvements](https://github.com/Microsoft/TypeScript/issues/26077)
-* [X] [Refactor from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
+* [X] Refactorings to...
+  * [X] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+  * [X] [Convert from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
 
 # 3.0 (July 2018)
 
