@@ -64,6 +64,11 @@ Each command is associated with a request and a response interface. For instance
 
 [Tide](https://github.com/ananthakumaran/tide) is an elisp implementation for emacs plugin using `tsserver`
 
+## Neovim
+
+[nvim-typescript](https://github.com/mhartington/nvim-typescript) is a neovim plugin using `tsserver`
+
+
 # Advanced topics
 
 ## Logging
