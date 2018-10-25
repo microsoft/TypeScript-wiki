@@ -23,7 +23,7 @@
 
 # 3.1 (September 2018)
 
-* [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
+* [X] [Mapped tuple and array types](https://github.com/Microsoft/TypeScript/pull/26063)
 * [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 * [X] [`typesVersions` redirects](https://github.com/Microsoft/TypeScript/issues/22605)
 * [X] [Error UX improvements](https://github.com/Microsoft/TypeScript/issues/26077)
