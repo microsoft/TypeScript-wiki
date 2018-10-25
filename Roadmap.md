@@ -14,12 +14,14 @@
 # 3.2 (November 2018)
 
 * [X] [Strict bind, call, and apply methods on functions](https://github.com/Microsoft/TypeScript/pull/27028)
-* [ ] [Allow non-unit types in union discriminants](https://github.com/Microsoft/TypeScript/pull/27695)
+* [X] [Allow non-unit types in union discriminants](https://github.com/Microsoft/TypeScript/pull/27695)
 * [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796)
+* [X] [Configuration inheritance through node packages](https://github.com/Microsoft/TypeScript/pull/27348)
+* [X] [Supporting `Object.defineProperty` property assignments in JS](https://github.com/Microsoft/TypeScript/pull/27208)
 * [ ] Quick fixes to...
-  * [ ] Scaffold local `@types` packages with dts-gen
+  * [X] Scaffold local `@types` packages with dts-gen
 
 # 3.1 (September 2018)
 
