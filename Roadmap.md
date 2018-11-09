@@ -22,7 +22,7 @@
 * [X] [Allow non-unit types in union discriminants](https://github.com/Microsoft/TypeScript/pull/27695)
 * [X] [Generic spread expressions in object literals](https://github.com/Microsoft/TypeScript/pull/28234)
 * [X] [Generic object rest variables and parameters](https://github.com/Microsoft/TypeScript/pull/28312)
-* [X] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
+* [X] [Type-checking support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
 * [X] [Configuration inheritance through node packages](https://github.com/Microsoft/TypeScript/pull/27348)
 * [X] [Supporting `Object.defineProperty` property assignments in JS](https://github.com/Microsoft/TypeScript/pull/27208)
 * [X] [Support printing the implied configuration object to the console with `--showConfig`](https://github.com/Microsoft/TypeScript/pull/27353)
