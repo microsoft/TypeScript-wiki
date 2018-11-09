@@ -27,7 +27,7 @@
 * [X] [Supporting `Object.defineProperty` property assignments in JS](https://github.com/Microsoft/TypeScript/pull/27208)
 * [X] [Support printing the implied configuration object to the console with `--showConfig`](https://github.com/Microsoft/TypeScript/pull/27353)
 * [ ] Quick fixes to...
-  * [X] Scaffold local `@types` packages with dts-gen
+  * [X] [Scaffold local `@types` packages with dts-gen](https://github.com/Microsoft/TypeScript/issues/25746)
   * [X] [Add intermediate `unknown` type assertions](https://github.com/Microsoft/TypeScript/issues/28067)
 
 # 3.1 (September 2018)
