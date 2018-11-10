@@ -2,6 +2,16 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.2
+
+## `lib.d.ts` updates
+
+### `wheelDelta` and friends have been removed.
+
+`wheelDeltaX`, `wheelDelta`, and `wheelDeltaZ` have all been removed as they is a deprecated properties on `WheelEvent`s.
+
+**Solution**: Use `deltaX`, `deltaY`, and `deltaZ` instead.
+
 # TypeScript 3.1
 
 ## Some vendor-specific types are removed from `lib.d.ts`
