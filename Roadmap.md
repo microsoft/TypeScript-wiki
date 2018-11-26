@@ -14,6 +14,7 @@
 # 3.3 (January 2019)
 
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
+* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
 # 3.2 (November 2018)
