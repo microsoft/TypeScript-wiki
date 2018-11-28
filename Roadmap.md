@@ -16,6 +16,10 @@
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
+* [ ] Quick fixes to...
+  * [ ] [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
+* [ ] Refactorings to...
+  * [ ] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
 
 # 3.2 (November 2018)
 
@@ -29,7 +33,6 @@
 * [X] [Support printing the implied configuration object to the console with `--showConfig`](https://github.com/Microsoft/TypeScript/pull/27353)
 * [X] [Improved formatting and indentation for lists and chained calls](https://github.com/Microsoft/TypeScript/pull/28340)
 * [X] Quick fixes to...
-  * [X] [Scaffold local `@types` packages with dts-gen](https://github.com/Microsoft/TypeScript/issues/25746)
   * [X] [Add intermediate `unknown` type assertions](https://github.com/Microsoft/TypeScript/issues/28067)
   * [X] [Add missing `new` keyword](https://github.com/Microsoft/TypeScript/issues/26580)
 
