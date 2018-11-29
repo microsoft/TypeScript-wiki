@@ -1,5 +1,29 @@
 # TypeScript 3.2
 
+## `strictBindCallApply`
+
+TypeScript 3.2 introduces a new `--strictBindCallApply` compiler option (in the `--strict` family of options) with which the `bind`, `call`, and `apply` methods on function objects are strongly typed and strictly checked.
+
+```ts
+function foo(a: number, b: string): string {
+    return a + b;
+}
+
+let a = foo.apply(undefined, [10]);              // error: too few argumnts
+let b = foo.apply(undefined, [10, 20]);          // error: 2nd argument is a number
+let c = foo.apply(undefined, [10, "hello", 30]); // error: too many arguments
+let d = foo.apply(undefined, [10, "hello"]);     // okay! returns a string
+```
+
+This is achieved by introducing two new types, `CallableFunction` and `NewableFunction`, in `lib.d.ts`. These types contain specialized generic method declarations for `bind`, `call`, and `apply` for regular functions and constructor functions, respectively. The declarations use generic rest parameters (see #24897) to capture and reflect parameter lists in a strongly typed manner. In `--strictBindCallApply` mode these declarations are used in place of the (very permissive) declarations provided by type `Function`.
+
+### Caveats
+
+Since the stricter checks may uncover previously unreported errors, this is a breaking change in `--strict` mode.
+
+Additionally, [another caveat](https://github.com/Microsoft/TypeScript/pull/27028#issuecomment-429334450) of this new functionality is that due to certain limitations, `bind`, `call`, and `apply` can't yet fully model generic functions or functions that have overloads.
+When using these methods on a generic function, type parameters will be substituted with the empty object type (`{}`), and when used on a function with overloads, only the last overload will ever be modeled.
+
 ## Generic spread expressions in object literals
 
 In TypeScript 3.2, object literals now allow generic spread expressions which now produce intersection types, similar to the `Object.assign` function and JSX literals. For example:
@@ -50,29 +74,80 @@ const taggedPoint = { x: 10, y: 20, tag: "point" };
 const point = excludeTag(taggedPoint);  // { x: number, y: number }
 ```
 
-## `strictBindCallApply`
+## BigInt
 
-TypeScript 3.2 introduces a new `--strictBindCallApply` compiler option (in the `--strict` family of options) with which the `bind`, `call`, and `apply` methods on function objects are strongly typed and strictly checked.
+BigInts are part of an upcoming proposal in ECMAScript that allow us to model theoretically arbitrarily large integers.
+TypeScript 3.2 brings type-checking for BigInts, as well as support for emitting BigInt literals when targeting `esnext`.
+
+BigInt support in TypeScript introduces a new primitive type called the `bigint` (all lowercase).
+You can get a `bigint` by calling the `BigInt()` function or by writing out a BigInt literal by adding an `n` to the end of any integer numeric literal:
 
 ```ts
-function foo(a: number, b: string): string {
-    return a + b;
+let foo: bigint = BigInt(100); // the BigInt function
+let bar: bigint = 100n;        // a BigInt literal
+
+// *Slaps roof of fibonacci function*
+// This bad boy returns ints that can get *so* big!
+function fibonacci(n: bigint) {
+    let result = 1n;
+    for (let last = 0n, i = 0n; i < n; i++) {
+        const current = result;
+        result += last;
+        last = current;
+    }
+    return result;
 }
 
-let a = foo.apply(undefined, [10]);              // error: too few argumnts
-let b = foo.apply(undefined, [10, 20]);          // error: 2nd argument is a number
-let c = foo.apply(undefined, [10, "hello", 30]); // error: too many arguments
-let d = foo.apply(undefined, [10, "hello"]);     // okay! returns a string
+fibonacci(10000n)
 ```
 
-This is achieved by introducing two new types, `CallableFunction` and `NewableFunction`, in `lib.d.ts`. These types contain specialized generic method declarations for `bind`, `call`, and `apply` for regular functions and constructor functions, respectively. The declarations use generic rest parameters (see #24897) to capture and reflect parameter lists in a strongly typed manner. In `--strictBindCallApply` mode these declarations are used in place of the (very permissive) declarations provided by type `Function`.
+While you might imagine close interaction between `number` and `bigint`, the two are separate domains.
+
+```ts
+declare let foo: number;
+declare let bar: bigint;
+
+foo = bar; // error: Type 'bigint' is not assignable to type 'number'.
+bar = foo; // error: Type 'number' is not assignable to type 'bigint'.
+```
+
+As specified in ECMAScript, mixing `number`s and `bigint`s in arithmetic operations is an error.
+You'll have to explicitly convert values to `BigInt`s.
+
+```ts
+console.log(3.141592 * 10000n);     // error
+console.log(3145 * 10n);            // error
+console.log(BigInt(3145) * 10n);    // okay!
+```
+
+Also important to note is that `bigint`s produce a new string when using the `typeof` operator: the string `"bigint"`.
+Thus, TypeScript correctly narrows using `typeof` as you'd expect.
+
+```ts
+function whatKindOfNumberIsIt(x: number | bigint) {
+    if (typeof x === "bigint") {
+        console.log("'x' is a bigint!");
+    }
+    else {
+        console.log("'x' is a floating-point number");
+    }
+}
+```
+
+We'd like to extend a huge thanks to [Caleb Sander](https://github.com/calebsander) for all the work on this feature.
+We're grateful for the contribution, and we're sure our users are too!
 
 ### Caveats
 
-Since the stricter checks may uncover previously unreported errors, this is a breaking change in `--strict` mode.
+As we mentioned, BigInt support is only available for the `esnext` target.
+It may not be obvious, but because BigInts have different behavior for mathematical operators like `+`, `-`, `*`, etc., providing functionality for older targets where the feature doesn't exist (like `es2017` and below) would involve rewriting each of these operations.
+TypeScript would need to dispatch to the correct behavior depending on the type, and so every addition, string concatenation, multiplication, etc. would involve a function call.
 
-Additionally, [another caveat](https://github.com/Microsoft/TypeScript/pull/27028#issuecomment-429334450) of this new functionality is that due to certain limitations, `bind`, `call`, and `apply` can't yet fully model generic functions or functions that have overloads.
-When using these methods on a generic function, type parameters will be substituted with the empty object type (`{}`), and when used on a function with overloads, only the last overload will ever be modeled.
+For that reason, we have no immediate plans to provide downleveling support.
+On the bright side, Node 11 and newer versions of Chrome already support this feature, so you'll be able to use BigInts there when targeting `esnext`.
+
+Certain targets may include a polyfill or BigInt-like runtime object.
+For those purposes you may want to add `esnext.bigint` to the `lib` setting in your compiler options.
 
 ## Non-unit types as union discriminants
 
