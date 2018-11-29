@@ -24,6 +24,30 @@ Since the stricter checks may uncover previously unreported errors, this is a br
 Additionally, [another caveat](https://github.com/Microsoft/TypeScript/pull/27028#issuecomment-429334450) of this new functionality is that due to certain limitations, `bind`, `call`, and `apply` can't yet fully model generic functions or functions that have overloads.
 When using these methods on a generic function, type parameters will be substituted with the empty object type (`{}`), and when used on a function with overloads, only the last overload will ever be modeled.
 
+## Non-unit types as union discriminants
+
+TypeScript 3.2 makes narrowing easier by relaxing rules for what it considers a discriminant property.
+Common properties of unions are now considered discriminants as long as they contain *some* singleton type (e.g. a string literal, `null`, or `undefined`), and they contain no generics.
+
+As a result, TypeScript 3.2 considers the `error` property in the following example to be a discriminant, whereas before it wouldn't since `Error` isn't a singleton type.
+Thanks to this, narrowing works correctly in the body of the `unwrap` function.
+
+```ts
+type Result<T> =
+    | { error: Error; data: null }
+    | { error: null; data: T };
+
+function unwrap<T>(result: Result<T>) {
+    if (result.error) {
+        // Here 'error' is non-null
+        throw result.error;
+    }
+
+    // Now 'data' is non-null
+    return result.data;
+}
+```
+
 # TypeScript 3.1
 
 ## Mapped types on tuples and arrays
