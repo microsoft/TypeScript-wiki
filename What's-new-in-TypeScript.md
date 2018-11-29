@@ -192,7 +192,7 @@ Here, TypeScript will climb up `node_modules` folders looking for a `@my-team/ts
 
 This feature can be extremely useful for bigger organizations, or projects with lots of distributed dependencies.
 
-## The `--showConfig` flag
+## The new `--showConfig` flag
 
 `tsc`, the TypeScript compiler, supports a new flag called `--showConfig`.
 When running `tsc --showConfig`, TypeScript will calculate the effective `tsconfig.json` (after calculating options inherited from the `extends` field) and print that out.
