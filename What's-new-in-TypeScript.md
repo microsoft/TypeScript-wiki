@@ -1,5 +1,55 @@
 # TypeScript 3.2
 
+## Generic spread expressions in object literals
+
+In TypeScript 3.2, object literals now allow generic spread expressions which now produce intersection types, similar to the `Object.assign` function and JSX literals. For example:
+
+```ts
+function taggedObject<T, U extends string>(obj: T, tag: U) {
+    return { ...obj, tag };  // T & { tag: U }
+}
+
+let x = taggedObject({ x: 10, y: 20 }, "point");  // { x: number, y: number } & { tag: "point" }
+```
+
+Property assignments and non-generic spread expressions are merged to the greatest extent possible on either side of a generic spread expression. For example:
+
+```ts
+function foo1<T>(t: T, obj1: { a: string }, obj2: { b: string }) {
+    return { ...obj1, x: 1, ...t, ...obj2, y: 2 };  // { a: string, x: number } & T & { b: string, y: number }
+}
+```
+
+Non-generic spread expressions continue to be processed as before: Call and construct signatures are stripped, only non-method properties are preserved, and for properties with the same name, the type of the rightmost property is used. This contrasts with intersection types which concatenate call and construct signatures, preserve all properties, and intersect the types of properties with the same name. Thus, spreads of the same types may produce different results when they are created through instantiation of generic types:
+
+```ts
+function spread<T, U>(t: T, u: U) {
+    return { ...t, ...u };  // T & U
+}
+
+declare let x: { a: string, b: number };
+declare let y: { b: string, c: boolean };
+
+let s1 = { ...x, ...y };  // { a: string, b: string, c: boolean }
+let s2 = spread(x, y);    // { a: string, b: number } & { b: string, c: boolean }
+let b1 = s1.b;  // string
+let b2 = s2.b;  // number & string
+```
+
+## Generic object rest variables and parameters
+
+TypeScript 3.2 also allows destructuring a rest binding from a generic variable. This is achieved by using the predefined `Pick` and `Exclude` helper types from `lib.d.ts`, and using the generic type in question as well as the names of the other bindings in the destructuring pattern.
+
+```ts
+function excludeTag<T extends { tag: string }>(obj: T) {
+    let { tag, ...rest } = obj;
+    return rest;  // Pick<T, Exclude<keyof T, "tag">>
+}
+
+const taggedPoint = { x: 10, y: 20, tag: "point" };
+const point = excludeTag(taggedPoint);  // { x: number, y: number }
+```
+
 ## `strictBindCallApply`
 
 TypeScript 3.2 introduces a new `--strictBindCallApply` compiler option (in the `--strict` family of options) with which the `bind`, `call`, and `apply` methods on function objects are strongly typed and strictly checked.
