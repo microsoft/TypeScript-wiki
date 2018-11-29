@@ -11,21 +11,40 @@
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 3.3 (January 2019)
+
+* [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
+* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
+<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
+* [ ] Quick fixes to...
+  * [ ] [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
+* [ ] Refactorings to...
+  * [ ] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
+
 # 3.2 (November 2018)
 
 * [X] [Strict bind, call, and apply methods on functions](https://github.com/Microsoft/TypeScript/pull/27028)
-* [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
-* [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
-* [ ] Refactorings to...
-  * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+* [X] [Allow non-unit types in union discriminants](https://github.com/Microsoft/TypeScript/pull/27695)
+* [X] [Generic spread expressions in object literals](https://github.com/Microsoft/TypeScript/pull/28234)
+* [X] [Generic object rest variables and parameters](https://github.com/Microsoft/TypeScript/pull/28312)
+* [X] [Type-checking support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
+* [X] [Configuration inheritance through node packages](https://github.com/Microsoft/TypeScript/pull/27348)
+* [X] [Supporting `Object.defineProperty` property assignments in JS](https://github.com/Microsoft/TypeScript/pull/27208)
+* [X] [Support printing the implied configuration object to the console with `--showConfig`](https://github.com/Microsoft/TypeScript/pull/27353)
+* [X] [Improved formatting and indentation for lists and chained calls](https://github.com/Microsoft/TypeScript/pull/28340)
+* [X] Quick fixes to...
+  * [X] [Add intermediate `unknown` type assertions](https://github.com/Microsoft/TypeScript/issues/28067)
+  * [X] [Add missing `new` keyword](https://github.com/Microsoft/TypeScript/issues/26580)
 
 # 3.1 (September 2018)
 
-* [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
+* [X] [Mapped tuple and array types](https://github.com/Microsoft/TypeScript/pull/26063)
 * [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 * [X] [`typesVersions` redirects](https://github.com/Microsoft/TypeScript/issues/22605)
 * [X] [Error UX improvements](https://github.com/Microsoft/TypeScript/issues/26077)
-* [X] [Refactor from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
+* [X] Refactorings to...
+  * [X] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+  * [X] [Convert from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
 
 # 3.0 (July 2018)
 
