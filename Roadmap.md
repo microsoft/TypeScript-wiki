@@ -35,6 +35,8 @@
 * [X] Quick fixes to...
   * [X] [Add intermediate `unknown` type assertions](https://github.com/Microsoft/TypeScript/issues/28067)
   * [X] [Add missing `new` keyword](https://github.com/Microsoft/TypeScript/issues/26580)
+  * [X] [Infer types from usage outside of `noImplicitAny`](https://github.com/Microsoft/TypeScript/pull/27693)
+  * [X] [Infer JSDoc types from usage](https://github.com/Microsoft/TypeScript/pull/27610)
 
 # 3.1 (September 2018)
 
