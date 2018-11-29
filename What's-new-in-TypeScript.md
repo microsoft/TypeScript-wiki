@@ -173,6 +173,31 @@ function unwrap<T>(result: Result<T>) {
 }
 ```
 
+## `tsconfig.json` inheritance via Node.js packages
+
+TypeScript 3.2 now resolves `tsconfig.json`s from `node_modules`. When using a bare path for the `"extends"` field in `tsconfig.json`, TypeScript will dive into `node_modules` packages for us.
+
+```json5
+{
+    "extends": "@my-team/tsconfig-base",
+    "include": ["./**/*"]
+    "compilerOptions": {
+        // Override certain options on a project-by-project basis.
+        "strictBindCallApply": false,
+    }
+}
+```
+
+Here, TypeScript will climb up `node_modules` folders looking for a `@my-team/tsconfig-base` package. For each of those packages, TypeScript will first check whether `package.json` contains a `"tsconfig"` field, and if it does, TypeScript will try to load a configuration file from that field. If neither exists, TypeScript will try to read from a `tsconfig.json` at the root. This is similar to the lookup process for `.js` files in packages that Node uses, and the `.d.ts` lookup process that TypeScript already uses.
+
+This feature can be extremely useful for bigger organizations, or projects with lots of distributed dependencies.
+
+## The `--showConfig` flag
+
+`tsc`, the TypeScript compiler, supports a new flag called `--showConfig`.
+When running `tsc --showConfig`, TypeScript will calculate the effective `tsconfig.json` (after calculating options inherited from the `extends` field) and print that out.
+This can be useful for diagnosing configuration issues in general.
+
 ## `Object.defineProperty` declarations in JavaScript
 
 When writing in JavaScript files (using `allowJs`), TypeScript now recognizes declarations that use `Object.defineProperty`.
