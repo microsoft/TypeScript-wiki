@@ -173,6 +173,29 @@ function unwrap<T>(result: Result<T>) {
 }
 ```
 
+## `Object.defineProperty` declarations in JavaScript
+
+When writing in JavaScript files (using `allowJs`), TypeScript now recognizes declarations that use `Object.defineProperty`.
+This means you'll get better completions, and stronger type-checking when enabling type-checking in JavaScript files (by turning on the `checkJs` option or adding a `// @ts-check` comment to the top of your file).
+
+```js
+// @ts-check
+
+let obj = {};
+Object.defineProperty(obj, "x", { value: "hello", writable: false });
+
+obj.x.toLowercase();
+//    ~~~~~~~~~~~
+//    error:
+//     Property 'toLowercase' does not exist on type 'string'.
+//     Did you mean 'toLowerCase'?
+
+obj.x = "world";
+//  ~
+//  error:
+//   Cannot assign to 'x' because it is a read-only property.
+```
+
 # TypeScript 3.1
 
 ## Mapped types on tuples and arrays
