@@ -12,6 +12,10 @@ These changes list where implementation differs between versions as the spec and
 
 **Solution**: Use `deltaX`, `deltaY`, and `deltaZ` instead.
 
+### More specific types
+
+Certain parameters no longer accept `null`, or now accept more specific types as per the corresponding specifications that describe the DOM.
+
 # TypeScript 3.1
 
 ## Some vendor-specific types are removed from `lib.d.ts`
