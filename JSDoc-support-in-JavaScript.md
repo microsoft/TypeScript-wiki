@@ -1,5 +1,5 @@
-The list below outlines which constructs are currently supported
-when using JSDoc annotations to provide type information in JavaScript files.
+TSDoc, a TypeScript native version of JSDoc is [currently under development](https://github.com/Microsoft/tsdoc). In the meantime, the list below outlines which constructs are currently supported
+when using JSDoc annotations to provide type information in JavaScript/TypeScript files.
 
 Note any tags which are not explicitly listed below (such as `@async`) are not yet supported.
 
