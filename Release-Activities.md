@@ -21,9 +21,10 @@ This is the list of release activities needed for every TypeScript release.
 * [ ] Add new [Release Notes page](https://github.com/Microsoft/TypeScript-Handbook/tree/master/pages/release%20notes) for the new release
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
 
-### types-publisher
+### types-publisher and definitelytyped-header-parser
 
-* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser), and publish new version
+* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
+    * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
 * [ ] Update [types-publisher]((https://github.com/Microsoft/types-publisher)) dependency to the new header-parser
 * [ ] Run the tagging script to tag for new version (version of `typescript@next`)
 
