@@ -29,7 +29,7 @@ When your plugin is loaded, it's first initialized as a factory function with it
 
 Here's the minimal code that handles this injected `ts` value:
 ```ts
-function init(modules: { typescript: import("typescript/lib/tsserverlibrary") }) {
+function init(modules: { typescript: typeof import("typescript/lib/tsserverlibrary") }) {
   const ts = modules.typescript;
   /* More to come here */
 }
@@ -43,7 +43,7 @@ TypeScript Language Service Plugins use the [Decorator Pattern](https://en.wikip
 
 Let's fill in some more code to properly set up a decorator:
 ```ts
-function init(modules: { typescript: import("typescript/lib/tsserverlibrary") }) {
+function init(modules: { typescript: typeof import("typescript/lib/tsserverlibrary") }) {
   const ts = modules.typescript;
 
   function create(info: ts.server.PluginCreateInfo) {
@@ -158,7 +158,7 @@ function create(info: ts.server.PluginCreateInfo) {
 ## Putting it all together
 
 ```ts
-function init(modules: { typescript: import("typescript/lib/tsserverlibrary") }) {
+function init(modules: { typescript: typeof import("typescript/lib/tsserverlibrary") }) {
   const ts = modules.typescript;
 
   function create(info: ts.server.PluginCreateInfo) {
