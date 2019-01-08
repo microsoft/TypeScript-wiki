@@ -1,4 +1,4 @@
-This page outlines specific features and fixes that are scheduled or planned for given releases. The current 6-month roadmap that outlines [focus areas of work can be viewed here](https://github.com/Microsoft/TypeScript/issues/29288).
+This page outlines specific features and fixes that are scheduled or planned for given releases. The current [6-month roadmap that outlines focus areas of work can be viewed here](https://github.com/Microsoft/TypeScript/issues/29288).
 
 - [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
