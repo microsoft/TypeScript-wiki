@@ -13,7 +13,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
-# 3.3 (January 2019)
+# 3.4 (March 2019)
 
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] [Relaxed rules on methods of union types](https://github.com/Microsoft/TypeScript/pull/29011)
@@ -23,6 +23,10 @@ This page outlines specific features and fixes that are scheduled or planned for
   * [ ] [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [ ] Refactorings to...
   * [ ] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
+
+# 3.3 (January 2019)
+
+* [ ] [`globalThis`](https://github.com/Microsoft/TypeScript/pull/29332)
 
 # 3.2 (November 2018)
 
