@@ -27,7 +27,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 3.3 (January 2019)
 
 * [X] [Relaxed rules on methods of union types](https://github.com/Microsoft/TypeScript/pull/29011)
-* [ ] [File-incremental builds in `--build --watch` mode for composite projects](https://github.com/Microsoft/TypeScript/pull/29161)
+* [X] [File-incremental builds in `--build --watch` mode for composite projects](https://github.com/Microsoft/TypeScript/pull/29161)
 
 # 3.2 (November 2018)
 
