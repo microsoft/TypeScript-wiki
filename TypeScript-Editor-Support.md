@@ -80,6 +80,16 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 
 As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
 
+* [ALE](https://github.com/w0rp/ale)
+
+ALE (Asynchronous Lint Engine) supports As-you-type completion for typescript out of the box.
+
+```vimscript
+" Enable completion where available.
+" This setting must be set before ALE is loaded.
+let g:ale_completion_enabled = 1
+```
+
 # Visual Studio 2013/2015
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
