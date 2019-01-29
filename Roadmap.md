@@ -16,6 +16,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 3.4 (March 2019)
 
 * [X] [Improved support for read-only arrays and tuples](https://github.com/Microsoft/TypeScript/pull/29435)
+* [ ] [Const contexts for literal expressions](https://github.com/Microsoft/TypeScript/pull/29510)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * [ ] [`globalThis`](https://github.com/Microsoft/TypeScript/pull/29332)
 * [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
