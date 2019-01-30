@@ -8,7 +8,7 @@ This is the list of release activities needed for every TypeScript release.
 * [ ] [Tag](https://github.com/Microsoft/TypeScript/tags) release branch
 * [ ] Update [AUTHORS.md](https://github.com/Microsoft/TypeScript/blob/master/AUTHORS.md) for the release ([script](https://github.com/Microsoft/TypeScript/blob/master/scripts/authors.ts))
 * [ ] Draft and publish new [release](https://github.com/Microsoft/TypeScript/releases)
-* [ ] Close milestone coresponding to the release
+* [ ] Close milestone corresponding to the release
 
 ### Wiki
 
@@ -33,10 +33,14 @@ This is the list of release activities needed for every TypeScript release.
 * [ ] Publish new version of [typescript](https://www.npmjs.com/package/typescript)
 * [ ] Publish new version of [tslib](https://www.npmjs.com/package/tslib) (if needed)
 
+<!-- SUBSUMED BY MARKETPLACE UPLOADS
+
 #### Download Center
 
 * [ ] Upload Visual Studio 2017 installer to https://www.microsoft.com/en-us/download/details.aspx?id=55258
 * [ ] Upload Visual Studio 2015 installer to https://www.microsoft.com/en-us/download/details.aspx?id=48593
+
+-->
 
 #### Nuget
 
