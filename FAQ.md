@@ -443,8 +443,9 @@ A popular method is to check for properties on an object.
 You can use user-defined type guards to accomplish this:
 
 ```ts
-function isSomeInterface(x: any): x is SomeInterface {
+function isSomeInterface(x: any): boolean {
   return typeof x.name === 'string' && typeof x.length === 'number';
+}
 
 function f(x: SomeInterface|SomeOtherInterface) {
   if (isSomeInterface(x)) {
