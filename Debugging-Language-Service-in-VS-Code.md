@@ -60,10 +60,7 @@ From here, there are different steps for debugging the client- and server-side, 
                "protocol": "inspector",
                "port": 5859,
                "sourceMaps": true,
-               "outFiles": ["/path/to/repo/TypeScript/built/local"],
-               "runtimeArgs": [
-                    "--inspect=5859"
-               ]
+               "outFiles": ["/path/to/repo/TypeScript/built/local"]
            }
        ]
    }
