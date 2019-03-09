@@ -15,7 +15,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 3.4 (March 2019)
 
-* [ ] [Higher order function type inference](https://github.com/Microsoft/TypeScript/pull/30215)
+* [X] [Higher order function type inference](https://github.com/Microsoft/TypeScript/pull/30215)
 * [X] [Improved support for read-only arrays and tuples](https://github.com/Microsoft/TypeScript/pull/29435)
 * [X] [Const contexts for literal expressions](https://github.com/Microsoft/TypeScript/pull/29510)
 * [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
