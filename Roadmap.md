@@ -10,22 +10,26 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Implement ES Decorator proposal
 * Implement ES Private Fields
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
+* [ ] [Investigate partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
+* [ ] [Investigate stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
+<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
+* [ ] Quick fixes to...
+  * [ ] [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
+
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
 # 3.4 (March 2019)
 
 * [X] [Higher order function type inference](https://github.com/Microsoft/TypeScript/pull/30215)
+* [X] [`--incremental` builds with `.tsbuildinfo` files](https://github.com/Microsoft/TypeScript/pull/29813)
 * [X] [Improved support for read-only arrays and tuples](https://github.com/Microsoft/TypeScript/pull/29435)
 * [X] [Const contexts for literal expressions](https://github.com/Microsoft/TypeScript/pull/29510)
-* [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
-* [ ] [`globalThis`](https://github.com/Microsoft/TypeScript/pull/29332)
-* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
-<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
-* [ ] Quick fixes to...
-  * [ ] [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
-* [ ] Refactorings to...
-  * [ ] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
+* [X] [`globalThis`](https://github.com/Microsoft/TypeScript/pull/29332)
+* [X] Refactorings to...
+  * [X] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
+
+[See the 3.4 Iteration Plan](https://github.com/Microsoft/TypeScript/issues/30281)
 
 # 3.3 (January 2019)
 
