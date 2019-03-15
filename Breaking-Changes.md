@@ -2,6 +2,47 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.4
+
+## Top-level `this` is now typed
+
+The type of top-level `this` is now typed as `typeof globalThis` instead of `any`.
+As a consequence, you may receive errors for accessing unknown values on `this` under `noImplicitAny`.
+
+```ts
+// previously okay in noImplicitAny, now an error
+this.whargarbl = 10;
+```
+
+Note that code compiled under `noImplicitThis` will not experience any changes here.
+
+## Propagated generic type arguments
+
+In certain cases, TypeScript 3.4's improved inference might produce functions that are generic, rather than ones that take and return their constraints (usually `{}`).
+
+```ts
+declare function compose<T, U, V>(f: (arg: T) => U, g: (arg: U) => V): (arg: T) => V;
+
+function list<T>(x: T) { return [x]; }
+function box<T>(value: T) { return { value }; }
+
+let f = compose(list, box);
+let x = f(100)
+
+// In TypeScript 3.4, 'x.value' has the type
+//
+//   number[]
+//
+// but it previously had the type
+//
+//   {}[]
+//
+// So it's now an error to push in a string.
+x.value.push("hello");
+```
+
+An explicit type annotation on `x` can get rid of the error.
+
 # TypeScript 3.2
 
 ## `lib.d.ts` updates
