@@ -1,6 +1,6 @@
 # TypeScript 3.4
 
-This section has yet to be filled out. [See the RC release page in the meantime](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4-rc/)
+This section has yet to be filled out. [See the RC release page in the meantime](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4-rc/).
 
 # TypeScript 3.3
 
