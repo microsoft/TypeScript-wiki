@@ -8,7 +8,7 @@ We recommend reading Chapter 1 of the TypeScript Language Specification for more
  1. Provide a structuring mechanism for larger pieces of code.
  1. Impose no runtime overhead on emitted programs.
  1. Emit clean, idiomatic, recognizable JavaScript code.
- 1. Produce a language that is composable and easy to reason about.
+ 1. Produce a composable and easily understood programming language.
  1. Align with current and future ECMAScript proposals.
  1. Preserve runtime behavior of all JavaScript code.
  1. Avoid adding expression-level syntax.
