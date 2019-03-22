@@ -17,7 +17,23 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Decorators for function expressions/arrow functions
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
+# 3.5 (May 2019)
+
+[See the 3.5 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30555)
+
+* [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
+* [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
+* [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
+* [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
+* [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
+* [ ] [Smart Select API](https://github.com/Microsoft/TypeScript/issues/29071)
+* [ ] [Sorted/prioritized completions](https://github.com/Microsoft/TypeScript/issues/15024)
+* [ ] [Refactoring to extract type](https://github.com/Microsoft/TypeScript/issues/23869)
+
 # 3.4 (March 2019)
+
+[See the 3.4 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30281)
 
 * [X] [Higher order function type inference](https://github.com/Microsoft/TypeScript/pull/30215)
 * [X] [`--incremental` builds with `.tsbuildinfo` files](https://github.com/Microsoft/TypeScript/pull/29813)
@@ -26,8 +42,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [X] [`globalThis`](https://github.com/Microsoft/TypeScript/pull/29332)
 * [X] Refactorings to...
   * [X] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
-
-[See the 3.4 Iteration Plan](https://github.com/Microsoft/TypeScript/issues/30281)
 
 # 3.3 (January 2019)
 
