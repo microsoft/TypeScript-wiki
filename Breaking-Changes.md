@@ -81,6 +81,37 @@ function isEven(prom: Promise<number>): Promise<{ success: boolean }> {
 }
 ```
 
+### Consistent inference priorities outside of `strictFunctionTypes`
+
+In TypeScript 3.3 with `--strictFunctionTypes` off, generic types declared with `interface` were assumed to always be covariant with respect to their type parameter.
+For function types, this behavior was generally not observable.
+However, for generic `interface` types that used their type parameters with `keyof` positions - a contravariant use - these types behaved incorrectly.
+
+In TypeScript 3.4, variance of types declared with `interface` is now correctly measured in all cases.
+This causes an observable breaking change for interfaces that used a type parameter only in `keyof` (including places like `Record<K, T>` which is an alias for a type involving `keyof K`). The example above is one such possible break.
+
+```ts
+interface HasX { x: any }
+interface HasY { y: any }
+
+declare const source: HasX | HasY;
+declare const properties: KeyContainer<HasX>;
+
+interface KeyContainer<T> {
+    key: keyof T;
+}
+
+function read1<T>(source: T, prop: KeyContainer<T>) {
+    console.log(source[prop.key])
+}
+
+// This call should have been rejected, because we might
+// incorrectly be reading 'x' from 'HasY'
+read1(source, properties);
+```
+
+This error is likely indicative of an issue with the original code.
+
 # TypeScript 3.2
 
 ## `lib.d.ts` updates
