@@ -43,6 +43,44 @@ x.value.push("hello");
 
 An explicit type annotation on `x` can get rid of the error.
 
+### Contextual return types flow in as contextual argument types
+
+TypeScript now uses types that flow into function calls (like `then` in the below example) to contextually type function arguments (like the arrow function in the below example).
+
+```ts
+function isEven(prom: Promise<number>): Promise<{ success: boolean }> {
+    return prom.then<{success: boolean}>((x) => {
+        return x % 2 === 0 ?
+            { success: true } :
+            Promise.resolve({ success: false });
+    });
+}
+```
+
+This is generally an improvement, but in the above example it causes `true` and `false` to acquire literal types which is undesirable.
+
+```
+Argument of type '(x: number) => Promise<{ success: false; }> | { success: true; }' is not assignable to parameter of type '(value: number) => { success: false; } | PromiseLike<{ success: false; }>'.
+  Type 'Promise<{ success: false; }> | { success: true; }' is not assignable to type '{ success: false; } | PromiseLike<{ success: false; }>'.
+    Type '{ success: true; }' is not assignable to type '{ success: false; } | PromiseLike<{ success: false; }>'.
+      Type '{ success: true; }' is not assignable to type '{ success: false; }'.
+        Types of property 'success' are incompatible.
+
+```
+
+The appropriate workaround is to add type arguments to the appropriate call - the `then` method call in this example.
+
+```ts
+function isEven(prom: Promise<number>): Promise<{ success: boolean }> {
+    //               vvvvvvvvvvvvvvvvvv
+    return prom.then<{success: boolean}>((x) => {
+        return x % 2 === 0 ?
+            { success: true } :
+            Promise.resolve({ success: false });
+    });
+}
+```
+
 # TypeScript 3.2
 
 ## `lib.d.ts` updates
