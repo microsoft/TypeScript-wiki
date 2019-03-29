@@ -101,13 +101,13 @@ interface KeyContainer<T> {
     key: keyof T;
 }
 
-function read1<T>(source: T, prop: KeyContainer<T>) {
+function readKey<T>(source: T, prop: KeyContainer<T>) {
     console.log(source[prop.key])
 }
 
 // This call should have been rejected, because we might
-// incorrectly be reading 'x' from 'HasY'
-read1(source, properties);
+// incorrectly be reading 'x' from 'HasY'. It now appropriately errors.
+readKey(source, properties);
 ```
 
 This error is likely indicative of an issue with the original code.
