@@ -11,7 +11,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Implement ES Private Fields
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * [Investigate partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
-* [Investigate stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
@@ -24,6 +23,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
 * [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
 * [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
+* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
 * [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 * [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
 * [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
