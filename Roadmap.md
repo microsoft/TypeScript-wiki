@@ -21,7 +21,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 [See the 3.5 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30555)
 
 * [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
-* [ ] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
+* [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
 * [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
 * [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
 * [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
