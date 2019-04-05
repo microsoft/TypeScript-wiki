@@ -2,6 +2,22 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.5
+
+## `lib.d.ts` includes the `Omit` helper type
+
+TypeScript 3.5 includes a new `Omit` helper type.
+As a result, any global declarations of `Omit` included in your project will result in the following error message:
+
+```ts
+Duplicate identifier 'Omit'.
+```
+
+Two workarounds may be used here:
+
+1. Delete the duplicate declaration and use the one provided in `lib.d.ts`.
+2. Export the existing declaration from a module file or a namespace to avoid a global collision. Existing usages can use an `import` or explicit reference to your project's old `Omit` type.
+
 # TypeScript 3.4
 
 ## Top-level `this` is now typed
