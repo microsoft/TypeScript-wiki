@@ -490,10 +490,20 @@ Nullable types only have meaning if `strictNullChecks` is on:
 ```js
 /**
  * @type {?number}
- * With strictNullChecks: true -- number | null
- * With strictNullChecks: off  -- number
+ * With strictNullChecks: true  -- number | null
+ * With strictNullChecks: false -- number
  */
 var nullable;
+```
+
+You can also use a union type:
+```js
+/**
+ * @type {number | null}
+ * With strictNullChecks: true  -- number | null
+ * With strictNullChecks: false -- number
+ */
+var unionNullable;
 ```
 
 Non-nullable types have no meaning and are treated just as their original type:
