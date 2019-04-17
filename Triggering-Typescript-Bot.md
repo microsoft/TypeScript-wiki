@@ -12,4 +12,6 @@ The currently recognized commands are:
 * [`perf test`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=22) - This queues a build on our perf server using the code from the PR - once started (which will only happen once any currently running build is done), this takes around 40 minutes. The bot should post the results of the perf test run back into the triggering PR once done.
 * [`pack this`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=19) - This creates a build which simply does a build, LKG, tests, and packs the result into an installable tarball (which can be downloaded from the build artifacts on the azure pipelines build status page), perfect for installing with `npm i <URL to tarball>` to test with.
 
+A single comment may contain multiple commands, so long as each is prefixed with a call to `@typescript-bot`.
+
 The source of the webhook running the bot is currently available [here](https://github.com/weswigham/typescript-bot-test-triggerer).
