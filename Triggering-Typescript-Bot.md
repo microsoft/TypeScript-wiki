@@ -2,7 +2,7 @@ If you're a TS maintainer, you can respond to a PR with a comment similar to
 ```
 @typescript-bot test this
 ```
-to trigger an specialized on-demand build on the PR.
+to trigger a specialized on-demand build on the PR.
 
 The currently recognized commands are:
 * [`test this`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=11) - This runs the internal RWC suite against the PR (this takes around 20 minutes). If the tests fail, a diff will be produced and a PR against the internal RWC suite repo will be made with the diff.
