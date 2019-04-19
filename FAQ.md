@@ -937,15 +937,16 @@ One can manually copy methods from the prototype onto the instance itself (i.e. 
 
 TypeScript uses a structural type system.
 When determining compatibility between `Something<number>` and `Something<string>`, we examine each *member* of each type.
-If each member of the types is compatible, then the type is compatible as well.
-Because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what type `T` is.
+If all of the members are compatible, then the types themselves are compatible.
+But because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what type `T` is - it has no bearing on whether the types are compatible.
 
-In general, you should *never* have a type parameter which is unused.
+In general, you should *never* have type parameters which are unused.
 The type will have unexpected compatibility (as shown here) and will also fail to have proper generic type inference in function calls.
 
 ### Why doesn't type inference work on this interface: `interface Foo<T> { }` ?
 
 > I wrote some code like this:
+>
 > ```ts
 > interface Named<T> {
 >     name: string;
