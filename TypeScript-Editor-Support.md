@@ -67,28 +67,28 @@ The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Subl
 
 * [Quramy/tsuquyomi](https://github.com/Quramy/tsuquyomi)
 
-If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following code into your `.vimrc` to specify what token will trigger the completion. YouCompleteMe will call into its respective TypeScript Plugin for semantic queries.
+  If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following code into your `.vimrc` to specify what token will trigger the completion. YouCompleteMe will call into its respective TypeScript Plugin for semantic queries.
 
-```vimscript
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-```
+  ```vimscript
+  if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+  endif
+  let g:ycm_semantic_triggers['typescript'] = ['.']
+  ```
 
 * [mhartington/nvim-typescript](https://github.com/mhartington/nvim-typescript)
 
-As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
+  As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
 
 * [ALE](https://github.com/w0rp/ale)
 
-ALE (Asynchronous Lint Engine) supports As-you-type completion for typescript out of the box.
+  ALE (Asynchronous Lint Engine) supports as-you-type completion for TypeScript out of the box.
 
-```vimscript
-" Enable completion where available.
-" This setting must be set before ALE is loaded.
-let g:ale_completion_enabled = 1
-```
+  ```vimscript
+  " Enable completion where available.
+  " This setting must be set before ALE is loaded.
+  let g:ale_completion_enabled = 1
+  ```
 
 # Visual Studio 2013/2015
 
