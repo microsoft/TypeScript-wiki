@@ -55,14 +55,17 @@ Each command is associated with a request and a response interface. For instance
 
 [TypeScript-Sublime-Plugin](https://github.com/Microsoft/TypeScript-Sublime-Plugin) is a Sublime text plugin written in Python that uses `tsserver`.
 
-## VS Code
+## Visual Studio Code
 
-[VS Code](https://code.visualstudio.com/)'s [TypeScript support](https://github.com/Microsoft/vscode/tree/master/extensions/typescript) is implemented in TypeScript using `tsserver`.
-
+[S Code](https://code.visualstudio.com/)'s [TypeScript support](https://github.com/Microsoft/vscode/tree/master/extensions/typescript) is implemented in TypeScript using `tsserver`.
 
 ## Tide
 
 [Tide](https://github.com/ananthakumaran/tide) is an elisp implementation for emacs plugin using `tsserver`
+
+## Neovim
+
+[nvim-typescript](https://github.com/mhartington/nvim-typescript) is a neovim plugin using `tsserver`
 
 # Advanced topics
 
