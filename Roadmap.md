@@ -22,7 +22,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
-* [ ] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
+* [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
 * [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
 * [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
 * [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
