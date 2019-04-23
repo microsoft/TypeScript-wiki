@@ -1,18 +1,18 @@
 # Quick List
 
- * [alm.tools](#alm)
- * [Atom](#atom)
- * [CATS](#cats) 
- * [Eclipse](#eclipse)
- * [Emacs](#emacs)
- * [NeoVim](#neovim)
- * [NetBeans](#netbeans)
- * [Notepad++](#notepad)
- * [Sublime Text](#sublime-text)
- * [Vim](#vim)
- * [Visual Studio](#visual-studio-20132015)
- * [Visual Studio Code](#visual-studio-code)
- * [WebStorm](#webstorm)
+* [alm.tools](#alm)
+* [Atom](#atom)
+* [CATS](#cats) 
+* [Eclipse](#eclipse)
+* [Emacs](#emacs)
+* [NeoVim](#neovim)
+* [NetBeans](#netbeans)
+* [Notepad++](#notepad)
+* [Sublime Text](#sublime-text)
+* [Vim](#vim)
+* [Visual Studio](#visual-studio-20132015)
+* [Visual Studio Code](#visual-studio-code)
+* [WebStorm](#webstorm)
 
 # alm
 
@@ -67,24 +67,34 @@ The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Subl
 
 * [Quramy/tsuquyomi](https://github.com/Quramy/tsuquyomi)
 
-If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following code into your `.vimrc` to specify what token will trigger the completion. YouCompleteMe will call into its respective TypeScript Plugin for semantic queries.
+  If you would like to have as-you-type completion, you can install [YouCompleteMe](https://github.com/Valloric/YouCompleteMe) and add the following code into your `.vimrc` to specify what token will trigger the completion. YouCompleteMe will call into its respective TypeScript Plugin for semantic queries.
 
-```vimscript
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-```
+  ```vimscript
+  if !exists("g:ycm_semantic_triggers")
+    let g:ycm_semantic_triggers = {}
+  endif
+  let g:ycm_semantic_triggers['typescript'] = ['.']
+  ```
 
 * [mhartington/nvim-typescript](https://github.com/mhartington/nvim-typescript)
 
-As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
+  As-you-type deoplete asynchronous completion framework for Vim 8. Needs [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim) in order to work.
 
-# Visual Studio 2013/2015
+* [ALE](https://github.com/w0rp/ale)
+
+  ALE (Asynchronous Lint Engine) supports as-you-type completion for TypeScript out of the box.
+
+  ```vimscript
+  " Enable completion where available.
+  " This setting must be set before ALE is loaded.
+  let g:ale_completion_enabled = 1
+  ```
+
+# Visual Studio
 
 [Visual Studio](https://www.visualstudio.com/) comes with TypeScript when installing Microsoft Web Tools.
 
-TypeScript for Visual Studio 2017 with [version 15.2 or later](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes-v15.2) can be found [here](https://www.microsoft.com/en-us/download/details.aspx?id=55258)
+TypeScript for Visual Studio 2019 and Visual Studio 2017 (with [version 15.2 or later](https://www.visualstudio.com/en-us/news/releasenotes/vs2017-relnotes-v15.2)) can be found [here](https://marketplace.visualstudio.com/publishers/TypeScriptTeam)
 
 TypeScript for Visual Studio 2015 with [update 3](https://www.visualstudio.com/en-us/news/releasenotes/vs2015-update3-vs) can be found [here](http://www.microsoft.com/en-us/download/details.aspx?id=48593)
 

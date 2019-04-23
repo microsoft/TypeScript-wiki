@@ -19,7 +19,7 @@ For instance, a call to `getSyntacticDiagnostics` will only need the file in que
 The language service design decouples different phases of the compiler pipeline that would normally happen in order in one shot during command-line compilation; and it allows the language service host flexibility in ordering these different phases.
 
 
-For instance, the language service reports diagnostics on a file per file bases, all while making a distinction between syntactic and semantic errors of each file. This ensures that the host can supply an optimal experience by retrieving syntax errors for a given file without having to pay the cost of querying other files, or performing a full semantic check. It also allows the host to skip querying for syntax errors for files that have not changed. Similarly, the language service allows for emitting a single file (`getEmitOutput`) without having to emit or even type check the whole program.
+For instance, the language service reports diagnostics on a file per file basis, all while making a distinction between syntactic and semantic errors of each file. This ensures that the host can supply an optimal experience by retrieving syntax errors for a given file without having to pay the cost of querying other files, or performing a full semantic check. It also allows the host to skip querying for syntax errors for files that have not changed. Similarly, the language service allows for emitting a single file (`getEmitOutput`) without having to emit or even type check the whole program.
 
 ## Language Service Host
 
@@ -42,7 +42,7 @@ Incremental parsing asks the second question to ensure it only re-parses changed
 
 ## Reference resolution in the language service
 
-There are two means of declaring dependencies in TypeScript: import statements, and triple-slash reference comments (`/// <reference path="..." />`). Reference resolution for a program is the process of walking the dependency graph between files, and generating a sorted list of files compromising the program. 
+There are two means of declaring dependencies in TypeScript: import statements, and triple-slash reference comments (`/// <reference path="..." />`). Reference resolution for a program is the process of walking the dependency graph between files, and generating a sorted list of files comprising the program. 
 
 In the command-line compiler (`tsc`) this happens as part of building the program. A `createProgram` call starts with a set of root files, parses them in order, and walks their dependency declaration (both imports and triple-slash references) resolving references to actual files on disk and then pulling them into the compilation process.
 
