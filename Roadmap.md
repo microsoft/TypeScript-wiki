@@ -20,6 +20,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 3.5 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30555)
 
+* [X] [Higher order inferences for constructor functions](https://github.com/Microsoft/TypeScript/pull/31116)
 * [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
 * [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
