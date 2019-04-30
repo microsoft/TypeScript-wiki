@@ -4,10 +4,11 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 3.5
 
-## Generic type parameter constraints now default to `unknown`
+## Generic type parameters are implicitly constrained to `unknown`
 
-[In TypeScript 3.5, generic type parameters now have an implicit constraint of `unknown`, as opposed to `{}`](https://github.com/Microsoft/TypeScript/pull/30637).
-THis means that methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
+In TypeScript 3.5, [generic type parameters without an explicit constraint are now implicitly constrained to `unknown`](https://github.com/Microsoft/TypeScript/pull/30637), whereas previously the implicit constraint of type parameters was the empty object type `{}`.
+
+This means that methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
 
 ```ts
 function foo<T>(x: T): [T, string] {
