@@ -4,6 +4,27 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 3.5
 
+## Generic type parameter constraints now default to `unknown`
+
+[In TypeScript 3.5, generic type parameters now have an implicit constraint of `unknown`, as opposed to `{}`](https://github.com/Microsoft/TypeScript/pull/30637).
+THis means that methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
+
+```ts
+function foo<T>(x: T): [T, string] {
+    return [x, x.toString()]
+    //           ~~~~~~~~ error! Property 'toString' does not exist on type 'T'.
+}
+```
+
+As a workaround, you can add an explicit constraint of `{}` to a type parameter to get the old behavior.
+
+```ts
+//             vvvvvvvvvv
+function foo<T extends {}>(x: T): [T, string] {
+    return [x, x.toString()]
+}
+```
+
 ## `lib.d.ts` includes the `Omit` helper type
 
 TypeScript 3.5 includes a new `Omit` helper type.
