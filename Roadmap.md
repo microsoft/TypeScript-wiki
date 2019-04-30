@@ -16,23 +16,28 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Decorators for function expressions/arrow functions
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
+# 3.6 (July 2019)
+
+* [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
+* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
+* [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
+* [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
+* [ ] [Sorted/prioritized completions](https://github.com/Microsoft/TypeScript/issues/15024)
+
 # 3.5 (May 2019)
 
 [See the 3.5 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30555)
 
 * [X] [Higher order inferences for constructor functions](https://github.com/Microsoft/TypeScript/pull/31116)
+* [X] [Easier assignment to discriminated unions](https://github.com/Microsoft/TypeScript/pull/30779)
 * [X] [Change default constraint for type parameters from `{}` to `unknown`](https://github.com/Microsoft/TypeScript/pull/30637)
-* [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
 * [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
-* [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
-* [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
-* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
-* [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 * [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
-* [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
+* [X] Speed improvements in `--incremental` and `--build`
+  * [X] [Caching module resolution results](https://github.com/Microsoft/TypeScript/pull/31100)
+  * [X] [Caching results of parsing `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/31101)
 * [ ] [Smart Select API](https://github.com/Microsoft/TypeScript/issues/29071)
-* [ ] [Sorted/prioritized completions](https://github.com/Microsoft/TypeScript/issues/15024)
 * [ ] [Refactoring to extract type](https://github.com/Microsoft/TypeScript/issues/23869)
 
 # 3.4 (March 2019)
