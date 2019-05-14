@@ -31,6 +31,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [X] [Higher order inferences for constructor functions](https://github.com/Microsoft/TypeScript/pull/31116)
 * [X] [Easier assignment to discriminated unions](https://github.com/Microsoft/TypeScript/pull/30779)
 * [X] [Change default constraint for type parameters from `{}` to `unknown`](https://github.com/Microsoft/TypeScript/pull/30637)
+* [X] [Improved checking of indexed access types](https://github.com/microsoft/TypeScript/pull/30769)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
 * [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
 * [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
