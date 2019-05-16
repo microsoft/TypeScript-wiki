@@ -14,7 +14,7 @@ In practice, `{}` and `unknown` are pretty similar, but there are a few key diff
 * `{}` is assumed to not be `null` or `undefined`, whereas `unknown` is possibly one of those values.
 * `{}` is assignable to `object`, but `unknown` is not.
 
-On the caller side, this typically means is that assignment to `object` will fail, and methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
+On the caller side, this typically means that assignment to `object` will fail, and methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
 
 ```ts
 function foo<T>(x: T): [T, string] {
@@ -50,12 +50,10 @@ As a workaround, you can provide an explicit type argument:
 const k = parse<{}>("...");
 ```
 
-## `{ [k: string]: unknown }` is no longer a wildcard assignment target
+### `{ [k: string]: unknown }` is no longer a wildcard assignment target
 
-### Background
-
-The index signature `{ [s: string]: any }` in TypeScript behaves specially: It is a valid assignment target for any object type.
-This is a *special rule* - the definition of index signatures would not normally produce this behavior.
+The index signature `{ [s: string]: any }` in TypeScript behaves specially: it's a valid assignment target for any object type.
+This is a special rule, since types with index signatures don't normally produce this behavior.
 
 Since its introduction, the type `unknown` in an index signature behaved the same way:
 
@@ -65,11 +63,8 @@ let dict: { [s: string]: unknown };
 dict = () => {};
 ```
 
-In general this rule makes sense; the implied constraint of "All its properties are some subtype of `unknown`" is trivially true of any object type.
-
-### Rationale and Change
-
-In TypeScript 3.5, this special rule is removed for `{ [s: string]: unknown }`.
+In general this rule makes sense; the implied constraint of "all its properties are some subtype of `unknown`" is trivially true of any object type.
+However, in TypeScript 3.5, this special rule is removed for `{ [s: string]: unknown }`.
 
 This was a necessary change because of the change from `{}` to `unknown` when generic inference has no candidates.
 Consider this code:
@@ -81,38 +76,30 @@ fn(someFunc);
 ```
 
 In TypeScript 3.4, the following sequence occurred:
- * No candidates were found for `T`
- * `T` is selected to be `{}`
- * `someFunc` isn't assignable to `arg` because there are no special rules allowing arbitrary assignment to `{ [k: string]: {} }`
- * The call is correctly rejected
 
-In TypeScript 3.5, *prior to this breaking change*, the following sequence occurred:
- * No candidates were found for `T`
- * `T` is selected to be `unknown`
- * `someFunc` is assignable to `arg` because of the special rule allowing arbitrary assignment to `{ [k: string]: unknown }`
- * The call is incorrectly allowed
+* No candidates were found for `T`
+* `T` is selected to be `{}`
+* `someFunc` isn't assignable to `arg` because there are no special rules allowing arbitrary assignment to `{ [k: string]: {} }`
+* The call is correctly rejected
 
-In TypeScript 3.5, *with* this change, the following sequence occurrs:
- * No candidates were found for `T`
- * `T` is selected to be `unknown`
- * `someFunc` not assignable to `arg` because it doesn't have a compatible index signature
- * The call is correctly rejected
+Due to changes around unconstrained type parameters falling back to `unknown` (see above), `arg` would have had the type `{ [k: string]: unknown }`, which anything is assignable to, so the call would have incorrectly been allowed.
+That's why TypeScript 3.5 removes the specialized assignability rule to permit assignment to `{ [k: string]: unknown }`.
 
-Note that the existing behavior allowing the inference of an index signature from a type originating in a fresh object literal is still preserved:
+Note that fresh object literals are still exempt from this check.
+
 ```ts
 const obj = { m: 10 }; 
 // OK
 const dict: { [s: string]: unknown } = obj;
 ```
 
-### Workarounds
-
-Some codebases have adopted `{ [s: string]: unknown }` to mean "an arbitrary object".
-Depending on the intended behavior, several alternatives are available:
+Depending on the intended behavior of `{ [s: string]: unknown }`, several alternatives are available:
  
-* `object`
 * `{ [s: string]: any }`
 * `{ [s: string]: {} }`
+* `object`
+* `unknown`
+* `any`
 
 We recommend sketching out your desired use cases and seeing which one is the best option for your particular use case.
 
