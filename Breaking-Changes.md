@@ -8,7 +8,13 @@ These changes list where implementation differs between versions as the spec and
 
 In TypeScript 3.5, [generic type parameters without an explicit constraint are now implicitly constrained to `unknown`](https://github.com/Microsoft/TypeScript/pull/30637), whereas previously the implicit constraint of type parameters was the empty object type `{}`.
 
-This means that methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
+In practice, `{}` and `unknown` are pretty similar, but there are a few key differences:
+
+* `{}` can be indexed with a string (`k["foo"]`), though this is an implicit `any` error under `--noImplicitAny`.
+* `{}` is assumed to not be `null` or `undefined`, whereas `unknown` is possibly one of those values.
+* `{}` is assignable to `object`, but `unknown` is not.
+
+On the caller side, this typically means is that assignment to `object` will fail, and methods on `Object` like `toString`, `toLocaleString`, `valueOf`, `hasOwnProperty`, `isPrototypeOf`, and `propertyIsEnumerable` will no longer be available.
 
 ```ts
 function foo<T>(x: T): [T, string] {
@@ -26,6 +32,236 @@ function foo<T extends {}>(x: T): [T, string] {
 }
 ```
 
+From the caller side, failed inferences for generic type arguments will result in `unknown` instead of `{}`.
+
+```ts
+function parse<T>(x: string): T {
+    return JSON.parse(x);
+}
+
+// k has type 'unknown' - previously, it was '{}'.
+const k = parse("...");
+```
+
+As a workaround, you can provide an explicit type argument:
+
+```ts
+// 'k' now has type '{}'
+const k = parse<{}>("...");
+```
+
+## `{ [k: string]: unknown }` is no longer a wildcard assignment target
+
+### Background
+
+The index signature `{ [s: string]: any }` in TypeScript behaves specially: It is a valid assignment target for any object type.
+This is a *special rule* - the definition of index signatures would not normally produce this behavior.
+
+Since its introduction, the type `unknown` in an index signature behaved the same way:
+
+```ts
+let dict: { [s: string]: unknown };
+// Was OK
+dict = () => {};
+```
+
+In general this rule makes sense; the implied constraint of "All its properties are some subtype of `unknown`" is trivially true of any object type.
+
+### Rationale and Change
+
+In TypeScript 3.5, this special rule is removed for `{ [s: string]: unknown }`.
+
+This was a necessary change because of the change from `{}` to `unknown` when generic inference has no candidates.
+Consider this code:
+
+```ts
+declare function someFunc(): void;
+declare function fn<T>(arg: { [k: string]: T }): void;
+fn(someFunc);
+```
+
+In TypeScript 3.4, the following sequence occurred:
+ * No candidates were found for `T`
+ * `T` is selected to be `{}`
+ * `someFunc` isn't assignable to `arg` because there are no special rules allowing arbitrary assignment to `{ [k: string]: {} }`
+ * The call is correctly rejected
+
+In TypeScript 3.5, *prior to this breaking change*, the following sequence occurred:
+ * No candidates were found for `T`
+ * `T` is selected to be `unknown`
+ * `someFunc` is assignable to `arg` because of the special rule allowing arbitrary assignment to `{ [k: string]: unknown }`
+ * The call is incorrectly allowed
+
+In TypeScript 3.5, *with* this change, the following sequence occurrs:
+ * No candidates were found for `T`
+ * `T` is selected to be `unknown`
+ * `someFunc` not assignable to `arg` because it doesn't have a compatible index signature
+ * The call is correctly rejected
+
+Note that the existing behavior allowing the inference of an index signature from a type originating in a fresh object literal is still preserved:
+```ts
+const obj = { m: 10 }; 
+// OK
+const dict: { [s: string]: unknown } = obj;
+```
+
+### Workarounds
+
+Some codebases have adopted `{ [s: string]: unknown }` to mean "an arbitrary object".
+Depending on the intended behavior, several alternatives are available:
+ 
+* `object`
+* `{ [s: string]: any }`
+* `{ [s: string]: {} }`
+
+We recommend sketching out your desired use cases and seeing which one is the best option for your particular use case.
+
+## Improved excess property checks in union types
+
+### Background
+
+TypeScript has a feature called *excess property checking* in object literals.
+This feature is meant to detect typos for when a type isn't expecting a specific property.
+
+```ts
+type Style = {
+    alignment: string,
+    color?: string
+};
+
+const s: Style = {
+    alignment: "center",
+    colour: "grey"
+//  ^^^^^^ error! 
+};
+```
+
+### Rationale and Change
+
+In TypeScript 3.4 and earlier, certain excess properties were allowed in situations where they really shouldn't have been.
+
+Consider this code:
+```ts
+type Point = {
+    x: number;
+    y: number;
+};
+
+type Label = {
+    name: string;
+};
+
+const pl: Point | Label = {
+    x: 0,
+    y: 0,
+    name: true // <- danger!
+};
+```
+
+Excess property checking was previously only capable of detecting properties which weren't present in *any* member of a target union type.
+
+In TypeScript 3.5, these excess properties are now correctly detected, and the sample above correctly issues an error.
+
+Note that it's still legal to be assignable to multiple parts of a union:
+
+```ts
+const pl: Point | Label = {
+    x: 0,
+    y: 0,
+    name: "origin" // OK
+};
+```
+
+### Workarounds
+
+We have not witnessed examples where this checking hasn't caught legitimate issues, but in a pinch, any of the workarounds to disable excess property checking will apply:
+
+* Add a type assertion onto the object (e.g. `{ myProp: SomeType } as ExpectedType`)
+* Add an index signature to the expected type to signal that unspecified properties are expected (e.g. `interface ExpectedType { myProp: SomeType; [prop: string]: unknown }`)
+
+## Fixes to Unsound Writes to Indexed Access Types
+
+### Background
+
+TypeScript allows you to represent the abstract operation of accessing a property of an object via the name of that property:
+
+```ts
+type A = {
+    s: string;
+    n: number;
+};
+
+function read<K extends keyof A>(arg: A, key: K): A[K] {
+    return arg[key];
+} 
+
+const a: A = { s: "", n: 0 };
+const x = read(a, "s"); // x: string
+```
+
+While commonly used for reading values from an object, you can also use this for writes:
+
+```ts
+function write<K extends keyof A>(arg: A, key: K, value: A[K]): void {
+    arg[key] = value;
+}
+```
+
+### Change and Rationale
+
+In TypeScript 3.4, the logic used to validate a *write* was much too permissive:
+
+```ts
+function write<K extends keyof A>(arg: A, key: K, value: A[K]): void {
+    // ???
+    arg[key] = "hello, world";
+}
+// Breaks the object by putting a string where a number should be
+write(a, "n");
+```
+
+In TypeScript 3.5, this logic is fixed and the above sample correctly issues an error.
+
+### Workarounds
+
+Most instances of this error represent potential errors in the relevant code.
+
+One example we found looked like this:
+```ts
+type T = {
+    a: string,
+    x: number,
+    y: number
+};
+function write<K extends keyof T>(obj: T, k: K) {
+    // Trouble waiting
+    obj[k] = 1;
+}
+const someObj: T = { a: "", x: 0, y: 0 };
+// Note: write(someObj, "a") never occurs, so the code is technically bug-free (?)
+write(someObj, "x");
+write(someObj, "y");
+```
+
+This function can be fixed to only accept keys which map to numeric properties:
+
+```ts
+// Generic helper type that produces the keys of an object
+// type which map to properties of some other specific type
+type KeysOfType<TObj, TProp, K extends keyof TObj = keyof TObj> = K extends K ? TObj[K] extends TProp ? K : never : never;
+
+function write(obj: SomeObj, k: KeysOfType<SomeObj, number>) {
+    // OK
+    obj[k] = 1;
+}
+
+const someObj: SomeObj = { a: "", x: 0, y: 0 };
+write(someObj, "x");
+write(someObj, "y");
+// Correctly an error
+write(someObj, "a");
+```
+
 ## `lib.d.ts` includes the `Omit` helper type
 
 TypeScript 3.5 includes a new `Omit` helper type.
@@ -39,6 +275,52 @@ Two workarounds may be used here:
 
 1. Delete the duplicate declaration and use the one provided in `lib.d.ts`.
 2. Export the existing declaration from a module file or a namespace to avoid a global collision. Existing usages can use an `import` or explicit reference to your project's old `Omit` type.
+
+## `Object.keys` rejects primitives in ES5
+
+### Background
+
+In ECMAScript 5 environments, `Object.keys` throws an exception if passed any non-`object` argument:
+
+```ts
+// Throws if run in an ES5 runtime
+Object.keys(10);
+```
+
+In ECMAScript 2015, `Object.keys` returns `[]` if its argument is a primitive:
+
+```ts
+// [] in ES6 runtime
+Object.keys(10);
+```
+
+### Rationale and Change
+
+This is a potential source of error that wasn't previously identified.
+
+In TypeScript 3.5, if `target` (or equivalently `lib`) is `ES5`, calls to `Object.keys` must pass a valid `object`.
+
+### Workarounds
+
+In general, errors here represent possible exceptions in your application and should be treated as such.
+If you happen to know through other means that a value is an `object`, a type assertion is appropriate:
+
+```ts
+function fn(arg: object | number, isArgActuallyObject: boolean) {
+    if (isArgActuallyObject) {
+        const k = Object.keys(arg as object);
+    }
+}
+```
+
+Note that this change interacts with the change in generic inference from `{}` to `unknown`, because `{}` is a valid `object` whereas `unknown` isn't:
+
+```ts
+declare function fn<T>(): T;
+
+// Was OK in TypeScript 3.4, errors in 3.5 under --target ES5
+Object.keys(fn());
+```
 
 # TypeScript 3.4
 
@@ -1731,7 +2013,7 @@ class C {
     foo(arguments: any) {   // Invalid: "arguments" is not allow as a function argument
         var eval = 10;      // Invalid: "eval" is not allowed as the left-hand-side expression
         arguments = [];     // Invalid: arguments object is immutable
-	}
+    }
 }
 ```
 For complete list of strict mode restrictions, please see Annex C - The Strict Mode of ECMAScript of ECMA-262 6<sup>th</sup> Edition.
