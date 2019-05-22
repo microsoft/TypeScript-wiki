@@ -16,7 +16,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Decorators for function expressions/arrow functions
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
-# 3.6 (July 2019)
+# 3.6 (August 2019)
 
 * [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
 * [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
