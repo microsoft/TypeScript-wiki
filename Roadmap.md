@@ -18,6 +18,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 3.6 (August 2019)
 
+[See the 3.6 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/31639)
+
 * [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
 * [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
 * [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
