@@ -29,7 +29,7 @@ This is the list of release activities needed for every TypeScript release.
     * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
 * [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
 * [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency to the new header-parser
-* [ ] Run the tagging script to tag for new version (version of `typescript@next`)
+* [ ] Run [the tagging script](https://github.com/sandersn/dt-retag/blob/master/index.js) to tag for new version (version of `typescript@next`)
 
 #### npm
 
