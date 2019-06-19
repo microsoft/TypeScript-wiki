@@ -25,13 +25,11 @@ Let's write a simple plugin. Our plugin will remove a user-configurable list of 
 
 ### Setup and Initialization
 
-When your plugin is loaded, it's first initialized as a factory function with its first parameter set to `{typescript: ts}`. It's important to use *this* value, rather than the imported `ts` module, because any version of TypeScript might be loaded by tsserver. If you use any other object, you'll run into compatibility problems later because enum values may change between versions. Note below that ts_module is imported *only* for the type annotation.
+When your plugin is loaded, it's first initialized as a factory function with its first parameter set to `{typescript: ts}`. It's important to use *this* value, rather than the imported `ts` module, because any version of TypeScript might be loaded by tsserver. If you use any other object, you'll run into compatibility problems later because enum values may change between versions.
 
 Here's the minimal code that handles this injected `ts` value:
 ```ts
-import * as ts_module from "typescript/lib/tsserverlibrary";
-
-function init(modules: { typescript: typeof ts_module }) {
+function init(modules: { typescript: typeof import("typescript/lib/tsserverlibrary") }) {
   const ts = modules.typescript;
   /* More to come here */
 }
@@ -45,7 +43,7 @@ TypeScript Language Service Plugins use the [Decorator Pattern](https://en.wikip
 
 Let's fill in some more code to properly set up a decorator:
 ```ts
-function init(modules: { typescript: typeof ts_module }) {
+function init(modules: { typescript: typeof import("typescript/lib/tsserverlibrary") }) {
   const ts = modules.typescript;
 
   function create(info: ts.server.PluginCreateInfo) {
@@ -160,9 +158,7 @@ function create(info: ts.server.PluginCreateInfo) {
 ## Putting it all together
 
 ```ts
-import * as ts_module from "../node_modules/typescript/lib/tsserverlibrary";
-
-function init(modules: { typescript: typeof ts_module }) {
+function init(modules: { typescript: typeof import("typescript/lib/tsserverlibrary") }) {
   const ts = modules.typescript;
 
   function create(info: ts.server.PluginCreateInfo) {
