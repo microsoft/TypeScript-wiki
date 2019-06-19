@@ -257,3 +257,4 @@ Some other TypeScript Language Service Plugin implementations you can look at fo
 * https://github.com/Quramy/ts-graphql-plugin
 * https://github.com/Microsoft/typescript-styled-plugin
 * https://github.com/angelozerr/tslint-language-service/
+* https://github.com/xialvjun/ts-sql-plugin

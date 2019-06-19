@@ -108,20 +108,20 @@ export function delint(sourceFile: ts.SourceFile) {
       case ts.SyntaxKind.ForInStatement:
       case ts.SyntaxKind.WhileStatement:
       case ts.SyntaxKind.DoStatement:
-        if ((<ts.IterationStatement>node).statement.kind !== ts.SyntaxKind.Block) {
+        if ((node as ts.IterationStatement).statement.kind !== ts.SyntaxKind.Block) {
           report(
             node,
-            "A looping statement's contents should be wrapped in a block body."
+            'A looping statement\'s contents should be wrapped in a block body.'
           );
         }
         break;
 
       case ts.SyntaxKind.IfStatement:
-        let ifStatement = <ts.IfStatement>node;
+        const ifStatement = node as ts.IfStatement;
         if (ifStatement.thenStatement.kind !== ts.SyntaxKind.Block) {
           report(
             ifStatement.thenStatement,
-            "An if statement's contents should be wrapped in a block body."
+            'An if statement\'s contents should be wrapped in a block body.'
           );
         }
         if (
@@ -131,18 +131,18 @@ export function delint(sourceFile: ts.SourceFile) {
         ) {
           report(
             ifStatement.elseStatement,
-            "An else statement's contents should be wrapped in a block body."
+            'An else statement\'s contents should be wrapped in a block body.'
           );
         }
         break;
 
       case ts.SyntaxKind.BinaryExpression:
-        let op = (<ts.BinaryExpression>node).operatorToken.kind;
+        const op = (node as ts.BinaryExpression).operatorToken.kind;
         if (
           op === ts.SyntaxKind.EqualsEqualsToken ||
-          op == ts.SyntaxKind.ExclamationEqualsToken
+          op === ts.SyntaxKind.ExclamationEqualsToken
         ) {
-          report(node, "Use '===' and '!=='.");
+          report(node, 'Use \'===\' and \'!==\'.');
         }
         break;
     }
@@ -151,7 +151,7 @@ export function delint(sourceFile: ts.SourceFile) {
   }
 
   function report(node: ts.Node, message: string) {
-    let { line, character } = sourceFile.getLineAndCharacterOfPosition(
+    const { line, character } = sourceFile.getLineAndCharacterOfPosition(
       node.getStart()
     );
     console.log(
@@ -163,7 +163,7 @@ export function delint(sourceFile: ts.SourceFile) {
 const fileNames = process.argv.slice(2);
 fileNames.forEach(fileName => {
   // Parse a file
-  let sourceFile = ts.createSourceFile(
+  const sourceFile = ts.createSourceFile(
     fileName,
     readFileSync(fileName).toString(),
     ts.ScriptTarget.ES2015,

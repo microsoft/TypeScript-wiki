@@ -85,7 +85,7 @@ See [this doc](https://github.com/Microsoft/TypeScript/wiki/JsDoc-support-in-Jav
 
 #### <a name="TsDeclFiles"></a> IntelliSense based on TypeScript Declaration Files
 
-Because JavaScript and TypeScript are now based on the same language service, they are able to interact in a richer way. For example, JavaScript IntelliSense can be provided for values declared in a `.d.ts` file ([more info](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Writing%20Definition%20Files.md)), and types such as interfaces and classes declared in TypeScript are available for use as types in JsDoc comments. 
+Because JavaScript and TypeScript are now based on the same language service, they are able to interact in a richer way. For example, JavaScript IntelliSense can be provided for values declared in a `.d.ts` file ([more info](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/declaration%20files/Introduction.md)), and types such as interfaces and classes declared in TypeScript are available for use as types in JsDoc comments.
 
 Below, we show a simple example of a TypeScript definition file providing such type information (via an interface) to a JavaScript file in the same project (using a JsDoc tag).
 

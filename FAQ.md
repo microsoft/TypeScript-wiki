@@ -95,7 +95,7 @@ Here are some behaviors that look may look like bugs, but aren't.
    * Prior discussion at #4544
  * I'm allowed to use a shorter parameter list where a longer one is expected
    * See the [FAQ Entry on this page](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
-   * Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868
+   * Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868, #26324, #30876
  * `private` class members are actually visible at runtime
    * See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
    * Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
@@ -187,7 +187,7 @@ Because of this omission, TypeScript must be more permissive when asked whether 
 
 To understand why, consider two questions: Is `Dog[]` a subtype of `Animal[]` ? *Should* `Dog[]` be a subtype of `Animal[]` in TypeScript?
 
-The second question (*should* `Dog[]` be a subtype of `Animal[]`?) is an easier to analyze.
+The second question (*should* `Dog[]` be a subtype of `Animal[]`?) is easier to analyze.
 What if the answer was "no" ?
 
 ```ts
@@ -240,7 +240,7 @@ so we have to take a correctness trade-off for the specific case of function arg
 > ```
 
 This is the expected and desired behavior.
-First, refer to the "substitutability" primer at the top of the FAQ -- `handler` is a valid argument for `callback` because it can safely ignored extra parameters.
+First, refer to the "substitutability" primer at the top of the FAQ -- `handler` is a valid argument for `callback` because it can safely ignore extra parameters.
 
 Second, let's consider another case:
 ```ts
@@ -608,7 +608,7 @@ function createLog(source:string, message?:string): number {
 }
 ```
 
-The rationale here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive that what you would want your users to call you through.
+The rationale here is that since JavaScript does not have function overloading, you will be doing parameter checking in your function, and this your function implementation might be more permissive than what you would want your users to call you through.
 
 For instance you can require your users to call you using matching pairs of arguments, and implement this correctly without having to allow mixed argument types:
 
@@ -937,15 +937,16 @@ One can manually copy methods from the prototype onto the instance itself (i.e. 
 
 TypeScript uses a structural type system.
 When determining compatibility between `Something<number>` and `Something<string>`, we examine each *member* of each type.
-If each member of the types are compatible, then the type are compatible as well.
-Because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what type `T` is.
+If all of the members are compatible, then the types themselves are compatible.
+But because `Something<T>` doesn't *use* `T` in any member, it doesn't matter what type `T` is - it has no bearing on whether the types are compatible.
 
-In general, you should *never* have a type parameter which is unused.
+In general, you should *never* have type parameters which are unused.
 The type will have unexpected compatibility (as shown here) and will also fail to have proper generic type inference in function calls.
 
 ### Why doesn't type inference work on this interface: `interface Foo<T> { }` ?
 
 > I wrote some code like this:
+>
 > ```ts
 > interface Named<T> {
 >     name: string;
@@ -963,7 +964,7 @@ The type will have unexpected compatibility (as shown here) and will also fail t
 > ```
 
 TypeScript uses a structural type system.
-This structuralness also applies during generic type inference.
+This structural-ness also applies during generic type inference.
 When inferring the type of `T` in the function call, we try to find *members* of type `T` on the `x` argument to figure out what `T` should be.
 Because there are no members which use `T`, there is nothing to infer from, so we return `{}`.
 
@@ -1360,9 +1361,9 @@ To ensure the output does not change with adding new files specify `--rootDir` o
 
 If you want to exclude some of the files use `“exclude”`, if you would rather specify all the files instead of letting the compiler look them up, use `“files”`.
 
-That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from “mod”`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition files. if the file was found, it will be included regardless if it was excluded in the previous steps.
+That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from “mod”`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition file. if the file was found, it will be included regardless if it was excluded in the previous steps.
 
-So to exclude a file from the compilation, you need to exclude and all **all** files that has an `import` or `/// <reference path="..." />` directives to it.
+So to exclude a file from the compilation, you need to exclude and all **all** files that have an `import` or `/// <reference path="..." />` directives to them.
 
 Use `tsc --listFiles` to list what files are included in your compilation, and `tsc --traceResolution` to see why they were included.
 
@@ -1386,7 +1387,7 @@ If you just want to include the JavaScript files for editing and don't need to c
 ### Why some comments are not preserved in emitted JavaScript even when `--removeComments` is not specified?
 
 TypeScript compiler uses a position of a node in the abstract syntax tree to retrieve its comments during emit.
-Because, the compiler does not store all tokens into the tree, some comments may be missed in an output JavaScript file.
+Because the compiler does not store all tokens into the tree, some comments may be missed in an output JavaScript file.
 For example, we do not store following tokens into the tree `,`, `{`, `}`, `(`, `)`.
 Therefore, trailing comments or leading comments of such token cannot be retrieved during emit.
 At the moment, there is not an easy method to preserve such comments without storing those tokens.
@@ -1401,8 +1402,8 @@ Some cases where TypeScript compiler will not be able to preserve your comments:
 </div>
 
 var x = {
-    prop1: 1, // won't get emit because we can't retrieve this comment
-    prop2: 2  // will be emit
+    prop1: 1, // won't get emitted because we can't retrieve this comment
+    prop2: 2  // will be emitted
 }
 
 function foo() /* this comment can't be preserved */ { }
@@ -1412,7 +1413,7 @@ function foo() /* this comment can't be preserved */ { }
 ### Why Copyright comments are removed when `--removeComments` is true?
 
 TypeScript compiler will preserve copyright comment regardless of `--removeComments`.
-For a comment to be considered a copyright comment, it must have following characteristics:
+For a comment to be considered a copyright comment, it must have the following characteristics:
 
 - a top-of-file comment following by empty line, separating it from the first statement.
 - begin with `/*!`
@@ -1505,7 +1506,7 @@ function foo /*trailing comments of the function name, "foo", AST node*/ () {
 > I don't think this suggestion should have been closed! What can I do next?
 
 To date, we've received over 1,000 suggestions on the TypeScript GitHub repo.
-We do our best to read, understand, prioritize, formalize, and implement these suggestions.
+We do our best to read, understand, prioritize, formalize and implement these suggestions.
 User feedback has been critical in shaping the success of the project.
 That said, sometimes we'll make decisions that you don't agree with, and sometimes we'll make the wrong call.
 What should you do if you think we should reconsider something?
