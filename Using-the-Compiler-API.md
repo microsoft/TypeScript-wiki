@@ -722,7 +722,7 @@ function generateDocumentation(
   function serializeSymbol(symbol: ts.Symbol): DocEntry {
     return {
       name: symbol.getName(),
-      documentation: ts.displayPartsToString(symbol.getDocumentationComment()),
+      documentation: ts.displayPartsToString(symbol.getDocumentationComment(checker)),
       type: checker.typeToString(
         checker.getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration!)
       )
@@ -749,14 +749,14 @@ function generateDocumentation(
     return {
       parameters: signature.parameters.map(serializeSymbol),
       returnType: checker.typeToString(signature.getReturnType()),
-      documentation: ts.displayPartsToString(signature.getDocumentationComment())
+      documentation: ts.displayPartsToString(signature.getDocumentationComment(checker))
     };
   }
 
   /** True if this is visible outside this file, false otherwise */
   function isNodeExported(node: ts.Node): boolean {
     return (
-      (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export) !== 0 ||
+      (ts.getCombinedModifierFlags(node as ts.Declaration) & ts.ModifierFlags.Export) !== 0 ||
       (!!node.parent && node.parent.kind === ts.SyntaxKind.SourceFile)
     );
   }
