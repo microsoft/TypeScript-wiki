@@ -113,8 +113,8 @@ with a type assertion (eg `value as WeakType`).
 
 ```ts
 interface Methods {
-    method1(): number;
-    method2(a: string): string;
+    method1?(): number;
+    method2?(a: string): string;
 }
 class B implements Methods {
 //                 ~~~~~~~
@@ -157,7 +157,7 @@ For example,
 
 ```ts
 interface Data {
-  beforeUpdate()?: void;
+  beforeUpdate?(): void;
 }
 function register(data: Data) {
   if (data.beforeUpdate) {
