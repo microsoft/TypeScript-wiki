@@ -36,7 +36,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [X] [Improved checking of indexed access types](https://github.com/microsoft/TypeScript/pull/30769)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
 * [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
-* [X] [`--noEmitOnError` with `--isolatedModules`](https://github.com/microsoft/TypeScript/pull/310430)
+* [X] [`--noEmitOnError` with `--isolatedModules`](https://github.com/microsoft/TypeScript/pull/31043)
 * [X] Speed improvements in `--incremental` and `--build`
   * [X] [Caching module resolution results](https://github.com/Microsoft/TypeScript/pull/31100)
   * [X] [Caching results of parsing `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/31101)
