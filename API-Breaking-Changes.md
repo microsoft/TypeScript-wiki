@@ -4,7 +4,7 @@
 
 # TypeScript 3.0
 
-- The deprecated internal method `LanguageService#getSourceFile` has been removed. See #24540.
+- The deprecated internal method `LanguageService#getSourceFile` has been removed. See [#24540](https://github.com/microsoft/TypeScript/pull/24540).
 - The deprecated function `TypeChecker#getSymbolDisplayBuilder` and associated interfaces have been removed. See [#25331](https://github.com/Microsoft/TypeScript/pull/25331). The emitter and node builder should be used instead.
 - The deprecated functions `escapeIdentifier` and `unescapeIdentifier` have been removed. Due to changing how the identifier name API worked in general, they have been identity functions for a few releases, so if you need your code to behave the same way, simply removing the calls should be sufficient. Alternatively, the typesafe `escapeLeadingUnderscores` and `unescapeLeadingUnderscores` should be used if the types indicate they are required (as they are used to convert to or from branded `__String` and `string` types).
 - The `TypeChecker#getSuggestionForNonexistentProperty`, `TypeChecker#getSuggestionForNonexistentSymbol`, and `TypeChecker#getSuggestionForNonexistentModule` methods have been made internal, and are no longer part of our public API. See [#25520](https://github.com/Microsoft/TypeScript/pull/25520).
@@ -27,7 +27,7 @@
 
 - `Declaration` does not have a `name` property. TypeScript now recognize assignments in .js files as declarations in certain contexts, e.g. `func.prototype.method = function() {..}` will be a declaration of member `method` on `func`. As a result `Declaration` is not guaranteed to have a `name` property as before. A new type was introduced `NamedDeclaration` to take the place of `Declaration`, and `Declaration` moved to be the base type of both `NamedDeclaration` and `BinaryExpression`.
 Casting to `NamedDeclaration` should be safe for non .js declarations.
-See https://github.com/Microsoft/TypeScript/pull/15594 for more details.
+See [#15594](https://github.com/Microsoft/TypeScript/pull/15594) for more details.
 
 # TypeScript 2.2
 
@@ -97,6 +97,6 @@ We did some cleanup to the public interfaces, here is the full list of changes:
 
 ### `typescript_internal.d.ts` and `typescriptServices_internal.d.ts` have been removed
 
-The two files exposed helpers in the past that were not part of the supported TypeScript API. If you were using any of these APIs please file an issue to re-expose them; requests for exposing helper APIs will be triaged on a case-per-case basis.
+The two files exposed helpers in the past that were not part of the supported TypeScript API. If you were using any of these APIs please file an issue to re-expose them; requests for exposing helper APIs will be triaged on a case-by-case basis.
 
 For more information please see the [full change](https://github.com/Microsoft/TypeScript/pull/2692).
