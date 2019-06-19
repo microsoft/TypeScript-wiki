@@ -33,7 +33,7 @@ From here, there are different steps for debugging the client- and server-side, 
     For most Unix-like shells (e.g. bash), this will be something like
 
     ```sh
-    export TSS_DEBUG = 5859
+    export TSS_DEBUG=5859
     ```
 
     For PowerShell, this is something like
