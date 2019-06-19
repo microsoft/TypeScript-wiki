@@ -32,7 +32,10 @@ Syntax Kind | Example
 
 The lexical classifier is a rudimentary classifier that is intended to be fast and work on single lines at a time. It works through augmenting TypeScript's scanner, which itself works on a regular language grammar except when given a lexical goal in mind. Keep in mind, lexical goals can only be triggered accurately when motivated by a syntactically aware entity, while the lexical classifier only has the context of a single line with a previous line state to work with.
 
-To throw a wrench in the gears, substitution templates are not regular (they are context-free, and if someone wants to write a formal proof of this, *a la* Rust's string literals not being context-free, feel free to send a pumping lemma pull request for the wiki). The issue is that a `}` (close curly brace) and the template tail literals (`}...${` (*TemplateMiddle*) and ``}...${` `` (*TemplateTail*)) are need to be distinguished by lexical goals, which are triggered by ***syntactically aware*** consumers.
+To throw a wrench in the gears, substitution templates are not regular (they are context-free, and if someone wants to write a formal proof of this, *a la* [Rust's string literals not being context-free][rust], feel free to send a [pumping lemma][] pull request for the wiki). The issue is that a `}` (close curly brace) and the template tail literals (`}...${` (*TemplateMiddle*) and ``}...${` `` (*TemplateTail*)) are need to be distinguished by lexical goals, which are triggered by ***syntactically aware*** consumers.
+
+[rust]: https://github.com/rust-lang/rust/blob/master/src/grammar/raw-string-literal-ambiguity.md
+[pumping lemma]: https://en.wikipedia.org/wiki/Pumping_lemma_for_regular_languages  "Pumping lemma for regular languages"
 
 The basic solution is to just maintain a stack. However, in the interest of giving accurate results without complicating the classifier too much, we only keep track of whether a *single* template expression was unterminated. This means that if you have `` `...${ `...${ `` (two *TemplateHead*s) on a single line, or a multiline object literal in substitution position, your results may not be accurate. In practice this does not happen much, so the behavior is largely acceptable.
 
