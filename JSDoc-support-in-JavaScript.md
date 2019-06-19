@@ -280,7 +280,7 @@ Of course, any of these types can be declared using Typescript syntax in a singl
 
 ## `@template`
 
-You can declare generic types with the `@template` tag:
+You can declare generic functions with the `@template` tag:
 
 ```js
 /**
@@ -315,6 +315,45 @@ function seriousalize(key, object) {
 }
 ```
 
+Declaring generic classes or types is unsupported.
+
+## Classes
+
+Classes can be declared as ES6 classes.
+
+```js
+class C {
+  /**
+   * @param {number} data
+   */
+  constructor(data) {
+    // property types can be inferred
+    this.name = "foo";
+
+    // or set explicitly
+    /** @type {string | null} */
+    this.title = null;
+
+    // or simply annotated, if they're set elsewhere
+    /** @type {number} */
+    this.size;
+
+    this.initialize(data); // Should error, initializer expects a string
+  }
+  /**
+  * @param {string} s
+  */
+  initialize = function (s) {
+    this.size = s.length
+  }
+}
+
+var c = new C(0);
+var result = C(1); // C should only be called with new
+```
+
+They can also be declared as constructor functions, as described in the next section:
+
 ## `@constructor`
 
 The compiler infers constructor functions based on this-property assignments, but you can make checking stricter and suggestions better if you add a `@constructor` tag:
@@ -325,7 +364,17 @@ The compiler infers constructor functions based on this-property assignments, bu
  * @param {number} data
  */
 function C(data) {
-  this.size = 0;
+  // property types can be inferred
+  this.name = "foo";
+
+  // or set explicitly
+  /** @type {string | null} */
+  this.title = null;
+
+  // or simply annotated, if they're set elsewhere
+  /** @type {number} */
+  this.size;
+
   this.initialize(data); // Should error, initializer expects a string
 }
 /**
