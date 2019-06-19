@@ -89,7 +89,16 @@ The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Subl
   " This setting must be set before ALE is loaded.
   let g:ale_completion_enabled = 1
   ```
-* [coc-tsserver](https://github.com/neoclide/coc-tsserver) provide the same features as VSCode's builtin typescript language extension. 
+  
+* [coc.nvim](https://github.com/neoclide/coc.nvim)
+  
+Install [coc-tsserver](https://github.com/neoclide/coc-tsserver) by command:
+
+``` vim
+:CocInstall coc-tsserver
+```
+
+[coc-tsserver](https://github.com/neoclide/coc-tsserver) provide almost same features as typescript language extension of VSCode, including completion of function calls as snippets, auto import after completion etc.
 
 # Visual Studio
 
