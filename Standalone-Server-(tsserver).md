@@ -57,7 +57,7 @@ Each command is associated with a request and a response interface. For instance
 
 ## Visual Studio Code
 
-[S Code](https://code.visualstudio.com/)'s [TypeScript support](https://github.com/Microsoft/vscode/tree/master/extensions/typescript) is implemented in TypeScript using `tsserver`.
+[VS Code](https://code.visualstudio.com/)'s [TypeScript support](https://github.com/microsoft/vscode/tree/master/extensions/typescript-language-features) is implemented in TypeScript using `tsserver`.
 
 ## Tide
 
