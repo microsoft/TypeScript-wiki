@@ -156,7 +156,7 @@ import types can also be used in type alias declarations:
 
 ```js
 /**
- * @typedef Pet { import("./a").Pet }
+ * @typedef { import("./a").Pet } Pet
  */
 
 /**
@@ -490,10 +490,20 @@ Nullable types only have meaning if `strictNullChecks` is on:
 ```js
 /**
  * @type {?number}
- * With strictNullChecks: true -- number | null
- * With strictNullChecks: off  -- number
+ * With strictNullChecks: true  -- number | null
+ * With strictNullChecks: false -- number
  */
 var nullable;
+```
+
+You can also use a union type:
+```js
+/**
+ * @type {number | null}
+ * With strictNullChecks: true  -- number | null
+ * With strictNullChecks: false -- number
+ */
+var unionNullable;
 ```
 
 Non-nullable types have no meaning and are treated just as their original type:
@@ -509,3 +519,16 @@ var normal;
 Unlike JSDoc's type system, Typescript only allows you to mark types as containing null or not.
 There is no explicit non-nullability -- if strictNullChecks is on, then `number` is not nullable.
 If it is off, then `number` is nullable.
+
+### Unsupported tags
+
+TypeScript ignores any unsupported JSDoc tags.
+
+The following tags have open issues to support them:
+
+- `@const` ([issue #19672](https://github.com/Microsoft/TypeScript/issues/19672))
+- `@inheritdoc` ([issue #23215](https://github.com/Microsoft/TypeScript/issues/23215))
+- `@memberof` ([issue #7237](https://github.com/Microsoft/TypeScript/issues/7237))
+- `@readonly` ([issue #17233](https://github.com/Microsoft/TypeScript/issues/17233))
+- `@yields` ([issue #23857](https://github.com/Microsoft/TypeScript/issues/23857))
+- `{@link …}` ([issue #16498](https://github.com/Microsoft/TypeScript/issues/16498))

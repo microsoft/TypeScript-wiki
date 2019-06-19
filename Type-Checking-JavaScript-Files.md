@@ -1,6 +1,7 @@
 TypeScript 2.3 and later support type-checking and reporting errors in `.js` files with `--checkJs`.
 
 You can skip checking some files by adding `// @ts-nocheck` comment to them; conversely, you can choose to check only a few `.js` files by adding a `// @ts-check` comment to them without setting `--checkJs`.
+
 You can also ignore errors on specific lines by adding `// @ts-ignore` on the preceding line.
 Note that if you have a `tsconfig.json`, JS checking will respect strict flags like `noImplicitAny`, `strictNullChecks`, etc.
 However, because of the relative looseness of JS checking, combining strict flags with it may be surprising.

@@ -1,6 +1,6 @@
 VS Code is designed around an extension model. TypeScript provides a server called TSServer that provides information for providing quick-info, completions, etc., and VS Code acts as a client which queries the server when this information is needed. For example, VS Code queries TSServer for quick-info when the user's mouse hovers over a variable. TSServer will respond with information such as the appropriate type, and the styling to apply to the text that describes the type.
 
-Organizationally, the client-side code for communicating with the TypeScript server lives in [`extensions/typescript`](https://github.com/Microsoft/vscode/tree/master/extensions/typescript) in [the VS Code repository](https://github.com/Microsoft/vscode).<sup>1</sup>
+Organizationally, the client-side code for communicating with the TypeScript server lives in [`extensions/typescript-language-features`](https://github.com/Microsoft/vscode/tree/master/extensions/typescript-language-features) in [the VS Code repository](https://github.com/Microsoft/vscode).<sup>1</sup>
 
 Meanwhile, the server-side code lives in `src/services` and `src/server` of [the TypeScript repository](https://github.com/Microsoft/TypeScript).
 
@@ -33,7 +33,7 @@ From here, there are different steps for debugging the client- and server-side, 
     For most Unix-like shells (e.g. bash), this will be something like
 
     ```sh
-    export TSS_DEBUG = 5859
+    export TSS_DEBUG=5859
     ```
 
     For PowerShell, this is something like

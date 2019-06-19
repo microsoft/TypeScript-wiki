@@ -2,6 +2,146 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.5
+
+## `lib.d.ts` includes the `Omit` helper type
+
+TypeScript 3.5 includes a new `Omit` helper type.
+As a result, any global declarations of `Omit` included in your project will result in the following error message:
+
+```ts
+Duplicate identifier 'Omit'.
+```
+
+Two workarounds may be used here:
+
+1. Delete the duplicate declaration and use the one provided in `lib.d.ts`.
+2. Export the existing declaration from a module file or a namespace to avoid a global collision. Existing usages can use an `import` or explicit reference to your project's old `Omit` type.
+
+# TypeScript 3.4
+
+## Top-level `this` is now typed
+
+The type of top-level `this` is now typed as `typeof globalThis` instead of `any`.
+As a consequence, you may receive errors for accessing unknown values on `this` under `noImplicitAny`.
+
+```ts
+// previously okay in noImplicitAny, now an error
+this.whargarbl = 10;
+```
+
+Note that code compiled under `noImplicitThis` will not experience any changes here.
+
+## Propagated generic type arguments
+
+In certain cases, TypeScript 3.4's improved inference might produce functions that are generic, rather than ones that take and return their constraints (usually `{}`).
+
+```ts
+declare function compose<T, U, V>(f: (arg: T) => U, g: (arg: U) => V): (arg: T) => V;
+
+function list<T>(x: T) { return [x]; }
+function box<T>(value: T) { return { value }; }
+
+let f = compose(list, box);
+let x = f(100)
+
+// In TypeScript 3.4, 'x.value' has the type
+//
+//   number[]
+//
+// but it previously had the type
+//
+//   {}[]
+//
+// So it's now an error to push in a string.
+x.value.push("hello");
+```
+
+An explicit type annotation on `x` can get rid of the error.
+
+### Contextual return types flow in as contextual argument types
+
+TypeScript now uses types that flow into function calls (like `then` in the below example) to contextually type function arguments (like the arrow function in the below example).
+
+```ts
+function isEven(prom: Promise<number>): Promise<{ success: boolean }> {
+    return prom.then<{success: boolean}>((x) => {
+        return x % 2 === 0 ?
+            { success: true } :
+            Promise.resolve({ success: false });
+    });
+}
+```
+
+This is generally an improvement, but in the above example it causes `true` and `false` to acquire literal types which is undesirable.
+
+```
+Argument of type '(x: number) => Promise<{ success: false; }> | { success: true; }' is not assignable to parameter of type '(value: number) => { success: false; } | PromiseLike<{ success: false; }>'.
+  Type 'Promise<{ success: false; }> | { success: true; }' is not assignable to type '{ success: false; } | PromiseLike<{ success: false; }>'.
+    Type '{ success: true; }' is not assignable to type '{ success: false; } | PromiseLike<{ success: false; }>'.
+      Type '{ success: true; }' is not assignable to type '{ success: false; }'.
+        Types of property 'success' are incompatible.
+
+```
+
+The appropriate workaround is to add type arguments to the appropriate call - the `then` method call in this example.
+
+```ts
+function isEven(prom: Promise<number>): Promise<{ success: boolean }> {
+    //               vvvvvvvvvvvvvvvvvv
+    return prom.then<{success: boolean}>((x) => {
+        return x % 2 === 0 ?
+            { success: true } :
+            Promise.resolve({ success: false });
+    });
+}
+```
+
+### Consistent inference priorities outside of `strictFunctionTypes`
+
+In TypeScript 3.3 with `--strictFunctionTypes` off, generic types declared with `interface` were assumed to always be covariant with respect to their type parameter.
+For function types, this behavior was generally not observable.
+However, for generic `interface` types that used their type parameters with `keyof` positions - a contravariant use - these types behaved incorrectly.
+
+In TypeScript 3.4, variance of types declared with `interface` is now correctly measured in all cases.
+This causes an observable breaking change for interfaces that used a type parameter only in `keyof` (including places like `Record<K, T>` which is an alias for a type involving `keyof K`). The example above is one such possible break.
+
+```ts
+interface HasX { x: any }
+interface HasY { y: any }
+
+declare const source: HasX | HasY;
+declare const properties: KeyContainer<HasX>;
+
+interface KeyContainer<T> {
+    key: keyof T;
+}
+
+function readKey<T>(source: T, prop: KeyContainer<T>) {
+    console.log(source[prop.key])
+}
+
+// This call should have been rejected, because we might
+// incorrectly be reading 'x' from 'HasY'. It now appropriately errors.
+readKey(source, properties);
+```
+
+This error is likely indicative of an issue with the original code.
+
+# TypeScript 3.2
+
+## `lib.d.ts` updates
+
+### `wheelDelta` and friends have been removed.
+
+`wheelDeltaX`, `wheelDelta`, and `wheelDeltaZ` have all been removed as they is a deprecated properties on `WheelEvent`s.
+
+**Solution**: Use `deltaX`, `deltaY`, and `deltaZ` instead.
+
+### More specific types
+
+Certain parameters no longer accept `null`, or now accept more specific types as per the corresponding specifications that describe the DOM.
+
 # TypeScript 3.1
 
 ## Some vendor-specific types are removed from `lib.d.ts`

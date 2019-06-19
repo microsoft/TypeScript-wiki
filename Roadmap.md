@@ -1,3 +1,5 @@
+This page outlines specific features and fixes that are scheduled or planned for given releases. The current [6-month roadmap that outlines focus areas of work can be viewed here](https://github.com/Microsoft/TypeScript/issues/29288).
+
 - [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
 # Future
@@ -8,24 +10,72 @@
 * Implement ES Decorator proposal
 * Implement ES Private Fields
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
+* [Investigate partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
+* Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
+<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
+
+# 3.5 (May 2019)
+
+[See the 3.5 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30555)
+
+* [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
+* [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
+* [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
+* [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
+* [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
+* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
+* [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
+* [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
+* [ ] [Smart Select API](https://github.com/Microsoft/TypeScript/issues/29071)
+* [ ] [Sorted/prioritized completions](https://github.com/Microsoft/TypeScript/issues/15024)
+* [ ] [Refactoring to extract type](https://github.com/Microsoft/TypeScript/issues/23869)
+
+# 3.4 (March 2019)
+
+[See the 3.4 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30281)
+
+* [X] [Higher order function type inference](https://github.com/Microsoft/TypeScript/pull/30215)
+* [X] [`--incremental` builds with `.tsbuildinfo` files](https://github.com/Microsoft/TypeScript/pull/29813)
+* [X] [Improved support for read-only arrays and tuples](https://github.com/Microsoft/TypeScript/pull/29435)
+* [X] [Const contexts for literal expressions](https://github.com/Microsoft/TypeScript/pull/29510)
+* [X] [`globalThis`](https://github.com/Microsoft/TypeScript/pull/29332)
+* [X] Refactorings to...
+  * [X] [Convert to "named" parameters](https://github.com/Microsoft/TypeScript/issues/23552)
+
+# 3.3 (January 2019)
+
+* [X] [Relaxed rules on methods of union types](https://github.com/Microsoft/TypeScript/pull/29011)
+* [X] [File-incremental builds in `--build --watch` mode for composite projects](https://github.com/Microsoft/TypeScript/pull/29161)
 
 # 3.2 (November 2018)
 
 * [X] [Strict bind, call, and apply methods on functions](https://github.com/Microsoft/TypeScript/pull/27028)
-* [ ] [Support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
-* [ ] [Partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
-* [ ] Refactorings to...
-  * [ ] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+* [X] [Allow non-unit types in union discriminants](https://github.com/Microsoft/TypeScript/pull/27695)
+* [X] [Generic spread expressions in object literals](https://github.com/Microsoft/TypeScript/pull/28234)
+* [X] [Generic object rest variables and parameters](https://github.com/Microsoft/TypeScript/pull/28312)
+* [X] [Type-checking support for `BigInt`](https://github.com/Microsoft/TypeScript/issues/15096)
+* [X] [Configuration inheritance through node packages](https://github.com/Microsoft/TypeScript/pull/27348)
+* [X] [Supporting `Object.defineProperty` property assignments in JS](https://github.com/Microsoft/TypeScript/pull/27208)
+* [X] [Support printing the implied configuration object to the console with `--showConfig`](https://github.com/Microsoft/TypeScript/pull/27353)
+* [X] [Improved formatting and indentation for lists and chained calls](https://github.com/Microsoft/TypeScript/pull/28340)
+* [X] Quick fixes to...
+  * [X] [Add intermediate `unknown` type assertions](https://github.com/Microsoft/TypeScript/issues/28067)
+  * [X] [Add missing `new` keyword](https://github.com/Microsoft/TypeScript/issues/26580)
+  * [X] [Infer types from usage outside of `noImplicitAny`](https://github.com/Microsoft/TypeScript/pull/27693)
+  * [X] [Infer JSDoc types from usage](https://github.com/Microsoft/TypeScript/pull/27610)
 
 # 3.1 (September 2018)
 
-* [X] [Mapped tuple types](https://github.com/Microsoft/TypeScript/issues/25947)
+* [X] [Mapped tuple and array types](https://github.com/Microsoft/TypeScript/pull/26063)
 * [X] [Property assignments on function declarations](https://github.com/Microsoft/TypeScript/pull/26368)
 * [X] [`typesVersions` redirects](https://github.com/Microsoft/TypeScript/issues/22605)
 * [X] [Error UX improvements](https://github.com/Microsoft/TypeScript/issues/26077)
-* [X] [Refactor from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
+* [X] Refactorings to...
+  * [X] [Rename files from import/export paths](https://github.com/Microsoft/TypeScript/issues/24501)
+  * [X] [Convert from `Promise#then`/`catch` to `async`/`await`](https://github.com/Microsoft/TypeScript/pull/26373)
 
 # 3.0 (July 2018)
 
