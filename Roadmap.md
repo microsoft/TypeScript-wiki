@@ -14,17 +14,17 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
+* [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
 # 3.6 (August 2019)
 
 [See the 3.6 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/31639)
 
-* [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
-* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
-* [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
-* [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
-* [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [x] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
+* [x] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
+* [x] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
+* [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
 
 # 3.5 (May 2019)
 
