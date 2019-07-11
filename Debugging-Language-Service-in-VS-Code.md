@@ -25,8 +25,6 @@ From here, there are different steps for debugging the client- and server-side, 
 
 ## Debugging tsserver (server-side)
 
-> **Note:** [the gulp-build doesn't currently produce working source-maps](https://github.com/Microsoft/TypeScript/issues/11105), and [building with jake may require some extra effort to fix the source-maps](https://github.com/Microsoft/TypeScript/issues/11111).
-
 1. Choose an available port to debug TSServer using either of the following two methods (in the rest of this guide, we assume you chose 5859):
     * In a shell, export the `TSS_DEBUG` environment variable to an open port. We will run the development VS Code instance from within that shell.
 
