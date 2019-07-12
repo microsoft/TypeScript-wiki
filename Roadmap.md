@@ -23,7 +23,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [x] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
 * [x] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
-* [x] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
 * [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
 
 # 3.5 (May 2019)
@@ -35,6 +34,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [X] [Change default constraint for type parameters from `{}` to `unknown`](https://github.com/Microsoft/TypeScript/pull/30637)
 * [X] [Improved checking of indexed access types](https://github.com/microsoft/TypeScript/pull/30769)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
+* [x] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
 * [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
 * [X] [`--noEmitOnError` with `--isolatedModules`](https://github.com/microsoft/TypeScript/pull/31043)
 * [X] Speed improvements in `--incremental` and `--build`
