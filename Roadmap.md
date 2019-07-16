@@ -22,8 +22,12 @@ This page outlines specific features and fixes that are scheduled or planned for
 [See the 3.6 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/31639)
 
 * [x] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
-* [x] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
+* [x] [More accurate array spreads](https://github.com/microsoft/TypeScript/pull/31166)
+* [x] [Improved UX around Promises](https://github.com/microsoft/TypeScript/issues/30646)
+* [x] [Semicolon-aware auto-imports](https://github.com/microsoft/TypeScript/issues/19882)
 * [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [ ] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
+* [ ] [Call Hierarchy support](https://github.com/microsoft/TypeScript/issues/31863)
 
 # 3.5 (May 2019)
 
