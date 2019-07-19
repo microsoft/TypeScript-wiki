@@ -25,7 +25,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [More accurate array spreads](https://github.com/microsoft/TypeScript/pull/31166)
 * [x] [Improved UX around Promises](https://github.com/microsoft/TypeScript/issues/30646)
 * [x] [Semicolon-aware auto-imports](https://github.com/microsoft/TypeScript/issues/19882)
-* [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
 * [ ] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
 * [ ] [Call Hierarchy support](https://github.com/microsoft/TypeScript/issues/31863)
 
