@@ -1,1 +1,1 @@
-A comprehensive introduction to type checking JavaScript files with TypeScript can be found in the [official handbook](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html).
+A comprehensive introduction to type checking JavaScript files with TypeScript can be found in the [official handbook](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html#supported-jsdoc).
