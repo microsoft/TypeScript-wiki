@@ -13,6 +13,7 @@ The currently recognized commands are:
 * [`perf test`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=22) - This queues a build on our perf server using the code from the PR - once started (which will only happen once any currently running build is done), this takes around 40 minutes. The bot should post the results of the perf test run back into the triggering PR once done.
 * [`pack this`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=19) - This creates a build which does a build, runs an LKG, runs normal tests, and then packs the result into an installable tarball (which can be downloaded from the build artifacts on the azure pipelines build status page), perfect for installing with `npm i <URL to tarball>` to test with.
 * [`cherry-pick this to branchname`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - This launches a task to squash the commits from the PR and then open a new PR that cherry-picks the change into branch `branchname`. This takes about 5 minutes as the build agent needs to clone the input PR. The bot should reply if something goes wrong, or otherwise once the new PR is open.
+* [`cherry-pick this to branchname and LKG`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - Same as above, but an LKG commit will be added onto the PR after the squashed cherry-pick commit.
 
 A single comment may contain multiple commands, so long as each is prefixed with a call to `@typescript-bot`.
 
