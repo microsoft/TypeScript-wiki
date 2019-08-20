@@ -56,7 +56,6 @@
   - [Things That Don't Work](#things-that-dont-work)
     - [You should emit classes like this so they have real private members](#you-should-emit-classes-like-this-so-they-have-real-private-members)
     - [You should emit classes like this so they don't lose `this` in callbacks](#you-should-emit-classes-like-this-so-they-dont-lose-this-in-callbacks)
-    - [Why can't I access arbitrary properties on a type with a string indexer?](#why-cant-i-access-arbitrary-properties-on-a-type-with-a-string-indexer)
     - [You should have some class initialization which is impossible to emit code for](#you-should-have-some-class-initialization-which-is-impossible-to-emit-code-for)
   - [External Tools](#external-tools)
     - [How do I write unit tests with TypeScript?](#how-do-i-write-unit-tests-with-typescript)
@@ -1215,39 +1214,6 @@ There isn't really anything else to be said on that front -- TypeScript must hav
 Second, the runtime characteristics of this class are very surprising.
 Instead of allocating one closure per method, this allocates one closure per method *per instance*.
 This is expensive in terms of class initialization cost, memory pressure, and GC performance.
-
-### Why can't I access arbitrary properties on a type with a string indexer?
-
-> When I declare an interface with a string indexer,
-> I want to be able to access arbitrary properties on it, like this:
-> ```ts
-> interface StringMap {
->    [index: string]: string;
-> }
-> function f(obj: StringMap) {
->    obj.foo; // error!
->    obj['foo']; // I have to write it this way
-> }
-> ```
-> Instead I can only use index syntax: `obj['foo']`.
-
-The point of TypeScript is to catch errors at compile-time, and "Property does not exist" is one of the most important.
-If a string indexer lets you access properties on a type, you'd never get this error for those types.
-This is important if you have other properties on the indexed type:
-
-```ts
-interface StringMap {
-   property1: string;
-   [index: string]: string;
-}
-function f(obj: StringMap) {
-   obj.property1; // ok
-   obj.propertyl; // error!
-   obj['foo']; // ok
-}
-```
-
-So TypeScript always checks property accesses and reserves arbitrary access for the indexer syntax.
 
 ### You should have some class initialization which is impossible to emit code for
 TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1617)
