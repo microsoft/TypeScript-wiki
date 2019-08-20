@@ -29,16 +29,16 @@
     - [Why do these empty classes behave strangely?](#why-do-these-empty-classes-behave-strangely)
     - [When and why are classes nominal?](#when-and-why-are-classes-nominal)
     - [Why does `this` get orphaned in my instance methods?](#why-does-this-get-orphaned-in-my-instance-methods)
-    - [What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class` ?](#whats-the-difference-between-bar-and-typeof-bar-when-bar-is-a-class-)
+    - [What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class`?](#whats-the-difference-between-bar-and-typeof-bar-when-bar-is-a-class)
     - [Why do my derived class property initializers overwrite values set in the base class constructor?](#why-do-my-derived-class-property-initializers-overwrite-values-set-in-the-base-class-constructor)
     - [What's the difference between `declare class` and `interface`?](#whats-the-difference-between-declare-class-and-interface)
     - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
-    - [Why am I getting "TypeError: [base class name] is not defined in `__extends` ?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends-)
-    - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends-)
+    - [Why am I getting "TypeError: [base class name] is not defined in `__extends`?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends)
+    - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends`?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends)
     - [Why doesn't extending built-ins like `Error`, `Array`, and `Map` work?](#why-doesnt-extending-built-ins-like-error-array-and-map-work)
   - [Generics](#generics)
     - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
-    - [Why doesn't type inference work on this interface: `interface Foo<T> { }` ?](#why-doesnt-type-inference-work-on-this-interface-interface-foot---)
+    - [Why doesn't type inference work on this interface: `interface Foo<T> { }`?](#why-doesnt-type-inference-work-on-this-interface-interface-foot--)
     - [Why can't I write `typeof T`, `new T`, or `instanceof T` in my generic function?](#why-cant-i-write-typeof-t-new-t-or-instanceof-t-in-my-generic-function)
   - [Modules](#modules)
     - [Why are imports being elided in my emit?](#why-are-imports-being-elided-in-my-emit)
@@ -50,9 +50,9 @@
     - [Why doesn't `isFoo(x)` narrow `x` to `Foo` when `isFoo` is a type guard?](#why-doesnt-isfoox-narrow-x-to-foo-when-isfoo-is-a-type-guard)
   - [Decorators](#decorators)
     - [Decorators on function declarations](#decorators-on-function-declarations)
-    - [What's the difference between `@dec` and `@dec()` ? Shouldn't they be equivalent?](#whats-the-difference-between-dec-and-dec--shouldnt-they-be-equivalent)
+    - [What's the difference between `@dec` and `@dec()`? Shouldn't they be equivalent?](#whats-the-difference-between-dec-and-dec-shouldnt-they-be-equivalent)
   - [JSX and React](#jsx-and-react)
-    - [I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />` ?](#i-wrote-declare-var-mycomponent-reactcomponent-why-cant-i-write-mycomponent--)
+    - [I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`?](#i-wrote-declare-var-mycomponent-reactcomponent-why-cant-i-write-mycomponent-)
   - [Things That Don't Work](#things-that-dont-work)
     - [You should emit classes like this so they have real private members](#you-should-emit-classes-like-this-so-they-have-real-private-members)
     - [You should emit classes like this so they don't lose `this` in callbacks](#you-should-emit-classes-like-this-so-they-dont-lose-this-in-callbacks)
@@ -62,7 +62,7 @@
     - [How do I write unit tests with TypeScript?](#how-do-i-write-unit-tests-with-typescript)
   - [Commandline Behavior](#commandline-behavior)
     - [Why did adding an `import` or `export` modifier break my program?](#why-did-adding-an-import-or-export-modifier-break-my-program)
-    - [How do I control file ordering in combined output (`--out`) ?](#how-do-i-control-file-ordering-in-combined-output---out-)
+    - [How do I control file ordering in combined output (`--out`)?](#how-do-i-control-file-ordering-in-combined-output---out)
     - [What does the error "Exported variable [name] has or is using private name [name]" mean?](#what-does-the-error-exported-variable-name-has-or-is-using-private-name-name-mean)
     - [Why does `--outDir` moves output after adding a new file?](#why-does---outdir-moves-output-after-adding-a-new-file)
   - [`tsconfig.json` Behavior](#tsconfigjson-behavior)
@@ -86,26 +86,26 @@
 
 > I've found a long-overlooked bug in TypeScript!
 
-Here are some behaviors that look may look like bugs, but aren't.
+Here are some behaviors that may look like bugs, but aren't.
 
- * These two empty classes can be used in place of each other
-   * See the [FAQ Entry on this page](#why-do-these-empty-classes-behave-strangely)
- * I can use a non-`void`-returning function where one returning `void` is expected
-   * See the [FAQ Entry on this page](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
-   * Prior discussion at #4544
- * I'm allowed to use a shorter parameter list where a longer one is expected
-   * See the [FAQ Entry on this page](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
-   * Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868, #26324, #30876
- * `private` class members are actually visible at runtime
-   * See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
-   * Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
+* These two empty classes can be used in place of each other
+  * See the [FAQ Entry on this page](#why-do-these-empty-classes-behave-strangely)
+* I can use a non-`void`-returning function where one returning `void` is expected
+  * See the [FAQ Entry on this page](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
+  * Prior discussion at #4544
+* I'm allowed to use a shorter parameter list where a longer one is expected
+  * See the [FAQ Entry on this page](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
+  * Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868, #26324, #30876
+* `private` class members are actually visible at runtime
+  * See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
+  * Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
 
 ## Common Feature Requests
 > I want to request one of the following features...
 
 Here's a list of common feature requests and their corresponding issue.
 Please leave comments in these rather than logging new issues.
-* Safe navigation operator, AKA CoffeeScript's null conditional/propagating/propagation operator, AKA C#'s' ?. operator [#16](https://github.com/Microsoft/TypeScript/issues/16)
+* Safe navigation operator, AKA CoffeeScript's null conditional/propagating/propagation operator, AKA C#'s' `?.` operator [#16](https://github.com/Microsoft/TypeScript/issues/16)
 * Minification [#8](https://github.com/Microsoft/TypeScript/issues/8)
 * Extension methods [#9](https://github.com/Microsoft/TypeScript/issues/9)
 * Partial classes [#563](https://github.com/Microsoft/TypeScript/issues/563)
@@ -185,17 +185,17 @@ See [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion 
 This is an unsoundness resulting from the lack of explicit covariant/contravariant annotations in the type system.
 Because of this omission, TypeScript must be more permissive when asked whether `(x: Dog) => void` is assignable to `(x: Animal) => void`.
 
-To understand why, consider two questions: Is `Dog[]` a subtype of `Animal[]` ? *Should* `Dog[]` be a subtype of `Animal[]` in TypeScript?
+To understand why, consider two questions: Is `Dog[]` a subtype of `Animal[]`? *Should* `Dog[]` be a subtype of `Animal[]` in TypeScript?
 
 The second question (*should* `Dog[]` be a subtype of `Animal[]`?) is easier to analyze.
-What if the answer was "no" ?
+What if the answer was "no"?
 
 ```ts
 function checkIfAnimalsAreAwake(arr: Animal[]) { ... }
 
 let myPets: Dog[] = [spot, fido];
 
-// Error? Can't substitute Dog[] for Animal[] ?
+// Error? Can't substitute Dog[] for Animal[]?
 checkIfAnimalsAreAwake(myPets);
 ```
 
@@ -206,10 +206,10 @@ There's not a good reason to reject this program on the basis that `Dog[]` can't
 Back to the first question.
 When the type system decides whether or not `Dog[]` is a subtype of `Animal[]`, it does the following computation (written here as if the compiler took no optimizations), among many others:
 
- * Is `Dog[]` assignable to `Animal[]` ?
-  * Is each member of `Dog[]` assignable to `Animal[]` ?
+ * Is `Dog[]` assignable to `Animal[]`?
+  * Is each member of `Dog[]` assignable to `Animal[]`?
     * Is `Dog[].push` assignable to `Animal[].push`?
-      * Is the type `(x: Dog) => number` assignable to `(x: Animal) => number` ?
+      * Is the type `(x: Dog) => number` assignable to `(x: Animal) => number`?
         * Is the first parameter type in `(x: Dog) => number` assignable to or from first parameter type in `(x: Animal) => number`?
           * Is `Dog` assignable to or from `Animal`?
             * Yes.
@@ -264,9 +264,9 @@ The meaning of an optional callback parameter is *this*:
 // Invoke the provided function with 0 or 1 argument
 function maybeCallWithArg(callback: (x?: number) => void) {
     if (Math.random() > 0.5) {
-       callback();
+        callback();
     } else {
-       callback(42);
+        callback(42);
     }
 }
 ```
@@ -536,7 +536,7 @@ One of the most useful cases is functions:
 var x: (n: string) => void = (s) => console.log(s.ToUpper());
 ```
 
-How did the compiler know that `s` was a `string`? If you wrote that function expression by itself, `s` would be of type `any` and there wouldn't be any error issued. But because the function was contextually typed by the type of `x`, the parameter s acquired the type `string`. Very useful!
+How did the compiler know that `s` was a `string`? If you wrote that function expression by itself, `s` would be of type `any` and there wouldn't be any error issued. But because the function was contextually typed by the type of `x`, the parameter `s` acquired the type `string`. Very useful!
 
 At the same time, an index signature specifies the type when an object is indexed by a `string` or a `number`. Naturally, these signatures are part of type checking:
 
@@ -643,8 +643,8 @@ The syntax `f({x: number})` declares a destructuring *from the property* `x` *to
 Looking at the emitted code for this is instructive:
 ```ts
 function f(_a) {
-    // Not really what we were going for
-    var number = _a.x;
+  // Not really what we were going for
+  var number = _a.x;
 }
 ```
 
@@ -738,11 +738,11 @@ Synonyms and alternate symptoms:
 > * Why does `this` point to `window` in my callback?
 > * Why does `this` point to `undefined` in my callback?
 > * Why am I getting an error `this.someMethod is not a function`?
-> * Why am I getting an error `Cannot read property 'someMethod' of undefined` ?
+> * Why am I getting an error `Cannot read property 'someMethod' of undefined`?
 
 In JavaScript, the value of `this` inside a function is determined as follows:
  1. Was the function the result of calling `.bind`? If so, `this` is the first argument passed to `bind`
- 2. Was the function *directly* invoked via a property access expression `expr.method()` ? If so, `this` is `expr`
+ 2. Was the function *directly* invoked via a property access expression `expr.method()`? If so, `this` is `expr`
  3. Otherwise, `this` is `undefined` (in "strict" mode), or `window` in non-strict mode
 
 The offending problem is this line of code:
@@ -755,7 +755,7 @@ Thus, `this` in the body of `someCallback` referred to `window` (or `undefined` 
 
 Solutions to this are outlined here: http://stackoverflow.com/a/20627988/1704166
 
-### What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class` ?
+### What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class`?
 > I wrote some code like this and don't understand the error I'm getting:
 > ```ts
 > class MyClass {
@@ -772,10 +772,10 @@ When a constructor function is invoked with `new`, we get back an object that is
 
 So when we define a class, we actually define two different *types*.
 
-The first is the one referred to by the class's name; in this case, `MyClass`.
+The first is the one referred to by the class' name; in this case, `MyClass`.
 This is the *instance* type of the class.
 It defines the properties and methods that an *instance* of the class has.
-It's the type returned by invoking the class's constructor.
+It's the type returned by invoking the class' constructor.
 
 The second type is anonymous.
 It is the type that the constructor function has.
@@ -814,10 +814,10 @@ See http://stackoverflow.com/a/14348084/1704166
 
 This makes a type called `Bar` that has the same members as the instance shape of `Foo`.
 However, if `Foo` has private members, their corresponding properties in `Bar` must be implemented
-  by a class which has `Foo` in its heritage.
+by a class which has `Foo` in its heritage.
 In general, this pattern is best avoided, especially if `Foo` has private members.
 
-### Why am I getting "TypeError: [base class name] is not defined in `__extends` ?
+### Why am I getting "TypeError: [base class name] is not defined in `__extends`?
 > I wrote some code like this:
 > ```ts
 > /** file1.ts **/
@@ -832,9 +832,9 @@ In general, this pattern is best avoided, especially if `Foo` has private member
 > ```
 
 The most common cause of this is that your HTML page includes a `<script>` tag for file2.ts, but not file1.ts.
-Add a script tag for the base class's output *before* the script tag for the derived class.
+Add a script tag for the base class' output *before* the script tag for the derived class.
 
-### Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends` ?
+### Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends`?
 > I wrote some code:
 > ```ts
 > /** file1.ts **/
@@ -943,13 +943,13 @@ But because `Something<T>` doesn't *use* `T` in any member, it doesn't matter wh
 In general, you should *never* have type parameters which are unused.
 The type will have unexpected compatibility (as shown here) and will also fail to have proper generic type inference in function calls.
 
-### Why doesn't type inference work on this interface: `interface Foo<T> { }` ?
+### Why doesn't type inference work on this interface: `interface Foo<T> { }`?
 
 > I wrote some code like this:
 >
 > ```ts
 > interface Named<T> {
->     name: string;
+>   name: string;
 > }
 > class MyNamed<T> implements Named<T> {
 >   name: 'mine';
@@ -971,7 +971,7 @@ Because there are no members which use `T`, there is nothing to infer from, so w
 Note that if you use `T`, you get correct inference:
 ```ts
 interface Named<T> {
-    name: string;
+  name: string;
   value: T; // <-- added
 }
 class MyNamed<T> implements Named<T> {
@@ -1014,7 +1014,7 @@ In both cases, using a *construct signature* and providing it as a parameter wil
 
 ```ts
 function create<T>(ctor: { new(): T }) {
-    return new ctor();
+  return new ctor();
 }
 var c = create(MyClass); // c: MyClass
 
@@ -1110,14 +1110,14 @@ TODO, but it is strongly related to the above section.
 ### Decorators on function declarations
 TODO: Answer. Also, what did we mean here?
 
-### What's the difference between `@dec` and `@dec()` ? Shouldn't they be equivalent?
+### What's the difference between `@dec` and `@dec()`? Shouldn't they be equivalent?
 TODO: Answer
 
 -------------------------------------------------------------------------------------
 
 ## JSX and React
 
-### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />` ?
+### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`?
 
 > I wrote some code like this. Why is there an error?
 > ```ts
@@ -1142,7 +1142,9 @@ let jsx = <SomeThing />; // Not gonna work
 ```
 
 The easiest fix is to use the `typeof` type operator.
-> let SomeThing: typeof Display = /* ... */;
+```ts
+let SomeThing: typeof Display = /* ... */;
+```
 
 -------------------------------------------------------------------------------------
 
@@ -1189,17 +1191,17 @@ a.increment(); // Prints 1
 > If I write code like this:
 > ```ts
 > class MyClass {
-> 	method() {
-> 	}
+>     method() {
+>     }
 > }
 > ```
-> You should emit code like this so that I can't mess up `this` in in callbacks:
+> You should emit code like this so that I can't mess up `this` in callbacks:
 > ```js
 > var MyClass = (function () {
 >     function MyClass() {
-> 		this.method = function() {
+>         this.method = function() {
 >
-> 		}
+>         }
 >     }
 >     return MyClass;
 > })();
@@ -1212,7 +1214,7 @@ There isn't really anything else to be said on that front -- TypeScript must hav
 
 Second, the runtime characteristics of this class are very surprising.
 Instead of allocating one closure per method, this allocates one closure per method *per instance*.
-This expensive in terms of class initialization cost, memory pressure, and GC performance.
+This is expensive in terms of class initialization cost, memory pressure, and GC performance.
 
 ### Why can't I access arbitrary properties on a type with a string indexer?
 
@@ -1230,7 +1232,7 @@ This expensive in terms of class initialization cost, memory pressure, and GC pe
 > Instead I can only use index syntax: `obj['foo']`.
 
 The point of TypeScript is to catch errors at compile-time, and "Property does not exist" is one of the most important.
-If a string indexer let you access properties on a type, you'd never get this error for those types.
+If a string indexer lets you access properties on a type, you'd never get this error for those types.
 This is important if you have other properties on the indexed type:
 
 ```ts
@@ -1300,7 +1302,7 @@ In this case, you should be running `node myApp.js`, because the *module* `myApp
 
 This behavior has been fixed as of TypeScript 1.8; combining `--out` and `--module` is now an error for CommonJS module output.
 
-### How do I control file ordering in combined output (`--out`) ?
+### How do I control file ordering in combined output (`--out`)?
 
 The order of the generated files in the output follows that of the input files after the pre-processing pass.
 
@@ -1357,11 +1359,11 @@ To ensure the output does not change with adding new files specify `--rootDir` o
 
 ### Why is a file in the `exclude` list still picked up by the compiler?
 
-`tsconfig.json` turns a folder into a “project”. Without specifying any `“exclude”` or `“files”` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation.
+`tsconfig.json` turns a folder into a "project". Without specifying any `"exclude"` or `"files"` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation.
 
-If you want to exclude some of the files use `“exclude”`, if you would rather specify all the files instead of letting the compiler look them up, use `“files”`.
+If you want to exclude some of the files, use `"exclude"`. If you would rather specify all the files instead of letting the compiler look them up, use `"files"`.
 
-That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from “mod”`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition file. if the file was found, it will be included regardless if it was excluded in the previous steps.
+That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from "mod"`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition file. If the file was found, it will be included regardless of whether it was excluded in the previous steps or not.
 
 So to exclude a file from the compilation, you need to exclude and all **all** files that have an `import` or `/// <reference path="..." />` directives to them.
 
@@ -1369,7 +1371,10 @@ Use `tsc --listFiles` to list what files are included in your compilation, and `
 
 ### How can I specify an `include`?
 
-There is no way now to indicate an `“include”` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either: 1. Using a `“files”` list, or 2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
+There is no way now to indicate an `"include"` to a file outside the current folder in the `tsconfig.json` (tracked by [#1927](https://github.com/Microsoft/TypeScript/issues/1927)). You can achieve the same result by either:
+
+1. Using a `"files"` list, or ;
+2. Adding a `/// <reference path="..." />` directive in one of the files in your directory.
 
 ### Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?
 
@@ -1389,7 +1394,7 @@ If you just want to include the JavaScript files for editing and don't need to c
 TypeScript compiler uses a position of a node in the abstract syntax tree to retrieve its comments during emit.
 Because the compiler does not store all tokens into the tree, some comments may be missed in an output JavaScript file.
 For example, we do not store following tokens into the tree `,`, `{`, `}`, `(`, `)`.
-Therefore, trailing comments or leading comments of such token cannot be retrieved during emit.
+Therefore, trailing comments or leading comments of such tokens cannot be retrieved during emit.
 At the moment, there is not an easy method to preserve such comments without storing those tokens.
 Doing so, however, can significantly increase the tree size and potentially have performance impact.
 
@@ -1448,7 +1453,7 @@ Other examples will use DOM types like `HTMLElement` and `HTMLDivElement` to hig
 
 ### "Substitutability"
 Many answers relating to the type system make reference to [Substitutability](https://en.wikipedia.org/wiki/Liskov_substitution_principle).
-This is a principle that says if an object `X` can be used in place of some object `Y`, then `X` is a *subtype* of `Y`.
+This is a principle that says that if an object `X` can be used in place of some object `Y`, then `X` is a *subtype* of `Y`.
 We also commonly say that `X` is *assignable to* `Y` (these terms have slightly different meanings in TypeScript, but the difference is not important here).
 
 In other words, if I ask for a `fork`, a `spork` is an acceptable *substitute* because it has the same functions and properties of a `fork` (three prongs and a handle).
@@ -1460,11 +1465,11 @@ TypeScript classifies comments into three different types:
 - Trailing comment : a comment after a node and in the same line as the node.
 - Detached comment : a comment that is not part of any node such as copyright comment.
 ```ts
-/*! Top-of-file copyright comment is a detached comment*/
+/*! Top-of-file copyright comment is a detached comment */
 
-/* Leading comments of the function AST node*/
-function foo /*trailing comments of the function name, "foo", AST node*/ () {
-  /* Detached comment*/
+/* Leading comments of the function AST node */
+function foo /* trailing comments of the function name, "foo", AST node */ () {
+  /* Detached comment */
 
   let x = 10;
 }
@@ -1522,7 +1527,7 @@ Having a record of these use cases helps us reprioritize.
 Specifically, remember that the TypeScript team does not have the resources to continuously relitigate closed suggestions.
 
 *Bargaining*: Ask yourself: is there a smaller thing that would work?
-Many suggestions are simply too large of a hammer for too small of a nail.
+Many suggestions are simply too large of a hammer or too small of a nail.
 Think about the problem you're experiencing for a while and see if you can come up with a simpler solution that accomplishes the same goal.
 
 *Depression*: Try not to be depressed about declined suggestions.
