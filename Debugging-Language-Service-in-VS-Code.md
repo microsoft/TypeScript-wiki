@@ -56,14 +56,11 @@ From here, there are different steps for debugging the client- and server-side, 
            {
                "name": "Attach to TS Server",
                "type": "node",
-               "request": "launch",
+               "request": "attach",
                "protocol": "inspector",
                "port": 5859,
                "sourceMaps": true,
                "outFiles": ["/path/to/repo/TypeScript/built/local"],
-               "runtimeArgs": [
-                    "--inspect=5859"
-               ]
            }
        ]
    }
