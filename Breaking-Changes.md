@@ -2,6 +2,70 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 3.6
+
+
+## Class Members Named `"constructor"` Are Now Constructors
+
+As per the ECMAScript specification, class declarations with methods named `constructor` are now constructor functions, regardless of whether they are declared using identifier names, or string names.
+
+```ts
+class C {
+    "constructor"() {
+        console.log("I am the constructor now.");
+    }
+}
+```
+
+A notable exception, and the workaround to this break, is using a computed property whose name evaluates to `"constructor"`.
+
+```ts
+class D {
+    ["constructor"]() {
+        console.log("I'm not a constructor - just a plain method!");
+    }
+}
+```
+
+## DOM Updates
+
+Many declarations have been removed or changed within `lib.dom.d.ts`.
+This includes (but isn't limited to) the following:
+
+* The global `window` is no longer defined as type `Window` - instead, it is defined as type `Window & typeof globalThis`. In some cases, it may be better to refer to its type as `typeof window`.
+* `GlobalFetch` is gone. Instead, use `WindowOrWorkerGlobalScope`
+* Certain non-standard properties on `Navigator` are gone.
+* The `experimental-webgl` context is gone. Instead, use `webgl` or `webgl2`.
+
+## JSDoc Comments No Longer Merge
+
+In JavaScript files, TypeScript will only consult immediately preceding JSDoc comments to figure out declared types.
+
+```ts
+/**
+ * @param {string} arg
+ */
+/**
+ * oh, hi, were you trying to type something?
+ */
+function whoWritesFunctionsLikeThis(arg) {
+    // 'arg' has type 'any'
+}
+```
+
+## Keywords Cannot Contain Escape Sequences
+
+Previously keywords were not allowed to contain escape sequences.
+TypeScript 3.6 disallows them.
+
+```ts
+while (true) {
+    \u0063ontinue;
+//  ~~~~~~~~~~~~~
+//  error! Keywords cannot contain escape characters.
+}
+```
+
 # TypeScript 3.5
 
 ## Generic type parameters are implicitly constrained to `unknown`
