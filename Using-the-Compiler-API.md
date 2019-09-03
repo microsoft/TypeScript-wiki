@@ -283,6 +283,80 @@ function reportWatchStatusChanged(diagnostic: ts.Diagnostic) {
 watchMain();
 ```
 
+## A minimal incremental compiler
+
+To compile incrementally, we need to create a builder program that reads the older program by reading tsbuildinfo file. This is as simple as calling `createIncrementalProgram`. `createIncrementalProgram` abstracts any interaction with the underlying system in the `IncrementalCompilerHost` interface. The `IncrementalCompilerHost` allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For convenience, we expose a function to create a default host using `createIncrementalCompilerHost`.
+
+```TypeScript
+import * as ts from "typescript";
+
+function incrementalCompile(): void {
+  const configPath = ts.findConfigFile(
+    /*searchPath*/ "./",
+    ts.sys.fileExists,
+    "tsconfig.json"
+  );
+  if (!configPath) {
+    throw new Error("Could not find a valid 'tsconfig.json'.");
+  }
+
+  const config = ts.getParsedCommandLineOfConfigFile(
+    configPath,
+    /*optionsToExtend*/ { incremental: true },
+    /*host*/ {
+      ...ts.sys,
+      onUnRecoverableConfigFileDiagnostic: d => console.error(ts.flattenDiagnosticMessageText(d, "\n"));
+    }
+  );
+  if (!config) {
+    throw new Error("Could not parse 'tsconfig.json'.");
+  }
+
+  const program = ts.createIncrementalProgram({
+    rootName: config.fileNames,
+    options: config.options,
+    configFileParsingDiagnostics: ts.getConfigFileParsingDiagnostics(config),
+    projectReferences: config.projectReferences
+    // createProgram can be passed in here to choose strategy for incremental compiler just like when creating incremental watcher program.
+    // Default is ts.createSemanticDiagnosticsBuilderProgram
+  });
+  const diagnostics = [
+    ...program.getConfigFileParsingDiagnostics(),
+    ...program.getSyntacticDiagnostics(),
+    ...program.getOptionsDiagnostics(),
+    ...program.getGlobalDiagnostics(),
+    ...program.getSemanticDiagnostics() // Get the diagnostics before emit to cache them in the buildInfo file.
+  ];
+  const emitResult = program.emit();
+  const allDiagnostics = diagnostics.concat(emitResult.diagnostics);
+
+  allDiagnostics.forEach(diagnostic => {
+    if (diagnostic.file) {
+      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+        diagnostic.start!
+      );
+      let message = ts.flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        "\n"
+      );
+      console.log(
+        `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
+      );
+    } else {
+      console.log(
+        `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`
+      );
+    }
+  });
+
+  let exitCode = emitResult.emitSkipped ? 1 : 0;
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
+}
+
+incrementalCompile();
+```
+
 ## Incremental build support using the language services
 
 > Please refer to the [[Using the Language Service API]] page for more details.
