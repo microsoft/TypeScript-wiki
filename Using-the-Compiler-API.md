@@ -359,7 +359,10 @@ incrementalCompile();
 
 ## A minimal solution compiler
 
-To compile solution that is project and its dependencies the way `tsc --b` does, we need to create a `SolutionBuilder` which iterates through projects to build. This can be achieved by using `createSolutionBuilder` which takes host which is `SolutionBuilderHost` and can be created using `createSolutionBuilderHost`, root solutions to build and buildOptions. To create a solution builder that also watches for changes (similar to `tsc --b --w`), you can use `createSolutionBuilderWithWatch` and host using `createSolutionBuilderWithWatchHost`.
+You may want to compile multiple projects based on project references.
+You can consider the transitive set of projects referenced by a `tsconfig.json` to be something like a "solution".
+
+To compile a solution (i.e. a project and its dependencies) the way `tsc --build`/`tsc -b` does, we need to create a `SolutionBuilder` which iterates through projects to build. This can be achieved by using `createSolutionBuilder` which takes a `SolutionBuilderHost` (which can be created using the `createSolutionBuilderHost` function), the root solutions to build, and `BuildOptions`. To create a solution builder that also watches for changes (similar to `tsc --b --w`), you can use `createSolutionBuilderWithWatch` and its respective host using `createSolutionBuilderWithWatchHost`.
 
 ```TypeScript
 import * as ts from "typescript";
