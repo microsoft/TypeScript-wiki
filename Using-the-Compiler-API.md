@@ -357,6 +357,147 @@ function incrementalCompile(): void {
 incrementalCompile();
 ```
 
+## A minimal solution compiler
+
+To compile solution that is project and its dependencies the way `tsc --b` does, we need to create a `SolutionBuilder` which iterates through projects to build. This can be achieved by using `createSolutionBuilder` which takes host which is `SolutionBuilderHost` and can be created using `createSolutionBuilderHost`, root solutions to build and buildOptions. To create a solution builder that also watches for changes (similar to `tsc --b --w`), you can use `createSolutionBuilderWithWatch` and host using `createSolutionBuilderWithWatchHost`.
+
+```TypeScript
+import * as ts from "typescript";
+
+/**
+ * To compile solution similar to tsc --b
+ */
+function compileSolution(rootNames: string[], options: ts.BuildOptions): void {
+  const host = ts.createSolutionBuilderHost(
+    // System like host, default is ts.sys
+    /*system*/ undefined,
+    // createProgram can be passed in here to choose strategy for incremental compiler just like when creating incremental watcher program.
+    // Default is ts.createSemanticDiagnosticsBuilderProgram
+    /*createProgram*/ undefined,
+    reportDiagnostic,
+    reportSolutionBuilderStatus,
+    reportErrorSummary
+  );
+
+  const solution = ts.createSolutionBuilder(
+    host,
+    rootNames,
+    options
+  );
+
+  // Builds the solution
+  const exitCode = solution.build();
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
+
+  // // Alternative to build if you want to take custom action for each project,
+  // while (true) {
+  //   const project = solution.getNextInvalidatedProject();
+  //   if (!project) { break; }
+  //
+  //   // Do custom things on project here
+  //   console.log(`Working with ${project.project}`);
+  //
+  //   // project.kind has info decides which type of project it is:
+  //   // ts.InvalidatedProjectKind.Build:: The project needs to be built (create program and emit the files)
+  //   // ts.InvalidatedProjectKind.UpdateBundle:: The project needs to combine outputs of references and its own files emit (using old output.js and .tsbuildinfo file) to get new output
+  //   // ts.InvalidatedProjectKind.UpdateOutputFileStamps:: The project needs to update timestamps of existing outputs since output is correct but output timestamp is older than one of its dependency
+  //
+  //   // Finish working with this project to get next project
+  //   project.done();
+  // }
+}
+
+/**
+ * To compile solution and watch changes similar to tsc --b --w
+ */
+function compileSolutionWithWatch(rootNames: string[], options: ts.BuildOptions): void {
+  const host = ts.createSolutionBuilderWithWatchHost(
+    // System like host, default is ts.sys
+    /*system*/ undefined,
+    // createProgram can be passed in here to choose strategy for incremental compiler just like when creating incremental watcher program.
+    // Default is ts.createSemanticDiagnosticsBuilderProgram
+    /*createProgram*/ undefined,
+    reportDiagnostic,
+    reportSolutionBuilderStatus,
+    reportWatchStatus
+  );
+
+  const solution = ts.createSolutionBuilderWithWatch(
+    host,
+    rootNames,
+    options
+  );
+
+  // Builds the solution and watches for changes
+  solution.clean();
+}
+
+/**
+ * To clean solution similar to tsc --b --clean
+ */
+function cleanSolution(rootNames: string[]): void {
+  // Create host
+  const host = ts.createSolutionBuilderHost();
+
+  // Create solution builder
+  const solution = ts.createSolutionBuilder(
+    host,
+    rootNames,
+    {}
+  );
+
+  // Clean the solution removing outputs
+  const exitCode = solution.clean();
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
+}
+
+// Reports error
+function reportDiagnostic(diagnostic: ts.Diagnostic) {
+  console.error(getTextForDiagnostic(diagnostic));
+}
+
+// Reports status like Project needs to be built because output file doesnot exist
+function reportSolutionBuilderStatus(diagnostic: ts.Diagnostic) {
+  console.info(getTextForDiagnostic(diagnostic));
+}
+
+// Reports summary with number of errors
+function reportErrorSummary(errorCount: number) {
+  console.info(`${errorCount} found.`);
+}
+
+// Report status of watch like Starting compilation, Compilation completed etc
+function reportWatchStatus(diagnostic: ts.Diagnostic) {
+  console.info(getTextForDiagnostic(diagnostic));
+}
+
+function getTextForDiagnostic(diagnostic: ts.Diagnostic): string {
+  if (diagnostic.file) {
+    const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+      diagnostic.start!
+    );
+    const message = ts.flattenDiagnosticMessageText(
+      diagnostic.messageText,
+      "\n"
+    );
+    return `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`;
+  } else {
+    return `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`;
+  }
+}
+
+// To compile solution similar to tsc --b
+compileSolution(process.argv.slice(2), { verbose: true });
+
+// To compile solution and watch changes similar to tsc --b --w
+compileSolutionWithWatch(process.argv.slice(2), { verbose: true });
+
+// To clean solution similar to tsc --b --clean
+cleanSolution(process.argv.slice(2));
+```
+
 ## Incremental build support using the language services
 
 > Please refer to the [[Using the Language Service API]] page for more details.
