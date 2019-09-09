@@ -20,6 +20,13 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
+# 3.7 (November 2019)
+
+* [ ] [Optional Chaining](https://github.com/microsoft/TypeScript/pull/33294)
+* [ ] [Assertions in control flow analysis](https://github.com/microsoft/TypeScript/pull/32695)
+* [ ] [Recursive type references](https://github.com/microsoft/TypeScript/pull/33050)
+* [ ] [Allow `allowJs` and `declaration` to be used together](https://github.com/microsoft/TypeScript/pull/32372)
+
 # 3.6 (August 2019)
 
 [See the 3.6 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/31639)
