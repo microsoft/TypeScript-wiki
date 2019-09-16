@@ -98,6 +98,12 @@ Here are some behaviors that may look like bugs, but aren't.
 * `private` class members are actually visible at runtime
   * See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
   * Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
+* This conditional type returns `never` when it should return the true branch.
+  * See this [issue](https://github.com/microsoft/TypeScript/issues/31751) for discussion about _distributive conditional types_.
+* This mapped type returns a primitive type, not an object type.
+  * Mapped types declared as `{ [ K in keyof T ]: U }` where T is a type parameter are known as _homomorphic mapped types_, which means that the mapped type is a structure preserving function of `T`. When type parameter `T` is instantiated with a primitive type the mapped type evaluates to the same primitive.
+* A method and a function property of the same type behave differently.
+  * Methods are always bivariant in their argument, while function properties are contravariant in their argument under `strictFunctionTypes`. More discussion [here](https://github.com/microsoft/TypeScript/pull/18654).
 
 ## Common Feature Requests
 > I want to request one of the following features...
