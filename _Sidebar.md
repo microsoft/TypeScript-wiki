@@ -36,6 +36,7 @@
 * [[Useful Links for TypeScript Issue Management]]
 * [[Writing Good Design Proposals]]
 * [[Compiler Internals]]
+* [Deployment](https://github.com/microsoft/TypeScript/wiki/TypeScript-Deployment)
 
 **Building Tools for TypeScript**
 * [[Architectural Overview]]
