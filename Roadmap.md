@@ -23,8 +23,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 3.7 (November 2019)
 
 * [ ] [Optional Chaining](https://github.com/microsoft/TypeScript/pull/33294)
-* [ ] [Assertions in control flow analysis](https://github.com/microsoft/TypeScript/pull/32695)
-* [ ] [Recursive type references](https://github.com/microsoft/TypeScript/pull/33050)
+* [X] [Assertions in control flow analysis](https://github.com/microsoft/TypeScript/pull/32695)
+* [X] [Recursive type references](https://github.com/microsoft/TypeScript/pull/33050)
 * [ ] [Allow `allowJs` and `declaration` to be used together](https://github.com/microsoft/TypeScript/pull/32372)
 
 # 3.6 (August 2019)
