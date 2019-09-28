@@ -12,3 +12,7 @@ Publishing to npm will submit the LKG version of TypeScript to npm. This means t
 gulp LKG
 npm publish
 ```
+
+### Official Releases
+
+Our releases are deployed using Azure Pipelines, you can see [them here](https://dev.azure.com/typescript/TypeScript/_release?_a=releases&view=mine&definitionId=1)
