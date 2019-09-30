@@ -15,4 +15,7 @@ npm publish
 
 ### Official Releases
 
-Our releases are deployed using Azure Pipelines, you can see [them here](https://dev.azure.com/typescript/TypeScript/_release?_a=releases&view=mine&definitionId=1)
+For all our release-x branches, the node 12 build always produces a tarball based on the branch. Any one of those tarballs can be promoted (from the build UI) and published as a full release, which then triggers `npm publish`es and GitHub releases.
+
+Our workflow is to prep the release branch, bump it's version, do an LKG, then fire off that generated tarball as the release using Azure Pipelines, you can see [them here](https://dev.azure.com/typescript/TypeScript/_release?_a=releases&view=mine&definitionId=1)
+
