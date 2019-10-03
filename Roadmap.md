@@ -23,10 +23,13 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 3.7 (November 2019)
 
 * [x] [Optional Chaining](https://github.com/microsoft/TypeScript/pull/33294)
-* [X] [Assertions in control flow analysis](https://github.com/microsoft/TypeScript/pull/32695)
-* [X] [Recursive type references](https://github.com/microsoft/TypeScript/pull/33050)
+* [x] [Nullish Coalescing](https://github.com/microsoft/TypeScript/issues/26578)
+* [X] [Assertions in Control Flow Analysis](https://github.com/microsoft/TypeScript/pull/32695)
+* [X] [Recursive Type References](https://github.com/microsoft/TypeScript/pull/33050)
 * [x] [Allow `allowJs` and `declaration` to be used together](https://github.com/microsoft/TypeScript/pull/32372)
-* [x] [Nullish Coalescing](https://github.com/microsoft/TypeScript/pull/32883)
+* [x] [Uncalled Function Checks](https://github.com/microsoft/TypeScript/pull/33178)
+* [x] [Semicolon Preferences in Editor Formatting](https://github.com/microsoft/TypeScript/issues/19882)
+* [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
 
 # 3.6 (August 2019)
 
