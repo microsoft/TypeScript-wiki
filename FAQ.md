@@ -1188,8 +1188,9 @@ It creates a *single* private field that all classes share:
 var a = new Foo();
 a.increment(); // Prints 1
 a.increment(); // Prints 2
-var b = new Foo(); // Should not affect a
-a.increment(); // Prints 1
+var b = new Foo(); // increments on b should be independent of a 
+b.increment(); // Supposed to print 1, prints 3
+a.increment(); // Should print 3, prints 4
 ```
 
 ### You should emit classes like this so they don't lose `this` in callbacks
