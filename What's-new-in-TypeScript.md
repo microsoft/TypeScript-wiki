@@ -1,4 +1,5 @@
-Because this page hit a limit on a GitHub wiki page size, it's now hosted on the website: https://www.typescriptlang.org/docs/handbook/release-notes/overview.html
+Because this page hit a limit on a GitHub wiki page size, it's now hosted on the website:
+https://www.typescriptlang.org/docs/handbook/release-notes/overview.html
 
 # TypeScript 3.6
 
@@ -514,7 +515,7 @@ See [Improved type inference for object literals](https://www.typescriptlang.org
 
 #### Example
 
-See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-4)
+See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-5)
 
 ## Improved handling of structurally identical classes and `instanceof` expressions
 
@@ -522,7 +523,7 @@ See [Improved handling of structurally identical classes and `instanceof` expres
 
 #### Example:
 
-See [Example:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-5)
+See [Example:](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-6)
 
 ## Type guards inferred from  `in` operator
 
@@ -530,15 +531,15 @@ See [Type guards inferred from  `in` operator](https://www.typescriptlang.org/do
 
 #### Example
 
-See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-6)
+See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-7)
 
 ## Support for `import d from "cjs"` form CommonJS modules with `--esModuleInterop`
 
-See [Support for `import d from "cjs"` form CommonJS modules with `--esModuleInterop`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#support-for-import-d-from-cjs-form-commonjs-modules-with---esmoduleinterop)
+See [Support for `import d from "cjs"` form CommonJS modules with `--esModuleInterop`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#support-for-import-d-from-cjs-from-commonjs-modules-with---esmoduleinterop)
 
 #### Example
 
-See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-7)
+See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-8)
 
 ## Numeric separators
 
@@ -546,7 +547,7 @@ See [Numeric separators](https://www.typescriptlang.org/docs/handbook/release-no
 
 ##### Example
 
-See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-8)
+See [Example](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-9)
 
 ## Cleaner output in `--watch` mode
 
