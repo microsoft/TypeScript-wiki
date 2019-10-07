@@ -28,8 +28,11 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [X] [Recursive Type References](https://github.com/microsoft/TypeScript/pull/33050)
 * [x] [Allow `allowJs` and `declaration` to be used together](https://github.com/microsoft/TypeScript/pull/32372)
 * [x] [Uncalled Function Checks](https://github.com/microsoft/TypeScript/pull/33178)
+* [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [x] [Call Hierarchy support](https://github.com/microsoft/TypeScript/issues/31863)
 * [x] [Semicolon Preferences in Editor Formatting](https://github.com/microsoft/TypeScript/issues/19882)
 * [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
+* [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
 
 # 3.6 (August 2019)
 
@@ -39,9 +42,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [More accurate array spreads](https://github.com/microsoft/TypeScript/pull/31166)
 * [x] [Improved UX around Promises](https://github.com/microsoft/TypeScript/issues/30646)
 * [x] [Semicolon-aware auto-imports](https://github.com/microsoft/TypeScript/issues/19882)
-* [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
-* [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
-* [x] [Call Hierarchy support](https://github.com/microsoft/TypeScript/issues/31863)
 
 # 3.5 (May 2019)
 
