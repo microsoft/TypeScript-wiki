@@ -7,7 +7,7 @@
 * [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
 * [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
 * [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
-* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
+* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tutorials/tsconfig.json.md)
 * [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
 * [Nightly Builds](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
