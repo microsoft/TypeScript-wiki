@@ -100,12 +100,17 @@ TypeScript provides the option to skip type-checking of the `.d.ts` files that i
 
 Alternatively, you can also enable the `skipLibCheck` flag to skip checking *all* `.d.ts` files in a compilation.
 
-These two options can often hide misconfiguration and conflicts in `.d.ts` files, so we suggest using them sparingly.
+These two options can often hide misconfiguration and conflicts in `.d.ts` files, so we suggest using them *only* for faster builds.
 
 # Configuring Other Build Tools
 
 TypeScript compilation is often performed with other build tools in mind - especially when writing web apps that might involve a bundler.
 While we can only make suggestions for a few build tools, ideally these techniques can be generalized.
+
+Make sure that in addition to reading this section, you read up about performance in your choice of build tool - for example:
+
+* [ts-loader's section on *Faster Builds*](https://github.com/TypeStrong/ts-loader#faster-builds)
+* [awesome-typescript-loader's section on *Performance Issues*](https://github.com/s-panferov/awesome-typescript-loader/blob/master/README.md#performance-issues)
 
 ## Concurrent Type-Checking
 
@@ -115,7 +120,7 @@ Because type-checking can take a little bit longer, it can impact the inner deve
 For this reason, some build tools can run type-checking in a concurrent process without blocking emit.
 While this means that invalid code can run before TypeScript reports an error in the tool, you'll often see errors in your editor first, and you won't be blocked for as long from running working code.
 
-An example of this in action is Webpack's `fork-ts-checker` plugin.
+An example of this in action is the [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin) plugin for Webpack, or [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) which also sometimes does this.
 
 ## Isolated File Emit
 
@@ -125,14 +130,35 @@ But needing to check other files to emit of an arbitrary file can make emit slow
 
 The need for features that need non-local information is somewhat rare - regular `enum`s can be used in place of `const enum`s, and modules can be used instead of `namespace`s.
 For that reason, TypeScript provides the `isolatedModules` flag to warn when using them.
-Using `isolatedModules` means that your codebase is safe for tools to use TypeScript APIs like `transpileModule` or alternative compilers like Babel.
+Enabling `isolatedModules` means that your codebase is safe for tools to use TypeScript APIs like `transpileModule` or alternative compilers like Babel.
 
-As an example of this in action, ts-loader provides
+If you *don't* turn `isolatedModules` on, then using build tools cannot properly transform code using isolated file emit techniques.
+As an example, the following code won't properly work at runtime because `const enum` values are expected to be inlined.
 
-* the `transpileOnly` flag to use `transpileModule`.
-* the `useBabel` flag
+```ts
+// ./src/fileA.ts
 
-<!-- TODO -->
+export const enum E {
+    A = 0,
+    B = 1,
+}
+
+// ./src/fileB.ts
+
+import { E } from "./fileA";
+
+console.log(E.A);
+```
+
+Isolated file emit can be leveraged by using the following tools:
+
+* [ts-loader](https://github.com/TypeStrong/ts-loader) provides [a `transpileOnly` flag](https://github.com/TypeStrong/ts-loader#transpileonly-boolean-defaultfalse) which performs isolated file emit by using `transpileModule`.
+* [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) provides [a `transpileOnly` flag](https://github.com/s-panferov/awesome-typescript-loader/blob/master/README.md#transpileonly-boolean) which performs isolated file emit by using `transpileModule`.
+* [TypeScript's `transpileModule` API](https://github.com/microsoft/TypeScript/blob/a685ac426c168a9d8734cac69202afc7cb022408/lib/typescript.d.ts#L5866) can be used directly.
+* [awesome-typescript-loader provides the `useBabel` flag](https://github.com/s-panferov/awesome-typescript-loader/blob/master/README.md#usebabel-boolean-defaultfalse).
+* [babel-loader](https://github.com/babel/babel-loader) compiles files in an isolated manner (but does not provide type-checking on its own).
+* [gulp-typescript](https://www.npmjs.com/package/gulp-typescript) enables isolated file emit when `isolatedModules` is enabled.
+* [rollup-plugin-typescript](https://github.com/rollup/rollup-plugin-typescript) ***only*** performs isolated file compilation.
 
 # Investigating Issues
 
@@ -274,6 +300,8 @@ Accessors are only available when targeting ECMAScript 5 and higher.
 
 # Filing an Issue
 
+If your project is already properly and optimally configured, you may want to [file an issue](https://github.com/microsoft/TypeScript/issues/new/choose).
+
 The best reports of performance issues contain *easily obtainable* and *minimal* reproductions of the problem.
 In other words, a codebase that can easily be cloned over git that contains only a few files.
 They require either no external integration with build tools - they can either be invoked via `tsc` or use isolated code which consumes the TypeScript API.
@@ -282,9 +310,44 @@ Codebases that require complex invocations and setups cannot be prioritized.
 We understand that this is not always easy to achieve - specifically, because it is hard to isolate the source of a problem within a codebase, and because sharing intellectual property may be an issue.
 In some cases, the team will be willing to send a non-disclosure agreement if we believe the issue is highly impactful.
 
-Aside from that, here are some other things a performance issue report should provide.
+Regardless of whether a reproduction is possible, following these directions when filing issues will help us provide you with performance fixes.
 
-* `extendedDiagnostics` output
-* 
+## Reporting Compiler Performance Issues
 
-<!-- TODO -->
+Sometimes you'll witness performance issues in both build times as well as editing scenarios.
+In these cases, it's best to focus on the TypeScript compiler.
+
+First, a nightly version of TypeScript should be used to ensure you're not hitting a resolved issue:
+
+```sh
+npm install --save-dev typescript@next
+
+# or
+
+yarn add typescript@next --dev
+```
+
+A compiler perf issue should include
+
+* The version of TypeScript that was installed (i.e. `npx tsc -v` or `yarn tsc -v`)
+* The output of running with `extendedDiagnostics` (`tsc --extendedDiagnostics -p tsconfig.json`)
+* Ideally, a project that demonstrates the issues being encountered.
+* Output logs from profiling the compiler (`isolate-*-*-*.log` and `*.cpuprofile` files)
+
+### Profiling the Compiler
+
+It is important to provide the team with diagnostic traces by running Node.js with the `--trace-ic` flag alongside TypeScript with the `--generateCpuProfile` flag:
+
+```sh
+node --trace-ic ./node_modules/typescript/lib/tsc.js --generateCpuProfile profile.cpuprofile -p tsconfig.json
+```
+
+Here `./node_modules/typescript/lib/tsc.js` can be replaced with any path to where your version of the TypeScript compiler is installed, and `tsconfig.json` can be any TypeScript configuration file.
+`profile.cpuprofile` is an output file of your choice.
+
+This will generate two files:
+
+* `--trace-ic` will emit to a file of the `isolate-*-*-*.log` (e.g. `isolate-00000176DB2DF130-17676-v8.log`). 
+* `--generateCpuProfile` will emit to a file with the name of your choice. In the above example, it will be a file named `profile.cpuprofile`.
+
+Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
