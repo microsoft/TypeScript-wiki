@@ -65,7 +65,7 @@ TypeScript now uses types that flow into function calls (like `then` in the belo
 
 ```ts
 function isEven(prom: Promise<number>): Promise<{ success: boolean }> {
-    return prom.then<{success: boolean}>((x) => {
+    return prom.then((x) => {
         return x % 2 === 0 ?
             { success: true } :
             Promise.resolve({ success: false });
