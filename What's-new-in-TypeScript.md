@@ -1636,4 +1636,3 @@ See [Performance Improvements](https://www.typescriptlang.org/docs/handbook/rele
 ## Better Module Visibility Rules
 
 See [Better Module Visibility Rules](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-1.html#better-module-visibility-rules)
-

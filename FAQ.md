@@ -1338,7 +1338,7 @@ If you want to exclude some of the files, use `"exclude"`. If you would rather s
 
 That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from "mod"`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition file. If the file was found, it will be included regardless of whether it was excluded in the previous steps or not.
 
-So to exclude a file from the compilation, you need to exclude and all **all** files that have an `import` or `/// <reference path="..." />` directives to them.
+So to exclude a file from the compilation, you need to exclude both the file itself and **all** files that have an `import` or `/// <reference path="..." />` directive to it.
 
 Use `tsc --listFiles` to list what files are included in your compilation, and `tsc --traceResolution` to see why they were included.
 

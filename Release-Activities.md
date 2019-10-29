@@ -23,10 +23,13 @@ This is the list of release activities needed for every TypeScript release.
 
 ### types-publisher and definitelytyped-header-parser
 
+**Following the publish**, these tasks must be done in order:
+
 * [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
     * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
-* [ ] Update [types-publisher]((https://github.com/Microsoft/types-publisher)) dependency to the new header-parser
-* [ ] Run the tagging script to tag for new version (version of `typescript@next`)
+* [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
+* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency to the new header-parser
+* [ ] Run [the tagging script](https://github.com/sandersn/dt-retag/blob/master/index.js) to tag for new version (version of `typescript@next`)
 
 #### npm
 

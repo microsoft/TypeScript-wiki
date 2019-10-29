@@ -1,4 +1,7 @@
-This page outlines specific features and fixes that are scheduled or planned for given releases. The current [6-month roadmap that outlines focus areas of work can be viewed here](https://github.com/Microsoft/TypeScript/issues/29288).
+This page outlines specific features and fixes that are scheduled or planned for given releases. The 6-month roadmaps that outlines focus areas of work can be viewed for
+
+* [July to December 2019](https://github.com/microsoft/TypeScript/issues/33118) (current)
+* [January to June 2019](https://github.com/Microsoft/TypeScript/issues/29288)
 
 - [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
@@ -14,24 +17,50 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
+* [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
+
+# 3.7 (November 2019)
+
+* [x] [Optional Chaining](https://github.com/microsoft/TypeScript/pull/33294)
+* [x] [Nullish Coalescing](https://github.com/microsoft/TypeScript/issues/26578)
+* [X] [Assertions in Control Flow Analysis](https://github.com/microsoft/TypeScript/pull/32695)
+* [X] [Recursive Type References](https://github.com/microsoft/TypeScript/pull/33050)
+* [x] [Allow `allowJs` and `declaration` to be used together](https://github.com/microsoft/TypeScript/pull/32372)
+* [x] [Uncalled Function Checks](https://github.com/microsoft/TypeScript/pull/33178)
+* [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
+* [x] [Call Hierarchy support](https://github.com/microsoft/TypeScript/issues/31863)
+* [x] [Semicolon Preferences in Editor Formatting](https://github.com/microsoft/TypeScript/issues/19882)
+* [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
+* [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
+
+# 3.6 (August 2019)
+
+[See the 3.6 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/31639)
+
+* [x] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
+* [x] [More accurate array spreads](https://github.com/microsoft/TypeScript/pull/31166)
+* [x] [Improved UX around Promises](https://github.com/microsoft/TypeScript/issues/30646)
+* [x] [Semicolon-aware auto-imports](https://github.com/microsoft/TypeScript/issues/19882)
 
 # 3.5 (May 2019)
 
 [See the 3.5 Iteration Plan for more details.](https://github.com/Microsoft/TypeScript/issues/30555)
 
-* [ ] [Negated types](https://github.com/Microsoft/TypeScript/pull/29317)
+* [X] [Higher order inferences for constructor functions](https://github.com/Microsoft/TypeScript/pull/31116)
+* [X] [Easier assignment to discriminated unions](https://github.com/Microsoft/TypeScript/pull/30779)
+* [X] [Change default constraint for type parameters from `{}` to `unknown`](https://github.com/Microsoft/TypeScript/pull/30637)
+* [X] [Improved checking of indexed access types](https://github.com/microsoft/TypeScript/pull/30769)
 * [X] [The `Omit` helper type](https://github.com/Microsoft/TypeScript/pull/30552)
+* [x] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
 * [X] [`--allowUmdGlobalAccess` to use UMD globals from modules](https://github.com/Microsoft/TypeScript/pull/30776)
-* [ ] [`globalThis` expressivity fixes](https://github.com/Microsoft/TypeScript/issues/30477)
-* [ ] [Strongly typed iterators and generators](https://github.com/Microsoft/TypeScript/issues/2983)
-* [ ] [Stricter types for `IteratorResult`](https://github.com/Microsoft/TypeScript/issues/11375)
-* [ ] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
-* [ ] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
-* [ ] [APIs for composite projects (`--build` mode)](https://github.com/Microsoft/TypeScript/issues/29978)
-* [ ] [Smart Select API](https://github.com/Microsoft/TypeScript/issues/29071)
-* [ ] [Sorted/prioritized completions](https://github.com/Microsoft/TypeScript/issues/15024)
-* [ ] [Refactoring to extract type](https://github.com/Microsoft/TypeScript/issues/23869)
+* [X] [`--noEmitOnError` with `--isolatedModules`](https://github.com/microsoft/TypeScript/pull/31043)
+* [X] Speed improvements in `--incremental` and `--build`
+  * [X] [Caching module resolution results](https://github.com/Microsoft/TypeScript/pull/31100)
+  * [X] [Caching results of parsing `tsconfig.json`](https://github.com/Microsoft/TypeScript/pull/31101)
+* [X] [Sorted/prioritized completions](https://github.com/Microsoft/TypeScript/issues/15024)
+* [X] [Smart Select API](https://github.com/Microsoft/TypeScript/issues/29071)
+* [X] [Refactoring to extract type](https://github.com/Microsoft/TypeScript/issues/23869)
 
 # 3.4 (March 2019)
 
