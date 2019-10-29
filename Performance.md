@@ -45,7 +45,7 @@ Tests can also be broken into their own project.
 ------------                ------------
 ```
 
-You can read up more about project references here. <!-- TODO -->
+You can [read up more about project references here](https://www.typescriptlang.org/docs/handbook/project-references.html).
 
 # Configuring `tsconfig.json` or `jsconfig.json`
 
