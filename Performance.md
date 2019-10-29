@@ -366,7 +366,3 @@ Including the output from `tsc --extendedDiagnostics` is always good context, bu
 1. This should open the `tsserver.log` file.
 
 ⚠ Warning: A TSServer log may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
-
-#### Collecting a TSServer Log in Other Editors
-
-You can collect a TSServer log in other editors as follows
