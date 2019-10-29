@@ -47,9 +47,13 @@ Tests can also be broken into their own project.
 
 You can read up more about project references here. <!-- TODO -->
 
-# Configuring `tsconfig.json`
+# Configuring `tsconfig.json` or `jsconfig.json`
 
-Within a `tsconfig.json`, there are two ways to specify files in a project:
+TypeScript and JavaScript users can always configure their compilations with a `tsconfig.json` file.
+[`jsconfig.json` files can also be used to configure the editing experience](https://code.visualstudio.com/docs/languages/jsconfig) for JavaScript users.
+You should always make sure that your configuration files aren't including too many files at once.
+
+Within a `tsconfig.json`, there are two ways to specify files in a project.
 
 * the `files` list
 * the `include` and `exclude` lists
@@ -67,7 +71,7 @@ Finally, while `exclude` has some reasonable defaults, certain configurations li
 
 For best practices, we recommend the following:
 
-* Specify only source folders in your project.
+* Specify only input folders in your project (i.e. folders whose source code you want to include for compilation/analysis).
 * Don't mix source files from other projects in the same folder.
 * If keeping tests in the same folder as other source files, give them a distinct name so they can easily be excluded.
 * Avoid large build artifacts and dependency folders like `node_modules` in source directories
@@ -93,7 +97,7 @@ Incremental compiles are enabled by default when using the `composite` flag for 
 
 ## Skipping `.d.ts` Checking
 
-By default, TypeScript performs a full re-check of all `.d.ts` files in a project to find issue and inconsistencies; however, this is typically unnecessary.
+By default, TypeScript performs a full re-check of all `.d.ts` files in a project to find issues and inconsistencies; however, this is typically unnecessary.
 Most of the time, the `.d.ts` files are known to already work - the way that types extend each other was already verified once, and declarations that matter will be checked anyway.
 
 TypeScript provides the option to skip type-checking of the `.d.ts` files that it ships with (e.g. `lib.d.ts`) using the `skipDefaultLibCheck` flag.
@@ -114,11 +118,11 @@ Make sure that in addition to reading this section, you read up about performanc
 
 ## Concurrent Type-Checking
 
-Type-checking typically requires semantic information from other files, and can be relatively expensive compared to other steps like emitting.
-Because type-checking can take a little bit longer, it can impact the inner development loop - in other words, you might experience a longer edit/compile/retry cycle, and this might be frustrating.
+Type-checking typically requires information from other files, and can be relatively expensive compared to other steps like transforming/emitting code.
+Because type-checking can take a little bit longer, it can impact the inner development loop - in other words, you might experience a longer edit/compile/run cycle, and this might be frustrating.
 
-For this reason, some build tools can run type-checking in a concurrent process without blocking emit.
-While this means that invalid code can run before TypeScript reports an error in the tool, you'll often see errors in your editor first, and you won't be blocked for as long from running working code.
+For this reason, some build tools can run type-checking in a separate process without blocking emit.
+While this means that invalid code can run before TypeScript reports an error in your build tool, you'll often see errors in your editor first, and you won't be blocked for as long from running working code.
 
 An example of this in action is the [`fork-ts-checker-webpack-plugin`](https://github.com/TypeStrong/fork-ts-checker-webpack-plugin) plugin for Webpack, or [awesome-typescript-loader](https://github.com/s-panferov/awesome-typescript-loader) which also sometimes does this.
 
@@ -164,6 +168,14 @@ Isolated file emit can be leveraged by using the following tools:
 
 There are certain ways to get hints of what might be going wrong.
 
+## Disabling Editor Plugins
+
+Editor experiences can be impacted by plugins.
+Try disabling plugins (especially JavaScript/TypeScript-related plugins) to see if that fixes any issues in performance and responsiveness.
+
+Certain editors also have their own troubleshooting guides for performance, so consider reading up on them.
+For example, Visual Studio Code has its own page for [Performance Issues](https://github.com/microsoft/vscode/wiki/Performance-Issues) as well.
+
 ## `extendedDiagnostics`
 
 You can run TypeScript with `--extendedDiagnostics` to get a printout of where the compiler is spending its time.
@@ -192,11 +204,13 @@ Emit time:                 0.01s
 Total time:                1.75s
 ```
 
+> Note that `Total time` won't be the sum of all times preceding it, since there is some overlap and some work is not instrumented.
+
 The most relevant information for most users is:
 
 Field   | Meaning
 --------|---------
-`Files` | the number of files that the program is including (use `listFiles` to see what they are).
+`Files` | the number of files that the program is including (use `--listFiles` to see what they are).
 `I/O Read time` | time spent reading from the file system - this includes traversing `include`'d folders.
 `Parse time` | time spent scanning and parsing the program
 `Program time` | combined time spent performing reading from the file system, scanning and parsing the program, and other calculation of the program graph. These steps are intermingled and combined here because files need to be resolved and loaded once they're included via `import`s and `export`s.
@@ -205,13 +219,15 @@ Field   | Meaning
 `transformTime time` | Time spent rewriting TypeScript ASTs (trees that represent source files) into forms that work in older runtimes.
 `commentTime` | Time spent calculating comments in output files.
 `I/O Write time` | Time spent writing/updating files on disk.
-`printTime` | Time spent calculating the string representation of an output file.
+`printTime` | Time spent calculating the string representation of an output file and emitting it to disk.
 
-<!-- TODO: is this important? Looks identical to printTime
+Things that you might want to ask given this input:
 
-`Emit time` | ...
-
--->
+* Does the number of files/number of lines of code roughly correspond to the number of files in your project? Try running `--listFiles` if not.
+* Does `Program time` or `I/O Read time` seem fairly high? [Ensure your `include`/`exclude` settings are configured correctly](#misconfigured-include-and-exclude).
+* Do other times seem off? [You might want to file an issue!](#filing-an-issue) Things you can do to help diagnose it might be
+    * Running with `emitDeclarationOnly` if `printTime` is high.
+    * Read up instructions on [Reporting Compiler Performance Issues](#reporting-compiler-performance-issues).
 
 ## `showConfig`
 
@@ -235,6 +251,8 @@ The emit is somewhat verbose, so you might want to redirect output to a file.
 tsc -p tsconfig.json > resolution.txt
 ```
 
+If you find a file that shouldn't be present, you may need to look into fixing up your `include`/`exclude` lists in your `tsconfig.json`, or alternatively, you might need to adjust other settings like `types`, `typeRoots`, or `paths`.
+
 ## Running `tsc` Alone
 
 Much of the time, users run into slow performance using 3rd party build tools like Gulp, Rollup, Webpack, etc.
@@ -247,14 +265,6 @@ Some questions to keep in mind:
 * Does the build tool have *its own configuration* that could be the cause?
 * Does the build tool have configuration *for its TypeScript integration* that could be the cause? (e.g. options for ts-loader?)
 
-## Disabling Editor Plugins
-
-Editor experiences can be impacted by plugins.
-Try disabling plugins (namely, JavaScript/TypeScript-related plugins) to see if that fixes any issues in performance and responsiveness.
-
-Certain editors also have their own troubleshooting guides for performance, so consider reading up on them.
-For example, Visual Studio Code has its own page for [Performance Issues](https://github.com/microsoft/vscode/wiki/Performance-Issues) as well.
-
 ## Upgrading Dependencies
 
 Sometimes TypeScript's type-checking can be impacted by computationally intensive `.d.ts` files.
@@ -264,7 +274,7 @@ Upgrading to a newer version of TypeScript (which can be more efficient) or to a
 # Common Issues
 
 Once you've trouble-shooted, you might want to explore some fixes to common issues.
-If the following solutions don't work, it may be worth [filing an issue](https://github.com/microsoft/TypeScript/issues/new/choose).
+If the following solutions don't work, it may be worth [filing an issue](#filing-an-issue).
 
 ## Misconfigured `include` and `exclude`
 
@@ -277,27 +287,6 @@ Problem          | Cause  | Fix
 Hidden dot files (e.g. `.git`) were accidentally included | `"exclude": ["**/node_modules"]` | `"exclude": ["**/node_modules", "**/.*/"]`
 Unexpected files are being included. | *`include` was not set* | `"include": ["src"]`
 
-<!--
-
-# Explicit File Lists
-
-Sometimes a `tsconfig.json` can be found by TypeScript, but the command line experience doesn't appear to reflect it.
-This is often because users specify explicit files to `tsc`, which will stop TypeScript from seeking out a tsconfig.
-
-```sh
-# doesn't look for a tsconfig.json!
-tsc main.ts helper.ts
-```
-
-As a result, users often run into using the default options with warnings like
-
-```
-Cannot find module '{0}'.
-Accessors are only available when targeting ECMAScript 5 and higher.
-```
-
--->
-
 # Filing an Issue
 
 If your project is already properly and optimally configured, you may want to [file an issue](https://github.com/microsoft/TypeScript/issues/new/choose).
@@ -308,7 +297,7 @@ They require either no external integration with build tools - they can either b
 Codebases that require complex invocations and setups cannot be prioritized.
 
 We understand that this is not always easy to achieve - specifically, because it is hard to isolate the source of a problem within a codebase, and because sharing intellectual property may be an issue.
-In some cases, the team will be willing to send a non-disclosure agreement if we believe the issue is highly impactful.
+In some cases, the team will be willing to send a non-disclosure agreement (NDA) if we believe the issue is highly impactful.
 
 Regardless of whether a reproduction is possible, following these directions when filing issues will help us provide you with performance fixes.
 
@@ -347,7 +336,37 @@ Here `./node_modules/typescript/lib/tsc.js` can be replaced with any path to whe
 
 This will generate two files:
 
-* `--trace-ic` will emit to a file of the `isolate-*-*-*.log` (e.g. `isolate-00000176DB2DF130-17676-v8.log`). 
+* `--trace-ic` will emit to a file of the `isolate-*-*-*.log` (e.g. `isolate-00000176DB2DF130-17676-v8.log`).
 * `--generateCpuProfile` will emit to a file with the name of your choice. In the above example, it will be a file named `profile.cpuprofile`.
 
-Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
+> ⚠ Warning: These files may include information from your workspace, including file paths and source code.
+> Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
+>
+> However, if you have any concerns about posting these publicly on GitHub, let us know and you can share the details privately.
+
+## Reporting Editing Performance Issues
+
+Perceived editing performance is frequently impacted by a number of things, and the only thing within the TypeScript team's control is the performance of the JavaScript/TypeScript language service, as well as the integration between that language service and certain editors (i.e. Visual Studio, Visual Studio Code, Visual Studio for Mac, and Sublime Text).
+Ensure that all 3rd-party plugins are turned off in your editor to determine whether there is an issue with TypeScript itself.
+
+Editing performance issues are slightly more involved, but the same ideas apply: clone-able minimal repro codebases are ideal, and though in some cases the team will be able to sign an NDA to investigate and isolate issues.
+
+Including the output from `tsc --extendedDiagnostics` is always good context, but taking a TSServer trace is the most helpful.
+
+### Taking a TSServer Log
+
+#### Collecting a TSServer Log in Visual Studio Code
+
+1. Open up your command palette and either
+    * open your global settings by entering `Preferences: Open User Settings`
+    * open your local project by entering `Preferences: Open Workspace Settings`
+1. Set the option `"typescript.tsserver.log": "verbose",`
+1. Restart VS Code and reproduce the problem
+1. In VS Code, run the `TypeScript: Open TS Server log` command
+1. This should open the `tsserver.log` file.
+
+⚠ Warning: A TSServer log may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
+
+#### Collecting a TSServer Log in Other Editors
+
+You can collect a TSServer log in other editors as follows
