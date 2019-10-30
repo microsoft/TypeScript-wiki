@@ -1,7 +1,19 @@
-## Release activities
-
 This is the list of release activities needed for every TypeScript release.
 [Additional activities](#additional-activities) are also needed if a new syntax is introduced or a new compiler option gets added.
+
+## Pre-Release Activities
+
+### types-publisher and definitelytyped-header-parser
+
+Once `master`'s version is updated, surrounding projects must be aware of the nightlies so that functionality such as ATA continues to work.
+
+* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
+    * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
+* [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
+* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency to the new header-parser
+* [ ] Run [the tagging script](https://github.com/sandersn/dt-retag/blob/master/index.js) to tag for new version (version of `typescript@next`)
+
+## Release Activities
 
 ### Release
 
@@ -20,16 +32,6 @@ This is the list of release activities needed for every TypeScript release.
 
 * [ ] Add new [Release Notes page](https://github.com/Microsoft/TypeScript-Handbook/tree/master/pages/release%20notes) for the new release
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
-
-### types-publisher and definitelytyped-header-parser
-
-**Following the publish**, these tasks must be done in order:
-
-* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
-    * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
-* [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
-* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency to the new header-parser
-* [ ] Run [the tagging script](https://github.com/sandersn/dt-retag/blob/master/index.js) to tag for new version (version of `typescript@next`)
 
 #### npm
 
