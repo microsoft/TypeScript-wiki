@@ -1,7 +1,7 @@
 This is the list of release activities needed for every TypeScript release.
 [Additional activities](#additional-activities) are also needed if a new syntax is introduced or a new compiler option gets added.
 
-## Pre-Release Activities
+## Release Candidate Activities
 
 ### types-publisher and definitelytyped-header-parser
 
