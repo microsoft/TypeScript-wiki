@@ -22,6 +22,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 3.7 (November 2019)
 
+[See the 3.7 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/33352)
+
 * [x] [Optional Chaining](https://github.com/microsoft/TypeScript/pull/33294)
 * [x] [Nullish Coalescing](https://github.com/microsoft/TypeScript/issues/26578)
 * [X] [Assertions in Control Flow Analysis](https://github.com/microsoft/TypeScript/pull/32695)
