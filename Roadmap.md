@@ -31,10 +31,13 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Allow `allowJs` and `declaration` to be used together](https://github.com/microsoft/TypeScript/pull/32372)
 * [x] [Uncalled Function Checks](https://github.com/microsoft/TypeScript/pull/33178)
 * [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
-* [x] [Call Hierarchy support](https://github.com/microsoft/TypeScript/issues/31863)
-* [x] [Semicolon Preferences in Editor Formatting](https://github.com/microsoft/TypeScript/issues/19882)
-* [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
-* [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
+* [x] [Flattened Property/Method Reporting](https://github.com/microsoft/TypeScript/issues/33361)
+* [x] Editor Functionality/APIs
+  * [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
+  * [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
+  * [x] [Quick fix to convert `const` to `let`](https://github.com/microsoft/TypeScript/issues/22473)
+  * [x] [Call Hierarchy Support](https://github.com/microsoft/TypeScript/issues/31863)
+  * [x] [Semicolon Formatting Preferences](https://github.com/microsoft/TypeScript/issues/19882)
 
 # 3.6 (August 2019)
 
