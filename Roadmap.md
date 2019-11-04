@@ -36,7 +36,6 @@ This page outlines specific features and fixes that are scheduled or planned for
   * [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
   * [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
   * [x] [Quick fix to convert `const` to `let`](https://github.com/microsoft/TypeScript/issues/22473)
-  * [x] [Call Hierarchy Support](https://github.com/microsoft/TypeScript/issues/31863)
   * [x] [Semicolon Formatting Preferences](https://github.com/microsoft/TypeScript/issues/19882)
 
 # 3.6 (August 2019)
