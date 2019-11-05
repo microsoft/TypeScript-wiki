@@ -17,7 +17,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
-* [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
 # 3.7 (November 2019)
@@ -32,6 +31,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Uncalled Function Checks](https://github.com/microsoft/TypeScript/pull/33178)
 * [x] [`--declaration` and `--isolatedModules`](https://github.com/Microsoft/TypeScript/issues/29490)
 * [x] [Flattened Property/Method Reporting](https://github.com/microsoft/TypeScript/issues/33361)
+* [x] [`--declaration` and `--allowJs`](https://github.com/Microsoft/TypeScript/issues/7546)
 * [x] Editor Functionality/APIs
   * [x] [Build-Free Editing for Project References](https://github.com/microsoft/TypeScript/pull/32028)
   * [x] [Auto-inserted `await` for completions](https://github.com/microsoft/TypeScript/issues/31450)
