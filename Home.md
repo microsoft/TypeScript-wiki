@@ -30,6 +30,7 @@ Please see the [[FAQ]] for common questions, suggestions, and other useful infor
 
 # Advanced Topics
 
+* [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
 * [Mixins](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Mixins.md)
 * [Declaration Merging](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Declaration%20Merging.md)
 * [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
