@@ -1,0 +1,28 @@
+# Based on https://www.growingwiththeweb.com/2016/07/enabling-pull-requests-on-github-wikis.html
+name: Sync to Dot Wiki
+on:
+  push:
+    branches: [master]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          # Setup Git
+          git config user.name "typescript-bot"
+          git config user.email "bot@typescriptlang.org"
+          # Remove the un-auth'd origin
+          git remote remove origin
+          # Switch to authed remotes for both the - and the .
+          git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git > /dev/null 2>&1
+          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+          git fetch origin
+          git fetch upstream
+          # Merge them all together
+          git merge upstream/master --no-edit
+          # Push them both
+          git push origin HEAD:master > /dev/null 2>&1
+          git push upstream HEAD:master > /dev/null 2>&1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
