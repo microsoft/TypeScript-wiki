@@ -1,5 +1,5 @@
 # Based on https://www.growingwiththeweb.com/2016/07/enabling-pull-requests-on-github-wikis.html
-name: Sync to Dot Wiki
+name: Sync Two Wiki Repos
 on:
   push:
     branches: [master]
