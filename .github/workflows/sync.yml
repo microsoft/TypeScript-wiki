@@ -27,5 +27,4 @@ jobs:
         # Merge them all together
       - run:  git merge upstream/master --no-edit
         # Push them both
-      - run:  git push origin HEAD:master > /dev/null 2>&1
       - run:  git push upstream HEAD:master > /dev/null 2>&1
