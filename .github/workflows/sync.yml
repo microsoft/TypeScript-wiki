@@ -9,21 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+    
+        # Setup Git
+      - run: git config user.name "typescript-bot"
+      - run: git config user.email "bot@typescriptlang.org"
+        # Remove the un-auth'd origin
+      - run:  git remote remove origin
+        # Switch to authed remotes for both the - and the .
       - run: |
-          # Setup Git
-          git config user.name "typescript-bot"
-          git config user.email "bot@typescriptlang.org"
-          # Remove the un-auth'd origin
-          git remote remove origin
-          # Switch to authed remotes for both the - and the .
-          git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git > /dev/null 2>&1
-          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
-          git fetch origin
-          git fetch upstream
-          # Merge them all together
-          git merge upstream/master --no-edit
-          # Push them both
-          git push origin HEAD:master > /dev/null 2>&1
-          git push upstream HEAD:master > /dev/null 2>&1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+           git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git > /dev/null 2>&1
+           git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: git fetch origin
+      - run: git fetch upstream
+        # Merge them all together
+      - run:  git merge upstream/master --no-edit
+        # Push them both
+      - run:  git push origin HEAD:master > /dev/null 2>&1
+      - run:  git push upstream HEAD:master > /dev/null 2>&1
