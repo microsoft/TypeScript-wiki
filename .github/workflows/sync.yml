@@ -8,6 +8,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v1
       - run: |
           # Setup Git
           git config user.name "typescript-bot"
