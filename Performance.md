@@ -319,13 +319,14 @@ yarn add typescript@next --dev
 A compiler perf issue should include
 
 * The version of TypeScript that was installed (i.e. `npx tsc -v` or `yarn tsc -v`)
+* The version of Node on which TypeScript ran (i.e. `node -v`)
 * The output of running with `extendedDiagnostics` (`tsc --extendedDiagnostics -p tsconfig.json`)
 * Ideally, a project that demonstrates the issues being encountered.
 * Output logs from profiling the compiler (`isolate-*-*-*.log` and `*.cpuprofile` files)
 
 ### Profiling the Compiler
 
-It is important to provide the team with diagnostic traces by running Node.js with the `--trace-ic` flag alongside TypeScript with the `--generateCpuProfile` flag:
+It is important to provide the team with diagnostic traces by running Node.js v10+ with the `--trace-ic` flag alongside TypeScript with the `--generateCpuProfile` flag:
 
 ```sh
 node --trace-ic ./node_modules/typescript/lib/tsc.js --generateCpuProfile profile.cpuprofile -p tsconfig.json
