@@ -1,3 +1,5 @@
+[User documentation](https://www.typescriptlang.org/)
+
 **News**
 * [[Roadmap]]
 * [[Breaking Changes]]
@@ -9,8 +11,7 @@
 * [[JavaScript-Language-Service-in-Visual-Studio]]
 * [[Providing-Visual-Studio-Repro-Steps]]
 
-**TypeScript Contributors**
-
+**Contributing to TypeScript**
 * [[Contributing to TypeScript]]
 * [[TypeScript Design Goals]]
 * [[Coding Guidelines]]
