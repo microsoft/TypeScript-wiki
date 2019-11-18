@@ -1,39 +1,9 @@
-# [[FAQ]]
-Please see the [[FAQ]] for common questions, suggestions, and other useful information.
+The TypeScript Wiki is for people who are interested in:
 
-# Getting Started
+- Debugging TypeScript problems
+- Using the compiler API
+- Wanting to contribute to the TypeScript codebase
 
-* [Basic Types](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Basic%20Types.md)
-* [Interfaces](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Interfaces.md)
-* [Classes](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Classes.md)
-* [Namespaces and Modules](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Namespaces%20and%20Modules.md)
-* [Functions](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Functions.md)
-* [Generics](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Generics.md)
-* [Common Errors](https://github.com/Microsoft/TypeScript-wiki/blob/master/Common-Errors.md)
-* [Integrating with Build Tools](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Integrating%20with%20Build%20Tools.md)
-* [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
-* [TypeScript Editor Support](TypeScript-Editor-Support)
-* [tsconfig.json](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/tsconfig.json.md)
-* [Nightly Builds](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
+It is also used as a scratch-pad for one-off links which are useful when triaging GitHub issues. For example the [[FAQ]]
 
-# Tutorials
-
-[See our full list of quick starts](https://www.typescriptlang.org/samples/) which includes
-
-* [Angular](https://angular.io/docs/ts/latest/quickstart.html)
-* [React](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter)
-* [Vue](https://github.com/Microsoft/TypeScript-Vue-Starter#typescript-vue-starter)
-* [Glimmer](https://glimmerjs.com/guides/installing)
-* [Dojo 2](https://dojo.io/tutorials/002_creating_an_application/)
-* [Knockout](https://github.com/Microsoft/TypeScript-Knockout-Starter#typescript-knockout-starter)
-* [Node.js/Express](https://github.com/Microsoft/TypeScript-Node-Starter#typescript-node-starter)
-
-# Advanced Topics
-
-* [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
-* [Mixins](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Mixins.md)
-* [Declaration Merging](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Declaration%20Merging.md)
-* [Type Inference](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Inference.md)
-* [Type Compatibility](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Type%20Compatibility.md)
-* [Writing Declaration (`.d.ts`) Files](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/declaration%20files/Introduction.md)
-* [JSX](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/JSX.md)
+If you are after documentation on how to use TypeScript the langauge, or the build tool: please see: https://www.typescriptlang.org
