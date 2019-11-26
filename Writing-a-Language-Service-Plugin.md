@@ -87,8 +87,8 @@ Let's modify the above pass-through plugin to add some new behavior.
 We'll change the `getCompletionsAtPosition` function to remove certain entries named `caller` from the completion list:
 ```ts
 // Remove specified entries from completion list
-proxy.getCompletionsAtPosition = (fileName, position) => {
-  const prior = info.languageService.getCompletionsAtPosition(fileName, position);
+proxy.getCompletionsAtPosition = (fileName, position, options) => {
+  const prior = info.languageService.getCompletionsAtPosition(fileName, position, options);
   prior.entries = prior.entries.filter(e => e.name !== "caller");
   return prior;
 };
@@ -108,10 +108,11 @@ function create(info: ts.server.PluginCreateInfo) {
   // ... (set up decorator here) ...
 
   // Remove specified entries from completion list
-  proxy.getCompletionsAtPosition = (fileName, position) => {
+  proxy.getCompletionsAtPosition = (fileName, position, options) => {
     const prior = info.languageService.getCompletionsAtPosition(
       fileName,
-      position
+      position,
+      options
     );
     prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
     return prior;
@@ -181,10 +182,11 @@ function init(modules: { typescript: typeof import("typescript/lib/tsserverlibra
     }
 
     // Remove specified entries from completion list
-    proxy.getCompletionsAtPosition = (fileName, position) => {
+    proxy.getCompletionsAtPosition = (fileName, position, options) => {
       const prior = info.languageService.getCompletionsAtPosition(
         fileName,
-        position
+        position,
+        options
       );
       const oldLength = prior.entries.length;
       prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
