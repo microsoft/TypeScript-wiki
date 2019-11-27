@@ -1,4 +1,4 @@
-[User documentation](https://www.typescriptlang.org/)
+# [User documentation](https://www.typescriptlang.org/)
 
 **News**
 * [[Roadmap]]
@@ -6,6 +6,7 @@
 * [[API Breaking Changes]]
 
 **Debugging TypeScript**
+* [[Performance]]
 * [[Debugging-Language-Service-in-VS-Code]]
 * [[Getting-logs-from-TS-Server-in-VS-Code]]
 * [[JavaScript-Language-Service-in-Visual-Studio]]
