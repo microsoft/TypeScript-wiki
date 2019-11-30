@@ -22,9 +22,17 @@ npm install @types/node
 
 That's it, you're ready to go. Now you can try out some of the following examples.
 
+The compiler API has a few main components:
+ 
+ - A `Program` which is the TypeScript terminology for your whole application
+ - A `CompilerHost` which represents the users' system, with an API for reading files, checking directories and case sensitivity etc.
+ - Many `SourceFile`s which represent each source file in the application, hosting both the text and TypeScript AST
+
 ## A minimal compiler
 
-Let's try to write a barebones compiler that will take a list of TypeScript files and compile down to their corresponding JavaScript. We will need to create a `Program`. This is as simple as calling `createProgram`. `createProgram` abstracts any interaction with the underlying system in the `CompilerHost` interface. The `CompilerHost` allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For convenience, we expose a function to create a default host using `createCompilerHost`.
+This example is a barebones compiler which takes a list of TypeScript files and compiles them to their corresponding JavaScript.
+
+We will need to create a `Program`, via `createProgram` - this will create a default `CompilerHost` which uses the file system to get files.
 
 ```TypeScript
 import * as ts from "typescript";
@@ -39,20 +47,11 @@ function compile(fileNames: string[], options: ts.CompilerOptions): void {
 
   allDiagnostics.forEach(diagnostic => {
     if (diagnostic.file) {
-      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
-        diagnostic.start!
-      );
-      let message = ts.flattenDiagnosticMessageText(
-        diagnostic.messageText,
-        "\n"
-      );
-      console.log(
-        `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
-      );
+      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
+      let message = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
+      console.log(`${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`);
     } else {
-      console.log(
-        `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`
-      );
+      console.log(ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n"));
     }
   });
 
@@ -71,25 +70,125 @@ compile(process.argv.slice(2), {
 
 ## A simple transform function
 
-Creating a compiler is simple enough, but you may want to just get the corresponding JavaScript output given TypeScript sources. For this you can use ts.transpileModule to get a string => string transformation in two lines.
+Creating a compiler is not too many lines of code, but you may want to just get the corresponding JavaScript output given TypeScript sources. 
+For this you can use `ts.transpileModule` to get a string => string transformation in two lines.
 
 ```TypeScript
 import * as ts from "typescript";
 
 const source = "let x: string  = 'string'";
 
-let result = ts.transpileModule(source, {
-  compilerOptions: { module: ts.ModuleKind.CommonJS }
-});
+let result = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS }});
 
 console.log(JSON.stringify(result));
 ```
 
+## Getting the DTS from a JavaScript file
+
+This will only work in TypeSCript 3.7 and above. This example shows how you can take a list of JavaScript files and will show their generated d.ts files in the terminal.
+
+```ts
+import * as ts from "typescript";
+
+function compile(fileNames: string[], options: ts.CompilerOptions): void {
+  // Create a Program with an in-memory emit
+  const createdFiles = {}
+  const host = ts.createCompilerHost(options);
+  host.writeFile = (fileName: string, contents: string) => createdFiles[fileName] = contents
+  
+  // Prepare and emit the d.ts files
+  const program = ts.createProgram(fileNames, options, host);
+  program.emit();
+
+  // Loop through all the input files
+  fileNames.forEach(file => {
+    console.log("### JavaScript\n")
+    console.log(host.readFile(file))
+
+    console.log("### Type Definition\n")
+    const dts = file.replace(".js", ".d.ts")
+    console.log(createdFiles[dts])
+  })
+}
+
+// Run the compiler
+compile(process.argv.slice(2), {
+  allowJs: true,
+  declaration: true,
+  emitDeclarationOnly: true,
+});
+```
+
+## Re-printing Sections of a TypeScript File
+
+This example will log out sub-sections of a TypeScript of JavaScript source file, this pattern is useful when you want
+the code for your app to be the source of truth. For example showcasing exports via their JSDoc comments.
+
+```ts
+import * as ts from "typescript";
+
+/**
+ * Prints out particular nodes from a source file
+ * 
+ * @param file a path to a file
+ * @param identifiers top level identifiers available
+ */
+function extract(file: string, identifiers: string[]): void {
+  // Create a Program to represent the project, then pull out the
+  // source file to parse its AST.
+  let program = ts.createProgram([file], { allowJs: true });
+  const sourceFile = program.getSourceFile(file);
+  
+  // To print the AST, we'll use TypeScript's printer
+  const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
+
+  // To give constructive error messages, keep track of found and un-found identifiers
+  const unfoundNodes = [], foundNodes = [];
+
+  // Loop through the root AST nodes of the file
+  ts.forEachChild(sourceFile, node => {
+    let name = "";
+    
+    // This is an incomplete set of AST nodes which could have a top level identifier
+    // it's left to you to expand this list, which you can do by using
+    // https://ts-ast-viewer.com/ to see the AST of a file then use the same patterns
+    // as below
+    if (ts.isFunctionDeclaration(node)) {
+      name = node.name.text;
+      // Hide the method body when printing
+      node.body = undefined;
+    } else if (ts.isVariableStatement(node)) {
+      name = node.declarationList.declarations[0].name.getText(sourceFile);
+    } else if (ts.isInterfaceDeclaration(node)){
+      name = node.name.text
+    }
+
+    const container = identifiers.includes(name) ? foundNodes : unfoundNodes;
+    container.push([name, node]);
+  });
+
+  // Either print the found nodes, or offer a list of what identifiers were found
+  if (!foundNodes.length) {
+    console.log(`Could not find any of ${identifiers.join(", ")} in ${file}, found: ${unfoundNodes.filter(f => f[0]).map(f => f[0]).join(", ")}.`);
+    process.exitCode = 1;
+  } else {
+    foundNodes.map(f => {
+      const [name, node] = f;
+      console.log("### " + name + "\n");
+      console.log(printer.printNode(ts.EmitHint.Unspecified, node, sourceFile)) + "\n";
+    });
+  }
+}
+
+// Run the extract function with the script's arguments
+extract(process.argv[2], process.argv.slice(3));
+```
+
 ## Traversing the AST with a little linter
 
-As mentioned above, the `Node` interface is the root of our AST. Generally, we use the `forEachChild` function in a recursive manner to traverse. This subsumes the visitor pattern and often gives more flexibility.
+The `Node` interface is the root interface for the TypeScript AST. Generally, we use the `forEachChild` function in a recursive manner to iterate through the tree. This subsumes the visitor pattern and often gives more flexibility.
 
-As an example of how one could traverse the AST, consider a minimal linter that does the following:
+As an example of how one could traverse a file's AST, consider a minimal linter that does the following:
 
 * Checks that all looping construct bodies are enclosed by curly braces.
 * Checks that all if/else bodies are enclosed by curly braces.
@@ -119,10 +218,7 @@ export function delint(sourceFile: ts.SourceFile) {
       case ts.SyntaxKind.IfStatement:
         const ifStatement = node as ts.IfStatement;
         if (ifStatement.thenStatement.kind !== ts.SyntaxKind.Block) {
-          report(
-            ifStatement.thenStatement,
-            'An if statement\'s contents should be wrapped in a block body.'
-          );
+          report(ifStatement.thenStatement, 'An if statement\'s contents should be wrapped in a block body.');
         }
         if (
           ifStatement.elseStatement &&
@@ -138,10 +234,7 @@ export function delint(sourceFile: ts.SourceFile) {
 
       case ts.SyntaxKind.BinaryExpression:
         const op = (node as ts.BinaryExpression).operatorToken.kind;
-        if (
-          op === ts.SyntaxKind.EqualsEqualsToken ||
-          op === ts.SyntaxKind.ExclamationEqualsToken
-        ) {
+        if (op === ts.SyntaxKind.EqualsEqualsToken || op === ts.SyntaxKind.ExclamationEqualsToken) {
           report(node, 'Use \'===\' and \'!==\'.');
         }
         break;
@@ -151,12 +244,8 @@ export function delint(sourceFile: ts.SourceFile) {
   }
 
   function report(node: ts.Node, message: string) {
-    const { line, character } = sourceFile.getLineAndCharacterOfPosition(
-      node.getStart()
-    );
-    console.log(
-      `${sourceFile.fileName} (${line + 1},${character + 1}): ${message}`
-    );
+    const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+    console.log(`${sourceFile.fileName} (${line + 1},${character + 1}): ${message}`);
   }
 }
 
@@ -177,7 +266,7 @@ fileNames.forEach(fileName => {
 
 In this example, we did not need to create a type checker because all we wanted to do was traverse each `SourceFile`.
 
-All possible ```ts.SyntaxKind``` can be found under enum [here](https://github.com/Microsoft/TypeScript/blob/964565e06968259fc4e6de6f1e88ab5e0663a94a/lib/typescript.d.ts#L62).
+All possible ```ts.SyntaxKind``` can be found under enum [here](https://github.com/microsoft/TypeScript/blob/7c14aff09383f3814d7aae1406b5b2707b72b479/lib/typescript.d.ts#L78).
 
 ## Writing an incremental program watcher
 
@@ -239,12 +328,7 @@ function watchMain() {
   // Note that we're assuming `origCreateProgram` and `origPostProgramCreate`
   // doesn't use `this` at all.
   const origCreateProgram = host.createProgram;
-  host.createProgram = (
-    rootNames: ReadonlyArray<string>,
-    options,
-    host,
-    oldProgram
-  ) => {
+  host.createProgram = (rootNames: ReadonlyArray<string>, options, host, oldProgram) => {
     console.log("** We're about to create the program! **");
     return origCreateProgram(rootNames, options, host, oldProgram);
   };
@@ -261,15 +345,7 @@ function watchMain() {
 }
 
 function reportDiagnostic(diagnostic: ts.Diagnostic) {
-  console.error(
-    "Error",
-    diagnostic.code,
-    ":",
-    ts.flattenDiagnosticMessageText(
-      diagnostic.messageText,
-      formatHost.getNewLine()
-    )
-  );
+  console.error("Error", diagnostic.code, ":", ts.flattenDiagnosticMessageText( diagnostic.messageText, formatHost.getNewLine()));
 }
 
 /**
@@ -325,10 +401,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   };
 
   // Create the language service files
-  const services = ts.createLanguageService(
-    servicesHost,
-    ts.createDocumentRegistry()
-  );
+  const services = ts.createLanguageService(servicesHost, ts.createDocumentRegistry());
 
   // Now let's watch the files
   rootFileNames.forEach(fileName => {
@@ -400,89 +473,9 @@ const currentDirectoryFiles = fs
 watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
 ```
 
-## Transpiling a single file
-
-Currently TypeScript exposes two functions for this purpose: `transpileModule` and `transpile` (**which is deprecated**).
-Note that regardless of the name, **each one assumes that the input file is a module**.
-
-Here is the relevant signature of `transpileModule`:
-
-```ts
-export interface TranspileOptions {
-  compilerOptions?: CompilerOptions;
-  fileName?: string;
-  reportDiagnostics?: boolean;
-  moduleName?: string;
-  renamedDependencies?: Map<string>;
-}
-
-export interface TranspileOutput {
-  outputText: string;
-  diagnostics?: Diagnostic[];
-  sourceMapText?: string;
-}
-
-/*
- * This function will compile source text from 'input' argument using specified
- * compiler options.
- * If not options are provided - it will use a set of default compiler options.
- * Extra compiler options that will unconditionally be used by this function are:
- * - isolatedModules = true
- * - allowNonTsExtensions = true
- * - noLib = true
- * - noResolve = true
- */
-export function transpileModule(
-  input: string,
-  transpileOptions: TranspileOptions
-): TranspileOutput;
-```
-
-and here is the appropriate version of `transpile`:
-
-```ts
-export function transpile(
-  input: string,
-  compilerOptions?: CompilerOptions,
-  fileName?: string,
-  diagnostics?: Diagnostic[],
-  moduleName?: string
-): string;
-```
-
-> Historical note: initially only `transpile` function existed, however it was pretty difficult to extend (i.e to add new input parameters or return some extra information like source maps) without breaking existing consumers. As a result `transpile` is currently considered deprecated and superseded by `transpileModule`.
-
-```ts
-var ts = require("typescript");
-var content = 'import {f} from "foo"\n' + "export var x = f()";
-
-var compilerOptions = { module: ts.ModuleKind.System };
-
-var res1 = ts.transpileModule(content, {
-  compilerOptions: compilerOptions,
-  moduleName: "myModule2"
-});
-console.log(res1.outputText);
-
-console.log("============");
-
-var res2 = ts.transpile(
-  content,
-  compilerOptions,
-  /*fileName*/ undefined,
-  /*diagnostics*/ undefined,
-  /*moduleName*/ "myModule1"
-);
-console.log(res2);
-```
-
-Usually TypeScript compiler uses file extension to determine if file should be parsed as '.tsx' or '.ts'. The same rule is applied during single file transpilation if the file name is provided.
-If the file name is omitted, then compiler will check if the `jsx` options is specified.
-If it is set and is not `JsxEmit.None`, then source text will be interpreted as '.tsx'.
-
 ## Customizing module resolution
 
-You can override the standard way the compiler uses to resolve modules by implementing optional method: `CompilerHost.resolveModuleNames`:
+You can override the standard way the compiler resolves modules by implementing optional method: `CompilerHost.resolveModuleNames`:
 > `CompilerHost.resolveModuleNames(moduleNames: string[], containingFile: string): string[]`.
 
 The method is given a list of module names in a file, and is expected to return an array of size `moduleNames.length`, each element of the array stores either:
@@ -499,10 +492,7 @@ This function returns an object that stores result of module resolution (value o
 import * as ts from "typescript";
 import * as path from "path";
 
-function createCompilerHost(
-  options: ts.CompilerOptions,
-  moduleSearchLocations: string[]
-): ts.CompilerHost {
+function createCompilerHost(options: ts.CompilerOptions, moduleSearchLocations: string[]): ts.CompilerHost {
   return {
     getSourceFile,
     getDefaultLibFileName: () => "lib.d.ts",
@@ -526,11 +516,7 @@ function createCompilerHost(
     return ts.sys.readFile(fileName);
   }
 
-  function getSourceFile(
-    fileName: string,
-    languageVersion: ts.ScriptTarget,
-    onError?: (message: string) => void
-  ) {
+  function getSourceFile(fileName: string, languageVersion: ts.ScriptTarget, onError?: (message: string) => void) {
     const sourceText = ts.sys.readFile(fileName);
     return sourceText !== undefined
       ? ts.createSourceFile(fileName, sourceText, languageVersion)
@@ -599,26 +585,11 @@ function makeFactorialFunction() {
     paramName
   );
 
-  const condition = ts.createBinary(
-    paramName,
-    ts.SyntaxKind.LessThanEqualsToken,
-    ts.createLiteral(1)
-  );
+  const condition = ts.createBinary(paramName, ts.SyntaxKind.LessThanEqualsToken, ts.createLiteral(1));
+  const ifBody = ts.createBlock([ts.createReturn(ts.createLiteral(1))], /*multiline*/ true);
 
-  const ifBody = ts.createBlock(
-    [ts.createReturn(ts.createLiteral(1))],
-    /*multiline*/ true
-  );
-  const decrementedArg = ts.createBinary(
-    paramName,
-    ts.SyntaxKind.MinusToken,
-    ts.createLiteral(1)
-  );
-  const recurse = ts.createBinary(
-    paramName,
-    ts.SyntaxKind.AsteriskToken,
-    ts.createCall(functionName, /*typeArgs*/ undefined, [decrementedArg])
-  );
+  const decrementedArg = ts.createBinary(paramName, ts.SyntaxKind.MinusToken, ts.createLiteral(1));
+  const recurse = ts.createBinary(paramName, ts.SyntaxKind.AsteriskToken, ts.createCall(functionName, /*typeArgs*/ undefined, [decrementedArg]));
   const statements = [ts.createIf(condition, ifBody), ts.createReturn(recurse)];
 
   return ts.createFunctionDeclaration(
@@ -633,22 +604,10 @@ function makeFactorialFunction() {
   );
 }
 
-const resultFile = ts.createSourceFile(
-  "someFileName.ts",
-  "",
-  ts.ScriptTarget.Latest,
-  /*setParentNodes*/ false,
-  ts.ScriptKind.TS
-);
-const printer = ts.createPrinter({
-  newLine: ts.NewLineKind.LineFeed
-});
-const result = printer.printNode(
-  ts.EmitHint.Unspecified,
-  makeFactorialFunction(),
-  resultFile
-);
+const resultFile = ts.createSourceFile("someFileName.ts", "", ts.ScriptTarget.Latest, /*setParentNodes*/ false, ts.ScriptKind.TS);
+const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
 
+const result = printer.printNode(ts.EmitHint.Unspecified, makeFactorialFunction(), resultFile);
 console.log(result);
 ```
 
