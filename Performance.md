@@ -248,7 +248,7 @@ Running with `traceResolution` can help explain *why* a file was included in a c
 The emit is somewhat verbose, so you might want to redirect output to a file.
 
 ```sh
-tsc -p tsconfig.json > resolution.txt
+tsc --traceResolution > resolution.txt
 ```
 
 If you find a file that shouldn't be present, you may need to look into fixing up your `include`/`exclude` lists in your `tsconfig.json`, or alternatively, you might need to adjust other settings like `types`, `typeRoots`, or `paths`.
