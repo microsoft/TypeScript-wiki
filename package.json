@@ -5,6 +5,7 @@
     "glob": "^7.1.6"
   },
   "scripts": {
-    "build": "md-magic --path '**/*.md'"
+    "build": "md-magic --path '**/*.md'",
+    "lint": "node scripts/convertRelativeLinksToHardcoded.js **/*.md"
   }
 }
