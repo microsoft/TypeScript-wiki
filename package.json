@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "markdown-magic": "^1.0.0",
+    "typescript": "latest",
+    "glob": "^7.1.6"
+  },
+  "scripts": {
+    "build": "md-magic --path '**/*.md'"
+  }
+}

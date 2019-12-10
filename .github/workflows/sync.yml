@@ -9,22 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-    
+
         # Setup Git
       - run: git config user.name "typescript-bot"
       - run: git config user.email "bot@typescriptlang.org"
-        # Remove the un-auth'd origin
-      - run:  git remote remove origin
-        # Switch to authed remotes for both the - and the .
-      - run: |
-           git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git > /dev/null 2>&1
-           git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+
+        # Add the authed remotes for .
+      - run:  git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
         env:
           GITHUB_TOKEN: ${{ secrets.TS_BOT_TOKEN }}
 
-      - run: git fetch origin
-      - run: git fetch upstream
-        # Merge them all together
-      - run:  git merge upstream/master --no-edit
-        # Push them both
-      - run:  git push upstream HEAD:master > /dev/null 2>&1
+      # Update search links from the origin repo before pushing to the upstream
+      - run: git clone -–depth 1 https://github.com/microsoft/TypeScript.git
+      - run: node scripts/convertRelativeLinksToHardcoded.js **/*.md --write
+      - run: rm -rf TypeScript
+
+      - run: git add .
+      - run: git commit --amend --no-edit
+
+        # Push to the auth'd branch
+      - run:  git push upstream HEAD:master -f > /dev/null 2>&1

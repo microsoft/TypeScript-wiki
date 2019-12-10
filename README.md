@@ -6,7 +6,6 @@ in a GitHub Action in [`.github/workflows/sync.yml`](.github/workflows/sync.yml)
 
 The wiki root is [Home.md](./Home.md).
 
-
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
