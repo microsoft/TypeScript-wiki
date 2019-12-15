@@ -6,6 +6,40 @@ in a GitHub Action in [`.github/workflows/sync.yml`](.github/workflows/sync.yml)
 
 The wiki root is [Home.md](./Home.md).
 
+You can run this locally if you have ruby installed via:
+
+```sh
+# Install the deps
+gem install gollum
+
+# Start the server
+gollum
+```
+
+Then you can open: `http://localhost:4567`
+
+Things to remember:
+
+- Wikis don't support nesting, so filenames have to get a bit wild
+
+  ```diff
+  - compiler/testing/fourslash.md
+  + compiler-testing-fourslash.md
+  ```
+
+- You can use a custom link syntax for references to TypeScript code which will
+  be looked up at deploy time:
+
+  ```
+  link to [`runFourSlashTest`][0]
+
+  [0]: <src/harness/fourslash.ts - function runFourSlashTest(>
+  ```
+
+  Will look at the file `src/harness/fourslash.ts` in microsoft/TypeScript to 
+  find the line of code `function runFourSlashTest` and provide a direct link 
+  in the wiki. You can audit them via the script `npm run lint`.
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a

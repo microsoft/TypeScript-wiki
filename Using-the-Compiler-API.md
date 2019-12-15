@@ -8,7 +8,7 @@ First you'll need to install TypeScript >=1.6 from `npm`.
 Once that's done, you'll need to link it from wherever your project resides.
 If you don't link from within a Node project, it will just link globally.
 
-```
+```sh
 npm install -g typescript
 npm link typescript
 ```
@@ -16,7 +16,7 @@ npm link typescript
 You will also need the node definition file for some of these samples.
 To acquire the definition file, run:
 
-```
+```sh
 npm install @types/node
 ```
 
@@ -450,10 +450,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
         let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
           diagnostic.start!
         );
-        console.log(
-          `  Error ${diagnostic.file.fileName} (${line + 1},${character +
-            1}): ${message}`
-        );
+        console.log(`  Error ${diagnostic.file.fileName} (${line + 1},${character +1}): ${message}`);
       } else {
         console.log(`  Error: ${message}`);
       }
@@ -464,10 +461,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 // Initialize files constituting the program as all .ts files in the current directory
 const currentDirectoryFiles = fs
   .readdirSync(process.cwd())
-  .filter(
-    fileName =>
-      fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts"
-  );
+  .filter(fileName => fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
 
 // Start the watcher
 watch(currentDirectoryFiles, { module: ts.ModuleKind.CommonJS });
@@ -640,7 +634,6 @@ function generateDocumentation(
 
   // Get the checker, we will use it to find more about classes
   let checker = program.getTypeChecker();
-
   let output: DocEntry[] = [];
 
   // Visit every sourceFile in the program

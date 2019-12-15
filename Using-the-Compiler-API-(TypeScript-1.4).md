@@ -1,5 +1,6 @@
 ## Getting set up
-First you'll need to install TypeScript ==1.4 from `npm`.
+
+First you'll need to install TypeScript 1.4 from `npm`.
 
 > #### For API Samples compatible with **TypeScript >= 1.5** please see [[Using the Compiler API]]
 
