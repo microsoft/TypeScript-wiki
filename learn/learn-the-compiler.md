@@ -21,7 +21,8 @@ code .
 gulp runtests-parallel
 ```
 
-To dive deeper into getting set up to work on the codebase, read [the CONTRIBUTING.md](./CONTRIBUTING.md).
+
+To dive deeper into getting set up to work on the codebase, read: [[Getting Set Up|getting-started-with-the-compiler]].
 
 ### Critical prior knowledge
 

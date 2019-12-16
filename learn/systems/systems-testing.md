@@ -2,9 +2,8 @@
 
 Yep, TypeScript has tests. Quite a lot, with a few different techniques:
 
-- [Unit Tests](./units.md)
-- [Baselines](./baselines.md)
-- [Fourslash](./fourslash.md)
+- [[Baselines|systems-baselines]]
+- [[Fourslash|systems-fourslash]]
 
 ## Commands worth knowing
 

@@ -17,7 +17,7 @@ const errors: Diagnostic[] = [];
 Then it starts If the letter is a - then start looking forwards to see if the arg is available in [the
 optionmap][4]
 
-[0]: src/tsc/tsc.ts
+[0]: https://github.com/microsoft/TypeScript/blob/master/src/tsc/tsc.ts
 [1]: <src/tsc/tsc.ts - function executeCommandLine>
 [2]: <src/compiler/types.ts - export interface ParsedCommandLine>
 [3]: <src/compiler/commandLineParser.ts - function parseCommandLineWorker>

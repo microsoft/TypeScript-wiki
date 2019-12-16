@@ -17,9 +17,9 @@ This function takes a few params:
 const a = "Hello World";
 ```
 
-  <!-- prettier-ignore-start -->
+<!-- prettier-ignore-start -->
 
 [0]: <src/compiler/checker.ts - function inferTypes(>
 [1]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#strict-function-types
 
-  <!-- prettier-ignore-end -->
+<!-- prettier-ignore-end -->
