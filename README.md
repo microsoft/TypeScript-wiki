@@ -20,6 +20,16 @@ Then you can open: `http://localhost:4567`
 
 Things to remember:
 
+- Gollum is a bit of a nightmare for testing, my current technique is:
+
+  ```sh
+  # before
+  git branch -b thing_i_am_working_on
+  
+  # to iterate, amend the commit and re-run gollum against that bit of git
+  git add .; git commit --amend --no-edit --no-verify; gollum --ref thing_i_am_working_on
+  ```
+
 - Wikis don't support nesting, so filenames have to get a bit wild
 
   ```diff
