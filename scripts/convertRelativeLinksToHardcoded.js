@@ -16,6 +16,7 @@ const glob = require("glob")
 const {readFileSync, writeFileSync, existsSync}  = require("fs")
 const {join}  = require("path")
 const { execSync } = require("child_process");
+const escapeRegex = require("escape-regex-string");
 
 if (!process.argv[2]) throw new Error("Did not include a glob for markdown files to change")
 
@@ -45,7 +46,7 @@ files.forEach(file => {
     const originalFile = readFileSync(join(repoPath, file), "utf8")
     if (!originalFile) throw new Error(`Could not find a file at '${join(repoPath, file)}'`)
 
-    const line = getLineNo(originalFile, new RegExp(searchTerm))
+    const line = getLineNo(originalFile, new RegExp(escapeRegex(searchTerm)))
     const lineRef = line && line[0] && line[0].number ? `#L${line[0].number}`: ""
     const replacement = `: https://github.com/microsoft/TypeScript/blob/${repoHead.trim()}/${file}${lineRef}`
     content = content.replace(original, replacement)

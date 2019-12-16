@@ -1,4 +1,4 @@
-This page follows on from [README.md](./README.md).
+This page follows on from [[Learn the Compiler|learn-the-compiler]].
 
 ### Getting set up
 
@@ -30,8 +30,10 @@ You'll probably want to add the following to your watch section in VS Code:
 This is really useful for keeping track of changing state, and it's pretty often that those are the names of
 things you're looking for.
 
+If you want to see what a debugging session looks like with the compiler team, watch [these](https://www.youtube.com/watch?v=3vwO4DwlGYE) [videos](https://www.youtube.com/watch?v=Xq4p5LXaO8Y).
+
 ### Getting started
 
-You can learn about the different ways to [write a test here](./systems/testing) to try and re-produce a bug. It
+You can learn about the different ways to [[write a test here|systems-testing]] to try and re-produce a bug. It
 might be a good idea to look in the recently closed PRs to find something small which adds a test case, then read
 the test and the code changes to get used to the flow.

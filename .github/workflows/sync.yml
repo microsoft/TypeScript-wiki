@@ -22,7 +22,7 @@ jobs:
       # Update search links from the origin repo before pushing to the upstream
       - run: git clone --depth 1 https://github.com/microsoft/TypeScript.git
       - run: npm i
-      - run: node scripts/convertRelativeLinksToHardcoded.js **/*.md --write
+      - run: node scripts/convertRelativeLinksToHardcoded.js "**/*.md" --write
       - run: rm -rf TypeScript
 
       - run: git add .

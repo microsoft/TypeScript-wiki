@@ -14,5 +14,4 @@ VS Code has three extensions related to TypeScript:
 A large amount of the work happens in the [`TypeScriptServiceClient`][1] which is the VS Code side of the
 TSServer.
 
-[1]:
-  https://github.com/microsoft/vscode/blob/master/extensions/typescript-language-features/src/typescriptServiceClient.ts#L75
+[1]: https://github.com/microsoft/vscode/blob/master/extensions/typescript-language-features/src/typescriptServiceClient.ts#L75

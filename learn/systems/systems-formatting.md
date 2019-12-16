@@ -32,8 +32,6 @@ requests a set of rules which can be applied to the items via `createRulesMap`.
 There are a lot of rules, which you can find in [rules.ts](./rules.ts) each one has a left and right reference to
 nodes or token ranges and note of what action should be applied by the formatter.
 
-## Rules
-
 ### Where is this used?
 
 The formatter is used mainly from any language service operation that inserts or modifies code. The formatter is
