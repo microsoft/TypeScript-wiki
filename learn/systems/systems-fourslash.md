@@ -53,10 +53,10 @@ moment;`
 ### Formatting
 
 <!-- prettier-ignore-start -->
-[0]: /src/testRunner/fourslashRunner.ts
-[1]: /tests/cases/fourslash
-[2]: /src/testRunner/runner.ts
-[3]: /src/harness/fourslash.ts
+[0]: https://github.com/microsoft/TypeScript/blob/master/src/testRunner/fourslashRunner.ts
+[1]: https://github.com/microsoft/TypeScript/blob/master/tests/cases/fourslash
+[2]: https://github.com/microsoft/TypeScript/blob/master/src/testRunner/runner.ts
+[3]: https://github.com/microsoft/TypeScript/blob/master/src/harness/fourslash.ts
 [4]: <src/harness/fourslash.ts - function runFourSlashTest(>
 [5]: <src/harness/fourslash.ts - function runFourSlashTestContent(>
 [5]: <src/harness/fourslash.ts - function parseTestData(>
