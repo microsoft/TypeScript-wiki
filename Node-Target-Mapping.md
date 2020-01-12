@@ -5,6 +5,18 @@ for ECMAScript features are available in your node version.
 
 To update this file, you can use [node.green](https://node.green) to map to the different options in [microsoft/typescript@src/lib](https://github.com/Microsoft/TypeScript/tree/master/src/lib)
 
+#### Node 12
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["ES2019"],
+    "module": "commonjs",
+    "target": "ES2019"
+  }
+}
+```
+
 #### Node 10
 
 ```json
