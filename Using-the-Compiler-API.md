@@ -85,7 +85,7 @@ console.log(JSON.stringify(result));
 
 ## Getting the DTS from a JavaScript file
 
-This will only work in TypeSCript 3.7 and above. This example shows how you can take a list of JavaScript files and will show their generated d.ts files in the terminal.
+This will only work in TypeScript 3.7 and above. This example shows how you can take a list of JavaScript files and will show their generated d.ts files in the terminal.
 
 ```ts
 import * as ts from "typescript";
