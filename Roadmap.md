@@ -19,6 +19,20 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Decorators for function expressions/arrow functions
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
+
+# 3.8 (November 2019)
+
+[See the 3.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/34898)
+
+* [ ] [Type-Only Imports and Exports]()
+* [x] [New `export * as ns` Syntax](https://github.com/microsoft/TypeScript/pull/34903)
+* [x] [Top-Level Await](https://github.com/microsoft/TypeScript/issues/25988)
+* [x] [Private Fields](https://github.com/Microsoft/TypeScript/pull/30829)
+* [x] [Public Fields Breaking Change](https://github.com/microsoft/TypeScript/issues/34787)
+* [x] [JSDoc Property Modifiers](https://github.com/microsoft/TypeScript/issues/14009)
+* [x] ["Fast and Loose" Incremental Checking](https://github.com/microsoft/TypeScript/issues/33329)
+
+
 # 3.7 (November 2019)
 
 [See the 3.7 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/33352)
