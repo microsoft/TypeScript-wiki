@@ -20,7 +20,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 <!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
 
-# 3.8 (Febraury 2020)
+# 3.8 (February 2020)
 
 [See the 3.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/34898)
 
