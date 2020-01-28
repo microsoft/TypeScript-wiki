@@ -16,8 +16,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
-<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
-
 
 # 3.8 (February 2020)
 
@@ -29,6 +27,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Private Fields](https://github.com/Microsoft/TypeScript/pull/30829)
 * [x] [JSDoc `@public`/`@private`/`@protected` Modifiers](https://github.com/microsoft/TypeScript/pull/35731)
 * [x] [JSDoc `@readonly` Modifier](https://github.com/microsoft/TypeScript/issues/17233)
+* [x] [Improved File Watching and `watchOptions`](https://github.com/microsoft/TypeScript/pull/35615)
 * [x] ["Fast and Loose" Incremental Checking](https://github.com/microsoft/TypeScript/issues/33329)
 
 # 3.7 (November 2019)
