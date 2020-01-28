@@ -57,7 +57,7 @@ moment;`
 [1]: https://github.com/microsoft/TypeScript/blob/master/tests/cases/fourslash
 [2]: https://github.com/microsoft/TypeScript/blob/master/src/testRunner/runner.ts
 [3]: https://github.com/microsoft/TypeScript/blob/master/src/harness/fourslashImpl.ts
-[4]: <src/harness/fourslashImpl.ts - function runFourSlashTest(>
-[5]: <src/harness/fourslashImpl.ts - function runFourSlashTestContent(>
-[5]: <src/harness/fourslashImpl.ts - function parseTestData(>
+[4]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/harness/fourslashImpl.ts#L3579
+[5]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/harness/fourslashImpl.ts#L3584
+[5]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/harness/fourslashImpl.ts#L3634
 <!-- prettier-ignore-end -->

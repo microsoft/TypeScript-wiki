@@ -93,8 +93,8 @@ These are some reference PRs to look at
 - https://github.com/microsoft/TypeScript/pull/32281
 
 <!-- prettier-ignore-start -->
-[1]: <src/services/services.ts - function getCodeFixesAtPosition>
+[1]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/services.ts#L1852
 [2]: src/services/codeFixProvider.ts
-[3]: <src/services/services.ts - export function getFixes>
-[4]: <src/services/codeFixProvider.ts - export function getFixes>
+[3]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/services.ts
+[4]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/codeFixProvider.ts#L55
 <!-- prettier-ignore-end -->
