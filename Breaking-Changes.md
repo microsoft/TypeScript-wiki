@@ -2,8 +2,26 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
-# TypeScript 3.6
+# TypeScript 3.8
 
+## Optional Arguments with no Inferences are Correctly Marked as Implicitly `any`
+
+In the following code, `param` is now marked with an error under `noImplicitAny`.
+
+```ts
+function foo(f: () => void) {
+    // ...
+}
+
+foo((param?) => {
+    // ...
+});
+```
+
+This is because there is no corresponding parameter for the type of `f` in `foo`.
+This seems unlikely to be intentional, but it can be worked around by providing an explicit type for `param`.
+
+# TypeScript 3.6
 
 ## Class Members Named `"constructor"` Are Now Constructors
 
