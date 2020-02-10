@@ -12,7 +12,7 @@ reasonable dancing
 
 <!-- prettier-ignore-start -->
 
-[0]: <src/compiler/program.ts - function getDiagnosticsProducingTypeChecker>
+[0]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/compiler/program.ts#L1557
 [4]: GLOSSARY.md#statements
 
 <!-- prettier-ignore-end -->

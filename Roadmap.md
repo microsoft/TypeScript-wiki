@@ -11,27 +11,24 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * Implement ES Decorator proposal
-* Implement ES Private Fields
 * Investigate [Ambient](https://github.com/Microsoft/TypeScript/issues/2900), [Deprecated](https://github.com/Microsoft/TypeScript/issues/390), and [Conditional](https://github.com/Microsoft/TypeScript/issues/3538) decorators
 * [Investigate partial type argument inference](https://github.com/Microsoft/TypeScript/pull/26349)
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
-<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
-
-# 3.8 (November 2019)
+# 3.8 (February 2020)
 
 [See the 3.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/34898)
 
-* [ ] [Type-Only Imports and Exports]()
+* [x] [Type-Only Imports and Exports](https://github.com/microsoft/TypeScript/pull/35200)
 * [x] [New `export * as ns` Syntax](https://github.com/microsoft/TypeScript/pull/34903)
 * [x] [Top-Level Await](https://github.com/microsoft/TypeScript/issues/25988)
 * [x] [Private Fields](https://github.com/Microsoft/TypeScript/pull/30829)
-* [x] [Public Fields Breaking Change](https://github.com/microsoft/TypeScript/issues/34787)
-* [x] [JSDoc Property Modifiers](https://github.com/microsoft/TypeScript/issues/14009)
+* [x] [JSDoc `@public`/`@private`/`@protected` Modifiers](https://github.com/microsoft/TypeScript/pull/35731)
+* [x] [JSDoc `@readonly` Modifier](https://github.com/microsoft/TypeScript/issues/17233)
+* [x] [Improved File Watching and `watchOptions`](https://github.com/microsoft/TypeScript/pull/35615)
 * [x] ["Fast and Loose" Incremental Checking](https://github.com/microsoft/TypeScript/issues/33329)
-
 
 # 3.7 (November 2019)
 

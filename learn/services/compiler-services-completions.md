@@ -33,6 +33,6 @@ different uses:
 ####
 
 <!-- prettier-ignore-start -->
-[1]: <src/services/completions.ts - interface CompletionData {>
-[2]: <src/services/completions.ts - function getCompletionData(>
+[1]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/completions.ts#L701
+[2]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/completions.ts#L786
 <!-- prettier-ignore-end -->

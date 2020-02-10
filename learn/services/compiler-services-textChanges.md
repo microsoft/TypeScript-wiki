@@ -54,14 +54,14 @@ Changes look like this:
 [`newFileChanges`][3] handles passing the set of
 
 <!-- prettier-ignore-start -->
-[0]: <src/services/textChanges.ts - export class ChangeTracker>
-[1]: <src/services/textChanges.ts - type Change =>
-[2]: <src/services/textChanges.ts - function createWriter>
-[3]: <src/services/textChanges.ts - function newFileChanges>
-[4]: <src/services/textChanges.ts - function getTextChangesFromChanges>
-[5]: <src/services/textChanges.ts - function computeNewText>
-[6]: <src/services/textChanges.ts - function getFormattedTextOfNode>
-[7]: <src/compiler/emitter.ts - function createPrinter>
-[8]: <src/services/textChanges.ts - function getNonformattedText>
-[8]: <src/services/textChanges.ts - function applyChanges>
+[0]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L232
+[1]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L125
+[2]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L966
+[3]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L864
+[4]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L847
+[5]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L877
+[6]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L905
+[7]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/compiler/emitter.ts#L820
+[8]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L923
+[8]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/services/textChanges.ts#L931
 <!-- prettier-ignore-end -->

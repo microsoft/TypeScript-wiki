@@ -19,7 +19,7 @@ const a = "Hello World";
 
 <!-- prettier-ignore-start -->
 
-[0]: <src/compiler/checker.ts - function inferTypes(>
+[0]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/compiler/checker.ts#L17674
 [1]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-6.html#strict-function-types
 
 <!-- prettier-ignore-end -->

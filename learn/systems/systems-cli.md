@@ -18,7 +18,7 @@ Then it starts If the letter is a - then start looking forwards to see if the ar
 optionmap][4]
 
 [0]: https://github.com/microsoft/TypeScript/blob/master/src/tsc/tsc.ts
-[1]: <src/tsc/tsc.ts - function executeCommandLine>
-[2]: <src/compiler/types.ts - export interface ParsedCommandLine>
-[3]: <src/compiler/commandLineParser.ts - function parseCommandLineWorker>
-[4]: <src/compiler/commandLineParser.ts - export const optionDeclarations>
+[1]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/tsc/tsc.ts
+[2]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/compiler/types.ts#L5232
+[3]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/compiler/commandLineParser.ts#L1192
+[4]: https://github.com/microsoft/TypeScript/blob/1bb6ea03/src/compiler/commandLineParser.ts#L222
