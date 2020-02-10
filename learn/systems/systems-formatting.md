@@ -3,7 +3,7 @@
 To format code you need to have a formatting context and a `SourceFile`. The formatting context contains all user
 settings like tab size, newline character, etc.
 
-The end result of formatting is represented by TextChange objects which hold the new string content, and the text
+The formatter is an AST formatter, which is then used to make edits to the original source code. The end result of formatting is represented by a series of TextChange objects which hold the new string content, and the text
 to replace it with.
 
 ```ts
@@ -12,6 +12,13 @@ export interface TextChange {
   newText: string;
 }
 ```
+
+These are then applied from the back of the formatting range to the front.
+
+### Where is this used?
+
+The formatter is used mainly from any language service operation that inserts or modifies code. The formatter is
+not exported publicly, and so all usage can only come through the language server.
 
 ## Internals
 
@@ -22,17 +29,32 @@ formatted.
 The formatSpan then uses a scanner (either with or without JSX support) which starts at the highest node the
 covers the span of text and recurses down through the node's children.
 
-As it recurses, `processNode` is called on the children setting the indentation is decided and passed through into
+As it recurses, `processNode` is called on the children setting the indentation. Indentation is passed through into
 each of that node's children.
 
-The meat of formatting decisions is made via `processPair`, the pair here being the current node and the previous
-node. `processPair` which mutates the formatting context to represent the current place in the scanner and
-requests a set of rules which can be applied to the items via `createRulesMap`.
+From there, there are fine-grain edits to the formatting (usually to enforce a space, or line break here or there) via  formatting rules which happen in `processPair`, the pair here being the current node and the previous node. 
+
+`processPair` mutates the formatting context to represent the current place in the scanner and requests a set of rules which can be applied to the items via `createRulesMap`.
 
 There are a lot of rules, which you can find in [rules.ts](./rules.ts) each one has a left and right reference to
 nodes or token ranges and note of what action should be applied by the formatter.
 
-### Where is this used?
 
-The formatter is used mainly from any language service operation that inserts or modifies code. The formatter is
-not exported publicly, and so all usage can only come through the language server.
+### Debugging Tips
+
+Add these to your watch options:
+
+-  `node.__debugGetText()`
+- `sourceFile.text.slice(child.pos, child.end)`
+
+For most indentation issues, look to set a breakpoint at one of
+
+- `function recordDelete`
+- `function recordReplace`
+- `function recordInsert`
+
+Then for rule edits:
+
+- `function processPair`
+
+All of these are in `formtting.ts`.

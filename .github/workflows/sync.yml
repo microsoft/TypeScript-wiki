@@ -14,10 +14,13 @@ jobs:
       - run: git config user.name "typescript-bot"
       - run: git config user.email "bot@typescriptlang.org"
 
-        # Add the authed remotes for .
+        # Add the authed remotes for the hidden wiki
       - run:  git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
         env:
           GITHUB_TOKEN: ${{ secrets.TS_BOT_TOKEN }}
+
+        # Grab any potential edits through the web ui
+      - run: git pull upstream master
 
       # Update search links from the origin repo before pushing to the upstream
       - run: git clone --depth 1 https://github.com/microsoft/TypeScript.git TypeScript
