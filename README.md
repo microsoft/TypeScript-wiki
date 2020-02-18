@@ -1,7 +1,7 @@
 ## The TypeScript wiki
 
 This repo is the source of truth for the GitHub wiki, PRs to this repo are automatically merged into the 
-auto-generated GitHub [repo for the wiki](https://github.com/microsoft/TypeScript.wiki.git). This is done 
+auto-generated GitHub [repo for the wiki](https://github.com/microsoft/TypeScript/wiki). This is done 
 in a GitHub Action in [`.github/workflows/sync.yml`](.github/workflows/sync.yml).
 
 The wiki root is [Home.md](./Home.md).
