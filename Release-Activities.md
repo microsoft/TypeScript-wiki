@@ -9,7 +9,7 @@ Once `master`'s version is updated, surrounding projects must be aware of the ni
 
 * [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
     * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
-* [ ] Update [dt-retag](https://github.com/sandersn/dt-retag/blob/master/index.js) to the new header-parser and run it. tag for new version (version of `typescript@next`)
+* [ ] Update [dt-retag](https://github.com/sandersn/dt-retag/blob/master/index.js) to the new header-parser and run it to add the tag for `typescript@next` to each package.
 
 ## Release Activities
 
@@ -61,7 +61,7 @@ Once `master`'s version is updated, surrounding projects must be aware of the ni
 
 After the release version is published to npm:
 * [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
-* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency to the new header-parser. Be sure to clear caches on Travis since it doesn't know how to cache github dependencies correctly.
+* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency on dtslint. Be sure to clear caches on Travis since it doesn't know how to cache github dependencies correctly.
 * [ ] Run [dt-retag](https://github.com/sandersn/dt-retag/blob/master/index.js) again so that packages published during the RC period get the new version's tag.
 
 #### Website
