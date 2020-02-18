@@ -1,3 +1,7 @@
+# TypeScript 3.8
+
+- The mutable property disableIncrementalParsing has been removed. It was untested and, at least on GitHub, unused by anyone. Incremental parsing can no longer be disabled.
+
 # TypeScript 3.7
 
 - the typeArguments property from the TypeReference interface and provides a getTypeArguments method on the TypeChecker interface to be used instead. This change is necessary because resolution of type arguments in type references is now deferred due to the ability to create [Recursive type references](https://github.com/microsoft/TypeScript/pull/33050).
