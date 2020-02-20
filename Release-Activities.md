@@ -34,16 +34,7 @@ Once `master`'s version is updated, surrounding projects must be aware of the ni
 #### npm
 
 * [ ] Publish new version of [typescript](https://www.npmjs.com/package/typescript)
-* [ ] Publish new version of [tslib](https://www.npmjs.com/package/tslib) (if needed)
-
-<!-- SUBSUMED BY MARKETPLACE UPLOADS
-
-#### Download Center
-
-* [ ] Upload Visual Studio 2017 installer to https://www.microsoft.com/en-us/download/details.aspx?id=55258
-* [ ] Upload Visual Studio 2015 installer to https://www.microsoft.com/en-us/download/details.aspx?id=48593
-
--->
+* [ ] Publish new version of [tslib](https://www.npmjs.com/package/tslib) (if needed) by creating a tag
 
 #### Nuget
 
