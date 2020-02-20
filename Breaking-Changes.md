@@ -4,6 +4,31 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 3.8
 
+## Stricter Assignability Checks to Unions with Index Signatures
+
+Previously, excess properties were unchecked when assigning to unions where *any* type had an index signature - even if that excess property could *never* satisfy that index signature.
+In TypeScript 3.8, the type-checker is stricter, and only "exempts" properties from excess property checks if that property could plausibly satisfy an index signature.
+
+```ts
+const obj1: { [x: string]: number } | { a: number };
+
+obj1 = { a: 5, c: 'abc' }
+//             ~
+// Error!
+// The type '{ [x: string]: number }' no longer exempts 'c'
+// from excess property checks on '{ a: number }'.
+
+let obj2: { [x: string]: number } | { [x: number]: number };
+
+obj2 = { a: 'abc' };
+//       ~
+// Error!
+// The types '{ [x: string]: number }' and '{ [x: number]: number }' no longer exempts 'a'
+// from excess property checks against '{ [x: number]: number }',
+// and it *is* sort of an excess property because 'a' isn't a numeric property name.
+// This one is more subtle.
+```
+
 ## Optional Arguments with no Inferences are Correctly Marked as Implicitly `any`
 
 In the following code, `param` is now marked with an error under `noImplicitAny`.
@@ -20,6 +45,33 @@ foo((param?) => {
 
 This is because there is no corresponding parameter for the type of `f` in `foo`.
 This seems unlikely to be intentional, but it can be worked around by providing an explicit type for `param`.
+
+## `object` in JSDoc is No Longer `any` Under `noImplicitAny`
+
+Historically, TypeScript's support for checking JavaScript has been lax in certain ways in order to provide an approachable experience.
+
+For example, users often used `Object` in JSDoc to mean, "some object, I dunno what", we've treated it as `any`.
+
+```js
+// @ts-check
+
+/**
+ * @param thing {Object} some object, i dunno what
+ */
+function doSomething(thing) {
+    let x = thing.x;
+    let y = thing.y;
+    thing();
+}
+```
+
+This is because treating it as TypeScript's `Object` type would end up in code reporting uninteresting errors, since the `Object` type is an extremely vague type with few capabilities other than methods like `toString` and `valueOf`.
+
+However, TypeScript *does* have a more useful type named `object` (notice that lowercase `o`).
+The `object` type is more restrictive than `Object`, in that it rejects all primitive types like `string`, `boolean`, and `number`.
+Unfortunately, both `Object` and `object` were treated as `any` in JSDoc.
+
+Because `object` can come in handy and is used significantly less than `Object` in JSDoc, we've removed the special-case behavior in JavaScript files when using `noImplicitAny` so that in JSDoc, the `object` type really refers to the non-primitive `object` type.
 
 # TypeScript 3.6
 
