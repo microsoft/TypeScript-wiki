@@ -15,6 +15,9 @@ The currently recognized commands are:
 * [`cherry-pick this to branchname`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - This launches a task to squash the commits from the PR and then open a new PR that cherry-picks the change into branch `branchname`. This takes about 5 minutes as the build agent needs to clone the input PR. The bot should reply if something goes wrong, or otherwise once the new PR is open.
 * [`cherry-pick this to branchname and LKG`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - Same as above, but an LKG commit will be added onto the PR after the squashed cherry-pick commit.
 
+In addition, there are a small suite of commands which work in _any_ comment and relate to release management:
+* [`create release-X.Y`](https://github.com/microsoft/TypeScript/blob/master/.github/workflows/new-release-branch.yaml) This makes a `release-X.Y` branch (replace `X.Y` with your desired version) with the `package.json` version set to `X.Y.0-beta`, the `corePublic` `versionMajorMinor` set to `X.Y`, and the full `ts.version` string set to `X.Y.0-beta`, and updates the accompanying baselines. An LKG is then performed. This new branch is directly pushed to `microsoft/TypeScript`.
+
 A single comment may contain multiple commands, so long as each is prefixed with a call to `@typescript-bot`.
 
 The source of the webhook running the bot is currently available [here](https://github.com/weswigham/typescript-bot-test-triggerer).
