@@ -16,7 +16,7 @@ The currently recognized commands are:
 * [`cherry-pick this to branchname and LKG`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - Same as above, but an LKG commit will be added onto the PR after the squashed cherry-pick commit.
 
 In addition, there are a small suite of commands which work in _any_ comment and relate to release management:
-* [`create release-X.Y`](https://github.com/microsoft/TypeScript/blob/master/.github/workflows/new-release-branch.yaml) This makes a `release-X.Y` branch (replace `X.Y` with your desired version) with the `package.json` version set to `X.Y.0-beta`, the `corePublic` `versionMajorMinor` set to `X.Y`, and the full `ts.version` string set to `X.Y.0-beta`, and updates the accompanying baselines. An LKG is then performed. This new branch is directly pushed to `microsoft/TypeScript`.
+* [`create release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22New+Release+Branch%22) This makes a `release-X.Y` branch (replace `X.Y` with your desired version) with the `package.json` version set to `X.Y.0-beta`, the `corePublic` `versionMajorMinor` set to `X.Y`, and the full `ts.version` string set to `X.Y.0-beta`, and updates the accompanying baselines. An LKG is then performed. This new branch is directly pushed to `microsoft/TypeScript`. In short, this fully sets up a new release branch to be ready to publish a beta.
 
 A single comment may contain multiple commands, so long as each is prefixed with a call to `@typescript-bot`.
 
