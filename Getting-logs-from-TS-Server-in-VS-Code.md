@@ -17,4 +17,4 @@ Info 2    [13:5:26.816] Arguments: /Applications/Visual Studio Code - Insiders.a
 
 This log will contain file paths about the current project, and where your VS Code application is. If it's important to you, you may want to sanitize the log before sending it.
 
-If the log is pretty small, you can embed it directly into an issue comment. If it's very long, we recommend you paste it into a gist at https://gist.github.com and link to that.
+If the log is pretty small, you can embed it directly into an issue comment. If it's very long, we recommend you paste it into a gist at https://gist.github.com and link to that. If privacy is still a concern, we may be able to discuss a more private exchange of logs.
