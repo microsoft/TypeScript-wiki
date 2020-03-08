@@ -106,7 +106,7 @@ function compile(fileNames: string[], options: ts.CompilerOptions): void {
     console.log(host.readFile(file))
 
     console.log("### Type Definition\n")
-    const dts = file.replace(".js", ".d.ts")
+    const dts = file.replace(".ts", ".d.ts")
     console.log(createdFiles[dts])
   })
 }
