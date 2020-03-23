@@ -8,7 +8,7 @@ When building up any codebase of a non-trivial size with TypeScript, it is helpf
 Each project has its own `tsconfig.json` that has dependencies on other projects.
 This can be helpful to avoid loading too many files in a single compilation, and also makes certain codebase layout strategies easier to put together.
 
-There are some very basic ways of breaking up a codebase into projects.
+There are some very basic ways of [breaking up a codebase into projects](https://www.typescriptlang.org/docs/handbook/project-references.html).
 As an example, one might be a program with a project for the client, a project for the server, and a project that's shared between the two.
 
 ```
