@@ -156,10 +156,10 @@ handling the diagnostic results from any checking though and doesn't do the work
   type.
 
 - The heavy lifting of the comparison depending on what flags are set on the node is done in
-  [`structuredTypeRelatedTo`][23]. Where it picks off one by one different possible combinations for matching and
+  [`structuredTypeRelatedTo`][24]. Where it picks off one by one different possible combinations for matching and
   returns early as soon as possible.
 
-A lot of the functions related to type checking return a [`Ternary`][24], which an enum with three states, true,
+A lot of the functions related to type checking return a [`Ternary`][25], which an enum with three states, true,
 false and maybe. This gives the checker the chance to admit that it probably can't figure out whether a match is
 true currently (maybe it hit the 100 depth limit for example) and potentially could be figured out coming in from
 a different resolution.
@@ -194,11 +194,12 @@ TODO: what are substituted types?
 [15]: <src/compiler/checker.ts - function isTypeRelatedTo>
 [16]: <src/compiler/checker.ts - function isSimpleTypeRelatedTo>
 [17]: <src/compiler/checker.ts - function checkTypeRelatedTo>
-[17]: <src/compiler/checker.ts - function isRelatedTo>
+[18]: <src/compiler/checker.ts - function isRelatedTo>
 [19]: <src/compiler/types.ts - export const enum TypeFlags>
 [20]: GLOSSARY.md#structural-type-system 
 [21]: <src/compiler/checker.ts - function isIdenticalTo>
 [22]: <src/compiler/checker.ts - function recursiveTypeRelatedTo>
-[22]: <src/compiler/checker.ts - function eachTypeRelatedToSomeType>
-[23]: <src/compiler/checker.ts - function structuredTypeRelatedTo>
+[23]: <src/compiler/checker.ts - function eachTypeRelatedToSomeType>
+[24]: <src/compiler/checker.ts - function structuredTypeRelatedTo>
+[25]: <src/compiler/types.ts - export const enum Ternary>
 <!-- prettier-ignore-end -->

@@ -15,7 +15,7 @@ Fourslash automatically generates mocha tests based on files you put inside [`/t
 for this lives in [`/src/testRunner/fourslashRunner.ts`][1]. This class is instantiated in
 [`/src/testRunner/runner.ts`][2].
 
-Fom here the main work all lives in [`/src/harness/fourslash.ts`][3] where we'll be spending the rest of this
+Fom here the main work all lives in [`/src/harness/fourslashImpl.ts`][3] where we'll be spending the rest of this
 section. The initial entry point is [`runFourSlashTest`][4] but the work is in [`runFourSlashTestContent`][5].
 
 This function first creates a virtual fs, uses [`parseTestData`][6] to fill up the virtual fs. `parseTestData`:
@@ -59,5 +59,5 @@ moment;`
 [3]: https://github.com/microsoft/TypeScript/blob/master/src/harness/fourslashImpl.ts
 [4]: <src/harness/fourslashImpl.ts - function runFourSlashTest(>
 [5]: <src/harness/fourslashImpl.ts - function runFourSlashTestContent(>
-[5]: <src/harness/fourslashImpl.ts - function parseTestData(>
+[6]: <src/harness/fourslashImpl.ts - function parseTestData(>
 <!-- prettier-ignore-end -->

@@ -43,10 +43,10 @@ Things to remember:
   ```
   link to [`runFourSlashTest`][0]
 
-  [0]: <src/harness/fourslash.ts - function runFourSlashTest(>
+  [0]: <src/harness/fourslashImpl.ts - function runFourSlashTest(>
   ```
 
-  Will look at the file `src/harness/fourslash.ts` in microsoft/TypeScript to 
+  Will look at the file `src/harness/fourslashImpl.ts` in microsoft/TypeScript to 
   find the line of code `function runFourSlashTest` and provide a direct link 
   in the wiki. You can audit them via the script `npm run lint`.
 

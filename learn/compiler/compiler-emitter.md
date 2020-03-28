@@ -43,5 +43,5 @@ goes through a
 [1]: <src/compiler/emitter.ts - function createPrinter>
 [2]: <src/compiler/emitter.ts - function print(>
 [3]: <src/compiler/emitter.ts - const enum PipelinePhase>
-[3]: <src/compiler/emitter.ts - function pipelineEmitWithHint(>
+[4]: <src/compiler/emitter.ts - function pipelineEmitWithHint(>
 <!-- prettier-ignore-end -->

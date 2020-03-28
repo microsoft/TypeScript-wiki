@@ -63,5 +63,5 @@ Changes look like this:
 [6]: <src/services/textChanges.ts - function getFormattedTextOfNode>
 [7]: <src/compiler/emitter.ts - function createPrinter>
 [8]: <src/services/textChanges.ts - function getNonformattedText>
-[8]: <src/services/textChanges.ts - function applyChanges>
+[9]: <src/services/textChanges.ts - function applyChanges>
 <!-- prettier-ignore-end -->
