@@ -19,6 +19,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 3.9 (May 2020)
 
+[See the 3.9 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/37198)
+
 * [x] [Fix Inference in `Promise.all`](https://github.com/microsoft/TypeScript/pull/34501)
 * [x] Type-checking Speedups
   * https://github.com/microsoft/TypeScript/pull/36576
