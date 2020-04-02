@@ -17,6 +17,23 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 3.9 (May 2020)
+
+* [x] [Fix Inference in `Promise.all`](https://github.com/microsoft/TypeScript/pull/34501)
+* [x] Type-checking Speedups
+  * https://github.com/microsoft/TypeScript/pull/36576
+  * https://github.com/microsoft/TypeScript/pull/36590
+  * https://github.com/microsoft/TypeScript/pull/36607
+  * https://github.com/microsoft/TypeScript/pull/36622
+  * https://github.com/microsoft/TypeScript/pull/36754
+  * https://github.com/microsoft/TypeScript/pull/36696
+* [x] [`// @ts-expect-error` Comments](https://github.com/microsoft/TypeScript/pull/36014)
+* [x] [Uncalled Function Checks in Conditionals](https://github.com/microsoft/TypeScript/issues/36048)
+* [x] [Support for CommonJS Auto-Imports](https://github.com/microsoft/TypeScript/pull/37027)
+* [x] [Preserved Newlines in Refactorings/Quick Fixes](https://github.com/microsoft/TypeScript/pull/36688)
+* [x] [Editor Support for Solution-Style `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/37239)
+* [x] [Quick Fixes for Missing Return Expressions](https://github.com/microsoft/TypeScript/pull/26434)
+
 # 3.8 (February 2020)
 
 [See the 3.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/34898)
