@@ -1,6 +1,7 @@
 This page outlines specific features and fixes that are scheduled or planned for given releases. The 6-month roadmaps that outlines focus areas of work can be viewed for
 
-* [July to December 2019](https://github.com/microsoft/TypeScript/issues/33118) (current)
+* [January to  June 2020](https://github.com/microsoft/TypeScript/issues/369480) (current)
+* [July to December 2019](https://github.com/microsoft/TypeScript/issues/33118)
 * [January to June 2019](https://github.com/Microsoft/TypeScript/issues/29288)
 
 - [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
