@@ -1,6 +1,6 @@
 # TypeScript 3.8
 
-- The mutable property disableIncrementalParsing has been removed. It was untested and, at least on GitHub, unused by anyone. Incremental parsing can no longer be disabled.
+- The mutable property `disableIncrementalParsing` has been removed. It was untested and, at least on GitHub, unused by anyone. Incremental parsing can no longer be disabled.
 
 # TypeScript 3.7
 
