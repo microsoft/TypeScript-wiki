@@ -4,7 +4,15 @@
 
 # TypeScript 3.7
 
-- the typeArguments property from the TypeReference interface and provides a getTypeArguments method on the TypeChecker interface to be used instead. This change is necessary because resolution of type arguments in type references is now deferred due to the ability to create [recursive type references](https://github.com/microsoft/TypeScript/pull/33050).
+- the `typeArguments` property has been removed from the `TypeReference` interface, and the `getTypeArguments` method on `TypeChecker` instances should be used instead. This change was necessary to defer resolution of type arguments in order to support [recursive type references](https://github.com/microsoft/TypeScript/pull/33050).
+
+  As a workaround, you can define a helper function to support multiple versions of TypeScript.
+
+  ```ts
+  function getTypeArguments(checker: ts.TypeChecker, typeRef: ts.TypeReference) {
+      return checker.getTypeArguments?.(typeRef) ?? typeRef.typeArguments;
+  }
+  ```
 
 
 # TypeScript 3.1
