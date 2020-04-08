@@ -10,7 +10,7 @@
 
   ```ts
   function getTypeArguments(checker: ts.TypeChecker, typeRef: ts.TypeReference) {
-      return checker.getTypeArguments?.(typeRef) ?? typeRef.typeArguments;
+      return checker.getTypeArguments?.(typeRef) ?? (typeRef as any).typeArguments;
   }
   ```
 
