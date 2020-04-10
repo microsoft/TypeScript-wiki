@@ -23,7 +23,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 [See the 3.9 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/37198)
 
 * [x] [Fix Inference in `Promise.all`](https://github.com/microsoft/TypeScript/pull/34501)
-* [x] Type-checking Speedups
+* [x] Type-Checking Speedups
   * https://github.com/microsoft/TypeScript/pull/36576
   * https://github.com/microsoft/TypeScript/pull/36590
   * https://github.com/microsoft/TypeScript/pull/36607
