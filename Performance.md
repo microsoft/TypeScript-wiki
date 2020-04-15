@@ -130,19 +130,18 @@ An example of this in action is the [`fork-ts-checker-webpack-plugin`](https://g
 
 By default, TypeScript's emit requires semantic information that might not be local to a file.
 This is to understand how to emit features like `const enum`s and `namespace`s.
-But needing to check other files to emit of an arbitrary file can make emit slower.
+But needing to check *other* files to generate the output for an arbitrary file can make emit slower.
 
 The need for features that need non-local information is somewhat rare - regular `enum`s can be used in place of `const enum`s, and modules can be used instead of `namespace`s.
-For that reason, TypeScript provides the `isolatedModules` flag to warn when using them.
-Enabling `isolatedModules` means that your codebase is safe for tools to use TypeScript APIs like `transpileModule` or alternative compilers like Babel.
+For that reason, TypeScript provides the `isolatedModules` flag to error on features powered by non-local information.
+Enabling `isolatedModules` means that your codebase is safe for tools that use TypeScript APIs like `transpileModule` or alternative compilers like Babel.
 
-If you *don't* turn `isolatedModules` on, then using build tools cannot properly transform code using isolated file emit techniques.
-As an example, the following code won't properly work at runtime because `const enum` values are expected to be inlined.
+As an example, the following code won't properly work at runtime with isolated file transforms because `const enum` values are expected to be inlined; but luckily, `isolatedModules` will tell us that early on.
 
 ```ts
 // ./src/fileA.ts
 
-export const enum E {
+export declare const enum E {
     A = 0,
     B = 1,
 }
@@ -152,7 +151,12 @@ export const enum E {
 import { E } from "./fileA";
 
 console.log(E.A);
+//          ~
+// error: Cannot access ambient const enums when the '--isolatedModules' flag is provided.
 ```
+
+> **Remember:** `isolatedModules` doesn't automatically make code generation faster - it just tells you when you're about to use a feature that might not be supported.
+The thing you're looking for is isolated module emit in different build tools and APIs.
 
 Isolated file emit can be leveraged by using the following tools:
 
