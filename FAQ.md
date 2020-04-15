@@ -1326,7 +1326,7 @@ The compiler needs a "root" directory in the source to mirror into the output di
 If `--rootDir` is not specified, the compiler will compute one; this is based on a common path calculation, which is the longest common prefix of all your input files.
 Obviously this changes with adding a new file to the compilation that has a shorter path prefix.
 
-To ensure the output does not change with adding new files specify `--rootDir` on the command-line or in your tsconfig.json.
+To ensure the output does not change with adding new files, specify `--rootDir` on the command-line or in your `tsconfig.json`.
 
 ## `tsconfig.json` Behavior
 
