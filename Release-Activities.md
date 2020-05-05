@@ -3,13 +3,14 @@ This is the list of release activities needed for every TypeScript release.
 
 ## Release Candidate Activities
 
-### definitelytyped-header-parser and dt-retag
+### @definitelytyped/header-parser and retag
 
-Once `master`'s version is updated, surrounding projects must be aware of the nightlies so that functionality such as ATA continues to work.
+Once `master`'s version is updated, the @definitelytyped packages must be aware of the nightly's new version so that functionality such as ATA continues to work.
 
-* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
-    * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
-* [ ] Update [dt-retag](https://github.com/sandersn/dt-retag/blob/master/index.js) to the new header-parser and run it to add the tag for `typescript@next` to each package.
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions) to support ***the next version***, and publish new version
+    * in other words, if we're releasing TypeScript 3.9, the header parser needs to support `4.0`.
+    * Add the new version to the `supported` list.
+* [ ] Run [@definitelytyped/retag](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/retag) to add the tag `ts4.0` to each package.
 
 ## Release Activities
 
@@ -51,9 +52,10 @@ Once `master`'s version is updated, surrounding projects must be aware of the ni
 #### dtslint and types-publisher
 
 After the release version is published to npm:
-* [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
-* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency on dtslint. Be sure to clear caches on Travis since it doesn't know how to cache github dependencies correctly.
-* [ ] Run [dt-retag](https://github.com/sandersn/dt-retag/blob/master/index.js) again so that packages published during the RC period get the new version's tag.
+
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions): move the newly  published version from `supported` to `shipped` (in the example above, that's 3.9), and publish new version of @definitelytyped.
+* [ ] Update [dtslint](https://github.com/Microsoft/dtslint) and dts-critic's dependency to the new @definitelytyped/header-parser
+* [ ] Update [@definitelytyped/publisher](https://github.com/Microsoft/DefinitelyTyped-tools)'s dependency on dtslint. You may still need to clear caches on Travis, although it usually caches npm packages correctly.
 
 #### Website
 
