@@ -35,6 +35,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Support for CommonJS Auto-Imports](https://github.com/microsoft/TypeScript/pull/37027)
 * [x] [Preserved Newlines in Refactorings/Quick Fixes](https://github.com/microsoft/TypeScript/pull/36688)
 * [x] [Editor Support for Solution-Style `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/37239)
+* [x] [Editor Support for Multi-Project Symbol Navigation](https://github.com/microsoft/TypeScript/pull/38027)
 * [x] Quick Fixes to
   * [x] [Correct Cases of Missing Return Expressions](https://github.com/microsoft/TypeScript/pull/26434)
   * [ ] [Declare a `private` method](https://github.com/microsoft/TypeScript/issues/37782)
