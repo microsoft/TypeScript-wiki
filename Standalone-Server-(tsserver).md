@@ -23,7 +23,7 @@ Requests are JSON following the protocol definition. Here is an example request 
 {"seq":1,"type":"request","command":"open","arguments":{"file":"c:/DefinitelyTyped/gregorian-calendar/index.d.ts"}}
 ```
 
-Responses are augmented JSON format. the Message stars with a header with the content length followed by a line separator (`\r\n`) followed by the response body as a JSON string:
+Responses are augmented JSON format. The Message starts with a header with the content length followed by a line separator (`\r\n`) followed by the response body as a JSON string:
 
 Here is an example of a response for a `quickinfo` command:
 
@@ -88,17 +88,17 @@ Note: `file` defaults to `__dirname\.log<PID>` if not specified
 
 ## Cancellation
 
-`tsserver` on startup will try to load module `./cancellationToken` from the containing directory. This module should export a factory function that accepts a list of command line arguments and returns [HostCancellationToken](https://github.com/Microsoft/TypeScript/blob/master/src/services/types.ts#L119-L121). tsserver will use this token to check if in-flight operation should be cancelled. 
+`tsserver` on startup will try to load module `./cancellationToken` from the containing directory. This module should export a factory function that accepts a list of command line arguments and returns [HostCancellationToken](https://github.com/Microsoft/TypeScript/blob/master/src/services/types.ts#L119-L121). `tsserver` will use this token to check if in-flight operation should be cancelled. 
 
 NOTE: This token will be used for all operations so if one operation is cancelled and cancellation was reported through the token then when another operation is started - token should be reset into the non-cancelled state.
 
-Default implementation of the cancellation token uses presence of named pipes as a way to signal cancellation.
+Default implementation of the cancellation token uses the presence of named pipes as a way to signal cancellation.
 
-1. before spawning the server client generates a unique name. This name is passed to the server as a `cancellationPipeName` command line argument. 
-2. if some operation on the client side should be cancelled - client opens a named pipe with a name generated on step 1. Nothing needs to be written in the pipe - default cancellation token will interpret the presence of named pipe as a cancellation request.
-3. After receiving acknowledgment from the server client closes the pipe so it can use the same pipe name for the next operation.
+1. Before spawning the server, the client generates a unique name. This name is passed to the server as a `cancellationPipeName` command line argument. 
+2. If some operation on the client side should be cancelled - client opens a named pipe with a name generated on step 1. Nothing needs to be written in the pipe - default cancellation token will interpret the presence of named pipe as a cancellation request.
+3. After receiving acknowledgment from the server, the client closes the pipe so it can use the same pipe name for the next operation.
 
-Server can split execution of some commands (like `geterr`) in a few steps that will be executed with a delay. This allows to react on user actions more promptly and do not run heavy computations if their results will not be used however it introduces a tricky moment in support of cancellations. By allowing request to be suspended and resumed later we break the invariant that was the cornerstone for default implementation of cancellation, namely now requests can overlap so one pipe name can no longer be used because client have no reason what request is currently executing and will be cancelled. To deal with this issue tsserver allows pipe name to be computed dynamically based on current request id. To enable this client need to value that ends with `*` as `--cancellationPipeName` argument. If provided cancellation pipe name ends with `*` then default implementation of cancellation token will build expected pipe name as `<cancellationPipeName argument without *><currentRequestId>`. This will allow client to signal any request it thinks is in flight by creating a named pipe with a proper name. Note that server will always send `requestCompleted` message to denote that asynchronous request was completed (either by running to completion or via cancellation) so client can close named pipe once this message is received
+Server can split execution of some commands (like `geterr`) in a few steps that will be executed with a delay. This allows it to react on user actions more promptly and not run heavy computations if their results will not be used. However, it introduces a tricky moment in support of cancellations. By allowing request to be suspended and resumed later we break the invariant that was the cornerstone for default implementation of cancellation. Namely now requests can overlap so one pipe name can no longer be used because client have no reason what request is currently executing and will be cancelled. To deal with this issue `tsserver` allows pipe name to be computed dynamically based on current request id. To enable this the client need to provide a value that ends with `*` as the `--cancellationPipeName` argument. If provided cancellation pipe name ends with `*` then default implementation of cancellation token will build expected pipe name as `<cancellationPipeName argument without *><currentRequestId>`. This will allow client to signal any request it thinks is in flight by creating a named pipe with a proper name. Note that server will always send `requestCompleted` message to denote that asynchronous request was completed (either by running to completion or via cancellation) so the client can close named pipe once this message is received.
 
 ## Commandline options
 
@@ -139,7 +139,7 @@ If a file does not have a configuration file (`tsconfig.json` or `jsconfig.json`
 
 The server will include the loose file, then includes all other files included by triple slash references and module imports from the original file transitively.
 
-Compilation options will use a the default options for inferred projects.
+Compilation options will use the default options for inferred projects.
 The host can set the defaults of an inferred project.
 
 ## Relationship Among These Projects
