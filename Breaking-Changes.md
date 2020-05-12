@@ -181,6 +181,38 @@ In practice, we don't expect this to break much existing code.
 
 You can see the specific changes in [the original pull request](https://github.com/microsoft/TypeScript/pull/37124).
 
+## Exports Now Use Getters for Live Bindings
+
+When targeting module systems like CommonJS in ES5 and above, TypeScript will use get accessors to emulate live bindings.
+
+https://github.com/microsoft/TypeScript/pull/35967
+
+## Exports are Hoisted and Initially Assigned 
+
+TypeScript now hoists exported declarations to the top of the file when targeting module systems like CommonJS in ES5 and above. For example, code like
+
+```ts
+export * from "mod";
+export const nameFromMod = 0;
+```
+
+previously had output like
+
+```ts
+__exportStar(exports, require("mod"));
+exports.nameFromMod = 0;
+```
+
+However, because exports now use `get`-accessors, this assignment would throw because `__exportStar` now makes get-accesors which can't be overridden with a simple assignment. Instead, TypeScript 3.9 emits the following:
+
+```ts
+exports.nameFromMod = void 0;
+__exportStar(exports, require("mod"));
+exports.nameFromMod = 0;
+```
+
+See [the original pull request](https://github.com/microsoft/TypeScript/pull/37093) for more information.
+
 # TypeScript 3.8
 
 ## Stricter Assignability Checks to Unions with Index Signatures
