@@ -177,19 +177,19 @@ See [the original pull request](https://github.com/microsoft/TypeScript/pull/295
 In previous TypeScript versions, declarations like `export * from "foo"` would be dropped in our JavaScript output if `foo` didn't export any values.
 This sort of emit is problematic because it's type-directed and can't be emulated by Babel.
 TypeScript 3.9 will always emit these `export *` declarations.
-In practice, we don't expect this to break much existing code.
+In practice, we don't expect this to break much existing code, but bundlers may have a harder time tree-shaking the code.
 
 You can see the specific changes in [the original pull request](https://github.com/microsoft/TypeScript/pull/37124).
 
 ## Exports Now Use Getters for Live Bindings
 
-When targeting module systems like CommonJS in ES5 and above, TypeScript will use get accessors to emulate live bindings.
+When targeting module systems like CommonJS in ES5 and above, TypeScript will use get accessors to emulate live bindings so that changes to a variable in one module are witnessed in any exporting modules. This change is meant to make TypeScript's emit more compliant with ECMAScript modules.
 
-https://github.com/microsoft/TypeScript/pull/35967
+For more details, see [the PR that applies this change](https://github.com/microsoft/TypeScript/pull/359670).
 
 ## Exports are Hoisted and Initially Assigned 
 
-TypeScript now hoists exported declarations to the top of the file when targeting module systems like CommonJS in ES5 and above. For example, code like
+TypeScript now hoists exported declarations to the top of the file when targeting module systems like CommonJS in ES5 and above. This change is meant to make TypeScript's emit more compliant with ECMAScript modules. For example, code like
 
 ```ts
 export * from "mod";
