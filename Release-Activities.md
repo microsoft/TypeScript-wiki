@@ -6,6 +6,7 @@ This is the list of release activities needed for every TypeScript release.
 ### tslib
 
 * [ ] Add all tslib updates
+* [ ] Review next version number
 
 ### `@definitelytyped/header-parser` and `retag`
 
