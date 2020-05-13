@@ -3,7 +3,11 @@ This is the list of release activities needed for every TypeScript release.
 
 ## Release Candidate Activities
 
-### @definitelytyped/header-parser and retag
+### tslib
+
+* [ ] Add all tslib updates
+
+### `@definitelytyped/header-parser` and `retag`
 
 Once `master`'s version is updated, the @definitelytyped packages must be aware of the nightly's new version so that functionality such as ATA continues to work.
 
@@ -11,6 +15,7 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
     * in other words, if we're releasing TypeScript 3.9, the header parser needs to support `4.0`.
     * To do this, add the new version to the `supported` list.
 * [ ] Run [@definitelytyped/retag](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/retag) to add the tag `ts4.0` to each package.
+
 
 ## Release Activities
 
