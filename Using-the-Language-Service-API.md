@@ -53,8 +53,6 @@ This work flow is decoupled in the language service into two phases, allowing th
 
 > To resolve references originating from a file, use `ts.preProcessFile`. This method will resolve both imports and triple-slash references from a given file. Also worth noting is that this relies solely on the scanner, and does not require a full parse, so as to allow for fast context resolution which is suited to editor interactions.
 
-Something that is currently missing, and should be added in next release, is a built-in way to resolve imports. ts.preProcessFile returns import text, and the caller needs to resolve that to a `.ts` file path. [Issue #1793](https://github.com/Microsoft/TypeScript/issues/1793) tracks fixing it.
-
 ## Document Registry
 
 A language service object corresponds to a single project. So if the host is handling multiple projects it will need to maintain multiple instances of the LanguageService objects; each instance of the language service holds state about the files in the context. Most of the state that a language service object holds is syntactic (text + AST). The projects can share files (at minimum, the library file `lib.d.ts`).
