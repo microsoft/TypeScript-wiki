@@ -18,6 +18,27 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.0 (August 2020)
+
+[See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/38510)
+
+
+* [ ] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
+* [x] [Labeled Tuple Elements](https://github.com/Microsoft/TypeScript/issues/28259)
+* [x] [Class Property Inference from Constructors](https://github.com/microsoft/TypeScript/pull/37920)
+* [ ] [Placeholder Types](https://github.com/microsoft/TypeScript/issues/31894)
+* [ ] [Investigate the `awaited` Type](https://github.com/microsoft/TypeScript/issues/27711)
+* [ ] [JSX Factory Updates](https://github.com/microsoft/TypeScript/issues/34547)
+* [ ] [`unknown` on `catch` Clause Bindings](https://github.com/microsoft/TypeScript/issues/36775)
+* [ ] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/37713)
+* [ ] [Improved Auto-Import](https://github.com/microsoft/TypeScript/issues/37812)
+* [ ] [Editor support for `/** @deprecated */` tags](https://github.com/microsoft/TypeScript/issues/390)
+* [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
+* [ ] [Semantic Highlighting](https://github.com/microsoft/TypeScript/issues/38435)
+* [ ] [Refactoring Discoverability](https://github.com/microsoft/TypeScript/issues/34930) ([ideas](https://github.com/microsoft/TypeScript/issues/37895))
+* [ ] Refactorings
+    * [ ] [Convert to Optional Chaining and Coalescing](https://github.com/microsoft/TypeScript/issues/35018)
+
 # 3.9 (May 2020)
 
 [See the 3.9 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/37198)
