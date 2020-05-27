@@ -37,6 +37,7 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
 
 * [ ] Add new [Release Notes page](https://github.com/Microsoft/TypeScript-Handbook/tree/master/pages/release%20notes) for the new release
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
+* [ ] Update [Public Dates](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/src/lib/release-plan.json)
 
 #### npm
 
