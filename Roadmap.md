@@ -23,11 +23,9 @@ This page outlines specific features and fixes that are scheduled or planned for
 [See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/38510)
 
 
-* [ ] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
+* [x] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
 * [x] [Labeled Tuple Elements](https://github.com/Microsoft/TypeScript/issues/28259)
 * [x] [Class Property Inference from Constructors](https://github.com/microsoft/TypeScript/pull/37920)
-* [ ] [Placeholder Types](https://github.com/microsoft/TypeScript/issues/31894)
-* [ ] [Investigate the `awaited` Type](https://github.com/microsoft/TypeScript/issues/27711)
 * [ ] [JSX Factory Updates](https://github.com/microsoft/TypeScript/issues/34547)
 * [ ] [`unknown` on `catch` Clause Bindings](https://github.com/microsoft/TypeScript/issues/36775)
 * [ ] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/37713)
