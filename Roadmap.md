@@ -8,7 +8,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # Future
 
-* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * Implement ES Decorator proposal
@@ -22,7 +21,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/38510)
 
-
+* [ ] [Variadic Tuple Types](https://github.com/microsoft/TypeScript/pull/39094)
 * [x] [Labeled Tuple Elements](https://github.com/Microsoft/TypeScript/issues/28259)
 * [x] [Class Property Inference from Constructors](https://github.com/microsoft/TypeScript/pull/37920)
 * [x] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
