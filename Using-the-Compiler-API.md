@@ -121,7 +121,7 @@ compile(process.argv.slice(2), {
 
 ## Re-printing Sections of a TypeScript File
 
-This example will log out sub-sections of a TypeScript of JavaScript source file, this pattern is useful when you want
+This example will log out sub-sections of a TypeScript or JavaScript source file, this pattern is useful when you want
 the code for your app to be the source of truth. For example showcasing exports via their JSDoc comments.
 
 ```ts
