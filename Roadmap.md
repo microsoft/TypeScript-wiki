@@ -21,15 +21,14 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/38510)
 
-* [ ] [Variadic Tuple Types](https://github.com/microsoft/TypeScript/pull/39094)
+* [x] [Variadic Tuple Types](https://github.com/microsoft/TypeScript/pull/39094)
 * [x] [Labeled Tuple Elements](https://github.com/Microsoft/TypeScript/issues/28259)
 * [x] [Class Property Inference from Constructors](https://github.com/microsoft/TypeScript/pull/37920)
 * [x] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
-* [ ] [JSX Factory Updates](https://github.com/microsoft/TypeScript/issues/34547)
 * [x] [`unknown` on `catch` Clause Bindings](https://github.com/microsoft/TypeScript/issues/36775)
 * [ ] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/39035)
-* [ ] [Improved Auto-Import](https://github.com/microsoft/TypeScript/issues/37812)
-* [ ] [Editor support for `/** @deprecated */` tags](https://github.com/microsoft/TypeScript/issues/390)
+* [x] [Improved Auto-Import](https://github.com/microsoft/TypeScript/issues/37812)
+* [x] [Editor support for `/** @deprecated */` tags](https://github.com/microsoft/TypeScript/issues/390)
 * [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
 * [ ] [Semantic Highlighting](https://github.com/microsoft/TypeScript/issues/38435)
 * [ ] [Refactoring Discoverability](https://github.com/microsoft/TypeScript/issues/34930) ([ideas](https://github.com/microsoft/TypeScript/issues/37895))
