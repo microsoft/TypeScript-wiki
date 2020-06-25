@@ -2,6 +2,52 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.0
+
+## Properties Overridding Accessors is an Error
+
+Previously, it was only an error for properties to override accessors when using `useDefineForClassFields`; however, TypeScript now always issues an error when declaring a property in a derived class that would override a getter or setter in the base class.
+
+```ts
+class Base {
+    get foo() {
+        return 100;
+    }
+    set foo() {
+        // ...
+    }
+}
+
+class Derived extends Base {
+    foo: number;
+//  ~~~
+// error!
+// 'foo' is defined as an accessor in class 'Base',
+// but is overridden here in 'Derived' as an instance property.
+}
+```
+
+See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37894).
+
+## Operands for `delete` must be optional.
+
+When using the `delete` operator in `strictNullChecks`, the operand must now be `any`, `unknown`, `never`, or be optional (in that it contains `undefined` in the type).
+Otherwise, use of the `delete` operator is an error.
+
+```ts
+interface Thing {
+    prop: string;
+}
+
+function f(x: Thing) {
+    delete x.prop;
+    //     ~~~~~~
+    // error! The operand of a 'delete' operator must be optional.
+}
+```
+
+See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37921).
+
 # TypeScript 3.9
 
 ## Parsing Differences in Optional Chaining and Non-Null Assertions
