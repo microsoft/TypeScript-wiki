@@ -4,9 +4,9 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.0
 
-## Properties Overridding Accessors is an Error
+### Properties Overridding Accessors (and vice versa) is an Error
 
-Previously, it was only an error for properties to override accessors when using `useDefineForClassFields`; however, TypeScript now always issues an error when declaring a property in a derived class that would override a getter or setter in the base class.
+Previously, it was only an error for properties to override accessors, or accessors to override properties, when using `useDefineForClassFields`; however, TypeScript now always issues an error when declaring a property in a derived class that would override a getter or setter in the base class.
 
 ```ts
 class Base {
@@ -19,7 +19,7 @@ class Base {
 }
 
 class Derived extends Base {
-    foo: number;
+    foo = 10;
 //  ~~~
 // error!
 // 'foo' is defined as an accessor in class 'Base',
@@ -27,26 +27,22 @@ class Derived extends Base {
 }
 ```
 
-See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37894).
-
-## Operands for `delete` must be optional.
-
-When using the `delete` operator in `strictNullChecks`, the operand must now be `any`, `unknown`, `never`, or be optional (in that it contains `undefined` in the type).
-Otherwise, use of the `delete` operator is an error.
-
 ```ts
-interface Thing {
-    prop: string;
+class Base {
+    prop = 10;
 }
 
-function f(x: Thing) {
-    delete x.prop;
-    //     ~~~~~~
-    // error! The operand of a 'delete' operator must be optional.
+class Derived extends Base {
+    get prop() {
+    //  ~~~~
+    // error!
+    // 'prop' is defined as a property in class 'Base', but is overridden here in 'Derived' as an accessor.
+        return 100;
+    }
 }
 ```
 
-See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37921).
+See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37894).
 
 # TypeScript 3.9
 
