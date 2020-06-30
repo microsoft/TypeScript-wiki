@@ -51,6 +51,9 @@ You can [read up more about project references here](https://www.typescriptlang.
 
 TypeScript and JavaScript users can always configure their compilations with a `tsconfig.json` file.
 [`jsconfig.json` files can also be used to configure the editing experience](https://code.visualstudio.com/docs/languages/jsconfig) for JavaScript users.
+
+## Specifying Files
+
 You should always make sure that your configuration files aren't including too many files at once.
 
 Within a `tsconfig.json`, there are two ways to specify files in a project.
@@ -85,6 +88,51 @@ Here is a reasonable `tsconfig.json` that demonstrates this in action.
     },
     "include": ["src"],
     "exclude": ["**/node_modules", "**/.*/"],
+}
+```
+
+## Controlling `@types` Inclusion
+
+By default, TypeScript automatically includes every `@types` package that it finds in your `node_modules` folder, regardless of whether you import it.
+This is meant to make certain things "just work" when using Node.js, Jasmine, Mocha, Chai, etc. since these tools/packages aren't imported - they're just loaded into the global environment.
+
+Sometimes this logic can slow down program construction time in both compilation and editing scenarios, and it can even cause issues with multiple global packages with conflicting declarations, causing errors like
+
+```
+Duplicate identifier 'IteratorResult'.
+Duplicate identifier 'it'.
+Duplicate identifier 'define'.
+Duplicate identifier 'require'.
+```
+
+In cases where no global package is required, the fix is as easy as specifying an empty field for [the `"types"` option](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#types-typeroots-and-types) in a `tsconfig.json`/`jsconfig.json`
+
+```json5
+// src/tsconfig.json
+{
+   "compilerOptions": {
+       // ...
+
+       // Don't automatically include anything.
+       // Only include `@types` packages that we need to import.
+       "types" : []
+   },
+   "files": ["foo.ts"]
+}
+```
+
+If you still need a few global packages, add them to the `types` field.
+
+```json5
+// tests/tsconfig.json
+{
+   "compilerOptions": {
+       // ...
+
+       // Only include `@types/node` and `@types/mocha`.
+       "types" : ["node", "mocha"]
+   },
+   "files": ["foo.test.ts"]
 }
 ```
 
