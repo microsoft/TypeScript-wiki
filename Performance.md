@@ -2,6 +2,7 @@ There are easy ways to configure TypeScript to ensure faster compilations and ed
 The earlier on these practices are adopted, the better.
 Beyond best-practices, there are some common techniques for investigating slow compilations/editing experiences, some common fixes, and some common ways of helping the TypeScript team investigate the issues as a last resort.
 
+- [Using Interfaces Over Intersections](#using-interfaces-over-intersections)
 - [Using Project References](#using-project-references)
 - [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
   * [Specifying Files](#specifying-files)
@@ -26,6 +27,29 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [Reporting Editing Performance Issues](#reporting-editing-performance-issues)
     + [Taking a TSServer Log](#taking-a-tsserver-log)
       - [Collecting a TSServer Log in Visual Studio Code](#collecting-a-tsserver-log-in-visual-studio-code)
+
+# Using Interfaces Over Intersections
+
+Much of the time, a simple type alias to an object type acts very similarly to an interface.
+
+```ts
+interface Foo { prop: string }
+
+type Bar = { prop: string };
+```
+
+However, interfaces typically have better properties in type display, and as soon as you need to compose two types, interfaces create a single flat object type that detects property conflicts.
+This is in contrast with intersection types, where every constituent is checked before checking against the effective type.
+Type relationships between interfaces are also cached, as opposed to intersection types.
+
+```diff
+- type Foo = Bar & Baz & {
+-     someProp: string;
+- }
++ interface Foo extends Bar, Baz {
++     someProp: string;
++ }
+```
 
 # Using Project References
 
