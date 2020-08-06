@@ -26,14 +26,14 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Class Property Inference from Constructors](https://github.com/microsoft/TypeScript/pull/37920)
 * [x] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
 * [x] [`unknown` on `catch` Clause Bindings](https://github.com/microsoft/TypeScript/issues/36775)
-* [ ] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/39035)
+* [x] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/39035)
 * [x] [Improved Auto-Import](https://github.com/microsoft/TypeScript/issues/37812)
 * [x] [Editor support for `/** @deprecated */` tags](https://github.com/microsoft/TypeScript/issues/390)
 * [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
 * [ ] [Semantic Highlighting](https://github.com/microsoft/TypeScript/issues/38435)
-* [ ] [Refactoring Discoverability](https://github.com/microsoft/TypeScript/issues/34930) ([ideas](https://github.com/microsoft/TypeScript/issues/37895))
-* [ ] Refactorings
-    * [ ] [Convert to Optional Chaining and Coalescing](https://github.com/microsoft/TypeScript/issues/35018)
+* [x] [Refactoring Discoverability](https://github.com/microsoft/TypeScript/issues/34930) ([ideas](https://github.com/microsoft/TypeScript/issues/37895))
+* [x] Refactorings
+    * [x] [Convert to Optional Chaining and Coalescing](https://github.com/microsoft/TypeScript/issues/35018)
 
 # 3.9 (May 2020)
 
