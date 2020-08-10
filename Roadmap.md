@@ -17,6 +17,13 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.1. (November 2020)
+
+* [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
+* [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
+* [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
+* [ ] [Semantic Highlighting](https://github.com/microsoft/TypeScript/issues/38435)
+
 # 4.0 (August 2020)
 
 [See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/38510)
@@ -29,8 +36,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/39035)
 * [x] [Improved Auto-Import](https://github.com/microsoft/TypeScript/issues/37812)
 * [x] [Editor support for `/** @deprecated */` tags](https://github.com/microsoft/TypeScript/issues/390)
-* [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
-* [ ] [Semantic Highlighting](https://github.com/microsoft/TypeScript/issues/38435)
 * [x] [Refactoring Discoverability](https://github.com/microsoft/TypeScript/issues/34930) ([ideas](https://github.com/microsoft/TypeScript/issues/37895))
 * [x] Refactorings
     * [x] [Convert to Optional Chaining and Coalescing](https://github.com/microsoft/TypeScript/issues/35018)
