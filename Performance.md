@@ -264,6 +264,8 @@ Isolated file emit can be leveraged by using the following tools:
 * [babel-loader](https://github.com/babel/babel-loader) compiles files in an isolated manner (but does not provide type-checking on its own).
 * [gulp-typescript](https://www.npmjs.com/package/gulp-typescript) enables isolated file emit when `isolatedModules` is enabled.
 * [rollup-plugin-typescript](https://github.com/rollup/rollup-plugin-typescript) ***only*** performs isolated file compilation.
+* [ts-jest](https://kulshekhar.github.io/ts-jest/) can use be configured with the [`isolatedModules` flag set to `true`]isolatedModules: true(.
+* [ts-node](https://www.npmjs.com/package/ts-node) can detect [the `"transpileOnly"` option in the `"ts-node"` field of a `tsconfig.json`, and also has a `--transpile-only` flag](https://www.npmjs.com/package/ts-node#cli-and-programmatic-options).
 
 # Investigating Issues
 
