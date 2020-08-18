@@ -2,6 +2,54 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.1
+
+### `any` and `unknown` are considered possibly falsy in `&&` expressions
+
+_**Note:** This change, and the description of the previous behavior, apply only under `--strictNullChecks`._
+
+Previously, when an `any` or `unknown` appeared on the left-hand side of an `&&`, it was assumed to be definitely truthy, which made the type of the expression the type of the right-hand side:
+
+```ts
+// Before:
+
+function before(x: any, y: unknown) {
+    const definitelyThree = x && 3; // 3
+    const definitelyFour = y && 4;  // 4
+}
+
+// Passing any falsy values here demonstrates that `definitelyThree` and `definitelyFour`
+// are not, in fact, definitely 3 and 4 at runtime.
+before(false, 0);
+```
+
+In TypeScript 4.1, under `--strictNullChecks`, when `any` or `unknown` appears on the left-hand side of an `&&`, the type of the expression is `any` or `unknown`, respectively:
+
+```ts
+// After:
+
+function after(x: any, y: unknown) {
+    const maybeThree = x && 3; // any
+    const maybeFour = y && 4;  // unknown
+}
+```
+
+This change introduces new errors most frequently where TypeScript previously failed to notice that an `unknown` in an `&&` expression may not produce a `boolean`:
+
+```ts
+
+function isThing(x: unknown): boolean {
+    return x && typeof x === "object" && x.hasOwnProperty("thing");
+//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//  error!
+//  Type 'unknown' is not assignable to type 'boolean'.
+}
+```
+
+If `x` is a falsy value other than `false`, the function will return it, in conflict with the `boolean` return type annotation. The error can be resolved by replacing the first `x` in the return expression with `!!x`.
+
+See more details on the [implementing pull request](https://github.com/microsoft/TypeScript/pull/39529).
+
 # TypeScript 4.0
 
 ### Properties Overridding Accessors (and vice versa) is an Error
