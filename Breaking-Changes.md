@@ -90,6 +90,25 @@ class Derived extends Base {
 }
 ```
 
+## Operands for `delete` must be optional.
+
+When using the `delete` operator in `strictNullChecks`, the operand must now be `any`, `unknown`, `never`, or be optional (in that it contains `undefined` in the type).
+Otherwise, use of the `delete` operator is an error.
+
+```ts
+interface Thing {
+    prop: string;
+}
+
+function f(x: Thing) {
+    delete x.prop;
+    //     ~~~~~~
+    // error! The operand of a 'delete' operator must be optional.
+}
+```
+
+See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37921).
+
 See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37894).
 
 # TypeScript 3.9
