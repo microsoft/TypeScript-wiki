@@ -1,3 +1,7 @@
+# TypeScript 4.0
+
+- TypeScript provides a set of "factory" functions for producing syntax tree nodes; however, TypeScript 4.0 provides a new node factory API. For TypeScript 4.0 we've made the decision to deprecate these older functions in favor of the new ones. For more details, [read up on the relevant pull request for this change](https://github.com/microsoft/TypeScript/pull/35282).
+
 # TypeScript 3.8
 
 - The mutable property `disableIncrementalParsing` has been removed. It was untested and, at least on GitHub, unused by anyone. Incremental parsing can no longer be disabled.
