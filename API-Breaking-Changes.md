@@ -2,7 +2,7 @@
 
 - TypeScript provides a set of "factory" functions for producing syntax tree nodes; however, TypeScript 4.0 provides a new node factory API. For TypeScript 4.0 we've made the decision to deprecate these older functions in favor of the new ones. For more details, [read up on the relevant pull request for this change](https://github.com/microsoft/TypeScript/pull/35282).
 
-- `TupleTypeNode.elementTypes` renamed to `TupleTypeNodes.elements`
+- `TupleTypeNode.elementTypes` renamed to `TupleTypeNode.elements`
 - `KeywordTypeNode` is no longer used to represent this and null types. `null` now gets a `LiteralTypeNode`, `this` now always gets a `ThisTypeNode`
 
 # TypeScript 3.8
