@@ -19,6 +19,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.1. (November 2020)
 
+[See the 4.1 Iteration Plan for more details](https://github.com/microsoft/TypeScript/issues/40124)
+
 * [x] [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
