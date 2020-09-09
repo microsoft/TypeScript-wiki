@@ -4,12 +4,14 @@ Beyond best-practices, there are some common techniques for investigating slow c
 
 - [Avoiding Anti-Patterns](#avoiding-anti-patterns)
   * [Using Interfaces Over Intersections](#using-interfaces-over-intersections)
+  * [Using Type Annotations](#using-type-annotation)
 - [Using Project References](#using-project-references)
 - [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
   * [Specifying Files](#specifying-files)
   * [Controlling `@types` Inclusion](#controlling-types-inclusion)
   * [Incremental Project Emit](#incremental-project-emit)
   * [Skipping `.d.ts` Checking](#skipping-dts-checking)
+  * [Using Faster Variance Checks](#using-faster-variance-checks)
 - [Configuring Other Build Tools](#configuring-other-build-tools)
   * [Concurrent Type-Checking](#concurrent-type-checking)
   * [Isolated File Emit](#isolated-file-emit)
@@ -51,6 +53,25 @@ Type relationships between interfaces are also cached, as opposed to intersectio
 - }
 + interface Foo extends Bar, Baz {
 +     someProp: string;
++ }
+```
+
+## Using Type Annotations
+
+Adding type annotations, especially return types, can save the compiler a lot of work.
+In part, this is because named types tend to be more compact than anonymous types (which the compiler might infer), which reduces the amount of time spend reading and writing declaration files (e.g. for incremental builds).
+Type inference is very convenient, so there's no need to do this universally - however, it can be a useful thing to try if you've identified a slow section of your code.
+
+```diff
+- import { otherFunc } from "other";
+-
+- export function func() {
+-     return otherFunc();
+- }
++ import { otherFunc, otherType } from "other";
++
++ export function func(): otherType {
++     return otherFunc();
 + }
 ```
 
@@ -96,6 +117,14 @@ Tests can also be broken into their own project.
 |  Tests   |                |  Tests   |
 ------------                ------------
 ```
+
+One commonly asked question is "how big should a project be?".
+This is a lot like asking "how big should a function be?" or "how big should a class be?" and, to a large extent, comes down to experience.
+One familiar way of splitting up JS/TS code is with folders.
+As a heuristic, if things are related enough to go in the same folder, they belong in the same project.
+Beyond that, avoid massive or tiny projects.
+If one project is larger than all the others combined, that's a warning sign.
+Similarly, it's best to avoid having dozens of single-file projects because the overhead adds up.
 
 You can [read up more about project references here](https://www.typescriptlang.org/docs/handbook/project-references.html).
 
@@ -205,6 +234,16 @@ TypeScript provides the option to skip type-checking of the `.d.ts` files that i
 Alternatively, you can also enable the `skipLibCheck` flag to skip checking *all* `.d.ts` files in a compilation.
 
 These two options can often hide misconfiguration and conflicts in `.d.ts` files, so we suggest using them *only* for faster builds.
+
+## Using Faster Variance Checks
+
+Is a list of dogs a list of animals?
+That is, is `List<Dog>` assignable to `List<Animals>`?
+The straightforward way to find out is to do a structural comparison of the types, member by member.
+Unfortunately, this can be very expensive.
+However, if we know enough about `List<T>`, we can reduce this assignability check to determining whether `Dog` is assignable to `Animal` (i.e. without considering each member of `List<T>`).
+(In particular, we need to know the [variance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) of the type parameter `T`.)
+The compiler can only take full advantage of this potential speedup if the `strictFunctionTypes` flag is enabled (otherwise, it uses the slower, but more lenient, structural check).
 
 # Configuring Other Build Tools
 
