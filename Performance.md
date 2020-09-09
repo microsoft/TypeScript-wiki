@@ -142,7 +142,7 @@ Within a `tsconfig.json`, there are two ways to specify files in a project.
 * the `files` list
 * the `include` and `exclude` lists
 
-The primary difference between the two is that `files` expects a list of file paths to source files, and `include/`exclude` use globbing patterns to match against files.
+The primary difference between the two is that `files` expects a list of file paths to source files, and `include`/`exclude` use globbing patterns to match against files.
 
 While specifying `files` will allow TypeScript to quickly load up files up directly, it can be cumbersome if you have many files in your project without just a few top-level entry-points.
 Additionally, it's easy to forget to add new files to your `tsconfig.json`, which means that you might end up with strange editor behavior where those new files are incorrectly analyzed.
@@ -158,7 +158,10 @@ For best practices, we recommend the following:
 * Specify only input folders in your project (i.e. folders whose source code you want to include for compilation/analysis).
 * Don't mix source files from other projects in the same folder.
 * If keeping tests in the same folder as other source files, give them a distinct name so they can easily be excluded.
-* Avoid large build artifacts and dependency folders like `node_modules` in source directories
+* Avoid large build artifacts and dependency folders like `node_modules` in source directories.
+
+Note: without an `exclude` list, `node_modules` is excluded by default;
+as soon as one is added, it's important to explicitly add `node_modules` to the list.
 
 Here is a reasonable `tsconfig.json` that demonstrates this in action.
 
