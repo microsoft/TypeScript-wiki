@@ -2,8 +2,8 @@ There are easy ways to configure TypeScript to ensure faster compilations and ed
 The earlier on these practices are adopted, the better.
 Beyond best-practices, there are some common techniques for investigating slow compilations/editing experiences, some common fixes, and some common ways of helping the TypeScript team investigate the issues as a last resort.
 
-- [Avoiding Anti-Patterns](#avoiding-anti-patterns)
-  * [Using Interfaces Over Intersections](#using-interfaces-over-intersections)
+- [Writing Easy-to-Compile Code](#writing-easy-to-compile-code)
+  * [Preferring Interfaces Over Intersections](#preferring-interfaces-over-intersections)
   * [Using Type Annotations](#using-type-annotation)
 - [Using Project References](#using-project-references)
 - [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
@@ -31,9 +31,9 @@ Beyond best-practices, there are some common techniques for investigating slow c
     + [Taking a TSServer Log](#taking-a-tsserver-log)
       - [Collecting a TSServer Log in Visual Studio Code](#collecting-a-tsserver-log-in-visual-studio-code)
 
-# Avoiding Anti-Patterns
+# Writing Easy-to-Compile Code
 
-## Using Interfaces Over Intersections
+## Preferring Interfaces Over Intersections
 
 Much of the time, a simple type alias to an object type acts very similarly to an interface.
 
