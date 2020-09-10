@@ -101,7 +101,7 @@ Every time an object is assigned to a `Schedule`, it has to be compared to each 
 For a two-element union, this is trivial and inexpensive.
 However, if your union has more than a dozen elements, it can cause real problems in compilation speed.
 For instance, to eliminate redundant members from a union, the elements have to be compared pairwise, which is quadratic.
-Similarly, if you intersect large unions, distribution can result in enormous types.
+This sort of check might occur when intersecting large unions, where intersecting over each union member can result in enormous types that then need to be reduced.
 One way to avoid this is to use subtypes, rather than unions.
 
 ```ts
