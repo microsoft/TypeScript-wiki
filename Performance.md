@@ -125,7 +125,8 @@ interface WeekendSchedule extends Schedule {
 declare function printSchedule(schedule: Schedule);
 ```
 
-More realistically, consider declaring a base `HtmlElement` type, which `DivElement`, `ImgElement`, etc extend, rather than using a union `DivElement | /*...*/ | ImgElement | /*...*/`.
+A more realistic example of this might come up when trying to model every built-in DOM element type.
+In this case, it would be preferable to create a base `HtmlElement` type with common members, which `DivElement`, `ImgElement`, etc. extend, rather than to create the exhaustive union `DivElement | /*...*/ | ImgElement | /*...*/`.
 
 # Using Project References
 
