@@ -1,8 +1,16 @@
 # Based on https://www.growingwiththeweb.com/2016/07/enabling-pull-requests-on-github-wikis.html
 name: Sync Two Wiki Repos
+
 on:
+  # Merged PRs
   push:
     branches: [master]
+  # Weekly
+  schedule:
+    # https://crontab.guru/#0_12_*_*_1
+    - cron: "0 12 * * 1"
+  # Whenever someone asks
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -14,19 +22,19 @@ jobs:
       - run: git config user.name "typescript-bot"
       - run: git config user.email "bot@typescriptlang.org"
 
-        # Add the authed remotes for .
-      - run:  git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+        # Replace remotes with auth'd versions, then pull the .wiki version (the one people can't PR to)
+        # then merge in any changes from here and push
+      - 
+        run: |
+          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+          git remote remove origin
+          git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git > /dev/null 2>&1
+          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+          git fetch origin
+          git fetch upstream
+          git merge upstream/master --no-edit
+          git push origin HEAD:master > /dev/null 2>&1
+          git push upstream HEAD:master > /dev/null 2>&1
         env:
           GITHUB_TOKEN: ${{ secrets.TS_BOT_TOKEN }}
 
-      # Update search links from the origin repo before pushing to the upstream
-      - run: git clone --depth 1 https://github.com/microsoft/TypeScript.git TypeScript
-      - run: npm i
-      - run: node scripts/convertRelativeLinksToHardcoded.js "**/*.md" --write
-      - run: rm -rf TypeScript
-
-      - run: git add .
-      - run: git commit --amend --no-edit
-
-        # Push to the auth'd branch
-      - run:  git push upstream HEAD:master -f > /dev/null 2>&1
