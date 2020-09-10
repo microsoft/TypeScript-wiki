@@ -172,7 +172,7 @@ Tests can also be broken into their own project.
 ```
 
 One commonly asked question is "how big should a project be?".
-This is a lot like asking "how big should a function be?" or "how big should a class be?" and, to a large extent, comes down to experience.
+This is a lot like asking "how big should a function be?" or "how big should a class be?" and, to a large extent, it comes down to experience.
 One familiar way of splitting up JS/TS code is with folders.
 As a heuristic, if things are related enough to go in the same folder, they belong in the same project.
 Beyond that, avoid massive or tiny projects.
