@@ -26,15 +26,14 @@ jobs:
         # then merge in any changes from here and push
       - 
         run: |
-          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
           git remote remove origin
-          git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git > /dev/null 2>&1
-          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git > /dev/null 2>&1
+          git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git
+          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git
           git fetch origin
           git fetch upstream
-          git merge upstream/master --no-edit
-          git push origin HEAD:master > /dev/null 2>&1
-          git push upstream HEAD:master > /dev/null 2>&1
+          git merge upstream/master --no-edit 
+          git push origin HEAD:master
+          git push upstream HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.TS_BOT_TOKEN }}
 
