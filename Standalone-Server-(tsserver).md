@@ -23,7 +23,7 @@ Requests are JSON following the protocol definition. Here is an example request 
 {"seq":1,"type":"request","command":"open","arguments":{"file":"c:/DefinitelyTyped/gregorian-calendar/index.d.ts"}}
 ```
 
-Responses are augmented JSON format. the Message stars with a header with the content length followed by a line separator (`\r\n`) followed by the response body as a JSON string:
+Responses are augmented JSON format. The Message starts with a header with the content length followed by a line separator (`\r\n`) followed by the response body as a JSON string:
 
 Here is an example of a response for a `quickinfo` command:
 
