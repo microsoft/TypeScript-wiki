@@ -66,7 +66,7 @@ Type inference is very convenient, so there's no need to do this universally - h
 ```diff
 - import { otherFunc } from "other";
 + import { otherFunc, otherType } from "other";
- 
+
 - export function func() {
 + export function func(): otherType {
       return otherFunc();
@@ -97,7 +97,7 @@ declare function printSchedule(schedule: WeekdaySchedule | WeekendSchedule);
 ```
 
 However, they also come with a cost.
-Every time an object is assigned to a `Schedule`, it has to be compared to each element of the union.
+Every time an argument is passed to `printSchedule`, it has to be compared to each element of the union.
 For a two-element union, this is trivial and inexpensive.
 However, if your union has more than a dozen elements, it can cause real problems in compilation speed.
 For instance, to eliminate redundant members from a union, the elements have to be compared pairwise, which is quadratic.
@@ -300,6 +300,7 @@ Unfortunately, this can be very expensive.
 However, if we know enough about `List<T>`, we can reduce this assignability check to determining whether `Dog` is assignable to `Animal` (i.e. without considering each member of `List<T>`).
 (In particular, we need to know the [variance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) of the type parameter `T`.)
 The compiler can only take full advantage of this potential speedup if the `strictFunctionTypes` flag is enabled (otherwise, it uses the slower, but more lenient, structural check).
+For this reason, we recommend building with `--strictFunctionTypes` (which is enabled by default under `--strict`).
 
 # Configuring Other Build Tools
 
