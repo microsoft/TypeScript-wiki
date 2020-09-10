@@ -1,8 +1,6 @@
 # Introduction
 This document serves to outline the general design principles we have based the TypeScript language on. While it is by no means exhaustive, it aims to summarize the rules by which we've made many of the decisions that have shaped the language. Some of these rules are subjective, and at times are at odds with each other; reaching the right balance and making the right exceptions is the essence of how successful programming languages are designed.
 
-We recommend reading Chapter 1 of the TypeScript Language Specification for more background on the overall aims of the TypeScript language itself, and how it intends those goals to be achieved.
-
 # Goals
  1. Statically identify constructs that are likely to be errors.
  1. Provide a structuring mechanism for larger pieces of code.

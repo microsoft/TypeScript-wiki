@@ -3,15 +3,20 @@ This is the list of release activities needed for every TypeScript release.
 
 ## Release Candidate Activities
 
-### types-publisher and definitelytyped-header-parser
+### tslib
 
-Once `master`'s version is updated, surrounding projects must be aware of the nightlies so that functionality such as ATA continues to work.
+* [ ] Add all tslib updates
+* [ ] Review next version number
 
-* [ ] Update [definitelytyped-header-parser](https://github.com/Microsoft/definitelytyped-header-parser) to understand ***the next version***, and publish new version
-    * in other words, if we're releasing TypeScript 3.2, the header parser needs to be able to parse `3.3`.
-* [ ] Update [dtslint](https://github.com/Microsoft/dtslint)'s dependency to the new header-parser
-* [ ] Update [types-publisher](https://github.com/Microsoft/types-publisher)'s dependency to the new header-parser
-* [ ] Run [the tagging script](https://github.com/sandersn/dt-retag/blob/master/index.js) to tag for new version (version of `typescript@next`)
+### `@definitelytyped/header-parser` and `retag`
+
+Once `master`'s version is updated, the @definitelytyped packages must be aware of the nightly's new version so that functionality such as ATA continues to work.
+
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions) to support ***the next version***, and publish new version
+    * in other words, if we're releasing TypeScript 3.9, the header parser needs to support `4.0`.
+    * To do this, add the new version to the `supported` list.
+* [ ] Run [@definitelytyped/retag](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/retag) to add the tag `ts4.0` to each package.
+
 
 ## Release Activities
 
@@ -32,20 +37,12 @@ Once `master`'s version is updated, surrounding projects must be aware of the ni
 
 * [ ] Add new [Release Notes page](https://github.com/Microsoft/TypeScript-Handbook/tree/master/pages/release%20notes) for the new release
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
+* [ ] Update [Public Dates](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/src/lib/release-plan.json)
 
 #### npm
 
 * [ ] Publish new version of [typescript](https://www.npmjs.com/package/typescript)
-* [ ] Publish new version of [tslib](https://www.npmjs.com/package/tslib) (if needed)
-
-<!-- SUBSUMED BY MARKETPLACE UPLOADS
-
-#### Download Center
-
-* [ ] Upload Visual Studio 2017 installer to https://www.microsoft.com/en-us/download/details.aspx?id=55258
-* [ ] Upload Visual Studio 2015 installer to https://www.microsoft.com/en-us/download/details.aspx?id=48593
-
--->
+* [ ] Publish new version of [tslib](https://www.npmjs.com/package/tslib) (if needed) by creating a tag
 
 #### Nuget
 
@@ -58,6 +55,14 @@ Once `master`'s version is updated, surrounding projects must be aware of the ni
 #### TypeScript-Sublime-Plugin
 
 * [ ] Update version of [tsserver](https://github.com/Microsoft/TypeScript-Sublime-Plugin/tree/master/tsserver), test, and tag
+
+#### dtslint and types-publisher
+
+After the release version is published to npm:
+
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions): move the newly  published version from `supported` to `shipped` (in the example above, that's 3.9), and publish new version of @definitelytyped.
+* [ ] Update [dtslint](https://github.com/Microsoft/dtslint) and dts-critic's dependency to the new @definitelytyped/header-parser
+* [ ] Update [@definitelytyped/publisher](https://github.com/Microsoft/DefinitelyTyped-tools)'s dependency on dtslint. You may still need to clear caches on Travis, although it usually caches npm packages correctly.
 
 #### Website
 

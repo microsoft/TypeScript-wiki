@@ -1,6 +1,25 @@
+# TypeScript 4.0
+
+- TypeScript provides a set of "factory" functions for producing syntax tree nodes; however, TypeScript 4.0 provides a new node factory API. For TypeScript 4.0 we've made the decision to deprecate these older functions in favor of the new ones. For more details, [read up on the relevant pull request for this change](https://github.com/microsoft/TypeScript/pull/35282).
+
+- `TupleTypeNode.elementTypes` renamed to `TupleTypeNode.elements`
+- `KeywordTypeNode` is no longer used to represent this and null types. `null` now gets a `LiteralTypeNode`, `this` now always gets a `ThisTypeNode`
+
+# TypeScript 3.8
+
+- The mutable property `disableIncrementalParsing` has been removed. It was untested and, at least on GitHub, unused by anyone. Incremental parsing can no longer be disabled.
+
 # TypeScript 3.7
 
-- the typeArguments property from the TypeReference interface and provides a getTypeArguments method on the TypeChecker interface to be used instead. This change is necessary because resolution of type arguments in type references is now deferred due to the ability to create [Recursive type references](https://github.com/microsoft/TypeScript/pull/33050).
+- the `typeArguments` property has been removed from the `TypeReference` interface, and the `getTypeArguments` method on `TypeChecker` instances should be used instead. This change was necessary to defer resolution of type arguments in order to support [recursive type references](https://github.com/microsoft/TypeScript/pull/33050).
+
+  As a workaround, you can define a helper function to support multiple versions of TypeScript.
+
+  ```ts
+  function getTypeArguments(checker: ts.TypeChecker, typeRef: ts.TypeReference) {
+      return checker.getTypeArguments?.(typeRef) ?? (typeRef as any).typeArguments;
+  }
+  ```
 
 
 # TypeScript 3.1

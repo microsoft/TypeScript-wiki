@@ -14,6 +14,12 @@ The currently recognized commands are:
 * [`pack this`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=19) - This creates a build which does a build, runs an LKG, runs normal tests, and then packs the result into an installable tarball (which can be downloaded from the build artifacts on the azure pipelines build status page), perfect for installing with `npm i <URL to tarball>` to test with.
 * [`cherry-pick this to branchname`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - This launches a task to squash the commits from the PR and then open a new PR that cherry-picks the change into branch `branchname`. This takes about 5 minutes as the build agent needs to clone the input PR. The bot should reply if something goes wrong, or otherwise once the new PR is open.
 * [`cherry-pick this to branchname and LKG`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - Same as above, but an LKG commit will be added onto the PR after the squashed cherry-pick commit.
+* `run repros` - Triggers inline code repro workflow
+
+In addition, there are a small suite of commands which work in _any_ comment and relate to release management:
+* [`create release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22New+Release+Branch%22) This makes a `release-X.Y` branch (replace `X.Y` with your desired version) with the `package.json` version set to `X.Y.0-beta`, the `corePublic` `versionMajorMinor` set to `X.Y`, and the full `ts.version` string set to `X.Y.0-beta`, and updates the accompanying baselines. An LKG is then performed. This new branch is directly pushed to `microsoft/TypeScript`. In short, this fully sets up a new release branch to be ready to publish a beta.
+* [`bump release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Set+branch+version%22) This bumps the version (`0-beta` -> `1-rc` -> `2` -> `3` and so on) on the specified branch and captures a new LKG, essentially preparing the branch for a new release.
+* [`sync release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22sync%22) This merges `master` into the specified branch; this is useful for syncing the branch with `master` in the period between the beta and rc.
 
 A single comment may contain multiple commands, so long as each is prefixed with a call to `@typescript-bot`.
 

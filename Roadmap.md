@@ -1,13 +1,13 @@
 This page outlines specific features and fixes that are scheduled or planned for given releases. The 6-month roadmaps that outlines focus areas of work can be viewed for
 
-* [July to December 2019](https://github.com/microsoft/TypeScript/issues/33118) (current)
+* [January to June 2020](https://github.com/microsoft/TypeScript/issues/36948) (current)
+* [July to December 2019](https://github.com/microsoft/TypeScript/issues/33118)
 * [January to June 2019](https://github.com/Microsoft/TypeScript/issues/29288)
 
 - [X] Feature already available in [`typescript@next`](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Nightly%20Builds.md)
 
 # Future
 
-* [Variadic types](https://github.com/Microsoft/TypeScript/issues/5453)
 * Investigate [nominal typing support](https://github.com/Microsoft/TypeScript/issues/202)
 * [Flattening declarations](https://github.com/Microsoft/TypeScript/issues/4433)
 * Implement ES Decorator proposal
@@ -16,21 +16,72 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Quick fix to [Scaffold local `@types` packages](https://github.com/Microsoft/TypeScript/issues/25746)
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
-<!-- * [ ] [`unknown` for implicit generic constraints](https://github.com/Microsoft/TypeScript/issues/26796) -->
 
+# 4.1. (November 2020)
+
+[See the 4.1 Iteration Plan for more details](https://github.com/microsoft/TypeScript/issues/40124)
+
+* [ ] [Key Renaming in Mapped Types and Template String Types](https://github.com/microsoft/TypeScript/issues/12754)
+* [x] [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
+* [ ] [Pedantic `override` Checks](https://github.com/microsoft/TypeScript/issues/2000)
+* [ ] [Pedantic Index Signature Checks](https://github.com/microsoft/TypeScript/issues/13778)
+* [ ] [Improved Excess Property Checks](https://github.com/microsoft/TypeScript/pull/40311)
+* [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
+* [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
+* [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
+* [ ] [Semantic Highlighting API](https://github.com/microsoft/TypeScript/issues/38435)
+
+# 4.0 (August 2020)
+
+[See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/38510)
+
+* [x] [Variadic Tuple Types](https://github.com/microsoft/TypeScript/pull/39094)
+* [x] [Labeled Tuple Elements](https://github.com/Microsoft/TypeScript/issues/28259)
+* [x] [Class Property Inference from Constructors](https://github.com/microsoft/TypeScript/pull/37920)
+* [x] [Short-Circuiting Assignment Operators](https://github.com/microsoft/TypeScript/issues/37255)
+* [x] [`unknown` on `catch` Clause Bindings](https://github.com/microsoft/TypeScript/issues/36775)
+* [x] [Lightweight Editor Mode](https://github.com/microsoft/TypeScript/issues/39035)
+* [x] [Improved Auto-Import](https://github.com/microsoft/TypeScript/issues/37812)
+* [x] [Editor support for `/** @deprecated */` tags](https://github.com/microsoft/TypeScript/issues/390)
+* [x] [Refactoring Discoverability](https://github.com/microsoft/TypeScript/issues/34930) ([ideas](https://github.com/microsoft/TypeScript/issues/37895))
+* [x] Refactorings
+    * [x] [Convert to Optional Chaining and Coalescing](https://github.com/microsoft/TypeScript/issues/35018)
+
+# 3.9 (May 2020)
+
+[See the 3.9 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/37198)
+
+* [x] [Fix Inference in `Promise.all`](https://github.com/microsoft/TypeScript/pull/34501)
+* [x] Type-Checking Speedups
+  * https://github.com/microsoft/TypeScript/pull/36576
+  * https://github.com/microsoft/TypeScript/pull/36590
+  * https://github.com/microsoft/TypeScript/pull/36607
+  * https://github.com/microsoft/TypeScript/pull/36622
+  * https://github.com/microsoft/TypeScript/pull/36754
+  * https://github.com/microsoft/TypeScript/pull/36696
+* [x] [`// @ts-expect-error` Comments](https://github.com/microsoft/TypeScript/pull/36014)
+* [x] [Uncalled Function Checks in Conditionals](https://github.com/microsoft/TypeScript/issues/36048)
+* [x] [Support for CommonJS Auto-Imports](https://github.com/microsoft/TypeScript/pull/37027)
+* [x] [Preserved Newlines in Refactorings/Quick Fixes](https://github.com/microsoft/TypeScript/pull/36688)
+* [x] [Editor Support for Solution-Style `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/37239)
+* [x] [Editor Support for Multi-Project Symbol Navigation](https://github.com/microsoft/TypeScript/pull/38027)
+* [x] Quick Fixes to
+  * [x] [Correct Cases of Missing Return Expressions](https://github.com/microsoft/TypeScript/pull/26434)
+  * [ ] [Declare a `private` method](https://github.com/microsoft/TypeScript/issues/37782)
+  * [x] [Declare a `private` property](https://github.com/microsoft/TypeScript/issues/36249)
 
 # 3.8 (February 2020)
 
 [See the 3.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/34898)
 
-* [ ] [Type-Only Imports and Exports]()
+* [x] [Type-Only Imports and Exports](https://github.com/microsoft/TypeScript/pull/35200)
 * [x] [New `export * as ns` Syntax](https://github.com/microsoft/TypeScript/pull/34903)
 * [x] [Top-Level Await](https://github.com/microsoft/TypeScript/issues/25988)
 * [x] [Private Fields](https://github.com/Microsoft/TypeScript/pull/30829)
-* [x] [Public Fields Breaking Change](https://github.com/microsoft/TypeScript/issues/34787)
-* [x] [JSDoc Property Modifiers](https://github.com/microsoft/TypeScript/issues/14009)
+* [x] [JSDoc `@public`/`@private`/`@protected` Modifiers](https://github.com/microsoft/TypeScript/pull/35731)
+* [x] [JSDoc `@readonly` Modifier](https://github.com/microsoft/TypeScript/issues/17233)
+* [x] [Improved File Watching and `watchOptions`](https://github.com/microsoft/TypeScript/pull/35615)
 * [x] ["Fast and Loose" Incremental Checking](https://github.com/microsoft/TypeScript/issues/33329)
-
 
 # 3.7 (November 2019)
 

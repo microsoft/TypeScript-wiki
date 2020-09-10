@@ -2,8 +2,398 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
-# TypeScript 3.6
+# TypeScript 4.1
 
+### `any` and `unknown` are considered possibly falsy in `&&` expressions
+
+_**Note:** This change, and the description of the previous behavior, apply only under `--strictNullChecks`._
+
+Previously, when an `any` or `unknown` appeared on the left-hand side of an `&&`, it was assumed to be definitely truthy, which made the type of the expression the type of the right-hand side:
+
+```ts
+// Before:
+
+function before(x: any, y: unknown) {
+    const definitelyThree = x && 3; // 3
+    const definitelyFour = y && 4;  // 4
+}
+
+// Passing any falsy values here demonstrates that `definitelyThree` and `definitelyFour`
+// are not, in fact, definitely 3 and 4 at runtime.
+before(false, 0);
+```
+
+In TypeScript 4.1, under `--strictNullChecks`, when `any` or `unknown` appears on the left-hand side of an `&&`, the type of the expression is `any` or `unknown`, respectively:
+
+```ts
+// After:
+
+function after(x: any, y: unknown) {
+    const maybeThree = x && 3; // any
+    const maybeFour = y && 4;  // unknown
+}
+```
+
+This change introduces new errors most frequently where TypeScript previously failed to notice that an `unknown` in an `&&` expression may not produce a `boolean`:
+
+```ts
+
+function isThing(x: unknown): boolean {
+    return x && typeof x === "object" && x.hasOwnProperty("thing");
+//  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//  error!
+//  Type 'unknown' is not assignable to type 'boolean'.
+}
+```
+
+If `x` is a falsy value other than `false`, the function will return it, in conflict with the `boolean` return type annotation. The error can be resolved by replacing the first `x` in the return expression with `!!x`.
+
+See more details on the [implementing pull request](https://github.com/microsoft/TypeScript/pull/39529).
+
+# TypeScript 4.0
+
+### Properties Overridding Accessors (and vice versa) is an Error
+
+Previously, it was only an error for properties to override accessors, or accessors to override properties, when using `useDefineForClassFields`; however, TypeScript now always issues an error when declaring a property in a derived class that would override a getter or setter in the base class.
+
+```ts
+class Base {
+    get foo() {
+        return 100;
+    }
+    set foo() {
+        // ...
+    }
+}
+
+class Derived extends Base {
+    foo = 10;
+//  ~~~
+// error!
+// 'foo' is defined as an accessor in class 'Base',
+// but is overridden here in 'Derived' as an instance property.
+}
+```
+
+```ts
+class Base {
+    prop = 10;
+}
+
+class Derived extends Base {
+    get prop() {
+    //  ~~~~
+    // error!
+    // 'prop' is defined as a property in class 'Base', but is overridden here in 'Derived' as an accessor.
+        return 100;
+    }
+}
+```
+
+## Operands for `delete` must be optional.
+
+When using the `delete` operator in `strictNullChecks`, the operand must now be `any`, `unknown`, `never`, or be optional (in that it contains `undefined` in the type).
+Otherwise, use of the `delete` operator is an error.
+
+```ts
+interface Thing {
+    prop: string;
+}
+
+function f(x: Thing) {
+    delete x.prop;
+    //     ~~~~~~
+    // error! The operand of a 'delete' operator must be optional.
+}
+```
+
+See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37921).
+
+See more details on [the implementing pull request](https://github.com/microsoft/TypeScript/pull/37894).
+
+# TypeScript 3.9
+
+## Parsing Differences in Optional Chaining and Non-Null Assertions
+
+TypeScript recently implemented the optional chaining operator, but we've received user feedback that the behavior of optional chaining (`?.`) with the non-null assertion operator (`!`) is extremely counter-intuitive.
+
+Specifically, in previous versions, the code
+
+```ts
+foo?.bar!.baz
+```
+
+was interpreted to be equivalent to the following JavaScript.
+
+```js
+(foo?.bar).baz
+```
+
+In the above code the parentheses stop the "short-circuiting" behavior of optional chaining, so if `foo` is `undefined`, accessing `baz` will cause a runtime error.
+
+The Babel team who pointed this behavior out, and most users who provided feedback to us, believe that this behavior is wrong.
+We do too!
+The thing we heard the most was that the `!` operator should just "disappear" since the intent was to remove `null` and `undefined` from the type of `bar`.
+
+In other words, most people felt that the original snippet should be interpreted as
+
+```js
+foo?.bar.baz
+```
+
+which just evaluates to `undefined` when `foo` is `undefined`.
+
+This is a breaking change, but we believe most code was written with the new interpretation in mind.
+Users who want to revert to the old behavior can add explicit parentheses around the left side of the `!` operator.
+
+```ts
+(foo?.bar)!.baz
+```
+
+For more information, [see the corresponding pull request](https://github.com/microsoft/TypeScript/pull/36539).
+
+## `}` and `>` are Now Invalid JSX Text Characters
+
+The JSX Specification forbids the use of the `}` and `>` characters in text positions.
+TypeScript and Babel have both decided to enforce this rule to be more comformant.
+The new way to insert these characters is to use an HTML escape code (e.g. `<span> 2 &gt 1 </div>`) or insert an expression with a string literal (e.g. `<span> 2 {">"} 1 </div>`).
+
+In the presence of code like this, you'll get an error message along the lines of
+
+```
+Unexpected token. Did you mean `{'>'}` or `&gt;`?
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+```
+
+For example:
+
+```tsx
+let directions = <span>Navigate to: Menu Bar > Tools > Options</div>
+//                                           ~       ~
+// Unexpected token. Did you mean `{'>'}` or `&gt;`?
+```
+
+For more information, see the corresponding [pull request](https://github.com/microsoft/TypeScript/pull/36636).
+
+## Stricter Checks on Intersections and Optional Properties
+
+Generally, an intersection type like `A & B` is assignable to `C` if either `A` or `B` is assignable to `C`; however, sometimes that has problems with optional properties.
+For example, take the following:
+
+```ts
+interface A {
+    a: number; // notice this is 'number'
+}
+
+interface B {
+    b: string;
+}
+
+interface C {
+    a?: boolean; // notice this is 'boolean'
+    b: string;
+}
+
+declare let x: A & B;
+declare let y: C;
+
+y = x;
+```
+
+In previous versions of TypeScript, this was allowed because while `A` was totally incompatible with `C`, `B` *was* compatible with `C`.
+
+In TypeScript 3.9, so long as every type in an intersection is a concrete object type, the type system will consider all of the properties at once.
+As a result, TypeScript will see that the `a` property of `A & B` is incompatible with that of `C`:
+
+```
+Type 'A & B' is not assignable to type 'C'.
+  Types of property 'a' are incompatible.
+    Type 'number' is not assignable to type 'boolean | undefined'.
+```
+
+For more information on this change, [see the corresponding pull request](https://github.com/microsoft/TypeScript/pull/37195).
+
+## Intersections Reduced By Discriminant Properties
+
+There are a few cases where you might end up with types that describe values that just don't exist.
+For example
+
+```ts
+declare function smushObjects<T, U>(x: T, y: U): T & U;
+
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+interface Square {
+    kind: "square";
+    sideLength: number;
+}
+
+declare let x: Circle;
+declare let y: Square;
+
+let z = smushObjects(x, y);
+console.log(z.kind);
+```
+
+This code is slightly weird because there's really no way to create an intersection of a `Circle` and a `Square` - they have two incompatible `kind` fields.
+In previous versions of TypeScript, this code was allowed and the type of `kind` itself was `never` because `"circle" & "square"` described a set of values that could `never` exist.
+
+In TypeScript 3.9, the type system is more aggressive here - it notices that it's impossible to intersect `Circle` and `Square` because of their `kind` properties.
+So instead of collapsing the type of `z.kind` to `never`, it collapses the type of `z` itself (`Circle & Square`) to `never`.
+That means the above code now errors with:
+
+```
+Property 'kind' does not exist on type 'never'.
+```
+
+Most of the breaks we observed seem to correspond with slightly incorrect type declarations.
+For more details, [see the original pull request](https://github.com/microsoft/TypeScript/pull/36696).
+
+## Getters/Setters are No Longer Enumerable
+
+In older versions of TypeScript, `get` and `set` accessors in classes were emitted in a way that made them enumerable; however, this wasn't compliant with the ECMAScript specification which states that they must be non-enumerable.
+As a result, TypeScript code that targeted ES5 and ES2015 could differ in behavior.
+
+With [recent changes](https://github.com/microsoft/TypeScript/pull/32264), TypeScript 3.9 now conforms more closely with ECMAScript in this regard.
+
+## Type Parameters That Extend `any` No Longer Act as `any`
+
+In previous versions of TypeScript, a type parameter constrained to `any` could be treated as `any`.
+
+```ts
+function foo<T extends any>(arg: T) {
+    arg.spfjgerijghoied; // no error!
+}
+```
+
+This was an oversight, so TypeScript 3.9 takes a more conservative approach and issues an error on these questionable operations.
+
+```ts
+function foo<T extends any>(arg: T) {
+    arg.spfjgerijghoied;
+    //  ~~~~~~~~~~~~~~~
+    // Property 'spfjgerijghoied' does not exist on type 'T'.
+}
+```
+
+See [the original pull request](https://github.com/microsoft/TypeScript/pull/29571) for more details.
+
+## `export *` is Always Retained
+
+In previous TypeScript versions, declarations like `export * from "foo"` would be dropped in our JavaScript output if `foo` didn't export any values.
+This sort of emit is problematic because it's type-directed and can't be emulated by Babel.
+TypeScript 3.9 will always emit these `export *` declarations.
+In practice, we don't expect this to break much existing code, but bundlers may have a harder time tree-shaking the code.
+
+You can see the specific changes in [the original pull request](https://github.com/microsoft/TypeScript/pull/37124).
+
+## Exports Now Use Getters for Live Bindings
+
+When targeting module systems like CommonJS in ES5 and above, TypeScript will use get accessors to emulate live bindings so that changes to a variable in one module are witnessed in any exporting modules. This change is meant to make TypeScript's emit more compliant with ECMAScript modules.
+
+For more details, see [the PR that applies this change](https://github.com/microsoft/TypeScript/pull/359670).
+
+## Exports are Hoisted and Initially Assigned 
+
+TypeScript now hoists exported declarations to the top of the file when targeting module systems like CommonJS in ES5 and above. This change is meant to make TypeScript's emit more compliant with ECMAScript modules. For example, code like
+
+```ts
+export * from "mod";
+export const nameFromMod = 0;
+```
+
+previously had output like
+
+```ts
+__exportStar(exports, require("mod"));
+exports.nameFromMod = 0;
+```
+
+However, because exports now use `get`-accessors, this assignment would throw because `__exportStar` now makes get-accesors which can't be overridden with a simple assignment. Instead, TypeScript 3.9 emits the following:
+
+```ts
+exports.nameFromMod = void 0;
+__exportStar(exports, require("mod"));
+exports.nameFromMod = 0;
+```
+
+See [the original pull request](https://github.com/microsoft/TypeScript/pull/37093) for more information.
+
+# TypeScript 3.8
+
+## Stricter Assignability Checks to Unions with Index Signatures
+
+Previously, excess properties were unchecked when assigning to unions where *any* type had an index signature - even if that excess property could *never* satisfy that index signature.
+In TypeScript 3.8, the type-checker is stricter, and only "exempts" properties from excess property checks if that property could plausibly satisfy an index signature.
+
+```ts
+const obj1: { [x: string]: number } | { a: number };
+
+obj1 = { a: 5, c: 'abc' }
+//             ~
+// Error!
+// The type '{ [x: string]: number }' no longer exempts 'c'
+// from excess property checks on '{ a: number }'.
+
+let obj2: { [x: string]: number } | { [x: number]: number };
+
+obj2 = { a: 'abc' };
+//       ~
+// Error!
+// The types '{ [x: string]: number }' and '{ [x: number]: number }' no longer exempts 'a'
+// from excess property checks against '{ [x: number]: number }',
+// and it *is* sort of an excess property because 'a' isn't a numeric property name.
+// This one is more subtle.
+```
+
+## Optional Arguments with no Inferences are Correctly Marked as Implicitly `any`
+
+In the following code, `param` is now marked with an error under `noImplicitAny`.
+
+```ts
+function foo(f: () => void) {
+    // ...
+}
+
+foo((param?) => {
+    // ...
+});
+```
+
+This is because there is no corresponding parameter for the type of `f` in `foo`.
+This seems unlikely to be intentional, but it can be worked around by providing an explicit type for `param`.
+
+## `object` in JSDoc is No Longer `any` Under `noImplicitAny`
+
+Historically, TypeScript's support for checking JavaScript has been lax in certain ways in order to provide an approachable experience.
+
+For example, users often used `Object` in JSDoc to mean, "some object, I dunno what", we've treated it as `any`.
+
+```js
+// @ts-check
+
+/**
+ * @param thing {Object} some object, i dunno what
+ */
+function doSomething(thing) {
+    let x = thing.x;
+    let y = thing.y;
+    thing();
+}
+```
+
+This is because treating it as TypeScript's `Object` type would end up in code reporting uninteresting errors, since the `Object` type is an extremely vague type with few capabilities other than methods like `toString` and `valueOf`.
+
+However, TypeScript *does* have a more useful type named `object` (notice that lowercase `o`).
+The `object` type is more restrictive than `Object`, in that it rejects all primitive types like `string`, `boolean`, and `number`.
+Unfortunately, both `Object` and `object` were treated as `any` in JSDoc.
+
+Because `object` can come in handy and is used significantly less than `Object` in JSDoc, we've removed the special-case behavior in JavaScript files when using `noImplicitAny` so that in JSDoc, the `object` type really refers to the non-primitive `object` type.
+
+# TypeScript 3.6
 
 ## Class Members Named `"constructor"` Are Now Constructors
 

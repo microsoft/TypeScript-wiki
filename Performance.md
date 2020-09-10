@@ -2,13 +2,139 @@ There are easy ways to configure TypeScript to ensure faster compilations and ed
 The earlier on these practices are adopted, the better.
 Beyond best-practices, there are some common techniques for investigating slow compilations/editing experiences, some common fixes, and some common ways of helping the TypeScript team investigate the issues as a last resort.
 
+- [Writing Easy-to-Compile Code](#writing-easy-to-compile-code)
+  * [Preferring Interfaces Over Intersections](#preferring-interfaces-over-intersections)
+  * [Using Type Annotations](#using-type-annotations)
+  * [Preferring Base Types Over Unions](#preferring-base-types-over-unions)
+- [Using Project References](#using-project-references)
+- [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
+  * [Specifying Files](#specifying-files)
+  * [Controlling `@types` Inclusion](#controlling-types-inclusion)
+  * [Incremental Project Emit](#incremental-project-emit)
+  * [Skipping `.d.ts` Checking](#skipping-dts-checking)
+  * [Using Faster Variance Checks](#using-faster-variance-checks)
+- [Configuring Other Build Tools](#configuring-other-build-tools)
+  * [Concurrent Type-Checking](#concurrent-type-checking)
+  * [Isolated File Emit](#isolated-file-emit)
+- [Investigating Issues](#investigating-issues)
+  * [Disabling Editor Plugins](#disabling-editor-plugins)
+  * [`extendedDiagnostics`](#extendeddiagnostics)
+  * [`showConfig`](#showconfig)
+  * [`traceResolution`](#traceresolution)
+  * [Running `tsc` Alone](#running-tsc-alone)
+  * [Upgrading Dependencies](#upgrading-dependencies)
+- [Common Issues](#common-issues)
+  * [Misconfigured `include` and `exclude`](#misconfigured-include-and-exclude)
+- [Filing an Issue](#filing-an-issue)
+  * [Reporting Compiler Performance Issues](#reporting-compiler-performance-issues)
+    + [Profiling the Compiler](#profiling-the-compiler)
+  * [Reporting Editing Performance Issues](#reporting-editing-performance-issues)
+    + [Taking a TSServer Log](#taking-a-tsserver-log)
+      - [Collecting a TSServer Log in Visual Studio Code](#collecting-a-tsserver-log-in-visual-studio-code)
+
+# Writing Easy-to-Compile Code
+
+## Preferring Interfaces Over Intersections
+
+Much of the time, a simple type alias to an object type acts very similarly to an interface.
+
+```ts
+interface Foo { prop: string }
+
+type Bar = { prop: string };
+```
+
+However, interfaces typically have better properties in type display, and as soon as you need to compose two types, interfaces create a single flat object type that detects property conflicts.
+This is in contrast with intersection types, where every constituent is checked before checking against the effective type.
+Type relationships between interfaces are also cached, as opposed to intersection types.
+
+```diff
+- type Foo = Bar & Baz & {
+-     someProp: string;
+- }
++ interface Foo extends Bar, Baz {
++     someProp: string;
++ }
+```
+
+## Using Type Annotations
+
+Adding type annotations, especially return types, can save the compiler a lot of work.
+In part, this is because named types tend to be more compact than anonymous types (which the compiler might infer), which reduces the amount of time spend reading and writing declaration files (e.g. for incremental builds).
+Type inference is very convenient, so there's no need to do this universally - however, it can be a useful thing to try if you've identified a slow section of your code.
+
+```diff
+- import { otherFunc } from "other";
++ import { otherFunc, otherType } from "other";
+
+- export function func() {
++ export function func(): otherType {
+      return otherFunc();
+  }
+```
+
+## Preferring Base Types Over Unions
+
+Union types are great - they let you express the range of possible values for a type.
+
+```ts
+interface WeekdaySchedule {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+  wake: Time;
+  startWork: Time;
+  endWork: Time;
+  sleep: Time;
+}
+
+interface WeekendSchedule {
+  day: "Saturday" | "Sunday";
+  wake: Time;
+  familyMeal: Time;
+  sleep: Time;
+}
+
+declare function printSchedule(schedule: WeekdaySchedule | WeekendSchedule);
+```
+
+However, they also come with a cost.
+Every time an argument is passed to `printSchedule`, it has to be compared to each element of the union.
+For a two-element union, this is trivial and inexpensive.
+However, if your union has more than a dozen elements, it can cause real problems in compilation speed.
+For instance, to eliminate redundant members from a union, the elements have to be compared pairwise, which is quadratic.
+This sort of check might occur when intersecting large unions, where intersecting over each union member can result in enormous types that then need to be reduced.
+One way to avoid this is to use subtypes, rather than unions.
+
+```ts
+interface Schedule {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+  wake: Time;
+  sleep: Time;
+}
+
+interface WeekdaySchedule extends Schedule {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+  startWork: Time;
+  endWork: Time;
+}
+
+interface WeekendSchedule extends Schedule {
+  day: "Saturday" | "Sunday";
+  familyMeal: Time;
+}
+
+declare function printSchedule(schedule: Schedule);
+```
+
+A more realistic example of this might come up when trying to model every built-in DOM element type.
+In this case, it would be preferable to create a base `HtmlElement` type with common members, which `DivElement`, `ImgElement`, etc. extend, rather than to create the exhaustive union `DivElement | /*...*/ | ImgElement | /*...*/`.
+
 # Using Project References
 
 When building up any codebase of a non-trivial size with TypeScript, it is helpful to organize the codebase into several independent *projects*.
 Each project has its own `tsconfig.json` that has dependencies on other projects.
 This can be helpful to avoid loading too many files in a single compilation, and also makes certain codebase layout strategies easier to put together.
 
-There are some very basic ways of breaking up a codebase into projects.
+There are some very basic ways of [breaking up a codebase into projects](https://www.typescriptlang.org/docs/handbook/project-references.html).
 As an example, one might be a program with a project for the client, a project for the server, and a project that's shared between the two.
 
 ```
@@ -45,12 +171,23 @@ Tests can also be broken into their own project.
 ------------                ------------
 ```
 
+One commonly asked question is "how big should a project be?".
+This is a lot like asking "how big should a function be?" or "how big should a class be?" and, to a large extent, it comes down to experience.
+One familiar way of splitting up JS/TS code is with folders.
+As a heuristic, if things are related enough to go in the same folder, they belong in the same project.
+Beyond that, avoid massive or tiny projects.
+If one project is larger than all the others combined, that's a warning sign.
+Similarly, it's best to avoid having dozens of single-file projects because the overhead adds up.
+
 You can [read up more about project references here](https://www.typescriptlang.org/docs/handbook/project-references.html).
 
 # Configuring `tsconfig.json` or `jsconfig.json`
 
 TypeScript and JavaScript users can always configure their compilations with a `tsconfig.json` file.
 [`jsconfig.json` files can also be used to configure the editing experience](https://code.visualstudio.com/docs/languages/jsconfig) for JavaScript users.
+
+## Specifying Files
+
 You should always make sure that your configuration files aren't including too many files at once.
 
 Within a `tsconfig.json`, there are two ways to specify files in a project.
@@ -58,7 +195,7 @@ Within a `tsconfig.json`, there are two ways to specify files in a project.
 * the `files` list
 * the `include` and `exclude` lists
 
-The primary difference between the two is that `files` expects a list of file paths to source files, and `include/`exclude` use globbing patterns to match against files.
+The primary difference between the two is that `files` expects a list of file paths to source files, and `include`/`exclude` use globbing patterns to match against files.
 
 While specifying `files` will allow TypeScript to quickly load up files up directly, it can be cumbersome if you have many files in your project without just a few top-level entry-points.
 Additionally, it's easy to forget to add new files to your `tsconfig.json`, which means that you might end up with strange editor behavior where those new files are incorrectly analyzed.
@@ -74,7 +211,10 @@ For best practices, we recommend the following:
 * Specify only input folders in your project (i.e. folders whose source code you want to include for compilation/analysis).
 * Don't mix source files from other projects in the same folder.
 * If keeping tests in the same folder as other source files, give them a distinct name so they can easily be excluded.
-* Avoid large build artifacts and dependency folders like `node_modules` in source directories
+* Avoid large build artifacts and dependency folders like `node_modules` in source directories.
+
+Note: without an `exclude` list, `node_modules` is excluded by default;
+as soon as one is added, it's important to explicitly add `node_modules` to the list.
 
 Here is a reasonable `tsconfig.json` that demonstrates this in action.
 
@@ -85,6 +225,51 @@ Here is a reasonable `tsconfig.json` that demonstrates this in action.
     },
     "include": ["src"],
     "exclude": ["**/node_modules", "**/.*/"],
+}
+```
+
+## Controlling `@types` Inclusion
+
+By default, TypeScript automatically includes every `@types` package that it finds in your `node_modules` folder, regardless of whether you import it.
+This is meant to make certain things "just work" when using Node.js, Jasmine, Mocha, Chai, etc. since these tools/packages aren't imported - they're just loaded into the global environment.
+
+Sometimes this logic can slow down program construction time in both compilation and editing scenarios, and it can even cause issues with multiple global packages with conflicting declarations, causing errors like
+
+```
+Duplicate identifier 'IteratorResult'.
+Duplicate identifier 'it'.
+Duplicate identifier 'define'.
+Duplicate identifier 'require'.
+```
+
+In cases where no global package is required, the fix is as easy as specifying an empty field for [the `"types"` option](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#types-typeroots-and-types) in a `tsconfig.json`/`jsconfig.json`
+
+```json5
+// src/tsconfig.json
+{
+   "compilerOptions": {
+       // ...
+
+       // Don't automatically include anything.
+       // Only include `@types` packages that we need to import.
+       "types" : []
+   },
+   "files": ["foo.ts"]
+}
+```
+
+If you still need a few global packages, add them to the `types` field.
+
+```json5
+// tests/tsconfig.json
+{
+   "compilerOptions": {
+       // ...
+
+       // Only include `@types/node` and `@types/mocha`.
+       "types" : ["node", "mocha"]
+   },
+   "files": ["foo.test.ts"]
 }
 ```
 
@@ -105,6 +290,17 @@ TypeScript provides the option to skip type-checking of the `.d.ts` files that i
 Alternatively, you can also enable the `skipLibCheck` flag to skip checking *all* `.d.ts` files in a compilation.
 
 These two options can often hide misconfiguration and conflicts in `.d.ts` files, so we suggest using them *only* for faster builds.
+
+## Using Faster Variance Checks
+
+Is a list of dogs a list of animals?
+That is, is `List<Dog>` assignable to `List<Animals>`?
+The straightforward way to find out is to do a structural comparison of the types, member by member.
+Unfortunately, this can be very expensive.
+However, if we know enough about `List<T>`, we can reduce this assignability check to determining whether `Dog` is assignable to `Animal` (i.e. without considering each member of `List<T>`).
+(In particular, we need to know the [variance](https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)) of the type parameter `T`.)
+The compiler can only take full advantage of this potential speedup if the `strictFunctionTypes` flag is enabled (otherwise, it uses the slower, but more lenient, structural check).
+For this reason, we recommend building with `--strictFunctionTypes` (which is enabled by default under `--strict`).
 
 # Configuring Other Build Tools
 
@@ -130,19 +326,18 @@ An example of this in action is the [`fork-ts-checker-webpack-plugin`](https://g
 
 By default, TypeScript's emit requires semantic information that might not be local to a file.
 This is to understand how to emit features like `const enum`s and `namespace`s.
-But needing to check other files to emit of an arbitrary file can make emit slower.
+But needing to check *other* files to generate the output for an arbitrary file can make emit slower.
 
 The need for features that need non-local information is somewhat rare - regular `enum`s can be used in place of `const enum`s, and modules can be used instead of `namespace`s.
-For that reason, TypeScript provides the `isolatedModules` flag to warn when using them.
-Enabling `isolatedModules` means that your codebase is safe for tools to use TypeScript APIs like `transpileModule` or alternative compilers like Babel.
+For that reason, TypeScript provides the `isolatedModules` flag to error on features powered by non-local information.
+Enabling `isolatedModules` means that your codebase is safe for tools that use TypeScript APIs like `transpileModule` or alternative compilers like Babel.
 
-If you *don't* turn `isolatedModules` on, then using build tools cannot properly transform code using isolated file emit techniques.
-As an example, the following code won't properly work at runtime because `const enum` values are expected to be inlined.
+As an example, the following code won't properly work at runtime with isolated file transforms because `const enum` values are expected to be inlined; but luckily, `isolatedModules` will tell us that early on.
 
 ```ts
 // ./src/fileA.ts
 
-export const enum E {
+export declare const enum E {
     A = 0,
     B = 1,
 }
@@ -152,7 +347,12 @@ export const enum E {
 import { E } from "./fileA";
 
 console.log(E.A);
+//          ~
+// error: Cannot access ambient const enums when the '--isolatedModules' flag is provided.
 ```
+
+> **Remember:** `isolatedModules` doesn't automatically make code generation faster - it just tells you when you're about to use a feature that might not be supported.
+The thing you're looking for is isolated module emit in different build tools and APIs.
 
 Isolated file emit can be leveraged by using the following tools:
 
@@ -163,6 +363,8 @@ Isolated file emit can be leveraged by using the following tools:
 * [babel-loader](https://github.com/babel/babel-loader) compiles files in an isolated manner (but does not provide type-checking on its own).
 * [gulp-typescript](https://www.npmjs.com/package/gulp-typescript) enables isolated file emit when `isolatedModules` is enabled.
 * [rollup-plugin-typescript](https://github.com/rollup/rollup-plugin-typescript) ***only*** performs isolated file compilation.
+* [ts-jest](https://kulshekhar.github.io/ts-jest/) can use be configured with the [`isolatedModules` flag set to `true`]isolatedModules: true(.
+* [ts-node](https://www.npmjs.com/package/ts-node) can detect [the `"transpileOnly"` option in the `"ts-node"` field of a `tsconfig.json`, and also has a `--transpile-only` flag](https://www.npmjs.com/package/ts-node#cli-and-programmatic-options).
 
 # Investigating Issues
 
