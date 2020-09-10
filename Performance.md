@@ -99,7 +99,7 @@ declare function printSchedule(schedule: WeekdaySchedule | WeekendSchedule);
 However, they also come with a cost.
 Every time an object is assigned to a `Schedule`, it has to be compared to each element of the union.
 For a two-element union, this is trivial and inexpensive.
-However, if your union has more than a dozen elements, it can cause real problems.
+However, if your union has more than a dozen elements, it can cause real problems in compilation speed.
 For instance, to eliminate redundant members from a union, the elements have to be compared pairwise, which is quadratic.
 Similarly, if you intersect large unions, distribution can result in enormous types.
 One way to avoid this is to use subtypes, rather than unions.
