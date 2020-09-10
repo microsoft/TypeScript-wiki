@@ -4,7 +4,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
 
 - [Writing Easy-to-Compile Code](#writing-easy-to-compile-code)
   * [Preferring Interfaces Over Intersections](#preferring-interfaces-over-intersections)
-  * [Using Type Annotations](#using-type-annotation)
+  * [Using Type Annotations](#using-type-annotations)
   * [Preferring Base Types Over Unions](#preferring-base-types-over-unions)
 - [Using Project References](#using-project-references)
 - [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
