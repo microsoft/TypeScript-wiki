@@ -5,6 +5,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
 - [Writing Easy-to-Compile Code](#writing-easy-to-compile-code)
   * [Preferring Interfaces Over Intersections](#preferring-interfaces-over-intersections)
   * [Using Type Annotations](#using-type-annotation)
+  * [Preferring Base Types Over Unions](#preferring-base-types-over-unions)
 - [Using Project References](#using-project-references)
 - [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
   * [Specifying Files](#specifying-files)
@@ -74,6 +75,60 @@ Type inference is very convenient, so there's no need to do this universally - h
 +     return otherFunc();
 + }
 ```
+
+## Preferring Base Types Over Unions
+
+Union types are great - they let you express the range of possible values for a type.
+
+```ts
+interface WeekdaySchedule {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+  wake: Time;
+  startWork: Time;
+  endWork: Time;
+  sleep: Time;
+}
+
+interface WeekendSchedule {
+  day: "Saturday" | "Sunday";
+  wake: Time;
+  familyMeal: Time;
+  sleep: Time;
+}
+
+declare function printSchedule(schedule: WeekdaySchedule | WeekendSchedule);
+```
+
+However, they also come with a cost.
+Every time an object is assigned to a `Schedule`, it has to be compared to each element of the union.
+For a two-element union, this is trivial and inexpensive.
+However, if your union has more than a dozen elements, it can cause real problems.
+For instance, to eliminate redundant members from a union, the elements have to be compared pairwise, which is quadratic.
+Similarly, if you intersect large unions, distribution can result in enormous types.
+One way to avoid this is to use subtypes, rather than unions.
+
+```ts
+interface Schedule {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+  wake: Time;
+  sleep: Time;
+}
+
+interface WeekdaySchedule extends Schedule {
+  day: "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+  startWork: Time;
+  endWork: Time;
+}
+
+interface WeekendSchedule extends Schedule {
+  day: "Saturday" | "Sunday";
+  familyMeal: Time;
+}
+
+declare function printSchedule(schedule: Schedule);
+```
+
+More realistically, consider declaring a base `HtmlElement` type, which `DivElement`, `ImgElement`, etc extend, rather than using a union `DivElement | /*...*/ | ImgElement | /*...*/`.
 
 # Using Project References
 
