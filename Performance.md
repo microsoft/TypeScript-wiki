@@ -65,15 +65,12 @@ Type inference is very convenient, so there's no need to do this universally - h
 
 ```diff
 - import { otherFunc } from "other";
--
-- export function func() {
--     return otherFunc();
-- }
 + import { otherFunc, otherType } from "other";
-+
+ 
+- export function func() {
 + export function func(): otherType {
-+     return otherFunc();
-+ }
+      return otherFunc();
+  }
 ```
 
 ## Preferring Base Types Over Unions
