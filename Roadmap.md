@@ -25,7 +25,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
 * [ ] [Pedantic `override` Checks](https://github.com/microsoft/TypeScript/issues/2000)
 * [ ] [Pedantic Index Signature Checks](https://github.com/microsoft/TypeScript/issues/13778)
-* [ ] [Improved Excess Property Checks](https://github.com/microsoft/TypeScript/pull/40311)
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
 * [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
