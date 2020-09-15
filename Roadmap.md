@@ -21,10 +21,9 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.1 Iteration Plan for more details](https://github.com/microsoft/TypeScript/issues/40124)
 
-* [ ] [Key Renaming in Mapped Types and Template String Types](https://github.com/microsoft/TypeScript/issues/12754)
+* [x] [Key Renaming in Mapped Types and Template String Types](https://github.com/microsoft/TypeScript/issues/12754)
 * [x] [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
-* [ ] [Pedantic `override` Checks](https://github.com/microsoft/TypeScript/issues/2000)
-* [ ] [Pedantic Index Signature Checks](https://github.com/microsoft/TypeScript/issues/13778)
+* [x] [Pedantic Index Signature Checks](https://github.com/microsoft/TypeScript/issues/13778)
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
 * [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
