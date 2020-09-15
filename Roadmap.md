@@ -17,6 +17,10 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.2 (February 2021)
+
+* [ ] [Pedantic `override` Checks](https://github.com/microsoft/TypeScript/issues/2000)
+
 # 4.1. (November 2020)
 
 [See the 4.1 Iteration Plan for more details](https://github.com/microsoft/TypeScript/issues/40124)
