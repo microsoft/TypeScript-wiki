@@ -4,7 +4,7 @@ The TypeScript team develops around one central branch: `master`.
 This branch is used for nightly builds, and is the source of truth.
 This central branch is always meant to build cleanly.
 
-# How Branching Works Around Releases
+# The Typical Release Schedule
 
 The typical release schedule for a version `X.Y` looks like
 
@@ -17,6 +17,8 @@ The typical release schedule for a version `X.Y` looks like
 1. Then every week evaluate whether the following needs to be done:
     1. Cherry-pick prioritized new work into the X.Y branch
     1. Release a new patch version
+
+# How Branching Works Around Releases
 
 What happens behind the covers on the engineering team?
 
