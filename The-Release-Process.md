@@ -29,6 +29,11 @@ What happens behind the covers on the engineering team?
 1. After the RC goes out, the assumption is that all work in `master` will go into TypeScript X.(Y + 1). **Any critical changes will need to be cherry-picked to `release-X.Y`**.
 1. When we need to create a build for the stable release version of TypeScript X.Y, we bump the version to `X.Y.2` (with no pre-release version string or tag). On npm, this is published with `--tag latest`.
 
+# Release Tasks
+
+Every publish, especially the Beta, RC, and Stable releases, must undergo a set of release activities.
+These release activities are documented [here](https://github.com/microsoft/TypeScript/wiki/Release-Activities).
+
 # FAQ
 
 ## Why do you need to set the patch version on pre-releases?
