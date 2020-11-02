@@ -29,6 +29,29 @@ What happens behind the covers on the engineering team?
 1. After the RC goes out, the assumption is that all work in `master` will go into TypeScript X.(Y + 1). **Any critical changes will need to be cherry-picked to `release-X.Y`**.
 1. When we need to create a build for the stable release version of TypeScript X.Y, we bump the version to `X.Y.2` (with no pre-release version string or tag). On npm, this is published with `--tag latest`.
 
+## The Comment Command Sequence
+
+Much of this process is automated by [Triggering @typescript-bot](https://github.com/microsoft/TypeScript/wiki/Triggering-TypeScript-Bot) to perform tasks, along with a few GitHub actions.
+Typically, commands to the bot are given [in the Iteration Plan comments of a release](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+label%3APlanning+%22Iteration+Plan%22+).
+The commands roughly occur in the following order:
+
+1. Readying the Beta
+  1. `@typescript-bot create release-X.Y` (create the branch)
+  1. In the event that changes need to come in after:
+    1. `@typescript-bot sync release-X.Y`
+    1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Update+LKG%22) on `release-X.Y`.
+1. Readying the RC
+  1. `@typescript-bot sync release-X.Y` (sync `master` to `release-X.Y`)
+  1. `@typescript-bot bump release-X.Y` (update the version number)
+  1. In the event that changes need to come in after:
+    1. `@typescript-bot sync release-X.Y`
+    1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Update+LKG%22) on `release-X.Y`.
+1. Readying the Stable Release
+  1. `@typescript-bot bump release-X.Y` (update the version number)
+  1. On relevant PRs early on, run `@typescript-bot cherry-pick this to release-X.Y`
+  1. On PRs that look like they will be the last cherry-pick: `@typescript-bot cherry-pick this to release-X.Y and LKG`
+  1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Update+LKG%22) on `release-X.Y` when necessary.
+
 # Release Tasks
 
 Every publish, especially the Beta, RC, and Stable releases, must undergo a set of release activities.
