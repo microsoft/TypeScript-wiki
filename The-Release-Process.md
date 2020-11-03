@@ -1,15 +1,34 @@
-# Tracking Releases
+# How Do I Track Releases?
 
 Each release has a corresponding [Iteration Plan](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+label%3APlanning+%22Iteration+Plan) issue on GitHub.
-These iteration plans contain a list of **planned work items** as well as **release dates**.
+These iteration plans contain a list of **planned work items** as well as **planned release dates**.
 
 We also keep an updated [Feature Roadmap](https://github.com/Microsoft/TypeScript/wiki/Roadmap) which is typically more accurate in terms of what we release.
 
 The TypeScript team also maintains the official [TypeScript Blog](https://devblogs.microsoft.com/typescript/) where releases are announced.
 
-# What Work Gets Done?
+The official [@typescript](twitter.com/typescript/) Twitter account also will post release announcements.
+
+# What Are the Stages of a Release?
 
 TypeScript currently has two pre-releases (the Beta and the Release Candidate), followed by a stable "final" release, followed by any number of patches.
+
+```
+                                                         /---> TS 4.1.3 (patch)
+TS 4.1.0 Beta ----> TS 4.1.1 RC ------> TS 4.1.2 Stable <
+                                                         \----> TS 4.2.0 Beta
+```
+
+# How Often Does TypeScript Release?
+
+Releases are planned on a case-by-case basis, but in general you can expect a release around every 3 months.
+The breakdown across pre-release versions is typically
+
+* Betas are released about 4 weeks after the prior Stable release.
+* Release Candidates are released around 6 weeks after the prior Beta.
+* Stable releases are released around 2 weeks after the prior Release Candidate.
+
+# What Work Gets Done?
 
 ## What gets done for the Beta?
 
