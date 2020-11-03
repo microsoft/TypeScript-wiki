@@ -47,7 +47,7 @@ Editor features are okay to go in here because they are relatively easy to back 
 
 Once the RC goes out, the team begins focus on the next version of TypeScript.
 
-***Very few changes should be expected for a version after the release candidate.***
+***Very few changes should be expected for a version after the Release Candidate.***
 
 ## What gets done for the Stable/Final release?
 
