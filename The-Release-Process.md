@@ -65,6 +65,10 @@ Patch releases are periodically pushed out for any of the following:
 
 These fixes are typically weighed against the cost (how hard it would be for the team to retroactively apply/release a change), the risk (how much code is changed, how understandable is the fix), as well as how feasible it would be to wait for the next version.
 
+_____________
+
+> Note: the following section is targeted more at maintainers and contributors!
+
 # Release Mechanics
 
 The TypeScript team develops around one central branch: `master`.
