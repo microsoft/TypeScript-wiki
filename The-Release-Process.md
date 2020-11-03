@@ -1,9 +1,13 @@
 # How Do I Track Releases?
 
+## Planning and Development
+
 Each release has a corresponding [Iteration Plan](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+label%3APlanning+%22Iteration+Plan) issue on GitHub.
 These iteration plans contain a list of **planned work items** as well as **planned release dates**.
 
 We also keep an updated [Feature Roadmap](https://github.com/Microsoft/TypeScript/wiki/Roadmap) which is typically more accurate in terms of what we release.
+
+## Actual Releases
 
 The TypeScript team also maintains the official [TypeScript Blog](https://devblogs.microsoft.com/typescript/) where releases are announced.
 
