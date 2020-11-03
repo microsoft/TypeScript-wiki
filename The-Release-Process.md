@@ -1,3 +1,12 @@
+# Tracking Releases
+
+Each release has a corresponding [Iteration Plan](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+label%3APlanning+%22Iteration+Plan) issue on GitHub.
+These iteration plans contain a list of **planned work items** as well as **release dates**.
+
+We also keep an updated [Feature Roadmap](https://github.com/Microsoft/TypeScript/wiki/Roadmap) which is typically more accurate in terms of what we release.
+
+The TypeScript team also maintains the official [TypeScript Blog](https://devblogs.microsoft.com/typescript/) where releases are announced.
+
 # What Work Gets Done?
 
 TypeScript currently has two pre-releases (the Beta and the Release Candidate), followed by a stable "final" release, followed by any number of patches.
