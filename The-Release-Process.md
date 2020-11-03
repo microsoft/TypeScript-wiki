@@ -69,10 +69,46 @@ Patch releases are periodically pushed out for any of the following:
 
 These fixes are typically weighed against the cost (how hard it would be for the team to retroactively apply/release a change), the risk (how much code is changed, how understandable is the fix), as well as how feasible it would be to wait for the next version.
 
+## Which Version Should I Be Using?
+
+We always appreciate early feedback on new versions of the language and editor support!
+Depending on how you'd like to test TypeScript and contribute, there are a couple of different options.
+
+### Testing Independently
+
+Despite what the name might imply, [nightly versions](https://www.typescriptlang.org/docs/handbook/nightly-builds.html) are always the preferred way to test out the current state of TypeScript.
+While we won't necessarily endorse them for production use, nightlies are always fairly stable and easy to use.
+
+You can download a nightly release via npm (`npm install typescript@next`) and configure your editor support.
+If you can't commit to updating your build processes yet, but you write code in Visual Studio Code, you can use the [TypeScript and JavaScript Nightly](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next) extension to at least try out new versions of our editor support.
+
+### Testing New Features
+
+If you're willing to try new features, we make Beta releases available.
+This is often a good period to start providing feedback on new features, and the closer to the beta release that feedback occurs, the easier we can address it before it officially is added to the language.
+
+The longer you wait after a beta, the less relevant or actionable your feedback can occur.
+In those cases, we encourage you to switch to the nightly releases.
+
+### Testing for High-Priority Bug Fixes
+
+If you are extremely limited in your ability to provide feedback, the Release Candidate is the most stable pre-release we provide.
+Feedback on the Release Candidate can be addressed, but it is typically limited to high-priority bug fixes, not fundamental changes.
+
+If you intend to provide feedback that will fundamentally affect the design of the language, it should ideally be provided before the RC.
+If that is the case, do not wait until the release candidate.
+Use nightly releases to test on your own or within your team/organization!
+
+### Staying Up-to-Date
+
+If you can't commit any feedback, just stay up to date on the latest version of TypeScript.
+Dedicate a day or two every 3 months or so to perform the upgrade.
+
 _____________
 _____________
 
-> Note: the following section is targeted more at maintainers and contributors!
+The following section is targeted more at maintainers and contributors!
+If you're simply consuming TypeScript, it is probably not relevant.
 
 # Release Mechanics
 
