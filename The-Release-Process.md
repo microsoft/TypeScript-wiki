@@ -172,7 +172,10 @@ These release activities are documented [here](https://github.com/microsoft/Type
 
 # Publishing
 
-TODO
+The publishing process is largely internal at the moment, but it is also largely uninteresting.
+
+The most interesting portion of this is the fact that a Visual Studio build is created, typically 2-3 business days prior to a release, so that a testing team can perform a validation pass.
+This validation pass sometimes finds regressions in both the core TypeScript experience as well as the TypeScript/JavaScript editing experience.
 
 # FAQ
 
