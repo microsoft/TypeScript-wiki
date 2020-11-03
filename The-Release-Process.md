@@ -88,7 +88,7 @@ If you can't commit to updating your build processes yet, but you write code in 
 If you're willing to try new features, we make Beta releases available.
 This is often a good period to start providing feedback on new features, and the closer to the beta release that feedback occurs, the easier we can address it before it officially is added to the language.
 
-The longer you wait after a beta, the less relevant or actionable your feedback can occur.
+The longer you wait after a beta, the less actionable your feedback will be.
 In those cases, we encourage you to switch to the nightly releases.
 
 ## Testing for High-Priority Bug Fixes
