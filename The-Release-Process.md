@@ -25,7 +25,8 @@ TS 4.1.0 Beta ----> TS 4.1.1 RC ------> TS 4.1.2 Stable <
 
 # How Often Does TypeScript Release?
 
-Releases are planned on a case-by-case basis, but in general you can expect a release around every 3 months.
+Releases are planned on a case-by-case basis, but in general you can expect a release **around every 3 months**.
+
 The breakdown across pre-release versions is typically
 
 * Betas are released about 4 weeks after the prior Stable release.
