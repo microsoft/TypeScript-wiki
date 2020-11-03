@@ -77,7 +77,7 @@ _____________
 # Release Mechanics
 
 The TypeScript team develops around one central branch: `master`.
-This branch is used for nightly builds, and is the source of truth.
+This branch is used for [nightly builds](https://www.typescriptlang.org/docs/handbook/nightly-builds.html), and is the source of truth.
 This central branch is always meant to build cleanly.
 
 # The Typical Release Schedule
@@ -96,7 +96,7 @@ The typical release schedule for a version `X.Y` looks like
 
 # How Branching Works Around Releases
 
-What happens behind the covers on the engineering team?
+What does the team have to do to achieve that typical release schedule?
 
 1. Development always just occurs on the `master` branch. This is the default assumption.
 1. When we need to create the beta build for TypeScript X.Y, we create a branch called `release-X.Y` and bump the version to `X.Y.0-beta`. On npm, this is published with `--tag beta`.
@@ -132,6 +132,10 @@ The commands roughly occur in the following order:
 
 Every publish, especially the Beta, RC, and Stable releases, must undergo a set of release activities.
 These release activities are documented [here](https://github.com/microsoft/TypeScript/wiki/Release-Activities).
+
+# Publishing
+
+TODO
 
 # FAQ
 
