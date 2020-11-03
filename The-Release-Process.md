@@ -9,7 +9,7 @@ Breaking changes and features are "front-loaded" so that they can get ample test
 It also ensures we can roll back changes before there is too much momentum in a release.
 We strive to get these in as early as possible so that they are available in [nightly releases](https://www.typescriptlang.org/docs/handbook/nightly-builds.html).
 
-**We strive not to make breaking changes after the Beta release.**
+***We strive not to make breaking changes after the Beta release.***
 
 ## What gets done before the Release Candidate
 
@@ -19,12 +19,11 @@ Editor features are okay to go in here because they are relatively easy to back 
 
 Once the RC goes out, the team begins focus on the next version of TypeScript.
 
-**Very few changes should be expected for a version after the release candidate.**
-Changes are cherry-picked on a case-by-case basis for the final release.
+***Very few changes should be expected for a version after the release candidate.***
 
 ## What gets done before a Stable/Final release?
 
-High-priority fixes are applied following the Release Candidate.
+High-priority fixes are applied following the Release Candidate for the Stable release.
 
 By default, new bugs that are not regressions from the upcoming or prior version of TypeScript will be addressed in a new minor version following the final release.
 
