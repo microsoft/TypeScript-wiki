@@ -32,6 +32,7 @@ The breakdown across pre-release versions is typically
 * Betas are released about 4 weeks after the prior Stable release.
 * Release Candidates are released around 6 weeks after the prior Beta.
 * Stable releases are released around 2 weeks after the prior Release Candidate.
+* Patches are released at any frequency depending on urgency, but we evaluate at the end of every month whether a patch should be published for the current stable release.
 
 # What Work Gets Done?
 
