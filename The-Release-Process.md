@@ -2,7 +2,7 @@
 
 TypeScript currently has two pre-releases (the Beta and the Release Candidate), followed by a stable "final" release, followed by any number of patches.
 
-## What gets done before the Beta?
+## What gets done for the Beta?
 
 During the beta, new features, breaking changes, and bug fixes are prioritized.
 Breaking changes and features are "front-loaded" so that they can get ample testing in the beta and RC.
@@ -11,7 +11,7 @@ We strive to get these in as early as possible so that they are available in [ni
 
 ***We strive not to make breaking changes after the Beta release.***
 
-## What gets done before the Release Candidate
+## What gets done for the Release Candidate
 
 Following the beta release, work is done that leads to a Release Candidate (RC).
 The RC primarily contains bug fixes and often editor features that were not finished in time for the Beta.
@@ -21,11 +21,21 @@ Once the RC goes out, the team begins focus on the next version of TypeScript.
 
 ***Very few changes should be expected for a version after the release candidate.***
 
-## What gets done before a Stable/Final release?
+## What gets done for the Stable/Final release?
 
 High-priority fixes are applied following the Release Candidate for the Stable release.
 
 By default, new bugs that are not regressions from the upcoming or prior version of TypeScript will be addressed in a new minor version following the final release.
+
+## What gets done for patch releases?
+
+Patch releases are periodically pushed out for any of the following:
+
+* High-priority regression fixes
+* Performance regression fixes
+* Safe fixes to the language service/editing experience
+
+These fixes are typically weighed against the cost (how hard it would be for the team to retroactively apply/release a change), the risk (how much code is changed, how understandable is the fix), as well as how feasible it would be to wait for the next version.
 
 # Release Mechanics
 
