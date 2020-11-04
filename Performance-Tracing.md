@@ -67,6 +67,10 @@ The goal of this process is to be able to extract a reduced repro for which you 
     5.  This mode is for zooming.
         Click-drag up or right to zoom in and down or left to zoom out.
 
+    *Aside:* the [edge://tracing](edge://tracing) tracing controls are rather clumsy.
+    An alternative is to open the trace in the F12 tools by clicking the Upload button on the Performance tab.
+    This has much more modern navigation, but drops instant events (mostly used for errors in compiler traces) and possibly other features.  We hope to improve support in future releases.
+
 7.  If you expand the Main thread and select one of the boxes, you'll see something like this, with time on the horizontal axis and (partial) call stacks growing down from the top:\
     ![Expanded view of edge://tracing](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingExpanded.png)
     1.  You can easily differentiate the four major phases of compilation.
@@ -149,7 +153,3 @@ From the file path in `checkSourceFile` and the types we've just pulled out of `
 Look hard enough and you'll be able to create a toy program that reproduces the performance issue you're seeing in your real code.
 We'd love to hear about it but, if you still can't share, the next step is to play around with alternate declarations and `any` type assertions until you've sped up the toy program.
 Then you can apply the same fix or mitigation to your real code.
-
-*Aside:* the [edge://tracing](edge://tracing) tracing controls are rather clumsy.
-An alternative is to open the trace in the F12 tools by clicking the Upload button on the Performance tab.
-This has much more modern navigation, but drops instant events (mostly used for errors in compiler traces) and possibly other features.
