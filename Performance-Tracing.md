@@ -6,7 +6,7 @@ This feature is still experimental and will likely change significantly in TS 4.
 In particular, though it would be easy and helpful to post-process the trace files, you should assume that any such post-processing tools will be broken by TS 4.2.
 
 Trace files are basically useless without the underlying code, so there's little reason to share one with anyone who can't access your code.
-If you do share them, please consider zipping them - they compress very well.
+If you do share them, please consider zipping them — they compress very well.
 
 # Getting Started
 
@@ -24,7 +24,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
 
 3.  Once your project builds without errors, compile your project with `tsc` and `--generateTrace some_directory`.
     You can use `.` as the directory, but it may get cluttered, so a subdirectory is usually preferable.
-    In this early version of the feature, you have to use `tsc` specifically - building through a bundler that invokes TypeScipt via the API will not work.
+    In this early version of the feature, you have to use `tsc` specifically — building through a bundler that invokes TypeScipt via the API will not work.
     For best results, make sure this is not an incremental build (i.e. pass `-f` in build mode or `--incremental false` for regular compilation).
 
 4.  Let's assume you called your output directory "trace".
@@ -57,7 +57,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
     ![Initial view of edge://tracing](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingJustOpened.png)
     1.  Use the little triangle to expand the view of the "Main" thread.
         For convenience, we ignore all other threads.
-    2.  This little toolbar is floating - you'll probably want to move it into the blank space under the thread name (i.e. into the left sidebar).
+    2.  This little toolbar is floating — you'll probably want to move it into the blank space under the thread name (i.e. into the left sidebar).
         Each button indicates a cursor mode.
     3.  This mode is for selection.
         Selecting a single element is possible in most modes, but box selection is only possible in this one.\
@@ -86,11 +86,11 @@ The goal of this process is to be able to extract a reduced repro for which you 
     4.  This is the emit phase, which we'll ignore for now.
     5.  This is the selected box.
     6.  These are the built-in metadata about the box.
-        1.  `Start` is the timestamp of the start of the operation - usually uninteresting.
+        1.  `Start` is the timestamp of the start of the operation — usually uninteresting.
         2.  `Wall Duration` this is what would be called "Total Time" in many profiling tools.
         3.  `Self Time` is the amount of time that is not accounted for by child boxes (i.e. directly below this one).
     7.  This metadata is specific to the kind of box you're looking at.
-        *This is the most important information* - it will contain paths and things.
+        *This is the most important information* — it will contain paths and things.
 
     *Note:* All times reflect the overhead of tracing, which is not spread uniformly through the execution.
     We're looking for ways to reduce the impact.
@@ -99,7 +99,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
     Here we see a zoomed in portion of the trace:\
     ![Checking phase portion of trace](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingCheckVariableDeclaration.png)
     1.  What we're looking at is a call stack summary, with callers above and callees below.
-        *Not all frames are present* - the trace would be too large and hard to read.
+        *Not all frames are present* — the trace would be too large and hard to read.
         Three box types are of particular interest when reducing a repro:
         1.  `checkSourceFile` gives the time spent checking a particular file.
             Look in the metadata for the file path.
@@ -146,7 +146,7 @@ Here are the corresponding entries from `types.json`.
 ```
 
 This data gives us some sense of what they look like and a location where we can review the declaration.
-In this case, we're comparing two different instantiations of [`NamedExoticComponent<P>`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/599ef3c6e2142d87b6b4bcf030fb798504c3a468/types/react/index.d.ts#L361) - one instantiated with type `20434` and the other with `20437`.
+In this case, we're comparing two different instantiations of [`NamedExoticComponent<P>`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/599ef3c6e2142d87b6b4bcf030fb798504c3a468/types/react/index.d.ts#L361) — one instantiated with type `20434` and the other with `20437`.
 These types are also described in `types.json`, so keep looking up more types recursively until you understand what's going on.
 From the file path in `checkSourceFile` and the types we've just pulled out of `types.json`, we can probably guess approximately which code fragment was involved (knowing in advance that it's neither an expression, nor a variable declaration, which would have gotten a box).
 
