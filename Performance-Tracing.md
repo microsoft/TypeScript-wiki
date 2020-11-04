@@ -1,8 +1,6 @@
-# Performance Tracing
-
 TypeScript 4.1 introduced a `generateTrace` flag to make it easier to identify the parts of a program that are taking the most time to compile.
 
-## Warnings
+# Warnings
 
 This feature is still experimental and will likely change significantly in TS 4.2.
 In particular, though it would be easy and helpful to post-process the trace files, you should assume that any such post-processing tools will be broken by TS 4.2.
@@ -10,7 +8,7 @@ In particular, though it would be easy and helpful to post-process the trace fil
 Trace files are basically useless without the underlying code, so there's little reason to share one with anyone who can't access your code.
 If you do share them, please consider zipping them - they compress very well.
 
-## Getting Started
+# Getting Started
 
 At present, the output is not very user friendly, but here are some steps you can take to identify the parts of your code that are slowing the compiler down.
 The goal of this process is to be able to extract a reduced repro for which you can file an [issue](https://github.com/microsoft/TypeScript/issues).
@@ -121,7 +119,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
     If none of the suggestions help, please file an [issue](https://github.com/microsoft/TypeScript/issues), including code that reproduces the slowdown you're seeing and instructions for compiling it.
 
 
-## Advanced
+# Advanced
 
 At this point, it's going to be pretty hard to keep going if you don't have a good mental model of how types are represented in the compiler.
 On top of that, the structure of this output is very likely to change in TS 4.2.
