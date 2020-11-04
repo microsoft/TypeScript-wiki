@@ -142,7 +142,7 @@ Here are the corresponding entries from `types.json`.
 ```
 
 This data gives us some sense of what they look like and a location where we can review the declaration.
-In this case, we're comparing two different instantiations of [NamedExoticComponent&lt;P&gt;](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/599ef3c6e2142d87b6b4bcf030fb798504c3a468/types/react/index.d.ts#L361) - one instantiated with type `20434` and the other with `20437`.
+In this case, we're comparing two different instantiations of [`NamedExoticComponent<P>`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/599ef3c6e2142d87b6b4bcf030fb798504c3a468/types/react/index.d.ts#L361) - one instantiated with type `20434` and the other with `20437`.
 These types are also described in `types.json`, so keep looking up more types recursively until you understand what's going on.
 From the file path in `checkSourceFile` and the types we've just pulled out of `types.json`, we can probably guess approximately which code fragment was involved (knowing in advance that it's neither an expression, nor a variable declaration, which would have gotten a box).
 
