@@ -5,7 +5,7 @@ TypeScript 4.1 introduced a `generateTrace` flag to make it easier to identify t
 ## Warnings
 
 This feature is still experimental and will likely change significantly in TS 4.2.
-In particular, though it would be easy and helpful to post-process the trace files, you should assume that your post-processing tools will be broken by TS 4.2.
+In particular, though it would be easy and helpful to post-process the trace files, you should assume that any such post-processing tools will be broken by TS 4.2.
 
 Trace files are basically useless without the underlying code, so there's little reason to share one with anyone who can't access your code.
 If you do share them, please consider zipping them - they compress very well.
@@ -16,18 +16,18 @@ At present, the output is not very user friendly, but here are some steps you ca
 The goal of this process is to be able to extract a reduced repro for which you can file an [issue](https://github.com/microsoft/TypeScript/issues).
 
 1.  This document is specific to TS 4.1 RC and TS 4.1, so you'll need to install one of those.
-    The easiest way is to `npm install typescript@rc` ( or `typescript@4.1`, once it is released).
-    There's no need to check in a change to your repo - you can just use it locally while you do your tracing.
+    The easiest way is to `npm install typescript@rc` (or `typescript@4.1`, once it is released).
+    Tracing with TypeScript 4.1 can be done once locally, so any changes to your `node_modules` and `package.json` can be discarded afterwards.
 
 2.  Rebuild your project with the newly installed version of Typescript.
     Odds are you're going to get some new compiler errors.
-    Ideally, you want to fix these new errors correctly, so that the code you trace will be realistic.
+    Ideally, you'll want to address these new errors, so that the code you trace will be realistic.
     If that is not feasible, prefer `@ts-ignore` to `any`, because it will cause less short-circuiting.
 
-3.  Once your project builds without errors, compile your project with `tsc` and `-generateTrace some_directory`.
+3.  Once your project builds without errors, compile your project with `tsc` and `--generateTrace some_directory`.
     You can use `.` as the directory, but it may get cluttered, so a subdirectory is usually preferable.
     In this early version of the feature, you have to use `tsc` specifically - building through a bundler that invokes TypeScipt via the API will not work.
-    For best results, make sure this is not an incremental build (i.e. pass `-f` in build mode or `-incremental false` for regular compilation).
+    For best results, make sure this is not an incremental build (i.e. pass `-f` in build mode or `--incremental false` for regular compilation).
 
 4.  Let's assume you called your output directory "trace".
     You should now have a directory structure like this:
@@ -72,15 +72,15 @@ The goal of this process is to be able to extract a reduced repro for which you 
 7.  If you expand the Main thread and select one of the boxes, you'll see something like this, with time on the horizontal axis and (partial) call stacks growing down from the top:\
     ![Expanded view of edge://tracing](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingExpanded.png)
     1.  You can easily differentiate the four major phases of compilation.
-        This is program construction, which includes parsing and modules resolution.
+        This is program construction, which includes parsing and module resolution.
         Usually, you want to look for the largest `findSourceFile` boxes and follow them down to see which dependency chain is taking the most time.
-        Usually, it will be a library outside your own code.
+        Generally, it will be a library outside your own code.
         Be sure to include this library in any repro you construct.
     2.  This is the binding phase.
         It is rarely an issue, so we'll ignore it for now.
     3.  This is the (type) checking phase, where most of the TypeScript-specific work happens.
         *You generally want to start here.*
-        We'll zoom in in a later step.
+        We'll consider this is more detail in a later step.
     4.  This is the emit phase, which we'll ignore for now.
     5.  This is the selected box.
     6.  These are the built-in metadata about the box.
@@ -91,6 +91,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
         *This is the most important information* - it will contain paths and things.
 
     *Note:* All times reflect the overhead of tracing, which is not spread uniformly through the execution.
+    We're looking for ways to reduce the impact.
 
 8.  As mentioned above, the checking phase will generally be the most interesting when diagnosing delays.
     Here we see a zoomed in portion of the trace:\
@@ -109,7 +110,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
             The metadata for these boxes is not particularly convenient to consume.
             1.  `kind` identifies a member of the [SyntaxKind](https://github.com/microsoft/TypeScript/blob/9c60d5a4d33e4ed846cad2136da9efcd48adf847/src/compiler/types.ts#L21) enum.
             2.  `pos` is the zero-indexed character offset from the beginning of the file to the beginning of the range being checked.
-                Note that position will be *before* any trivia (whitespace, comments) before the relevant code fragment, so it will frequently appears to be immediately after the *preceding* statement.
+                Note that position will be *before* any trivia (whitespace, comments) before the relevant code fragment, so it will frequently appear to be immediately after the *preceding* statement.
             3.  `end` is the zero-indexed character offset from the beginning of the file to the end of the range being checked.
     2.  In this particular screenshot, we see that a single variable declaration accounts for a large percentage of the check time of this entire file.
         However, the declaration itself is not interesting because its child is an expression that is nearly as wide (i.e. the declaration has low "Self Time").
