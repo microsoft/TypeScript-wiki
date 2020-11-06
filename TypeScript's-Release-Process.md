@@ -1,13 +1,13 @@
 # How Do I Track Releases?
 
-## Planning and Development
+## Tracking Planning and Development
 
 Each release has a corresponding [Iteration Plan](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+label%3APlanning+%22Iteration+Plan) issue on GitHub.
 These iteration plans contain a list of **planned work items** as well as **planned release dates**.
 
 We also keep an updated [Feature Roadmap](https://github.com/Microsoft/TypeScript/wiki/Roadmap) which is typically more accurate in terms of what we release.
 
-## Actual Releases
+## Tracking Actual Releases
 
 The TypeScript team also maintains the official [TypeScript Blog](https://devblogs.microsoft.com/typescript/) where releases are announced.
 
@@ -25,7 +25,8 @@ TS 4.1.0 Beta ----> TS 4.1.1 RC ------> TS 4.1.2 Stable <
 
 # How Often Does TypeScript Release?
 
-Releases are planned on a case-by-case basis, but in general you can expect a release **around every 3 months**.
+In general you can expect a release **around every 3 months**.
+TypeScript's release cadence is relatively regular in this respect, though there may occasionally be some variance due to holidays and other scheduling concerns.
 
 The breakdown across pre-release versions is typically
 
