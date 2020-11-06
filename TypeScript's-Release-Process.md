@@ -46,7 +46,7 @@ We strive to get these in as early as possible so that they are available in [ni
 
 ***We strive not to make breaking changes after the Beta release.***
 
-## What gets done for the Release Candidate
+## What gets done for the Release Candidate?
 
 Following the beta release, work is done that leads to a Release Candidate (RC).
 The RC primarily contains bug fixes and often editor features that were not finished in time for the Beta.
