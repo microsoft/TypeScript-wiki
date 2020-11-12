@@ -14,9 +14,7 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
 
 * [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions) to support ***the next version***, and publish new version
     * in other words, if we're releasing TypeScript 3.9, the header parser needs to support `4.0`.
-    * To do this, add the new version to the `supported` list.
-* [ ] Run [@definitelytyped/retag](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/retag) to add the tag `ts4.0` to each package.
-
+    * Follow the instructions in `typescript-versions`' source to update dependents.
 
 ## Release Activities
 
