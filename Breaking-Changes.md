@@ -4,6 +4,64 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.1
 
+### `abstract` Members Can't Be Marked `async`
+
+Members marked as `abstract` can no longer be marked as `async`.
+The fix here is to remove the `async` keyword, since callers are only concerned with the return type.
+
+### `resolve`'s Parameters Are No Longer Optional in `Promise`s
+
+When writing code like the following
+
+```ts
+new Promise(resolve => {
+    doSomethingAsync(() => {
+        doSomething();
+        resolve();
+    })
+})
+```
+
+You may get an error like the following:
+
+```
+  resolve()
+  ~~~~~~~~~
+error TS2554: Expected 1 arguments, but got 0.
+  An argument for 'value' was not provided.
+```
+
+This is because `resolve` no longer has an optional parameter, so by default, it must now be passed a value.
+Often this catches legitimate bugs with using `Promise`s.
+The typical fix is to pass it the correct argument, and sometimes to add an explicit type argument.
+
+```ts
+new Promise<number>(resolve => {
+    //     ^^^^^^^^
+    doSomethingAsync(value => {
+        doSomething();
+        resolve(value);
+        //      ^^^^^
+    })
+})
+```
+
+However, sometimes `resolve()` really does need to be called without an argument.
+In these cases, we can give `Promise` an explicit `void` generic type argument (i.e. write it out as `Promise<void>`).
+This leverages new functionality in TypeScript 4.1 where a potentially-`void` trailing parameter can become optional.
+
+```ts
+new Promise<void>(resolve => {
+    //     ^^^^^^
+    doSomethingAsync(() => {
+        doSomething();
+        resolve();
+    })
+})
+```
+
+TypeScript 4.1 ships with a quick fix to help fix this break.
+
 ### `any` and `unknown` are considered possibly falsy in `&&` expressions
 
 _**Note:** This change, and the description of the previous behavior, apply only under `--strictNullChecks`._
@@ -49,6 +107,71 @@ function isThing(x: unknown): boolean {
 If `x` is a falsy value other than `false`, the function will return it, in conflict with the `boolean` return type annotation. The error can be resolved by replacing the first `x` in the return expression with `!!x`.
 
 See more details on the [implementing pull request](https://github.com/microsoft/TypeScript/pull/39529).
+
+### Conditional Spreads Create Optional Properties
+
+In JavaScript, object spreads (like `{ ...foo }`) don't operate over falsy values.
+So in code like `{ ...foo }`, `foo` will be skipped over if it's `null` or `undefined`.
+
+Many users take advantage of this to spread in properties "conditionally".
+
+```ts
+interface Person {
+    name: string;
+    age: number;
+    location: string;
+}
+
+interface Animal {
+    name: string;
+    owner: Person;
+}
+
+function copyOwner(pet?: Animal) {
+    return {
+        ...(pet && pet.owner),
+        otherStuff: 123
+    }
+}
+
+// We could also use optional chaining here:
+
+function copyOwner(pet?: Animal) {
+    return {
+        ...(pet?.owner),
+        otherStuff: 123
+    }
+}
+```
+
+Here, if `pet` is defined, the properties of `pet.owner` will be spread in - otherwise, no properties will be spread into the returned object.
+
+The return type of `copyOwner` was previously a union type based on each spread:
+
+```
+{ x: number } | { x: number, name: string, age: number, location: string }
+```
+
+This modeled exactly how the operation would occur: if `pet` was defined, all the properties from `Person` would be present; otherwise, none of them would be defined on the result.
+It was an all-or-nothing operation.
+
+However, we've seen this pattern taken to the extreme, with hundreds of spreads in a single object, each spread potentially adding in hundreds or thousands of properties.
+It turns out that for various reasons, this ends up being extremely expensive, and usually for not much benefit.
+
+In TypeScript 4.1, the returned type instead uses all-optional properties.
+
+```
+{
+    x: number;
+    name?: string;
+    age?: number;
+    location?: string;
+}
+```
+
+This ends up performing better and generally displaying better too.
+
+For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/40778).
 
 # TypeScript 4.0
 
