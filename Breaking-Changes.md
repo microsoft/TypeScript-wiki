@@ -192,8 +192,7 @@ This ends up performing better and generally displaying better too.
 
 For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/40778).
 
-
-### Unmatched parameters are no longer related
+## Unmatched parameters are no longer related
 
 TypeScript would previously relate parameters that didn't correspond to each other by relating them to the type `any`.
 With [changes in TypeScript 4.1](https://github.com/microsoft/TypeScript/pull/41308), the language now skips this process entirely.
