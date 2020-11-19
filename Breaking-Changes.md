@@ -2,14 +2,33 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.2
+
+## Type Arguments in JavaScript Are Not Parsed as Type Arguments
+
+Type arguments were already not allowed in JavaScript, but in TypeScript 4.2, the parser will parse them in a more spec-compliant way.
+So when writing the following code in a JavaScript file:
+
+```ts
+f<T>(100)
+```
+
+TypeScript will parse it as the following JavaScript:
+
+```js
+(f < T) > (100)
+```
+
+This may impact you if you were leveraging TypeScript's API to parse type constructs in JavaScript files, which may have occurred when trying to parse Flow files.
+
 # TypeScript 4.1
 
-### `abstract` Members Can't Be Marked `async`
+## `abstract` Members Can't Be Marked `async`
 
 Members marked as `abstract` can no longer be marked as `async`.
 The fix here is to remove the `async` keyword, since callers are only concerned with the return type.
 
-### `resolve`'s Parameters Are No Longer Optional in `Promise`s
+## `resolve`'s Parameters Are No Longer Optional in `Promise`s
 
 When writing code like the following
 
@@ -62,7 +81,7 @@ new Promise<void>(resolve => {
 
 TypeScript 4.1 ships with a quick fix to help fix this break.
 
-### `any` and `unknown` are considered possibly falsy in `&&` expressions
+## `any` and `unknown` are considered possibly falsy in `&&` expressions
 
 _**Note:** This change, and the description of the previous behavior, apply only under `--strictNullChecks`._
 
@@ -108,7 +127,7 @@ If `x` is a falsy value other than `false`, the function will return it, in conf
 
 See more details on the [implementing pull request](https://github.com/microsoft/TypeScript/pull/39529).
 
-### Conditional Spreads Create Optional Properties
+## Conditional Spreads Create Optional Properties
 
 In JavaScript, object spreads (like `{ ...foo }`) don't operate over falsy values.
 So in code like `{ ...foo }`, `foo` will be skipped over if it's `null` or `undefined`.
@@ -175,7 +194,7 @@ For more details, [see the original change](https://github.com/microsoft/TypeScr
 
 # TypeScript 4.0
 
-### Properties Overridding Accessors (and vice versa) is an Error
+## Properties Overridding Accessors (and vice versa) is an Error
 
 Previously, it was only an error for properties to override accessors, or accessors to override properties, when using `useDefineForClassFields`; however, TypeScript now always issues an error when declaring a property in a derived class that would override a getter or setter in the base class.
 
