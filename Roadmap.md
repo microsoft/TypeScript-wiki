@@ -19,7 +19,13 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.2 (February 2021)
 
-* [ ] [Pedantic `override` Checks](https://github.com/microsoft/TypeScript/issues/2000)
+* [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
+* [ ] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
+* [ ] [`--noImplicitOverride`](https://github.com/microsoft/TypeScript/pull/39669)
+* [x] [`--noPropertyAccessFromIndexSignature`](https://github.com/microsoft/TypeScript/pull/40171/)
+* [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
+* [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
+* [ ] [Declare missing helper function](https://github.com/microsoft/TypeScript/pull/41215)
 
 # 4.1. (November 2020)
 
@@ -30,7 +36,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Pedantic Index Signature Checks](https://github.com/microsoft/TypeScript/issues/13778)
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
-* [ ] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
+* [x] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
 * [ ] [Semantic Highlighting API](https://github.com/microsoft/TypeScript/issues/38435)
 
 # 4.0 (August 2020)
