@@ -19,6 +19,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.2 (February 2021)
 
+[See the 4.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/41601)
+
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [ ] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
 * [ ] [`--noImplicitOverride`](https://github.com/microsoft/TypeScript/pull/39669)
