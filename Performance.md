@@ -1,7 +1,7 @@
 > Read carefully before you jump to conclusions on this page!
 
 There are easy ways to configure TypeScript to ensure faster compilations and editing experiences.
-The earlier on these practices are adopted, the better.
+The earlier that these practices can be adopted, the better.
 Beyond best-practices, there are some common techniques for investigating slow compilations/editing experiences, some common fixes, and some common ways of helping the TypeScript team investigate the issues as a last resort.
 
 - [Writing Easy-to-Compile Code](#writing-easy-to-compile-code)
