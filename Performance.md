@@ -1,4 +1,4 @@
-> Read carefully before you jump to conclusions on this page!
+> # Read carefully before you jump to conclusions on this page!
 
 There are easy ways to configure TypeScript to ensure faster compilations and editing experiences.
 The earlier that these practices can be adopted, the better.
