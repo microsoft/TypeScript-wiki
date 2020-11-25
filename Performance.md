@@ -46,9 +46,15 @@ interface Foo { prop: string }
 type Bar = { prop: string };
 ```
 
-However, interfaces typically have better properties in type display, and as soon as you need to compose two types, interfaces create a single flat object type that detects property conflicts.
-This is in contrast with intersection types, where every constituent is checked before checking against the effective type.
-Type relationships between interfaces are also cached, as opposed to intersection types.
+However, and as soon as you need to compose two or more types, you have the option of extending those types with an interface, or intersecting them in a type alias, and that's when the differences start to matter.
+
+Interfaces create a single flat object type that detects property conflicts, which are usually important to resolve!
+Intersections on the other hand just recursively merge properties, and in some cases produce `never`.
+Interfaces also display consistently better, whereas type aliases to intersections can't be displayed in part of other intersections.
+Type relationships between interfaces are also cached, as opposed to intersection types as a whole.
+A final noteworthy difference is that when checking against a target intersection type, every constituent is checked before checking against the "effective"/"flattened" type.
+
+For this reason, extending types with `interface`s/`extends` is suggested over creating intersection types.
 
 ```diff
 - type Foo = Bar & Baz & {
