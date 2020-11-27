@@ -60,7 +60,7 @@ Type relationships between interfaces are also cached, as opposed to intersectio
 ## Using Type Annotations
 
 Adding type annotations, especially return types, can save the compiler a lot of work.
-In part, this is because named types tend to be more compact than anonymous types (which the compiler might infer), which reduces the amount of time spend reading and writing declaration files (e.g. for incremental builds).
+In part, this is because named types tend to be more compact than anonymous types (which the compiler might infer), which reduces the amount of time spent reading and writing declaration files (e.g. for incremental builds).
 Type inference is very convenient, so there's no need to do this universally - however, it can be a useful thing to try if you've identified a slow section of your code.
 
 ```diff
