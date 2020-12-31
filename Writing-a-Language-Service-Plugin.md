@@ -4,7 +4,7 @@ In TypeScript 2.2 and later, developers can enable *language service plugins* to
 
 ## What's a Language Service Plugin?
 
-TypeScript Language Service Plugins ("plugins") are for changing the *editing experience* only. The core TypeScript language remains the same. Plugins can't add new language features such as new syntax or different typechecking behavior, and plugins aren't loaded during normal commandline typechecking or emitting.
+TypeScript Language Service Plugins ("plugins") are for changing the *editing experience* only. The core TypeScript language remains the same. Plugins can't add new language features such as new syntax or different typechecking behavior, and plugins aren't loaded during normal commandline typechecking or emitting, (so are not loaded by `tsc`).
 
 Instead, plugins are for augmenting the editing experience. Some examples of things plugins might do:
  * Provide errors from a linter inline in the editor
