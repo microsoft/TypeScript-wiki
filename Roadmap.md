@@ -22,9 +22,10 @@ This page outlines specific features and fixes that are scheduled or planned for
 [See the 4.2 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/41601)
 
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
-* [ ] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
+* [x] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
 * [ ] [`--noImplicitOverride`](https://github.com/microsoft/TypeScript/pull/39669)
 * [x] [`--noPropertyAccessFromIndexSignature`](https://github.com/microsoft/TypeScript/pull/40171/)
+* [x] [`--explainFiles` to understand why files have been included in a program](https://github.com/microsoft/TypeScript/pull/40011)
 * [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
 * [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
 * [ ] [Declare missing helper function](https://github.com/microsoft/TypeScript/pull/41215)
