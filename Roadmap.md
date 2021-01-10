@@ -17,18 +17,22 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.3 (May 2021)
+
+* [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
+* [ ] [`--noImplicitOverride`](https://github.com/microsoft/TypeScript/pull/39669)
+* [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
+* [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
+
 # 4.2 (February 2021)
 
 [See the 4.2 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/41601)
 
-* [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [x] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
-* [ ] [`--noImplicitOverride`](https://github.com/microsoft/TypeScript/pull/39669)
 * [x] [`--noPropertyAccessFromIndexSignature`](https://github.com/microsoft/TypeScript/pull/40171/)
+* [x] [`abstract` constructor types](https://github.com/microsoft/TypeScript/pull/36392)
 * [x] [`--explainFiles` to understand why files have been included in a program](https://github.com/microsoft/TypeScript/pull/40011)
-* [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
-* [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
-* [ ] [Declare missing helper function](https://github.com/microsoft/TypeScript/pull/41215)
+* [x] [Declare missing helper function](https://github.com/microsoft/TypeScript/pull/41215)
 
 # 4.1. (November 2020)
 
