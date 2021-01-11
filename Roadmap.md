@@ -20,7 +20,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 4.3 (May 2021)
 
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
-* [ ] [`--noImplicitOverride`](https://github.com/microsoft/TypeScript/pull/39669)
+* [ ] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
 * [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
 * [ ] [Use `unknown` as the type for `catch` clause variables](https://github.com/microsoft/TypeScript/pull/41013)
 * [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
