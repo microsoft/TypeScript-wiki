@@ -4,6 +4,30 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.2
 
+## `noImplicitAny` Errors Apply to Loose `yield` Expressions
+
+When a `yield` expression is captured, but isn't contextually typed (i.e. TypeScript can't figure out what the type is), TypeScript will now issue an implicit `any` error.
+
+```ts
+function* g1() {
+  const value = yield 1; // report implicit any error
+}
+
+function* g2() {
+  yield 1; // result is unused, no error
+}
+
+function* g3() {
+  const value: string = yield 1; // result is contextually typed by type annotation of `value`, no error.
+}
+
+function* g3(): Generator<number, void, string> {
+  const value = yield 1; // result is contextually typed by return-type annotation of `g3`, no error.
+}
+```
+
+See more details in [the corresponding changes](https://github.com/microsoft/TypeScript/pull/41348).
+
 ## Type Arguments in JavaScript Are Not Parsed as Type Arguments
 
 Type arguments were already not allowed in JavaScript, but in TypeScript 4.2, the parser will parse them in a more spec-compliant way.
