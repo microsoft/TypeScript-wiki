@@ -24,6 +24,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
 * [ ] [Use `unknown` as the type for `catch` clause variables](https://github.com/microsoft/TypeScript/pull/41013)
 * [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
+* [ ] [Editor support for inline hints](https://github.com/microsoft/TypeScript/pull/42089)
 
 # 4.2 (February 2021)
 
