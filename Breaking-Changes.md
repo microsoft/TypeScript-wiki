@@ -4,6 +4,23 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.2
 
+## Template Literal Expressions Have Template Literal Types
+
+In TypeScript 4.2, template string expressions now start out with template literal types.
+Similarly to string literal types, these types widen in mutable contexts.
+
+```ts
+const n: number = 123;
+const s1 = `${n}px`;  // `${number}px`
+const s2: `${number}px` = s1;
+const s3: `${number}pt` = s1;  // Error
+let v1 = s1;  // string (because of widening)
+```
+
+This is a break, as these values used to just have type `string`.
+
+[See the respective pull request for more details](https://github.com/microsoft/TypeScript/pull/41891).
+
 ## `noImplicitAny` Errors Apply to Loose `yield` Expressions
 
 When a `yield` expression is captured, but isn't contextually typed (i.e. TypeScript can't figure out what the type is), TypeScript will now issue an implicit `any` error.
