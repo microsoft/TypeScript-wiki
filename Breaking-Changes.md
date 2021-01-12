@@ -62,6 +62,19 @@ TypeScript will parse it as the following JavaScript:
 
 This may impact you if you were leveraging TypeScript's API to parse type constructs in JavaScript files, which may have occurred when trying to parse Flow files.
 
+## The `in` Operator No Longer Allows Primitive Types on the Right Side
+
+In JavaScript, it is a runtime error to use a non-object type on the right side of the `in` operator.
+TypeScript 4.2 ensures this can be caught at design-time.
+
+```ts
+"foo" in 42
+//       ~~
+// error! The right-hand side of an 'in' expression must not be a primitive.
+```
+
+This check is fairly conservative for the most part, so if you have received an error about this, it is likely an issue in the code.
+
 # TypeScript 4.1
 
 ## `abstract` Members Can't Be Marked `async`
