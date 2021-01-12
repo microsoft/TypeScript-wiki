@@ -23,6 +23,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [ ] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
 * [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
 * [ ] [Use `unknown` as the type for `catch` clause variables](https://github.com/microsoft/TypeScript/pull/41013)
+* [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
 * [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
 
 # 4.2 (February 2021)
@@ -30,6 +31,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 [See the 4.2 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/41601)
 
 * [x] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
+* [x] [Smarter Type Alias Printing and Emit](https://github.com/microsoft/TypeScript/pull/42284)
 * [x] [`--noPropertyAccessFromIndexSignature`](https://github.com/microsoft/TypeScript/pull/40171/)
 * [x] [`abstract` constructor types](https://github.com/microsoft/TypeScript/pull/36392)
 * [x] [`--explainFiles` to understand why files have been included in a program](https://github.com/microsoft/TypeScript/pull/40011)
