@@ -13,7 +13,7 @@ If you do share them, please consider zipping them — they compress very well.
 At present, the output is not very user friendly, but here are some steps you can take to identify the parts of your code that are slowing the compiler down.
 The goal of this process is to be able to extract a reduced repro for which you can file an [issue](https://github.com/microsoft/TypeScript/issues).
 
-1.  This document is specific to TypeScript 4.1 and higher, so you'll need that first.
+1.  This document is specific to TypeScript 4.1, so you'll need that first.
     The easiest way is to `npm install typescript@4.1`.
     Tracing with TypeScript 4.1 can be done once locally, so any changes to your `node_modules` and `package.json` can be discarded afterwards.
 

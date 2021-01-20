@@ -483,12 +483,12 @@ Upgrading to a newer version of TypeScript (which can be more efficient) or to a
 
 ## Performance Tracing
 
-You might find that these diagnostic methods are too opaque to get a sense of why TypeScript feels slow.
-TypeScript provides a `--generateTrace` option that can give you a sense of the work the compiler is spending time on.
+In some cases, the approaches above might not give you enough insight to understand why TypeScript feels slow.
+TypeScript 4.1 and higher provides a `--generateTrace` option that can give you a sense of the work the compiler is spending time on.
 `--generateTrace` will create an output file that can be analyzed within Edge or Chrome.
 
-Make sure TypeScript can compile your project without errors.
-Once you can get a clean compile/type-check, you can run with the `--generateTrace` flag to specify an output directory for tracing.
+Ideally, TypeScript will be able to compile your project without any errors, though it's not a strict requirement for tracing.
+Once you're ready to get a trace, you can run TypeScript with the `--generateTrace` flag.
 
 ```
 tsc -p ./some/project/src/tsconfig.json --generateTrace tracing_output_folder
