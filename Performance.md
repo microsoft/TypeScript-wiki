@@ -481,6 +481,31 @@ Sometimes TypeScript's type-checking can be impacted by computationally intensiv
 This is rare, but can happen.
 Upgrading to a newer version of TypeScript (which can be more efficient) or to a newer version of an `@types` package (which may have reverted a regression) can often solve the issue.
 
+## Performance Tracing
+
+You might find that these diagnostic methods are too opaque to get a sense of why TypeScript feels slow.
+TypeScript provides a `--generateTrace` option that can give you a sense of the work the compiler is spending time on.
+`--generateTrace` will create an output file that can be analyzed within Edge or Chrome.
+
+Make sure TypeScript can compile your project without errors.
+Once you can get a clean compile/type-check, you can run with the `--generateTrace` flag to specify an output directory for tracing.
+
+```
+tsc -p ./some/project/src/tsconfig.json --generateTrace tracing_output_folder
+```
+
+You can then
+
+1. Visit [edge://tracing](edge://tracing) or [chrome://tracing](chrome://tracing) depending on which browser you use
+1. Click on the `Load` button at the top left
+1. Open the generated JSON file in your output directory.
+
+You can [read more about performance tracing in more detail here](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
+
+⚠ Warning: A performance trace may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
+
+⚠ Warning: The format of performance trace files is not stable, and may change from version to version.
+
 # Common Issues
 
 Once you've trouble-shooted, you might want to explore some fixes to common issues.
@@ -533,6 +558,12 @@ A compiler perf issue should include
 * The output of running with `extendedDiagnostics` (`tsc --extendedDiagnostics -p tsconfig.json`)
 * Ideally, a project that demonstrates the issues being encountered.
 * Output logs from profiling the compiler (`isolate-*-*-*.log` and `*.cpuprofile` files)
+
+### Providing Performance Traces
+
+[Performance traces (described above)](#performance-tracing) are meant to help teams figure out build performance issues in their own codebases;
+however, they can also be useful for the TypeScript team in diagnosing and fixing issues.
+[See the above section on performance traces](#performance-tracing) and continue reading more on [our dedicated performance tracing page](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
 
 ### Profiling the Compiler
 
