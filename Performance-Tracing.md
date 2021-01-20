@@ -50,11 +50,11 @@ The goal of this process is to be able to extract a reduced repro for which you 
     If you don't already have a specific project of interest, you'll probably want to choose the largest `trace` file and the corresponding `types` file.
     For the remaining steps, we'll refer to the chosen files as `trace.json` and `types.json`, respectively.
 
-5.  Navigate to [edge://tracing](edge://tracing) (or [chrome://tracing](chrome://tracing)) and click `Load`.\
+5.  Navigate to [`about://tracing`](about://tracing) and click `Load`.\
     Navigate to and select `trace.json`.
 
-6.  If you've never visited [edge://tracing](edge://tracing) before, you'll see something like this:\
-    ![Initial view of edge://tracing](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingJustOpened.png)
+6.  If you've never visited [`about://tracing`](about://tracing) before, you'll see something like this:\
+    ![Initial view of `about://tracing`](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingJustOpened.png)
     1.  Use the little triangle to expand the view of the "Main" thread.
         For convenience, we ignore all other threads.
     2.  This little toolbar is floating — you'll probably want to move it into the blank space under the thread name (i.e. into the left sidebar).
@@ -67,12 +67,12 @@ The goal of this process is to be able to extract a reduced repro for which you 
     5.  This mode is for zooming.
         Click-drag up or right to zoom in and down or left to zoom out.
 
-    *Aside:* the [edge://tracing](edge://tracing) tracing controls are rather clumsy.
-    An alternative is to open the trace in the F12 tools by clicking the Upload button on the Performance tab.
-    This has much more modern navigation, but drops instant events (mostly used for errors in compiler traces) and possibly other features.  We hope to improve support in future releases.
+    *Aside:* the [`about://tracing`](about://tracing) UI is rather clumsy.
+    An alternative is to open the trace in Devtools (F12) by clicking the Upload button on the Performance tab.
+    This provides a more modern navigation experience, but drops instant events (mostly used for errors in compiler traces) and possibly other features.
 
 7.  If you expand the Main thread and select one of the boxes, you'll see something like this, with time on the horizontal axis and (partial) call stacks growing down from the top:\
-    ![Expanded view of edge://tracing](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingExpanded.png)
+    ![Expanded view of `about://tracing`](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingExpanded.png)
     1.  You can easily differentiate the four major phases of compilation.
         This is program construction, which includes parsing and module resolution.
         Usually, you want to look for the largest `findSourceFile` boxes and follow them down to see which dependency chain is taking the most time.

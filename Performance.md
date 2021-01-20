@@ -497,9 +497,9 @@ tsc -p ./some/project/src/tsconfig.json --generateTrace tracing_output_folder
 
 You can then
 
-1. Visit [edge://tracing](edge://tracing) or [chrome://tracing](chrome://tracing) depending on which browser you use
-1. Click on the `Load` button at the top left
-1. Open the generated JSON file in your output directory.
+1. Visit [`about://tracing`](about://tracing) on Edge/Chrome,
+1. Click on the `Load` button at the top left,
+1. Open the generated JSON file (`trace.*.json`) in your output directory.
 
 You can [read more about performance tracing in more detail here](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
 
@@ -562,9 +562,9 @@ A compiler perf issue should include
 
 ### Providing Performance Traces
 
-[Performance traces (described above)](#performance-tracing) are meant to help teams figure out build performance issues in their own codebases;
+[Performance traces](#performance-tracing) are meant to help teams figure out build performance issues in their own codebases;
 however, they can also be useful for the TypeScript team in diagnosing and fixing issues.
-[See the above section on performance traces](#performance-tracing) and continue reading more on [our dedicated performance tracing page](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
+See the above section on [performance traces](#performance-tracing) and continue reading more on our dedicated [performance tracing page](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
 
 ### Profiling the Compiler
 
