@@ -25,6 +25,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [`traceResolution`](#traceresolution)
   * [Running `tsc` Alone](#running-tsc-alone)
   * [Upgrading Dependencies](#upgrading-dependencies)
+  * [Performance Tracing](#performance-tracing)
 - [Common Issues](#common-issues)
   * [Misconfigured `include` and `exclude`](#misconfigured-include-and-exclude)
 - [Filing an Issue](#filing-an-issue)
