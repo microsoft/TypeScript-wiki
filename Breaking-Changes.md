@@ -57,7 +57,7 @@ function doSomething(x: E) {
 }
 ```
 
-Alternatively, you can re-declare your enum to have a non-trivial initializer so that any number is both assignable and comparable to that enum.
+Alternatively, you can re-declare your enum to have a non-trivial initializer so that any number is both assignable and comparable to that enum. This may be useful if the intent is for the enum to specify a few well-known values.
 
 ```ts
 enum E {
@@ -66,6 +66,8 @@ enum E {
   B = 1,
 }
 ```
+
+For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/42472)
 
 # TypeScript 4.2
 
