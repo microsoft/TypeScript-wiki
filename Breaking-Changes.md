@@ -18,6 +18,7 @@ enum E {
 }
 
 function doSomething(x: E) {
+  // Error! This condition will always return 'true' since the types 'E' and '-1' have no overlap.
   if (x === -1) {
     // ...
   }
@@ -32,7 +33,7 @@ enum E {
   B = 1,
 }
 
-// Include -1 in the type.
+// Include -1 in the type, if we're really certain that -1 can come through.
 function doSomething(x: E | -1) {
   if (x === -1) {
     // ...
@@ -49,27 +50,20 @@ enum E {
 }
 
 function doSomething(x: E) {
-  // Use a type asertion on 'x'.
+  // Use a type asertion on 'x' because we know we're not actually just dealing with values from 'E'.
   if ((x as number) === -1) {
     // ...
   }
 }
 ```
 
-Alternatively, you can re-declare your enum to have a non-trivial initializer.
+Alternatively, you can re-declare your enum to have a non-trivial initializer so that any number is both assignable and comparable to that enum.
 
 ```ts
-
 enum E {
   // the leading + on 0 opts TypeScript out of inferring a union enum.
   A = +0,
   B = 1,
-}
-
-function doSomething(x: E) {
-  if (x === -1) {
-    // ...
-  }
 }
 ```
 
