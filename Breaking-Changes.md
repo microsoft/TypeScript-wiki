@@ -2,6 +2,73 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.3
+
+## Union Enums Cannot Be Compared to Any Number
+
+Certain `enum`s are considered *union `enum`s* when their members are either automatically filled in, or trivially written.
+In those cases, an enum can recall each value that it potentially represents.
+
+In TypeScript 4.3, if a value with a union `enum` type is compared with a numeric literal that it could never be equal to, then the type-checker will isue an error.
+
+```ts
+enum E {
+  A = 0,
+  B = 1,
+}
+
+function doSomething(x: E) {
+  // Error! This condition will always return 'true' since the types 'E' and '-1' have no overlap.
+  if (x === -1) {
+    // ...
+  }
+}
+```
+
+As a workaround, you can re-write an annotation to include the appropriate literal type.
+
+```ts
+enum E {
+  A = 0,
+  B = 1,
+}
+
+// Include -1 in the type, if we're really certain that -1 can come through.
+function doSomething(x: E | -1) {
+  if (x === -1) {
+    // ...
+  }
+}
+```
+
+You can also use a type-assertion on the value.
+
+```ts
+enum E {
+  A = 0,
+  B = 1,
+}
+
+function doSomething(x: E) {
+  // Use a type asertion on 'x' because we know we're not actually just dealing with values from 'E'.
+  if ((x as number) === -1) {
+    // ...
+  }
+}
+```
+
+Alternatively, you can re-declare your enum to have a non-trivial initializer so that any number is both assignable and comparable to that enum. This may be useful if the intent is for the enum to specify a few well-known values.
+
+```ts
+enum E {
+  // the leading + on 0 opts TypeScript out of inferring a union enum.
+  A = +0,
+  B = 1,
+}
+```
+
+For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/42472)
+
 # TypeScript 4.2
 
 ## Template Literal Expressions Have Template Literal Types
