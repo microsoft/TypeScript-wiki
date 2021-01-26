@@ -53,7 +53,19 @@ The goal of this process is to be able to extract a reduced repro for which you 
 5.  Navigate to [`about://tracing`](about://tracing) and click `Load`.\
     Navigate to and select `trace.json`.
 
-6.  If you've never visited [`about://tracing`](about://tracing) before, you'll see something like this:\
+6.  These trace dump files can get big, to a point where it is impossible to load them.
+    (The tracing dump files are not statistical: *all* entries are included, which leads to the big outputs.)
+    If you run into this problem, you can use the [process-tracing script](https://www.npmjs.com/package/process-tracing) which can perform many useful operations on tracing files.
+    Most importantly, the `--sample` flag can be used to mimic statistical down-sampling to any given frequency.
+    This script has a few more useful features like auto-gzipping the result (tracing tools can load gzipped files), fixing aborted trace files, and more; use `--help` to see the different options.
+
+    For example:
+
+        process-tracing --sample=5 --close trace.1.json trace.1.json.gz
+
+    will downsample the trace file to a 5ms frequency, close off unterminated events (in case the tsc process crashed), and produce a gzipped file.
+
+7.  If you've never visited [`about://tracing`](about://tracing) before, you'll see something like this:\
     ![Initial view of `about://tracing`](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingJustOpened.png)
     1.  Use the little triangle to expand the view of the "Main" thread.
         For convenience, we ignore all other threads.
@@ -71,7 +83,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
     An alternative is to open the trace in Devtools (F12) by clicking the Upload button on the Performance tab.
     This provides a more modern navigation experience, but drops instant events (mostly used for errors in compiler traces) and possibly other features.
 
-7.  If you expand the Main thread and select one of the boxes, you'll see something like this, with time on the horizontal axis and (partial) call stacks growing down from the top:\
+8.  If you expand the Main thread and select one of the boxes, you'll see something like this, with time on the horizontal axis and (partial) call stacks growing down from the top:\
     ![Expanded view of `about://tracing`](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingExpanded.png)
     1.  You can easily differentiate the four major phases of compilation.
         This is program construction, which includes parsing and module resolution.
@@ -95,7 +107,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
     *Note:* All times reflect the overhead of tracing, which is not spread uniformly through the execution.
     We're looking for ways to reduce the impact.
 
-8.  As mentioned above, the checking phase will generally be the most interesting when diagnosing delays.
+9.  As mentioned above, the checking phase will generally be the most interesting when diagnosing delays.
     Here we see a zoomed in portion of the trace:\
     ![Checking phase portion of trace](https://raw.githubusercontent.com/wiki/Microsoft/TypeScript/images/tracingCheckVariableDeclaration.png)
     1.  What we're looking at is a call stack summary, with callers above and callees below.
@@ -119,7 +131,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
         This expression has four interesting sub-expressions, each of which has many, many children.
         So identifying those four ranges in the file would be the place to start when reducing a repro.
 
-9.  Once you have identified the problematic code, review [[Performance]] for suggestions relevant to your scenario.
+10. Once you have identified the problematic code, review [[Performance]] for suggestions relevant to your scenario.
     If none of the suggestions help, please file an [issue](https://github.com/microsoft/TypeScript/issues), including code that reproduces the slowdown you're seeing and instructions for compiling it.
 
 
