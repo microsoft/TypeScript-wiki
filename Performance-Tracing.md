@@ -26,6 +26,12 @@ The goal of this process is to be able to extract a reduced repro for which you 
     You can use `.` as the directory, but it may get cluttered, so a subdirectory is usually preferable.
     In this early version of the feature, you have to use `tsc` specifically — building through a bundler that invokes TypeScipt via the API will not work.
     For best results, make sure this is not an incremental build (i.e. pass `-f` in build mode or `--incremental false` for regular compilation).
+    
+    For example:
+    
+    ```sh
+    tsc -p some_directory --generateTrace some_directory
+    ```
 
 4.  Let's assume you called your output directory "trace".
     You should now have a directory structure like this:
