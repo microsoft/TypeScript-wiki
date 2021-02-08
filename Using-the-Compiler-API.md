@@ -572,31 +572,31 @@ Here is an example that utilizes both to produce a factorial function:
 import ts = require("typescript");
 
 function makeFactorialFunction() {
-  const functionName = ts.createIdentifier("factorial");
-  const paramName = ts.createIdentifier("n");
-  const parameter = ts.createParameter(
+  const functionName = ts.factory.createIdentifier("factorial");
+  const paramName = ts.factory.createIdentifier("n");
+  const parameter = ts.factory.createParameterDeclaration(
     /*decorators*/ undefined,
     /*modifiers*/ undefined,
     /*dotDotDotToken*/ undefined,
     paramName
   );
 
-  const condition = ts.createBinary(paramName, ts.SyntaxKind.LessThanEqualsToken, ts.createLiteral(1));
-  const ifBody = ts.createBlock([ts.createReturn(ts.createLiteral(1))], /*multiline*/ true);
+  const condition = ts.factory.createBinaryExpression(paramName, ts.SyntaxKind.LessThanEqualsToken, ts.factory.createNumericLiteral(1));
+  const ifBody = ts.factory.createBlock([ts.factory.createReturnStatement(ts.factory.createNumericLiteral(1))], /*multiline*/ true);
 
-  const decrementedArg = ts.createBinary(paramName, ts.SyntaxKind.MinusToken, ts.createLiteral(1));
-  const recurse = ts.createBinary(paramName, ts.SyntaxKind.AsteriskToken, ts.createCall(functionName, /*typeArgs*/ undefined, [decrementedArg]));
-  const statements = [ts.createIf(condition, ifBody), ts.createReturn(recurse)];
+  const decrementedArg = ts.factory.createBinaryExpression(paramName, ts.SyntaxKind.MinusToken, ts.factory.createNumericLiteral(1));
+  const recurse = ts.factory.createBinaryExpression(paramName, ts.SyntaxKind.AsteriskToken, ts.factory.createCallExpression(functionName, /*typeArgs*/ undefined, [decrementedArg]));
+  const statements = [ts.factory.createIfStatement(condition, ifBody), ts.factory.createReturnStatement(recurse)];
 
-  return ts.createFunctionDeclaration(
+  return ts.factory.createFunctionDeclaration(
     /*decorators*/ undefined,
-    /*modifiers*/ [ts.createToken(ts.SyntaxKind.ExportKeyword)],
+    /*modifiers*/ [ts.factory.createToken(ts.SyntaxKind.ExportKeyword)],
     /*asteriskToken*/ undefined,
     functionName,
     /*typeParameters*/ undefined,
     [parameter],
-    /*returnType*/ ts.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
-    ts.createBlock(statements, /*multiline*/ true)
+    /*returnType*/ ts.factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+    ts.factory.createBlock(statements, /*multiline*/ true)
   );
 }
 
