@@ -10,4 +10,4 @@
  * [Design Meeting Docket](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22in+discussion%22): Open `Suggestion` issues tagged with `In Discussion`
 
  * [Needs Proposal Review](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22needs+proposal%22): Open `Suggestion` issues tagged with `Needs Proposal`
- * [Needs More Info Review](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22needs+more+info%22): Open `Suggestion` issues tagged with `Needs Proposal`
+ * [Needs More Info Review](https://github.com/Microsoft/TypeScript/issues?q=is%3Aopen+is%3Aissue+label%3A%22needs+more+info%22): Open `Suggestion` issues tagged with `Needs More Info`
