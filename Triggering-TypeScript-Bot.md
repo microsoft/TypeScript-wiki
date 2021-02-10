@@ -17,7 +17,9 @@ The currently recognized commands are:
 * [`cherry-pick this to branchname and LKG`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - Same as above, but an LKG commit will be added onto the PR after the squashed cherry-pick commit.
 * `run repros` - Triggers inline code repro workflow
 
-In addition, there are a small suite of commands which work in _any_ comment and relate to release management:
+In addition, there are a small suite of commands which work in _any_ comment and relate to release management.
+You can see how these are typically used in our documented [comment command sequence](https://github.com/microsoft/TypeScript/wiki/TypeScript's-Release-Process#the-comment-command-sequence):
+
 * [`create release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22New+Release+Branch%22) This makes a `release-X.Y` branch (replace `X.Y` with your desired version) with the `package.json` version set to `X.Y.0-beta`, the `corePublic` `versionMajorMinor` set to `X.Y`, and the full `ts.version` string set to `X.Y.0-beta`, and updates the accompanying baselines. An LKG is then performed. This new branch is directly pushed to `microsoft/TypeScript`. In short, this fully sets up a new release branch to be ready to publish a beta.
 * [`bump release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Set+branch+version%22) This bumps the version (`0-beta` -> `1-rc` -> `2` -> `3` and so on) on the specified branch and captures a new LKG, essentially preparing the branch for a new release.
 * [`sync release-X.Y`](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22sync%22) This merges `master` into the specified branch; this is useful for syncing the branch with `master` in the period between the beta and rc.
