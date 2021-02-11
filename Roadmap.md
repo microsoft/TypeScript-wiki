@@ -1,6 +1,7 @@
 This page outlines specific features and fixes that are scheduled or planned for given releases. The 6-month roadmaps that outlines focus areas of work can be viewed for
 
-* [January to June 2020](https://github.com/microsoft/TypeScript/issues/36948) (current)
+* [January to June 2021](https://github.com/microsoft/TypeScript/issues/42673) (current)
+* [January to December 2020](https://github.com/microsoft/TypeScript/issues/36948)
 * [July to December 2019](https://github.com/microsoft/TypeScript/issues/33118)
 * [January to June 2019](https://github.com/Microsoft/TypeScript/issues/29288)
 
@@ -18,6 +19,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 * Decorators for function expressions/arrow functions
 
 # 4.3 (May 2021)
+
+[See the 4.3 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/42762)
 
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [ ] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
