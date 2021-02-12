@@ -1,11 +1,12 @@
 The TS Server is a Node process which editors talk to in order to provide rich functionality for your TypeScript/JavaScript code (e.g. auto-completions, go-to-definition, quick fixes, refactorings).
 
-This page describes how to get a TS Server log via VS Code. You might need this to diagnose why a crash is taking place (often forcing you to restart VS Code or the JS/TS language server), or to make sure that the communication between TypeScript the language and your editor is what you expect.
+This page describes how to get a TS Server log within Visual Studio Code. You might need this to diagnose why a crash is taking place (often forcing you to restart VS Code or the JS/TS language server), or to make sure that the communication between TypeScript the language and your editor is what you expect.
 
-1. Open the project you want to investigate in VS Code
-1. Run the command `Open TS server log file` (View > Command Palette) , this should offer to turn on logging if you don't have it enabled
-1. Restart your project, and try to only do the reproduction case
-1. Run `Open TS server log file` again and it will re-direct you to a file with the logs
+1. Open the project you want to investigate in Visual Studio Code.
+1. Run the command `Open TS Server Log` (You can run commands with `View` > `Command Palette`).
+   1. This command should offer to turn on logging if you don't have it enabled. Enable logging if it isn't already.
+1. Restart your project, and try to only do the reproduction case.
+1. Run `Open TS Server Log` again and it will re-direct you to a file with the logs.
 
 The log should start like:
 
