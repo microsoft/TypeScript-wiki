@@ -38,6 +38,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Template Literal Types for Template String Expressions](https://github.com/microsoft/TypeScript/pull/41891)
 * [x] [`--noPropertyAccessFromIndexSignature`](https://github.com/microsoft/TypeScript/pull/40171/)
 * [x] [`abstract` constructor types](https://github.com/microsoft/TypeScript/pull/36392)
+* [x] [Smarter unused local analysis in destructuring](https://github.com/microsoft/TypeScript/issues/31388)
 * [x] [`--explainFiles` to understand why files have been included in a program](https://github.com/microsoft/TypeScript/pull/40011)
 * [x] [Declare missing helper function](https://github.com/microsoft/TypeScript/pull/41215)
 
