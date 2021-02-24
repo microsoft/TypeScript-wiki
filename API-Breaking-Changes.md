@@ -1,3 +1,11 @@
+# TypeScript 4.2
+
+## `visitNode`'s `lift` Takes a `readonly Node[]` Instead of a `NodeArray<Node>`
+
+The `lift` function in the `visitNode` API now takes a `readonly Node[]`.
+You can [see details of the change here](https://github.com/microsoft/TypeScript/pull/42000).
+
+
 # TypeScript 4.1
 
 ## Type Arguments in JavaScript Are Not Parsed as Type Arguments
@@ -18,11 +26,6 @@ TypeScript will parse it as the following JavaScript:
 This may impact you if you were leveraging TypeScript's API to parse type constructs in JavaScript files, which may have occurred when trying to parse Flow files.
 
 [See more details here](https://github.com/microsoft/TypeScript/pull/36673).
-
-## `visitNode`'s `lift` Takes a `readonly Node[]` Instead of a `NodeArray<Node>`
-
-The `lift` function in the `visitNode` API now takes a `readonly Node[]`.
-You can [see details of the change here](https://github.com/microsoft/TypeScript/pull/42000).
 
 # TypeScript 4.0
 
