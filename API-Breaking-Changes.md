@@ -1,4 +1,4 @@
-# TypeScript 4.2
+# TypeScript 4.1
 
 ## Type Arguments in JavaScript Are Not Parsed as Type Arguments
 
