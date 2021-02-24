@@ -1,6 +1,6 @@
 # TypeScript 4.2
 
-## `visitNode`'s `lift` Takes a `readonly Node[]` Instead of a `NodeArray<Node>`
+- `visitNode`'s `lift` Takes a `readonly Node[]` Instead of a `NodeArray<Node>`
 
 The `lift` function in the `visitNode` API now takes a `readonly Node[]`.
 You can [see details of the change here](https://github.com/microsoft/TypeScript/pull/42000).
@@ -8,9 +8,9 @@ You can [see details of the change here](https://github.com/microsoft/TypeScript
 
 # TypeScript 4.1
 
-## Type Arguments in JavaScript Are Not Parsed as Type Arguments
+- Type Arguments in JavaScript Are Not Parsed as Type Arguments
 
-Type arguments were already not allowed in JavaScript, but in TypeScript 4.2, the parser will parse them in a more spec-compliant way.
+Type arguments were already not allowed in JavaScript, but in TypeScript 4.1, the parser will parse them in a more spec-compliant way.
 So when writing the following code in a JavaScript file:
 
 ```ts
