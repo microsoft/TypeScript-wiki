@@ -29,9 +29,10 @@ Beyond best-practices, there are some common techniques for investigating slow c
 - [Common Issues](#common-issues)
   * [Misconfigured `include` and `exclude`](#misconfigured-include-and-exclude)
 - [Filing an Issue](#filing-an-issue)
-  * [Reporting Compiler Performance Issues](#reporting-compiler-performance-issues)
+  * [Reporting Compiler Perf Issues](#reporting-compiler-performance-issues)
+    + [Providing Performance Traces](#providing-performance-traces)
     + [Profiling the Compiler](#profiling-the-compiler)
-  * [Reporting Editing Performance Issues](#reporting-editing-performance-issues)
+  * [Reporting Editing Perf Issues](#reporting-editing-performance-issues)
     + [Taking a TSServer Log](#taking-a-tsserver-log)
       - [Collecting a TSServer Log in Visual Studio Code](#collecting-a-tsserver-log-in-visual-studio-code)
 
