@@ -37,9 +37,9 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
 * [x] [Editor support for `@link` tags](https://github.com/microsoft/TypeScript/pull/41877)
 * Investigate auto-import improvements
+    * [x] [Complete import statements through auto-imports](https://github.com/microsoft/TypeScript/issues/31658)
     * [ ] [Sorted auto-imports in completions](https://github.com/microsoft/TypeScript/issues/41083)
     * [ ] [Display result paths in completions](https://github.com/microsoft/TypeScript/issues/42005)
-    * [ ] [Complete import statements through auto-imports](https://github.com/microsoft/TypeScript/issues/31658)
 
 # 4.2 (February 2021)
 
