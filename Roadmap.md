@@ -31,7 +31,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [ ] [Separate "write" types](https://github.com/microsoft/TypeScript/pull/42425)
 * [ ] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
-* [x] [Template string type inference and compatibility improvements](https://github.com/microsoft/TypeScript/pull/43361)
+* [ ] [Template string type inference and compatibility improvements](https://github.com/microsoft/TypeScript/pull/43361)
 * [x] [Infer template string types when contextually typed](https://github.com/microsoft/TypeScript/pull/43376)
 * [x] [ECMAScript `#private` Methods](https://github.com/microsoft/TypeScript/pull/42458)
 * [x] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
