@@ -18,16 +18,28 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.4 (August 2021)
+
+* [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
+* [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
+* [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
+* [ ] [Use `unknown` as the type for `catch` clause variables](https://github.com/microsoft/TypeScript/pull/41013)
+
 # 4.3 (May 2021)
 
 [See the 4.3 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/42762)
 
-* [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
+* [ ] [Separate "write" types](https://github.com/microsoft/TypeScript/pull/42425)
 * [ ] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
-* [ ] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
-* [ ] [Use `unknown` as the type for `catch` clause variables](https://github.com/microsoft/TypeScript/pull/41013)
-* [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
-* [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
+* [x] [Template string type inference and compatibility improvements](https://github.com/microsoft/TypeScript/pull/43361)
+* [x] [Infer template string types when contextually typed](https://github.com/microsoft/TypeScript/pull/43376)
+* [x] [ECMAScript `#private` Methods](https://github.com/microsoft/TypeScript/pull/42458)
+* [x] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
+* [x] [Editor support for `@link` tags](https://github.com/microsoft/TypeScript/pull/41877)
+* Investigate auto-import improvements
+    * [ ] [Sorted auto-imports in completions](https://github.com/microsoft/TypeScript/issues/41083)
+    * [ ] [Display result paths in completions](https://github.com/microsoft/TypeScript/issues/42005)
+    * [ ] [Complete import statements through auto-imports](https://github.com/microsoft/TypeScript/issues/31658)
 
 # 4.2 (February 2021)
 
