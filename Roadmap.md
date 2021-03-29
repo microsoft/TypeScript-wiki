@@ -60,7 +60,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [x] [Template literal types and mapped type 'as' clauses](https://github.com/microsoft/TypeScript/pull/40336)
 * [x] [Recursive Conditional Types](https://github.com/microsoft/TypeScript/pull/40002)
-* [x] [Pedantic Index Signature Checks](https://github.com/microsoft/TypeScript/issues/13778)
+* [x] [Pedantic Index Signature Checks (`--noUncheckedIndexedAccess`)](https://github.com/microsoft/TypeScript/issues/13778)
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
 * [x] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
