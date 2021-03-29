@@ -117,6 +117,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [JSDoc `@readonly` Modifier](https://github.com/microsoft/TypeScript/issues/17233)
 * [x] [Improved File Watching and `watchOptions`](https://github.com/microsoft/TypeScript/pull/35615)
 * [x] ["Fast and Loose" Incremental Checking](https://github.com/microsoft/TypeScript/issues/33329)
+* [x] [Editor Support for Call Hierarchy View](https://github.com/microsoft/TypeScript/issues/31863)
 
 # 3.7 (November 2019)
 
