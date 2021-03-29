@@ -47,7 +47,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [x] [Leading/middle rest elements in tuple types](https://github.com/microsoft/TypeScript/pull/41544)
 * [x] [Smarter Type Alias Printing and Emit](https://github.com/microsoft/TypeScript/pull/42284)
-* [x] [Template Literal Types for Template String Expressions](https://github.com/microsoft/TypeScript/pull/41891)
+* [x] ~[Template Literal Types for Template String Expressions](https://github.com/microsoft/TypeScript/pull/41891)~
 * [x] [`--noPropertyAccessFromIndexSignature`](https://github.com/microsoft/TypeScript/pull/40171/)
 * [x] [`abstract` constructor types](https://github.com/microsoft/TypeScript/pull/36392)
 * [x] [Smarter unused local analysis in destructuring](https://github.com/microsoft/TypeScript/issues/31388)
