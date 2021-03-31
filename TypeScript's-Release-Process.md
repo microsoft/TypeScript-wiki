@@ -154,18 +154,18 @@ The commands roughly occur in the following order:
     1. `@typescript-bot create release-X.Y` (create the branch)
     1. In the event that changes need to come in after:
         1. `@typescript-bot sync release-X.Y`
-        1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Update+LKG%22) on `release-X.Y`.
+        1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y`.
 1. Readying the RC
     1. `@typescript-bot sync release-X.Y` (sync `master` to `release-X.Y`)
     1. `@typescript-bot bump release-X.Y` (update the version number)
     1. In the event that changes need to come in after:
         1. `@typescript-bot sync release-X.Y`
-        1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Update+LKG%22) on `release-X.Y`.
+        1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y`.
 1. Readying the Stable Release
     1. `@typescript-bot bump release-X.Y` (update the version number)
     1. On relevant PRs early on, run `@typescript-bot cherry-pick this to release-X.Y`
     1. On PRs that look like they will be the last cherry-pick: `@typescript-bot cherry-pick this to release-X.Y and LKG`
-    1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions?query=workflow%3A%22Update+LKG%22) on `release-X.Y` when necessary.
+    1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y` when necessary.
 
 # Release Tasks
 
