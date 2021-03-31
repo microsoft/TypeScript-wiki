@@ -4,7 +4,7 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.3
 
-## Union Enums Cannot Be Compared to Any Number
+## Union Enums Cannot Be Compared to Arbitrary Numbers
 
 Certain `enum`s are considered *union `enum`s* when their members are either automatically filled in, or trivially written.
 In those cases, an enum can recall each value that it potentially represents.
@@ -70,23 +70,6 @@ enum E {
 For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/42472)
 
 # TypeScript 4.2
-
-## Template Literal Expressions Have Template Literal Types
-
-In TypeScript 4.2, template string expressions now start out with template literal types.
-Similarly to string literal types, these types widen in mutable contexts.
-
-```ts
-const n: number = 123;
-const s1 = `${n}px`;  // `${number}px`
-const s2: `${number}px` = s1;
-const s3: `${number}pt` = s1;  // Error
-let v1 = s1;  // string (because of widening)
-```
-
-This is a break, as these values used to just have type `string`.
-
-[See the respective pull request for more details](https://github.com/microsoft/TypeScript/pull/41891).
 
 ## `noImplicitAny` Errors Apply to Loose `yield` Expressions
 
