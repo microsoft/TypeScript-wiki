@@ -29,9 +29,10 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.3 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/42762)
 
-* [ ] [Separate "write" types](https://github.com/microsoft/TypeScript/pull/42425)
-* [ ] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
-* [ ] [Template string type inference and compatibility improvements](https://github.com/microsoft/TypeScript/pull/43361)
+* [x] [Separate "write" types](https://github.com/microsoft/TypeScript/pull/42425)
+* [x] [`--noImplicitOverride` and the `override` keyword](https://github.com/microsoft/TypeScript/pull/39669)
+* [x] [Template string type inference and compatibility improvements](https://github.com/microsoft/TypeScript/pull/43361)
+* [x] [Contextual Narrowing for Generics](https://github.com/microsoft/TypeScript/pull/43183)
 * [x] [Infer template string types when contextually typed](https://github.com/microsoft/TypeScript/pull/43376)
 * [x] [ECMAScript `#private` Methods](https://github.com/microsoft/TypeScript/pull/42458)
 * [x] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
