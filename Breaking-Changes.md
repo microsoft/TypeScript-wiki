@@ -18,7 +18,7 @@ enum E {
 }
 
 function doSomething(x: E) {
-  // Error! This condition will always return 'true' since the types 'E' and '-1' have no overlap.
+  // Error! This condition will always return 'false' since the types 'E' and '-1' have no overlap.
   if (x === -1) {
     // ...
   }
