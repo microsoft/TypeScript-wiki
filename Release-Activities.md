@@ -1,6 +1,8 @@
 This is the list of release activities needed for every TypeScript release.
 [Additional activities](#additional-activities) are also needed if a new syntax is introduced or a new compiler option gets added.
 
+The primary people managing a release should oversee these tasks along with the [overall release process](https://github.com/microsoft/TypeScript/wiki/TypeScript's-Release-Process).
+
 ## Release Candidate Activities
 
 ### tslib
