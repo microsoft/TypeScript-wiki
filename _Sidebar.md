@@ -32,6 +32,7 @@
 * [[TypeScript MSBuild In Depth]]
 * [[Debugging Language Service in VS Code]]
 * [[Writing a Language Service Plugin]]
+* [[Docker Quickstart]]
 
 **FAQs**
 * [[FAQ]]
