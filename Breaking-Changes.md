@@ -2,6 +2,27 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.4
+
+## Abstract properties Do Not Allow Initializers
+
+The following code is now an error because abstract properties may not have initializers:
+
+```ts
+abstract class C {
+    abstract prop = 1;
+}
+```
+
+Instead, just give a type to the property:
+
+```ts
+abstract class C {
+    abstract prop: number;
+}
+```
+
+
 # TypeScript 4.3
 
 ## Union Enums Cannot Be Compared to Arbitrary Numbers
