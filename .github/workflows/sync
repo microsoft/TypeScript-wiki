@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -ue
+shopt -s extglob
+
+PUSHER="${PUSHER// +( )/ }"; PUSHER="${PUSHER# }"; PUSHER="${PUSHER% }"
+NAME="${PUSHER% <*}"
+EMAIL="${PUSHER##* <}"; EMAIL="${EMAIL%>}"
+echo "Setting git username to \"$NAME\" and email to \"$EMAIL\""
+export GIT_AUTHOR_NAME="$NAME"
+export GIT_AUTHOR_EMAIL="$EMAIL"
+export GIT_COMMITTER_NAME="$NAME"
+export GIT_COMMITTER_EMAIL="$EMAIL"
+
+DASHREMOTE="$(git remote get-url origin)"
+DOTREMOTE="${DASHREMOTE//-wiki/.wiki}"
+echo "\$DASHREMOTE = $DASHREMOTE, \$DOTREMOTE = $DOTREMOTE"
+
+for r in "$DASHREMOTE" "$DOTREMOTE"; do
+  if [[ "$(git ls-remote --symref "$r" HEAD | grep "^ref:")" \
+          != $'ref: refs/heads/master\tHEAD' ]]; then
+    echo "Unexpected branch name at $r: expected to see \"master\""
+  fi
+done
+
+echo ">>> Adding DOTREMOTE"
+git remote add dot "$DOTREMOTE"
+git fetch dot
+
+echo ">>> Merging changes"
+git pull --no-edit --no-rebase dot "master"
+
+echo ">>> Pushing merges"
+git push origin
+git push dot

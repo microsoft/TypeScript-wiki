@@ -1,39 +1,27 @@
-# Based on https://www.growingwiththeweb.com/2016/07/enabling-pull-requests-on-github-wikis.html
+# Roughly based on
+#   https://www.growingwiththeweb.com/2016/07/enabling-pull-requests-on-github-wikis.html
+
 name: Sync Two Wiki Repos
 
 on:
-  # Merged PRs
-  push:
-    branches: [master]
-  # Weekly
-  schedule:
-    # https://crontab.guru/#0_12_*_*_1
-    - cron: "0 12 * * 1"
-  # Whenever someone asks
-  workflow_dispatch:
+  push: {branches: [master]}
+  schedule: [{cron: "7 0 * * 1,3"}] # https://crontab.guru/#7_0_*_*_1,3
+  workflow_dispatch:                # on request
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-
-        # Setup Git
-      - run: git config user.name "typescript-bot"
-      - run: git config user.email "bot@typescriptlang.org"
-
-        # Replace remotes with auth'd versions, then pull the .wiki version (the one people can't PR to)
-        # then merge in any changes from here and push
-      - 
-        run: |
-          git remote remove origin
-          git remote add origin https://$GITHUB_TOKEN@github.com/microsoft/TypeScript-wiki.git
-          git remote add upstream https://$GITHUB_TOKEN@github.com/microsoft/TypeScript.wiki.git
-          git fetch origin
-          git fetch upstream
-          git merge upstream/master --no-edit 
-          git push origin HEAD:master
-          git push upstream HEAD:master
-        env:
-          GITHUB_TOKEN: ${{ secrets.TS_BOT_TOKEN }}
-
+    - name: Get repo name
+      run: R=${GITHUB_REPOSITORY%?wiki}; echo "BASENAME=${R##*/}" >> $GITHUB_ENV
+    - name: Checkout ${{ env.BASENAME }}-wiki
+      uses: actions/checkout@v2
+      with:
+        repository: "${{ GITHUB.repository_owner }}/${{ env.BASENAME }}-wiki"
+        token: ${{ secrets.TS_BOT_TOKEN }}
+        fetch-depth: 0
+    - name: Run sync
+      run: ./.github/workflows/sync
+      env:
+        PUSHER: typescript-bot <bot@typescriptlang.org>
+        AUTH: ${{ secrets.TS_BOT_TOKEN }}
