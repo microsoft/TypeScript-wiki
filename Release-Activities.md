@@ -27,6 +27,10 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
 * [ ] Draft and publish new [release](https://github.com/Microsoft/TypeScript/releases)
 * [ ] Close milestone corresponding to the release
 
+### Project Health
+
+* [ ] Review perf dashboard to identify regressions
+
 ### Wiki
 
 * [ ] Update [What's new in TypeScript](https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript)
