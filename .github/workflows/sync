@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+# This script implements a two-way mirroring bewteen a GH wiki for a repo `R`
+# (called `DOTREMOTE` below) with a public repo `R-wiki` (intended for external
+# contributions, called `DASHREMOTE` below).  See `sync.yml` for how it is
+# triggered: it is a minimal-ish yaml file that should be added to both sides
+# (`R` and `R-wiki`), with a `push` trigger on `R-wiki` (and optionally a
+# schedule) and a `gollum` trigger on `R`.  The action spec is careful to
+# always checkout `R-wiki` (`DASHREMOTE`) since checking out `R` would be
+# useless.  It then merges in changes in `DOTREMOTE` and pushes the results to
+# both.  Pushing the merged version will trigger an action on the other side,
+# but that would be very quick (both the `merge` and pushing it will be
+# no-ops.)
+
 set -ue
 shopt -s extglob
 

@@ -1,8 +1,8 @@
 ## The TypeScript wiki
 
-This repo is a mirror of [the TypeScript wiki](https://github.com/Microsoft/TypeScript/wiki).
-Changes on either the wiki or this repo are immediately mirrored to the other side.
-This is done in a GitHub Action [here](.github/workflows/sync.yml), and [another](https://github.com/microsoft/TypeScript/blob/master/.github/workflows/ci.yml) in the TS repo.
+> This repo is a mirror of [the TypeScript wiki](https://github.com/Microsoft/TypeScript/wiki).
+> Changes on either the wiki or this repo are immediately mirrored to the other side.
+> This is done in a GitHub Action [here](.github/workflows/sync.yml), and [another](https://github.com/microsoft/TypeScript/blob/master/.github/workflows/sync-wiki.yml) in the TS repo, and the main work is done by a [`sync` script](.github/workflows/sync).
 
 The wiki root is [Home.md](./Home.md).
 
