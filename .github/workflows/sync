@@ -14,7 +14,7 @@ export GIT_COMMITTER_EMAIL="$EMAIL"
 
 DASHREMOTE="$(git remote get-url origin)"
 DOTREMOTE="${DASHREMOTE//-wiki/.wiki}"
-echo "\$DASHREMOTE = $DASHREMOTE, \$DOTREMOTE = $DOTREMOTE"
+echo "DASHREMOTE = $DASHREMOTE, DOTREMOTE = $DOTREMOTE"
 
 for r in "$DASHREMOTE" "$DOTREMOTE"; do
   if [[ "$(git ls-remote --symref "$r" HEAD | grep "^ref:")" \
@@ -23,13 +23,15 @@ for r in "$DASHREMOTE" "$DOTREMOTE"; do
   fi
 done
 
-echo ">>> Adding DOTREMOTE"
+echo ">>> Adding and fetching DOTREMOTE"
 git remote add dot "$DOTREMOTE"
 git fetch dot
 
 echo ">>> Merging changes"
 git pull --no-edit --no-rebase dot "master"
 
-echo ">>> Pushing merges"
+echo ">>> Pushing merges to DASHREMOTE"
 git push origin
+
+echo ">>> Pushing merges to DOTREMOTE"
 git push dot
