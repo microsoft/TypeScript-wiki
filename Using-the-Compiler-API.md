@@ -13,8 +13,8 @@ npm install -g typescript
 npm link typescript
 ```
 
-You will also need the node definition file for some of these samples.
-To acquire the definition file, run:
+You will also need the Node.js declaration files for some of these samples.
+To acquire the declaration files, run:
 
 ```sh
 npm install -D @types/node
