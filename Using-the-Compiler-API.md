@@ -17,7 +17,7 @@ You will also need the node definition file for some of these samples.
 To acquire the definition file, run:
 
 ```sh
-npm install @types/node
+npm install -D @types/node
 ```
 
 That's it, you're ready to go. Now you can try out some of the following examples.
