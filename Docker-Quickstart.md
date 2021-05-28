@@ -65,7 +65,7 @@ therefore the container.)
 docker run -it --rm node:12
 ```
 
-Image names are tagged --- this is similar to the above, but now I'm
+Image names are tagged — this is similar to the above, but now I'm
 specifying that I want to use the `12` tag.  When you don't specify a
 tag as in the above, you get the default of `:latest`.
 
@@ -86,7 +86,7 @@ Here I added a `bash` at the end, overriding what the `node` image runs
 by default.  Now I get a `bash` prompt, and I can do whatever I want:
 `npm install` stuff (locally or globally), `apt install` OS packages
 (you'll need to `apt update` first to get the package directory), and
-even `rm /bin/*` --- it's all completely safe, and everything will
+even `rm /bin/*` — it's all completely safe, and everything will
 disappear when the container is done.
 
 But if you know even a little about linux, you'll recognize that this is
@@ -141,7 +141,7 @@ preferable.
 
 This is a more involved example: running the
 [fuzzer](https://github.com/microsoft/tsserverfuzzer).  First, clone the
-repository --- the `node` image includes `git` so you can do it in the
+repository — the `node` image includes `git` so you can do it in the
 container, but you're probably more comfortable with your usual
 environment.  You'll probably use vscode or whatever... something like
 
@@ -172,7 +172,7 @@ node@...:/fuzzer$ node lib/Fuzzer/main.js
 ```
 
 You can now do the usual things, even `git` commands (since the file
-format is the same --- just be careful of sneaky EOL translation).
+format is the same — just be careful of sneaky EOL translation).
 
 I you did all of this, the `git status` should show just a change in
 `package-lock.json`, and the last execution got stuck waiting for a
@@ -255,15 +255,28 @@ One problem with running this code is that it requires having `sudo`,
 but the `node` image is based on a minimal linux so it doesn't have it.
 One way to do it is to fix the code to not use `sudo` if it's running as
 root ... but a way around it is to start the container with `bash`, and
-run the two `apt` commands to get `sudo` installed.  (There are probably
-a bunch of other things needed to run this, I'll revise if needed.)
+run the two `apt` commands to get `sudo` installed.  (In the case of
+this `TypeScriptErrorDeltas` code, there is something else that is
+needed: see "Privileged runs" below.)
 
 It is obviously tedious to do this installation every time you want to
-run it --- ignoring changing the code to not require extra packages, it
-is pretty easy to build an image yourself.  But I'll finish the quick
-part here.
+run it — ignoring changing the code to not require extra packages, it is
+pretty easy to build an image yourself.  But I'll finish the quick part
+here.
 
 ## Extras
+
+### Privileged runs
+
+A docker container is an image running in a sandboxed environment that
+is restricted in several ways (like seeing its own FS and network).
+There are, however, cases where linux functionality is needed from the
+kernel — and mounting things (when you're already *in* the container) is
+one such case that is normally blocked.  Docker has a bunch of
+"capabilities" that are off by default and can be turned on if needed.
+In cases like `TypeScriptErrorDeltas`, where you're running known
+non-malicious code, you can just enable all of them by adding a
+`--privileged` flag.
 
 ### `docker build`
 
