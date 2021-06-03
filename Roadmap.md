@@ -20,10 +20,12 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.4 (August 2021)
 
+[See the 4.4 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/44237)
+
+* [x] [Strict optional property checks through `--strictOptionalProperties`](https://github.com/microsoft/TypeScript/issues/13195)
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
+* [ ] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
 * [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
-* [ ] [Investigate `typeof class`](https://github.com/microsoft/TypeScript/issues/41581)
-* [ ] [Use `unknown` as the type for `catch` clause variables](https://github.com/microsoft/TypeScript/pull/41013)
 
 # 4.3 (May 2021)
 
