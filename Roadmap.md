@@ -24,7 +24,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [x] [Strict optional property checks through `--strictOptionalProperties`](https://github.com/microsoft/TypeScript/issues/13195)
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
-* [ ] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
+* [x] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
 * [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
 
 # 4.3 (May 2021)
