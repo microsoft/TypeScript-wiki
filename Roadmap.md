@@ -26,6 +26,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [x] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
 * [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
+* [x] [Updated `--help` descriptions](https://github.com/microsoft/TypeScript/pull/44409#event-4893868354)
 
 # 4.3 (May 2021)
 
