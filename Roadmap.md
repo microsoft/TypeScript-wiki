@@ -27,6 +27,9 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
 * [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
 * [x] [Updated `--help` descriptions](https://github.com/microsoft/TypeScript/pull/44409#event-4893868354)
+* [ ] [Inlay Hints](https://github.com/microsoft/TypeScript/pull/42089)
+* [x] [High-Confidence Suggestions in Unchecked JavaScript](https://github.com/microsoft/TypeScript/issues/41582)
+* [x] [Quick Fix to Declare Missing Properties on Objects](https://github.com/microsoft/TypeScript/pull/44576)
 
 # 4.3 (May 2021)
 
