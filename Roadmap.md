@@ -18,16 +18,21 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.5 (November 2021)
+
+* [ ] [Import Assertions](https://github.com/microsoft/TypeScript/pull/40698)
+* [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
+
 # 4.4 (August 2021)
 
 [See the 4.4 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/44237)
 
+* [x] [Control Flow Analysis of Aliased Conditions](https://github.com/microsoft/TypeScript/pull/44730)
+* [x] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [x] [Strict optional property checks through `--strictOptionalProperties`](https://github.com/microsoft/TypeScript/issues/13195)
-* [ ] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [x] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
-* [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
 * [x] [Updated `--help` descriptions](https://github.com/microsoft/TypeScript/pull/44409#event-4893868354)
-* [ ] [Inlay Hints](https://github.com/microsoft/TypeScript/pull/42089)
+* [x] [Inlay Hints](https://github.com/microsoft/TypeScript/pull/42089)
 * [x] [High-Confidence Suggestions in Unchecked JavaScript](https://github.com/microsoft/TypeScript/issues/41582)
 * [x] [Quick Fix to Declare Missing Properties on Objects](https://github.com/microsoft/TypeScript/pull/44576)
 
