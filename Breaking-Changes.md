@@ -4,24 +4,44 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.4
 
-## Abstract properties Do Not Allow Initializers
+## `lib.d.ts` Changes for TypeScript 4.4
+
+As with every TypeScript version, declarations for `lib.d.ts` (especially the declarations generated for web contexts), have changed.
+You can consult [our list of known `lib.dom.d.ts` changes](https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/1029#issuecomment-869224737) to understand what is impacted.
+
+## Using `unknown` in Catch Variables
+
+Technically, users running with the `--strict` flag may see new errors around `catch` variables being `unknown`, especially if the existing code assumes only `Error` values have been caught.
+This often results in error messages such as:
+
+```
+Property 'message' does not exist on type 'unknown'.
+Property 'name' does not exist on type 'unknown'.
+Property 'stack' does not exist on type 'unknown'.
+```
+
+To get around this, you can specifically add runtime checks to ensure that the thrown type matches your expected type.
+Otherwise, you can just use a type assertion, add an explicit `: any` to your catch variable, or turn off `--useUnknownInCatchVariables`.
+
+## Abstract Properties Do Not Allow Initializers
 
 The following code is now an error because abstract properties may not have initializers:
 
 ```ts
 abstract class C {
     abstract prop = 1;
+    //       ~~~~
+    // Property 'prop' cannot have an initializer because it is marked abstract.
 }
 ```
 
-Instead, just give a type to the property:
+Instead, you may only specify a type for the property:
 
 ```ts
 abstract class C {
     abstract prop: number;
 }
 ```
-
 
 # TypeScript 4.3
 
