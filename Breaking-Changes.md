@@ -9,6 +9,39 @@ These changes list where implementation differs between versions as the spec and
 As with every TypeScript version, declarations for `lib.d.ts` (especially the declarations generated for web contexts), have changed.
 You can consult [our list of known `lib.dom.d.ts` changes](https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/1029#issuecomment-869224737) to understand what is impacted.
 
+## More-Compliant Indirect Calls for Imported Functions
+
+In earlier versions of TypeScript, calling an import from CommonJS, AMD, and other non-ES module systems would set the `this` value of the called function.
+Specifically, in the following example, when calling `fooModule.foo()`, the `foo()` method will have `fooModule` set as the value of `this`.
+
+```ts
+// Imagine this is our imported module, and it has an export named 'foo'.
+let fooModule = {
+    foo() {
+        console.log(this);
+    }
+};
+
+fooModule.foo();
+```
+
+This is not the way exported functions in ECMAScript are supposed to work when we call them.
+That's why TypeScript 4.4 intentionally discards the `this` value when calling imported functions, by using the following emit.
+
+```ts
+// Imagine this is our imported module, and it has an export named 'foo'.
+let fooModule = {
+    foo() {
+        console.log(this);
+    }
+};
+
+// Notice we're actually calling '(0, fooModule.foo)' now, which is subtly different.
+(0, fooModule.foo)();
+```
+
+For more information, you can read up more [here](https://github.com/microsoft/TypeScript/pull/44624).
+
 ## Using `unknown` in Catch Variables
 
 Technically, users running with the `--strict` flag may see new errors around `catch` variables being `unknown`, especially if the existing code assumes only `Error` values have been caught.
