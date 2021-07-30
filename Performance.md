@@ -9,6 +9,9 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [Using Type Annotations](#using-type-annotations)
   * [Preferring Base Types Over Unions](#preferring-base-types-over-unions)
 - [Using Project References](#using-project-references)
+  * [New Code](#new-code)
+  * [Existing Code](#existing-code)
+  * [Performance Considerations](#performance-considerations)
 - [Configuring `tsconfig.json` or `jsconfig.json`](#configuring-tsconfigjson-or-jsconfigjson)
   * [Specifying Files](#specifying-files)
   * [Controlling `@types` Inclusion](#controlling-types-inclusion)
@@ -140,11 +143,13 @@ In this case, it would be preferable to create a base `HtmlElement` type with co
 
 # Using Project References
 
+## New Code
+
 When building up any codebase of a non-trivial size with TypeScript, it is helpful to organize the codebase into several independent *projects*.
 Each project has its own `tsconfig.json` that has dependencies on other projects.
 This can be helpful to avoid loading too many files in a single compilation, and also makes certain codebase layout strategies easier to put together.
 
-There are some very basic ways of [breaking up a codebase into projects](https://www.typescriptlang.org/docs/handbook/project-references.html).
+There are some very basic ways of [organizing a codebase into projects](https://www.typescriptlang.org/docs/handbook/project-references.html).
 As an example, one might be a program with a project for the client, a project for the server, and a project that's shared between the two.
 
 ```
@@ -181,15 +186,29 @@ Tests can also be broken into their own project.
 ------------                ------------
 ```
 
-One commonly asked question is "how big should a project be?".
-This is a lot like asking "how big should a function be?" or "how big should a class be?" and, to a large extent, it comes down to experience.
-One familiar way of splitting up JS/TS code is with folders.
-As a heuristic, if things are related enough to go in the same folder, they belong in the same project.
-Beyond that, avoid massive or tiny projects.
-If one project is larger than all the others combined, that's a warning sign.
-Similarly, it's best to avoid having dozens of single-file projects because the overhead adds up.
-
 You can [read up more about project references here](https://www.typescriptlang.org/docs/handbook/project-references.html).
+
+## Existing Code
+
+When a workspace becomes so large that it's hard for the editor to handle (and you've used [performance tracing](#providing-performance-traces) to confirm that there are no hotspots, making scale the most likely culprit) , it can be helpful to break it down into a collection of projects that reference each other.
+If you're working in a monorepo, this can be as simple as creating a project for each package and mirroring the package dependency graph in project references.
+Otherwise the process is more ad hoc - you may be able to follow the directory structure or you may have to use carefully chosen `include` and `exclude` globs.
+Some things to keep in mind:
+* Aim for evenly-sized projects - avoid having a single humongous project with lots of tiny satellites
+* Try to group together files that will be edited together - this will limit the number of projects the editor needs to load
+* Separating out test code can help prevent product code from accidentally depending on it
+
+## Performance Considerations
+
+As with any encapsulation mechanism, projects come with a cost.
+For example, if all projects depend on the same typings (e.g. a popular UI framework), some parts of those typings will be checked repeatedly - once for each project consuming them.
+Empirically, it seems that (for a workspace with more than one project) 5-20 projects is an appropriate range - fewer may result in editor slowdowns and more may result in excessive overhead.
+Some good reasons to split out a project:
+* It has a different output location (e.g. because it's a package in a monorepo)
+* It requires different settings (e.g. `lib` or `moduleResolution`)
+* It contains global declarations that you want to scope (either for encapsulation or to limit expensive global rebuilds)
+* The editor's language service runs out of memory when trying to process the code as a single project
+  * In this case, you will want to set `"disableReferencedProjectLoad": true` and `"disableSolutionSearching": true` to limit project loading while editing
 
 # Configuring `tsconfig.json` or `jsconfig.json`
 
