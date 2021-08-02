@@ -46,4 +46,4 @@ echo ">>> Pushing merges to DASHREMOTE"
 git push origin
 
 echo ">>> Pushing merges to DOTREMOTE"
-git push dot
+git push dot main:master
