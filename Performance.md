@@ -190,7 +190,7 @@ You can [read up more about project references here](https://www.typescriptlang.
 
 ## Existing Code
 
-When a workspace becomes so large that it's hard for the editor to handle (and you've used [performance tracing](#providing-performance-traces) to confirm that there are no hotspots, making scale the most likely culprit) , it can be helpful to break it down into a collection of projects that reference each other.
+When a workspace becomes so large that it's hard for the editor to handle (and you've used [performance tracing](#providing-performance-traces) to confirm that there are no hotspots, making scale the most likely culprit), it can be helpful to break it down into a collection of projects that reference each other.
 If you're working in a monorepo, this can be as simple as creating a project for each package and mirroring the package dependency graph in project references.
 Otherwise the process is more ad hoc - you may be able to follow the directory structure or you may have to use carefully chosen `include` and `exclude` globs.
 Some things to keep in mind:
