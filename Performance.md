@@ -208,7 +208,7 @@ Some good reasons to split out a project:
 * It requires different settings (e.g. `lib` or `moduleResolution`)
 * It contains global declarations that you want to scope (either for encapsulation or to limit expensive global rebuilds)
 * The editor's language service runs out of memory when trying to process the code as a single project
-  * In this case, you will want to set `"disableReferencedProjectLoad": true` and `"disableSolutionSearching": true` to limit project loading while editing
+    * In this case, you will want to set `"disableReferencedProjectLoad": true` and `"disableSolutionSearching": true` to limit project loading while editing
 
 # Configuring `tsconfig.json` or `jsconfig.json`
 
