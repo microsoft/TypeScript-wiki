@@ -201,7 +201,7 @@ Some things to keep in mind:
 ## Performance Considerations
 
 As with any encapsulation mechanism, projects come with a cost.
-For example, if all projects depend on the same typings (e.g. a popular UI framework), some parts of those typings will be checked repeatedly - once for each project consuming them.
+For example, if all projects depend on the same packages (e.g. a popular UI framework), some parts of that package's types will be checked repeatedly - once for each project consuming them.
 Empirically, it seems that (for a workspace with more than one project) 5-20 projects is an appropriate range - fewer may result in editor slowdowns and more may result in excessive overhead.
 Some good reasons to split out a project:
 * It has a different output location (e.g. because it's a package in a monorepo)
