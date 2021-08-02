@@ -81,7 +81,7 @@ function Foo(param1) {
 }
 ```
 
-See [this doc](https://github.com/microsoft/TypeScript-wiki/blob/master/JSDoc-support-in-JavaScript.md) for the JsDoc annotations currently supported.
+See [this doc](https://github.com/microsoft/TypeScript-wiki/blob/main/JSDoc-support-in-JavaScript.md) for the JsDoc annotations currently supported.
 
 #### <a name="TsDeclFiles"></a> IntelliSense based on TypeScript Declaration Files
 

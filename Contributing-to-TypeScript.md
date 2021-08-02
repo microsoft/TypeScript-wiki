@@ -6,7 +6,7 @@ To log a bug, just use the GitHub issue tracker. Confirmed bugs will be labelled
 
 ### Pull Requests
 
-Before we can accept a pull request from you, you'll need to sign the Contributor License Agreement (CLA). See the "Legal" section of the [CONTRIBUTING.md guide](https://github.com/Microsoft/TypeScript/blob/master/CONTRIBUTING.md). That document also outlines the technical nuts and bolts of submitting a pull request. Be sure to follow our [[Coding Guidelines|coding-guidelines]].
+Before we can accept a pull request from you, you'll need to sign the Contributor License Agreement (CLA). See the "Legal" section of the [CONTRIBUTING.md guide](https://github.com/Microsoft/TypeScript/blob/main/CONTRIBUTING.md). That document also outlines the technical nuts and bolts of submitting a pull request. Be sure to follow our [[Coding Guidelines|coding-guidelines]].
 
 ### Suggestions
 

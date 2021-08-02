@@ -23,7 +23,7 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
 ### Release
 
 * [ ] [Tag](https://github.com/Microsoft/TypeScript/tags) release branch
-* [ ] Update [AUTHORS.md](https://github.com/Microsoft/TypeScript/blob/master/AUTHORS.md) for the release ([script](https://github.com/Microsoft/TypeScript/blob/master/scripts/authors.ts))
+* [ ] Update [AUTHORS.md](https://github.com/Microsoft/TypeScript/blob/main/AUTHORS.md) for the release ([script](https://github.com/Microsoft/TypeScript/blob/main/scripts/authors.ts))
 * [ ] Draft and publish new [release](https://github.com/Microsoft/TypeScript/releases)
 * [ ] Close milestone corresponding to the release
 
