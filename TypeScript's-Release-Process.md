@@ -18,9 +18,11 @@ The official [@typescript](twitter.com/typescript/) Twitter account also posts r
 TypeScript currently has two pre-releases (the Beta and the Release Candidate), followed by a stable "final" release, followed by any number of patches.
 
 ```
-                                                         /---> TS 4.1.3 (patch)
-TS 4.1.0 Beta ----> TS 4.1.1 RC ------> TS 4.1.2 Stable <
-                                                         \----> TS 4.2.0 Beta
+     TS 4.1.0 Beta ----> TS 4.1.1 RC ------> TS 4.1.2 Stable ------> TS 4.1.3 (patch) ---> ...
+     /                 /
+main --------------------------------------------------------------- ...
+                                                          \
+                                                          TS 4.2.0 (Beta) ---> ...
 ```
 
 # How Often Does TypeScript Release?
