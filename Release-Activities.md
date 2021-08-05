@@ -41,7 +41,6 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
 
 * [ ] Add new [Release Notes page](https://github.com/Microsoft/TypeScript-Handbook/tree/master/pages/release%20notes) for the new release
 * [ ] Update [Handbook](https://github.com/Microsoft/TypeScript-Handbook) (As needed)
-* [ ] Update [Public Dates](https://github.com/microsoft/TypeScript-Website/blob/v2/packages/typescriptlang-org/src/lib/release-plan.json)
 
 #### npm
 
@@ -72,8 +71,6 @@ After the release version is published to npm:
 
 * [ ] Update Handbook
 * [ ] Add new release notes page
-* [ ] Update playground
-* [ ] Update version strings in the download banner
 
 ## Additional activities
 
@@ -84,16 +81,6 @@ When a new syntax or a new compiler option is introduced, find below the list of
 #### MSBuild tasks and targets
 
 * [ ] Add support for new option in MSBuild tasks and targets (see [handbook](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options%20in%20MSBuild.md))
-
-#### Handbook
-
-* [ ] Add new option to [Compiler Options](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options.md)
-* [ ] Add new option to [Compiler Options in MSBuild](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Compiler%20Options%20in%20MSBuild.md)
-
-#### SchemaStore
-
-* [ ] Add new option to [tsconfig.json schema](https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/tsconfig.json)
-* [ ] Add new option to [jsconfig.json schema](https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/jsconfig.json)
 
 ### New syntax introduced
 
