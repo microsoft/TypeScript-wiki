@@ -56,6 +56,44 @@ Property 'stack' does not exist on type 'unknown'.
 To get around this, you can specifically add runtime checks to ensure that the thrown type matches your expected type.
 Otherwise, you can just use a type assertion, add an explicit `: any` to your catch variable, or turn off `--useUnknownInCatchVariables`.
 
+## Broader Always-Truthy Promise Checks
+
+In prior versions, TypeScript introduced "Always Truthy Promise checks" to catch code where an `await` may have been forgotten;
+however, the checks only applied to named declarations.
+That meant that while this code would correctly receive an error...
+
+```ts
+async function foo(): Promise<boolean> {
+    return false;
+}
+
+async function bar(): Promise<string> {
+    const fooResult = foo();
+    if (fooResult) {        // <- error! :D
+        return "true";
+    }
+    return "false";
+}
+```
+
+...the following code would not.
+
+```ts
+async function foo(): Promise<boolean> {
+    return false;
+}
+
+async function bar(): Promise<string> {
+    if (foo()) {            // <- no error :(
+        return "true";
+    }
+    return "false";
+}
+```
+
+TypeScript 4.4 now flags both.
+For more information, [read up on the original change](https://github.com/microsoft/TypeScript/pull/44491).
+
 ## Abstract Properties Do Not Allow Initializers
 
 The following code is now an error because abstract properties may not have initializers:
