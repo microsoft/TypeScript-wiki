@@ -51,6 +51,7 @@ This often results in error messages such as:
 Property 'message' does not exist on type 'unknown'.
 Property 'name' does not exist on type 'unknown'.
 Property 'stack' does not exist on type 'unknown'.
+Object is of type 'unknown'.
 ```
 
 To get around this, you can specifically add runtime checks to ensure that the thrown type matches your expected type.
