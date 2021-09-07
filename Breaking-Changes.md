@@ -2,6 +2,12 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.5
+
+## `target` and `module` are Reserved Top-Level `tsconfig.json` Fields
+
+https://github.com/microsoft/TypeScript/pull/44964
+
 # TypeScript 4.4
 
 ## `lib.d.ts` Changes for TypeScript 4.4
