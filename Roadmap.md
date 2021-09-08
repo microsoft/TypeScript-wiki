@@ -47,7 +47,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Template string type inference and compatibility improvements](https://github.com/microsoft/TypeScript/pull/43361)
 * [x] [Contextual Narrowing for Generics](https://github.com/microsoft/TypeScript/pull/43183)
 * [x] [Infer template string types when contextually typed](https://github.com/microsoft/TypeScript/pull/43376)
-* [x] [ECMAScript `#private` Methods](https://github.com/microsoft/TypeScript/pull/42458)
+* [x] [ECMAScript `#private` Methods/Statics/Accessors](https://github.com/microsoft/TypeScript/pull/42458)
 * [x] [`static` Index Signatures](https://github.com/microsoft/TypeScript/pull/37797)
 * [x] [Editor support for `@link` tags](https://github.com/microsoft/TypeScript/pull/41877)
 * Investigate auto-import improvements
