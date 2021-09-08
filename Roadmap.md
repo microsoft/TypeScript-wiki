@@ -32,7 +32,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Control Flow Analysis of Aliased Conditions](https://github.com/microsoft/TypeScript/pull/44730)
 * [x] [Generalized index signatures](https://github.com/microsoft/TypeScript/pull/26797)
 * [x] [Strict optional property checks through `--strictOptionalProperties`](https://github.com/microsoft/TypeScript/issues/13195)
-* [x] [Use `unknown` as the type for `catch` clause variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
+* [x] [Use `unknown` as the type for `try`/`catch` variables `--useUnknownInCatchVariables`](https://github.com/microsoft/TypeScript/pull/41013)
 * [x] [Updated `--help` descriptions](https://github.com/microsoft/TypeScript/pull/44409#event-4893868354)
 * [x] [Inlay Hints](https://github.com/microsoft/TypeScript/pull/42089)
 * [x] [High-Confidence Suggestions in Unchecked JavaScript](https://github.com/microsoft/TypeScript/issues/41582)
