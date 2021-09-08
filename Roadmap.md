@@ -22,6 +22,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.5 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/45418)
 
+* [X] [Tail recursive evaluation of conditional types](https://github.com/microsoft/TypeScript/pull/45711)
 * [ ] [Import Assertions](https://github.com/microsoft/TypeScript/pull/40698)
 * [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
 
