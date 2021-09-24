@@ -47,18 +47,15 @@ function init(modules: { typescript: typeof import("typescript/lib/tsserverlibra
   const ts = modules.typescript;
 
   function create(info: ts.server.PluginCreateInfo) {
-    // Set up decorator
+    // Set up decorator object
     const proxy: ts.LanguageService = Object.create(null);
-    for (let k of Object.keys(info.languageService) as Array<
-      keyof ts.LanguageService
-    >) {
-      const x = info.languageService[k];
+    for (let k of Object.keys(info.languageService) as Array<keyof ts.LanguageService>) {
+      const x = info.languageService[k]!;
+      // @ts-expect-error - JS runtime trickery which is tricky to type tersely
       proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
     }
-    return proxy;
+    return { create };
   }
-
-  return { create };
 }
 ```
 
@@ -172,22 +169,19 @@ function init(modules: { typescript: typeof import("typescript/lib/tsserverlibra
       "I'm getting set up now! Check the log for this message."
     );
 
-    // Set up decorator
+    // Set up decorator object
     const proxy: ts.LanguageService = Object.create(null);
-    for (let k of Object.keys(info.languageService) as Array<
-      keyof ts.LanguageService
-    >) {
-      const x = info.languageService[k];
+    for (let k of Object.keys(info.languageService) as Array<keyof ts.LanguageService>) {
+      const x = info.languageService[k]!;
+      // @ts-expect-error - JS runtime trickery which is tricky to type tersely
       proxy[k] = (...args: Array<{}>) => x.apply(info.languageService, args);
     }
 
     // Remove specified entries from completion list
     proxy.getCompletionsAtPosition = (fileName, position, options) => {
-      const prior = info.languageService.getCompletionsAtPosition(
-        fileName,
-        position,
-        options
-      );
+      const prior = info.languageService.getCompletionsAtPosition(fileName, position, options);
+      if (!prior) return
+
       const oldLength = prior.entries.length;
       prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
 
