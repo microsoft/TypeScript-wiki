@@ -2018,7 +2018,7 @@ class FooError extends Error {
 However, any subclass of `FooError` will have to manually set the prototype as well.
 For runtimes that don't support [`Object.setPrototypeOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
 
-Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior](https://msdn.microsoft.com/en-us/library/s4esdbwz(v=vs.94).aspx).
+Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior](https://docs.microsoft.com/en-us/archive/microsoft-edge/legacy/developer/dev-guide/whats-new/javascript-version-information).
 One can manually copy methods from the prototype onto the instance itself (i.e. `FooError.prototype` onto `this`), but the prototype chain itself cannot be fixed.
 
 ## Literal types are inferred by default for `const` variables and `readonly` properties
