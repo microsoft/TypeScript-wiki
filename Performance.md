@@ -521,7 +521,7 @@ You can then
 1. Click on the `Load` button at the top left,
 1. Open the generated JSON file (`trace.*.json`) in your output directory.
 
-Note that, even if your build doesn't not directly invoke tsc (e.g. because you use a bundler) or the slowdown you're seeing is in the editor, collecting and interpreting a trace from tsc will generally be much easier than trying to investigate your slowdown directly and will still produce representative results.
+Note that, even if your build doesn't directly invoke tsc (e.g. because you use a bundler) or the slowdown you're seeing is in the editor, collecting and interpreting a trace from tsc will generally be much easier than trying to investigate your slowdown directly and will still produce representative results.
 
 You can [read more about performance tracing in more detail here](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
 
