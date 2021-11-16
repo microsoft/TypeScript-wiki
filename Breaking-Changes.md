@@ -4,9 +4,50 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.5
 
-## `target` and `module` are Reserved Top-Level `tsconfig.json` Fields
+## `lib.d.ts` Changes for TypeScript 4.5
 
-https://github.com/microsoft/TypeScript/pull/44964
+TypeScript 4.5 contains changes to its built-in declaration files which may affect your compilation;
+however, [these changes were fairly minimal](https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/1143), and we expect most code will be unaffected.
+
+## Inference Changes from `Awaited`
+
+Because `Awaited` is now used in `lib.d.ts` and as a result of `await`, you may see certain generic types change that might cause incompatibilities.
+This may cause issues when providing explicit type arguments to functions like `Promise.all`, `Promise.allSettled`, etc.
+
+Often, you can make a fix by removing type arguments altogether.
+
+```diff
+- Promise.all<boolean, boolean>(...)
++ Promise.all(...)
+```
+
+More involved cases will require you to replace a list of type arguments with a single type argument of a tuple-like type.
+
+
+```diff
+- Promise.all<boolean, boolean>(...)
++ Promise.all<[boolean, boolean]>(...)
+```
+
+However, there will be occasions when a fix will be a little bit more involved, and replacing the types with a tuple of the original type arguments won't be enough.
+[One example where this occasionally comes up](https://github.com/microsoft/TypeScript/issues/46651#issuecomment-959791706) is when an element is possibly a `Promise` or non-`Promise`.
+In those cases, it's no longer okay to unwrap the underlying element type.
+
+```diff
+- Promise.all<boolean | undefined, boolean | undefined>(...)
++ Promise.all<[Promise<boolean> | undefined, Promise<boolean> | undefined]>(...)
+```
+
+## Compiler Options Checking at the Root of `tsconfig.json`
+
+It's an easy mistake to accidentally forget about the `compilerOptions` section in a `tsconfig.json`.
+To help catch this mistake, in TypeScript 4.5, it is an error to add a top-level field which matches any of the available options in `compilerOptions` *without* having also defined `compilerOptions` in that `tsconfig.json`.
+
+## Restrictions on Assignability to Conditional Types
+
+TypeScript no longer allows types to be assignable to conditional types that use `infer`, or that are distributive.
+Doing so previously often ended up causing major performance issues.
+For more information, [see the specific change on GitHub](https://github.com/microsoft/TypeScript/pull/46429).
 
 # TypeScript 4.4
 
