@@ -54,6 +54,9 @@ import moment = require("moment");
 // Before: "Moment: Wed Nov 17 2021 16:23:57 GMT-0800"
 //  After: "Moment: 1637195037348"
 console.log(`Moment: ${moment()}`);
+```
+
+More more information, [see the original issue](https://github.com/microsoft/TypeScript/issues/39744).
 
 ## Compiler Options Checking at the Root of `tsconfig.json`
 
