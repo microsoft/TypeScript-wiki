@@ -38,6 +38,23 @@ In those cases, it's no longer okay to unwrap the underlying element type.
 + Promise.all<[Promise<boolean> | undefined, Promise<boolean> | undefined]>(...)
 ```
 
+## Template Strings Use `.concat()`
+
+Template strings in TypeScript previously just used the `+` operator when targeting ES3 or ES5;
+however, this leads to some divergences between the use of `.valueOf()` and `.toString()` which ends up being less spec-compliant.
+This is usually not noticeable, but is particularly important when using upcoming standard library additions like [Temporal](https://tc39.es/proposal-temporal/docs/).
+
+TypeScript now uses calls to `.concat()` on `strings`.
+This gives code the same behavior regardless of whether it targets ES3 and ES5, or ES2015 and later.
+Most code should be unaffected, but you might now see different results on values that define separate `valueOf()` and `toString()` methods.
+
+```ts
+import moment = require("moment");
+
+// Before: "Moment: Wed Nov 17 2021 16:23:57 GMT-0800"
+//  After: "Moment: 1637195037348"
+console.log(`Moment: ${moment()}`);
+
 ## Compiler Options Checking at the Root of `tsconfig.json`
 
 It's an easy mistake to accidentally forget about the `compilerOptions` section in a `tsconfig.json`.
