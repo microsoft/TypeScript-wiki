@@ -1,3 +1,16 @@
+# TypeScript 4.5
+
+- `factory.createImportSpecifier` and `factory.updateImportSpecifier` now take an `isTypeOnly` parameter:
+
+  ```diff
+  - createImportSpecifier(propertyName: Identifier | undefined, name: Identifier): ImportSpecifier;
+  + createImportSpecifier(isTypeOnly: boolean, propertyName: Identifier | undefined, name: Identifier): ImportSpecifier;
+  - updateImportSpecifier(node: ImportSpecifier, propertyName: Identifier | undefined, name: Identifier): ImportSpecifier;
+  + updateImportSpecifier(node: ImportSpecifier, isTypeOnly: boolean, propertyName: Identifier | undefined, name: Identifier): ImportSpecifier;
+  ```
+
+  You can read more about this change at the [implementing PR](https://github.com/microsoft/TypeScript/pull/45998).
+
 # TypeScript 4.2
 
 - `visitNode`'s `lift` Takes a `readonly Node[]` Instead of a `NodeArray<Node>`
