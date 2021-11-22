@@ -5,6 +5,18 @@ for ECMAScript features are available in your node version.
 
 To update this file, you can use [node.green](https://node.green) to map to the different options in [microsoft/typescript@src/lib](https://github.com/Microsoft/TypeScript/tree/main/src/lib)
 
+#### Node 16
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["ES2021"],
+    "module": "commonjs",
+    "target": "ES2021"
+  }
+}
+```
+
 #### Node 14
 
 ```json
