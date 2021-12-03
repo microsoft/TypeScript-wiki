@@ -12,11 +12,10 @@ The primary people managing a release should oversee these tasks along with the 
 
 ### `@definitelytyped/header-parser` and `retag`
 
-Once `master`'s version is updated, the @definitelytyped packages must be aware of the nightly's new version so that functionality such as ATA continues to work.
+Once `main`'s version is updated, the @definitelytyped packages must be aware of the nightly's new version so that nightly versions of ATA continue to work. ATA relies on `tsX.Y` tags on `@types/*` packages.
 
-* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions) to support ***the next version***, and publish new version
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions) to support ***the next version***, and publish a new release.
     * in other words, if we're releasing TypeScript 3.9, the header parser needs to support `4.0`.
-    * Follow the instructions in `typescript-versions`' source to update dependents.
 
 ## Release Activities
 
@@ -63,9 +62,7 @@ Once `master`'s version is updated, the @definitelytyped packages must be aware 
 
 After the release version is published to npm:
 
-* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions): move the newly  published version from `supported` to `shipped` (in the example above, that's 3.9), and publish new version of @definitelytyped.
-* [ ] Update [dtslint](https://github.com/Microsoft/dtslint) and dts-critic's dependency to the new @definitelytyped/header-parser
-* [ ] Update [@definitelytyped/publisher](https://github.com/Microsoft/DefinitelyTyped-tools)'s dependency on dtslint.
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions): move the newly  published version from `supported` to `shipped` (in the example above, that's 3.9), and publish a new release of @definitelytyped.
 
 #### Website
 
