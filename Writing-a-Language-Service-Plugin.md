@@ -251,3 +251,4 @@ Some other TypeScript Language Service Plugin implementations you can look at fo
 * https://github.com/angelozerr/tslint-language-service/
 * https://github.com/xialvjun/ts-sql-plugin
 * https://github.com/HearTao/ts-string-literal-enum-plugin
+* https://github.com/ngnijland/typescript-todo-or-die-plugin
