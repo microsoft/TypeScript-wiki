@@ -108,6 +108,7 @@ function create(info: ts.server.PluginCreateInfo) {
   // If nothing was specified, we'll just remove 'caller'
   const whatToRemove: string[] = info.config.remove || ["caller"];
 
+  const proxy: ts.LanguageService = Object.create(null);
   // ... (set up decorator here) ...
 
   // Remove specified entries from completion list
@@ -120,6 +121,8 @@ function create(info: ts.server.PluginCreateInfo) {
     prior.entries = prior.entries.filter(e => whatToRemove.indexOf(e.name) < 0);
     return prior;
   };
+
+  return proxy;
 }
 ```
 
