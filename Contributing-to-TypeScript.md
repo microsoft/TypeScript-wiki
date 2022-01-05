@@ -8,6 +8,8 @@ To log a bug, just use the GitHub issue tracker. Confirmed bugs will be labelled
 
 Before we can accept a pull request from you, you'll need to sign the Contributor License Agreement (CLA). See the "Legal" section of the [CONTRIBUTING.md guide](https://github.com/Microsoft/TypeScript/blob/main/CONTRIBUTING.md). That document also outlines the technical nuts and bolts of submitting a pull request. Be sure to follow our [[Coding Guidelines|coding-guidelines]].
 
+You can learn more about the compiler's codebase at https://github.com/microsoft/TypeScript-Compiler-Notes/
+
 ### Suggestions
 
 We're also interested in your feedback in future of TypeScript. You can submit a suggestion or feature request through the issue tracker. To make this process more effective, we're asking that these include more information to help define them more clearly. Start by reading the [[TypeScript Design Goals]] and refer to [[Writing Good Design Proposals]] for information on how to write great feature proposals.

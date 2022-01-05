@@ -1,7 +1,9 @@
 ## Recommended Node TSConfig settings
 
 You can let TypeScript compile as little as possible by knowing what the baseline support 
-for ECMAScript features are available in your node version. 
+for ECMAScript features are available in your node version
+
+You can also use https://github.com/tsconfig/bases/ to find `tsconfig.json`s to extend, simplifying your own JSON files to just the options for your project.
 
 To update this file, you can use [node.green](https://node.green) to map to the different options in [microsoft/typescript@src/lib](https://github.com/Microsoft/TypeScript/tree/main/src/lib)
 
