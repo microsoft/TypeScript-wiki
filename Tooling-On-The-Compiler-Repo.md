@@ -19,7 +19,7 @@ The bot which adds/removes labels and assignees lives at [microsoft/TypeScript-r
 
 ### Repros
 
-A scheduled task which evaulates code samples generated in [the Bug Workbench](https://www.typescriptlang.org/dev/bug-workbench).
+A scheduled task which evaluates code samples generated in [the Bug Workbench](https://www.typescriptlang.org/dev/bug-workbench).
 
 This automation runs via a [daily GitHub Action](https://github.com/microsoft/TypeScript/blob/master/.github/workflows/twoslash-repros.yaml) where the majority of the code lives at [`microsoft/TypeScript-Twoslash-Repro-Action`](https://github.com/microsoft/TypeScript-Twoslash-Repro-Action)
 

@@ -17,10 +17,9 @@
 * [[Contributing to TypeScript]]
 * [[TypeScript Design Goals]]
 * [[Coding Guidelines]]
-* [[Spec conformance testing]]
 * [[Useful Links for TypeScript Issue Management]]
 * [[Writing Good Design Proposals]]
-* [[Compiler Internals]]
+* [Compiler Repo Notes](https://github.com/microsoft/TypeScript-Compiler-Notes/)
 * [Deployment](https://github.com/microsoft/TypeScript/wiki/TypeScript-Deployment)
 
 **Building Tools for TypeScript**
@@ -37,3 +36,7 @@
 **FAQs**
 * [[FAQ]]
 * [[FAQs for API Consumers]]
+
+**The Main Repo**
+* [[Triggering TypeScript Bot]]
+* [[Tooling on the Compiler Repo]]
