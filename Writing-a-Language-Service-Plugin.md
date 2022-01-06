@@ -19,6 +19,10 @@ Examples of things language plugins cannot do:
 
 Developers using the plugin will `npm install --save-dev your_plugin_name` and edit their `tsconfig.json` file to enable your plugin.
 
+## Kickstart your plugin
+
+There is a template repo which shows a working development environment for a TSServer Plugin here: https://github.com/orta/TypeScript-TSServer-Plugin-Template
+
 ## Overview: Writing a Simple Plugin
 
 Let's write a simple plugin. Our plugin will remove a user-configurable list of property names from the completion list. You might use this sort of plugin on your team to help remind you which APIs are 'banned' (for example, using the `caller` property of `function` is discouraged).
