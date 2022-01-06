@@ -83,9 +83,7 @@ To enable this plugin, users will add an entry to the `plugins` list in their `t
 }
 ```
 
-By default, this name is interpreted as an NPM package name; that is, it can be either the name of
-an NPM package with an `index.js` file, or it can be a path to a directory with an `index.js` file.
-See below for tips on testing your plugin locally.
+This name can only be an NPM package name.
 
 ### Customizing Behavior
 
@@ -220,22 +218,35 @@ export = init;
 
 ## Testing Locally
 
-To locally test your plugin, set up a sample project and give it the path to your plugin in the
-tsconfig.json file. For example:
+To locally test your plugin, set up a sample project and use a `file:` dependency ( e.g. `"tsserver-plugin": "file:.."`) to link your plugin via the module name in the tsconfig.json file. For example:
 
 ```
 your_plugin/index.ts
 your_plugin/index.js (compiled by tsc)
-sample_project/tsconfig.json
+your_plugin/sample_project/package.json
+your_plugin/sample_project/tsconfig.json
 ```
 
-where `sample_project/tsconfig.json` contains
+where `your_plugin/sample_project/package.json` contains
+
+```json
+{
+    "name": "sample_project",
+    "dependencies": {
+        "your_plugin": "file:..",
+        "typescript": "^4.4.3"
+    }
+}
+
+```
+
+and `your_plugin/sample_project/tsconfig.json` contains
 
 ```json
 {
     "compilerOptions": {
         "plugins": [{
-            "name": "../your_plugin",
+            "name": "your_plugin",
         }]
     }
 }
