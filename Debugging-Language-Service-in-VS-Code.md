@@ -24,6 +24,8 @@ TSS_DEBUG=5667 code --user-data-dir ~/.vscode-debug/
 
 This will open VS Code as a separate app from your current one, it may have some of your extensions but not your settings. As long as you consistently use the above command, then you can save settings for debugging between sessions.
 
+Optionally you can use `TSS_DEBUG_BRK` to have the TSServer wait for your debugger before launching.
+
 This will launch a debug TSServer which you can connect to from inside the TypeScript codebase. Open up the TypeScript codebase, and look at the debugging panel. At the top, look to see if there is a drop-down item for debugging by Attaching to VS Code TSServer then select that.
 
 If there isn't, copy the template of `.vscode/launch.template.json` to `.vscode/launch.json` and it should show up.
