@@ -515,7 +515,9 @@ Once you're ready to get a trace, you can run TypeScript with the `--generateTra
 tsc -p ./some/project/src/tsconfig.json --generateTrace tracing_output_folder
 ```
 
-You can then
+To quickly list performance hot-spots, you can install and run [@typescript/analyze-trace](https://www.npmjs.com/package/@typescript/analyze-trace) from npm.
+
+Alternatively, you can review the details manually:
 
 1. Visit [`about://tracing`](about://tracing) on Edge/Chrome,
 1. Click on the `Load` button at the top left,
