@@ -1163,7 +1163,7 @@ let SomeThing: typeof Display = /* ... */;
 >     private x = 0;
 >     increment(): number {
 >         this.x++;
->         return x;
+>         return this.x;
 >     }
 > }
 > ```
