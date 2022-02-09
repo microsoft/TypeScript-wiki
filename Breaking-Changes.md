@@ -249,6 +249,52 @@ enum E {
 
 For more details, [see the original change](https://github.com/microsoft/TypeScript/pull/42472)
 
+## Class fields while extending classes
+
+TypeScript 4.3 introduces new `useDefineForClassFields` compiler option, which defaults to `true`.
+
+The class' fields initialization will be included then.
+
+```ts
+class Example {
+    private abc: string;
+}
+```
+
+Becomes:
+
+```js
+// TypeScript <4.3 or "useDefineForClassFields": false
+class Example {
+}
+
+// TypeScript >=4.3 default behavior - "useDefineForClassFields": true
+class Example {
+    abc;
+}
+```
+
+It may introduce the problem when extending classes - after `super` constructor will be called, all child class properties will be reinitialized.
+It may lead to unexpected behavior, where the value was set during super class constructor, but it's reset later.
+
+```ts
+class Parent {
+    public value: string | null;
+
+    public constructor() {
+        this.value = "test value";
+    }
+}
+
+class Child extends Parent {
+    public value!: string;
+}
+
+console.log(new Child().value);
+// for `useDefineForClassFields: false` -> "test value"
+// for `useDefineForClassFields: true`  -> undefined
+```
+
 # TypeScript 4.2
 
 ## `noImplicitAny` Errors Apply to Loose `yield` Expressions
