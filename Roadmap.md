@@ -18,6 +18,12 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.7 (May 2022)
+
+* [Class Initialization Checks for Computed Properties](https://github.com/microsoft/TypeScript/pull/45974)
+
+# 4.6 (February 2022)
+
 # 4.5 (November 2021)
 
 [See the 4.5 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/45418)
