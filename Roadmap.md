@@ -24,6 +24,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.6 (February 2022)
 
+[See the 4.6 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/46858)
+
 * [x] [Narrowing for Variables Destructured from Discriminated Unions](https://github.com/microsoft/TypeScript/pull/46266)
 * [x] [Relaxed Checks on Code Before `super()`](https://github.com/microsoft/TypeScript/pull/29374)
 * [x] [Improved Recursion Depth Checks](https://github.com/microsoft/TypeScript/pull/46599)
@@ -36,10 +38,19 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.5 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/45418)
 
-* [X] [Tail recursive evaluation of conditional types](https://github.com/microsoft/TypeScript/pull/45711)
-* [ ] [Import Assertions](https://github.com/microsoft/TypeScript/pull/40698)
-* [ ] [Allow more code before `super()` calls in subclasses](https://github.com/microsoft/TypeScript/pull/29374)
-
+* [x] [`lib` Overrides from `node_modules`](https://github.com/microsoft/TypeScript/pull/45771)
+* [x] [`Awaited` and `Promise` Function Improvements](https://github.com/microsoft/TypeScript/pull/45350)
+* [x] [Tail Recursive Evaluation of Conditional Types](https://github.com/microsoft/TypeScript/pull/45711)
+* [x] [Template String Discriminants](https://github.com/microsoft/TypeScript/pull/46137)
+* [x] [`--module es2022`](https://github.com/microsoft/TypeScript/pull/44656)
+* [x] [Controls for Import Elision via `--preserveValueImports`](https://github.com/microsoft/TypeScript/pull/44619)
+* [x] [`type` Modifiers on Import Names](https://github.com/microsoft/TypeScript/pull/45998)
+* [x] [`in` Checks on `#private` Fields](https://github.com/microsoft/TypeScript/pull/44648)
+* [x] [Import Assertions](https://github.com/microsoft/TypeScript/pull/40698)
+* [x] [Speed Improvements on Windows/Mac via `realpathSync.native`](https://github.com/microsoft/TypeScript/pull/44966)
+* [x] [Snippet Completions for Subclass Methods](https://github.com/microsoft/TypeScript/issues/45670)
+* [x] [Snippet Completions for JSX Attributes](https://github.com/microsoft/TypeScript/pull/45903)
+* [x] [Better Editor Support for Unresolved Types](https://github.com/microsoft/TypeScript/pull/45976)
 # 4.4 (August 2021)
 
 [See the 4.4 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/44237)
