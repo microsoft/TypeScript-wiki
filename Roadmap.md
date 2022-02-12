@@ -24,6 +24,14 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.6 (February 2022)
 
+* [x] [Narrowing for Variables Destructured from Discriminated Unions](https://github.com/microsoft/TypeScript/pull/46266)
+* [x] [Relaxed Checks on Code Before `super()`](https://github.com/microsoft/TypeScript/pull/29374)
+* [x] [Improved Recursion Depth Checks](https://github.com/microsoft/TypeScript/pull/46599)
+* [x] [Indexed Access Inference Improvements](https://github.com/microsoft/TypeScript/pull/47109)
+* [x] [`--target es2022`](https://github.com/microsoft/TypeScript/pull/46291)
+* [x] [Syntax and Binding Errors in JavaScript Files](https://github.com/microsoft/TypeScript/pull/4706)
+* [x] [Release of `@typescript/analyze-trace`](https://github.com/microsoft/typescript-analyze-trace)
+
 # 4.5 (November 2021)
 
 [See the 4.5 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/45418)
