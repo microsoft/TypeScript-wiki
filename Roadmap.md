@@ -21,6 +21,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 4.7 (May 2022)
 
 * [ ] [Class Initialization Checks for Computed Properties](https://github.com/microsoft/TypeScript/pull/45974)
+* [ ] [Allow `typeof` on `#private` Fields](https://github.com/microsoft/TypeScript/pull/47696)
 
 # 4.6 (February 2022)
 
