@@ -5,8 +5,14 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
   - [Common "Bugs" That Aren't Bugs](#common-bugs-that-arent-bugs)
+    - [These two empty classes can be used in place of each other.](#these-two-empty-classes-can-be-used-in-place-of-each-other)
+    - [I can use a non-`void`-returning function where one returning `void` is expected.](#i-can-use-a-non-void-returning-function-where-one-returning-void-is-expected)
+    - [I'm allowed to use a shorter parameter list where a longer one is expected.](#im-allowed-to-use-a-shorter-parameter-list-where-a-longer-one-is-expected)
+    - [`private` class members are actually visible at runtime.](#private-class-members-are-actually-visible-at-runtime)
+    - [This conditional type returns `never` when it should return the true branch.](#this-conditional-type-returns-never-when-it-should-return-the-true-branch)
+    - [This mapped type returns a primitive type, not an object type.](#this-mapped-type-returns-a-primitive-type-not-an-object-type)
+    - [A method and a function property of the same type behave differently.](#a-method-and-a-function-property-of-the-same-type-behave-differently)
   - [Common Feature Requests](#common-feature-requests)
   - [Type System Behavior](#type-system-behavior)
     - [What is structural typing?](#what-is-structural-typing)
@@ -87,23 +93,36 @@
 
 Here are some behaviors that may look like bugs, but aren't.
 
-* These two empty classes can be used in place of each other
-  * See the [FAQ Entry on this page](#why-do-these-empty-classes-behave-strangely)
-* I can use a non-`void`-returning function where one returning `void` is expected
-  * See the [FAQ Entry on this page](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
-  * Prior discussion at #4544
-* I'm allowed to use a shorter parameter list where a longer one is expected
-  * See the [FAQ Entry on this page](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
-  * Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868, #26324, #30876
-* `private` class members are actually visible at runtime
-  * See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
-  * Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
-* This conditional type returns `never` when it should return the true branch.
-  * See this [issue](https://github.com/microsoft/TypeScript/issues/31751) for discussion about _distributive conditional types_.
-* This mapped type returns a primitive type, not an object type.
-  * Mapped types declared as `{ [ K in keyof T ]: U }` where T is a type parameter are known as _homomorphic mapped types_, which means that the mapped type is a structure preserving function of `T`. When type parameter `T` is instantiated with a primitive type the mapped type evaluates to the same primitive.
-* A method and a function property of the same type behave differently.
-  * Methods are always bivariant in their argument, while function properties are contravariant in their argument under `strictFunctionTypes`. More discussion [here](https://github.com/microsoft/TypeScript/pull/18654).
+### These two empty classes can be used in place of each other.
+
+See the [FAQ Entry on this page](#why-do-these-empty-classes-behave-strangely).
+
+### I can use a non-`void`-returning function where one returning `void` is expected.
+
+* See the [FAQ Entry on this page](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
+* Prior discussion at #4544
+
+### I'm allowed to use a shorter parameter list where a longer one is expected.
+
+* See the [FAQ Entry on this page](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
+* Prior discussion at #370, #9300, #9765, #9825, #13043, #16871, #13529, #13977, #17868, #20274, #20541, #21868, #26324, #30876
+
+### `private` class members are actually visible at runtime.
+
+* See the [FAQ Entry on this page](#you-should-emit-classes-like-this-so-they-have-real-private-members) for a commonly suggested "fix"
+* Prior discussion at #564, #1537, #2967, #3151, #6748, #8847, #9733, #11033
+
+### This conditional type returns `never` when it should return the true branch.
+
+See this [issue](https://github.com/microsoft/TypeScript/issues/31751) for discussion about _distributive conditional types_.
+
+### This mapped type returns a primitive type, not an object type.
+
+Mapped types declared as `{ [ K in keyof T ]: U }` where T is a type parameter are known as _homomorphic mapped types_, which means that the mapped type is a structure preserving function of `T`. When type parameter `T` is instantiated with a primitive type the mapped type evaluates to the same primitive.
+
+### A method and a function property of the same type behave differently.
+
+Methods are always bivariant in their argument, while function properties are contravariant in their argument under `strictFunctionTypes`. More discussion [here](https://github.com/microsoft/TypeScript/pull/18654).
 
 ## Common Feature Requests
 > I want to request one of the following features...
