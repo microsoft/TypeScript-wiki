@@ -20,9 +20,17 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.7 (May 2022)
 
-* [x] [Class Initialization Checks for Computed Properties](https://github.com/microsoft/TypeScript/pull/45974)
-* [x] [Improved Inference Between Function Properties and Methods](https://github.com/microsoft/TypeScript/pull/48538)
+* [x] [Control Flow and Class Initialization Checks for Computed Properties](https://github.com/microsoft/TypeScript/pull/45974)
+* [x] [Instantiation Expressions](https://github.com/microsoft/TypeScript/pull/47607)
+* [x] [Improved Inference Between Function-Initialized Properties and Methods](https://github.com/microsoft/TypeScript/pull/48538)
+* [x] [`extends` Constraints on `infer` Type Variables](https://github.com/microsoft/TypeScript/pull/48112)
+* [x] [Optional Variance Annotations](https://github.com/microsoft/TypeScript/pull/48240)
+* [x] [`moduleSuffixes` Option For Resolution](https://github.com/microsoft/TypeScript/pull/48189)
+* [x] [`resolution-mode` for `/// <reference types="..." />` Directives](https://github.com/microsoft/TypeScript/pull/47732)
+* [x] [`resolution-mode` for `import type`](https://github.com/microsoft/TypeScript/pull/47807)
 * [x] [Allow `typeof` on `#private` Fields](https://github.com/microsoft/TypeScript/pull/47696)
+* [x] [Object Method Snippet Completions](https://github.com/microsoft/TypeScript/issues/46590)
+* [x] [Grouping-Aware Organize Imports](https://github.com/microsoft/TypeScript/pull/48330)
 
 # 4.6 (February 2022)
 
