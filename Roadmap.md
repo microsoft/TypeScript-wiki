@@ -33,6 +33,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Allow `typeof` on `#private` Fields](https://github.com/microsoft/TypeScript/pull/47696)
 * [x] [Object Method Snippet Completions](https://github.com/microsoft/TypeScript/issues/46590)
 * [x] [Grouping-Aware Organize Imports](https://github.com/microsoft/TypeScript/pull/48330)
+* [ ] [Go to Source Definition/JavaScript Implementation](https://github.com/microsoft/TypeScript/pull/48264)
+* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.6 (February 2022)
 
