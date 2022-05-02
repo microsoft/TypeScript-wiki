@@ -2,6 +2,157 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.8
+
+## Unconstrained Type Parameters No Longer Assignable to `{}` in `strictNullChecks`
+
+Originally, the constraint of all type parameters in TypeScript was `{}` (the empty object type).
+Eventually the constraint was changed to `unknown` which also permits `null` and `undefined`.
+Outside of `strictNullChecks`, these types are interchangeable, but within `strictNullChecks`, `unknown` is not assignable to `{}`.
+
+In TypeScript 4.7, under `strictNullChecks`, the type-checker disables a type safety hole that was maintained for backwards-compatibility, where type parameters were considered to always be assignable to `{}`, `object`, and any other structured types with all-optional properties.
+
+```ts
+function foo<T>(x: T) {
+    const a: {} = x;
+    //    ~
+    // Type 'T' is not assignable to type '{}'.
+
+    const b: object = x;
+    //    ~
+    // Type 'T' is not assignable to type 'object'.
+
+    const c: { foo?: string, bar?: number } = x;
+    //    ~
+    // Type 'T' is not assignable to type '{ foo?: string | undefined; bar?: number | undefined; }'.
+}
+```
+
+In such cases, you may need a type assertion on `x`, or a constraint of `{}` on `T`.
+
+```ts
+function foo<T extends {}>(x: T) {
+    // Works
+    const a: {} = x;
+
+    // Works
+    const b: object = x;
+}
+```
+
+This behavior can come up in calls to 
+
+```ts
+function keysEqual<T>(x: T, y: T) {
+    const xKeys = Object.keys(x);
+    const yKeys = Object.keys(y);
+    if (xKeys.length !== yKeys.length) return false;
+    for (let i = 0; i < xKeys.length; i++) {
+        if (xKeys[i] !== yKeys[i]) return false;
+    }
+    return true;
+}
+```
+
+For the above, you might see an error message that looks like this:
+
+```ts
+No overload matches this call.
+  Overload 1 of 2, '(o: {}): string[]', gave the following error.
+    Argument of type 'T' is not assignable to parameter of type '{}'.
+  Overload 2 of 2, '(o: object): string[]', gave the following error.
+    Argument of type 'T' is not assignable to parameter of type 'object'.
+```
+
+For more information, take a look at [the breaking PR here](https://github.com/microsoft/TypeScript/pull/48366).
+
+# TypeScript 4.7
+
+## `readFile` Method is No Longer Optional on `LanguageServiceHost`
+
+If you're creating `LanguageService` instances, then provided `LanguageServiceHost`s will need to provide a `readFile` method.
+This change was necessary to support the new `moduleDetection` compiler option.
+
+You can [read more on the change here](https://github.com/microsoft/TypeScript/pull/47495).
+
+## `readonly` Tuples Have a `readonly` `length` Property
+
+A `readonly` tuple will now treat its `length` property as `readonly`.
+This was almost never witnessable for fixed-length tuples, but was an oversight which could be observed for tuples with trailing optional and rest element types.
+
+As a result, the following code will now fail:
+
+```ts
+function overwriteLength(tuple: readonly [string, string, string]) {
+    // Now errors.
+    tuple.length = 7;
+}
+```
+
+You can [read more on this change here](https://github.com/microsoft/TypeScript/pull/47717).
+
+# TypeScript 4.6
+
+## Object Rests Drop Unspreadable Members from Generic Objects
+
+Object rest expressions now drop members that appear to be unspreadable on generic objects.
+In the following example...
+
+```ts
+class Thing {
+    someProperty = 42;
+
+    someMethod() {
+        // ...
+    }
+}
+
+function foo<T extends Thing>(x: T) {
+    let { someProperty, ...rest } = x;
+
+    // Used to work, is now an error!
+    // Property 'someMethod' does not exist on type 'Omit<T, "someProperty" | "someMethod">'.
+    rest.someMethod();
+}
+```
+
+the variable `rest` used to have the type `Omit<T, "someProperty">` because TypeScript would strictly analyze which other properties were destructured.
+This doesn't model how `...rest` would work in a destructuring from a non-generic type because `someMethod` would typically be dropped as well.
+In TypeScript 4.6, the type of `rest` is `Omit<T, "someProperty" | "someMethod">`.
+
+This can also come up in cases when destructuring from `this`.
+When destructuring `this` using a `...rest` element, unspreadable and non-public members are now dropped, which is consistent with destructuring instances of a class in other places.
+
+```ts
+class Thing {
+    someProperty = 42;
+
+    someMethod() {
+        // ...
+    }
+
+    someOtherMethod() {
+        let { someProperty, ...rest } = this;
+
+        // Used to work, is now an error!
+        // Property 'someMethod' does not exist on type 'Omit<T, "someProperty" | "someMethod">'.
+        rest.someMethod();
+    }
+}
+```
+
+For more details, [see the corresponding change here](https://github.com/microsoft/TypeScript/pull/47078).
+
+## JavaScript Files Always Receive Grammar and Binding Errors
+
+Previously, TypeScript would ignore most grammar errors in JavaScript apart from accidentally using TypeScript syntax in a JavaScript file.
+TypeScript now shows JavaScript syntax and binding errors in your file, such as using incorrect modifiers, duplicate declarations, and more.
+These will typically be most apparent in Visual Studio Code or Visual Studio, but can also occur when running JavaScript code through the TypeScript compiler.
+
+You can explicitly turn these errors off by inserting a `// @ts-nocheck` comment at the top of your file.
+
+For more information, see the [first](https://github.com/microsoft/TypeScript/pull/47067) and [second](https://github.com/microsoft/TypeScript/pull/47075) implementing pull requests for these features.
+
 # TypeScript 4.5
 
 ## `lib.d.ts` Changes for TypeScript 4.5
