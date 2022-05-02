@@ -10,7 +10,7 @@ Originally, the constraint of all type parameters in TypeScript was `{}` (the em
 Eventually the constraint was changed to `unknown` which also permits `null` and `undefined`.
 Outside of `strictNullChecks`, these types are interchangeable, but within `strictNullChecks`, `unknown` is not assignable to `{}`.
 
-In TypeScript 4.7, under `strictNullChecks`, the type-checker disables a type safety hole that was maintained for backwards-compatibility, where type parameters were considered to always be assignable to `{}`, `object`, and any other structured types with all-optional properties.
+In TypeScript 4.8, under `strictNullChecks`, the type-checker disables a type safety hole that was maintained for backwards-compatibility, where type parameters were considered to always be assignable to `{}`, `object`, and any other structured types with all-optional properties.
 
 ```ts
 function foo<T>(x: T) {
