@@ -40,12 +40,13 @@ function foo<T extends {}>(x: T) {
 }
 ```
 
-This behavior can come up in calls to 
+This behavior can come up in calls to `Object.keys`:
 
 ```ts
 function keysEqual<T>(x: T, y: T) {
     const xKeys = Object.keys(x);
     const yKeys = Object.keys(y);
+
     if (xKeys.length !== yKeys.length) return false;
     for (let i = 0; i < xKeys.length; i++) {
         if (xKeys[i] !== yKeys[i]) return false;
@@ -63,6 +64,8 @@ No overload matches this call.
   Overload 2 of 2, '(o: object): string[]', gave the following error.
     Argument of type 'T' is not assignable to parameter of type 'object'.
 ```
+
+Appropriately performing runtime checks to narrow the type, or using a type-assertion, may be the best way to deal with these new errors.
 
 For more information, take a look at [the breaking PR here](https://github.com/microsoft/TypeScript/pull/48366).
 
