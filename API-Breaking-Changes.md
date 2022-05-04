@@ -1,6 +1,6 @@
 # TypeScript 4.7
 
-- `resolveTypeReferenceDirectives` (both the services and global ts version) now accept an array of `FileReference`s as a first argument. If you reimplement `resolveTypereferenceDirectives`, you need to handle both the `string[]` and `FileReference[]` cases now.
+- `resolveTypeReferenceDirectives` (both the services and global ts version) now accept an array of `FileReference`s as a first argument. If you reimplement `resolveTypeReferenceDirectives`, you need to handle both the `string[]` and `FileReference[]` cases now.
 
 # TypeScript 4.5
 
