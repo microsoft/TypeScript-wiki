@@ -18,10 +18,15 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 4.8 (August 2022)
+
+* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
+
 # 4.7 (May 2022)
 
 [See the 4.7 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/48027)
 
+* [x] [`--module` and `--moduleResolution` options `node16` and `nodenext`](https://github.com/microsoft/TypeScript/pull/44501)
 * [x] [Control Flow and Class Initialization Checks for Computed Properties](https://github.com/microsoft/TypeScript/pull/45974)
 * [x] [Instantiation Expressions](https://github.com/microsoft/TypeScript/pull/47607)
 * [x] [Improved Inference Between Function-Initialized Properties and Methods](https://github.com/microsoft/TypeScript/pull/48538)
@@ -33,8 +38,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Allow `typeof` on `#private` Fields](https://github.com/microsoft/TypeScript/pull/47696)
 * [x] [Object Method Snippet Completions](https://github.com/microsoft/TypeScript/issues/46590)
 * [x] [Grouping-Aware Organize Imports](https://github.com/microsoft/TypeScript/pull/48330)
-* [ ] [Go to Source Definition/JavaScript Implementation](https://github.com/microsoft/TypeScript/pull/48264)
-* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
+* [x] [Go to Source Definition/JavaScript Implementation](https://github.com/microsoft/TypeScript/pull/48264)
 
 # 4.6 (February 2022)
 
@@ -65,6 +69,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Snippet Completions for Subclass Methods](https://github.com/microsoft/TypeScript/issues/45670)
 * [x] [Snippet Completions for JSX Attributes](https://github.com/microsoft/TypeScript/pull/45903)
 * [x] [Better Editor Support for Unresolved Types](https://github.com/microsoft/TypeScript/pull/45976)
+
 # 4.4 (August 2021)
 
 [See the 4.4 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/44237)
