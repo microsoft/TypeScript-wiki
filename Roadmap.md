@@ -26,7 +26,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 4.7 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/48027)
 
-* [x] [`--module` and `--moduleResolution` options `node16` and `nodenext`](https://github.com/microsoft/TypeScript/pull/44501)
+* [x] [`--module` and `--moduleResolution` options `node12` and `nodenext`](https://github.com/microsoft/TypeScript/pull/44501)
 * [x] [Control Flow and Class Initialization Checks for Computed Properties](https://github.com/microsoft/TypeScript/pull/45974)
 * [x] [Instantiation Expressions](https://github.com/microsoft/TypeScript/pull/47607)
 * [x] [Improved Inference Between Function-Initialized Properties and Methods](https://github.com/microsoft/TypeScript/pull/48538)
