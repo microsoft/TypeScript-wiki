@@ -71,6 +71,90 @@ For more information, take a look at [the breaking PR here](https://github.com/m
 
 # TypeScript 4.7
 
+## Stricter Spread Checks in JSX
+
+When writing a `...spread` in JSX, TypeScript now enforces stricter checks that the given type is actually an object.
+As a results, values with the types `unknown` and `never` (and more rarely, just bare `null` and `undefined`) can no longer be spread into JSX elements.
+
+So for the following example:
+
+```tsx
+import * as React from "react";
+
+interface Props {
+    stuff?: string;
+}
+
+function MyComponent(props: unknown) {
+    return <div {...props} />;
+}
+```
+
+you'll now receive an error like the following:
+
+```
+Spread types may only be created from object types.
+```
+
+This makes this behavior more consistent with spreads in object literals.
+
+For more details, [see the change on GitHub](https://github.com/microsoft/TypeScript/pull/48570).
+
+## Stricter Checks with Template String Expressions
+
+When a `symbol` value is used in a template string, it will trigger a runtime error in JavaScript.
+
+```js
+let str = `hello ${Symbol()}`;
+// TypeError: Cannot convert a Symbol value to a string
+```
+
+As a result, TypeScript will issue an error as well;
+however, TypeScript now also checks if a generic value that is constrained to a symbol in some way is used in a template string.
+
+```ts
+function logKey<S extends string | symbol>(key: S): S {
+    // Now an error.
+    console.log(`${key} is the key`);
+    return key;
+}
+
+function get<T, K extends keyof T>(obj: T, key: K) {
+    // Now an error.
+    console.log(`Grabbing property '${key}'.`);
+    return obj[key];
+}
+```
+
+TypeScript will now issue the following error:
+
+```
+Implicit conversion of a 'symbol' to a 'string' will fail at runtime. Consider wrapping this expression in 'String(...)'.
+```
+
+In some cases, you can get around this by wrapping the expression in a call to `String`, just like the error message suggests.
+
+```ts
+function logKey<S extends string | symbol>(key: S): S {
+    // Now an error.
+    console.log(`${String(key)} is the key`);
+    return key;
+}
+```
+
+In others, this error is too pedantic, and you might not ever care to even allow `symbol` keys when using `keyof`.
+In such cases, you can switch to `string & keyof ...`:
+
+```ts
+function get<T, K extends keyof T>(obj: T, key: K) {
+    // Now an error.
+    console.log(`Grabbing property '${key}'.`);
+    return obj[key];
+}
+```
+
+For more information, you can [see the implementing pull request](https://github.com/microsoft/TypeScript/pull/44578).
+
 ## `readFile` Method is No Longer Optional on `LanguageServiceHost`
 
 If you're creating `LanguageService` instances, then provided `LanguageServiceHost`s will need to provide a `readFile` method.
