@@ -29,6 +29,8 @@ Once `main`'s version is updated, the @definitelytyped packages must be aware of
 ### Project Health
 
 * [ ] Review perf dashboard to identify regressions
+* [ ] Review fuzzer-discovered crashes (and ensure these have been running)
+* [ ] Review [\[NewErrors] breaking change issues](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+is%3Aopen+NewErrors) (and ensure these have been running)
 
 ### Wiki
 
