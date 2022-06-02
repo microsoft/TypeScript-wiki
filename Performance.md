@@ -441,7 +441,7 @@ The most relevant information for most users is:
 
 Field   | Meaning
 --------|---------
-`Files` | the number of files that the program is including (use `--listFiles` to see what they are).
+`Files` | the number of files that the program is including (use `--listFilesOnly` to see what they are).
 `I/O Read time` | time spent reading from the file system - this includes traversing `include`'d folders.
 `Parse time` | time spent scanning and parsing the program
 `Program time` | combined time spent performing reading from the file system, scanning and parsing the program, and other calculation of the program graph. These steps are intermingled and combined here because files need to be resolved and loaded once they're included via `import`s and `export`s.
@@ -473,6 +473,17 @@ tsc --showConfig
 tsc --showConfig -p tsconfig.json
 ```
 
+## `listFilesOnly`
+
+Sometimes you might be surprised to find out TypeScript is reading more files than it should be - but which files is it actually reading?
+`listFilesOnly` can tell you.
+
+```sh
+tsc --listFilesOnly
+```
+
+*Note: `--listFiles` is a somewhat-deprecated version of this flag. It is usually less desirable because `--listFiles` will still perform a full compilation, whereas `--listFilesOnly` will quit as soon as it manages to find every file that a compilation would need.*
+
 ## `traceResolution`
 
 Running with `traceResolution` can help explain *why* a file was included in a compilation.
@@ -482,7 +493,7 @@ The emit is somewhat verbose, so you might want to redirect output to a file.
 tsc --traceResolution > resolution.txt
 ```
 
-If you find a file that shouldn't be present, you may need to look into fixing up your `include`/`exclude` lists in your `tsconfig.json`, or alternatively, you might need to adjust other settings like `types`, `typeRoots`, or `paths`.
+If you find a file that shouldn't be present, you may need to look into [fixing up your `include`/`exclude` lists](https://github.com/microsoft/TypeScript/wiki/Performance#misconfigured-include-and-exclude) in your `tsconfig.json`, or alternatively, you might need to adjust other settings like `types`, `typeRoots`, or `paths`.
 
 ## Running `tsc` Alone
 
