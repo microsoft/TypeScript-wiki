@@ -25,6 +25,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [Disabling Editor Plugins](#disabling-editor-plugins)
   * [`extendedDiagnostics`](#extendeddiagnostics)
   * [`showConfig`](#showconfig)
+  * [`listFilesOnly`](#listFilesOnly)
   * [`traceResolution`](#traceresolution)
   * [Running `tsc` Alone](#running-tsc-alone)
   * [Upgrading Dependencies](#upgrading-dependencies)
