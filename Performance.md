@@ -485,16 +485,27 @@ tsc --listFilesOnly
 
 *Note: `--listFiles` is a somewhat-deprecated version of this flag. It is usually less desirable because `--listFiles` will still perform a full compilation, whereas `--listFilesOnly` will quit as soon as it manages to find every file that a compilation would need.*
 
-## `traceResolution`
+## `explainFiles`
 
-Running with `traceResolution` can help explain *why* a file was included in a compilation.
+Running with `explainFiles` can help explain *why* a file was included in a compilation.
 The emit is somewhat verbose, so you might want to redirect output to a file.
 
 ```sh
-tsc --traceResolution > resolution.txt
+tsc --explainFiles > explanations.txt
 ```
 
 If you find a file that shouldn't be present, you may need to look into [fixing up your `include`/`exclude` lists](https://github.com/microsoft/TypeScript/wiki/Performance#misconfigured-include-and-exclude) in your `tsconfig.json`, or alternatively, you might need to adjust other settings like `types`, `typeRoots`, or `paths`.
+
+## `traceResolution`
+
+While `explainFiles` can point out how a file made its way into your program, `traceResolution` can help diagnose the precise steps that were taken in resolving an import path.
+The emit is somewhat verbose, so you might want to redirect output to a file.
+
+```sh
+tsc --traceResolution > resolutions.txt
+```
+
+You might find that there are issues with your `module`/`moduleResolution` settings, or even that your dependencies' `package.json` files are not configured correctly.
 
 ## Running `tsc` Alone
 
