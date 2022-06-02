@@ -104,6 +104,10 @@ Here are some behaviors that may look like bugs, but aren't.
   * Mapped types declared as `{ [ K in keyof T ]: U }` where T is a type parameter are known as _homomorphic mapped types_, which means that the mapped type is a structure preserving function of `T`. When type parameter `T` is instantiated with a primitive type the mapped type evaluates to the same primitive.
 * A method and a function property of the same type behave differently.
   * Methods are always bivariant in their argument, while function properties are contravariant in their argument under `strictFunctionTypes`. More discussion [here](https://github.com/microsoft/TypeScript/pull/18654).
+* Export maps aren't respected.
+  * TypeScript's support for export maps is recent, and requires `moduleResolution` be set to `node16` or `nodenext` to be respected.
+* A default import of a commonjs module with a default in a esm file doesn't seem to be the default export of that module when `module` is `node16` or `nodenext`.
+  * TypeScript is exposing `node`'s behavior here - when a esm module default imports a commonjs module, that whole commonjs module is made available as the default import. If you then want the actual default member of that module, you'll need to access the `default` member of that import. Refer to the [node documentation](https://nodejs.org/api/esm.html#commonjs-namespaces) for more information.
 
 ## Common Feature Requests
 > I want to request one of the following features...
