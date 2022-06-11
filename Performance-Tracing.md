@@ -61,7 +61,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
 5.  \[Optional\] For a quick summary of likely problems, you can use [@typescript/analyze-trace](https://www.npmjs.com/package/@typescript/analyze-trace):
     ```sh
     npm install @typescript/analyze-trace
-    npx analyze-trace some_directory
+    npx @typescript/analyze-trace some_directory
     ```
     where `some_directory` is path you passed to `--generateTrace`.
 
