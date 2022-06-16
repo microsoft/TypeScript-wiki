@@ -20,6 +20,14 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.8 (August 2022)
 
+* [ ] [ECMAScript Decorators](https://github.com/microsoft/TypeScript/issues/48885)
+* [x] [Improved Narrowing on Generics and Intersection Reduction](https://github.com/microsoft/TypeScript/pull/49119)
+* [x] [Improved Inference for `infer` Types in Template String Types](https://github.com/microsoft/TypeScript/pull/48094)
+* [x] [`--build`, `--watch`, and `--incremental` Performance Improvements](https://github.com/microsoft/TypeScript/pull/48784)
+* [x] [Errors When Comparing Object and Array Literals](https://github.com/microsoft/TypeScript/pull/45978)
+* [x] [Improved Inference from Binding Patterns](https://github.com/microsoft/TypeScript/pull/49086)
+* [x] [Resilient File-Watching During Large File Changes](https://github.com/microsoft/TypeScript/pull/48997)
+* [ ] [Find-All-References Performance Improvements](https://github.com/microsoft/TypeScript/pull/49581)
 * [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.7 (May 2022)
