@@ -27,7 +27,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Errors When Comparing Object and Array Literals](https://github.com/microsoft/TypeScript/pull/45978)
 * [x] [Improved Inference from Binding Patterns](https://github.com/microsoft/TypeScript/pull/49086)
 * [x] [Resilient File-Watching During Large File Changes](https://github.com/microsoft/TypeScript/pull/48997)
-* [ ] [Find-All-References Performance Improvements](https://github.com/microsoft/TypeScript/pull/49581)
+* [x] [Find-All-References Performance Improvements](https://github.com/microsoft/TypeScript/pull/49581)
 * [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.7 (May 2022)
