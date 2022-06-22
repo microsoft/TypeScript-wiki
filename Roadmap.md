@@ -18,9 +18,12 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
-# 4.8 (August 2022)
+# 4.9 (November 2022)
 
 * [ ] [ECMAScript Decorators](https://github.com/microsoft/TypeScript/issues/48885)
+
+# 4.8 (August 2022)
+
 * [x] [Improved Narrowing on Generics and Intersection Reduction](https://github.com/microsoft/TypeScript/pull/49119)
 * [x] [Improved Inference for `infer` Types in Template String Types](https://github.com/microsoft/TypeScript/pull/48094)
 * [x] [`--build`, `--watch`, and `--incremental` Performance Improvements](https://github.com/microsoft/TypeScript/pull/48784)
