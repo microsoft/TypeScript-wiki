@@ -2,7 +2,7 @@
 
 * [alm.tools](#alm)
 * [Atom](#atom)
-* [CATS](#cats) 
+* [CATS](#cats)
 * [Eclipse](#eclipse)
 * [Emacs](#emacs)
 * [NeoVim](#neovim)
@@ -42,7 +42,7 @@ Since it is also written in TypeScript, it can be easily extended if required.
 
 # NeoVim
 
-[nvim-typescript](https://github.com/mhartington/nvim-typescript)
+TypeScript support is enabled via the built-in [Language Server Protocol](https://neovim.io/doc/user/lsp.html) client included in NeoVim since version 0.5.
 
 # NetBeans
 
@@ -89,9 +89,9 @@ The [TypeScript Plugin for Sublime](https://github.com/Microsoft/TypeScript-Subl
   " This setting must be set before ALE is loaded.
   let g:ale_completion_enabled = 1
   ```
-  
+
 * [coc.nvim](https://github.com/neoclide/coc.nvim)
-  
+
 Install [coc-tsserver](https://github.com/neoclide/coc-tsserver) by command:
 
 ``` vim
