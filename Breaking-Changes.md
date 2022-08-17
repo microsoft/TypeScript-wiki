@@ -2,6 +2,14 @@ These changes list where implementation differs between versions as the spec and
 
 > For breaking changes to the compiler/services API, please check the [[API Breaking Changes]] page.
 
+# TypeScript 4.9
+
+## Better type for `Promise.resolve` 
+
+`Promise.resolve` now uses the `Awaited` type to unwrap promise types passed to it.
+This means that it more often returns the right Promise type.
+But that improved type can break existing code if it was expecting `any` or `unknown` instead of a Promise.
+
 # TypeScript 4.8
 
 ## Unconstrained Type Parameters No Longer Assignable to `{}` in `strictNullChecks`
