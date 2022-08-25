@@ -1,3 +1,88 @@
+# TypeScript 4.8
+
+## Decorators are placed on `modifiers` on TypeScript's Syntax Trees
+
+The current direction of decorators in TC39 means that TypeScript will have to handle a break in terms of placement of decorators.
+Previously, TypeScript assumed decorators would always be placed prior to all keywords/modifiers.
+For example
+
+```ts
+@decorator
+export class Foo {
+  // ...
+}
+```
+
+Decorators as currently proposed do not support this syntax.
+Instead, the `export` keyword must precede the decorator.
+
+```ts
+export @decorator class Foo {
+  // ...
+}
+```
+
+Unfortunately, TypeScript's trees are *concrete* rather than *abstract*, and our architecture expects syntax tree node fields to be entirely ordered before or after each other.
+To support both legacy decorators and decorators as proposed, TypeScript will have to gracefully parse, and intersperse, modifiers and decorators.
+
+To do this, it exposes a new type alias called `ModifierLike` which is a `Modifier` or a `Decorator`.
+
+```ts
+export type ModifierLike = Modifier | Decorator;
+```
+
+Decorators are now placed in the same field as `modifiers` which is now a `NodeArray<ModifierLike>` when set, and the entire field is deprecated.
+
+```diff
+- readonly modifiers?: NodeArray<Modifier> | undefined;
++ /**
++  * @deprecated ...
++  * Use `ts.canHaveModifiers()` to test whether a `Node` can have modifiers.
++  * Use `ts.getModifiers()` to get the modifiers of a `Node`.
++  * ...
++  */
++ readonly modifiers?: NodeArray<ModifierLike> | undefined;
+```
+
+All existing `decorators` properties have been marked as deprecated and will always be `undefined` if read.
+The type has also been changed to `undefined` so that existing tools know to handle them correctly.
+
+```diff
+- readonly decorators?: NodeArray<Decorator> | undefined;
++ /**
++  * @deprecated ...
++  * Use `ts.canHaveDecorators()` to test whether a `Node` can have decorators.
++  * Use `ts.getDecorators()` to get the decorators of a `Node`.
++  * ...
++  */
++ readonly decorators?: undefined;
+```
+
+To avoid all deprecation warnings and other issues, TypeScript now exposes four new functions.
+There are individual predicates for testing whether a node has support modifiers and decorators, along with respective accessor functions for grabbing them.
+
+```ts
+function canHaveModifiers(node: Node): node is HasModifiers;
+function getModifiers(node: HasModifiers): readonly Modifier[] | undefined;
+
+function canHaveDecorators(node: Node): node is HasDecorators;
+function getDecorators(node: HasDecorators): readonly Decorator[] | undefined;
+```
+
+As an example of how to access modifiers off of a node, you can write
+
+```ts
+const modifiers = canHaveModifiers(myNode) ? getModifiers(myNode) : undefined;
+```
+
+With the note that each call to `getModifiers` and `getDecorators` may allocate a new array.
+
+For more information, see changes around
+
+* [the restructuring of our tree nodes](https://github.com/microsoft/TypeScript/pull/49089)
+* [the deprecations](https://github.com/microsoft/TypeScript/pull/50343)
+* [exposing the predicate functions](https://github.com/microsoft/TypeScript/pull/50399)
+
 # TypeScript 4.7
 
 - `resolveTypeReferenceDirectives` (both the services and global ts version) now accept an array of `FileReference`s as a first argument. If you reimplement `resolveTypeReferenceDirectives`, you need to handle both the `string[]` and `FileReference[]` cases now.
