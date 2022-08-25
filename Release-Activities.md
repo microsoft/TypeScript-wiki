@@ -22,7 +22,6 @@ Once `main`'s version is updated, the @definitelytyped packages must be aware of
 ### Release
 
 * [ ] [Tag](https://github.com/Microsoft/TypeScript/tags) release branch
-* [ ] Update [AUTHORS.md](https://github.com/Microsoft/TypeScript/blob/main/AUTHORS.md) for the release ([script](https://github.com/Microsoft/TypeScript/blob/main/scripts/authors.ts))
 * [ ] Draft and publish new [release](https://github.com/Microsoft/TypeScript/releases)
 * [ ] Close milestone corresponding to the release
 
