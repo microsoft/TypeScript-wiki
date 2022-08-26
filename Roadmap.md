@@ -21,6 +21,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 4.9 (November 2022)
 
 * [ ] [ECMAScript Decorators](https://github.com/microsoft/TypeScript/issues/48885)
+* [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
 
 # 4.8 (August 2022)
 
