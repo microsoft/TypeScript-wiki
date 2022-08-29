@@ -21,7 +21,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 # 4.9 (November 2022)
 
 * [ ] [ECMAScript Decorators](https://github.com/microsoft/TypeScript/issues/48885)
-* [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
+* [x] [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
+* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.8 (August 2022)
 
@@ -32,7 +33,6 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Improved Inference from Binding Patterns](https://github.com/microsoft/TypeScript/pull/49086)
 * [x] [Resilient File-Watching During Large File Changes](https://github.com/microsoft/TypeScript/pull/48997)
 * [x] [Find-All-References Performance Improvements](https://github.com/microsoft/TypeScript/pull/49581)
-* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.7 (May 2022)
 
