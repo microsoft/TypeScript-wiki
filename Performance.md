@@ -8,6 +8,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [Preferring Interfaces Over Intersections](#preferring-interfaces-over-intersections)
   * [Using Type Annotations](#using-type-annotations)
   * [Preferring Base Types Over Unions](#preferring-base-types-over-unions)
+  * [Naming Complex Types](#naming-complex-types)
 - [Using Project References](#using-project-references)
   * [New Code](#new-code)
   * [Existing Code](#existing-code)
@@ -41,6 +42,9 @@ Beyond best-practices, there are some common techniques for investigating slow c
       - [Collecting a TSServer Log in Visual Studio Code](#collecting-a-tsserver-log-in-visual-studio-code)
 
 # Writing Easy-to-Compile Code
+
+Note that the following is not a bullet-proof set of rules.
+There may be exceptions to each rule depending on your codebase.
 
 ## Preferring Interfaces Over Intersections
 
@@ -79,13 +83,73 @@ Type inference is very convenient, so there's no need to do this universally - h
 
 ```diff
 - import { otherFunc } from "other";
-+ import { otherFunc, otherType } from "other";
++ import { otherFunc, OtherType } from "other";
 
 - export function func() {
-+ export function func(): otherType {
++ export function func(): OtherType {
       return otherFunc();
   }
 ```
+
+<details>
+<summary>
+
+Some hints that this might be worth trying are if your `--declaration` emit contains types like `import("./some/path").SomeType`, or contains extremely large types that were not written in the source code. Try writing something explicitly, and possibly creating a named type if you need.
+
+</summary>
+
+For a very large calculated type, it might be obvious [why printing/reading such a type can be costly](https://github.com/ant-design/ant-design-icons/pull/479);
+but why is `import()` code generation costly? Why is it a problem?
+
+In some cases, `--declaration` emit will need to refer to types from another module.
+For instance, the declaration emit for the following files...
+
+```ts
+// foo.ts
+export interface Result {
+    headers: any;
+    body: string;
+}
+
+export async function makeRequest(): Promise<Result> {
+    throw new Error("unimplemented");
+}
+
+// bar.ts
+import { makeRequest } from "./foo";
+
+export function doStuff() {
+    return makeRequest();
+}
+```
+
+will produce the following `.d.ts` files:
+
+```ts
+// foo.d.ts
+export interface Result {
+    headers: any;
+    body: string;
+}
+export declare function makeRequest(): Promise<Result>;
+
+// bar.d.ts
+export declare function doStuff(): Promise<import("./foo").Result>;
+```
+
+Notice the `import("./foo").Result`.
+TypeScript had to generate code to reference the type named `Result` in `foo.ts` in the declaration output of `bar.ts`.
+This involved:
+
+1. Figuring out whether the type was accessible through a local name.
+1. Finding whether type type was accessible through an `import(...)`.
+1. Calculating the most reasonable path to import that file.
+1. Generating new nodes to represent that type reference.
+1. Printing those type reference nodes.
+
+For a very big project, this might happen over and over and over again per a module.
+
+</summary>
 
 ## Preferring Base Types Over Unions
 
@@ -140,7 +204,38 @@ declare function printSchedule(schedule: Schedule);
 ```
 
 A more realistic example of this might come up when trying to model every built-in DOM element type.
-In this case, it would be preferable to create a base `HtmlElement` type with common members, which `DivElement`, `ImgElement`, etc. extend, rather than to create the exhaustive union `DivElement | /*...*/ | ImgElement | /*...*/`.
+In this case, it would be preferable to create a base `HtmlElement` type with common members which `DivElement`, `ImgElement`, etc. all extend from, rather than to create an exhaustive union like `DivElement | /*...*/ | ImgElement | /*...*/`.
+
+## Naming Complex Types
+
+Complex types can be written anywhere a type annotation is allowed.
+
+```ts
+interface SomeType<T> {
+    foo<U>(x: U):
+        U extends TypeA<T> ? ProcessTypeA<U, T> :
+        U extends TypeB<T> ? ProcessTypeB<U, T> :
+        U extends TypeC<T> ? ProcessTypeC<U, T> :
+        U;
+}
+```
+
+This is convenient, but today, every time `foo` is called, TypeScript has to re-run the conditional type.
+What's more, relating any two instances of `SomeType` requires re-relating the structure of the return type of `foo`.
+
+If the return type in this example was extracted out to a type alias, more information can be cached by the compiler:
+
+```ts
+type FooResult<U, T> =
+    U extends TypeA<T> ? ProcessTypeA<U, T> :
+    U extends TypeB<T> ? ProcessTypeB<U, T> :
+    U extends TypeC<T> ? ProcessTypeC<U, T> :
+    U;
+
+interface SomeType<T> {
+    foo<U>(x: U): FooResult<U, T>;
+}
+```
 
 # Using Project References
 
