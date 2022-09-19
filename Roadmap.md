@@ -20,7 +20,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.9 (November 2022)
 
-* [ ] [ECMAScript Decorators](https://github.com/microsoft/TypeScript/issues/48885)
+* [x] [Narrowing Checks for Unknown Properties with the `in` Operator](https://github.com/microsoft/TypeScript/issues/21732)
 * [x] [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
 * [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
