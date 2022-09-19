@@ -149,7 +149,7 @@ This involved:
 
 For a very big project, this might happen over and over and over again per a module.
 
-</summary>
+</details>
 
 ## Preferring Base Types Over Unions
 
