@@ -152,22 +152,22 @@ Much of this process is automated by [Triggering @typescript-bot](https://github
 Typically, commands to the bot are given [in the Iteration Plan comments of a release](https://github.com/microsoft/TypeScript/issues?q=is%3Aissue+label%3APlanning+%22Iteration+Plan%22+).
 The commands roughly occur in the following order:
 
-1. Readying the Beta
-    1. `@typescript-bot create release-X.Y` (create the branch)
+1. Readying a Beta
+    1. Comment `@typescript-bot create release-X.Y` (create the branch)
     1. In the event that changes need to come in after:
-        1. `@typescript-bot sync release-X.Y`
+        1. Comment `@typescript-bot sync release-X.Y`
         1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y`.
-1. Readying the RC
-    1. `@typescript-bot sync release-X.Y` (sync `main` to `release-X.Y`)
-    1. `@typescript-bot bump release-X.Y` (update the version number)
+1. Readying an RC
+    1. Comment `@typescript-bot sync release-X.Y` (sync `main` to `release-X.Y`)
+    1. Comment `@typescript-bot bump release-X.Y` (update the version number and LKG)
     1. In the event that changes need to come in after:
-        1. `@typescript-bot sync release-X.Y`
+        1. Comment `@typescript-bot sync release-X.Y`
         1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y`.
-1. Readying the Stable Release
-    1. `@typescript-bot bump release-X.Y` (update the version number)
-    1. On relevant PRs early on, run `@typescript-bot cherry-pick this to release-X.Y`
-    1. On PRs that look like they will be the last cherry-pick: `@typescript-bot cherry-pick this to release-X.Y and LKG`
-    1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y` when necessary.
+1. Readying a Stable (or patch) Release
+    1. On PRs that you want to cherry-pick, run `@typescript-bot cherry-pick this to release-X.Y`.
+    1. Comment `@typescript-bot bump release-X.Y` (update the version number)
+    1. If another PR comes in afterwards, you can run a combined cherry-pick/LKG with the comment `@typescript-bot cherry-pick this to release-X.Y and LKG`
+    1. Run [Update LKG](https://github.com/microsoft/TypeScript/actions/workflows/update-lkg.yml) on `release-X.Y` if necessary.
 
 # Release Tasks
 
