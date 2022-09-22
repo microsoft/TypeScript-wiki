@@ -38,12 +38,6 @@ import { someValue, SomeClass } from "some-module";
 let val = someValue;
 ```
 
-
-<details>
-<summary>
-Older releases
-</summary>
-
 # TypeScript 4.8
 
 ## Unconstrained Type Parameters No Longer Assignable to `{}` in `strictNullChecks`
@@ -110,6 +104,11 @@ No overload matches this call.
 Appropriately performing runtime checks to narrow the type, or using a type-assertion, may be the best way to deal with these new errors.
 
 For more information, take a look at [the breaking PR here](https://github.com/microsoft/TypeScript/pull/48366).
+
+<details>
+<summary>
+See Changes for Older Releases
+</summary>
 
 # TypeScript 4.7
 
