@@ -39,8 +39,10 @@ let val = someValue;
 ```
 
 
-
-
+<details>
+<summary>
+Older releases
+</summary>
 
 # TypeScript 4.8
 
@@ -3201,3 +3203,5 @@ null.toBAZ();
 
 undefined.toBAZ();
 ```
+
+</details>
