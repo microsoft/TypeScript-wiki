@@ -1,3 +1,9 @@
+# TypeScript 4.9
+
+As part of an optimization on substitution types, `SubstitutionType` objects no longer contain the `substitute` property representing the effective substitution (usually an intersection of the base type and the implicit constraint) - instead, they just contain the `constraint` property.
+
+For more details, [read more on the original pull request](https://github.com/microsoft/TypeScript/pull/50397).
+
 # TypeScript 4.8
 
 ## Decorators are placed on `modifiers` on TypeScript's Syntax Trees
