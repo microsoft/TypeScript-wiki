@@ -6,9 +6,9 @@ These changes list where implementation differs between versions as the spec and
 
 ## Better type for `Promise.resolve` 
 
-`Promise.resolve` now uses the `Awaited` type to unwrap promise types passed to it.
-This means that it more often returns the right Promise type.
-But that improved type can break existing code if it was expecting `any` or `unknown` instead of a Promise.
+`Promise.resolve` now uses the `Awaited` type to unwrap Promise-like types passed to it.
+This means that it more often returns the right `Promise` type, but that improved type can break existing code if it was expecting `any` or `unknown` instead of a `Promise`.
+For more information, [see the original change](https://github.com/microsoft/TypeScript/pull/33074).
 
 # TypeScript 4.8
 
