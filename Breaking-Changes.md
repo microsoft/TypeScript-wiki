@@ -105,6 +105,8 @@ Appropriately performing runtime checks to narrow the type, or using a type-asse
 
 For more information, take a look at [the breaking PR here](https://github.com/microsoft/TypeScript/pull/48366).
 
+___________
+
 <details>
 <summary>
 See Changes for Older Releases
