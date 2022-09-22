@@ -4,11 +4,43 @@ These changes list where implementation differs between versions as the spec and
 
 # TypeScript 4.9
 
-## Better type for `Promise.resolve` 
+## Better Types for `Promise.resolve` 
 
 `Promise.resolve` now uses the `Awaited` type to unwrap Promise-like types passed to it.
 This means that it more often returns the right `Promise` type, but that improved type can break existing code if it was expecting `any` or `unknown` instead of a `Promise`.
 For more information, [see the original change](https://github.com/microsoft/TypeScript/pull/33074).
+
+## JavaScript Emit No Longer Elides Imports
+
+When TypeScript first supported type-checking and compilation for JavaScript, it accidentally supported a feature called import elision.
+In short, if an import is not used as a value, or the compiler can detect that the import doesn't refer to a value at runtime, the compiler will drop the import during emit.
+
+This behavior is was always questionable, especially the detection of whether the import doesn't refer to a value, since it means that TypeScript has to trust sometimes-inaccurate declaration files.
+In turn, TypeScript now preserves imports in JavScript files.
+
+```js
+// input:
+import { someValue, SomeClass } from "some-module";
+
+/** @type {SomeType} */
+let val = someValue;
+
+// previous output:
+import { someValue } from "some-module";
+
+/** @type {SomeClass} */
+let val = someValue;
+
+// current output:
+import { someValue, SomeClass } from "some-module";
+
+/** @type {SomeType} */
+let val = someValue;
+```
+
+
+
+
 
 # TypeScript 4.8
 
