@@ -38,6 +38,8 @@ import { someValue, SomeClass } from "some-module";
 let val = someValue;
 ```
 
+More information is available at [the implementing change](https://github.com/microsoft/TypeScript/pull/50404).
+
 # TypeScript 4.8
 
 ## Unconstrained Type Parameters No Longer Assignable to `{}` in `strictNullChecks`
