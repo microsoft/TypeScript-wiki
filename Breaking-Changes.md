@@ -15,23 +15,23 @@ For more information, [see the original change](https://github.com/microsoft/Typ
 When TypeScript first supported type-checking and compilation for JavaScript, it accidentally supported a feature called import elision.
 In short, if an import is not used as a value, or the compiler can detect that the import doesn't refer to a value at runtime, the compiler will drop the import during emit.
 
-This behavior is was always questionable, especially the detection of whether the import doesn't refer to a value, since it means that TypeScript has to trust sometimes-inaccurate declaration files.
-In turn, TypeScript now preserves imports in JavScript files.
+This behavior was questionable, especially the detection of whether the import doesn't refer to a value, since it means that TypeScript has to trust sometimes-inaccurate declaration files.
+In turn, TypeScript now preserves imports in JavaScript files.
 
 ```js
-// input:
+// Input:
 import { someValue, SomeClass } from "some-module";
 
 /** @type {SomeType} */
 let val = someValue;
 
-// previous output:
+// Previous Output:
 import { someValue } from "some-module";
 
 /** @type {SomeClass} */
 let val = someValue;
 
-// current output:
+// Current Output:
 import { someValue, SomeClass } from "some-module";
 
 /** @type {SomeType} */
@@ -39,6 +39,31 @@ let val = someValue;
 ```
 
 More information is available at [the implementing change](https://github.com/microsoft/TypeScript/pull/50404).
+
+## `exports` is Prioritized Over `typesVersions`
+
+Previously, TypeScript incorrectly prioritized the `typesVersions` field over the `exports` field when resolving through a `package.json` under `--moduleResolution node16`.
+If this change impacts your library, you may need to add `types@` version selectors in your `package.json`'s `exports` field.
+
+```diff
+  {
+      "type": "module",
+      "main": "./dist/main.js"
+      "typesVersions": {
+          "<4.8": { ".": ["4.8-types/main.d.ts"] },
+          "*": { ".": ["modern-types/main.d.ts"] }
+      },
+      "exports": {
+          ".": {
++             "types@<4.8": "4.8-types/main.d.ts",
++             "types": "modern-types/main.d.ts",
+              "import": "./dist/main.js"
+          }
+      }
+  }
+```
+
+For more information, [see this pull request](https://github.com/microsoft/TypeScript/pull/50890).
 
 # TypeScript 4.8
 
