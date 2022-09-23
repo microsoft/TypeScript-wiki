@@ -1,6 +1,6 @@
 # TypeScript 4.9
 
-## Replacing `substitute` with `constraint` on `SubstitutionType`s
+## `substitute` Replaced With `constraint` on `SubstitutionType`s
 
 As part of an optimization on substitution types, `SubstitutionType` objects no longer contain the `substitute` property representing the effective substitution (usually an intersection of the base type and the implicit constraint) - instead, they just contain the `constraint` property.
 
