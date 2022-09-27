@@ -624,13 +624,20 @@ Upgrading to a newer version of TypeScript (which can be more efficient) or to a
 
 In some cases, the approaches above might not give you enough insight to understand why TypeScript feels slow.
 TypeScript 4.1 and higher provides a `--generateTrace` option that can give you a sense of the work the compiler is spending time on.
-`--generateTrace` will create an output file that can be analyzed within Edge or Chrome.
+`--generateTrace` will create an output file that can be analyzed by the `@typescript/analyze-trace` utility, or within Edge or Chrome.
 
 Ideally, TypeScript will be able to compile your project without any errors, though it's not a strict requirement for tracing.
+
 Once you're ready to get a trace, you can run TypeScript with the `--generateTrace` flag.
 
 ```
 tsc -p ./some/project/src/tsconfig.json --generateTrace tracing_output_folder
+```
+
+In some cases, you can also take a trace from your editor. In Visual Studio Code, that can be toggled by setting `TypeScript > Tsserver: Enable Tracing` in the UI or adding the following JSON setting:
+
+```json5
+"typescript.tsserver.enableTracing": true,
 ```
 
 To quickly list performance hot-spots, you can install and run [@typescript/analyze-trace](https://www.npmjs.com/package/@typescript/analyze-trace) from npm.
@@ -641,7 +648,7 @@ Alternatively, you can review the details manually:
 1. Click on the `Load` button at the top left,
 1. Open the generated JSON file (`trace.*.json`) in your output directory.
 
-Note that, even if your build doesn't directly invoke tsc (e.g. because you use a bundler) or the slowdown you're seeing is in the editor, collecting and interpreting a trace from tsc will generally be much easier than trying to investigate your slowdown directly and will still produce representative results.
+Note that, even if your build doesn't directly invoke `tsc` (e.g. because you use a bundler) or the slowdown you're seeing is in the editor, collecting and interpreting a trace from `tsc` will generally be much easier than trying to investigate your slowdown directly and will still produce representative results.
 
 You can [read more about performance tracing in more detail here](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
 
