@@ -6,6 +6,7 @@
 - The output files have changed significantly; if you are patching TypeScript, you will definitely need to change your patches.
 - The TypeScript package now targets ES2018, requiring Node 10 or newer. Prior to 5.0, our package targeted ES5 syntax and the ES2015 library.
   - Before 5.0 is released, we may increase this target to Node 12 (for ESM support).
+- `ts.Map`, `ts.Set`, `ts.ESMap`, `ts.Iterator`, and associated types have been removed. The native `Map`, `Set`, `Iterator` and associated types should be used instead.
 
 # TypeScript 4.9
 
