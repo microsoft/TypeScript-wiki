@@ -16,7 +16,6 @@ There are 3 causes of failures:
 
 For packages on Definitely Typed, don't bother filing a bug.
 Nobody reads them anyway.
-
 Instead, if the break is a good one, fix the problem yourself and send a PR.
 
 For Typescript and other repos, while the bugs are being fixed, you can add the package names to [expectedFailures.txt in DefinitelyTyped-tools](https://github.com/microsoft/DefinitelyTyped-tools/blob/master/packages/dtslint-runner/expectedFailures.txt).
@@ -27,7 +26,7 @@ For Typescript and other repos, while the bugs are being fixed, you can add the 
 2. Out of memory, usually when Typescript changes how much memory it uses. This is almost always a bad break.
 3. Complex assignability change. This is usually a good break.
 4. Untested types for package written in Javascript. This is usually a bad break, but requires a fix in the package, not Typescript.
-3. Those that from afar look like flies.
+3. [Those that from afar look like flies](https://en.wikipedia.org/wiki/The_Analytical_Language_of_John_Wilkins).
 
 
 ### Miscellanea
