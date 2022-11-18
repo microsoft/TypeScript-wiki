@@ -7,6 +7,7 @@
 - The TypeScript package now targets ES2018, requiring Node 10 or newer. Prior to 5.0, our package targeted ES5 syntax and the ES2015 library.
   - Before 5.0 is released, we may increase this target to Node 12 (for ESM support).
 - `ts.Map`, `ts.Set`, `ts.ESMap`, `ts.Iterator`, and associated types have been removed. The native `Map`, `Set`, `Iterator` and associated types should be used instead.
+- `BuilderProgramHost` no longer requires method `useCaseSensitiveFileNames` since its used from `program`.
 
 # TypeScript 4.9
 
