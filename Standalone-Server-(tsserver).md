@@ -4,7 +4,7 @@ The TypeScript standalone server (aka `tsserver`) is a node executable that enca
 
 ## Definition
 
-The server communication protocol is defined in [protocol.d.ts](https://github.com/Microsoft/TypeScript/blob/master/lib/protocol.d.ts).
+The server communication protocol is defined in the `ts.server.protocol` namespace, declared in [`tsserverlibrary.d.ts`](https://github.com/microsoft/TypeScript/blob/main/lib/tsserverlibrary.d.ts).
 
 The executable can be found in lib folder under the typescript package.
 
@@ -45,7 +45,7 @@ Content-Length: 261
 
 ## Commands
 
-`tsserver` supports a set of commands. The full list of commands supported by the server can be found under [ts.server.protocol.CommandTypes](https://github.com/Microsoft/TypeScript/blob/master/lib/protocol.d.ts#L5). 
+`tsserver` supports a set of commands. The full list of commands supported by the server can be found under [ts.server.protocol.CommandTypes](https://github.com/microsoft/TypeScript/blob/main/lib/tsserverlibrary.d.ts). 
 
 Each command is associated with a request and a response interface. For instance command `"completions"` corresponds to request interface `CompletionsRequest`, and response interface defined in `CompletionsResponse`.
 
