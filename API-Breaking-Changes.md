@@ -8,6 +8,7 @@
   - Before 5.0 is released, we may increase this target to Node 12 (for ESM support).
 - `ts.Map`, `ts.Set`, `ts.ESMap`, `ts.Iterator`, and associated types have been removed. The native `Map`, `Set`, `Iterator` and associated types should be used instead.
 - The `ts.Collection` and `ts.ReadonlyCollection` types have been removed. These types were unused in our public API, and were declared with the old `Map`/`Set` types (also removed in 5.0).
+- The `ts.Push` type has been removed. This type was only used twice in our API, and its uses have been replaced with arrays for consistency with other parts of our API.
 - `BuilderProgramHost` no longer requires method `useCaseSensitiveFileNames` since its used from `program`.
 
 # TypeScript 4.9
