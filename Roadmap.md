@@ -22,6 +22,15 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 * [x] [Narrowing Checks for Unknown Properties with the `in` Operator](https://github.com/microsoft/TypeScript/issues/21732)
 * [x] [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
+* [x] [Auto-accessors in classes](https://github.com/microsoft/TypeScript/pull/49705)
+* [x] [Forbidden Equality Checks Against `NaN`](https://github.com/microsoft/TypeScript/pull/50626)
+* [x] [File Watching Defaults Using to File-System Events](https://github.com/microsoft/TypeScript/pull/50366)
+* [x] ["Remove Imports" Command for Editors](https://github.com/microsoft/TypeScript/pull/50931)
+* [x] [Go-to-Definition on `return` Keywords](https://github.com/microsoft/TypeScript/pull/51227)
+* Optimizations
+  * [`forEachChild` as a Jump Table](https://github.com/microsoft/TypeScript/pull/50225)
+  * [`visitEachChild` as a Jump Table](https://github.com/microsoft/TypeScript/pull/50266)
+  * [Lazily Intersect and Normalize Substitution Type Constraints](https://github.com/microsoft/TypeScript/pull/50397)
 * [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.8 (August 2022)
@@ -134,7 +143,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
 * [x] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
-* [ ] [Semantic Highlighting API](https://github.com/microsoft/TypeScript/issues/38435)
+* [x] [Semantic Highlighting API](https://github.com/microsoft/TypeScript/issues/38435)
 
 # 4.0 (August 2020)
 
