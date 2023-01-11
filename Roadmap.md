@@ -18,6 +18,28 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 5.0 (March 2023)
+
+* [ ] [Standard ECMAScript Decorators](https://github.com/microsoft/TypeScript/pull/50820)
+* [x] [`const` Type Parameters](https://github.com/microsoft/TypeScript/pull/51865)
+* [x] [`--moduleResolution bundler`](https://github.com/microsoft/TypeScript/pull/51669)
+* [x] [`extends` Support for Multiple `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/50403)
+* [ ] [Declaration Files for non-JavaScript Files](https://github.com/microsoft/TypeScript/issues/50133)
+* [ ] [`@satisfies` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51753)
+* [x] [`@overload` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51234)
+* [x] [Unification Between Numeric and Literal `enum`s](https://github.com/microsoft/TypeScript/pull/50528)
+* [x] [Toggling Certain Compiler-Specific Flags Under `--build`](https://github.com/microsoft/TypeScript/pull/51241)
+* [x] [Flag Deprecations](https://github.com/microsoft/TypeScript/issues/51000)
+* [x] [Improved `in` Checks Under `--noUncheckedIndexedAccess`](https://github.com/microsoft/TypeScript/pull/53614)
+* [x] [Editor Support for Case-Sensitive Import Sorting](https://github.com/microsoft/TypeScript/pull/51733)
+* [x] [Editor Support for Exhaustive `switch`/`case` Snippet Completions](https://github.com/microsoft/TypeScript/pull/50996)
+* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
+* Optimizations
+  * [x] [Migrate to Modules](https://github.com/microsoft/TypeScript/pull/51387)
+  * [x] [`Node` Monomorphization](https://github.com/microsoft/TypeScript/pull/51682)
+  * [x] [`Symbol` Monomorphization](https://github.com/microsoft/TypeScript/pull/51880)
+  * [ ] [`Identifier` Size Reduction](https://github.com/microsoft/TypeScript/pull/52170)
+
 # 4.9 (November 2022)
 
 * [x] [Narrowing Checks for Unknown Properties with the `in` Operator](https://github.com/microsoft/TypeScript/issues/21732)
@@ -31,7 +53,6 @@ This page outlines specific features and fixes that are scheduled or planned for
   * [`forEachChild` as a Jump Table](https://github.com/microsoft/TypeScript/pull/50225)
   * [`visitEachChild` as a Jump Table](https://github.com/microsoft/TypeScript/pull/50266)
   * [Lazily Intersect and Normalize Substitution Type Constraints](https://github.com/microsoft/TypeScript/pull/50397)
-* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 
 # 4.8 (August 2022)
 
