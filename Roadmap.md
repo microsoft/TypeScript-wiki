@@ -20,6 +20,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 5.0 (March 2023)
 
+[See the 5.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/51362)
+
 * [ ] [Standard ECMAScript Decorators](https://github.com/microsoft/TypeScript/pull/50820)
 * [x] [`const` Type Parameters](https://github.com/microsoft/TypeScript/pull/51865)
 * [x] [`--moduleResolution bundler`](https://github.com/microsoft/TypeScript/pull/51669)
@@ -42,6 +44,8 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 # 4.9 (November 2022)
 
+[See the 4.9 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/50457)
+
 * [x] [Narrowing Checks for Unknown Properties with the `in` Operator](https://github.com/microsoft/TypeScript/issues/21732)
 * [x] [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
 * [x] [Auto-accessors in classes](https://github.com/microsoft/TypeScript/pull/49705)
@@ -55,6 +59,8 @@ This page outlines specific features and fixes that are scheduled or planned for
   * [Lazily Intersect and Normalize Substitution Type Constraints](https://github.com/microsoft/TypeScript/pull/50397)
 
 # 4.8 (August 2022)
+
+[See the 4.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/49074)
 
 * [x] [Improved Narrowing on Generics and Intersection Reduction](https://github.com/microsoft/TypeScript/pull/49119)
 * [x] [Improved Inference for `infer` Types in Template String Types](https://github.com/microsoft/TypeScript/pull/48094)
