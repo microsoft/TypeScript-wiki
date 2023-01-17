@@ -27,6 +27,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [`--moduleResolution bundler`](https://github.com/microsoft/TypeScript/pull/51669)
 * [x] [`extends` Support for Multiple `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/50403)
 * [ ] [Declaration Files for non-JavaScript Files](https://github.com/microsoft/TypeScript/issues/50133)
+* [ ] [`export type *`](https://github.com/microsoft/TypeScript/pull/52217)
 * [ ] [`--verbatimModuleSyntax`](https://github.com/microsoft/TypeScript/issues/51479)
 * [ ] [`@satisfies` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51753)
 * [x] [`@overload` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51234)
