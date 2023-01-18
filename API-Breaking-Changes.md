@@ -10,6 +10,9 @@
 - The `ts.Collection` and `ts.ReadonlyCollection` types have been removed. These types were unused in our public API, and were declared with the old `Map`/`Set` types (also removed in 5.0).
 - The `ts.Push` type has been removed. This type was only used twice in our API, and its uses have been replaced with arrays for consistency with other parts of our API.
 - `BuilderProgramHost` no longer requires method `useCaseSensitiveFileNames` since its used from `program`.
+- The TypeScript compiler is now compiled with `strictFunctionTypes`; to allow this, certain public AST visitor APIs have been modified to better reflect their underlying guarantees.
+  - The `VisitResult` type is no longer `undefined` by default; if you have written `VisitResult<Node>`, you may need to rewrite it as `VisitResult<Node | undeifned>` to reflect that your visitor may return undefined.
+  - Visitor-using APIs now correctly reflect the type of the output, including whether it passed a given type guard test, and whether or not it may be undefined. In order to get the type you expect, you may need to pass a `test` parameter to verify your expectations and then check the result for `undefined` (or, modify your visitor to return a more specific type).
 
 # TypeScript 4.9
 
