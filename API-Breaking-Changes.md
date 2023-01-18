@@ -1,9 +1,11 @@
 # TypeScript 5.0
 
+- TypeScript is now itself implemented using modules (though, the package still contains bundled outputs).
+  - The exported API is no longer defined as a "configurable" object, so operations which attempt to modify the package at runtime such as `const ts = require("ts"); ts.readJson = ...` will throw.
+  - The output files have changed significantly; if you are patching TypeScript, you will definitely need to change your patches.
 - `typescriptServices.js` has been removed; this file was identical to `typescript.js`, the entrypoint for our npm package.
 - `protocol.d.ts` is no longer included in the package; use `tsserverlibrary.d.ts`'s `ts.server.protocol` namespace instead.
   - Some elements of the protocol are not actually exported by the `ts.server.protocol` namespace, but were emitted in the old `protocol.d.ts` file, and may need to be accessed off of the `ts` namespace instead. See https://github.com/microsoft/vscode/pull/163365 for an potential way to minimize changes to protocol-using codebases.
-- The output files have changed significantly; if you are patching TypeScript, you will definitely need to change your patches.
 - The TypeScript package now targets ES2018, requiring Node 10 or newer. Prior to 5.0, our package targeted ES5 syntax and the ES2015 library.
   - Before 5.0 is released, we may increase this target to Node 12 (for ESM support).
 - `ts.Map`, `ts.Set`, `ts.ESMap`, `ts.Iterator`, and associated types have been removed. The native `Map`, `Set`, `Iterator` and associated types should be used instead.
