@@ -5,7 +5,7 @@ This is a list of the services that post as typescript-bot.
 - [Fabric Bot](https://github.com/microsoft/typescript/tree/main/.github/fabricbot.json) -- simple reactions to labels.
 - https://github.com/weswigham/typescript-bot-test-triggerer -- runs on the Azure Function typescriptbot-github, see [[Triggering TypeScript Bot]] -- responds to "test this" messages from team members.
 - https://github.com/microsoft/Typescript-repos-automation -- runs on the Azure Function TypeScriptReposAutomation -- more simple reactions to labels.
-- https://github.com/microsoft/TypeScript-Twoslash-Repro-Action -- runs ??? -- ??? ... something with repros!
+- https://github.com/microsoft/TypeScript-Twoslash-Repro-Action -- .github/workflows/??? -- ??? ... something with repros!
 
 
 ## Definitely Typed repo
