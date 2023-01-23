@@ -22,14 +22,14 @@ This page outlines specific features and fixes that are scheduled or planned for
 
 [See the 5.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/51362)
 
-* [ ] [Standard ECMAScript Decorators](https://github.com/microsoft/TypeScript/pull/50820)
+* [x] [Standard ECMAScript Decorators](https://github.com/microsoft/TypeScript/pull/50820)
 * [x] [`const` Type Parameters](https://github.com/microsoft/TypeScript/pull/51865)
 * [x] [`--moduleResolution bundler`](https://github.com/microsoft/TypeScript/pull/51669)
 * [x] [`extends` Support for Multiple `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/50403)
-* [ ] [Declaration Files for non-JavaScript Files](https://github.com/microsoft/TypeScript/issues/50133)
-* [ ] [`export type *`](https://github.com/microsoft/TypeScript/pull/52217)
-* [ ] [`--verbatimModuleSyntax`](https://github.com/microsoft/TypeScript/issues/51479)
-* [ ] [`@satisfies` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51753)
+* [x] [Declaration Files for non-JavaScript Files with `--allowArbitraryExtensions`](https://github.com/microsoft/TypeScript/issues/50133)
+* [x] [`export type *`](https://github.com/microsoft/TypeScript/pull/52217)
+* [x] [`--verbatimModuleSyntax`](https://github.com/microsoft/TypeScript/issues/51479)
+* [x] [`@satisfies` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51753)
 * [x] [`@overload` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51234)
 * [x] [Unification Between Numeric and Literal `enum`s](https://github.com/microsoft/TypeScript/pull/50528)
 * [x] [Toggling Certain Compiler-Specific Flags Under `--build`](https://github.com/microsoft/TypeScript/pull/51241)
@@ -37,12 +37,12 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Improved `in` Checks Under `--noUncheckedIndexedAccess`](https://github.com/microsoft/TypeScript/pull/53614)
 * [x] [Editor Support for Case-Sensitive Import Sorting](https://github.com/microsoft/TypeScript/pull/51733)
 * [x] [Editor Support for Exhaustive `switch`/`case` Snippet Completions](https://github.com/microsoft/TypeScript/pull/50996)
-* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
+* [x] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
 * Optimizations
   * [x] [Migrate to Modules](https://github.com/microsoft/TypeScript/pull/51387)
   * [x] [`Node` Monomorphization](https://github.com/microsoft/TypeScript/pull/51682)
   * [x] [`Symbol` Monomorphization](https://github.com/microsoft/TypeScript/pull/51880)
-  * [ ] [`Identifier` Size Reduction](https://github.com/microsoft/TypeScript/pull/52170)
+  * [x] [`Identifier` Size Reduction](https://github.com/microsoft/TypeScript/pull/52170)
 
 # 4.9 (November 2022)
 
