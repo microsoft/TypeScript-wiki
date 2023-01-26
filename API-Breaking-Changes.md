@@ -15,6 +15,7 @@
 - The TypeScript compiler is now compiled with `strictFunctionTypes`; to allow this, certain public AST visitor APIs have been modified to better reflect their underlying guarantees, as well as various corrections. The resulting API should be one that is more compatible with projects which also enable `strictFunctionTypes` (a recommended option enabled by `strict`).
   - The `VisitResult` type is no longer `undefined` by default; if you have written `VisitResult<Node>`, you may need to rewrite it as `VisitResult<Node | undeifned>` to reflect that your visitor may return undefined.
   - Visitor-using APIs now correctly reflect the type of the output, including whether it passed a given type guard test, and whether or not it may be undefined. In order to get the type you expect, you may need to pass a `test` parameter to verify your expectations and then check the result for `undefined` (or, modify your visitor to return a more specific type).
+- `typingOptions` along with its property `enableAutoDiscovery` which was deprecated for a long time is not supported any more in `tsconfig.json` and `jsconfig.json`. Use `typeAcquisition` in the config instead.
 
 # TypeScript 4.9
 
