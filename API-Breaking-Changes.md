@@ -16,6 +16,13 @@
   - The `VisitResult` type is no longer `undefined` by default; if you have written `VisitResult<Node>`, you may need to rewrite it as `VisitResult<Node | undeifned>` to reflect that your visitor may return undefined.
   - Visitor-using APIs now correctly reflect the type of the output, including whether it passed a given type guard test, and whether or not it may be undefined. In order to get the type you expect, you may need to pass a `test` parameter to verify your expectations and then check the result for `undefined` (or, modify your visitor to return a more specific type).
 - `typingOptions` along with its property `enableAutoDiscovery` which was deprecated for a long time is not supported any more in `tsconfig.json` and `jsconfig.json`. Use `typeAcquisition` in the config instead.
+- This release removes many long-deprecated parts of our public API, including (but not limited to):
+  - The top-level Node factory functions (deprecated since TS 4.0) such as `ts.createIdentifier`; use the factory provided in your `TransformationContext` or `ts.factory` instead.
+  - The `isTypeAssertion` function (deprecated since TS 4.0); use `isTypeAssertionExpression`.
+  - The overloads of `createConstructorTypeNode` and `updateConstructorTypeNode` which do not accept modifiers (deprecated since TS 4.2).
+  - The overloads of `createImportTypeNode` and `updateImportTypeNode` which do not accept assertions (deprecated since TS 4.6).
+  - The overloads of `createTypeParameterDeclaration` and `updateTypeParameterDeclaration` which do not accept modifiers (deprecated since TS 4.6).
+  - Node properties and factory function overloads which predate the merger of decorators and modifiers (deprecated since TS 4.8).
 
 # TypeScript 4.9
 
