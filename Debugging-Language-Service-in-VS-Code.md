@@ -24,7 +24,7 @@ TSS_DEBUG=5667 code --user-data-dir ~/.vscode-debug/
 
 This will open VS Code as a separate app from your current one, it may have some of your extensions but not your settings. As long as you consistently use the above command, then you can save settings for debugging between sessions.
 
-Optionally you can use `TSS_DEBUG_BRK` to have the TSServer wait for your debugger before launching.
+Optionally you can use `TSS_DEBUG_BRK` (i.e. `TSS_DEBUG_BRK=5567`) to have the TSServer wait for your debugger before launching.
 
 This will launch a debug TSServer which you can connect to from inside the TypeScript codebase. Open up the TypeScript codebase, and look at the debugging panel. At the top, look to see if there is a drop-down item for debugging by Attaching to VS Code TSServer then select that.
 
@@ -37,13 +37,15 @@ That should have you connected to the TSServer for the debugging app version of 
 ## Using Stable VS Code with Development TSServer
 
 
-VS Code chooses where to launch TSServer from via the setting: `typescript.tsdk`. Continuing from above, if you want to have your TSServer use a local copy of TypeScript then change this setting to:
+VS Code chooses where to launch TSServer from via the setting: `typescript.tsdk`. Continuing from above, if you want to have your TSServer use a local copy of TypeScript then change this setting (in `.vscode/settings.json` or your user JSON settings) to:
 
 ```json
 {
     "typescript.tsdk": "/path/to/repo/TypeScript/built/local"
 }
 ```
+
+This version of TypeScript may not be selected automatically; ensure that the above is being used by running the "TypeScript: Select TypeScript Version..." command in the command palette (Ctrl+Shift+P or Cmd+Shift+P).
 
 This is probably enough for most contributors, but if you are doing heavy duty VS Code and TypeScript work, you may want to carry on.
 
