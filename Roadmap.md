@@ -34,7 +34,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [Unification Between Numeric and Literal `enum`s](https://github.com/microsoft/TypeScript/pull/50528)
 * [x] [Toggling Certain Compiler-Specific Flags Under `--build`](https://github.com/microsoft/TypeScript/pull/51241)
 * [x] [Flag Deprecations](https://github.com/microsoft/TypeScript/issues/51000)
-* [x] [Improved `in` Checks Under `--noUncheckedIndexedAccess`](https://github.com/microsoft/TypeScript/pull/53614)
+* [x] [Improved `in` Checks Under `--noUncheckedIndexedAccess`](https://github.com/microsoft/TypeScript/pull/51653)
 * [x] [Editor Support for Case-Sensitive Import Sorting](https://github.com/microsoft/TypeScript/pull/51733)
 * [x] [Editor Support for Exhaustive `switch`/`case` Snippet Completions](https://github.com/microsoft/TypeScript/pull/50996)
 * [x] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
