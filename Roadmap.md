@@ -44,6 +44,7 @@ This page outlines specific features and fixes that are scheduled or planned for
   * [x] [`Symbol` Monomorphization](https://github.com/microsoft/TypeScript/pull/51880)
   * [x] [`Identifier` Size Reduction](https://github.com/microsoft/TypeScript/pull/52170)
   * [x] [`Printer` Caching](https://github.com/microsoft/TypeScript/pull/52382)
+  * [x] [Limited TDZ Avoidance](https://github.com/microsoft/TypeScript/issues/52924)
 
 # 4.9 (November 2022)
 
