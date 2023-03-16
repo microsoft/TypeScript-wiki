@@ -1,5 +1,5 @@
 
-# TypeScript 4.9
+# TypeScript 5.1
 
 - `Occurrences` is request handling on `tsserver` and `LanguageService .getOccurrencesAtPosition` are removed now that they have been deprecated for a long time. Use `documentHighlights` request on `tsserver` and `LanguageService.getDocumentHighlights` instead.
 
