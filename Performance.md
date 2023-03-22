@@ -27,6 +27,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [`extendedDiagnostics`](#extendeddiagnostics)
   * [`showConfig`](#showconfig)
   * [`listFilesOnly`](#listFilesOnly)
+  * [`explainFiles`](#explainfiles)
   * [`traceResolution`](#traceresolution)
   * [Running `tsc` Alone](#running-tsc-alone)
   * [Upgrading Dependencies](#upgrading-dependencies)
