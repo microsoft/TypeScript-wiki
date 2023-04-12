@@ -30,3 +30,18 @@ You can see how these are typically used in our documented [comment command sequ
 A single comment may contain multiple commands, so long as each is prefixed with a call to `@typescript-bot`.
 
 The source of the webhook running the bot is currently available [here](https://github.com/weswigham/typescript-bot-test-triggerer).
+
+Here is the usual invocation of all the useful bot commands at once:
+
+```ts
+@typescript-bot test this
+@typescript-bot test top100
+@typescript-bot user test this
+@typescript-bot user test tsserver
+@typescript-bot test tsserver top100
+@typescript-bot run dt
+@typescript-bot perf test this
+@typescript-bot pack this
+```
+
+You can [put this into a saved reply](https://github.com/settings/replies) so it's easily accessible.
