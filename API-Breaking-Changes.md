@@ -1,6 +1,7 @@
 
 # TypeScript 5.1
 
+- The TypeScript package now targets ES2020 and requires Node 14.17 or newer. Note that Node 14 is EOL at the end of April 2013.
 - `Occurrences` is request handling on `tsserver` and `LanguageService .getOccurrencesAtPosition` are removed now that they have been deprecated for a long time. Use `documentHighlights` request on `tsserver` and `LanguageService.getDocumentHighlights` instead.
 
 
