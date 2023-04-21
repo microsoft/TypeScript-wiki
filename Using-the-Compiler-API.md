@@ -278,7 +278,7 @@ This can speed up large projects with many files.
 This API is used internally in the compiler to implement its `--watch` mode, but can also be leveraged by other tools as follows:
 
 ```ts
-import ts = require("typescript");
+import ts from "typescript";
 
 const formatHost: ts.FormatDiagnosticsHost = {
   getCanonicalFileName: path => path,
@@ -569,7 +569,7 @@ TypeScript has factory functions and a printer API that you can use in conjuncti
 Here is an example that utilizes both to produce a factorial function:
 
 ```ts
-import ts = require("typescript");
+import ts from "typescript";
 
 function makeFactorialFunction() {
   const functionName = ts.factory.createIdentifier("factorial");
