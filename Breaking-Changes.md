@@ -419,7 +419,7 @@ For more information, you can read up more [here](https://github.com/microsoft/T
 
 ## Using `unknown` in Catch Variables
 
-Users running with the `--strict` flag may see new errors around `catch` variables being `unknown` due to the new `--useUnknownForCatchVariables` flag, especially if the existing code assumes only `Error` values have been caught.
+Users running with the `--strict` flag may see new errors around `catch` variables being `unknown` due to the new `--useUnknownInCatchVariables` flag, especially if the existing code assumes only `Error` values have been caught.
 This often results in error messages such as:
 
 ```
