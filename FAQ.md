@@ -1234,7 +1234,7 @@ TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1
 ## External Tools
 
 ### How do I write unit tests with TypeScript?
-* [Typescript Deep Dive](https://basarat.gitbooks.io/typescript/docs/testing/jest.html)
+* [Typescript Deep Dive](https://basarat.gitbook.io/typescript/intro-1)
 
 
 -------------------------------------------------------------------------------------
