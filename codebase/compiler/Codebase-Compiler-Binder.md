@@ -143,10 +143,13 @@ Containers and declarations are the same as for symbol binding, so those concept
 Declarations introduce type information; containers form the scope where type information is relevant.
 Other nodes may narrow, so they also interact with control flow.
 
-The control flow graph is a directed acyclic graph; that means each relevant node points to its antecedents (parents).
+The control flow graph is a directed graph; that means each relevant node points to its antecedents (parents)&mdash;the nodes that come *before* it in control flow.
 Specifically, each node can have a `flowNode`; this flow node has a `kind` and one or more `antecedents`.
 As the binder walks the tree, `bindWorker` assigns the current flow node to specific nodes that can introduce type information.
 Specific nodes that affect control flow alter the current flow node, such as `bindWhileStatement`.
+
+Notably, loops make the graph cyclic: the pre-while `FlowLabel` points both to the flow node before the loop and also the flow node at the bottom of the loop.
+That's because nodes inside loops might introduce type information, and this information should affect the next iteration of the loop.
 
 Here's an example:
 
@@ -174,7 +177,6 @@ But in the first `return x`, the first flow node it reaches is the `FlowConditio
 That check narrows `string | number` to `string`.
 Finally, the last `return x` starts with the post-if flow node, which unions the types that result from the `then` and `else` branches.
 But because the `then` branch returns, it doesn't contribute anything to the union; the resulting type is just `number`.
-
 
 ## Emit flags
 
