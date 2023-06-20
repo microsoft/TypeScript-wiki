@@ -40,9 +40,9 @@ Here is the usual invocation of all the useful bot commands at once:
 ```ts
 @typescript-bot test this
 @typescript-bot test top100
+@typescript-bot test tsserver top100
 @typescript-bot user test this
 @typescript-bot user test tsserver
-@typescript-bot test tsserver top100
 @typescript-bot run dt
 @typescript-bot perf test this
 @typescript-bot pack this
