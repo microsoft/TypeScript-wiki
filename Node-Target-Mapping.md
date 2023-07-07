@@ -43,6 +43,8 @@ To update this file, you can use [node.green](https://node.green) to map to the 
 }
 ```
 
+Note: Due to a V8 bug, one rarely-used ES2020 feature was incorrectly implemented in Node <16.3.0 - "spread parameters after optional chaining"; see [issue 46325](https://github.com/microsoft/TypeScript/issues/46325). If you use this feature and need to support versions of Node before 16.3.0, you may need to drop `target` to `ES2019`.
+
 #### Node 14
 
 ```json
@@ -54,6 +56,8 @@ To update this file, you can use [node.green](https://node.green) to map to the 
   }
 }
 ```
+
+Note: Due to a V8 bug, one rarely-used ES2020 feature was incorrectly implemented in all releases of Node 14 - "spread parameters after optional chaining"; see [issue 46325](https://github.com/microsoft/TypeScript/issues/46325). If you use this feature, you may need to drop `target` to `ES2019`.
 
 #### Node 12
 
@@ -78,8 +82,6 @@ To update this file, you can use [node.green](https://node.green) to map to the 
   }
 }
 ```
-
-Note: Follow [issue #20411](https://github.com/Microsoft/TypeScript/issues/20463) for more information on changes to the es2018 target/lib.
 
 #### Node 8
 
