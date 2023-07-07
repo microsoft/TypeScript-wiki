@@ -7,6 +7,18 @@ You can also use https://github.com/tsconfig/bases/ to find `tsconfig.json`s to 
 
 To update this file, you can use [node.green](https://node.green) to map to the different options in [microsoft/typescript@src/lib](https://github.com/Microsoft/TypeScript/tree/main/src/lib)
 
+#### Node 20
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "module": "commonjs",
+    "target": "ES2022"
+  }
+}
+```
+
 #### Node 18
 
 ```json
