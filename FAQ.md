@@ -188,7 +188,7 @@ See [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion 
  > let c = new Cat();
  >
  > // Runtime error here occurs because we end up invoking 'trainDog' with a 'Cat'
- > cloneAnimal(c, trainDog);
+ > cloneAnimal<Animal>(c, trainDog);
  > ```
 
 This is an unsoundness resulting from the lack of explicit covariant/contravariant annotations in the type system.
