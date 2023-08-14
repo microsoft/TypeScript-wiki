@@ -1,3 +1,6 @@
+# TypeScript 5.3
+
+- The `tsserverlibrary.js` entrypoint is now a thin wrapper around the normal `typescript.js` entrypoint. It's recommended to switch to the latter where possible. If you were relying on being able to load `tsserverlibrary.js` in a non-CJS context (e.g., as a browser global), `tsserverlibrary.js` will throw, as it's unable to generically load another script into the page; you should switch to using `typescript.js`.
 
 # TypeScript 5.1
 
