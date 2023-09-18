@@ -1,13 +1,37 @@
+# TypeScript 5.3
+
+- The `tsserverlibrary.js` entrypoint is now a thin wrapper around the normal `typescript.js` entrypoint. It's recommended to switch to the latter where possible. If you were relying on being able to load `tsserverlibrary.js` in a non-CJS context (e.g., as a browser global), `tsserverlibrary.js` will throw, as it's unable to generically load another script into the page; you should switch to using `typescript.js`.
+
+# TypeScript 5.1
+
+- The TypeScript package now targets ES2020 and requires Node 14.17 or newer. Note that Node 14 is EOL at the end of April 2023.
+- `Occurrences` is request handling on `tsserver` and `LanguageService .getOccurrencesAtPosition` are removed now that they have been deprecated for a long time. Use `documentHighlights` request on `tsserver` and `LanguageService.getDocumentHighlights` instead.
+
+
 # TypeScript 5.0
 
+- TypeScript is now itself implemented using modules (though, the package still contains bundled outputs).
+  - The exported API is no longer defined as a "configurable" object, so operations which attempt to modify the package at runtime such as `const ts = require("ts"); ts.readJson = ...` will throw.
+  - The output files have changed significantly; if you are patching TypeScript, you will definitely need to change your patches.
 - `typescriptServices.js` has been removed; this file was identical to `typescript.js`, the entrypoint for our npm package.
 - `protocol.d.ts` is no longer included in the package; use `tsserverlibrary.d.ts`'s `ts.server.protocol` namespace instead.
   - Some elements of the protocol are not actually exported by the `ts.server.protocol` namespace, but were emitted in the old `protocol.d.ts` file, and may need to be accessed off of the `ts` namespace instead. See https://github.com/microsoft/vscode/pull/163365 for an potential way to minimize changes to protocol-using codebases.
-- The output files have changed significantly; if you are patching TypeScript, you will definitely need to change your patches.
-- The TypeScript package now targets ES2018, requiring Node 10 or newer. Prior to 5.0, our package targeted ES5 syntax and the ES2015 library.
-  - Before 5.0 is released, we may increase this target to Node 12 (for ESM support).
+- The TypeScript package now targets ES2018 and requires Node 12.20 or newer. Prior to 5.0, our package targeted ES5 syntax and the ES2015 library.
 - `ts.Map`, `ts.Set`, `ts.ESMap`, `ts.Iterator`, and associated types have been removed. The native `Map`, `Set`, `Iterator` and associated types should be used instead.
+- The `ts.Collection` and `ts.ReadonlyCollection` types have been removed. These types were unused in our public API, and were declared with the old `Map`/`Set` types (also removed in 5.0).
+- The `ts.Push` type has been removed. This type was only used twice in our API, and its uses have been replaced with arrays for consistency with other parts of our API.
 - `BuilderProgramHost` no longer requires method `useCaseSensitiveFileNames` since its used from `program`.
+- The TypeScript compiler is now compiled with `strictFunctionTypes`; to allow this, certain public AST visitor APIs have been modified to better reflect their underlying guarantees, as well as various corrections. The resulting API should be one that is more compatible with projects which also enable `strictFunctionTypes` (a recommended option enabled by `strict`).
+  - The `VisitResult` type is no longer `undefined` by default; if you have written `VisitResult<Node>`, you may need to rewrite it as `VisitResult<Node | undefined>` to reflect that your visitor may return undefined.
+  - Visitor-using APIs now correctly reflect the type of the output, including whether it passed a given type guard test, and whether or not it may be undefined. In order to get the type you expect, you may need to pass a `test` parameter to verify your expectations and then check the result for `undefined` (or, modify your visitor to return a more specific type).
+- `typingOptions` along with its property `enableAutoDiscovery` which was deprecated for a long time is not supported any more in `tsconfig.json` and `jsconfig.json`. Use `typeAcquisition` in the config instead.
+- This release removes many long-deprecated parts of our public API, including (but not limited to):
+  - The top-level Node factory functions (deprecated since TS 4.0) such as `ts.createIdentifier`; use the factory provided in your `TransformationContext` or `ts.factory` instead.
+  - The `isTypeAssertion` function (deprecated since TS 4.0); use `isTypeAssertionExpression`.
+  - The overloads of `createConstructorTypeNode` and `updateConstructorTypeNode` which do not accept modifiers (deprecated since TS 4.2).
+  - The overloads of `createImportTypeNode` and `updateImportTypeNode` which do not accept assertions (deprecated since TS 4.6).
+  - The overloads of `createTypeParameterDeclaration` and `updateTypeParameterDeclaration` which do not accept modifiers (deprecated since TS 4.6).
+  - Node properties and factory function overloads which predate the merger of decorators and modifiers (deprecated since TS 4.8).
 
 # TypeScript 4.9
 

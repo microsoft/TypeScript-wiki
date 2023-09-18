@@ -18,13 +18,53 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [Investigate error messages in haiku or iambic pentameter](https://twitter.com/kitsonk/status/973651805950242816)
 * Decorators for function expressions/arrow functions
 
+# 5.0 (March 2023)
+
+[See the 5.0 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/51362)
+
+* [x] [Standard ECMAScript Decorators](https://github.com/microsoft/TypeScript/pull/50820)
+* [x] [`const` Type Parameters](https://github.com/microsoft/TypeScript/pull/51865)
+* [x] [`--moduleResolution bundler`](https://github.com/microsoft/TypeScript/pull/51669)
+* [x] [`extends` Support for Multiple `tsconfig.json` Files](https://github.com/microsoft/TypeScript/pull/50403)
+* [x] [Declaration Files for non-JavaScript Files with `--allowArbitraryExtensions`](https://github.com/microsoft/TypeScript/issues/50133)
+* [x] [`export type *`](https://github.com/microsoft/TypeScript/pull/52217)
+* [x] [`--verbatimModuleSyntax`](https://github.com/microsoft/TypeScript/issues/51479)
+* [x] [`@satisfies` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51753)
+* [x] [`@overload` JSDoc Tag in JavaScript](https://github.com/microsoft/TypeScript/pull/51234)
+* [x] [Unification Between Numeric and Literal `enum`s](https://github.com/microsoft/TypeScript/pull/50528)
+* [x] [Toggling Certain Compiler-Specific Flags Under `--build`](https://github.com/microsoft/TypeScript/pull/51241)
+* [x] [Flag Deprecations](https://github.com/microsoft/TypeScript/issues/51000)
+* [x] [Improved `in` Checks Under `--noUncheckedIndexedAccess`](https://github.com/microsoft/TypeScript/pull/51653)
+* [x] [Editor Support for Case-Sensitive Import Sorting](https://github.com/microsoft/TypeScript/pull/51733)
+* [x] [Editor Support for Exhaustive `switch`/`case` Snippet Completions](https://github.com/microsoft/TypeScript/pull/50996)
+* [x] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
+* Optimizations
+  * [x] [Migrate to Modules](https://github.com/microsoft/TypeScript/pull/51387)
+  * [x] [`Node` Monomorphization](https://github.com/microsoft/TypeScript/pull/51682)
+  * [x] [`Symbol` Monomorphization](https://github.com/microsoft/TypeScript/pull/51880)
+  * [x] [`Identifier` Size Reduction](https://github.com/microsoft/TypeScript/pull/52170)
+  * [x] [`Printer` Caching](https://github.com/microsoft/TypeScript/pull/52382)
+  * [x] [Limited TDZ Avoidance](https://github.com/microsoft/TypeScript/issues/52924)
+
 # 4.9 (November 2022)
+
+[See the 4.9 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/50457)
 
 * [x] [Narrowing Checks for Unknown Properties with the `in` Operator](https://github.com/microsoft/TypeScript/issues/21732)
 * [x] [`satisfies` operator](https://github.com/microsoft/TypeScript/issues/47920)
-* [ ] [Virtual File System Support for TSServer](https://github.com/microsoft/TypeScript/issues/47600)
+* [x] [Auto-accessors in classes](https://github.com/microsoft/TypeScript/pull/49705)
+* [x] [Forbidden Equality Checks Against `NaN`](https://github.com/microsoft/TypeScript/pull/50626)
+* [x] [File Watching Defaults Using to File-System Events](https://github.com/microsoft/TypeScript/pull/50366)
+* [x] ["Remove Imports" Command for Editors](https://github.com/microsoft/TypeScript/pull/50931)
+* [x] [Go-to-Definition on `return` Keywords](https://github.com/microsoft/TypeScript/pull/51227)
+* Optimizations
+  * [`forEachChild` as a Jump Table](https://github.com/microsoft/TypeScript/pull/50225)
+  * [`visitEachChild` as a Jump Table](https://github.com/microsoft/TypeScript/pull/50266)
+  * [Lazily Intersect and Normalize Substitution Type Constraints](https://github.com/microsoft/TypeScript/pull/50397)
 
 # 4.8 (August 2022)
+
+[See the 4.8 Iteration Plan for more details.](https://github.com/microsoft/TypeScript/issues/49074)
 
 * [x] [Improved Narrowing on Generics and Intersection Reduction](https://github.com/microsoft/TypeScript/pull/49119)
 * [x] [Improved Inference for `infer` Types in Template String Types](https://github.com/microsoft/TypeScript/pull/48094)
@@ -134,7 +174,7 @@ This page outlines specific features and fixes that are scheduled or planned for
 * [x] [`export * as default`](https://github.com/microsoft/TypeScript/issues/39769)
 * [x] [Aliased `this` in JavaScript functions](https://github.com/microsoft/TypeScript/issues/39842)
 * [x] [Editor support for `/** @see */` tags](https://github.com/microsoft/TypeScript/issues/35524)
-* [ ] [Semantic Highlighting API](https://github.com/microsoft/TypeScript/issues/38435)
+* [x] [Semantic Highlighting API](https://github.com/microsoft/TypeScript/issues/38435)
 
 # 4.0 (August 2020)
 

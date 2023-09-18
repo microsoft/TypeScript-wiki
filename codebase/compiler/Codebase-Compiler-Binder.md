@@ -137,7 +137,46 @@ TODO: Finish this
 
 ## Control Flow
 
-TODO: Missing completely
+Like symbols, control flow involves a walk of the tree, setting some information for certain kinds of nodes and skipping all other nodes.
+For control flow, nodes that can narrow or otherwise introduce type information are the relevant ones.
+Containers and declarations are the same as for symbol binding, so those concepts are reused.
+Declarations introduce type information; containers form the scope where type information is relevant.
+Other nodes may narrow, so they also interact with control flow.
+
+The control flow graph is a directed graph; that means each relevant node points to its antecedents (parents)&mdash;the nodes that come *before* it in control flow.
+Specifically, each node can have a `flowNode`; this flow node has a `kind` and one or more `antecedents`.
+As the binder walks the tree, `bindWorker` assigns the current flow node to specific nodes that can introduce type information.
+Specific nodes that affect control flow alter the current flow node, such as `bindWhileStatement`.
+
+Notably, loops make the graph cyclic: the pre-while `FlowLabel` points both to the flow node before the loop and also the flow node at the bottom of the loop.
+That's because nodes inside loops might introduce type information, and this information should affect the next iteration of the loop.
+
+Here's an example:
+
+```ts
+function f(x: string | number) {
+  if (typeof x === 'string') {
+    return x
+  } else {
+    console.log(x)
+  }
+  return x
+}
+```
+
+Here, the binder creates a `FlowStart` for `x: string | number`.
+Then when it walks the `if/else`, it creates two `FlowCondition` nodes, each with an antecedent of the original `FlowStart`.
+The two nodes correspond to the `then` body&mdash;where the condition `typeof x === "string"` is true&mdash;and the `else` body&mdash;where it's false.
+For `return x` inside the `then` body, it creates an Unreachable flow node.
+It also creates a post-if `FlowLabel` that joins the control flow between the two branches of the conditional.
+
+During checking of various references of `x`, control flow analysis will walk up the tree until it finds a control flow node, at which point it runs back through the control flow graph until it reaches a `FlowStart`.
+For example, to check the first `x` reference in `typeof x === "string"`, it walks up *past* the `if` &mdash; the condition is not contained in the flow of the `then` or the `else` bodies &mdash; and reaches FlowStart.
+The type here is `string | number`.
+But in the first `return x`, the first flow node it reaches is the `FlowCondition` for the `then` branch of the if/else.
+That check narrows `string | number` to `string`.
+Finally, the last `return x` starts with the post-if flow node, which unions the types that result from the `then` and `else` branches.
+But because the `then` branch returns, it doesn't contribute anything to the union; the resulting type is just `number`.
 
 ## Emit flags
 

@@ -1234,7 +1234,7 @@ TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1
 ## External Tools
 
 ### How do I write unit tests with TypeScript?
-* [Typescript Deep Dive](https://basarat.gitbooks.io/typescript/docs/testing/jest.html)
+* [Typescript Deep Dive](https://basarat.gitbook.io/typescript/intro-1/jest)
 
 
 -------------------------------------------------------------------------------------
@@ -1286,7 +1286,7 @@ The order of the generated files in the output follows that of the input files a
 The compiler performs a pre-processing pass on input files to resolve all *triple-slash reference directives* and *module import statements*.
 During this process, additional files can be added to the compilation.
 
-The process starts with a set of root files; these are the file names specified on the command-line or in the `"files"` list in the [`tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig.json.html).
+The process starts with a set of root files; these are the file names specified on the command-line or in the `"files"` list in the [`tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
 These root files are pre-processed in the *same order* they are specified.
 Before a file is added to the list, all triple-slash references and import statements in it are processed, and their targets included.
 Triple-slash references and import statements are resolved in a *depth-first manner*, in the order they appear in the file.
