@@ -609,12 +609,12 @@ console.log(result);
 
 ## Type Checker APIs
 
-Programs contain a `TypeChecker` object that provides methods for retrieving and reasoning about the types of AST nodes.
+Programs contain a `TypeChecker` object that provides methods for retrieving and reasoning about the types of syntax tree nodes.
 Type checker APIs generally work with two types of representations alongside AST nodes:
 
-* Symbol: describes how the type system views a declared entity, such as a class, function, or variable.
-* Type: describes the backing type that entities may be declared as.
-  These often have a backing Symbol pointing to their declaration(s).
+* `Symbol`s: describes how the type system views a declared entity, such as a class, function, or variable.
+* `Type`s: describes the backing type that entities may be declared as.
+  These often have a backing `Symbol` pointing to their declaration(s).
 
 For example, given a single function declaration like:
 
@@ -624,24 +624,24 @@ function greet() {
 }
 ```
 
-TypeScript would create the following representations:
+TypeScript will create a `Symbol` in the containing scope for `greet`.
+When looking up ("resolving") an identifier with the name `greet`, that `Symbol` can be retrieved.
+This `Symbol` will contain information about how `greet` was declared, and can be used to gain information about the type of `greet`.
 
-* Symbol (`Symbol(greet)`): describing the `greet` function declaration.
-  It includes the function's name and a list of declarations (here, just one).
-* Type (`() => void`): describing the type of `greet`, a function with no parameters and a `void` return.
-  Its backing symbol points to `Symbol(greet)`.
+On that note, TypeScript will also create a type describing `greet`, which is effectively the type `() => void` - a function with no parameters and a `void` return type.
+In this case, the type will be backed by the original symbol associated with `greet`.
 
 The type checker can be retrieved like `program.getTypeChecker()`.
 Commonly used type checker APIs include:
 
-* `getSymbolAtLocation(node)`: retrieves the Symbol associated with an AST node
-* `getTypeAtLocation(node)`: retrieves the Type associated with an AST node
-* `getTypeOfSymbolAtLocation(symbol, node)`: retrieves the Type associated with a symbol at a specific AST node
+* `getSymbolAtLocation(node)`: retrieves the `Symbol` associated with an AST node
+* `getTypeAtLocation(node)`: retrieves the `Type` associated with an AST node
+* `getTypeOfSymbolAtLocation(symbol, node)`: retrieves the `Type` associated with a symbol at a specific AST node
 * `typeToString(type)`: prints a type to a human-readable string
 
-> The type checker concept of "Symbol" only coincidentally has the same name as the JavaScript concept of "Symbol".
-> JavaScript's "Symbol" is a runtime primitive that is used to create unique identifiers.
-> TypeScript's "Symbol" is unrelated to the JavaScript "Symbol" and is used to represent the type system's view of an entity.
+> The type checker concept of `Symbol` only coincidentally has the same name as the JavaScript concept of `Symbol`.
+> JavaScript's `Symbol` is a runtime primitive that is used to create unique identifiers.
+> TypeScript's `Symbol` is unrelated to the JavaScript `Symbol` and is used to represent the type system's view of an entity.
 
 ### Using the Type Checker
 
