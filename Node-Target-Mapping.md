@@ -13,7 +13,7 @@ To update this file, you can use [node.green](https://node.green) to map to the 
 {
   "compilerOptions": {
     "lib": ["ES2023"],
-    "module": "commonjs",
+    "module": "node16",
     "target": "ES2022"
   }
 }
@@ -25,7 +25,7 @@ To update this file, you can use [node.green](https://node.green) to map to the 
 {
   "compilerOptions": {
     "lib": ["ES2022"],
-    "module": "commonjs",
+    "module": "node16",
     "target": "ES2022"
   }
 }
@@ -37,7 +37,7 @@ To update this file, you can use [node.green](https://node.green) to map to the 
 {
   "compilerOptions": {
     "lib": ["ES2021"],
-    "module": "commonjs",
+    "module": "node16",
     "target": "ES2021"
   }
 }
@@ -51,7 +51,7 @@ Note: Due to a V8 bug, one rarely-used ES2020 feature was incorrectly implemente
 {
   "compilerOptions": {
     "lib": ["ES2020"],
-    "module": "commonjs",
+    "module": "node16",
     "target": "ES2020"
   }
 }
@@ -65,7 +65,7 @@ Note: Due to a V8 bug, one rarely-used ES2020 feature was incorrectly implemente
 {
   "compilerOptions": {
     "lib": ["ES2019"],
-    "module": "commonjs",
+    "module": "node16",
     "target": "ES2019"
   }
 }
