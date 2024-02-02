@@ -718,10 +718,10 @@ See the above section on [performance traces](#performance-tracing) and continue
 
 ### Profiling the Compiler
 
-It is important to provide the team with diagnostic traces by running Node.js v10+ with the `--trace-ic` flag alongside TypeScript with the `--generateCpuProfile` flag:
+You can provide the team with diagnostic traces by running `dexnode` alongside TypeScript with the `--generateCpuProfile` flag:
 
 ```sh
-node --trace-ic ./node_modules/typescript/lib/tsc.js --generateCpuProfile profile.cpuprofile -p tsconfig.json
+npm exec dexnode -- ./node_modules/typescript/lib/tsc.js --generateCpuProfile profile.cpuprofile -p tsconfig.json
 ```
 
 Here `./node_modules/typescript/lib/tsc.js` can be replaced with any path to where your version of the TypeScript compiler is installed, and `tsconfig.json` can be any TypeScript configuration file.
@@ -729,7 +729,7 @@ Here `./node_modules/typescript/lib/tsc.js` can be replaced with any path to whe
 
 This will generate two files:
 
-* `--trace-ic` will emit to a file of the `isolate-*-*-*.log` (e.g. `isolate-00000176DB2DF130-17676-v8.log`).
+* `dexnode` will emit to a file of the `isolate-*-*-*.log` (e.g. `isolate-00000176DB2DF130-17676-v8.log`).
 * `--generateCpuProfile` will emit to a file with the name of your choice. In the above example, it will be a file named `profile.cpuprofile`.
 
 > ⚠ Warning: These files may include information from your workspace, including file paths and source code.
