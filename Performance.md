@@ -492,6 +492,16 @@ Isolated file emit can be leveraged by using the following tools:
 * [ts-jest](https://kulshekhar.github.io/ts-jest/) can use be configured with the [`isolatedModules` flag set to `true`]isolatedModules: true(.
 * [ts-node](https://www.npmjs.com/package/ts-node) can detect [the `"transpileOnly"` option in the `"ts-node"` field of a `tsconfig.json`, and also has a `--transpile-only` flag](https://www.npmjs.com/package/ts-node#cli-and-programmatic-options).
 
+# Optimizing Editing Experience; Performance of `ts-server`
+
+`ts-server`'s performance characteristics will always be related to the
+performance of type-checking your entire project using `tsc`, so the other
+performance optimization guidance here also applies to improving the editing
+experience. As you type, the checker is completely starting from scratch, but it
+only requests information about what you're typing. This means that the editing
+experience can vary based on how much work TypeScript needs to do to check the
+type of what you are actively editing.
+
 # Investigating Issues
 
 There are certain ways to get hints of what might be going wrong.
