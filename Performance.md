@@ -497,6 +497,9 @@ Isolated file emit can be leveraged by using the following tools:
 In-editor diagnostics are typically fetched a few seconds after typing stops.
 `ts-server`'s performance characteristics will always be related to the performance of type-checking your entire project using `tsc`, so the other performance optimization guidance here also applies to improving the editing experience.
 As you type, the checker is completely starting from scratch, but it only requests information about what you're typing.
+This means that the editing experience can vary based on how much work TypeScript needs to do to check the type of what you are actively editing.
+In most editors, like VS Code, diagnostics are requested for all open files, not the entire project.
+Accordingly, diagnostics will appear faster compared to checking the entire project with `tsc`, but slower than viewing a type with hover, since viewing a type with hover _only_ asks TypeScript to compute and check that specific type.
 
 # Investigating Issues
 
