@@ -494,13 +494,9 @@ Isolated file emit can be leveraged by using the following tools:
 
 # Optimizing Editing Experience; Performance of `ts-server`
 
-`ts-server`'s performance characteristics will always be related to the
-performance of type-checking your entire project using `tsc`, so the other
-performance optimization guidance here also applies to improving the editing
-experience. As you type, the checker is completely starting from scratch, but it
-only requests information about what you're typing. This means that the editing
-experience can vary based on how much work TypeScript needs to do to check the
-type of what you are actively editing.
+In-editor diagnostics are typically fetched a few seconds after typing stops.
+`ts-server`'s performance characteristics will always be related to the performance of type-checking your entire project using `tsc`, so the other performance optimization guidance here also applies to improving the editing experience.
+As you type, the checker is completely starting from scratch, but it only requests information about what you're typing.
 
 # Investigating Issues
 
