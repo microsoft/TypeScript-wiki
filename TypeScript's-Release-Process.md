@@ -11,7 +11,11 @@ We also keep an updated [Feature Roadmap](https://github.com/Microsoft/TypeScrip
 
 The TypeScript team also maintains the official [TypeScript Blog](https://devblogs.microsoft.com/typescript/) where releases are announced.
 
-The official [@typescript](twitter.com/typescript/) Twitter account also posts release announcements.
+The official TypeScript social media accounts also post release announcements:
+
+* [bsky.app/profile/typescriptlang.org](https://bsky.app/profile/typescriptlang.org)
+* [fosstodon.org/@TypeScript](https://fosstodon.org/@TypeScript)
+* [twitter.com/typescript](https://twitter.com/TypeScript)
 
 # What Are the Stages of a Release?
 
