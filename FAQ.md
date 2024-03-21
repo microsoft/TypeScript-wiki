@@ -1467,8 +1467,8 @@ function foo /* trailing comments of the function name, "foo", AST node */ () {
 * **Declined**: For reasons explained in the issue, we are not going to accept this suggestion (note: See "I disagree with the outcome..." section)
 * **Discussion**: This issue is a discussion with no defined outcome. The TypeScript team may weigh in on these issues, but they are not regularly reviewed
 * **Duplicate**: This issue is the same, or has the same root cause, as another issue
-* **Effort**: Easy/Moderate/Difficult: For issues marked as 'help wanted', these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modifying lib.d.s are generally Easy; work that requires understanding the basics of the code base is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
-* **good first issue**: These are 'Effort: easy' issues, good for your first contribution
+* **Effort**: Casual/Moderate/Difficult: For issues marked as 'help wanted', these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modifying lib.d.s are generally Casual; work that requires understanding the basics of the code base is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
+* **good first issue**: These are 'Effort: Casual' issues, good for your first contribution
 * **ES6 / ES7 / ES Next**: Refers to issues related to features found in these specific ECMAScript versions
 * **External**: Catch-all bucket when an issue reported is not an issue with TypeScript, but rather an external tool, library, website, person, or situation
 * **Fixed**: This bug has been fixed. Generally, you will see these bugs fixed in the nightly version(`npm install typescript@next`) within 24-48 hours
