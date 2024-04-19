@@ -1,85 +1,561 @@
-# FAQs
+# FAQ (For Issue Filers)
 
-<!-- !!! READ THIS !!! -->
-<!-- The table of contents is auto-generated using doctoc. Don't edit manually! -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+FAQ Update 2024: The FAQ now attempts to only address content from people who end up filing GitHub issues.
 
+This is not intended to be a representative FAQ for TypeScript *in general*.
 
-  - [Common "Bugs" That Aren't Bugs](#common-bugs-that-arent-bugs)
-  - [Common Feature Requests](#common-feature-requests)
-  - [Type System Behavior](#type-system-behavior)
-    - [What is structural typing?](#what-is-structural-typing)
-    - [What is type erasure?](#what-is-type-erasure)
-    - [Why are getters without setters not considered read-only?](#why-are-getters-without-setters-not-considered-read-only)
-    - [Why are function parameters bivariant?](#why-are-function-parameters-bivariant)
-    - [Why are functions with fewer parameters assignable to functions that take more parameters?](#why-are-functions-with-fewer-parameters-assignable-to-functions-that-take-more-parameters)
-    - [Why are functions returning non-`void` assignable to function returning `void`?](#why-are-functions-returning-non-void-assignable-to-function-returning-void)
-    - [Why are all types assignable to empty interfaces?](#why-are-all-types-assignable-to-empty-interfaces)
-    - [Can I make a type alias nominal?](#can-i-make-a-type-alias-nominal)
-    - [How do I prevent two types from being structurally compatible?](#how-do-i-prevent-two-types-from-being-structurally-compatible)
-    - [How do I check at run-time if an object implements some interface?](#how-do-i-check-at-run-time-if-an-object-implements-some-interface)
-    - [Why doesn't this incorrect cast throw a runtime error?](#why-doesnt-this-incorrect-cast-throw-a-runtime-error)
-    - [Why don't I get type checking for `(number) => string` or `(T) => T`?](#why-dont-i-get-type-checking-for-number--string-or-t--t)
-    - [Why am I getting an error about a missing index signature?](#why-am-i-getting-an-error-about-a-missing-index-signature)
-    - [Why am I getting `Supplied parameters do not match any signature` error?](#why-am-i-getting-supplied-parameters-do-not-match-any-signature-error)
-  - [Functions](#functions)
-    - [Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?](#why-cant-i-use-x-in-the-destructuring-function-f-x-number------)
-  - [Classes](#classes)
-    - [Why do these empty classes behave strangely?](#why-do-these-empty-classes-behave-strangely)
-    - [When and why are classes nominal?](#when-and-why-are-classes-nominal)
-    - [Why does `this` get orphaned in my instance methods?](#why-does-this-get-orphaned-in-my-instance-methods)
-    - [What's the difference between `Bar` and `typeof Bar` when `Bar` is a `class`?](#whats-the-difference-between-bar-and-typeof-bar-when-bar-is-a-class)
-    - [Why do my derived class property initializers overwrite values set in the base class constructor?](#why-do-my-derived-class-property-initializers-overwrite-values-set-in-the-base-class-constructor)
-    - [What's the difference between `declare class` and `interface`?](#whats-the-difference-between-declare-class-and-interface)
-    - [What does it mean for an interface to extend a class?](#what-does-it-mean-for-an-interface-to-extend-a-class)
-    - [Why am I getting "TypeError: [base class name] is not defined in `__extends`?](#why-am-i-getting-typeerror-base-class-name-is-not-defined-in-__extends)
-    - [Why am I getting "TypeError: Cannot read property 'prototype' of undefined" in `__extends`?](#why-am-i-getting-typeerror-cannot-read-property-prototype-of-undefined-in-__extends)
-    - [Why doesn't extending built-ins like `Error`, `Array`, and `Map` work?](#why-doesnt-extending-built-ins-like-error-array-and-map-work)
-  - [Generics](#generics)
-    - [Why is `A<string>` assignable to `A<number>` for `interface A<T> { }`?](#why-is-astring-assignable-to-anumber-for-interface-at--)
-    - [Why doesn't type inference work on this interface: `interface Foo<T> { }`?](#why-doesnt-type-inference-work-on-this-interface-interface-foot--)
-    - [Why can't I write `typeof T`, `new T`, or `instanceof T` in my generic function?](#why-cant-i-write-typeof-t-new-t-or-instanceof-t-in-my-generic-function)
-  - [Modules](#modules)
-    - [Why are imports being elided in my emit?](#why-are-imports-being-elided-in-my-emit)
-    - [Why don't namespaces merge across different module files?](#why-dont-namespaces-merge-across-different-module-files)
-  - [Enums](#enums)
-    - [What's the difference between `enum` and `const enum`s?](#whats-the-difference-between-enum-and-const-enums)
-  - [Type Guards](#type-guards)
-    - [Why doesn't `x instanceof Foo` narrow `x` to `Foo`?](#why-doesnt-x-instanceof-foo-narrow-x-to-foo)
-    - [Why doesn't `isFoo(x)` narrow `x` to `Foo` when `isFoo` is a type guard?](#why-doesnt-isfoox-narrow-x-to-foo-when-isfoo-is-a-type-guard)
-  - [Decorators](#decorators)
-    - [Decorators on function declarations](#decorators-on-function-declarations)
-    - [What's the difference between `@dec` and `@dec()`? Shouldn't they be equivalent?](#whats-the-difference-between-dec-and-dec-shouldnt-they-be-equivalent)
-  - [JSX and React](#jsx-and-react)
-    - [I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`?](#i-wrote-declare-var-mycomponent-reactcomponent-why-cant-i-write-mycomponent-)
-  - [Things That Don't Work](#things-that-dont-work)
-    - [You should emit classes like this so they have real private members](#you-should-emit-classes-like-this-so-they-have-real-private-members)
-    - [You should emit classes like this so they don't lose `this` in callbacks](#you-should-emit-classes-like-this-so-they-dont-lose-this-in-callbacks)
-    - [You should have some class initialization which is impossible to emit code for](#you-should-have-some-class-initialization-which-is-impossible-to-emit-code-for)
-  - [External Tools](#external-tools)
-    - [How do I write unit tests with TypeScript?](#how-do-i-write-unit-tests-with-typescript)
-  - [Commandline Behavior](#commandline-behavior)
-    - [Why did adding an `import` or `export` modifier break my program?](#why-did-adding-an-import-or-export-modifier-break-my-program)
-    - [How do I control file ordering in combined output (`--out`)?](#how-do-i-control-file-ordering-in-combined-output---out)
-    - [What does the error "Exported variable [name] has or is using private name [name]" mean?](#what-does-the-error-exported-variable-name-has-or-is-using-private-name-name-mean)
-    - [Why does `--outDir` moves output after adding a new file?](#why-does---outdir-moves-output-after-adding-a-new-file)
-  - [`tsconfig.json` Behavior](#tsconfigjson-behavior)
-    - [Why is a file in the `exclude` list still picked up by the compiler?](#why-is-a-file-in-the-exclude-list-still-picked-up-by-the-compiler)
-    - [How can I specify an `include`?](#how-can-i-specify-an-include)
-    - [Why am I getting the `error TS5055: Cannot write file 'xxx.js' because it would overwrite input file.` when using JavaScript files?](#why-am-i-getting-the-error-ts5055-cannot-write-file-xxxjs-because-it-would-overwrite-input-file-when-using-javascript-files)
-  - [Comments](#comments)
-    - [Why some comments are not preserved in emitted JavaScript even when `--removeComments` is not specified?](#why-some-comments-are-not-preserved-in-emitted-javascript-even-when---removecomments-is-not-specified)
-    - [Why Copyright comments are removed when `--removeComments` is true?](#why-copyright-comments-are-removed-when---removecomments-is-true)
-- [Glossary and Terms in this FAQ](#glossary-and-terms-in-this-faq)
-    - [Dogs, Cats, and Animals, Oh My](#dogs-cats-and-animals-oh-my)
-    - ["Substitutability"](#substitutability)
-    - [Trailing, leading, and detached comments](#trailing-leading-and-detached-comments)
-- [GitHub Process Questions](#github-process-questions)
-    - [What do the labels on these issues mean?](#what-do-the-labels-on-these-issues-mean)
-    - [I disagree with the outcome of this suggestion](#i-disagree-with-the-outcome-of-this-suggestion)
+## Common Feature Requests
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+### Existing Common Requests
+
+Listed here (with some synonyms) for easier Ctrl-F-ing
+
+ * Nominal types (tagged, branded): [#202](https://github.com/microsoft/TypeScript/issues/202)
+ * Negated types (not, exclusion, exclude, remove): [#4196](https://github.com/microsoft/TypeScript/issues/4196)
+ * Exact types (sealed, final, closed, unopen): [#12936](https://github.com/microsoft/TypeScript/issues/12936)
+ 
+## Pre-Declined Feature Rquests
+
+### New Utility Types
+
+While `lib.d.ts` has some built-in types such as `Pick`, `Omit`, `Exclude`, `ReturnType`, etc., we are not accepting suggestions for adding new utility types.
+
+[Experience has taught us](https://github.com/microsoft/TypeScript/issues/30825) that defining utility types opens up a huge range of disagreement about very specific aspects of how these utility types should work, and once we ship a utility type, it's nearly always impossible to change it without causing many subtle breaks in user code.
+
+### Add a Key Constraint to `Omit`
+
+`Omit`s lack of key constraint is intentional. Many use cases for this type do not obey that constraint, e.g.:
+```ts
+type MySpread<T1, T2> = T2 & Omit<T1, keyof T2>;
+type X = MySpread<{ a: string, b: number}, { b: string, c: boolean }>;
+let x: X = { a: "", b: "", c: true };
+```
+
+You can write a user-space `Omit` type if you'd like to constrain the key.
+
+We also recommend using these definitions of a user-side `Pick` and `Omit` if desired:
+```ts
+type Pick_NewAndImproved<T, K extends keyof T> = {
+  [P in keyof T as K & P]: T[P];
+};
+
+// Optional: Add 'extends keyof T' constraint to K
+type Omit_NewAndImproved<T, K> = {
+  [P in keyof T as Exclude<P, K & keyof any>]: T[P]; }
+}
+```
+
+### Module Specifier Rewriting
+
+It's explicitly out of scope for TypeScript to modify module specifiers as they appear in emitted JS, e.g. if you write
+
+```ts
+import x from "some/path";
+```
+
+the output specifier *will always be* `"some/path"` regardless of your tsconfig settings.
+
+This includes things like changing file extensions, changing `paths` lookups to their resolutions, changing absolute paths to relative paths, changing relative paths to absolute paths, changing sub-module specifiers to something else, and so on. The string in the import path is the string in the emitted JavaScript, no exceptions.
+
+Instead of trying to get TypeScript to change the path during emit, the correct approach is to write the specifier you want to be in the output, and adjust your configuration until that specifier resolves (in type-land) to the path you want it to.
+
+See also:
+
+ * [Module documentation](https://www.typescriptlang.org/docs/handbook/modules/theory.html#module-specifiers-are-not-transformed)
+ * [This comment](https://github.com/microsoft/TypeScript/issues/49083#issuecomment-1435399267)
+
+### Additional Logic in `noUncheckedIndexedAccess`
+
+`noUncheckedIndexedAccess` is intended to prevent all accidental out-of-bounds access on arrays.
+
+Because array mutation *could* occur at any time, it doesn't make any exceptions for things like `length` checks.
+
+In order to ensure that the flag doesn't have any "gaps", requests to change the logic to produce `T` instead of `T | undefined` will not be accepted.
+
+### `throws` / Checked Exceptions / Typed Exceptions
+
+[See this comment](https://github.com/microsoft/TypeScript/issues/13219#issuecomment-1515037604)
+
+## Common Misconceptions
+
+Note: Section titles here state the *true* version of the fact.
+
+### Primitives are `{ }`, and `{ }` Doesn't Mean `object`
+
+The type `{ }` refers to any (non-null/undefined) value with zero or more properties.
+
+Primitive values, like strings, do have properties. For example, `"hello world".length` is a valid property access, because strings have a `length` property. Therefore, a `string` is a valid `{ }`: it is not null or undefined, and has zero or more properties.
+
+The type that refers to values which have `Object` in their prototype chain is `object`. `{ }` is not a synonym for `object`.
+
+### `{ }` Does Not Refer to Objects With No Properties
+
+Because TypeScript doesn't have sealed/closed types, there's no type which refers to values with zero properties.
+
+Certain [lint rules](https://github.com/typescript-eslint/typescript-eslint/issues/8700) ban using `{}`; we do not recommend this rule and we don't design the language around misguided lint rules. The correct value to use for "any non-null non-undefined value" is `{ }`, other suggested types like `Record<string, never>` are not particularly coherent and shouldn't be used instead. We recommend disabling any lint rule that tries to prevent you from using `{ }`, because (unlike `String` or `Number`) it's a valid type that does occur in normal usage of TypeScript.
+
+### Evolving `let` and Evolving Arrays Aren't `any`
+
+Evolving `let` and evolving arrays are intentional (see PR #11263) and shouldn't be errors under `noImplicitAny`. They do not act like `any`.
+
+These features exist to ensure that these programs have equivalent behavior:
+```ts
+let x;
+if (cond) {
+  x = y;
+} else {
+  x = z;
+}
+doSomethingWith(x); // <- first read
+```
+and the identical program:
+```ts
+let x = cond ? y : z;
+doSomethingWith(x);
+```
+Even those these appear as `any` in tooltips (see #54414), these don't have any of the problems associated with `any`. Allowing an assignment prior to the first read is no different from initialization and should be treated the same as initialization (and is).
+
+### (Indirect) Excess Properties Are OK
+
+Object types in TypeScript aren't "sealed" / "closed" / "final". In other words, if you have a variable of *type* `{ a: string }`, it's possible that the variable points to a *value* like `{ a: "hello", b: 42 }`.
+
+When you're directly creating an object literal, TypeScript uses "excess property checks" to detect likely problems:
+```ts
+interface Dimensions {
+    width: number;
+    height: number;
+    depth?: number;
+}
+
+const p: Dimensions = {
+    width: 32,
+    height: 14,
+    depht: 11 // <-- typo!!
+}
+```
+However, this code is still legal:
+```ts
+const p = {
+    width: 32,
+    height: 14,
+    depht: 11 // <-- fine
+};
+console.log(p.depht); // yep, it's there
+const q: Dimensions = p; // also fine
+```
+
+This also means that `Object.keys` should (and does) return `string[]`, not `(keyof T)[]`. See also [this StackOverflow post](https://stackoverflow.com/questions/55012174/why-doesnt-object-keys-return-a-keyof-type-in-typescript)
+
+See also suggestion #12936
+
+### Parameter Contravariance is Correct
+
+Let's say you write an interface
+```ts
+interface CanCheck {
+    checkThing: (x: string) => boolean;
+}
+```
+and implement it with an object:
+```ts
+const obj = {
+    checkThing: (sn: string | number) => {
+        return true;
+    }
+}
+obj satisfies CanCheck; // OK
+```
+
+A common confusion is to say that since `string | number` is a bigger type than `string`, this program should be rejected, since it means a number might appear where a string is expected. This reasoning is incorrect; even though a number can be passed to `obj.checkThing`, that cannot create the situation where a `number` is present somewhere where *only* a `string` is expected.
+
+Another common confusion is to claim that the opposite program should be accepted:
+```ts
+interface CanCheck {
+    checkThing: (x: string | number) => boolean;
+}
+const obj = {
+    checkThing: (s: string) => {
+        return true;
+    }
+}
+obj satisfies CanCheck; // Alleged: should be OK
+```
+This is wrong. If `obj` is a `CanCheck`, then `obj.checkThing(42)` is legal, and `42` would appear in `s`, which is only allowed to be a `string`.
+
+Another common confusion is, in response, to say something like
+
+> But a function that takes a string *is* a function that takes a string or number!
+
+This is very, very easy to get backwards. After all, in common parlance, a "carnivore" is someone who eats meat. A person who eats beef would seem to qualify. Yet nearly every carnivore human does *not* eat human meat -- the predicate is not universal over all inputs.
+
+The correct way to phrase this is to insert the necessary qualifiers to the proposition
+
+> A function that can take **any** string is(?) a function that can take **any** string or number
+
+In this phrasing, the flaw is more apparent: Because the function *doesn't* take numbers, it doesn't match the criteria.
+
+This logic also applies equally to methods of classes that implement interfaces; no different behavior is required or justified here.
+
+### Parameter Arity Variance is Correct
+
+> I wrote some code like this and expected an error:
+> ```ts
+> function handler(arg: string) {
+>     // ....
+> }
+>
+> function doSomething(callback: (arg1: string, arg2: number) => void) {
+>     callback('hello', 42);
+> }
+>
+> // Expected error because 'doSomething' wants a callback of
+> // 2 parameters, but 'handler' only accepts 1
+> doSomething(handler);
+> ```
+
+This is the expected and desired behavior.
+
+Let's consider another program first:
+```ts
+let items = [1, 2, 3];
+items.forEach(arg => console.log(arg));
+```
+
+This is isomorphic to the example that "wanted" an error.
+At runtime, `forEach` invokes the given callback with three arguments (value, index, array), but most of the time the callback only uses one or two of the arguments.
+This is a very common JavaScript pattern and it would be burdensome to have to explicitly declare unused parameters.
+
+If this *were* an error, it's not even clear how you would fix it! Adding the extra parameters is likely to run afoul of your linter:
+```ts
+let items = [1, 2, 3];
+// Error: Unused variables 'i', 'arr'
+items.forEach((arg, i, arr) => console.log(arg));
+```
+JavaScript doesn't have a "discard" binding method, so you'd either end up with lint suppressions, or ugly and useless parameters:
+```ts
+// No one wants to write this sad code:
+items.forEach((arg, _1, _2) => console.log(arg));
+```
+
+> But `forEach` should just mark its parameters as optional!
+> e.g. `forEach(callback: (element?: T, index?: number, array?: T[]))`
+
+This is *not* what an optional callback parameter means.
+Function signatures are always read from the *caller's* perspective.
+If `forEach` declared that its callback parameters were optional, the meaning of that is "`forEach` **might call the callback with 0 arguments**".
+
+The meaning of an optional callback parameter is *this*:
+```ts
+// Invoke the provided function with 0 or 1 argument
+function maybeCallWithArg(callback: (x?: number) => void) {
+    if (Math.random() > 0.5) {
+        callback();
+    } else {
+        callback(42);
+    }
+}
+```
+`forEach` *always* provides all three arguments to its callback.
+You don't have to check for the `index` argument to be `undefined` - it's always there; it's not optional.
+
+There is currently not a way in TypeScript to indicate that a callback parameter *must* be present.
+Note that this sort of enforcement wouldn't ever directly fix a bug.
+In other words, in a hypothetical world where `forEach` callbacks were required to accept a minimum of one argument, you'd have this code:
+```ts
+[1, 2, 3].forEach(() => console.log("just counting"));
+             //   ~~ Error, not enough arguments?
+```
+which would be "fixed", but *not made any more correct*, by adding a parameter:
+```ts
+[1, 2, 3].forEach(x => console.log("just counting"));
+               // OK, but doesn't do anything different at all
+```
+
+### `void` and `undefined` are Different
+
+`void` is not an alias for `undefined`.
+
+See [this StackOverflow answer](https://stackoverflow.com/a/58885486)
+
+See also #42709
+
+### `Exclude` Isn't Type Negation
+
+`Exclude<T, U>` isn't the same as `T & not U`. TypeScript does not yet have the notion of a negated type; see #4196.
+
+[As mentioned in the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers), `Exclude` is a type alias whose *only* effect is to filter unions. This behavior comes from its [distributivity](https://www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types). It isn't a true "built-in" type that performs type negation.
+
+This means that if the input type isn't a union, nothing will happen. This includes types that you might think of as being "infinite unions", like `string` or `number` - they are not union types.
+
+For example, `Exclude<string, "hello">` just means `string`. It doesn't mean "any `string` except `"hello"`", because `string` is not a union, and thus no filtering occurs.
+
+The same is true for numbers; `Exclude<number, 0>` is `number` because `number` is not a union.
+
+### `as` is the Casting Operator, So it Casts
+
+The `as` operator (and its other syntax, `<T>expr`) is in the language *for the purpose* of downcasting, e.g. telling TypeScript that an `Animal` is actually a `Cat`. It's very easy to introduce runtime errors in your program via silencing a type error with a downcast, so care should be taken when using it.
+
+For convenience, this operator also works for upcasting, which is a much less frequently needed operation (usually `satisfies` is better).
+
+### The ECMAScript Spec is Descriptive, not Normative
+
+The ECMAScript spec defines the behavior of JavaScript runtime semantics. This means that even *clearly buggy* code, e.g.:
+```ts
+const output = "hello, world".substr("world");
+```
+has *a* defined behavior.
+
+The purpose of TypeScript isn't to tell you when you've somehow managed to reach outside the bounds of the ES Spec (a nearly impossible feat), nor to only tell you when you've done something that will raise a runtime exception (something that most people agree doesn't happen nearly often enough in JS). TypeScript defines a *normative* set of behaviors that we think are generally "good" JS - fewer (but not necessarily zero) implicit coercions, fewer property accesses that result in `undefined`, fewer exceptions, fewer `NaN`s, and so on. This does mean that some behavior is on the borderline of "good" vs "not so good", and there are judgement calls involved when it comes to what TypeScript thinks is OK or not.
+
+See also [this Stackoverflow Post](https://stackoverflow.com/a/41750391/)
+
+### `exclude` in `tsconfig.json` Only Filters `include`
+
+[As mentioned in the docs](https://www.typescriptlang.org/tsconfig#exclude), the `exclude` tsconfig option *only* filters the list of files that `include` picks up. It does not do anything else. Its only purpose is to change which files `include` produces, and doesn't change the behavior of any other processes. The only thing you can use `exclude` for is to have `include` not process a file; if the file is part of your program for a different reason, it will still be there.
+
+`exclude` has no effect on other ways a file might be included:
+
+* Module resolution
+* The `files` list
+* `/// <reference` directives
+* Anything else that isn't `include`
+
+You can run `tsc --explainFiles` to see why a file was included.
+
+### The "lib" in `skipLibCheck` Refers To `.d.ts` Files
+
+The "lib" in "`skipLibCheck`" refers to any `.d.ts` file.
+
+In other words, there is no distinction made between `.d.ts` files which are "yours" (say, in your `files` list) and "not yours" (say, in `node_modules/@types`).
+
+In general it's not correct to have a `.d.ts` file be a user-authored input to your program - even if a file only contains types, it should still be `.ts` so that it *produces* a `.d.ts` in the output for downstream consumers to use.
+
+## Non-Invariants
+
+### Circularity Errors *May* Occur In The Presence of Circularities
+
+During the depth-first process of typechecking, TypeScript may encounter an apparent circularity in logic, e.g. it determines that `X` should be assignable to `Y` if `X` is assignable to `Y`. When this happens, you'll see an error:
+
+> 'foo' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer
+
+Due to the complexity of the checking process and caching, it's sometimes possible for a circularity error to occur in some situations but not others. If a codebase has a circularity in checking, that error *may* be issued, but it's also possible that you may be able to cause the error to go away by pre-doing part of the cycle elsewhere.
+
+In the interests of not arbitrarily breaking people, we're not accepting PRs to *add* more circularity errors.
+
+If you have a working PR that *removes* circularity errors without adverse side effects, we can review them.
+
+A very instructive deeper discussion can be read at [#45213](https://github.com/microsoft/TypeScript/issues/45213).
+
+### Comment Preservation Not Guaranteed
+
+As a trade-off to make parsing more efficient, TypeScript's emitter *may* not emit every comment in the original source.
+
+If your scenario requires every comment, or some particular form of comment, to be preserved, please use an alternate TS-to-JS transpiler.
+
+### Structural vs Instantiation-Based Inference
+
+Consider a function call where TypeScript must perform type inference:
+```ts
+type Box<T> = { contents: T };
+declare function unbox<T>(arg: Box<T>): T;
+
+function foo(x: Box<string>) {
+    const a = unbox(x); // What is T?
+}
+```
+
+There are two different approaches for inferring `T` you can use here:
+ * Option 1 (structural): Determine the structure of `Box<string>`, see that it has a `{ value: string }` property, look at each property in `Box<T>` seeing if it uses `T` in some position, notice that there's a `value: string` coming from `x` that corresponds to `value: T` in `Box<T>`, therefore `T = string`
+ * Option 2 (instantiation-based): Notice that `Box<string>` is an instantiation of `Box<T>`, so `T = string`
+
+As one might expect, Option 2 is *much* faster, and is also equally correct. As such, TypeScript generally prefers this instantiation-based inference whenever possible.
+
+However, there are cases where instantiation and structural inference can produce different results.
+
+For example if `Box<T>` doesn't actually *use* `T`, then a structurally-based inference will find no occurences of `T` and infer `T = never`. *But* since there's never really a good reason to write a generic type this way, it's not considered to be problematic to do this.
+
+Which inference algorithm is chosen is implementation-dependent and may change for necessary correctness or performance reasons; you should not take a dependency on one or the other occurring.
+
+## Turn On This Flag To Do That
+
+Many bug reports simply require certain flags to be turned on to get the desired behavior.
+
+### Assume Array Access Might Be Out of Bounds: `noUncheckedIndexedAccess`
+
+You can turn on `noUncheckedIndexedAccess` to change the behavior such that arrays and object maps presume possibly-out-of-bounds access.
+
+This flag is a "big hammer", so to speak, and does not have any mechanisms for detecting provably in-bounds access. Because it's nearly impossible to soundly prove that an access is in-bounds (on account of mutation, etc.), such exceptions won't be considered.
+
+### Require Properties to Either Be Missing or Not `undefined`: `exactOptionalPropertyTypes`
+
+You can turn on `exactOptionalPropertyTypes` to change the behavior such that an optional property can't be explicitly provided with the value `undefined`.
+
+This flag affects *all* optional properties and there is no mechanism for doing this on a per-type basis.
+
+## Common Comments
+
+### What Kind of Feedback Are You Looking For?
+
+We greatly appreciate constructive and actionable feedback on all issues. Constructive and actionable means that we can read your comment and gain new information from it.
+
+Good examples of constructive and actionable feedback:
+
+ * Code examples demonstrating how you would have used or been helped by the feature
+ * Examples of third-party libraries that already use patterns like this
+ * Describing where existing workarounds fall short of the desired behavior
+
+A good litmus test to see if feedback is useful is to consider the scenario where we have an idea for some feature *other* than exactly the one being proposed, and think it might solve the problem you're having when asking for a particular feature. If you just say "I need this feature", we can't look at your comment and evaluate if the other proposed feature would solve your problem.
+
+Similarly, the same feature request might have many different interpretations. If you just say "I need this", we don't know which *this* you're talking about, and can't figure out which interpretation of the feature is the correct one to implement.
+
+### Time Marches On
+
+Comments noting how long an suggestion has been open, what year it is, etc., are not considered constructive or helpful. We ask that you not bother posting them.
+
+Most programming languages in common use have been in development for decades at this point, and most common feature ideas can be noticed within the first couple years of use, so the only notable thing that we can deduce from a suggestion being longstanding is that the underlying language has withstood the test of time and is still in use *despite* lacking that feature - if anything, evidence against its priority.
+
+Similarly, in successful languages, most ideas that are easy and good get implemented quickly, so if you're looking at a longstanding issue, it's like either much more difficult or much less good than you might be thinking it is. Engaging with the problem, or providing useful context on why you think the change would be helpful, are constructive ways that you can comment on these threads.
+
+Extending long threads with unconstructive comments like this has many downsides:
+
+ * Doesn't do anything to clarify why any particular change is more important than the thousands of other open suggestions (evolving a language is not a first-in first-out queue)
+ * Makes it harder to find useful content in the thread itself
+ * Adds noise to search results
+ * Increases the number of times someone has to click "Show More" once we reach the pagination limit
+
+### Can I Work On This?
+
+If this is in the `Backlog` milestone, yes! See also https://github.com/microsoft/TypeScript/blob/main/CONTRIBUTING.md#issue-claiming. Issues may also be marked with "Help Wanted" but this label is not necessary; the milestone field is authoritative.
+
+If an issue isn't in the `Backlog` milestone, please be advised that PRs may not be reviewed and may not be accepted.
+
+### Any Updates?
+
+There are generally no nonpublic updates that can be retrieved by asking "Any updates?".
+
+Our [iteration plans](https://github.com/microsoft/TypeScript/labels/Planning), [meeting notes](https://github.com/microsoft/TypeScript/labels/Design%20Notes), and other plans are available for perusal.
+
+If you'd like to see a particular bug fixed, feel free to raise it in the active milestone's iteration plan. We do our best to prioritize issues that people are encountering.
+
+If there are features you'd like to see added:
+
+ * If it's in the `Backlog` milestone, PRs are welcomed!
+ * If it's not in the `Backlog` milestone, see "What Kind of Feedback Are You Looking For?"
+
+### This Is Closed, But Should Be Open, Or Vice Versa
+
+Every project on GitHub uses slightly different definitions of "Open" and "Closed".
+
+For us, "Open" means "There is known work left to do". An unfixed bug, for example, should be left open. A suggestion we're still working out the details on, or assessing the need for, is also likely to be Open.
+
+"Closed" means "There is not known work left to do". A fixed bug, for example, is always closed; there is nothing left to do. A suggestion which is clearly out-of-scope for the project, either by going against its core design principles, or being simply unrelated to its core goals, would also be closed.
+
+Not every example is clear-cut. As with all things in life, when there are grey areas to be found, and it's [hard to find definitions that everyone agrees with](https://danluu.com/impossible-agree/).
+
+These are the edge case rules that we've decided on for clarity:
+
+ * A *bug* (i.e. known defect) that is so trivial as to not ever be bothersome (for example, a benign crash that only occurs in a file specifically crafted to overflow the parser stack) may be considered a "Won't Fix". In this case, it is *Closed* because there is not "work left to do"
+ * A *suggestion* (feature idea) that seems quite unlikely to provide a good return on investment in the foreseeable future would be Closed, because we've done the work (gathered feedback, considered the pros and cons, and made a decision)
+   * Sometimes the decision will be "Not right now, but definitely possibly later?" - in this case, Open is the correct state, because the work is "Keep collecting feedback to see how priorities change". A suggestion may be Open for a very long time as a result. We do not Close suggestions *simply* because they were brought up a long time ago, and don't Close issues simply because they haven't been done fast enough for someone's liking.
+ * A *design limitation* (acknowledged problem, but one where we have no idea how to fix it, or how to fix it without unacceptable downsides) is Closed. These are difficult cases where we've agreed that the issue is a problem *per se*, but can't see any solution that would be acceptable. There is no "work to be done" here because "Make a breakthrough" is not work that can be concretely pursued.
+   * If you think you have a solution to a problem marked "design limitation", feel free to send a PR, we will evaluate it.
+
+All decisions are "only for now". The JS ecosystem is ever-changing, developer priorities are ever-changing, and the project itself will always be evolving over time. This doesn't mean we need to leave *every* issue Open just to leave open a slight chance of a future possibility -- the "Re-open" button is always there, and we're always capable of changing our minds in the face of new evidence or new circumstances. Open/Closed in these gray areas represents *our best guess* at the long-term state of all of these decisions.
+
+It's worth noting that the Open/Close state flows *from* the maintainers' point of view *to* the issue, not vice versa. Reopening a Suggestion for a feature that we actively don't want to be part of the language won't make us start wanting it. Similarly, reopening a Design Limitation that we have no idea how to fix won't make us able to address it.
+
+Open/Closed definition is a project-wide decision and we don't make per-issue deviations from this definition. Complaining about open/closed state isn't constructive, and please remember that insistence in engaging in nonconstructive discussion is against the [code of conduct](https://microsoft.github.io/codeofconduct/).
+
+## Other FAQs and Errors
+
+### The inferred type of "X" cannot be named without a reference to "Y". This is likely not portable. A type annotation is necessary
+
+Let's say you use a package manager with strict dependencies:
+```
+|-/my_package_1
+|-- /node_modules
+|---- /other_package <- direct dependency
+|------ index.d.ts
+|------ /node_modules
+|--------- /sub_dep <- symlink!
+|----------- index.d.ts
+|-- /src
+|---- tsconfig.json  <- project root
+|---- foo.ts         <- a source file that imports the above file
+```
+Where `foo.ts` looks like this:
+```ts
+import { getMakeSubDep } from "other_package";
+
+// The inferred type of p refers to a type defined
+// inside node_modules/other_package/node_modules/sub_dep/index.d.ts
+export const p = getMakeSubDep();
+```
+When TypeScript needs to emit `foo.d.ts`, it needs to write out a type for `p`:
+```ts
+export const p: ???
+```
+
+What should go in the `???` ?
+
+One option would be to use a relative path:
+```ts
+import { subdep } from "../node_modules/other_package/node_modules/sub_dep";
+export const p: subdep
+```
+This is *obviously* wrong: It's implausible that a consumer of `foo.d.ts` would have a folder layout that matches what we happened to have here.
+
+Another option would be to use a subpath:
+```ts
+import { subdep } from "other_package/node_modules/sub_dep";
+export const p: subdep
+```
+This is *also* obviously wrong: The semantics of `other_package` are not that it exposes `node_modules/sub_dep` as as sub-path. This probably won't work at runtime, and even if it did, it's not what you want
+
+Another option would be to use a module name:
+```ts
+import { subdep } from "sub_dep";
+export const p: subdep
+```
+
+Is *this* correct?
+
+If `other_package` has a dependency on `sub_dep@2.0.0` and *your* package has a dependency on `sub_dep@3.0.0`, then these aren't the same type, and it's wrong.
+
+If you don't have a declared dependency on `sub_dep` at all, then this code would also fail to load `sub_dep` when ingested in a downstream project.
+
+These situations - the non-working ones - are the "non-portable identifiers" that TypeScript is complaining about. TS was put into a position where it had to reference the name of a module, but it couldn't find a name for that module that appeared to work. This is why this error occurs.
+
+Now, if you *do* have a declared dependency on `sub_dep`, and it resolves to the "same" target as the one `other_package` did, then this is fine. The way this works (roughly) is that TS keeps a reverse map of the files it has loaded and what module specifiers it used to find them. So if you have `import { subdep } from "sub_dep"`, and it resolved to a correct .d.ts file, then TS will have it in the lookup table and can use `sub_dep` to refer to the same file that `other_package` did even though these two module specifiers *may have* referred to different files (but they didn't).
+
+But! If you never referred to `sub_dep` in your compilation, then TypeScript has never "seen" `sub_dep` be referred to from the module resolution context that `foo.d.ts` will have, so it doesn't know whether or not `"sub_dep"` is a legal way to refer to `other_package/node_modules/sub_dep`, and ends up issuing this error.
+
+The correct way to address this is generally to import the type that the `.d.ts` needs to refer to:
+```ts
+// in foo.ts
+import { subdep } from "sub_dep";
+import { getMakeSubDep } from "other_package";
+
+// No additional type annotation needed
+export const p = getMakeSubDep();
+```
+If *you* can't do this, then TypeScript can't either, and the only real alternative is to use a broader type annotation so that TS doesn't need to refer to types which are impossible to name:
+```ts
+// in foo.ts
+import { getMakeSubDep } from "other_package";
+
+// Annotate to anonymous version of whatever subdep is
+export const p: { isSubDep: boolean } = getMakeSubDep();
+```
+Or restructure the input file in such a way that the referenced type is not exposed in the `.d.ts`.
+
+As of TypeScript 5.5 (see #58176), this error should never occur if the required dependency is in your project's `package.json`.
+
+--------------
+
+# FAQ Archive
+
+<!-- Unmigrated content down here -->
 
 ## Common "Bugs" That Aren't Bugs
 
@@ -162,22 +638,6 @@ This means that at run-time, there is no information present that says that some
 The lack of run-time type information can be surprising for programmers who are used to extensively using reflection or other metadata systems.
 Many questions in this FAQ boil down to "because types are erased".
 
-### Why are getters without setters not considered read-only?
-
-> I wrote some code like this and expected an error:
-> ```ts
-> class Foo {
->    get bar() {
->      return 42;
->    }
-> }
-> let x = new Foo();
-> // Expected error here
-> x.bar = 10;
-> ```
-
-This is now an error in TypeScript 2.0 and later.
-See [#12](https://github.com/Microsoft/TypeScript/issues/12) for the suggestion tracking this issue.
 
 ### Why are function parameters bivariant?
 
@@ -233,67 +693,6 @@ so we have to take a correctness trade-off for the specific case of function arg
 
 ### Why are functions with fewer parameters assignable to functions that take more parameters?
 
-> I wrote some code like this and expected an error:
-> ```ts
-> function handler(arg: string) {
->     // ....
-> }
->
-> function doSomething(callback: (arg1: string, arg2: number) => void) {
->     callback('hello', 42);
-> }
->
-> // Expected error because 'doSomething' wants a callback of
-> // 2 parameters, but 'handler' only accepts 1
-> doSomething(handler);
-> ```
-
-This is the expected and desired behavior.
-First, refer to the "substitutability" primer at the top of the FAQ -- `handler` is a valid argument for `callback` because it can safely ignore extra parameters.
-
-Second, let's consider another case:
-```ts
-let items = [1, 2, 3];
-items.forEach(arg => console.log(arg));
-```
-
-This is isomorphic to the example that "wanted" an error.
-At runtime, `forEach` invokes the given callback with three arguments (value, index, array), but most of the time the callback only uses one or two of the arguments.
-This is a very common JavaScript pattern and it would be burdensome to have to explicitly declare unused parameters.
-
-> But `forEach` should just mark its parameters as optional!
-> e.g. `forEach(callback: (element?: T, index?: number, array?: T[]))`
-
-This is *not* what an optional callback parameter means.
-Function signatures are always read from the *caller's* perspective.
-If `forEach` declared that its callback parameters were optional, the meaning of that is "`forEach` **might call the callback with 0 arguments**".
-
-The meaning of an optional callback parameter is *this*:
-```ts
-// Invoke the provided function with 0 or 1 argument
-function maybeCallWithArg(callback: (x?: number) => void) {
-    if (Math.random() > 0.5) {
-        callback();
-    } else {
-        callback(42);
-    }
-}
-```
-`forEach` *always* provides all three arguments to its callback.
-You don't have to check for the `index` argument to be `undefined` - it's always there; it's not optional.
-
-There is currently not a way in TypeScript to indicate that a callback parameter *must* be present.
-Note that this sort of enforcement wouldn't ever directly fix a bug.
-In other words, in a hypothetical world where `forEach` callbacks were required to accept a minimum of one argument, you'd have this code:
-```ts
-[1, 2, 3].forEach(() => console.log("just counting"));
-             //   ~~ Error, not enough arguments?
-```
-which would be "fixed", but *not made any more correct*, by adding a parameter:
-```ts
-[1, 2, 3].forEach(x => console.log("just counting"));
-               // OK, but doesn't do anything different at all
-```
 
 ### Why are functions returning non-`void` assignable to function returning `void`?
 
@@ -631,46 +1030,6 @@ function compare(a: string|number, b: string|number): void {
 compare(1,2) // OK
 compare("s", "l") // OK
 compare (1, "l") // Error.
-```
-
--------------------------------------------------------------------------------------
-
-## Functions
-
-### Why can't I use `x` in the destructuring `function f({ x: number }) { /* ... */ }`?
-> I wrote some code like this and got an unexpected error:
-> ```ts
-> function f({x: number}) {
->   // Error, x is not defined?
->   console.log(x);
-> }
-> ```
-
-Destructuring syntax is counterintuitive for those accustomed to looking at TypeScript type literals.
-The syntax `f({x: number})` declares a destructuring *from the property* `x` *to the local* `number`.
-
-Looking at the emitted code for this is instructive:
-```ts
-function f(_a) {
-  // Not really what we were going for
-  var number = _a.x;
-}
-```
-
-To write this code correctly, you should write:
-```ts
-function f({x}: {x: number}) {
-  // OK
-  console.log(x);
-}
-```
-
-If you can provide a default for all properties, it's preferable to write:
-```ts
-function f({x = 0}) {
-  // x: number
-  console.log(x);
-}
 ```
 
 -------------------------------------------------------------------------------------
@@ -1033,211 +1392,6 @@ function isReallyInstanceOf<T>(ctor: { new(...args: any[]): T }, obj: T) {
 ```
 
 -------------------------------------------------------------------------------------
-## Modules
-
-### Why are imports being elided in my emit?
-
-> I wrote some code like this
-> ```ts
-> import someModule = require('./myMod');
->
-> let x: someModule.SomeType = /* something */;
-> ```
->
-> and the emit looked like this:
-> ```js
-> // Expected to see "var someModule = require('./myMod');" here!
->
-> var x = /* something */;
-> ```
-
-TypeScript assumes that module imports do not have side effects, so it removes module imports that aren't used in any *expression*.
-
-Use `import "mod"` syntax to force the module to be loaded.
-
-```ts
-import "./myMod"; // For side effects
-```
-
-You can also simply reference the module. This is the most universal workaround. A single use will do:
-
-```ts
-import someModule = require('./myMod');
-someModule; // Used for side effects
-```
-
-### Why don't namespaces merge across different module files?
-
-TODO: Port content from
-http://stackoverflow.com/questions/30357634/how-do-i-use-namespaces-with-typescript-external-modules
-
--------------------------------------------------------------------------------------
-
-## Enums
-
-### What's the difference between `enum` and `const enum`s?
-
-TODO: Write up common symptoms of `enum` / `const enum` confusion.
-
-See http://stackoverflow.com/questions/28818849/how-do-the-different-enum-variants-work-in-typescript
-
--------------------------------------------------------------------------------------
-
-## Type Guards
-
-### Why doesn't `x instanceof Foo` narrow `x` to `Foo`?
-
-It depends what `x` is.
-If the type of `x` was originally not even compatible with `Foo`, then it wouldn't make much sense to narrow the type, so we don't.
-
-More likely, you'll find yourself in this situation when `x` had the type `any`.
-The motivating example for this is something like the following:
-
-```ts
-function doIt(x) {
-    if (x instanceof Object) {
-        // Assume 'x' is a well-known object which
-        // we know how to handle specifically
-    }
-
-    // Treat 'x' as a primitive
-}
-```
-
-You'll see this type of code in TypeScript code that predates union types, or TypeScript code that's been ported over from JavaScript.
-If we narrowed from `any` to `Object` then there's not much you could really do with `x`.
-Using any properties that aren't in `Object` will lead to an error.
-This is not just true of `Object`, it's true of any other type with a defined set of properties.
-
-### Why doesn't `isFoo(x)` narrow `x` to `Foo` when `isFoo` is a type guard?
-
-TODO, but it is strongly related to the above section.
-
--------------------------------------------------------------------------------------
-## Decorators
-
-### Decorators on function declarations
-TODO: Answer. Also, what did we mean here?
-
-### What's the difference between `@dec` and `@dec()`? Shouldn't they be equivalent?
-TODO: Answer
-
--------------------------------------------------------------------------------------
-
-## JSX and React
-
-### I wrote `declare var MyComponent: React.Component;`, why can't I write `<MyComponent />`?
-
-> I wrote some code like this. Why is there an error?
-> ```ts
-> class Display extends React.Component<any, any> {
->     render() { ... }
-> }
->
-> let SomeThing: Display = /* ... */;
-> // Error here, isn't this OK?
-> let jsx = <SomeThing />;
-> ```
-
-This is a confusion between the *instance* and *static* side of a class.
-When React instantiates a component, it's invoking a *constructor function*.
-So when TypeScript sees a JSX `<TagName />`, it is validating that the result of *constructing* `TagName` produces a valid component.
-
-But by declaring `let SomeThing: Display`, the code is indicating that `SomeThing` is the class *instance*, not the class *constructor*.
-Indeed, it would be a run-time error to write:
-```ts
-let SomeThing = new Display();
-let jsx = <SomeThing />; // Not gonna work
-```
-
-The easiest fix is to use the `typeof` type operator.
-```ts
-let SomeThing: typeof Display = /* ... */;
-```
-
--------------------------------------------------------------------------------------
-
-## Things That Don't Work
-
-### You should emit classes like this so they have real private members
-
-> If I write code like this:
-> ```ts
-> class Foo {
->     private x = 0;
->     increment(): number {
->         this.x++;
->         return x;
->     }
-> }
-> ```
-> You should emit code like this so that 'x' is truly private:
-> ```js
-> var Foo = (function () {
->     var x = 0;
->
->     function Foo() {
->     }
->     Foo.prototype.increment = function () {
->         x++;
->         return x;
->     };
->     return Foo;
-> })();
-> ```
-
-This code doesn't work.
-It creates a *single* private field that all classes share:
-```js
-var a = new Foo();
-a.increment(); // Prints 1
-a.increment(); // Prints 2
-var b = new Foo(); // increments on b should be independent of a 
-b.increment(); // Supposed to print 1, prints 3
-a.increment(); // Should print 3, prints 4
-```
-
-### You should emit classes like this so they don't lose `this` in callbacks
-> If I write code like this:
-> ```ts
-> class MyClass {
->     method() {
->     }
-> }
-> ```
-> You should emit code like this so that I can't mess up `this` in callbacks:
-> ```js
-> var MyClass = (function () {
->     function MyClass() {
->         this.method = function() {
->
->         }
->     }
->     return MyClass;
-> })();
-> ```
-
-Two problems here.
-
-First, the proposed behavior change is not in line with the ECMAScript specification.
-There isn't really anything else to be said on that front -- TypeScript must have the same runtime behavior as JavaScript.
-
-Second, the runtime characteristics of this class are very surprising.
-Instead of allocating one closure per method, this allocates one closure per method *per instance*.
-This is expensive in terms of class initialization cost, memory pressure, and GC performance.
-
-### You should have some class initialization which is impossible to emit code for
-TODO: Port content from [#1617](https://github.com/Microsoft/TypeScript/issues/1617)
-
--------------------------------------------------------------------------------------
-
-## External Tools
-
-### How do I write unit tests with TypeScript?
-* [Typescript Deep Dive](https://basarat.gitbook.io/typescript/intro-1/jest)
-
-
--------------------------------------------------------------------------------------
 
 ## Commandline Behavior
 
@@ -1279,20 +1433,6 @@ In this case, you should be running `node myApp.js`, because the *module* `myApp
 
 This behavior has been fixed as of TypeScript 1.8; combining `--out` and `--module` is now an error for CommonJS module output.
 
-### How do I control file ordering in combined output (`--out`)?
-
-The order of the generated files in the output follows that of the input files after the pre-processing pass.
-
-The compiler performs a pre-processing pass on input files to resolve all *triple-slash reference directives* and *module import statements*.
-During this process, additional files can be added to the compilation.
-
-The process starts with a set of root files; these are the file names specified on the command-line or in the `"files"` list in the [`tsconfig.json` file](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
-These root files are pre-processed in the *same order* they are specified.
-Before a file is added to the list, all triple-slash references and import statements in it are processed, and their targets included.
-Triple-slash references and import statements are resolved in a *depth-first manner*, in the order they appear in the file.
-
-See more information about resolving triple-slash reference directives at [triple-slash directives documentation](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html) and module import statements resolution at [module resolution documentation](https://www.typescriptlang.org/docs/handbook/module-resolution.html).
-
 ### What does the error "Exported variable [name] has or is using private name [name]" mean?
 
 This error occurs when you use the `--declaration` flag because the compiler is trying to produce a declaration file that *exactly* matches the module you defined.
@@ -1323,28 +1463,7 @@ To avoid this error:
 1. Export the declarations used in the type in question
 2. Specify an explicit type annotation for the compiler to use when writing declarations.
 
-### Why does `--outDir` moves output after adding a new file?
-
-`--outDir` specifies the "root" directory of the output.
-The compiler needs a "root" directory in the source to mirror into the output directory.
-If `--rootDir` is not specified, the compiler will compute one; this is based on a common path calculation, which is the longest common prefix of all your input files.
-Obviously this changes with adding a new file to the compilation that has a shorter path prefix.
-
-To ensure the output does not change with adding new files, specify `--rootDir` on the command-line or in your `tsconfig.json`.
-
 ## `tsconfig.json` Behavior
-
-### Why is a file in the `exclude` list still picked up by the compiler?
-
-`tsconfig.json` turns a folder into a "project". Without specifying any `"exclude"` or `"files"` entries, all files in the folder containing the `tsconfig.json` and all its sub-directories are included in your compilation.
-
-If you want to exclude some of the files, use `"exclude"`. If you would rather specify all the files instead of letting the compiler look them up, use `"files"`.
-
-That was `tsconfig.json` automatic inclusion. There is a different issue, which is module resolution. By module resolution, I mean the compiler trying to understand what `ns` means in an import statement like: `import * ns from "mod"`. To do so, the compiler needs the definition of a module, this could be a .ts file for your own code, or a .d.ts for an imported definition file. If the file was found, it will be included regardless of whether it was excluded in the previous steps or not.
-
-So to exclude a file from the compilation, you need to exclude both the file itself and **all** files that have an `import` or `/// <reference path="..." />` directive to it.
-
-Use `tsc --listFiles` to list what files are included in your compilation, and `tsc --traceResolution` to see why they were included.
 
 ### How can I specify an `include`?
 
@@ -1363,43 +1482,6 @@ There are multiple ways to solve this issue, though all of them involve configur
 If you don't want JavaScript files included in your project at all, simply set the `allowJs` option to `false`;
 If you do want to include and compile these JavaScript files, set the `outDir` option or `outFile` option to direct the emitted files elsewhere, so they won't conflict with your source files;
 If you just want to include the JavaScript files for editing and don't need to compile, set the `noEmit` compiler option to `true` to skip the emitting check.
-
-## Comments
-
-### Why some comments are not preserved in emitted JavaScript even when `--removeComments` is not specified?
-
-TypeScript compiler uses a position of a node in the abstract syntax tree to retrieve its comments during emit.
-Because the compiler does not store all tokens into the tree, some comments may be missed in an output JavaScript file.
-For example, we do not store following tokens into the tree `,`, `{`, `}`, `(`, `)`.
-Therefore, trailing comments or leading comments of such tokens cannot be retrieved during emit.
-At the moment, there is not an easy method to preserve such comments without storing those tokens.
-Doing so, however, can significantly increase the tree size and potentially have performance impact.
-
-Some cases where TypeScript compiler will not be able to preserve your comments:
-
-```ts
-/* comment */
-<div>
-    {/* comment will not be emitted */}
-</div>
-
-var x = {
-    prop1: 1, // won't get emitted because we can't retrieve this comment
-    prop2: 2  // will be emitted
-}
-
-function foo() /* this comment can't be preserved */ { }
-```
-
-
-### Why Copyright comments are removed when `--removeComments` is true?
-
-TypeScript compiler will preserve copyright comment regardless of `--removeComments`.
-For a comment to be considered a copyright comment, it must have the following characteristics:
-
-- a top-of-file comment following by empty line, separating it from the first statement.
-- begin with `/*!`
-
 
 -------------------------------------------------------------------------------------
 
@@ -1454,62 +1536,8 @@ function foo /* trailing comments of the function name, "foo", AST node */ () {
 
 ----------------------------------------------------------------------------------------
 
-# GitHub Process Questions
+## Dead Links Parking Lot
 
-### What do the labels on these issues mean?
-> What are all the labels people keep putting on my issues?
+### Why is a file in the `exclude` list still picked up by the compiler?
 
-* **help wanted**: We are accepting pull requests to implement this feature or fix this bug. PRs must adhere to the rules specified in `CONTRIBUTING.md`
-* **Breaking Change**: Fixing this bug or implementing this feature will break code that someone could have plausibly written (i.e. we do not consider new errors in nonsense code like `undefined.throwSomething()` to be breaking changes)
-* **By Design**: This is an intentional behavior of TypeScript
-* **Canonical**: This issue contains a lengthy explanation of a common question or misconception
-* **Committed**: Someone from the TypeScript team will fix this bug or implement this feature
-* **Declined**: For reasons explained in the issue, we are not going to accept this suggestion (note: See "I disagree with the outcome..." section)
-* **Discussion**: This issue is a discussion with no defined outcome. The TypeScript team may weigh in on these issues, but they are not regularly reviewed
-* **Duplicate**: This issue is the same, or has the same root cause, as another issue
-* **Effort**: Easy/Moderate/Difficult: For issues marked as 'help wanted', these are an approximation of how difficult we think fixing the bug or implementing the feature will be. As a rough guide, fixing typos or modifying lib.d.s are generally Easy; work that requires understanding the basics of the code base is Moderate; things marked Difficult will require an understanding that is rare outside the core TypeScript team
-* **good first issue**: These are 'Effort: easy' issues, good for your first contribution
-* **ES6 / ES7 / ES Next**: Refers to issues related to features found in these specific ECMAScript versions
-* **External**: Catch-all bucket when an issue reported is not an issue with TypeScript, but rather an external tool, library, website, person, or situation
-* **Fixed**: This bug has been fixed. Generally, you will see these bugs fixed in the nightly version(`npm install typescript@next`) within 24-48 hours
-* **High Priority**: Issues affecting runtime behavior or high-occurrence crashes
-* **Infrastructure**: Technical debt associated with the TypeScript project
-* **In Discussion**: The suggestion is ready to be discussed at a Design Meeting or Suggestion Backlog Slog
-* **Needs More Info**: The team needs more information about this suggestion or bug in order to understand what's going on. Generally, Suggestions will start out as Needs More Info, graduate to Needs Proposal, then finally go to In Discussion
-* **Needs Proposal**: A suggestion that has a well-understood use case and a plausible outline of a solution, but lacks a formal definition of how exactly the problem will be solved
-* **Out of Scope**: A suggestion that is outside the design parameters of TypeScript, either because it is a poor fit (e.g. make TypeScript look exactly like C#), is outside the constraints of the language (e.g. asm.js compilation), or better belongs to another tool or process (e.g. a built-in Collections library, or a runtime language feature that should start in the ECMAScript committee)
-* **Question**: The issue is (intentionally or otherwise) simply asking a question about TypeScript. Answers to Questions, if provided, will generally be to-the-point because we do not have time to be a support community for all TypeScript users; please use Stack Overflow for TypeScript questions.
-* **Revisit**: A suggestion or bug that can't be adequately addressed today, but will probably be able to be addressed in the future (e.g. we need to wait for the ECMAScript committee to make up its mind)
-* **Suggestion**: Any suggestion
-* **Too Complex**: Relative to the complexity required to implement or understand it, the suggestion does not provide enough value. This is a subjective measure, see "I disagree with the outcome...")
-* **Won't Fix**: While the behavior described is agreed to be incorrect, the cost (in time, complexity, performance, etc.) is too high to justify taking a fix relative to the cost of simply living with the bug
-
-### I disagree with the outcome of this suggestion
-> I don't think this suggestion should have been closed! What can I do next?
-
-To date, we've received over 1,000 suggestions on the TypeScript GitHub repo.
-We do our best to read, understand, prioritize, formalize and implement these suggestions.
-User feedback has been critical in shaping the success of the project.
-That said, sometimes we'll make decisions that you don't agree with, and sometimes we'll make the wrong call.
-What should you do if you think we should reconsider something?
-Let's walk through the five stages of grief.
-
-*Denial*: It's healthy to believe that a suggestion might come back later.
-Do keep leaving feedback!
-We look at all comments on all issues - closed or otherwise.
-If you encounter a problem that would have been addressed by a suggestion, leave a comment explaining what you were doing and how you could have had a better experience.
-Having a record of these use cases helps us reprioritize.
-
-*Anger*: Don't be angry.
-Specifically, remember that the TypeScript team does not have the resources to continuously relitigate closed suggestions.
-
-*Bargaining*: Ask yourself: is there a smaller thing that would work?
-Many suggestions are simply too large of a hammer or too small of a nail.
-Think about the problem you're experiencing for a while and see if you can come up with a simpler solution that accomplishes the same goal.
-
-*Depression*: Try not to be depressed about declined suggestions.
-The features that make it into the language instead might solve your problem in an even better way than you could have imagined.
-
-*Acceptance*: Repeat this mantra: *I will accept the features I cannot have,
-have courage to submit pull requests for those I can,
-and the wisdom to know the difference by looking at the GitHub labels.*
+See earlier content
