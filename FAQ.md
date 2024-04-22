@@ -389,6 +389,17 @@ This flag is a "big hammer", so to speak, and does not have any mechanisms for d
 ### Require Properties to Either Be Missing or Not `undefined`: `exactOptionalPropertyTypes`
 
 You can turn on `exactOptionalPropertyTypes` to change the behavior such that an optional property can't be explicitly provided with the value `undefined`.
+This has important effects on things like object spread:
+```ts
+type Foo = { bar: number };
+const base: Foo = { bar: 42 };
+// Somewhat-suspect initialization of Partial<Foo>
+const partial: Partial<Foo> = { bar: undefined };
+
+// If using spread, the 'undefined' value can be present
+// at Foo.bar
+const possiblyBad: Foo = { ...base, ...partial };
+```
 
 This flag affects *all* optional properties and there is no mechanism for doing this on a per-type basis.
 
