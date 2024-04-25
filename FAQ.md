@@ -13,7 +13,11 @@ Listed here (with some synonyms) for easier Ctrl-F-ing
  * Nominal types (tagged, branded): [#202](https://github.com/microsoft/TypeScript/issues/202)
  * Negated types (not, exclusion, exclude, remove): [#4196](https://github.com/microsoft/TypeScript/issues/4196)
  * Exact types (sealed, final, closed, unopen): [#12936](https://github.com/microsoft/TypeScript/issues/12936)
- 
+
+## Behavior That Looks Wrong (And Arguably Is) But Is Currently Working As Intended
+
+ * Method and function signatures behave differently, specifically that narrower argument types are unsoundly allowed in subtypes of methods, but not functions. See "Why Method Bivariance?" on this page
+
 ## Pre-Declined Feature Rquests
 
 ### New Utility Types
@@ -403,6 +407,10 @@ const possiblyBad: Foo = { ...base, ...partial };
 
 This flag affects *all* optional properties and there is no mechanism for doing this on a per-type basis.
 
+### Enforce `readonly` in Subtyping / Assignability
+
+Enable `--enforceReadonly` (available in TypeScript 5.6; see [#58296](https://github.com/microsoft/TypeScript/pull/58296))
+
 ## Common Comments
 
 ### What Kind of Feedback Are You Looking For?
@@ -478,6 +486,92 @@ It's worth noting that the Open/Close state flows *from* the maintainers' point 
 Open/Closed definition is a project-wide decision and we don't make per-issue deviations from this definition. Complaining about open/closed state isn't constructive, and please remember that insistence in engaging in nonconstructive discussion is against the [code of conduct](https://microsoft.github.io/codeofconduct/).
 
 ## Other FAQs and Errors
+
+### Why Method Bivariance?
+
+It seems like it should be really easy to add a `--strictMethodTypes` flag that works just like `--strictFunctionTypes` does today. What's the problem?
+
+In short, even though this seems like it should be straightforward, there are a large number of common patterns today that depend on using method bivariance to cause types to subtype other types in ways that are idiomatic due to prior knowledge of ownership, conventions around who's allowed to raise event-like callbacks, and others. A cursory check in a small project shows hundreds of errors in longstanding code where there aren't any existing complaints of unsoundness due to bivariance. Without a way to fix these errors, there's not a tractable path forward to adding those errors in other places where bivariance definitely *is* a possible source of error.
+
+Out of the gate, this breaks array covariance, and not even in a way that has an apparent fix. Let's reduce `Array<T>` and `ReadonlyArray<T>` to their smallest representations relevant to the problem at hand:
+```ts
+// The smallest possible read-only array that still has
+// a useful method for getting a mutable copy, like you
+// would expect to be able to get from Array#slice
+interface MiniatureReadonlyArray<T> {
+    getMutableCopy(): MiniatureMutableArray<T>;
+    readonly [i: number]: T;
+}
+
+// Mutable array just adds one contravariant method
+interface MiniatureMutableArray<T> extends MiniatureReadonlyArray<T> {
+    push(arg: T): void;
+}
+
+// A read-only array of strings and numbers
+declare const sn_mini: MiniatureReadonlyArray<string | number>;
+// A should-be-legal covariant aliasing of that array
+let snb_mini: MiniatureReadonlyArray<string | number | boolean> = sn_mini;
+```
+Under `strictMethodTypes`, this assignment actually fails. Why?
+
+*It appears* that an illegal call is possible when you do this:
+```ts
+// Invalid: snb_mini is possibly an alias to sn_mini,
+// whose getMutablyCopy's return type is MiniatureMutableArray<string | number>,
+// whose `push` method cannot accept booleans
+snb_mini.getMutableCopy().push(true);
+```
+This logic is sound given the definitions of types that we have.
+
+However, we (as humans) know from reading the prose that when we call `getMutableCopy`, the *copy* we get is something we're free to mutate however we like.
+
+Possible solutions to this problem are themselves quite difficult:
+ * One option would be to have some kind of per-site annotation so that we could say that `getMutableCopy` doesn't return a `MiniatureMutableArray<T>`; instead it returns... well, something else. `MiniatureMutableArray< out T>` ? What are the semantics of this? When exactly is the covariant aliasing allowed? Can I get a reference to an `out string` if I start with a `MiniatureReadonlyArray<string>`? When does that modifier go away? It's not clear. If I knew what to write here I'd be proposing it.
+ * Allow "forced" variance annotation, e.g. allow you to write something like `interface ReadonlyArray<out! T> {` that forces a covariant measurement of `T`. This isn't great either, because it means that structural and instantiation-based inferences and relational checks on `ReadonlyArray` would behave differently (see the FAQ entry on this). Since there's no guarantee which of those two checks you get, this just opens the door for a huge amount of fundamentally-unfixable inconsistencies whenever this type gets mentioned, which is going to be very common. *Worse*, since `interface Array<T>` and `interface ReadonlyArray<T>` *are* different interfaces, any time you bridge the mutability gap, you'll see the invariant behavior instead of the covariant behavior (since a variance annotation can't apply to a structural operation), so this problem would not actually go away *at all*.
+ * Some kind of more-explicit "ownership" model like Rust's that gives more prescriptive rules around when something is allowed to be covariantly aliased and when it isn't. Again, I don't know what that looks like in TypeScript.
+
+This also breaks function intersection with the built-in `Function`, again with no clear fix:
+```ts
+type SomeFunc = (s: string) => void;
+declare const sf: SomeFunc;
+// Illegal
+const p: Function & SomeFunc = sf;
+```
+With the observed error - again, technically sound - that you can't call `p`'s `apply` method obtained from `Function`
+```
+error TS2322: Type 'SomeFunc' is not assignable to type 'Function & SomeFunc'.
+  Type 'SomeFunc' is not assignable to type 'Function'.
+    Types of property 'apply' are incompatible.
+      Type '{ <T, R>(this: (this: T) => R, thisArg: T): R; <T, A extends any[], R>(this: (this: T, ...args: A) => R, thisArg: T, args: A): R; }' is not assignable to type '(this: Function, thisArg: any, argArray?: any) => any'.
+```
+
+Basic assignment to `readonly unknown[]` doesn't work, due to `concat`:
+```
+error TS2322: Type 'readonly string[]' is not assignable to type 'readonly unknown[]'.
+  Types of property 'concat' are incompatible.
+    Type '{ (...items: ConcatArray<string>[]): string[]; (...items: (string | ConcatArray<string>)[]): string[]; }' is not assignable to type '{ (...items: ConcatArray<unknown>[]): unknown[]; (...items: unknown[]): unknown[]; }'.
+      Types of parameters 'items' and 'items' are incompatible.
+        Type 'ConcatArray<unknown>' is not assignable to type 'ConcatArray<string>'.
+          The types returned by 'slice(...).pop()' are incompatible between these types.
+            Type 'unknown' is not assignable to type 'string | undefined'.
+
+```
+
+There's also a problem with the DOM, because the DOM types are constructed in a way that implicitly disallows some operations via a supertype alias, e.g. `addEventListener`
+
+`@types/node` also produces hundreds of errors due to the eventing pattern, e.g.
+```
+node_modules/@types/node/child_process.d.ts:73:15 - error TS2430: Interface 'ChildProcess' incorrectly extends interface 'EventEmitter'.
+  Types of property 'addListener' are incompatible.
+    Type '{ (event: string, listener: (...args: any[]) => void): this; (event: "close", listener: (code: number | null, signal: Signals | null) => void): this; (event: "disconnect", listener: () => void): this; (event: "error", listener: (err: Error) => void): this; (event: "exit", listener: (code: number | null, signal: Sign...' is not assignable to type '(eventName: string | symbol, listener: (...args: any[]) => void) => this'.
+      Types of parameters 'event' and 'eventName' are incompatible.
+        Type 'string | symbol' is not assignable to type 'string'.
+          Type 'symbol' is not assignable to type 'string'.
+
+73     interface ChildProcess extends EventEmitter {
+                 ~~~~~~~~~~~~
+```
 
 ### The inferred type of "X" cannot be named without a reference to "Y". This is likely not portable. A type annotation is necessary
 
@@ -1551,4 +1645,3 @@ function foo /* trailing comments of the function name, "foo", AST node */ () {
 
 ### Why is a file in the `exclude` list still picked up by the compiler?
 
-See earlier content
