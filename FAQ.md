@@ -152,6 +152,57 @@ This also means that `Object.keys` should (and does) return `string[]`, not `(ke
 
 See also suggestion #12936
 
+### `Number.isFinite` and `Number.isNaN` are Typed Correctly
+
+A dangerous thing that can happen in JavaScript is implicit coercion:
+```ts
+function quadruple(x) {
+  console.log((x + x) * 2);
+}
+quadruple("1"); // Prints 22, not 4
+```
+This happens because the value `"1"` adds to itself as string concat to produce `"11"`, which is then coerced to a number (`11`) before being multipled by `2`.
+
+You might try to use the global function `isFinite` to prevent this bug:
+```ts
+function quadruple(x) {
+  if (isFinite(x)) {
+    console.log((x + x) * 2);
+  }
+}
+quadruple("1"); // Still prints 22
+```
+This is because `isFinite` coerces its argument to a numeric value *before* evaluating if it's finite or not.
+This is dangerous, because it can lead to unexpected results like the one above.
+
+The function `Number.isFinite` doesn't have this problem; it only returns `true` if its argument is actually a `number`:
+```ts
+function quadruple(x) {
+  if (Number.isFinite(x)) {
+    // Not reached
+    console.log((x + x) * 2);
+  }
+}
+quadruple("1"); // Safely does nothing
+```
+
+`isNaN` and `Number.isNaN` behave in a similar way; we know one property of the `NaN` value is that
+```js
+NaN !== NaN
+```
+However, this property isn't true of values which pass `isNaN`:
+```ts
+const obj = {};
+if (isNaN(obj)) {
+  // prints true
+  console.log(obj === obj);
+}
+```
+
+The TypeScript types for these functions *correctly* model the fact that you never want a dangerous coercion to occur:
+ * It's only safe to pass pre-coerced `number`s to the global `isFinite`. It always returns predictable, non-dangerous results *as long as* its input is a `number`
+ * Conversely, `Number.isFinite` will always give reliable results, because it does not perform coercion. It can safely accept any input as a result
+
 ### Parameter Contravariance is Correct
 
 Let's say you write an interface
