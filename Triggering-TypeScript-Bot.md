@@ -1,8 +1,15 @@
 If you're a TS maintainer, you can respond to a PR with a comment similar to
 ```
-@typescript-bot test this
+@typescript-bot [test command]
 ```
 to trigger a specialized on-demand build on the PR.
+
+The following command triggers a set of the more common on-demand tests:
+```
+@tyepscript-bot test it
+```
+
+This will trigger the `test top400`, `user test this`, `run dt`, `perf test this faster` commands.
 
 The currently recognized commands are:
 * [`run dt`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=23) - The runs the definitely typed linter using the PR TS build sharded across 4 worker containers (this takes around 25 minutes).
@@ -37,7 +44,6 @@ The source of the webhook running the bot is currently available [here](https://
 Here is the usual invocation of all the useful bot commands at once:
 
 ```ts
-@typescript-bot test this
 @typescript-bot test top100
 @typescript-bot test tsserver top100
 @typescript-bot user test this
