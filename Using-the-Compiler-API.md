@@ -278,7 +278,7 @@ This can speed up large projects with many files.
 This API is used internally in the compiler to implement its `--watch` mode, but can also be leveraged by other tools as follows:
 
 ```ts
-import ts = require("typescript");
+import * as ts from "typescript";
 
 const formatHost: ts.FormatDiagnosticsHost = {
   getCanonicalFileName: path => path,
