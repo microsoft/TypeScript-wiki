@@ -1037,7 +1037,7 @@ You can see the specific changes in [the original pull request](https://github.c
 
 When targeting module systems like CommonJS in ES5 and above, TypeScript will use get accessors to emulate live bindings so that changes to a variable in one module are witnessed in any exporting modules. This change is meant to make TypeScript's emit more compliant with ECMAScript modules.
 
-For more details, see [the PR that applies this change](https://github.com/microsoft/TypeScript/pull/359670).
+For more details, see [the PR that applies this change](https://github.com/microsoft/TypeScript/pull/35967).
 
 ## Exports are Hoisted and Initially Assigned 
 
