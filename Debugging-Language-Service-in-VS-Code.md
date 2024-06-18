@@ -17,18 +17,22 @@ To launch VS Code with a different profile and a debug copy of TSServer:
 
 ```sh
 # Sets the TSServer port to 5667, this can be any number
-# Sets the user-data directory to be ~/.vscode-debug/ instead of ~/.vscode/ 
+# Sets the user profile directory to be ~/.vscode-debug/ instead of ~/.vscode/ 
 
-TSS_DEBUG=5667 code --user-data-dir ~/.vscode-debug/
+TSS_DEBUG=5667 code --profile ~/.vscode-debug/
 ```
 
 This will open VS Code as a separate app from your current one, it may have some of your extensions but not your settings. As long as you consistently use the above command, then you can save settings for debugging between sessions.
 
 Optionally you can use `TSS_DEBUG_BRK` (i.e. `TSS_DEBUG_BRK=5567`) to have the TSServer wait for your debugger before launching.
 
+> [!TIP]
+>
+> If you are running VS Code in a remote host (e.g. WSL or a Dev Container), use the environment variables `TSS_REMOTE_DEBUG` or `TSS_REMOTE_DEBUG_BRK` instead.
+
 This will launch a debug TSServer which you can connect to from inside the TypeScript codebase. Open up the TypeScript codebase, and look at the debugging panel. At the top, look to see if there is a drop-down item for debugging by Attaching to VS Code TSServer then select that.
 
-If there isn't, copy the template of `.vscode/launch.template.json` to `.vscode/launch.json` and it should show up.
+If there isn't, copy the template of [`.vscode/launch.template.json`](https://raw.githubusercontent.com/microsoft/TypeScript/main/.vscode/launch.template.json) to `.vscode/launch.json` and it should show up.
 
 Select the "Attach by ..." option in the dropdown for debugging and hit the play button, it will ask you to choose a node instance to connect to. In the above example we used the port 5667, look for that and select it.
 
