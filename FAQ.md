@@ -18,7 +18,7 @@ Listed here (with some synonyms) for easier Ctrl-F-ing
 
  * Method and function signatures behave differently, specifically that narrower argument types are unsoundly allowed in subtypes of methods, but not functions. See "Why Method Bivariance?" on this page
 
-## Pre-Declined Feature Rquests
+## Pre-Declined Feature Requests
 
 ### New Utility Types
 
