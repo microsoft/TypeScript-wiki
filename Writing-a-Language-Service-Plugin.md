@@ -271,8 +271,11 @@ Some other TypeScript Language Service Plugin implementations you can look at fo
 
 * https://github.com/angular/angular/blob/master/packages/language-service/src/ts_plugin.ts
 * https://github.com/Quramy/ts-graphql-plugin
-* https://github.com/Microsoft/typescript-styled-plugin
-* https://github.com/angelozerr/tslint-language-service/
+* https://github.com/styled-components/typescript-styled-plugin
 * https://github.com/xialvjun/ts-sql-plugin
 * https://github.com/HearTao/ts-string-literal-enum-plugin
 * https://github.com/ngnijland/typescript-todo-or-die-plugin
+* https://github.com/mdx-js/mdx-analyzer/tree/main/packages/typescript-plugin
+* https://github.com/sveltejs/language-tools/tree/master/packages/typescript-plugin
+* https://github.com/vuejs/language-tools/tree/master/packages/typescript-plugin
+* https://github.com/withastro/language-tools/blob/main/packages/ts-plugin/README.md
