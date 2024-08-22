@@ -10,12 +10,13 @@ The primary people managing a release should oversee these tasks along with the 
 * [ ] Add all tslib updates
 * [ ] Review next version number
 
-### `@definitelytyped/header-parser` and `retag`
+### `@definitelytyped/typescript-versions` and `@definitelytyped/typescript-packages`
 
 Once `main`'s version is updated, the @definitelytyped packages must be aware of the nightly's new version so that nightly versions of ATA continue to work. ATA relies on `tsX.Y` tags on `@types/*` packages.
 
-* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/master/packages/typescript-versions) to support ***the next version***, and publish a new release.
-    * in other words, if we're releasing TypeScript 3.9, the header parser needs to support `4.0`.
+* [ ] Update [@definitelytyped/typescript-versions](https://github.com/Microsoft/DefinitelyTyped-tools/tree/main/packages/typescript-versions) and [@definitelytyped/typescript-packages](https://github.com/microsoft/DefinitelyTyped-tools/tree/main/packages/typescript-packages) to support ***the next version***, update tests, and [publish a new release](https://github.com/microsoft/DefinitelyTyped-tools/blob/main/README.md#publishingdeploying).
+    * in other words, if we're releasing TypeScript 3.9, DefinitelyTyped needs to support `4.0`.
+    * An [example PR](https://github.com/microsoft/DefinitelyTyped-tools/pull/1048)
 
 ## Release Activities
 
