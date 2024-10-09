@@ -779,8 +779,7 @@ To actually view the generated profile with [pprof](https://github.com/google/pp
 Alternatively, you can use [SpeedScope](https://www.speedscope.app/) directly from your browser.
 
 > [!WARNING]
-> These files may include information from your workspace, including file paths and source code.
-> Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
+> These files may include information from your workspace, including file paths.
 >
 > pprof-it does recognize [the `PPROF_SANITIZE` environment variable to sanitize your profiles](https://github.com/jakebailey/pprof-it?tab=readme-ov-file#options) before posting them publicly.
 > You can also share an unsanitized profile privately if you would prefer.
