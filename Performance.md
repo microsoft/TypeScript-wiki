@@ -662,9 +662,11 @@ Note that, even if your build doesn't directly invoke `tsc` (e.g. because you us
 
 You can [read more about performance tracing in more detail here](https://github.com/microsoft/TypeScript/wiki/Performance-Tracing).
 
-⚠ Warning: A performance trace may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
+> [!WARNING]
+> A performance trace may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
 
-⚠ Warning: The format of performance trace files is not stable, and may change from version to version.
+> [!WARNING]
+> The format of performance trace files is not stable, and may change from version to version.
 
 # Common Issues
 
@@ -741,10 +743,47 @@ This will generate two files:
 * `dexnode` will emit to a file of the `isolate-*-*-*.log` (e.g. `isolate-00000176DB2DF130-17676-v8.log`).
 * `--generateCpuProfile` will emit to a file with the name of your choice. In the above example, it will be a file named `profile.cpuprofile`.
 
-> ⚠ Warning: These files may include information from your workspace, including file paths and source code.
+> [!WARNING]
+> These files may include information from your workspace, including file paths and source code.
 > Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
 >
 > However, if you have any concerns about posting these publicly on GitHub, let us know and you can share the details privately.
+
+## Profiling the Compiler with pprof
+
+[pprof](https://github.com/google/pprof) is a helpful utility for visualizing CPU and memory profiles.
+pprof has different visualization modes that may make problem areas more obvious, and its profiles tend to be smaller than those produced from `--generateCpuProfile`.
+
+The easiest way to generate a profile for pprof is to use [pprof-it](https://github.com/jakebailey/pprof-it).
+There are [different ways to use pprof-it](https://github.com/jakebailey/pprof-it?tab=readme-ov-file#usage), but a quick way is to use npx or a similar tool:
+
+```sh
+npx pprof-it ./node_modules/typescript/lib/tsc.js ...
+```
+
+You can also install it locally:
+
+```sh
+npm install --no-save pprof-it
+```
+
+and run certain build scripts via npm, npx, and similar tools with the `--node-option` flag:
+
+```sh
+npm --node-option="--require pprof-it" run <your-script-name>
+```
+
+To actually view the generated profile with [pprof](https://github.com/google/pprof), the Go toolset is required at minimum, and Graphviz is required for certain visualization capabilities.
+[See more here](https://github.com/google/pprof?tab=readme-ov-file#building-pprof).
+
+Alternatively, you can use [SpeedScope](https://www.speedscope.app/) directly from your browser.
+
+> [!WARNING]
+> These files may include information from your workspace, including file paths and source code.
+> Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
+>
+> pprof-it does recognize [the `PPROF_SANITIZE` environment variable to sanitize your profiles](https://github.com/jakebailey/pprof-it?tab=readme-ov-file#options) before posting them publicly.
+> You can also share an unsanitized profile privately if you would prefer.
 
 ## Reporting Editing Performance Issues
 
@@ -767,4 +806,5 @@ Including the output from `tsc --extendedDiagnostics` is always good context, bu
 1. In VS Code, run the `TypeScript: Open TS Server log` command
 1. This should open the `tsserver.log` file.
 
-⚠ Warning: A TSServer log may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
+> [!WARNING]
+> A TSServer log may include information from your workspace, including file paths and source code. If you have any concerns about posting this publicly on GitHub, let us know and you can share the details privately.
