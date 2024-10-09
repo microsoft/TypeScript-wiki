@@ -780,7 +780,8 @@ Alternatively, you can use [SpeedScope](https://www.speedscope.app/) directly fr
 > These files may include information from your workspace, including file paths and source code.
 > Both of these files are readable as plain-text, and you can modify them before attaching them as part of a GitHub issue. (e.g. to scrub them of file paths that may expose internal-only information).
 >
-> However, if you have any concerns about posting these publicly on GitHub, let us know and you can share the details privately.
+> pprof-it does recognize [the `PPROF_SANITIZE` environment variable to sanitize your profiles](https://github.com/jakebailey/pprof-it?tab=readme-ov-file#options) before posting them publicly.
+> You can also share an unsanitized profile privately if you would prefer.
 
 ## Reporting Editing Performance Issues
 
