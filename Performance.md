@@ -38,6 +38,7 @@ Beyond best-practices, there are some common techniques for investigating slow c
   * [Reporting Compiler Perf Issues](#reporting-compiler-performance-issues)
     + [Providing Performance Traces](#providing-performance-traces)
     + [Profiling the Compiler](#profiling-the-compiler)
+    + [Profiling the Compiler with pprof](#profiling-the-compiler-with-pprof)
   * [Reporting Editing Perf Issues](#reporting-editing-performance-issues)
     + [Taking a TSServer Log](#taking-a-tsserver-log)
       - [Collecting a TSServer Log in Visual Studio Code](#collecting-a-tsserver-log-in-visual-studio-code)
