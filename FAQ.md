@@ -411,7 +411,7 @@ If your scenario requires every comment, or some particular form of comment, to 
 
 Consider a function call where TypeScript must perform type inference:
 ```ts
-type Box<T> = { contents: T };
+type Box<T> = { value: T };
 declare function unbox<T>(arg: Box<T>): T;
 
 function foo(x: Box<string>) {
