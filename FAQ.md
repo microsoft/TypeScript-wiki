@@ -427,7 +427,7 @@ As one might expect, Option 2 is *much* faster, and is also equally correct. As 
 
 However, there are cases where instantiation and structural inference can produce different results.
 
-For example if `Box<T>` doesn't actually *use* `T`, then a structurally-based inference will find no occurences of `T` and infer `T = never`. *But* since there's never really a good reason to write a generic type this way, it's not considered to be problematic to do this.
+For example if `Box<T>` doesn't actually *use* `T`, then a structurally-based inference will find no occurrences of `T` and infer `T = never`. *But* since there's never really a good reason to write a generic type this way, it's not considered to be problematic to do this.
 
 Which inference algorithm is chosen is implementation-dependent and may change for necessary correctness or performance reasons; you should not take a dependency on one or the other occurring.
 
