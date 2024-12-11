@@ -14,7 +14,7 @@ To update this file, you can use [node.green](https://node.green) to map to the 
   "compilerOptions": {
     "lib": ["ES2023"],
     "module": "node16",
-    "target": "ES2022"
+    "target": "ES2023"
   }
 }
 ```
