@@ -1,9 +1,9 @@
 TypeScript 4.1 introduced a `generateTrace` flag to make it easier to identify the parts of a program that are taking the most time to compile.
 
-# Warnings
-
-The output changed somewhat in TypeScript 4.2 and may change again.
-Please do not take dependencies on particular characteristics of the output.
+> [!NOTE]
+>
+> The output changed somewhat in TypeScript 4.2 and may change again.
+> Please do not take dependencies on particular characteristics of the output.
 
 Trace files are hard to consume without the underlying source code - at best an external investigator can tell you which of your files to examine more closely.
 If you do share them, please consider zipping them — they compress very well.
