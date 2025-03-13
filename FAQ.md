@@ -460,7 +460,7 @@ This flag affects *all* optional properties and there is no mechanism for doing 
 
 ### Enforce `readonly` in Subtyping / Assignability
 
-Enable `--enforceReadonly` (available in TypeScript 5.6; see [#58296](https://github.com/microsoft/TypeScript/pull/58296))
+Enable `--enforceReadonly` (not yet released; see [#58296](https://github.com/microsoft/TypeScript/pull/58296))
 
 ## Common Comments
 
