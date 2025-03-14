@@ -536,6 +536,8 @@ It's worth noting that the Open/Close state flows *from* the maintainers' point 
 
 Open/Closed definition is a project-wide decision and we don't make per-issue deviations from this definition. Complaining about open/closed state isn't constructive, and please remember that insistence in engaging in nonconstructive discussion is against the [code of conduct](https://microsoft.github.io/codeofconduct/).
 
+On a related note, this project does not use the "Closed as Completed" / "Closed as Not Planned" distinction, please do not consult this information. The "close reason" field was added in 2022 so all closed issues prior to that are marked as "Completed" even if nothing was done as a result. Additionally, for a long time thereafter, it wasn't possible to set this field when closing via automation, so auto-closed issues also have an incorrect "close reason". Please don't consult this field, draw any conclusions from it, or ask maintainers to change it -- we don't consult it, and we consider labels / discussion comments to be the correct source of truth as to why an issue was closed (setting aside the philosophical paradox of whether one can be said to have "completed" something involving zero planned work).
+
 ## Other FAQs and Errors
 
 ### Why Method Bivariance?
