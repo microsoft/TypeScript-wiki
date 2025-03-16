@@ -75,3 +75,82 @@ Microsoft's general trademark guidelines can be found at http://go.microsoft.com
 Privacy information can be found at https://privacy.microsoft.com/en-us/
 
 Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents, or trademarks, whether by implication, estoppel or otherwise.
+
+## Overview
+
+This repository serves as a mirror of the TypeScript wiki, providing a comprehensive collection of documentation, guides, and resources related to the TypeScript programming language. The primary purpose of this repository is to facilitate collaboration and contributions from the TypeScript community, ensuring that the documentation remains up-to-date and relevant.
+
+### Repository Structure
+
+The repository is organized into various markdown files, each covering different aspects of TypeScript. Some of the key files and their contents include:
+
+- `Home.md`: The root of the wiki, providing an overview of the available documentation.
+- `API-Breaking-Changes.md`: A list of breaking changes in the TypeScript API across different versions.
+- `Architectural-Overview.md`: An overview of the TypeScript compiler's architecture and design.
+- `Compiler-Internals.md`: Detailed information about the internal workings of the TypeScript compiler.
+- `Compiler-Options.md`: A comprehensive guide to the various compiler options available in TypeScript.
+- `Common-Errors.md`: A list of common errors encountered while using TypeScript and their solutions.
+- `Performance.md`: Tips and best practices for optimizing TypeScript performance.
+- `Release-Activities.md`: A checklist of activities to be performed during a TypeScript release.
+- `Writing-a-Language-Service-Plugin.md`: A guide to creating custom language service plugins for TypeScript.
+
+## Setting Up the Development Environment
+
+To set up the development environment for this repository, follow these steps:
+
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/Microsoft/TypeScript-wiki.git
+   cd TypeScript-wiki
+   ```
+
+2. **Install dependencies**:
+   Ensure you have Ruby installed on your system. Then, install the required gems:
+   ```sh
+   gem install gollum
+   ```
+
+3. **Start the Gollum server**:
+   ```sh
+   gollum
+   ```
+
+4. **Open the local server**:
+   Open your web browser and navigate to `http://localhost:4567` to view the wiki locally.
+
+## Contributing to the Repository
+
+We welcome contributions from the TypeScript community to help improve the documentation and resources available in this repository. To contribute, follow these steps:
+
+1. **Fork the repository**:
+   Click the "Fork" button at the top right corner of the repository page to create a copy of the repository in your GitHub account.
+
+2. **Clone your fork**:
+   ```sh
+   git clone https://github.com/your-username/TypeScript-wiki.git
+   cd TypeScript-wiki
+   ```
+
+3. **Create a new branch**:
+   ```sh
+   git checkout -b your-branch-name
+   ```
+
+4. **Make your changes**:
+   Edit the markdown files to improve the documentation, fix errors, or add new content.
+
+5. **Commit your changes**:
+   ```sh
+   git add .
+   git commit -m "Description of your changes"
+   ```
+
+6. **Push your changes**:
+   ```sh
+   git push origin your-branch-name
+   ```
+
+7. **Create a pull request**:
+   Go to the original repository and click the "New pull request" button. Provide a description of your changes and submit the pull request for review.
+
+By following these steps, you can help ensure that the TypeScript documentation remains accurate, up-to-date, and useful for the entire community.
