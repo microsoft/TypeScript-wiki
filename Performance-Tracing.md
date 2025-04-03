@@ -146,7 +146,7 @@ The goal of this process is to be able to extract a reduced repro for which you 
         This expression has four interesting sub-expressions, each of which has many, many children.
         So identifying those four ranges in the file would be the place to start when reducing a repro.
 
-11. Once you have identified the problematic code, review [[Performance]] for suggestions relevant to your scenario.
+11. Once you have identified the problematic code, review [Performance](https://github.com/microsoft/TypeScript-wiki/blob/main/Performance.md) for suggestions relevant to your scenario.
     If none of the suggestions help, please file an [issue](https://github.com/microsoft/TypeScript/issues), including code that reproduces the slowdown you're seeing and instructions for compiling it.
 
 
