@@ -7,17 +7,47 @@ You can also use https://github.com/tsconfig/bases/ to find `tsconfig.json`s to 
 
 To update this file, you can use [node.green](https://node.green) to map to the different options in [microsoft/typescript@src/lib](https://github.com/Microsoft/TypeScript/tree/main/src/lib)
 
+#### Node 24
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["ES2024"],
+    "module": "nodenext",
+    "target": "ES2024"
+  }
+}
+```
+
+Note: [`module` is set to `nodenext` to allow `require("esm")`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html#support-for-require-of-ecmascript-modules-in---module-nodenext). After TypeScript 5.9 is released, it is recommended to set it to `node20` instead.
+
+#### Node 22
+
+```json
+{
+  "compilerOptions": {
+    "lib": ["ES2023"],
+    "module": "nodenext",
+    "target": "ES2023"
+  }
+}
+```
+
+Note: [`module` is set to `nodenext` to allow `require("esm")`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html#support-for-require-of-ecmascript-modules-in---module-nodenext). After TypeScript 5.9 is released, it is recommended to set it to `node20` instead.
+
 #### Node 20
 
 ```json
 {
   "compilerOptions": {
     "lib": ["ES2023"],
-    "module": "node16",
+    "module": "nodenext",
     "target": "ES2023"
   }
 }
 ```
+
+Note: [`module` is set to `nodenext` to allow `require("esm")`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-8.html#support-for-require-of-ecmascript-modules-in---module-nodenext). After TypeScript 5.9 is released, it is recommended to set it to `node20` instead.
 
 #### Node 18
 
