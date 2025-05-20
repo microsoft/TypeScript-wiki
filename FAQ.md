@@ -435,6 +435,21 @@ Which inference algorithm is chosen is implementation-dependent and may change f
 
 Many bug reports simply require certain flags to be turned on to get the desired behavior.
 
+### Auto-import Heuristics and Preferences
+
+Auto-import is the feature that automatically suggests identifiers from other files that you may be able to `import` into the current file. It operates under a few key assumptions:
+
+ 1. Your existing `import`s were written that way on purpose
+ 2. It's a bad idea to `import` things that won't work
+ 3. You don't want your laptop to start on fire
+
+Per the first point, when auto-import is choosing a way to refer to a module (there can often be more than one valid way), generally auto-import will try to use a module format that matches existing imports in the program. If this isn't available for whatever reason, the preferences `typescript.preferences.importModuleSpecifier` and `typescript.preferences.importModuleSpecifierEnding`
+are consulted. You can change these settings to change how auto-import chooses how to refer to a module.
+
+On the second point, auto-import *intentionally* will not offer imports from packages that aren't listed as explicit dependencies in `package.json`, unless those packages have already been imported elsewhere in your code. This includes both *transitive* dependencies and `devDependencies`, since neither of those kind of dependencies are guaranteed to be present when your code is installed elsewhere. There isn't an option to configure this, since this only affects the very first time you import a module.
+
+Performance is also important. In situations where auto-import would traverse an impractically large amount of code from your `dependencies` list, it instead switches to only offering identifiers from already-imported modules. The current threshold for this is 25 packages. If you want to scan the entire dependencies list, change the `typescript.preferences.includePackageJsonAutoImports` setting from `auto` (the default) to `on`, or if you want to disable dependencies scanning altogether, change it to `off`.
+
 ### Assume Array Access Might Be Out of Bounds: `noUncheckedIndexedAccess`
 
 You can turn on `noUncheckedIndexedAccess` to change the behavior such that arrays and object maps presume possibly-out-of-bounds access.
