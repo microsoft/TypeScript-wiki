@@ -641,6 +641,36 @@ node_modules/@types/node/child_process.d.ts:73:15 - error TS2430: Interface 'Chi
                  ~~~~~~~~~~~~
 ```
 
+### What does error TS1287 mean?
+
+Search Terms: "A top-level 'export' modifier cannot be used on value declarations in a CommonJS module when 'verbatimModuleSyntax' is enabled."; 
+TypeScript 5.9: "A CommonJS module cannot use ESM syntax when 'verbatimModuleSyntax' is enabled. Consider adding "type": "module" to package.json"
+
+**TL;DR**
+ * If you're writing an ESM NodeJS app, add `"type": "module"` to `package.json`
+   * If you're not sure what to do, start by trying this
+ * If you're writing a CommonJS NodeJS app, either write `import fs = require("fs");` or disable `verbatimModuleSyntax`
+ * If you're using a bundler, change `module` to `preserve` in `tsconfig.json`
+ * If you're writing ESM directly for web, change `module` to `esnext` in `tsconfig.json`
+
+The `verbatimModuleSyntax` flag enforces that CommonJS (CJS) modules use CJS syntax (`import fs = require('fs');`), and ES Modules (ESM) use ESM syntax (`import * as fs from 'fs';`).
+This is generally a good flag to enable, because some packages expose different API to CJS and ESM.
+By enabling `verbatimModuleSyntax`, you can be sure that when you see CJS syntax you're getting the CJS version of the module, and likewise for ESM.
+
+However, two things interact in a way that can be surprising.
+
+The first fact is that most people tend to write ESM syntax these days.
+
+The second is that NodeJS has a complex set of rules for determining when a file with a .js extension is CJS or ESM:
+
+ * If package.json doesn't exist, files are CJS unless they have a top-level import or export statement, in which case they're silently re-interpreted as ESM
+ * If package.json exists but has no `type` field, the same rule applies, except you'll see a warning on stdout
+   * Note that older versions of `npm init` do not set a `type` field
+ * If package.json exists and set `type`, the file is always of that type
+   * Newer versions of `npm init` set the `type` field to `"commonjs"` by default
+
+This means that unless you've explicitly taken some step to opt into ESM modules (either by setting `"type": "module" or naming your file `.mts`), Node.js will treat your files as CommonJS modules.
+
 ### The inferred type of "X" cannot be named without a reference to "Y". This is likely not portable. A type annotation is necessary
 
 Let's say you use a package manager with strict dependencies:
