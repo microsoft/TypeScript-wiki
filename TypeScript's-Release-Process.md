@@ -88,7 +88,8 @@ Depending on how you'd like to test TypeScript and contribute, there are a coupl
 Despite what the name might imply, [nightly versions](https://www.typescriptlang.org/docs/handbook/nightly-builds.html) are always the preferred way to test out the current state of TypeScript.
 While we won't necessarily endorse them for production use, nightlies are always fairly stable and easy to use.
 
-You can download a nightly release via npm (`npm install typescript@next`) and configure your editor support.
+You can download a nightly release via npm (`npm install typescript@next`) and configure your editor to use it.
+For example, you can [configure Visual Studio Code to use a workspace version](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-newer-typescript-versions).
 If you can't commit to updating your build processes yet, but you write code in Visual Studio Code, you can use the [TypeScript and JavaScript Nightly](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next) extension to at least try out new versions of our editor support.
 
 ## Testing New Features
@@ -96,7 +97,7 @@ If you can't commit to updating your build processes yet, but you write code in 
 If you're willing to try new features, we make Beta releases available.
 This is often a good period to start providing feedback on new features, and the closer to the beta release that feedback occurs, the easier we can address it before it officially is added to the language.
 
-The longer you wait after a beta, the less actionable your feedback will be.
+The longer you wait after a Beta, the less actionable your feedback will be.
 In those cases, we encourage you to switch to the nightly releases.
 
 ## Testing for High-Priority Bug Fixes
