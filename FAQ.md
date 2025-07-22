@@ -84,6 +84,28 @@ In order to ensure that the flag doesn't have any "gaps", requests to change the
 
 Note: Section titles here state the *true* version of the fact.
 
+## Comment Emit is Best-Effort
+
+When TypeScript emits JavaScript, it does not guarantee that 100% of source comments will be present in the output.
+Not storing or computing comment ranges on emit is important for performance, and reasonable people can and do disagree about which comment blocks "belong" to either type (thus omitted) or expression (thus retained) constructs, so in general you should not take a hard dependency on comments being preserved or removed in arbitrary positions.
+
+You can *generally* expect comments to be preserved in cases where the comment immediately precedes a value declaration
+```ts
+// This comment will be in the output
+const n = 5;
+```
+
+Comments will *generally* not be emitted when they occur inside types:
+```ts
+interface Foo {
+    // This comment won't be in the output
+    s: string;
+}
+```
+
+There are no specified guarantees on comme if you need 100% comment preservation according to some metric, we recommend using a different emit tool.
+Edge cases or "inconsistencies" *will not be considered as defects*, and we don't accept PRs to tinker with comment emit.
+
 ### Primitives are `{ }`, and `{ }` Doesn't Mean `object`
 
 The type `{ }` refers to any (non-null/undefined) value with zero or more properties.
