@@ -103,7 +103,7 @@ interface Foo {
 }
 ```
 
-There are no specified guarantees on comme if you need 100% comment preservation according to some metric, we recommend using a different emit tool.
+If you need 100% comment preservation according to some definition of what should/shouldn't be emitted, we recommend using a different emit tool.
 Edge cases or "inconsistencies" *will not be considered as defects*, and we don't accept PRs to tinker with comment emit.
 
 ### Primitives are `{ }`, and `{ }` Doesn't Mean `object`
