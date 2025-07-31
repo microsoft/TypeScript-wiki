@@ -29,6 +29,7 @@ The currently recognized commands are:
 * [`cherry-pick this to branchname`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - This launches a task to squash the commits from the PR and then open a new PR that cherry-picks the change into branch `branchname`. This takes about 5 minutes as the build agent needs to clone the input PR. The bot should reply if something goes wrong, or otherwise once the new PR is open.
 * [`cherry-pick this to branchname and LKG`](https://typescript.visualstudio.com/TypeScript/_build?definitionId=30) - Same as above, but an LKG commit will be added onto the PR after the squashed cherry-pick commit.
 * `run repros` - Triggers inline code repro workflow
+* [`autofix this`](https://github.com/microsoft/TypeScript/actions/workflows/accept-baselines-fix-lints.yaml) - Invokes a workflow to accept baselines, fix autofixable lint errors, and format code, then commit the result to the PR's branch. This only works on branches of the main repo, not on forks, at present.
 
 In addition, there are a small suite of commands which work in _any_ comment and relate to release management.
 You can see how these are typically used in our documented [comment command sequence](https://github.com/microsoft/TypeScript/wiki/TypeScript's-Release-Process#the-comment-command-sequence):
