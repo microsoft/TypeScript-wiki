@@ -57,7 +57,7 @@ It's explicitly out of scope for TypeScript to modify module specifiers as they 
 import x from "some/path";
 ```
 
-the output specifier *will always be* `"some/path"` regardless of your tsconfig settings.
+the output specifier *will always be* `"some/path"` regardless of your tsconfig settings (with the exception of [`rewriteRelativeImportExtensions`](https://www.typescriptlang.org/tsconfig/#rewriteRelativeImportExtensions)).
 
 This includes things like changing file extensions, changing `paths` lookups to their resolutions, changing absolute paths to relative paths, changing relative paths to absolute paths, changing sub-module specifiers to something else, and so on. The string in the import path is the string in the emitted JavaScript, no exceptions.
 
