@@ -359,6 +359,224 @@ function reportWatchStatusChanged(diagnostic: ts.Diagnostic) {
 watchMain();
 ```
 
+## A minimal incremental compiler
+
+To compile incrementally, we need to create a builder program that reads the older program by reading tsbuildinfo file. This is as simple as calling `createIncrementalProgram`. `createIncrementalProgram` abstracts any interaction with the underlying system in the `IncrementalCompilerHost` interface. The `IncrementalCompilerHost` allows the compiler to read and write files, get the current directory, ensure that files and directories exist, and query some of the underlying system properties such as case sensitivity and new line characters. For convenience, we expose a function to create a default host using `createIncrementalCompilerHost`.
+
+```TypeScript
+import * as ts from "typescript";
+
+function incrementalCompile(): void {
+  const configPath = ts.findConfigFile(
+    /*searchPath*/ "./",
+    ts.sys.fileExists,
+    "tsconfig.json"
+  );
+  if (!configPath) {
+    throw new Error("Could not find a valid 'tsconfig.json'.");
+  }
+
+  const config = ts.getParsedCommandLineOfConfigFile(
+    configPath,
+    /*optionsToExtend*/ { incremental: true },
+    /*host*/ {
+      ...ts.sys,
+      onUnRecoverableConfigFileDiagnostic: d => console.error(ts.flattenDiagnosticMessageText(d, "\n"));
+    }
+  );
+  if (!config) {
+    throw new Error("Could not parse 'tsconfig.json'.");
+  }
+
+  const program = ts.createIncrementalProgram({
+    rootName: config.fileNames,
+    options: config.options,
+    configFileParsingDiagnostics: ts.getConfigFileParsingDiagnostics(config),
+    projectReferences: config.projectReferences
+    // createProgram can be passed in here to choose strategy for incremental compiler just like when creating incremental watcher program.
+    // Default is ts.createSemanticDiagnosticsBuilderProgram
+  });
+  const diagnostics = [
+    ...program.getConfigFileParsingDiagnostics(),
+    ...program.getSyntacticDiagnostics(),
+    ...program.getOptionsDiagnostics(),
+    ...program.getGlobalDiagnostics(),
+    ...program.getSemanticDiagnostics() // Get the diagnostics before emit to cache them in the buildInfo file.
+  ];
+  const emitResult = program.emit();
+  const allDiagnostics = diagnostics.concat(emitResult.diagnostics);
+
+  allDiagnostics.forEach(diagnostic => {
+    if (diagnostic.file) {
+      let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+        diagnostic.start!
+      );
+      let message = ts.flattenDiagnosticMessageText(
+        diagnostic.messageText,
+        "\n"
+      );
+      console.log(
+        `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`
+      );
+    } else {
+      console.log(
+        `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`
+      );
+    }
+  });
+
+  let exitCode = emitResult.emitSkipped ? 1 : 0;
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
+}
+
+incrementalCompile();
+```
+
+## A minimal solution compiler
+
+You may want to compile multiple projects based on project references.
+You can consider the transitive set of projects referenced by a `tsconfig.json` to be something like a "solution".
+
+To compile a solution (i.e. a project and its dependencies) the way `tsc --build`/`tsc -b` does, we need to create a `SolutionBuilder` which iterates through projects to build. This can be achieved by using `createSolutionBuilder` which takes a `SolutionBuilderHost` (which can be created using the `createSolutionBuilderHost` function), the root solutions to build, and `BuildOptions`. To create a solution builder that also watches for changes (similar to `tsc --b --w`), you can use `createSolutionBuilderWithWatch` and its respective host using `createSolutionBuilderWithWatchHost`.
+
+```TypeScript
+import * as ts from "typescript";
+
+/**
+ * To compile solution similar to tsc --b
+ */
+function compileSolution(rootNames: string[], options: ts.BuildOptions): void {
+  const host = ts.createSolutionBuilderHost(
+    // System like host, default is ts.sys
+    /*system*/ undefined,
+    // createProgram can be passed in here to choose strategy for incremental compiler just like when creating incremental watcher program.
+    // Default is ts.createSemanticDiagnosticsBuilderProgram
+    /*createProgram*/ undefined,
+    reportDiagnostic,
+    reportSolutionBuilderStatus,
+    reportErrorSummary
+  );
+
+  const solution = ts.createSolutionBuilder(
+    host,
+    rootNames,
+    options
+  );
+
+  // Builds the solution
+  const exitCode = solution.build();
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
+
+  // // Alternative to build if you want to take custom action for each project,
+  // while (true) {
+  //   const project = solution.getNextInvalidatedProject();
+  //   if (!project) { break; }
+  //
+  //   // Do custom things on project here
+  //   console.log(`Working with ${project.project}`);
+  //
+  //   // project.kind has info decides which type of project it is:
+  //   // ts.InvalidatedProjectKind.Build:: The project needs to be built (create program and emit the files)
+  //   // ts.InvalidatedProjectKind.UpdateBundle:: The project needs to combine outputs of references and its own files emit (using old output.js and .tsbuildinfo file) to get new output
+  //   // ts.InvalidatedProjectKind.UpdateOutputFileStamps:: The project needs to update timestamps of existing outputs since output is correct but output timestamp is older than one of its dependency
+  //
+  //   // Finish working with this project to get next project
+  //   project.done();
+  // }
+}
+
+/**
+ * To compile solution and watch changes similar to tsc --b --w
+ */
+function compileSolutionWithWatch(rootNames: string[], options: ts.BuildOptions): void {
+  const host = ts.createSolutionBuilderWithWatchHost(
+    // System like host, default is ts.sys
+    /*system*/ undefined,
+    // createProgram can be passed in here to choose strategy for incremental compiler just like when creating incremental watcher program.
+    // Default is ts.createSemanticDiagnosticsBuilderProgram
+    /*createProgram*/ undefined,
+    reportDiagnostic,
+    reportSolutionBuilderStatus,
+    reportWatchStatus
+  );
+
+  const solution = ts.createSolutionBuilderWithWatch(
+    host,
+    rootNames,
+    options
+  );
+
+  // Builds the solution and watches for changes
+  solution.clean();
+}
+
+/**
+ * To clean solution similar to tsc --b --clean
+ */
+function cleanSolution(rootNames: string[]): void {
+  // Create host
+  const host = ts.createSolutionBuilderHost();
+
+  // Create solution builder
+  const solution = ts.createSolutionBuilder(
+    host,
+    rootNames,
+    {}
+  );
+
+  // Clean the solution removing outputs
+  const exitCode = solution.clean();
+  console.log(`Process exiting with code '${exitCode}'.`);
+  process.exit(exitCode);
+}
+
+// Reports error
+function reportDiagnostic(diagnostic: ts.Diagnostic) {
+  console.error(getTextForDiagnostic(diagnostic));
+}
+
+// Reports status like Project needs to be built because output file doesnot exist
+function reportSolutionBuilderStatus(diagnostic: ts.Diagnostic) {
+  console.info(getTextForDiagnostic(diagnostic));
+}
+
+// Reports summary with number of errors
+function reportErrorSummary(errorCount: number) {
+  console.info(`${errorCount} found.`);
+}
+
+// Report status of watch like Starting compilation, Compilation completed etc
+function reportWatchStatus(diagnostic: ts.Diagnostic) {
+  console.info(getTextForDiagnostic(diagnostic));
+}
+
+function getTextForDiagnostic(diagnostic: ts.Diagnostic): string {
+  if (diagnostic.file) {
+    const { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+      diagnostic.start!
+    );
+    const message = ts.flattenDiagnosticMessageText(
+      diagnostic.messageText,
+      "\n"
+    );
+    return `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${message}`;
+  } else {
+    return `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`;
+  }
+}
+
+// To compile solution similar to tsc --b
+compileSolution(process.argv.slice(2), { verbose: true });
+
+// To compile solution and watch changes similar to tsc --b --w
+compileSolutionWithWatch(process.argv.slice(2), { verbose: true });
+
+// To clean solution similar to tsc --b --clean
+cleanSolution(process.argv.slice(2));
+```
+
 ## Incremental build support using the language services
 
 > Please refer to the [[Using the Language Service API]] page for more details.
