@@ -6,7 +6,7 @@ to trigger a specialized on-demand build on the PR.
 
 The following command triggers a set of the more common on-demand tests:
 ```
-@tyepscript-bot test it
+@typescript-bot test it
 ```
 
 This will trigger the `test top400`, `user test this`, `run dt`, `perf test this faster` commands.
