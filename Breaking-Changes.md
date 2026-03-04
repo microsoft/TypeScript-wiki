@@ -2385,7 +2385,7 @@ class FooError extends Error {
 ```
 
 However, any subclass of `FooError` will have to manually set the prototype as well.
-For runtimes that don't support [`Object.setPrototypeOf`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
+For runtimes that don't support [`Object.setPrototypeOf`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf), you may instead be able to use [`__proto__`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/proto).
 
 Unfortunately, [these workarounds will not work on Internet Explorer 10 and prior](https://docs.microsoft.com/en-us/archive/microsoft-edge/legacy/developer/dev-guide/whats-new/javascript-version-information).
 One can manually copy methods from the prototype onto the instance itself (i.e. `FooError.prototype` onto `this`), but the prototype chain itself cannot be fixed.
@@ -2624,7 +2624,7 @@ For full list of breaking changes see the [breaking change issues](https://githu
 
 ## Modules are now emitted with a `"use strict";` prologue
 
-Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in the generated code. Starting with TypeScript 1.8, emitted modules are always in strict mode. This shouldn't have any visible changes in most code as TS considers most strict mode errors as errors at compile time, but it means that some things which used to silently fail at runtime in your TS code, like assigning to `NaN`, will now loudly fail. You can reference the [MDN Article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) on strict mode for a detailed list of the differences between strict mode and non-strict mode.
+Modules were always parsed in strict mode as per ES6, but for non-ES6 targets this was not respected in the generated code. Starting with TypeScript 1.8, emitted modules are always in strict mode. This shouldn't have any visible changes in most code as TS considers most strict mode errors as errors at compile time, but it means that some things which used to silently fail at runtime in your TS code, like assigning to `NaN`, will now loudly fail. You can reference the [MDN Article](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Strict_mode) on strict mode for a detailed list of the differences between strict mode and non-strict mode.
 
 To disable this behavior, pass `--noImplicitUseStrict` on the command line or set it in your tsconfig.json file.
 
