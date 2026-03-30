@@ -1452,10 +1452,47 @@ See [#1617](https://github.com/Microsoft/TypeScript/issues/1617) for this and ot
 
 ### What's the difference between `declare class` and `interface`?
 
-TODO: Write up common symptoms of `declare class` / `interface` confusion.
+### What's the difference between `declare class` and `interface`?
 
-See http://stackoverflow.com/a/14348084/1704166
+`interface` describes an instance shape only. It does not declare any value, constructor, or inheritance target at runtime.
 
+`declare class` describes an existing class value and its instance shape. It may be used when a constructor function with that name exists at runtime, but its implementation is provided elsewhere.
+
+This affects which class relationships are meaningful:
+
+* `implements` checks that a class's instance shape matches the type
+* `extends` requires a real base class value at runtime
+
+```ts
+interface Shape {
+    area(): number;
+}
+
+declare class BaseShape {
+    area(): number;
+}
+
+class A implements Shape {
+    area() { return 0; }
+}
+
+class B extends BaseShape {
+}
+```
+
+In the example above, `A` is only checked structurally. `B` inherits from `BaseShape`, so `BaseShape` must exist at runtime.
+
+Common symptoms of confusion:
+
+* Using `declare class` where only an object shape exists: `extends` compiles, but the emitted inheritance code fails at runtime
+* Using `interface` where an existing class should have been described: `implements` works, but there is no inherited behavior, and runtime checks like `instanceof` do not apply
+
+Rule of thumb:
+
+* Use `interface` for "objects with these members"
+* Use `declare class` for "this constructor exists at runtime"
+
+See also [this StackOverflow answer](http://stackoverflow.com/a/14348084/1704166).
 
 ### What does it mean for an interface to extend a class?
 
