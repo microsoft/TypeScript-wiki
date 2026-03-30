@@ -1452,8 +1452,6 @@ See [#1617](https://github.com/Microsoft/TypeScript/issues/1617) for this and ot
 
 ### What's the difference between `declare class` and `interface`?
 
-### What's the difference between `declare class` and `interface`?
-
 `interface` describes an instance shape only. It does not declare any value, constructor, or inheritance target at runtime.
 
 `declare class` describes an existing class value and its instance shape. It may be used when a constructor function with that name exists at runtime, but its implementation is provided elsewhere.
