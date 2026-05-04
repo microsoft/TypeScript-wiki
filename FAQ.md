@@ -423,6 +423,34 @@ If you have a working PR that *removes* circularity errors without adverse side 
 
 A very instructive deeper discussion can be read at [#45213](https://github.com/microsoft/TypeScript/issues/45213).
 
+### The "Equals" Type is Implementation-Defined
+
+You may have come across a clever-looking type that purports to test two types for "exact" equality, often written something like:
+
+```ts
+type Equals<X, Y> =
+    (<T>() => (T extends X ? 1 : 2)) extends
+    (<T>() => (T extends Y ? 1 : 2))
+        ? true
+        : false;
+```
+
+This type is sometimes called `Equals`, `StrictEquals`, `IsEqual`, `Equal`, or similar, and shows up in popular type-level utility libraries, [StackOverflow answers](https://stackoverflow.com/questions/68961864/how-does-the-equals-work-in-typescript), and ad-hoc test helpers (`type Assert<T extends true> = T; type _ = Assert<Equals<A, B>>`).
+
+It is critical to understand: **this type does not test "type equality" in any well-defined sense**, because TypeScript does not have any notion of "type equality". What it actually does is rely on a particular implementation detail of how the checker decides assignability between two `<T>() => ...` signatures whose return types are conditional types referencing `T`. Specifically, the checker takes a shortcut: rather than trying to prove the two conditional return types equivalent for every possible `T` (which is undecidable in general), it requires that the types in the `extends` position be "identical" according to an internal notion of identity. Two types being "identical" by that internal notion is *correlated* with - but not the same as - being "equal" in the way users typically mean.
+
+As a consequence:
+
+* **The result is implementation-defined.** Whether `Equals<X, Y>` produces `true` or `false` for a given pair of types depends on how the checker happens to canonicalize, normalize, alias, simplify, or order those types internally. Two types that are "the same type" by any reasonable user-level definition can still produce `false`
+* **The result can change between TypeScript versions.** Because the underlying identity check isn't attempting to provide any specific semantics, perfectly routine compiler changes (bug fixes, performance work, normalization tweaks, alias preservation improvements) can flip the result without warning
+* **The result can vary based on irrelevant-looking factors.** Whether a type is written inline vs. through a type alias, whether it goes through a generic indirection, the order of members in an intersection, the order of constituents in a union, whether a property was added via `&` vs. spelled out directly, whether `readonly` modifiers are present, and similar surface-level differences may all change the answer
+* **It interacts poorly with `any`, `never`, `unknown`, intersections, generics, conditional types, `unique symbol`, and branded/nominal patterns.** People regularly discover "surprising" results in these areas. These are not bugs in `Equals`; they are an inevitable consequence of trying to repurpose an internal heuristic as a user-facing equality predicate
+* **Bugs filed against this behavior will generally not be fixed.** We do not consider the `(<T>() => T extends X ? 1 : 2) extends (<T>() => T extends Y ? 1 : 2)` pattern to be a supported way of asking "are `X` and `Y` the same type?", because there is no such supported question to ask
+
+If you find this type useful in your own code with these caveats firmly in mind (for example, as a best-effort check in a type-level test suite where you are willing to update assertions when the compiler changes) you are of course free to use it.
+
+If your underlying goal is to express something like "these two types must stay in sync", prefer approaches that the language actually supports: deriving one type from the other (so they cannot drift), using `satisfies` to constrain a value, writing assignability checks in *both* directions (`[A] extends [B] ? [B] extends [A] ? true : false : false`), or other structural-based checks.
+
 ### Comment Preservation Not Guaranteed
 
 As a trade-off to make parsing more efficient, TypeScript's emitter *may* not emit every comment in the original source.
