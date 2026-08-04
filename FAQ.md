@@ -275,7 +275,7 @@ This logic also applies equally to methods of classes that implement interfaces;
 
 ### Calls to CFA-Affecting Require Explicitly Typed Names to Affect Control Flow
 
-TypeScript only treats a function call as returning `never` or implying an assetion check for control-flow analysis when:
+TypeScript only treats a function call as returning `never` or implying an assertion check for control-flow analysis when:
 
 * The call is a top-level expression statement
 * The target is an identifier or dotted sequence of identifiers
