@@ -273,6 +273,46 @@ In this phrasing, the flaw is more apparent: Because the function *doesn't* take
 
 This logic also applies equally to methods of classes that implement interfaces; no different behavior is required or justified here.
 
+### Calls to CFA-Affecting Require Explicitly Typed Names to Affect Control Flow
+
+TypeScript only treats a function call as returning `never` or implying an assetion check for control-flow analysis when:
+
+* The call is a top-level expression statement
+* The target is an identifier or dotted sequence of identifiers
+* **Every** identifier in the target has an explicit type
+* The resolved function has an explicit return type
+
+For example:
+
+```ts
+class Foo {
+    fail(): never {
+        throw new Error();
+    }
+}
+
+const foo = new Foo();
+
+const f = (): number => {
+    foo.fail(); // Error: function lacks an ending return statement
+};
+```
+Although `fail` explicitly returns `never`, `foo` has an inferred type. Consequently, `foo.fail()` does not affect control-flow analysis, and the end of `f` is considered reachable.
+
+To fix, add an explicit type to the variable:
+
+```ts
+const foo: Foo = new Foo();
+//       ^^^^^
+
+const f = (): number => {
+    foo.fail(); // OK
+};
+```
+This restriction prevents control-flow analysis from circularly triggering additional type inference while determining whether a call affects control flow.
+
+See also [#32695](https://github.com/microsoft/TypeScript/pull/32695) and [#45385](https://github.com/microsoft/TypeScript/issues/45385).
+
 ### Parameter Arity Variance is Correct
 
 > I wrote some code like this and expected an error:
