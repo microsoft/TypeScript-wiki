@@ -8,9 +8,11 @@ The TypeScript compiler (`tsc`) is a **build tool**, not a sandbox. It transform
 
 **No arbitrary code execution.** Running `tsc` on a malicious `.ts` or `tsconfig.json` file will never cause the input code to be executed. The compiler parses, type-checks, and emits; it does not evaluate the programs it compiles. There is no `eval`-at-compile-time, no macro system, and no plugin mechanism that runs author-supplied code during compilation. This is the core security property of `tsc`.
 
+*Exception*: If content mappers are enabled, this *does* enable execution of third-party code. Only pass this flag if you have validated which content mappers are available and that you are OK with running them.
+
 **Deterministic side effects.** The only side effect of a successful `tsc` invocation is writing output files (`.js`, `.d.ts`, `.map`, `.tsbuildinfo`) to disk. It does not make network requests, spawn child processes, or interact with the system beyond file I/O.
 
-**Safe exit.** Certain adverserial inputs may cause crashes, but these crashes will unwind the process normally, and will not be a source of buffer overrun or other memory safety exploit vectors.
+**Safe exit.** Certain adversarial inputs may cause crashes, but these crashes will unwind the process normally, and will not be a source of buffer overrun or other memory safety exploit vectors.
 
 ## Non-Guarantees
 
@@ -21,6 +23,10 @@ The TypeScript compiler (`tsc`) is a **build tool**, not a sandbox. It transform
 **Resource consumption.** TypeScript's type system is Turing-complete. A crafted input file can cause `tsc` to consume unbounded CPU time or memory during type-checking. The compiler provides no built-in timeouts or memory limits. Callers operating on untrusted input should enforce resource limits externally (e.g., `ulimit`, cgroups, process timeouts). You should not assume that an adverserially-constructed program will successfully typecheck in any bounded amount of time.
 
 **Crash safety.** `tsc` may gracefully crash, hang, or produce unexpected diagnostics when given adversarial input. While most crashes are treated as bugs and fixed when reported, the compiler does *not* guarantee graceful handling of all possible malformed inputs (e.g. an unbounded series of `f(f(f(f(...`).
+
+## Language Service
+
+The TypeScript Language Service (LS) only executes in the context of a [trusted workspace (VS Code)](https://code.visualstudio.com/docs/editing/workspaces/workspace-trust) or [trusted folder (VS)](https://learn.microsoft.com/en-us/visualstudio/ide/trust-settings?view=visualstudio). Similar to tsc, there are no guaranteed resource caps in the LS, and "hangs" may occur in the presence of adversarial inputs.
 
 ## Summary
 
