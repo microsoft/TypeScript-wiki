@@ -4,7 +4,7 @@
 
 ## Getting set up
 
-First you'll need to install TypeScript >=1.6 from `npm`.
+First you'll need to install TypeScript >=1.6, <7 from `npm`.
 
 Once that's done, you'll need to link it from wherever your project resides.
 If you don't link from within a Node project, it will just link globally.
