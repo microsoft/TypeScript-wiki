@@ -1,5 +1,6 @@
-> ## *Disclaimer*
-Keep in mind that this is not yet a stable API - we’re releasing this as version 0.5, and things will be changing over time. As a first iteration, there will be a few rough edges. We encourage any and all feedback from the community to improve the API. To allow users to transition between future releases, we will be documenting any [[API Breaking Changes]] per new release.
+> [!CAUTION]
+> The contents of this page currently describe TypeScript 6.0 and earlier.
+> TypeScript 7.1 will have a completely different API.
 
 ## Getting set up
 
