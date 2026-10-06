@@ -279,3 +279,4 @@ Some other TypeScript Language Service Plugin implementations you can look at fo
 * https://github.com/sveltejs/language-tools/tree/master/packages/typescript-plugin
 * https://github.com/vuejs/language-tools/tree/master/packages/typescript-plugin
 * https://github.com/withastro/language-tools/blob/main/packages/ts-plugin/README.md
+* https://github.com/DiFuks/ts-overrides-plugin/tree/main
