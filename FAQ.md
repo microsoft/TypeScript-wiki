@@ -567,6 +567,20 @@ This flag affects *all* optional properties and there is no mechanism for doing 
 
 Enable `--enforceReadonly` (not yet released; see [#58296](https://github.com/microsoft/TypeScript/pull/58296))
 
+## Why do PRs need approved issues?
+
+Improving software requires two things:
+ * A theory of what, specifically, should be changed
+ * A code change that correctly implements that theory
+
+When we look at an *issue*, we are assessing the first question: Is the proposed improvement valid? Is it based on true premises? Does it have other trade-offs that require discussion? Is the improvement fully thought through? Is there a strong case to be made *against* this improvement? Does it conflict with other potential improvements that might occur later? What edge cases exist, and how should they be resolved? Only once we have satisfactory answers to these questions can we really begin looking at code.
+
+When we look at a *PR*, we are assessing the second question: Does this code change correctly implement the proposed change? Is it well-tested? Is the code understandable?
+
+If a PR appears without an issue, all of the questions about the *theory of change* are commingled with the *implementation of that change*, and these questions are very intertwined in a way that is difficult to untangle. It's nearly impossible to have a truly productive discussion where half the comments relate to how a specific edge case *should* behave and half the comments are about whether the code *actually does that*. We're often left working backwards from the code change to try to understand what theory of improvement is being attempted.
+
+The reasons an issue might not be approved yet (typically in the case of a suggestion for a feature) are nearly always not addressable by providing code to implement that feature. Especially in the era of AI, the project's velocity is primarily gated on careful consideration of where to build next, not a lack of willing coders. A PR-first mindset puts the implementation ahead of the design, and confuses capability (can this feature exist?) for judgment (should this feature exist?).
+
 ## Common Comments
 
 ### What Kind of Feedback Are You Looking For?
