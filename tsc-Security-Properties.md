@@ -39,3 +39,13 @@ The TypeScript Language Service (LS) only executes in the context of a [trusted 
 | No crashes on adversarial input | ❌ No |
 
 **In short:** `tsc` is safe to run on untrusted code in the sense that it will only read and write files, and never execute the code it compiles or other arbitrary code. All other resource and path constraints are the caller's responsibility.
+
+# Security Invariants in the TypeScript repo
+
+Maintainers may trigger certain automated jobs through actions such as approving workflows to run CI or issuing commands to `typescript-bot`/`typescript-automation`. **This is a security boundary**: these actions necessarily execute code that is part of a PR, and a security boundary is that maintainers should not invoke these commands without first checking the content of the PR. It is not a security issue for code execution to occur as a result of a maintainer action; this is basically "the same as" the maintainer running the code on their machine locally.
+
+Certain invariants are still security issues if violated. For example:
+ * Timing attacks: a malicious PR author could push an additional commit after a maintainer triggered an automated activity. It is a security violation if the automation does not correctly associate an automated activity invocation with the head commit of the PR at the time the command was issued.
+ * Token exfiltration: most CI jobs use tokenless auth flows, but any tokens that are potentially exfiltratable will not have permissions above what the PR author would have equal (or greater) access to with their own account. It would be a security issue if this token had additional privileges beyond what the attacker already has implicit access to by virtue of having a GitHub account in the first place.
+
+
